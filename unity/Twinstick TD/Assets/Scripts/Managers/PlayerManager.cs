@@ -5,13 +5,13 @@ using UnityEngine;
 [Serializable]
 public class PlayerManager
 {
-
+    /*
     public Color m_PlayerColor;     // Colour of player
     public Transform m_SpawnPoint;  // Spawn position of player
     [HideInInspector] public int m_PlayerNumber;            // Number of player
     [HideInInspector] public GameObject m_Instance;         // A reference to the instance of the player
 
-    private TankMovement m_Movement;                        // Reference to player's movement script, used to disable and enable control.
+    //private PlayerMovement m_Movement;                        // Reference to player's movement script, used to disable and enable control.
     private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
 
 
@@ -62,4 +62,6 @@ public class PlayerManager
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
     }
+
+    */
 }
