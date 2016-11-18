@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     //Private variables
     private int m_waveNumber;                   // Which wave the game is currently on.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
-    private WaitForSeconds m_waveWait;
+    private WaitForSeconds m_waveWait;          // Time between waves (not yet used)
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
 
     //Start
@@ -96,11 +96,12 @@ public class GameManager : MonoBehaviour
     private IEnumerator GameLoop()
     {
         // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
+        
         yield return StartCoroutine(Startgame());
 
         // Once the 'RoundStarting' coroutine is finished, run the 'RoundPlaying' coroutine but don't return until it's finished.
         //yield return StartCoroutine(RoundPlaying());
-
+      
         // Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
         //yield return StartCoroutine(RoundEnding());
 
@@ -121,7 +122,7 @@ public class GameManager : MonoBehaviour
 
         // Increment the round number and display text showing the players what round it is.
         m_waveNumber++;
-
+        Debug.Log(m_waveNumber);
         // Wait for the specified length of time until yielding control back to the game loop.
         yield return m_StartWait;
     }
@@ -181,8 +182,8 @@ public class GameManager : MonoBehaviour
 
         return true;
     }
-
-    // Reset player position
+    */
+    // Reset player position(tested)
     private void resetAllPlayers()
     {
         for (int i = 0; i < m_players.Length; i++)
@@ -191,7 +192,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Kill all enemies
+    // Remove all enemies
+    /*
     private void killallenemies()
     {
         for(int i = 0; i < m_enemies.Length; i++)
@@ -199,6 +201,7 @@ public class GameManager : MonoBehaviour
             m_enemies[i].kill();
         }
     }
+    */
 
     // Enable player control
     private void enablePlayerControl()
@@ -208,7 +211,7 @@ public class GameManager : MonoBehaviour
             m_players[i].EnableControl();
         }
     }
-
+    
     //Disable player control
     private void disablePlayerControl()
     {
@@ -217,5 +220,5 @@ public class GameManager : MonoBehaviour
             m_players[i].DisableControl();
         }
     }
-    */
+    
 }
