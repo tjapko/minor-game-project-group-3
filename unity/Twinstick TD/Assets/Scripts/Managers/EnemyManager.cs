@@ -5,13 +5,13 @@ using UnityEngine;
 [Serializable]
 public class EnemyManager
 {
+    /*
     public Transform m_SpawnPoint;                          // Spawn position of enemy
     [HideInInspector] public int m_EnemyNumber;            // Number of enemy
     [HideInInspector] public GameObject m_Instance;         // A reference to the instance of the enemy
 
     private EnemyMovement m_Movement;                       // Reference to enemy's movement script, used to disable and enable control.
-	private int m_Health;
-	private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
+    private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
 
 
     public void Setup()
@@ -21,7 +21,7 @@ public class EnemyManager
         m_CanvasGameObject = m_Instance.GetComponentInChildren<Canvas>().gameObject;
 
         // Set the enemy number to be consistent across the scripts.
-//        m_Movement.m_PlayerNumber = m_PlayerNumber;
+        m_Movement.m_PlayerNumber = m_PlayerNumber;
     }
 
 
@@ -52,4 +52,5 @@ public class EnemyManager
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
     }
+    */
 }
