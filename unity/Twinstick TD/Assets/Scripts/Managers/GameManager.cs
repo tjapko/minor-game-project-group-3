@@ -3,12 +3,16 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+//UNDER CONSTRUCTION
+/// <summary>
+/// Class GameManager
+/// </summary>
 public class GameManager : MonoBehaviour
 {
+    //Public variables
     public float m_StartDelay = 3f;             // The delay between the start of round and playing of round
     public float m_waveDelay = 5f;              // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
-
     //public CameraControl m_CameraControl;     // Reference to the CameraControl script for control during different phases.
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
@@ -17,6 +21,7 @@ public class GameManager : MonoBehaviour
     public PlayerManager[] m_players;           // A collection of managers for enabling and disabling different aspects of the tanks.
     public EnemyManager[] m_enemies;            // A collection of managers for enabling and disabling different aspects of the tanks.
 
+    //Private variables
     private int m_waveNumber;                   // Which wave the game is currently on.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_waveWait;
@@ -29,7 +34,7 @@ public class GameManager : MonoBehaviour
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         spawnbase();
-        //spawnAllPlayers();
+        spawnAllPlayers();
         //SetCameraTargets();
 
         // Once the players and base has been created start game
@@ -42,7 +47,7 @@ public class GameManager : MonoBehaviour
         m_base.m_Instance = Instantiate(m_baseprefab, m_base.m_SpawnPoint.position, m_base.m_SpawnPoint.rotation) as GameObject;
     }
 
-    /*
+    
     // Spawn all the players
     private void spawnAllPlayers()
     {
@@ -54,7 +59,7 @@ public class GameManager : MonoBehaviour
             m_players[i].Setup();
         }
     }
-
+    /*
     // Spawn all the enemies
     private void SpawnAllEnemies(int m_number_enemies)
     {

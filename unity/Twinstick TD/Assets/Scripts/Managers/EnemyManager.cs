@@ -1,7 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-
+//UNDER CONSTRUCTION
+/// <summary>
+/// Class enemy manager
+/// </summary>
 [Serializable]
 public class EnemyManager
 {
