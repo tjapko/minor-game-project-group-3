@@ -10,10 +10,10 @@ public class GameManager : MonoBehaviour
     public float m_EndDelay = 3f;               // The delay between losing and restarting
 
     //public CameraControl m_CameraControl;     // Reference to the CameraControl script for control during different phases.
-    public GameObject m_baseprefab;             // Reference to the base
+    public GameObject m_base;                   // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
     public GameObject m_Enemyprefab;            // Reference to the prefab of the enemies.
-    public BaseManager m_base;                  // The base manager of the base
+//    public BaseManager m_base2;                  // The base manager of the base
     public PlayerManager[] m_players;           // A collection of managers for enabling and disabling different aspects of the tanks.
     public EnemyManager[] m_enemies;            // A collection of managers for enabling and disabling different aspects of the tanks.
 
@@ -29,23 +29,17 @@ public class GameManager : MonoBehaviour
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         spawnbase();
-        //spawnAllPlayers();
+        spawnAllPlayers();
         //SetCameraTargets();
 
-        // Once the players and base has been created start game
-        //StartCoroutine(GameLoop());
+        // Once the tanks have been created and the camera is using them as targets, start the game.
+        StartCoroutine(GameLoop());
     }
 
-    // Spawn the base
-    private void spawnbase()
-    {
-        m_base.m_Instance = Instantiate(m_baseprefab, m_base.m_SpawnPoint.position, m_base.m_SpawnPoint.rotation) as GameObject;
-    }
-
-    /*
     // Spawn all the players
     private void spawnAllPlayers()
     {
+        
         for (int i = 0; i < m_players.Length; i++)
         {
             m_players[i].m_Instance =
@@ -53,6 +47,12 @@ public class GameManager : MonoBehaviour
             m_players[i].m_PlayerNumber = i + 1;
             m_players[i].Setup();
         }
+    }
+
+    // Spawn the base
+    private void spawnbase()
+    {
+
     }
 
     // Spawn all the enemies
@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
             m_enemies[i].Setup();
         }
     }
-    */
 
     /*
     //Sets position of camera based on players
@@ -94,22 +93,21 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(Startgame());
 
         // Once the 'RoundStarting' coroutine is finished, run the 'RoundPlaying' coroutine but don't return until it's finished.
-        //yield return StartCoroutine(RoundPlaying());
+        yield return StartCoroutine(RoundPlaying());
 
         // Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
-        //yield return StartCoroutine(RoundEnding());
+        yield return StartCoroutine(RoundEnding());
 
         //Restart game
         StartCoroutine(GameLoop());
     }
 
-    
     // Starting game
     private IEnumerator Startgame()
     {
         // As soon as the round starts reset the players and make sure they can't move.
-        //resetAllPlayers();
-        //disablePlayerControl();
+        resetAllPlayers();
+        disablePlayerControl();
 
         // Snap the camera's zoom and position to something appropriate for the reset tanks.
         //m_CameraControl.SetStartPositionAndSize();
@@ -121,12 +119,12 @@ public class GameManager : MonoBehaviour
         yield return m_StartWait;
     }
 
-    /*
+
     private IEnumerator RoundPlaying()
     {
         // As soon as the round begins playing let the players control the tanks.
         enablePlayerControl();
-        SpawnAllEnemies();
+		SpawnAllEnemies(m_enemies.Length);
 
         // Clear the text from the screen.
         // m_MessageText.text = string.Empty;
@@ -148,7 +146,7 @@ public class GameManager : MonoBehaviour
         yield return m_EndWait;
     }
 
-    
+
     // Determine if players are dead
     private bool playerDead()
     {
@@ -191,7 +189,7 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i < m_enemies.Length; i++)
         {
-            m_enemies[i].kill();
+ //           m_enemies[i].kill();
         }
     }
 
@@ -212,5 +210,4 @@ public class GameManager : MonoBehaviour
             m_players[i].DisableControl();
         }
     }
-    */
 }

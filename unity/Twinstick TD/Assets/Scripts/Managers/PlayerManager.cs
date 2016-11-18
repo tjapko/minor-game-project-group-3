@@ -5,13 +5,13 @@ using UnityEngine;
 [Serializable]
 public class PlayerManager
 {
-    /*
+
     public Color m_PlayerColor;     // Colour of player
     public Transform m_SpawnPoint;  // Spawn position of player
     [HideInInspector] public int m_PlayerNumber;            // Number of player
     [HideInInspector] public GameObject m_Instance;         // A reference to the instance of the player
 
-    //private PlayerMovement m_Movement;                        // Reference to player's movement script, used to disable and enable control.
+    private PlayerMovement m_Movement;                        // Reference to player's movement script, used to disable and enable control.
     private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
 
 
@@ -22,7 +22,7 @@ public class PlayerManager
         m_CanvasGameObject = m_Instance.GetComponentInChildren<Canvas>().gameObject;
 
         // Set the player numbers to be consistent across the scripts.
-        m_Movement.m_PlayerNumber = m_PlayerNumber;
+//        m_Movement.m_PlayerNumber = m_PlayerNumber;
 
         // Get all of the renderers of the tank and set to colour
         MeshRenderer[] renderers = m_Instance.GetComponentsInChildren<MeshRenderer>();
@@ -36,8 +36,8 @@ public class PlayerManager
     // Used during the phases of the game where the player shouldn't be able to control their tank.
     public void DisableControl()
     {
-        m_Movement.enabled = false;
-        m_Shooting.enabled = false;
+//        m_Movement.enabled = false;
+ //       m_Shooting.enabled = false;
 
         m_CanvasGameObject.SetActive(false);
     }
@@ -47,7 +47,7 @@ public class PlayerManager
     public void EnableControl()
     {
         m_Movement.enabled = true;
-        m_Shooting.enabled = true;
+//        m_Shooting.enabled = true;
 
         m_CanvasGameObject.SetActive(true);
     }
@@ -62,6 +62,4 @@ public class PlayerManager
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
     }
-
-    */
 }
