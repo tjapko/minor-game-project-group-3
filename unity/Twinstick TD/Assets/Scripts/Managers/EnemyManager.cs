@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public class EnemyManager
 {
+    /*
     public Transform m_SpawnPoint;                          // Spawn position of enemy
     [HideInInspector] public int m_EnemyNumber;            // Number of enemy
     [HideInInspector] public GameObject m_Instance;         // A reference to the instance of the enemy
@@ -51,4 +52,5 @@ public class EnemyManager
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
     }
+    */
 }
