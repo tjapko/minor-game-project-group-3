@@ -1,30 +1,27 @@
 ﻿using System;
 using UnityEngine;
 
-//UNDER CONSTRUCTION
 /// <summary>
 /// Class enemy manager
 /// </summary>
 [Serializable]
 public class EnemyManager
 {
-    /*
-    public Transform m_SpawnPoint;                          // Spawn position of enemy
-    [HideInInspector] public int m_EnemyNumber;            // Number of enemy
-    [HideInInspector] public GameObject m_Instance;         // A reference to the instance of the enemy
+    //Public variables
+    public Transform m_SpawnPoint;                      // Spawn position of enemy (should be appointed by Gamemanger instead of manual)
+    [HideInInspector] public Transform m_TargetPoint;   // Location of target
+    [HideInInspector] public int m_EnemyNumber;         // Number of enemy
+    [HideInInspector] public GameObject m_Instance;     // A reference to the instance of the enemy
+    [HideInInspector] public EnemyMovement m_Movement;  // Reference to enemy's movement script, used to disable and enable control.
+    //private GameObject m_CanvasGameObject;            // Used to disable the world space UI during the Starting and Ending phases of each round.
 
-    private EnemyMovement m_Movement;                       // Reference to enemy's movement script, used to disable and enable control.
-    private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
-
-
+    //Setup
     public void Setup()
     {
         // Get references to the components.
         m_Movement = m_Instance.GetComponent<EnemyMovement>();
-        m_CanvasGameObject = m_Instance.GetComponentInChildren<Canvas>().gameObject;
-
-        // Set the enemy number to be consistent across the scripts.
-        m_Movement.m_PlayerNumber = m_PlayerNumber;
+        m_Movement.m_targetlocation = m_TargetPoint;
+        //m_CanvasGameObject = m_Instance.GetComponentInChildren<Canvas>().gameObject;
     }
 
 
@@ -32,8 +29,6 @@ public class EnemyManager
     public void DisableControl()
     {
         m_Movement.enabled = false;
-
-        m_CanvasGameObject.SetActive(false);
     }
 
 
@@ -41,8 +36,6 @@ public class EnemyManager
     public void EnableControl()
     {
         m_Movement.enabled = true;
-
-        m_CanvasGameObject.SetActive(true);
     }
 
 
@@ -55,5 +48,5 @@ public class EnemyManager
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
     }
-    */
+    
 }

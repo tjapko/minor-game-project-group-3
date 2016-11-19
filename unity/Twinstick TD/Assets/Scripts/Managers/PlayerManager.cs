@@ -1,15 +1,17 @@
 ﻿using System;
 using UnityEngine;
 
-
+/// <summary>
+/// PlayerManager
+/// </summary>
 [Serializable]
 public class PlayerManager
 {
     //public Color m_PlayerColor;       // Colour of player
     public Transform m_SpawnPoint;      // Spawn position of player
-    [HideInInspector] public int m_PlayerNumber;            // Number of player
-    [HideInInspector] public GameObject m_Instance;         // A reference to the instance of the player (Instantiated by gamer manager)
-    [HideInInspector] public Movement m_movement;           // Reference to player's movement script
+    [HideInInspector] public int m_PlayerNumber;        // Number of player
+    [HideInInspector] public GameObject m_Instance;     // A reference to the instance of the player (Instantiated by gamer manager)
+    [HideInInspector] public PlayerMovement m_movement; // Reference to player's movement script
 
     //private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
 
@@ -17,7 +19,7 @@ public class PlayerManager
     public void Setup()
     {
         // Get references to the components.
-        m_movement = m_Instance.GetComponent<Movement>();
+        m_movement = m_Instance.GetComponent<PlayerMovement>();
         //m_CanvasGameObject = m_Instance.GetComponentInChildren<Canvas>().gameObject;
 
     }
@@ -25,6 +27,10 @@ public class PlayerManager
     // Disable control of player
     public void DisableControl()
     {
+        if(m_movement == null)
+        {
+            Debug.Log("ISNULL");
+        }
         m_movement.enabled = false;
 
         //m_CanvasGameObject.SetActive(false);

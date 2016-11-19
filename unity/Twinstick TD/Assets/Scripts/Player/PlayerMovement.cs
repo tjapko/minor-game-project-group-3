@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Movement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour {
 
     public float m_Speed = 12f;
     public float m_TurnSpeed = 180f;
@@ -14,16 +14,10 @@ public class Movement : MonoBehaviour {
     private float m_OriginalPitch;
 
 
-    private void Awake()
+    private void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>(); //get rigid body
     }
-
-    private void Start()
-    {
-
-    }
-
 
     private void Update()
     {
@@ -40,7 +34,6 @@ public class Movement : MonoBehaviour {
         Turn();
 
     }
-
 
     private void Move()
     {
