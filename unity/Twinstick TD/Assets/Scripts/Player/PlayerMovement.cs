@@ -14,22 +14,20 @@ public class PlayerMovement : MonoBehaviour {
     private float m_TurnInputValue;
     private float m_OriginalPitch;
 
+	private Vector3 mouseInput;
 
     private void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>(); //get rigid body
     }
 
-    private void Update()
-    {
-        // Store the player's input.
-        m_MovementInputValueV = Input.GetAxis("Vertical");
-		m_MovementInputValueH = Input.GetAxis("Horizontal");
-    }
-
     //Every physics step
     private void FixedUpdate()
     {
+		// Store the player's input.
+		m_MovementInputValueV = Input.GetAxisRaw("Vertical");
+		m_MovementInputValueH = Input.GetAxisRaw("Horizontal");
+
         // Move and turn the player.
         Move();
         Turn();
@@ -52,13 +50,19 @@ public class PlayerMovement : MonoBehaviour {
     }
 		
     private void Turn()
-    {
-        // Adjust the rotation of the tank based on the player's input.
-        float turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime;
-        Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f); //Needed for turning (x,y,z)
-        turnRotation = turnRotation * m_Rigidbody.rotation;
-        turnRotation.x = 0f;
-        turnRotation.z = 0f;
-        m_Rigidbody.MoveRotation(turnRotation);
-    }
+	{
+
+		Ray cameraRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+		Plane groundPlane = new Plane (Vector3.up, Vector3.zero);
+		float rayLength;
+
+		if (groundPlane.Raycast (cameraRay, out rayLength)) 
+		{
+			Vector3 pointToLook = cameraRay.GetPoint (rayLength);
+			Debug.DrawLine (cameraRay.origin, pointToLook, Color.yellow ); 
+			transform.LookAt (pointToLook);
+		}
+
+	}
 }
+	
