@@ -3,57 +3,47 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public float m_Speed = 12f;
-    public float m_TurnSpeed = 180f;
+    public float Speed = 12f;
 
-    private string m_MovementAxisName;
-    private string m_TurnAxisName;
-    private Rigidbody m_Rigidbody;
-    private float m_MovementInputValue;
-    private float m_TurnInputValue;
-    private float m_OriginalPitch;
+    Vector3 movement;
+    Rigidbody playerRigidbody;
+    int floorMask;
+    float camRayLength = 100f;
 
 
-    private void Start()
+
+    private void awake()
     {
-        m_Rigidbody = GetComponent<Rigidbody>(); //get rigid body
+        // Create a layer mask for the floor layer.
+        floorMask = LayerMask.GetMask("Floor");
+        playerRigidbody = GetComponent<Rigidbody>(); //get rigid body
     }
 
-    private void Update()
+      private void FixedUpdate()
     {
-        // Store the player's input and make sure the audio for the engine is playing.
-        m_MovementInputValue = Input.GetAxis("Vertical");
-        m_TurnInputValue = Input.GetAxis("Horizontal");
-    }
-
-    //Every physics step
-    private void FixedUpdate()
-    {
-        // Move and turn the tank.
-        Move();
-        Turn();
-
-    }
-
-    private void Move()
-    {
-        // Adjust the position of the tank based on the player's input.
-        Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * Time.deltaTime; //Time.deltatime proportional to second (not per physics step)
-        movement += m_Rigidbody.position;
-        movement[1] = 0f;
-        m_Rigidbody.MovePosition(movement);
+      
+        turning();
 
     }
 
 
-    private void Turn()
+
+ 
+        void turning()
     {
-        // Adjust the rotation of the tank based on the player's input.
-        float turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime;
-        Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f); //Needed for turning (x,y,z)
-        turnRotation = turnRotation * m_Rigidbody.rotation;
-        turnRotation.x = 0f;
-        turnRotation.z = 0f;
-        m_Rigidbody.MoveRotation(turnRotation);
+            Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit floorHit;
+            Debug.DrawLine(camRay.origin, Input.mousePosition, Color.blue);
+
+        if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+            {
+                Vector3 playerToMouse = floorHit.point - transform.position;
+                playerToMouse.y = 0f;
+
+                Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+                playerRigidbody.MoveRotation(newRotation);
+            }
+        }
+
     }
-}
+
