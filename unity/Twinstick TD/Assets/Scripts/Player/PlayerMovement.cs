@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		if(Physics.Raycast(camRay , out floorHit, camRayLength , FloorMask)) // checking if the ray hits the floor 
 		{
-			Vector3 playerToMouse = floorHit.point - transform.position; // creating a vector from the player 
+			Vector3 playerToMouse = floorHit.point - transform.position; // creating a vector from the player to the mousePosition
 			playerToMouse.y = 0f; // because it's a projection on the x-z-plane
 
 			// Creating newRotation, towards the new mouse-direction (x-z-plane)
@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour {
 			m_playerRigidbody.MoveRotation(newRotation);
 
 			//Line from Main Camera to the point selected with the mouse (for debugging purposes)
-			Debug.DrawLine (Camera.main.transform.position, playerToMouse, Color.yellow ); 
+			Debug.DrawLine (Camera.main.transform.position, floorHit.point, Color.yellow ); 
 		}
 	}
 }
