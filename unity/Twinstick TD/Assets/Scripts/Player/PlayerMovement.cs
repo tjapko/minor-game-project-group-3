@@ -32,8 +32,8 @@ public class PlayerMovement : MonoBehaviour {
 	private void FixedUpdate()
 	{
 		// Store the player's input.
-		m_MovementInputValueV = Input.GetAxisRaw("Vertical");
-		m_MovementInputValueH = Input.GetAxisRaw("Horizontal");
+		m_MovementInputValueV = Input.GetAxis("Vertical");   // use Input.GetAxisRaw("Vertical") for instant reaction of the Vertical movement 
+		m_MovementInputValueH = Input.GetAxis("Horizontal"); // use Input.GetAxisRaw("Horizontal") for instant reaction of the Horizontal movement 
 		m_RotationInputM = Input.mousePosition;
 
 		// Move and turn the player.
