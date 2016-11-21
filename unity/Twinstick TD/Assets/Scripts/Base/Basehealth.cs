@@ -7,8 +7,8 @@ using System.Collections;
 public class Basehealth : MonoBehaviour {
 
     //Public variables
-    public float m_StartingHealth = 100f;           //Starting health
-    public float m_maxhealth = 100f;                //Maximum health
+    public float m_StartingHealth;           //Starting health
+    public float m_maxhealth;                //Maximum health
     public Color m_FullHealthColor = Color.green;   //Full health colour
     public Color m_ZeroHealthColor = Color.red;     //Zero health colour
     //Private variables
@@ -27,21 +27,6 @@ public class Basehealth : MonoBehaviour {
     //Gets called every time something hits the base and enemy or enemyShell will be set inactive
     void OnTriggerEnter(Collider other)
     {
-        
-        //Enemy
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            other.gameObject.SetActive(false);
-            count++;
-            TakeDamage(1f); //Future damage should be a variable of the enemy
-        }
-        //Enemy shell
-        if (other.gameObject.CompareTag("EnemyShell"))
-        {
-            other.gameObject.SetActive(false);
-            TakeDamage(1f); //Future damage should be a variable of the enemy
-        }
-
     }
 
     //Take damage function

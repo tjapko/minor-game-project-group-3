@@ -9,14 +9,10 @@ public class EnemyManager
 {
     //Public variables
     public Transform m_SpawnPoint;                      // Spawn position of enemy (should be appointed by Gamemanger instead of manual)
-    [HideInInspector]
-    public Transform m_TargetPoint;   // Location of target
-    [HideInInspector]
-    public int m_EnemyNumber;         // Number of enemy
-    [HideInInspector]
-    public GameObject m_Instance;     // A reference to the instance of the enemy
-    [HideInInspector]
-    public EnemyMovement m_Movement;  // Reference to enemy's movement script, used to disable and enable control.
+    [HideInInspector] public Transform m_TargetPoint;   // Location of target
+    [HideInInspector] public int m_EnemyNumber;         // Number of enemy
+    [HideInInspector] public GameObject m_Instance;     // A reference to the instance of the enemy
+    [HideInInspector] public EnemyMovement m_Movement;  // Reference to enemy's movement script, used to disable and enable control.
     //private GameObject m_CanvasGameObject;            // Used to disable the world space UI during the Starting and Ending phases of each round.
 
     //Constructor
@@ -33,9 +29,21 @@ public class EnemyManager
     //Setup
     public void Setup()
     {
-
     }
 
+	public void OnTriggerEnter(Collider other){
+		//if colide with base, damage base and set enemy to inactive
+		Debug.Log("Hoi");
+		if (other.gameObject.CompareTag ("Base")) {
+			Debug.Log ("hoi");
+			Rigidbody targetRigidbody = other.GetComponent<Rigidbody> ();
+			if (targetRigidbody) {
+				Basehealth basehealth = targetRigidbody.GetComponent<Basehealth> ();
+				basehealth.TakeDamage (1f);
+				m_Instance.SetActive (false);				
+			}
+		}
+	}
 
     // Used during the phases of the game where the enemy shouldn't move
     public void DisableControl()
