@@ -32,8 +32,9 @@ public class Basehealth : MonoBehaviour {
     //Take damage function
     public void TakeDamage(float amount)
     {
+		Debug.Log ("Damage!!!!!!");
         //Amount must be smaller than zero
-        if(amount < 0)
+        if(amount > 0)
         {
             m_CurrentHealth -= amount;
         }

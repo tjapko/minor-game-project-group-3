@@ -31,19 +31,18 @@ public class EnemyManager
     {
     }
 
-	public void OnTriggerEnter(Collider other){
-		//if colide with base, damage base and set enemy to inactive
-		Debug.Log("Hoi");
-		if (other.gameObject.CompareTag ("Base")) {
-			Debug.Log ("hoi");
-			Rigidbody targetRigidbody = other.GetComponent<Rigidbody> ();
-			if (targetRigidbody) {
-				Basehealth basehealth = targetRigidbody.GetComponent<Basehealth> ();
-				basehealth.TakeDamage (1f);
-				m_Instance.SetActive (false);				
-			}
-		}
-	}
+//	public void OnTriggerEnter(Collider other){
+//	//if colide with base, damage base and set enemy to inactive
+//	if (other.gameObject.CompareTag ("Base")) {
+//		Debug.Log ("hoi");
+//		Rigidbody targetRigidbody = other.GetComponent<Rigidbody> ();
+//		if (targetRigidbody) {
+//			Basehealth basehealth = targetRigidbody.GetComponent<Basehealth> ();
+//			basehealth.TakeDamage (1f);
+//			m_Instance.SetActive (false);				
+//		}
+//	}
+//	}
 
     // Used during the phases of the game where the enemy shouldn't move
     public void DisableControl()
