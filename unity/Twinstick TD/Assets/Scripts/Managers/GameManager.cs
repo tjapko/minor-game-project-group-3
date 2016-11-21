@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public float m_StartDelay = 3f;             // The delay between the start of round and playing of round
     public float m_waveDelay = 5f;              // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
-    //public CameraControl m_CameraControl;     // Reference to the CameraControl script for control during different phases.
+    public CameraControl m_CameraControl;     // Reference to the CameraControl script for control during different phases.
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
     public GameObject m_Enemyprefab;            // Reference to the prefab of the enemies.
@@ -39,9 +39,8 @@ public class GameManager : MonoBehaviour
         m_waveNumber = 0;
         spawnbase();
         spawnAllPlayers();
-        
 
-        //SetCameraTargets();
+        SetCameraTargets();
 
         // Once the players and base has been created start game
         StartCoroutine(GameLoop());
@@ -80,24 +79,24 @@ public class GameManager : MonoBehaviour
     }
     
 
-    /*
+    
     //Sets position of camera based on players
     private void SetCameraTargets()
     {
         // Create a collection of transforms the same size as the number of tanks.
-        Transform[] targets = new Transform[m_Tanks.Length];
-
+        Transform[] targets = new Transform[m_players.Length];
+        
         // For each of these transforms...
         for (int i = 0; i < targets.Length; i++)
         {
             // ... set it to the appropriate tank transform.
-            targets[i] = m_Tanks[i].m_Instance.transform;
+            targets[i] = m_players[i].m_Instance.transform;
         }
 
         // These are the targets the camera should follow.
         m_CameraControl.m_Targets = targets;
     }
-    */
+    
 
     // This is called from start and will run each phase of the game one after another.
     private IEnumerator GameLoop()
