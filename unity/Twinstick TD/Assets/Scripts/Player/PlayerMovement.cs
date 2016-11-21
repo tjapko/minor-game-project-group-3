@@ -43,15 +43,14 @@ public class PlayerMovement : MonoBehaviour {
 		// Vertical movement (z-axis)
 		float movementZ = m_MovementInputValueV * m_Speed * Time.deltaTime;
 
-		Vector3 movement = new Vector3(movementX, Time.deltaTime, movementZ);
+		Vector3 movement = new Vector3(movementX, 0f, movementZ);
 
 		movement += m_Rigidbody.position;
 
 		m_Rigidbody.MovePosition(movement);
 
     }
-
-
+		
     private void Turn()
     {
         // Adjust the rotation of the tank based on the player's input.
