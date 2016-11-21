@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-	//	public float m_RotationSpeed = 1f;
+	//	public float m_RotationSpeed = 1f; // not used now!
 	public float m_Speed = 10f;
 
 	private Rigidbody m_playerRigidbody;
@@ -16,19 +16,17 @@ public class PlayerMovement : MonoBehaviour {
 	private float camRayLength = 100f;
 
 
-	// Initializes Floormask and the Rigidbody
+	// Initializes the Floormask 
 	void Awake()
 	{
 		FloorMask = LayerMask.GetMask("mouseFloor"); 
-		m_playerRigidbody = GetComponent<Rigidbody>(); //get rigid body
 	}
 
-	//	  //Chahid's Start()
-	//    private void Start()
-	//    {
-	//		  FloorMask = LayerMask.GetMask("mouseFloor"); 
-	//        m_Rigidbody = GetComponent<Rigidbody>(); 
-	//    }
+	// Initializes the player's Rigidbody
+    private void Start()
+    {
+        m_playerRigidbody = GetComponent<Rigidbody>(); 
+    }
 
 	//Every physics step: Abstracting Vertical,Horizontal and mousePosition input and Updating player's position and rotation
 	private void FixedUpdate()
