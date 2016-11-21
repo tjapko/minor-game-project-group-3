@@ -132,7 +132,7 @@ GameObject:
   m_Layer: 0
   m_Name: playerspawn
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -181,13 +181,24 @@ MonoBehaviour:
   m_EndDelay: 3
   m_baseprefab: {fileID: 1000011563660048, guid: 08075c56f543cc348a029c91d94bf0e9,
     type: 2}
-  m_Playerprefab: {fileID: 0}
-  m_Enemyprefab: {fileID: 0}
+  m_Playerprefab: {fileID: 1000012244867938, guid: 6526df5f06f78a5438cb83f5730a0724,
+    type: 2}
+  m_Enemyprefab: {fileID: 1000012244867938, guid: effe25e49a723e140ae53d42e285572e,
+    type: 2}
   m_base:
     m_SpawnPoint: {fileID: 2120996593}
     m_Instance: {fileID: 0}
-  m_players: []
-  m_enemies: []
+  m_players:
+  - m_SpawnPoint: {fileID: 500508974}
+    m_PlayerNumber: 0
+    m_Instance: {fileID: 0}
+    m_movement: {fileID: 0}
+  m_enemies:
+  - m_SpawnPoint: {fileID: 2135807968}
+    m_TargetPoint: {fileID: 0}
+    m_EnemyNumber: 0
+    m_Instance: {fileID: 0}
+    m_Movement: {fileID: 0}
 --- !u!4 &1464915406
 Transform:
   m_ObjectHideFlags: 0
@@ -216,7 +227,7 @@ GameObject:
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -282,7 +293,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1514871765}
   m_LocalRotation: {x: -0.1424031, y: 0.8240399, z: -0.23740372, w: -0.4942865}
-  m_LocalPosition: {x: 5.353095, y: 5.209206, z: 4.2606583}
+  m_LocalPosition: {x: 10.42, y: 8.82, z: 6.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -331,18 +342,6 @@ Prefab:
       propertyPath: m_Name
       value: Levelart
       objectReference: {fileID: 0}
-    - target: {fileID: 4000010006026340, guid: bc74c621dd416704288cabee4879cf8b, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010006026340, guid: bc74c621dd416704288cabee4879cf8b, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010006026340, guid: bc74c621dd416704288cabee4879cf8b, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bc74c621dd416704288cabee4879cf8b, type: 2}
   m_IsPrefabParent: 0
@@ -357,7 +356,7 @@ GameObject:
   m_Layer: 0
   m_Name: basespawn
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -385,7 +384,7 @@ GameObject:
   m_Layer: 0
   m_Name: enemyspawn
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
