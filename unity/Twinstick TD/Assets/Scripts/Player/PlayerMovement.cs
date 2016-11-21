@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour {
     private string m_MovementAxisName;
     private string m_TurnAxisName;
     private Rigidbody m_Rigidbody;
-    private float m_MovementInputValue;
+    private float m_MovementInputValueV;
+	private float m_MovementInputValueH;
     private float m_TurnInputValue;
     private float m_OriginalPitch;
 
@@ -21,27 +22,32 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Update()
     {
-        // Store the player's input and make sure the audio for the engine is playing.
-        m_MovementInputValue = Input.GetAxis("Vertical");
-        m_TurnInputValue = Input.GetAxis("Horizontal");
+        // Store the player's input.
+        m_MovementInputValueV = Input.GetAxis("Vertical");
+		m_MovementInputValueH = Input.GetAxis("Horizontal");
     }
 
     //Every physics step
     private void FixedUpdate()
     {
-        // Move and turn the tank.
+        // Move and turn the player.
         Move();
         Turn();
-
     }
 
+	// Adjust the position of the player based on the player's input.
     private void Move()
     {
-        // Adjust the position of the tank based on the player's input.
-        Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * Time.deltaTime; //Time.deltatime proportional to second (not per physics step)
-        movement += m_Rigidbody.position;
-        movement[1] = 0f;
-        m_Rigidbody.MovePosition(movement);
+		// Horizontal movement (x-axis)
+		float movementX = m_MovementInputValueH * m_Speed * Time.deltaTime; //Time.deltatime proportional to second (not per physics step)
+		// Vertical movement (z-axis)
+		float movementZ = m_MovementInputValueV * m_Speed * Time.deltaTime;
+
+		Vector3 movement = new Vector3(movementX, Time.deltaTime, movementZ);
+
+		movement += m_Rigidbody.position;
+
+		m_Rigidbody.MovePosition(movement);
 
     }
 
