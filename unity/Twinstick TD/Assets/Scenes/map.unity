@@ -121,7 +121,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 112676612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 9.73}
+  m_LocalPosition: {x: 0, y: 1, z: 13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -168,7 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.2
-  spawn: {fileID: 1335071159}
   tower: {fileID: 2120996593}
 --- !u!95 &112676617
 Animator:
@@ -238,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_StartingHealth: 1
+  tower: {fileID: 0}
 --- !u!1 &290762543
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +291,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 427938695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.17, y: 1, z: -5.4}
+  m_LocalPosition: {x: -13.1, y: 1, z: -5.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -494,8 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523365121d23a8844865bcb8e05b9aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
-  spawn: {fileID: 427938696}
+  speed: 0.2
   tower: {fileID: 2120996593}
 --- !u!95 &1215159383
 Animator:
@@ -564,7 +563,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5e6876c6de11845aa60859b619f3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartingHealth: 0
+  m_StartingHealth: 1
+  tower: {fileID: 0}
 --- !u!1 &1222647283
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,8 +641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523365121d23a8844865bcb8e05b9aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.3
-  spawn: {fileID: 1602892390}
+  speed: 0.2
   tower: {fileID: 2120996593}
 --- !u!95 &1222647288
 Animator:
@@ -711,7 +710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5e6876c6de11845aa60859b619f3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartingHealth: 0
+  m_StartingHealth: 1
+  tower: {fileID: 0}
 --- !u!1 &1335071158
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,7 +734,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1335071158}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.1, y: 1, z: -5.12}
+  m_LocalPosition: {x: -13.1, y: 1, z: -5.4}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -777,8 +777,8 @@ MonoBehaviour:
   m_base:
     m_SpawnPoint: {fileID: 2120996593}
     m_Instance: {fileID: 0}
+    m_basehealth: {fileID: 0}
   m_players: []
-  m_enemies: []
 --- !u!4 &1464915406
 Transform:
   m_ObjectHideFlags: 0

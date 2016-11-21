@@ -4,15 +4,32 @@ using System.Collections;
 public class EnemyHealth : MonoBehaviour {
 	public float m_StartingHealth;	//Start health of enemy
 
+	[HideInInspector]public Basehealth tower;
+
 	private float m_CurrentHealth;	//Current health of enemy
 	private bool m_Dead;			//Enemy is dead or not
 
+
+	public void SetUp(){
+		
+	}
+
 	//gets called every time something hits the base and playerShell will be set inactive
-	void OnTriggerEnter(Collider other){
+	public void OnTriggerEnter(Collider other){
 		if (other.gameObject.CompareTag ("PlayerShell")) {
 			other.gameObject.SetActive (false);
 			TakeDamage (1f);
 		}
+
+			if (other.gameObject.CompareTag ("Base")) {
+				Rigidbody targetRigidbody = other.GetComponent<Rigidbody> ();
+				if (targetRigidbody) {
+				Basehealth basemanager = targetRigidbody.GetComponent<Basehealth> ();
+				basemanager.TakeDamage (1f);
+				gameObject.SetActive (false);				
+			}
+		}
+
 	}
 
 	//Take damage

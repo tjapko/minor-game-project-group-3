@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject m_Enemyprefab;            // Reference to the prefab of the enemies.
     public BaseManager m_base;                  // The base manager of the base
     public PlayerManager[] m_players;           // A collection of managers for enabling and disabling different aspects of the tanks.
-    public EnemyManager[] m_enemies;            // A collection of managers for enabling and disabling different aspects of the tanks.
+    public EnemyManager m_enemies;            // A collection of managers for enabling and disabling different aspects of the tanks.
 
     private int m_waveNumber;                   // Which wave the game is currently on.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     {
         m_StartWait = new WaitForSeconds(m_StartDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
+
 
         spawnbase();
         //spawnAllPlayers();

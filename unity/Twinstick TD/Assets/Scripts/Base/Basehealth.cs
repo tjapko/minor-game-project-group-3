@@ -4,35 +4,22 @@ using UnityEngine.UI;
 
 public class Basehealth : MonoBehaviour {
 
-    public float m_StartingHealth;
-    public float m_maxhealth;
-	private Color m_FullHealthColor = Color.green;
-    private Color m_ZeroHealthColor = Color.red;
+    public float m_StartingHealth;					// Initial health of base
+    public float m_maxhealth;						// Maximum health of base
+	[HideInInspector] public GameObject tower;		// Base
+	private Color m_FullHealthColor = Color.green;	
+    private Color m_ZeroHealthColor = Color.red;	
 
-    private float m_CurrentHealth;
-    private bool m_Dead;
-	int count;	//number of times enemy hit the base
+    private float m_CurrentHealth;					// Current health of base
+    private bool m_Dead;							// Base dead or not
 
 	void SetUp(){
-		count = 0;
+		m_CurrentHealth = m_StartingHealth;
+		m_Dead = false;
 	}
-
-	//gets called every time something hits the base and enemy or enemyShell will be set inactive
-	void OnTriggerEnter(Collider other){
-		if (other.gameObject.CompareTag ("Enemy")) {
-			other.gameObject.SetActive (false);
-			count++;
-			TakeDamage (1f);	//maybe not 1 for every kind of enemy
-		}
-		if (other.gameObject.CompareTag ("EnemyShell")){
-			other.gameObject.SetActive (false);
-			TakeDamage (1f); 	//if every shell takes 1 health off of healthbase
-		}
-	}
-
 
     // OnEnable
-    private void OnEnable()
+    public void OnEnable()
     {
         m_CurrentHealth = m_StartingHealth;
         m_Dead = false;
@@ -46,9 +33,9 @@ public class Basehealth : MonoBehaviour {
             m_CurrentHealth -= amount;
         }
 
-        if (m_CurrentHealth <= 0f && !m_Dead)
+		if (m_CurrentHealth <= 0f && !m_Dead)
         {
-            OnDeath();
+			OnDeath();
         }
     }
 
@@ -68,8 +55,7 @@ public class Basehealth : MonoBehaviour {
     private void OnDeath()
     {
         // Play the effects for the death of the tank and deactivate it.
-        m_Dead = true;
-
-        gameObject.SetActive(false);
+		m_Dead = true;
+		tower.SetActive(false);
     }
 }
