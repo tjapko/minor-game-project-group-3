@@ -9,19 +9,31 @@ public class EnemyManager
 {
     //Public variables
     public Transform m_SpawnPoint;                      // Spawn position of enemy (should be appointed by Gamemanger instead of manual)
-    [HideInInspector] public Transform m_TargetPoint;   // Location of target
-    [HideInInspector] public int m_EnemyNumber;         // Number of enemy
-    [HideInInspector] public GameObject m_Instance;     // A reference to the instance of the enemy
-    [HideInInspector] public EnemyMovement m_Movement;  // Reference to enemy's movement script, used to disable and enable control.
+    [HideInInspector]
+    public Transform m_TargetPoint;   // Location of target
+    [HideInInspector]
+    public int m_EnemyNumber;         // Number of enemy
+    [HideInInspector]
+    public GameObject m_Instance;     // A reference to the instance of the enemy
+    [HideInInspector]
+    public EnemyMovement m_Movement;  // Reference to enemy's movement script, used to disable and enable control.
     //private GameObject m_CanvasGameObject;            // Used to disable the world space UI during the Starting and Ending phases of each round.
+
+    //Constructor
+    public EnemyManager(GameObject instance, Transform spawnpoint, Transform target, int number)
+    {
+        this.m_SpawnPoint = spawnpoint;
+        this.m_TargetPoint = target;
+        this.m_EnemyNumber = number;
+        this.m_Instance = instance;
+        this.m_Movement = m_Instance.GetComponent<EnemyMovement>();
+        m_Movement.m_targetlocation = m_TargetPoint;
+    }
 
     //Setup
     public void Setup()
     {
-        // Get references to the components.
-        m_Movement = m_Instance.GetComponent<EnemyMovement>();
-        m_Movement.m_targetlocation = m_TargetPoint;
-        //m_CanvasGameObject = m_Instance.GetComponentInChildren<Canvas>().gameObject;
+
     }
 
 
@@ -48,5 +60,5 @@ public class EnemyManager
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
     }
-    
+
 }
