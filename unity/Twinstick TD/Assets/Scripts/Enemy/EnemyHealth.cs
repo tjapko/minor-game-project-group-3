@@ -1,17 +1,21 @@
 ﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class EnemyHealth
+/// </summary>
 public class EnemyHealth : MonoBehaviour
 {
-    public float m_StartingHealth = 100f;               // The amount of health each tank starts with.
+    //Public variables
+    public float m_StartingHealth;  //Start health of enemy
     public Slider m_Slider;                             // The slider to represent how much health the tank currently has.
     public Image m_FillImage;                           // The image component of the slider.
     public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
     public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
-    
-
-    private float m_CurrentHealth;                      // How much health the tank currently has.
-    private bool m_Dead;                                // Has the tank been reduced beyond zero health yet?
+    //Private variables
+    private float m_CurrentHealth;  //Current health of enemy
+    private bool m_Dead;            //Enemy is dead or not
 
 
     private void OnEnable()
@@ -24,7 +28,29 @@ public class EnemyHealth : MonoBehaviour
         SetHealthUI();
     }
 
+    //Gets called every time something hits the base and playerShell will be set inactive
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PlayerShell"))
+        {
+            other.gameObject.SetActive(false);
+            TakeDamage(1f);
+        }
+        //if colide with base, damage base and set enemy to inactive
+        if (other.gameObject.CompareTag("Base"))
+        {
+            Debug.Log("hoi");
+            Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
+            if (targetRigidbody)
+            {
+                Basehealth basehealth = targetRigidbody.GetComponent<Basehealth>();
+                basehealth.TakeDamage(1f);
+                gameObject.SetActive(false);
+            }
+        }
+    }
 
+    //Take damage
     public void TakeDamage(float amount)
     {
         // Reduce current health by the amount of damage done.
@@ -40,7 +66,6 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-
     private void SetHealthUI()
     {
         // Set the slider's value appropriately.
@@ -49,14 +74,10 @@ public class EnemyHealth : MonoBehaviour
         // Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
         m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
     }
-
-
+    // OnDeath
     private void OnDeath()
     {
-        // Set the flag so that this function is only called once.
         m_Dead = true;
-
-        // Set Enemy inactivw from the game.
-        gameObject.SetActive(false); 
+        gameObject.SetActive(false);
     }
 }
