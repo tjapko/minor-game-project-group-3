@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-	//	public float m_RotationSpeed = 1f; // not used now!
-	public float m_Speed = 10f;
+//	public float m_RotationSpeed = 1f; // not used now!
+	public float m_MovementSpeed = 10f;
 
 	private Rigidbody m_playerRigidbody;
 
@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour {
 	private float m_MovementInputValueH;
 	private Vector3 m_RotationInputM;
 
-	private int FloorMask;
+	private int Floor;
 	private float camRayLength = 100f;
 
 	Vector3 movement;
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Initializes the Floormask 
 	void Awake()
 	{
-		FloorMask = LayerMask.GetMask("mouseFloor"); 
+		Floor = LayerMask.GetMask("mouseFloor"); 
 	}
 
 	// Initializes the player's Rigidbody
@@ -44,13 +44,13 @@ public class PlayerMovement : MonoBehaviour {
 		Turn();
 	}
 
-	// Adjust the position of the player based on the player's input.
+	// Adjust the position of the player based on the player's keyboard input.
 	private void Move()
 	{
 		// Horizontal movement (x-axis)
-		float movementX = m_MovementInputValueH * m_Speed * Time.deltaTime; //Time.deltatime proportional to second (not per physics step)
+		float movementX = m_MovementInputValueH * m_MovementSpeed * Time.deltaTime; //Time.deltatime proportional to second (not per physics step)
 		// Vertical movement (z-axis)
-		float movementZ = m_MovementInputValueV * m_Speed * Time.deltaTime;
+		float movementZ = m_MovementInputValueV * m_MovementSpeed * Time.deltaTime;
 
 		// movement vector, no movement in the y-axis (because it's fixed)
 		movement = new Vector3(movementX, 0f, movementZ);
@@ -72,15 +72,16 @@ public class PlayerMovement : MonoBehaviour {
 		// camera is moved (not fixed)
 		if (cameraTransform != null) 
 		{
+			// calculate the new rotated, right-oriented movement vector 
 			Vector3 dir = cameraTransform.TransformDirection (movement);
-			dir.y = 0f;
+			dir.y = 0f; // y-value is keeped zero
 			return dir.normalized * movement.magnitude; // same length as before ()
 		}
 		// camera is not moved (fixed)
 		else 
 		{
-			cameraTransform = Camera.main.transform;
-			return movement;
+			cameraTransform = Camera.main.transform; 
+			return movement; // just return movement (already right orientation)
 		}
 
 	}
@@ -112,7 +113,7 @@ public class PlayerMovement : MonoBehaviour {
 		// a variable, which is true when the ray hits the floor 
 		RaycastHit floorHit; 
 
-		if(Physics.Raycast(camRay , out floorHit, camRayLength , FloorMask)) // checking if the ray hits the floor 
+		if(Physics.Raycast(camRay , out floorHit, camRayLength , Floor)) // checking if the ray hits the floor 
 		{
 			Vector3 playerToMouse = floorHit.point - transform.position; // creating a vector from the player to the mousePosition
 			playerToMouse.y = 0f; // because it's a projection on the x-z-plane
