@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
+using System.Collections.Generic;
 
 //UNDER CONSTRUCTION
 /// <summary>
@@ -129,7 +131,12 @@ public class GameManager : MonoBehaviour
 
 
         Debug.Log("Current wave" + m_waveNumber);
+        Debug.Log(Analytics.CustomEvent("TestEvent", new Dictionary<string, object> { { "firstObject", 10 } }));
 
+        Analytics.CustomEvent("amount of waves", new Dictionary<string, object>
+        {
+            { "amount of waves", m_waveNumber}
+        });
         StartCoroutine(RoundPlaying());
 
     }
