@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour {
 	private int FloorMask;
 	private float camRayLength = 100f;
 
+	Vector3 movement;
+	private Transform cameraTransform;
+
 
 	// Initializes the Floormask 
 	void Awake()
@@ -50,13 +53,35 @@ public class PlayerMovement : MonoBehaviour {
 		float movementZ = m_MovementInputValueV * m_Speed * Time.deltaTime;
 
 		// movement vector, no movement in the y-axis (because it's fixed)
-		Vector3 movement = new Vector3(movementX, 0f, movementZ);
+		movement = new Vector3(movementX, 0f, movementZ);
+
+		// Rotates (Vector3) movement 
+		movement = RotateWithView ();
 
 		// adding movement to player's position
 		movement += m_playerRigidbody.position;
 
 		// move player to the new (moved) position
 		m_playerRigidbody.MovePosition(movement);
+
+	}
+
+	// Rotate Vector3 movement with respect to the camera view
+	private Vector3 RotateWithView() 
+	{
+		// camera is moved (not fixed)
+		if (cameraTransform != null) 
+		{
+			Vector3 dir = cameraTransform.TransformDirection (movement);
+			dir.y = 0f;
+			return dir.normalized * movement.magnitude; // same length as before ()
+		}
+		// camera is not moved (fixed)
+		else 
+		{
+			cameraTransform = Camera.main.transform;
+			return movement;
+		}
 
 	}
 
@@ -101,4 +126,5 @@ public class PlayerMovement : MonoBehaviour {
 			Debug.DrawLine (Camera.main.transform.position, floorHit.point, Color.yellow ); 
 		}
 	}
+
 }
