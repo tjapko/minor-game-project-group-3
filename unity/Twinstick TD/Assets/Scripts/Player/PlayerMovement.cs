@@ -3,7 +3,9 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-//	public float m_RotationSpeed = 1f; // not used now!
+	public int m_PlayerNumber = 1; // not used yet; can be used to identify the different players (later), each players needs different controls!
+
+//	public float m_RotationSpeed = 1f; // not used!
 	public float m_MovementSpeed = 10f;
 
 	private Rigidbody m_playerRigidbody;
@@ -17,7 +19,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	Vector3 movement;
 	private Transform cameraTransform;
-
 
 	// Initializes the Floormask 
 	void Awake()
@@ -34,9 +35,15 @@ public class PlayerMovement : MonoBehaviour {
 	//Every physics step: Abstracting Vertical,Horizontal and mousePosition input and Updating player's position and rotation
 	private void FixedUpdate()
 	{
+		
+//		string m_MovementAxisNameV = "Vertical" + m_PlayerNumber; // can be used later
+//		string m_MovementAxisNameH = "Horizontal" + m_PlayerNumber; // can be used later
+		string m_MovementAxisNameV = "Vertical";
+		string m_MovementAxisNameH = "Horizontal";
+
 		// Store the player's input.
-		m_MovementInputValueV = Input.GetAxis("Vertical");   // use Input.GetAxisRaw("Vertical") for instant reaction of the Vertical movement 
-		m_MovementInputValueH = Input.GetAxis("Horizontal"); // use Input.GetAxisRaw("Horizontal") for instant reaction of the Horizontal movement 
+		m_MovementInputValueV = Input.GetAxis(m_MovementAxisNameV);   // use Input.GetAxisRaw("Vertical") for instant reaction of the Vertical movement 
+		m_MovementInputValueH = Input.GetAxis(m_MovementAxisNameH); // use Input.GetAxisRaw("Horizontal") for instant reaction of the Horizontal movement 
 		m_RotationInputM = Input.mousePosition;
 
 		// Move and turn the player.
@@ -85,24 +92,6 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 	}
-
-	//		//Chahid's Turn()
-	//    private void Turn()
-	//	{
-	//
-	//		Ray cameraRay = Camera.main.ScreenPointToRay (Input.mousePosition);
-	//
-	//		Plane groundPlane = new Plane (Vector3.up, Vector3.zero);
-	//		float rayLength;
-	//
-	//		if (groundPlane.Raycast (cameraRay, out rayLength)) 
-	//		{
-	//			Vector3 pointToLook = cameraRay.GetPoint (rayLength);
-	//			Debug.DrawLine (Camera.main.transform.position, pointToLook, Color.yellow ); 
-	//			transform.LookAt (pointToLook);
-	//		}
-	//
-	//	}
 
 	// Adjust the rotation of the player based on the mousePosition input.
 	void Turn()
