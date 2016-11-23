@@ -23,6 +23,7 @@ public class EnemyManager
         m_EnemyNumber = number;
         m_Instance = instance;
         m_Movement = m_Instance.GetComponent<EnemyMovement>();
+        m_Movement.m_targetlocation = target;
         m_Movement.m_targetlocation = m_TargetPoint;
     }
 

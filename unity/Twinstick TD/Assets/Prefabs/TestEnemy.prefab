@@ -90,7 +90,6 @@ GameObject:
   - 114: {fileID: 114000013654636568}
   - 114: {fileID: 114000011184074504}
   - 65: {fileID: 65000011758794278}
-  - 114: {fileID: 114000011496384960}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Enemy
@@ -152,7 +151,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012244867938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.426907, y: 1.8600731, z: 19.651388}
+  m_LocalPosition: {x: -13.67605, y: 13.04772, z: 20.766071}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -280,22 +279,6 @@ MonoBehaviour:
   m_StartingHealth: 100
   m_Slider: {fileID: 114000014227036790}
   m_FillImage: {fileID: 114000012168267054}
-  m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
-  m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &114000011496384960
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012244867938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 059af363294cba448a5ed7f702c41ad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StartingHealth: 100
-  m_Slider: {fileID: 53465376}
-  m_FillImage: {fileID: 53708576}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114000012168267054
