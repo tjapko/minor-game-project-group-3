@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class WaveManager : MonoBehaviour
+public class WaveManager
 {
     //Public variables
     public GameObject m_Enemyprefab;       //Reference to prefab of enemy
@@ -48,6 +48,17 @@ public class WaveManager : MonoBehaviour
         return true;
     }
 
+    // Spawn enemies
+    private void SpawnEnemies(int m_number_enemies)
+    {
+        for (int i = 0; i < m_number_enemies; i++)
+        {
+            GameObject newinstance = GameObject.Instantiate(m_Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
+            m_enemywave.Add(new EnemyManager(newinstance, m_enemyspawnpoints, m_target, enemy_number));
+            enemy_number++;
+        }
+    }
+
     //Remove dead enemies
     public void DestroyEnemies()
     {
@@ -55,25 +66,29 @@ public class WaveManager : MonoBehaviour
         {
             if (!(m_enemywave[i].m_Instance.activeSelf))
             {
-                Destroy(m_enemywave[i].m_Instance);
+                GameObject.Destroy(m_enemywave[i].m_Instance);
                 m_enemywave.RemoveAt(i);
             }
         }
 
     }
 
-    // Spawn enemies
-    private void SpawnEnemies(int m_number_enemies)
+    //Enable control of enemies
+    public void EnableEnemyWaveControl()
     {
-        for (int i = 0; i < m_number_enemies; i++)
+        foreach (EnemyManager enemy in m_enemywave)
         {
-            GameObject newinstance = Instantiate(m_Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
-            m_enemywave.Add(new EnemyManager(newinstance, m_enemyspawnpoints, m_target, enemy_number));
-            enemy_number++;
+            enemy.EnableControl();
         }
     }
 
-
-
+    //Disable control of enemies
+    public void DisableEnemyWaveControl()
+    {
+        foreach (EnemyManager enemy in m_enemywave)
+        {
+            enemy.DisableControl();
+        }
+    }
 
 }

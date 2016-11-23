@@ -12,37 +12,43 @@ public class PlayerManager
     [HideInInspector] public int m_PlayerNumber;        // Number of player
     [HideInInspector] public GameObject m_Instance;     // A reference to the instance of the player (Instantiated by gamer manager)
     [HideInInspector] public PlayerMovement m_movement; // Reference to player's movement script
+    [HideInInspector] public BulletFire m_shooting;     // Reference to player's shooting script
 
-    //private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
+    //Constructor
+    public PlayerManager (Transform spawnpoint, int playernumber, GameObject instance)
+    {
+        m_SpawnPoint = spawnpoint;
+        m_PlayerNumber = playernumber;
+        m_Instance = instance;
+
+        Setup();
+    }
 
     //Setup
     public void Setup()
     {
         // Get references to the components.
         m_movement = m_Instance.GetComponent<PlayerMovement>();
+        m_shooting = m_Instance.GetComponent<BulletFire>();
         //m_CanvasGameObject = m_Instance.GetComponentInChildren<Canvas>().gameObject;
 
-    }
-
-    // Disable control of player
-    public void DisableControl()
-    {
-        if(m_movement == null)
-        {
-            Debug.Log("ISNULL");
-        }
-        m_movement.enabled = false;
-
-        //m_CanvasGameObject.SetActive(false);
     }
 
     // Enable control of player
     public void EnableControl()
     {
         m_movement.enabled = true;
-
+        m_shooting.enabled = true;
         //m_CanvasGameObject.SetActive(true);
     }
+
+    // Disable control of player
+    public void DisableControl()
+    {
+        m_movement.enabled = false;
+        m_shooting.enabled = false;
+        //m_CanvasGameObject.SetActive(false);
+    } 
 
     // Reset state of player
     public void Reset()
