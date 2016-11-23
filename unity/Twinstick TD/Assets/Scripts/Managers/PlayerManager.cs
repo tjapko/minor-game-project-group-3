@@ -9,8 +9,9 @@ using UnityEngine.UI;
 [Serializable]
 public class PlayerManager
 {
-	public Text CurrencyText;
-	public Text KillsText;
+	// Still need to figure out how to represent the visibilty of the currency and kills when there are multiple players
+	public Text CurrencyText;	// for holding the Currency text which will be visible on the screen
+	public Text KillsText;		// for holding the Kills text which will be visible on the screen
     //public Color m_PlayerColor;       // Colour of player
     public Transform m_SpawnPoint;      // Spawn position of player
 
@@ -19,7 +20,7 @@ public class PlayerManager
     [HideInInspector] public PlayerMovement m_movement; // Reference to player's movement script
 
     //private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
-	private int Kills = 0; 
+	private int Kills; 		// int which will hold the number of kills per player
 	private int Currency;  // the currency can be the amount of carrots in the base (Carrots-farm) = baseHealth
 
 	//Setup
@@ -60,24 +61,26 @@ public class PlayerManager
 		m_Instance.SetActive(true);
 	}
 
-	// Initializes Currency, Kills and their Text representations on the screen
+	// Initializes Currency, Kills and their Text representations which are visible on the screen
 	public void Start() 
 	{
 		Currency = 1; // start currency
 		Kills = 0;	// start kills 
-		SetCurrencyText ();
-		SetKillsText ();
+		SetCurrencyText (); // updates the text representation of the Currency
+		SetKillsText (); 	// updates the text representation of the Kills
 	}
 		
 	// Update is called once per frame
 	void Update () 
 	{
-		Currency += 1;
-		Kills += 1;
+//		Currency += 1;
+//		Kills += 1;
 //		Debug.Log("Currency:" + Currency); 
 //		Debug.Log("Kills:" + Kills); 
-		updateCurrency ();
-		updateKills ();
+//		Debug.Log("CurrencyText:" + CurrencyText.text); 
+//		Debug.Log("KillsText:" + KillsText.text); 
+		updateCurrency ();	// checks whether the currency needs to be updated
+		updateKills ();		// checks whether the kills needs to be updated
 	}
 
 	// Update the statistics of the player
@@ -86,40 +89,41 @@ public class PlayerManager
 		Update ();
 	}
 		
-	/* NEEDS TO BE IMPLEMENTED! (already made this format for later)
+	/* NEEDS TO BE IMPLEMENTED!(already made this format for later)
 	 checks if some amount needs to be added to currency or substracted (waites from a reaction to update the currency) 
-	 maybe this is needed to be updated in the gameManager!
+	 maybe this is also needs to be updated in the gameManager!
 	*/
 	public void updateCurrency() 
 	{
-		int amount = 0;
-		bool kill=false, purchase = false;
-		string reward = "", price = "";
+		int amount;	// initialize int amount (for adding to or substracrting from the currency)
+		bool kill=false, purchase = false;	//boolean kill and purchase to check if condition is met 
+		string reward = "", price = ""; // for different rewards of killing enemies and different prices of purchases
 
 		if (kill)  // needs to check if a kill is registered (e.g. if some reward is earned)
 		{
 			switch (reward) 
 			{
-			case "a": amount = 1; break;
-			case "b": amount = 2; break;
-			case "c": amount = 3; break;
-			default: amount = 0; break;
+			//  maybe less or more types of rewards are needed
+				case "a": amount = 1; break; 
+				case "b": amount = 2; break;
+				case "c": amount = 3; break;
+				default: amount = 0; break;
 			}
-			addCurrency (amount);
+			addCurrency (amount); // update Currency
 		} 
 		else if (purchase)  // needs to check if something is purchased (e.g. if some money is spended)
 		{
 			switch(price) 
 			{
-			case "a": amount = 1; break;
-			case "b": amount = 2; break;
-			case "c": amount = 3; break;
-			default: amount = 0; break;
+				// maybe less or more types of prices are needed
+				case "a": amount = 1; break;
+				case "b": amount = 2; break;
+				case "c": amount = 3; break;
+				default: amount = 0; break;
 			}
-			substractCurrency (amount);
+			substractCurrency (amount); //update Currency
 		}
-		SetCurrencyText ();
-		SetKillsText ();
+		SetCurrencyText (); //update Currency text
 	}
 
 	/* NEEDS TO BE IMPLEMENTED! 
@@ -127,13 +131,13 @@ public class PlayerManager
 	*/
 	public void updateKills() 
 	{
-		bool kill = false;
+		bool kill = false; 
 
 		if (kill)  // needs to check if a kill is registered (e.g. if some reward is earned)
 		{
-			addKill ();
+			addKill (); // update int Kills
 		} 
-		SetKillsText ();
+		SetKillsText (); // update Kills text
 	}
 
 	// adds +1 to kills 

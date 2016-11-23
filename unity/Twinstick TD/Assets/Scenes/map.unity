@@ -149,29 +149,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 290762544}
   m_RootOrder: 2
---- !u!1 &538797840
+--- !u!1 &689244647
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 224: {fileID: 538797841}
-  - 222: {fileID: 538797843}
-  - 114: {fileID: 538797842}
+  - 224: {fileID: 689244648}
+  - 222: {fileID: 689244650}
+  - 114: {fileID: 689244649}
   m_Layer: 5
-  m_Name: 'CurrencyText '
+  m_Name: CurrencyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &538797841
+--- !u!224 &689244648
 RectTransform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 538797840}
+  m_GameObject: {fileID: 689244647}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -184,12 +184,12 @@ RectTransform:
   m_AnchoredPosition: {x: -1100, y: -40}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &538797842
+--- !u!114 &689244649
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 538797840}
+  m_GameObject: {fileID: 689244647}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
@@ -207,22 +207,22 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 25
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 219
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Currency: '
---- !u!222 &538797843
+--- !u!222 &689244650
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 538797840}
+  m_GameObject: {fileID: 689244647}
 --- !u!1 &922648187
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,13 +326,13 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 25
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 219
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Kills: '
@@ -427,7 +427,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 538797841}
+  - {fileID: 689244648}
   - {fileID: 1111282643}
   m_Father: {fileID: 1464915406}
   m_RootOrder: 0
@@ -477,7 +477,13 @@ MonoBehaviour:
     m_SpawnPoint: {fileID: 2120996593}
     m_Instance: {fileID: 0}
   m_players:
-  - CurrencyText: {fileID: 538797842}
+  - CurrencyText: {fileID: 689244649}
+    KillsText: {fileID: 1111282644}
+    m_SpawnPoint: {fileID: 500508974}
+    m_PlayerNumber: 0
+    m_Instance: {fileID: 0}
+    m_movement: {fileID: 0}
+  - CurrencyText: {fileID: 689244649}
     KillsText: {fileID: 1111282644}
     m_SpawnPoint: {fileID: 500508974}
     m_PlayerNumber: 0
