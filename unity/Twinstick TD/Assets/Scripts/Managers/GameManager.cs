@@ -45,6 +45,12 @@ public class GameManager : MonoBehaviour
 
         // Once the players and base has been created start game
         StartCoroutine(GameLoop());
+
+		// Initializes the statistics of the players (Currency, kills, etc)
+		for (int i = 0; i < m_players.Length; i++) 
+		{
+			m_players [i].Start ();
+		}
     }
 
     // Spawn the base
@@ -52,8 +58,7 @@ public class GameManager : MonoBehaviour
     {
         m_base.m_Instance = Instantiate(m_baseprefab, m_base.m_SpawnPoint.position, m_base.m_SpawnPoint.rotation) as GameObject;
     }
-
-
+		
     // Spawn all the players
     private void spawnAllPlayers()
     {
@@ -66,7 +71,6 @@ public class GameManager : MonoBehaviour
         }
     }
     
-
     // This is called from start and will run each phase of the game one after another.
     private IEnumerator GameLoop()
     {
@@ -83,8 +87,7 @@ public class GameManager : MonoBehaviour
         //Restart game
         StartCoroutine(GameLoop());
     }
-
-
+		
     // Starting game
     private IEnumerator Startgame()
     {
@@ -98,8 +101,8 @@ public class GameManager : MonoBehaviour
         // Wait for the specified length of time until yielding control back to the game loop.
         yield return m_StartWait;
     }
-
-
+		
+	// Rounds of the game
     private IEnumerator RoundPlaying()
     {
         //Increase wave number
@@ -131,7 +134,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Current wave" + m_waveNumber);
 
         StartCoroutine(RoundPlaying());
-
+ 
     }
 
     /*
@@ -202,5 +205,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+	// Update is called for every player to update their statistics
+	void Update ()
+	{
+		for (int i = 0; i < m_players.Length; i++) {
+			m_players [i].updateStatistics ();
+		} 
+	}
 
 }
