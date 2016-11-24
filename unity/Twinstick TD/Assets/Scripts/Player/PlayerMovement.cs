@@ -42,8 +42,8 @@ public class PlayerMovement : MonoBehaviour {
 		string m_MovementAxisNameH = "Horizontal";
 
 		// Store the player's input.
-		m_MovementInputValueV = Input.GetAxis(m_MovementAxisNameV);   // use Input.GetAxisRaw("Vertical") for instant reaction of the Vertical movement 
-		m_MovementInputValueH = Input.GetAxis(m_MovementAxisNameH); // use Input.GetAxisRaw("Horizontal") for instant reaction of the Horizontal movement 
+		m_MovementInputValueV = Input.GetAxisRaw(m_MovementAxisNameV);   // use Input.GetAxisRaw("Vertical") for instant reaction of the Vertical movement 
+		m_MovementInputValueH = Input.GetAxisRaw(m_MovementAxisNameH); // use Input.GetAxisRaw("Horizontal") for instant reaction of the Horizontal movement 
 		m_RotationInputM = Input.mousePosition;
 
 		// Move and turn the player.
@@ -55,12 +55,17 @@ public class PlayerMovement : MonoBehaviour {
 	private void Move()
 	{
 		// Horizontal movement (x-axis)
-		float movementX = m_MovementInputValueH * m_MovementSpeed * Time.deltaTime; //Time.deltatime proportional to second (not per physics step)
+		float movementX = m_MovementInputValueH;
 		// Vertical movement (z-axis)
-		float movementZ = m_MovementInputValueV * m_MovementSpeed * Time.deltaTime;
+		float movementZ = m_MovementInputValueV;
 
 		// movement vector, no movement in the y-axis (because it's fixed)
 		movement = new Vector3(movementX, 0f, movementZ);
+
+		// normalizing movement in order to get the speed of all directions the same 
+
+		// adjusting the movement speed
+		movement = movement *  m_MovementSpeed * Time.deltaTime;
 
 		// Rotates (Vector3) movement 
 		movement = RotateWithView ();
