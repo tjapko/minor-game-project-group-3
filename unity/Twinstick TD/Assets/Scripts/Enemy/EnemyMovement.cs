@@ -7,8 +7,8 @@ using System.Collections;
 public class EnemyMovement : MonoBehaviour
 {
     //Public variables
-    public float m_speed;               //Speed of enemy
-    public float m_turnspeed;           //Turnspeed of enemy
+    public float m_speed = 0.1f;    //Speed of enemy
+    public float m_turnspeed = 10f; //Turnspeed of enemy
     [HideInInspector] public Transform m_targetlocation;     //Location of target (currently not looking for base but spawn of base)
    
     //Private variables

@@ -33,13 +33,13 @@ public class Basehealth : MonoBehaviour {
         {
             other.gameObject.SetActive(false);
             count++;
-            TakeDamage(1f); //Future damage should be a variable of the enemy
+            TakeDamage(40f); //Future damage should be a variable of the enemy
         }
         //Enemy shell
         if (other.gameObject.CompareTag("EnemyShell"))
         {
             other.gameObject.SetActive(false);
-            TakeDamage(1f); //Future damage should be a variable of the enemy
+            TakeDamage(20f); //Future damage should be a variable of the enemy
         }
 
     }
@@ -48,7 +48,7 @@ public class Basehealth : MonoBehaviour {
     public void TakeDamage(float amount)
     {
         //Amount must be smaller than zero
-        if(amount < 0)
+        if(amount > 0)
         {
             m_CurrentHealth -= amount;
         }
