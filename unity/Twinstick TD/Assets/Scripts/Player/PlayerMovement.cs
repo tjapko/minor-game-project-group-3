@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour {
 
 //	public float m_RotationSpeed = 1f; // not used!
 	public float m_MovementSpeed = 10f;
-
 	private Rigidbody m_playerRigidbody;
 
 	private float m_MovementInputValueV;
@@ -36,13 +35,11 @@ public class PlayerMovement : MonoBehaviour {
 	private void FixedUpdate()
 	{
 		
-//		string m_MovementAxisNameV = "Vertical" + m_PlayerNumber; // can be used later
-//		string m_MovementAxisNameH = "Horizontal" + m_PlayerNumber; // can be used later
-		string m_MovementAxisNameV = "Vertical";
-		string m_MovementAxisNameH = "Horizontal";
+		string m_MovementAxisNameV = "Vertical"; //		string m_MovementAxisNameV = "Vertical" + m_PlayerNumber; // can be used later
+        string m_MovementAxisNameH = "Horizontal";//		string m_MovementAxisNameH = "Horizontal" + m_PlayerNumber; // can be used later
 
-		// Store the player's input.
-		m_MovementInputValueV = Input.GetAxisRaw(m_MovementAxisNameV);   // use Input.GetAxisRaw("Vertical") for instant reaction of the Vertical movement 
+        // Store the player's input.
+        m_MovementInputValueV = Input.GetAxisRaw(m_MovementAxisNameV);   // use Input.GetAxisRaw("Vertical") for instant reaction of the Vertical movement 
 		m_MovementInputValueH = Input.GetAxisRaw(m_MovementAxisNameH); // use Input.GetAxisRaw("Horizontal") for instant reaction of the Horizontal movement 
 		m_RotationInputM = Input.mousePosition;
 

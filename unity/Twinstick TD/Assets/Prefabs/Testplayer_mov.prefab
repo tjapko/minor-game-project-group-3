@@ -90,13 +90,14 @@ GameObject:
   - 54: {fileID: 54000010105218992}
   - 114: {fileID: 114000013493940560}
   - 114: {fileID: 114000014207326044}
+  - 114: {fileID: 114000012824491658}
   m_Layer: 0
-  m_Name: Testplayer_cap
+  m_Name: Testplayer_mov
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000013974171832
 GameObject:
   m_ObjectHideFlags: 1
@@ -333,6 +334,22 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114000012824491658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012244867938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664648c30de440a45bae5047875bb6b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlayerNumber: 1
+  m_Bullet: {fileID: 54000011572420536, guid: 2a8c5f3315dc474488e968eb83c43515, type: 2}
+  m_FireTransform: {fileID: 4000013499266326, guid: 2d09e22ed6226494e865781d437de263,
+    type: 2}
+  m_LaunchForce: 10
 --- !u!114 &114000013269634734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -366,13 +383,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012244867938}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2de21f9d5534a740baef8393047b895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerNumber: 1
   m_MovementSpeed: 10
+  cam: {fileID: 0}
 --- !u!114 &114000014207326044
 MonoBehaviour:
   m_ObjectHideFlags: 1
