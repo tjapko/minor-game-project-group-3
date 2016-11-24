@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     //Public variables
     public int m_amountofplayers;               // Total amount of players that are participating
     public float m_StartDelay = 3f;             // The delay between the start of round and playing of round
-    public float m_waveDelay = 2f;              // The delay between ending and starting of wave
+    public float m_waveDelay = 4f;              // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
     public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
     public GameObject m_uiprefab;               // Reference to UI prefab
@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
             gamepause = !gamepause;
             pauseGame(gamepause);
         }
+        m_uiscript.UIchange(wavephase, gamepause);
 
         //Update score
         m_uiscript.Update();
@@ -117,7 +118,7 @@ public class GameManager : MonoBehaviour
 
         //Send next wave and increase wave number
         //While loop is needed, because EnemiesDead() is not fast enough to detect that a new wave has spawned
-        while (m_wave.EnemiesDead())
+        while ((m_wave.EnemiesDead()))
         {
             m_wave.NextWave();
         }
@@ -132,7 +133,7 @@ public class GameManager : MonoBehaviour
             if (m_wave.EnemiesDead())
             {
                 // Start wave cooldown
-                StartCoroutine(RoundWaveCooldown());
+                yield return StartCoroutine(RoundWaveCooldown());
 
                 //Spawn next wave and remove dead enemies
                 m_wave.DestroyEnemies();
@@ -156,8 +157,10 @@ public class GameManager : MonoBehaviour
     //Wave cooldown
     private IEnumerator RoundWaveCooldown()
     {
+        Debug.Log("Wave cooldown");
         wavephase = false;
         yield return m_waveWait;
+        Debug.Log("Wave start");
     }
 
     //Pause game function
@@ -168,13 +171,11 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             m_players.disablePlayersControl();
             m_wave.DisableEnemyWaveControl();
-            m_uiscript.UIchange(wavephase, gamepause);
         } else
         {
             Time.timeScale = 1;
             m_players.enablePlayersControl();
             m_wave.EnableEnemyWaveControl();
-            m_uiscript.UIchange(wavephase, gamepause);
         }
         
     }
