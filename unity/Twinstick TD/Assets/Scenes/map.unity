@@ -432,22 +432,6 @@ Prefab:
       propertyPath: m_Name
       value: Levelart
       objectReference: {fileID: 0}
-    - target: {fileID: 1000011546111240, guid: bc74c621dd416704288cabee4879cf8b, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000010748524176, guid: bc74c621dd416704288cabee4879cf8b, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000010587754330, guid: bc74c621dd416704288cabee4879cf8b, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000010326500638, guid: bc74c621dd416704288cabee4879cf8b, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bc74c621dd416704288cabee4879cf8b, type: 2}
   m_IsPrefabParent: 0
