@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour {
 		movement = new Vector3(movementX, 0f, movementZ);
 
 		// normalizing movement in order to get the speed of all directions the same 
+		movement = movement.normalized;
 
 		// adjusting the movement speed
 		movement = movement *  m_MovementSpeed * Time.deltaTime;
