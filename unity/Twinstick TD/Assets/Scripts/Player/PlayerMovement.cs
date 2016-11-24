@@ -3,57 +3,124 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public float m_Speed = 12f;
-    public float m_TurnSpeed = 180f;
+	public int m_PlayerNumber = 1; // not used yet; can be used to identify the different players (later), each players needs different controls!
 
-    private string m_MovementAxisName;
-    private string m_TurnAxisName;
-    private Rigidbody m_Rigidbody;
-    private float m_MovementInputValue;
-    private float m_TurnInputValue;
-    private float m_OriginalPitch;
+//	public float m_RotationSpeed = 1f; // not used!
+	public float m_MovementSpeed = 10f;
 
+	private Rigidbody m_playerRigidbody;
 
+	private float m_MovementInputValueV;
+	private float m_MovementInputValueH;
+	private Vector3 m_RotationInputM;
+
+	private int Floor;
+	private float camRayLength = 100f;
+
+	Vector3 movement;
+	private Transform cameraTransform;
+
+	// Initializes the Floormask 
+	void Awake()
+	{
+		Floor = LayerMask.GetMask("mouseFloor"); 
+	}
+
+	// Initializes the player's Rigidbody
     private void Start()
     {
-        m_Rigidbody = GetComponent<Rigidbody>(); //get rigid body
+        m_playerRigidbody = GetComponent<Rigidbody>(); 
     }
 
-    private void Update()
-    {
-        // Store the player's input and make sure the audio for the engine is playing.
-        m_MovementInputValue = Input.GetAxis("Vertical");
-        m_TurnInputValue = Input.GetAxis("Horizontal");
-    }
+	//Every physics step: Abstracting Vertical,Horizontal and mousePosition input and Updating player's position and rotation
+	private void FixedUpdate()
+	{
+		
+//		string m_MovementAxisNameV = "Vertical" + m_PlayerNumber; // can be used later
+//		string m_MovementAxisNameH = "Horizontal" + m_PlayerNumber; // can be used later
+		string m_MovementAxisNameV = "Vertical";
+		string m_MovementAxisNameH = "Horizontal";
 
-    //Every physics step
-    private void FixedUpdate()
-    {
-        // Move and turn the tank.
-        Move();
-        Turn();
+		// Store the player's input.
+		m_MovementInputValueV = Input.GetAxisRaw(m_MovementAxisNameV);   // use Input.GetAxisRaw("Vertical") for instant reaction of the Vertical movement 
+		m_MovementInputValueH = Input.GetAxisRaw(m_MovementAxisNameH); // use Input.GetAxisRaw("Horizontal") for instant reaction of the Horizontal movement 
+		m_RotationInputM = Input.mousePosition;
 
-    }
+		// Move and turn the player.
+		Move();
+		Turn();
+	}
 
-    private void Move()
-    {
-        // Adjust the position of the tank based on the player's input.
-        Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * Time.deltaTime; //Time.deltatime proportional to second (not per physics step)
-        movement += m_Rigidbody.position;
-        movement[1] = 0f;
-        m_Rigidbody.MovePosition(movement);
+	// Adjust the position of the player based on the player's keyboard input.
+	private void Move()
+	{
+		// Horizontal movement (x-axis)
+		float movementX = m_MovementInputValueH;
+		// Vertical movement (z-axis)
+		float movementZ = m_MovementInputValueV;
 
-    }
+		// movement vector, no movement in the y-axis (because it's fixed)
+		movement = new Vector3(movementX, 0f, movementZ);
 
+		// normalizing movement in order to get the speed of all directions the same 
+		movement = movement.normalized;
 
-    private void Turn()
-    {
-        // Adjust the rotation of the tank based on the player's input.
-        float turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime;
-        Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f); //Needed for turning (x,y,z)
-        turnRotation = turnRotation * m_Rigidbody.rotation;
-        turnRotation.x = 0f;
-        turnRotation.z = 0f;
-        m_Rigidbody.MoveRotation(turnRotation);
-    }
+		// adjusting the movement speed
+		movement = movement *  m_MovementSpeed * Time.deltaTime;
+
+		// Rotates (Vector3) movement 
+		movement = RotateWithView ();
+
+		// adding movement to player's position
+		movement += m_playerRigidbody.position;
+
+		// move player to the new (moved) position
+		m_playerRigidbody.MovePosition(movement);
+
+	}
+
+	// Rotate Vector3 movement with respect to the camera view
+	private Vector3 RotateWithView() 
+	{
+		// camera is moved (not fixed)
+		if (cameraTransform != null) 
+		{
+			// calculate the new rotated, right-oriented movement vector 
+			Vector3 dir = cameraTransform.TransformDirection (movement);
+			dir.y = 0f; // y-value is keeped zero
+			return dir.normalized * movement.magnitude; // same length as before ()
+		}
+		// camera is not moved (fixed)
+		else 
+		{
+			cameraTransform = Camera.main.transform; 
+			return movement; // just return movement (already right orientation)
+		}
+
+	}
+
+	// Adjust the rotation of the player based on the mousePosition input.
+	void Turn()
+	{
+		// creating a ray from the camera to the mouseposition
+		Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+		// a variable, which is true when the ray hits the floor 
+		RaycastHit floorHit; 
+
+		if(Physics.Raycast(camRay , out floorHit, camRayLength , Floor)) // checking if the ray hits the floor 
+		{
+			Vector3 playerToMouse = floorHit.point - transform.position; // creating a vector from the player to the mousePosition
+			playerToMouse.y = 0f; // because it's a projection on the x-z-plane
+
+			// Creating newRotation, towards the new mouse-direction (x-z-plane)
+			Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+			// Rotate the player to the newRotation
+			m_playerRigidbody.MoveRotation(newRotation);
+
+			//Line from Main Camera to the point selected with the mouse (for debugging purposes)
+			Debug.DrawLine (Camera.main.transform.position, floorHit.point, Color.yellow ); 
+		}
+	}
+
 }
