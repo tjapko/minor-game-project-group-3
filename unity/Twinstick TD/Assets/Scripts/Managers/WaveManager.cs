@@ -23,12 +23,6 @@ public class WaveManager
         m_enemywave = new List<EnemyManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     // Send next wave
     public void NextWave()
     {

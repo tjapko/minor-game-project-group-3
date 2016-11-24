@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public float m_waveDelay = 2f;              // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
     public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
+    public GameObject m_uiprefab;               // Reference to UI prefab
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
     public GameObject m_Enemyprefab;            // Reference to the prefab of the enemies.
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     public Transform m_Enemyspawnpoint;           // Spawnpoint of enemy
 
     //Private variables
+    private MapUIScript m_uiscript;             // The UI script
     private BaseManager m_base;                 // The base manager of the base
     private UserManager m_players;              // A collection of managers for enabling and disabling different aspects of the players.
     private WaveManager m_wave;                 // A collection of managers for enabling and disabling different aspects of the enemies.
@@ -46,10 +48,12 @@ public class GameManager : MonoBehaviour
         m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint);
         m_players = new UserManager(m_Playerprefab, m_Playerspawnpoint, m_amountofplayers);
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
+        m_uiscript = new MapUIScript(m_uiprefab, m_players);
 
         //Spawning base and users
         m_players.spawnPlayers();
         m_base.spawnBase();
+
 
         //Set camera
         SetCameraTargets();
@@ -67,6 +71,11 @@ public class GameManager : MonoBehaviour
             gamepause = !gamepause;
             pauseGame(gamepause);
         }
+
+        //Update score
+        m_uiscript.Update();
+        m_players.Update();
+
     }
 
     // This is called from start and will run each phase of the game one after another.
@@ -189,12 +198,5 @@ public class GameManager : MonoBehaviour
         // These are the targets the camera should follow.
         m_CameraControl.m_Targets = targets;
     }
-
-    
-
-    
-
-    
-
 
 }

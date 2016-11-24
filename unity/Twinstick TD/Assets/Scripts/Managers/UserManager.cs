@@ -8,9 +8,19 @@ public class UserManager {
     public GameObject m_Playerprefab;       //Reference to prefab of player
     public Transform m_playerspawnpoint;    //Spawnpoints of enemies
     public int m_totalplayers;              //Total amount of players
-    [HideInInspector] public List<PlayerManager> m_playerlist;   //List of players
+    public List<PlayerManager> m_playerlist;   //List of players
 
     //Private variables
+
+
+    // Update is called for every player to update their statistics
+    public void Update()
+    {
+        foreach(PlayerManager player in m_playerlist)
+        {
+            player.Update();
+        }
+    }
 
     // Use this for initialization
     public UserManager(GameObject Playerprefab, Transform playerspawnpoint, int totalplayers)
