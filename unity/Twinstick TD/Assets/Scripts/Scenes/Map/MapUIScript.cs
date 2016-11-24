@@ -49,52 +49,91 @@ public class MapUIScript {
         SetKillsText();
     }
 
+    // Changing UI back and fourth between phases
+    // Wavephase = true : wavephase, Wavephase = false : build phase
+    public void UIchange(bool wavephase, bool pause)
+    {
+        if(pause)
+        {
+            hideConstructonPanel();
+            hideWaveControl();
+            showPauseMenu();
+        } else
+        {
+            if(wavephase)
+            {
+                hideConstructonPanel();
+                showWaveControl();
+                hidePauseMenu();
+            } else
+            {
+                showConstructonPanel();
+                hideWaveControl();
+                hidePauseMenu();
+            }
+        }
+    }
+
+    // Buildphase UI
+    public void UIbuildphase()
+    {
+        showWaveControl();
+        showConstructonPanel();
+    }
+
+    // Wave Phase
+    private void UIwavephase()
+    {
+        showWaveControl();
+        hideConstructonPanel();
+    }
+
     // sets the currencyText which is visible on the screen to the current Currency
-    public void SetCurrencyText()
+    private void SetCurrencyText()
     {
         m_textplayer1.transform.GetChild(1).GetComponent<Text>().text = "Currency: " + m_usermanager.m_playerlist[0].getCurrency().ToString();
         //m_textplayer2.transform.GetChild(1).GetComponent<Text>().text = "Currency: " + m_usermanager.m_playerlist[1].getCurrency().ToString();
     }
 
     // sets the KillsText which is visible on the screen to the current amount of kills
-    public void SetKillsText()
+    private void SetKillsText()
     {
         m_textplayer1.transform.GetChild(2).GetComponent<Text>().text = "Kills: " + m_usermanager.m_playerlist[0].getkills().ToString();
         //m_textplayer2.transform.GetChild(2).GetComponent<Text>().text = "Kills: " + m_usermanager.m_playerlist[1].getkills().ToString();
     }
 
     // Show Pause menu
-    public void showPauseMenu()
+    private void showPauseMenu()
     {
         m_pausemenu.SetActive(true);
     }
 
     // Show Pause menu
-    public void hidePauseMenu()
+    private void hidePauseMenu()
     {
         m_pausemenu.SetActive(false);
     }
 
     // Show Pause menu
-    public void showWaveControl()
+    private void showWaveControl()
     {
         m_wavecontrol.SetActive(true);
     }
 
     // Show Pause menu
-    public void hideWaveControl()
+    private void hideWaveControl()
     {
         m_wavecontrol.SetActive(false);
     }
 
     // Show Pause menu
-    public void showConstructonPanel()
+    private void showConstructonPanel()
     {
         m_constructionpanel.SetActive(true);
     }
 
     // Show Pause menu
-    public void hideConstructonPanel()
+    private void hideConstructonPanel()
     {
         m_constructionpanel.SetActive(false);
     }

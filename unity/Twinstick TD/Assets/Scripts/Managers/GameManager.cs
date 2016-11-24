@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour
     private WaitForSeconds m_waveWait;          // Time between waves (not yet used)
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
     private int m_waveNumber;                   // Which wave the game is currently on.
-    bool gamepause;                             // Boolean if game is paused 
+    bool gamepause;                             // Boolean if game is paused
+    bool wavephase;                             // Boolean if game is in wavephase or construction phase 
 
     //Start
     private void Start()
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
         m_EndWait = new WaitForSeconds(m_EndDelay);
         m_waveNumber = 0;
         gamepause = false;
+        wavephase = false;
 
         //Initialize managers
         m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint);
@@ -99,8 +101,9 @@ public class GameManager : MonoBehaviour
         // Reset all players and enable control
         m_players.resetAllPlayers();
         m_players.enablePlayersControl();
+        wavephase = false;
 
-        //m_CameraControl.SetStartPositionAndSize();
+        m_CameraControl.SetStartPositionAndSize();
 
         // Wait m_StartWait of seconds before starting rounds
         yield return m_StartWait;
@@ -124,6 +127,7 @@ public class GameManager : MonoBehaviour
         // Wait until base has no health or players are dead
         while (!(m_players.playerDead() || m_base.BaseDead()))
         {
+            wavephase = true;
             //Enemies are dead
             if (m_wave.EnemiesDead())
             {
@@ -152,6 +156,7 @@ public class GameManager : MonoBehaviour
     //Wave cooldown
     private IEnumerator RoundWaveCooldown()
     {
+        wavephase = false;
         yield return m_waveWait;
     }
 
@@ -163,11 +168,13 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             m_players.disablePlayersControl();
             m_wave.DisableEnemyWaveControl();
+            m_uiscript.UIchange(wavephase, gamepause);
         } else
         {
             Time.timeScale = 1;
             m_players.enablePlayersControl();
             m_wave.EnableEnemyWaveControl();
+            m_uiscript.UIchange(wavephase, gamepause);
         }
         
     }
