@@ -36,6 +36,7 @@ GameObject:
   - 4: {fileID: 4000010639275598}
   - 33: {fileID: 33000010645020724}
   - 23: {fileID: 23000012922203734}
+  - 54: {fileID: 54000012850106202}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Enemy
@@ -87,9 +88,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013963118164}
   - 54: {fileID: 54000010105218992}
-  - 114: {fileID: 114000013654636568}
   - 114: {fileID: 114000011184074504}
   - 65: {fileID: 65000011758794278}
+  - 114: {fileID: 114000010321620456}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Enemy
@@ -208,7 +209,22 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
+--- !u!54 &54000012850106202
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010358593608}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!65 &65000011758794278
 BoxCollider:
@@ -222,6 +238,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &114000010321620456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012244867938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2958e6e0e29d0ab42a749e573a448ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_target: {fileID: 0}
+  speed: 3
 --- !u!114 &114000010481510842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -329,20 +358,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114000013654636568
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012244867938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4daf149dbf77d245ba33bb189692d75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_speed: 0.05
-  m_turnspeed: 180
-  m_targetlocation: {fileID: 0}
 --- !u!114 &114000013743722634
 MonoBehaviour:
   m_ObjectHideFlags: 1
