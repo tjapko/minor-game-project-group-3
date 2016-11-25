@@ -104,13 +104,13 @@ public class PlayerMovement : MonoBehaviour {
 		Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 		// a variable, which is true when the ray hits the floor 
-		RaycastHit floorHit; 
-
-		if(Physics.Raycast(camRay , out floorHit, camRayLength , Floor)) // checking if the ray hits the floor 
+		RaycastHit floorHit;
+        
+        if (Physics.Raycast(camRay , out floorHit, camRayLength , Floor)) // checking if the ray hits the floor 
 		{
-			Vector3 playerToMouse = floorHit.point - transform.position; // creating a vector from the player to the mousePosition
-			playerToMouse.y = 0f; // because it's a projection on the x-z-plane
-            mouseposition = playerToMouse;  //Used for dropping objects
+            Vector3 playerToMouse = floorHit.point - transform.position; // creating a vector from the player to the mousePosition
+            playerToMouse.y = 0f; // because it's a projection on the x-z-plane
+            mouseposition = transform.position + playerToMouse;  //Used for dropping objects
 
             // Creating newRotation, towards the new mouse-direction (x-z-plane)
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
