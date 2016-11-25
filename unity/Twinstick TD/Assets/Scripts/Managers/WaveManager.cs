@@ -45,7 +45,7 @@ public class WaveManager
 	private Vector3 RandomPosition() 
 	{
 		float buffer = 1.0f;
-		bool walkable;
+		bool walkable = true; // needs to be implmented! 
 		float x_minrange, x_maxrange, z_minrange, z_maxrange;
 		float distance;
 		Vector3 Base = GameObject.FindGameObjectWithTag ("Base").GetComponent<Transform> ().transform.position;
@@ -59,7 +59,7 @@ public class WaveManager
 			randomPosition = new Vector3 (Random.Range (-x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
 
 			distance = Vector3.Distance(Base, randomPosition);
-		} while (distance <= 0.5 * (x_maxrange - x_minrange) && walkable);
+		} while (distance <= 0.5 * (x_maxrange - x_minrange) && !walkable);
 		return randomPosition;
 	}
 
