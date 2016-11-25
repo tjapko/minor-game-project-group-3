@@ -11,11 +11,6 @@ public class WaveManager
     //Private variables
     private List<EnemyManager> m_enemywave;       //Population of enemies
     private int enemy_number;               //Total amount of enemies spawned
-	private float x_minrange;
-	private float x_maxrange;
-	private float z_minrange;
-	private float z_maxrange;
-	private float distance;
 
     // Use this for initialization
     public WaveManager(GameObject Enemyprefab, Transform enemyspawnpoints, Transform target)
@@ -49,9 +44,12 @@ public class WaveManager
 
 	private Vector3 RandomPosition() 
 	{
+		float buffer = 1.0f;
+		bool walkable;
+		float x_minrange, x_maxrange, z_minrange, z_maxrange;
+		float distance;
 		Vector3 Base = GameObject.FindGameObjectWithTag ("Base").GetComponent<Transform> ().transform.position;
 
-		float buffer = 1.0f;
 		Vector3 randomPosition;
 		do {
 			x_minrange = GameObject.FindGameObjectWithTag ("Wall4").GetComponent<Transform> ().transform.position.x + buffer;
@@ -61,7 +59,7 @@ public class WaveManager
 			randomPosition = new Vector3 (Random.Range (-x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
 
 			distance = Vector3.Distance(Base, randomPosition);
-		} while (distance <= 0.5 * (x_maxrange - x_minrange));
+		} while (distance <= 0.5 * (x_maxrange - x_minrange) && walkable);
 		return randomPosition;
 	}
 
