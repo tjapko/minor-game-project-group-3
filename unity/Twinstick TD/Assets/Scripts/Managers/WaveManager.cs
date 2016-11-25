@@ -63,7 +63,7 @@ public class WaveManager
 		float crit_distance  = (float)0.5 * (x_maxrange - x_minrange); 
 
 		do {
-			randomPosition = new Vector3 (Random.Range (-x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
+			randomPosition = new Vector3 (Random.Range (x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
 			distance = Vector3.Distance(Base, randomPosition);
 		} while (distance <= crit_distance && !walkable); // distance needs to be smaller than critical distance and the spawnpoint needs to be walkable
 		return randomPosition;
