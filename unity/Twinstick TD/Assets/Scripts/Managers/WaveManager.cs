@@ -5,7 +5,7 @@ public class WaveManager
 {
     //Public variables
     public GameObject m_Enemyprefab;       //Reference to prefab of enemy
-    public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
+	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
     public Transform m_target;             //Target(s) of enemies
 
     //Private variables
@@ -26,7 +26,7 @@ public class WaveManager
     // Send next wave
     public void NextWave()
     {
-        SpawnEnemies(1);
+        SpawnEnemies(2);
     }
 
     //Check if all enemies are dead;
@@ -42,11 +42,21 @@ public class WaveManager
         return true;
     }
 
+	private Vector3 RandomPosition() 
+	{
+		float x_minrange = GameObject.FindGameObjectWithTag("Wall4").GetComponent<Transform>().transform.position.x;
+		float x_maxrange = GameObject.FindGameObjectWithTag("Wall2").GetComponent<Transform>().transform.position.x;
+		float z_minrange = GameObject.FindGameObjectWithTag("Wall1").GetComponent<Transform>().transform.position.z;
+		float z_maxrange = GameObject.FindGameObjectWithTag("Wall3").GetComponent<Transform>().transform.position.z;
+		return new Vector3 (Random.Range (-x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
+	}
+
     // Spawn enemies
     private void SpawnEnemies(int m_number_enemies)
     {
         for (int i = 0; i < m_number_enemies; i++)
         {
+			m_enemyspawnpoints.position = RandomPosition ();
             GameObject newinstance = GameObject.Instantiate(m_Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
             m_enemywave.Add(new EnemyManager(newinstance, m_enemyspawnpoints, m_target, enemy_number));
             enemy_number++;
