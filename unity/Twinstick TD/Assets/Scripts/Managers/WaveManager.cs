@@ -42,11 +42,11 @@ public class WaveManager
 		return true;
 	}
 
-	private Vector3 RandomPosition() 
+	private Vector3 RandomSpawnPosition() 
 	{
 		Vector3 randomPosition;
 
-		float buffer = 1.0f;  	// buffer for extra space between enemies and wall
+		float buffer = 1.0f;  	// buffer for extra space between enemies and wall maybe not needed for later (walkable will fix this)
 		bool walkable = true;	// needs to be implmented! 
 		float distance;		 	// distance between base and enemies spawnpoint 
 
@@ -63,18 +63,17 @@ public class WaveManager
 		float crit_distance  = (float)0.5 * (x_maxrange - x_minrange); 
 
 		do {
-			randomPosition = new Vector3 (Random.Range (-x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
+			randomPosition = new Vector3 (Random.Range (x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
 			distance = Vector3.Distance(Base, randomPosition);
-		} while (distance <= crit_distance && !walkable); // distance needs to be smaller than critical distance and the spawnpoint needs to be walkable
+		} while (distance <= crit_distance || !walkable); // distance needs to be smaller than critical distance and the spawnpoint needs to be walkable
 		return randomPosition;
 	}
-
 	// Spawn enemies
 	private void SpawnEnemies(int m_number_enemies)
 	{
 		for (int i = 0; i < m_number_enemies; i++)
 		{
-			m_enemyspawnpoints.position = RandomPosition ();
+			m_enemyspawnpoints.position = RandomSpawnPosition ();
 			GameObject newinstance = GameObject.Instantiate(m_Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
 			m_enemywave.Add(new EnemyManager(newinstance, m_enemyspawnpoints, m_target, enemy_number));
 			enemy_number++;
