@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
 	public int m_PlayerNumber = 1; // not used yet; can be used to identify the different players (later), each players needs different controls!
+    public Vector3 mouseposition;
 
 //	public float m_RotationSpeed = 1f; // not used!
 	public float m_MovementSpeed = 10f;
@@ -109,9 +110,10 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			Vector3 playerToMouse = floorHit.point - transform.position; // creating a vector from the player to the mousePosition
 			playerToMouse.y = 0f; // because it's a projection on the x-z-plane
+            mouseposition = playerToMouse;  //Used for dropping objects
 
-			// Creating newRotation, towards the new mouse-direction (x-z-plane)
-			Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+            // Creating newRotation, towards the new mouse-direction (x-z-plane)
+            Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
 			// Rotate the player to the newRotation
 			m_playerRigidbody.MoveRotation(newRotation);
 

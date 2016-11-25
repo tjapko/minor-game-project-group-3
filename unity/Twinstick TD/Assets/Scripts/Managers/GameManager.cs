@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
         m_players.spawnPlayers();
         m_base.spawnBase();
 
-
         //Set camera
         SetCameraTargets();
 
@@ -76,8 +75,8 @@ public class GameManager : MonoBehaviour
         m_uiscript.UIchange(wavephase, gamepause);
 
         //Update score
-        m_uiscript.Update();
         m_players.Update();
+        m_uiscript.Update();
 
     }
 
@@ -89,7 +88,7 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(Startgame());
 
         //Play round
-        yield return StartCoroutine(RoundPlaying());
+        yield return StartCoroutine(wavePhase());
 
         // Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
         yield return StartCoroutine(RoundEnding());
@@ -111,20 +110,11 @@ public class GameManager : MonoBehaviour
     }
 
     //Play round
-    private IEnumerator RoundPlaying()
+    private IEnumerator wavePhase()
     {
         // Clear the text from the screen.
         // m_MessageText.text = string.Empty;
-
-        //Send next wave and increase wave number
-        //While loop is needed, because EnemiesDead() is not fast enough to detect that a new wave has spawned
-        while ((m_wave.EnemiesDead()))
-        {
-            m_wave.NextWave();
-        }
-        m_waveNumber++;
-        Debug.Log("Current wave" + m_waveNumber);
-
+        
         // Wait until base has no health or players are dead
         while (!(m_players.playerDead() || m_base.BaseDead()))
         {
@@ -132,10 +122,11 @@ public class GameManager : MonoBehaviour
             //Enemies are dead
             if (m_wave.EnemiesDead())
             {
-                // Start wave cooldown
-                yield return StartCoroutine(RoundWaveCooldown());
+                // Go into construction phase
+                yield return StartCoroutine(constructionPhase());
 
                 //Spawn next wave and remove dead enemies
+                //While loop is needed, because EnemiesDead() is not fast enough to detect that a new wave has spawned
                 m_wave.DestroyEnemies();
                 while (m_wave.EnemiesDead())
                 {
@@ -154,13 +145,30 @@ public class GameManager : MonoBehaviour
         
     }
 
-    //Wave cooldown
-    private IEnumerator RoundWaveCooldown()
+    // Construction phase
+    private IEnumerator constructionPhase()
     {
-        Debug.Log("Wave cooldown");
+        //Set wavephase to false and set timer
         wavephase = false;
+        StartCoroutine(constructionphaseTimer());
+        
+        //While the game is in construction phase perform actions
+        //Can get out of while loop by getting signal from next wave button
+        //Can get out of while loop when timer reaches time 
+        // Timer must be shorter than time of ending next wave, incase user presses next wave button !!!! (needs fix)
+        while(!wavephase)
+        {
+            yield return null;
+        }
+
+        //Starting wave phase
+    }
+    
+    // Constuction phase countdown
+    private IEnumerator constructionphaseTimer()
+    {
         yield return m_waveWait;
-        Debug.Log("Wave start");
+        wavephase = true;
     }
 
     //Pause game function
@@ -183,7 +191,7 @@ public class GameManager : MonoBehaviour
     
     private IEnumerator RoundEnding()
     {
-        // Stop tanks from moving.
+        // Stop players and waves from moving.
         m_players.disablePlayersControl();
         m_wave.DisableEnemyWaveControl();
 
@@ -193,18 +201,23 @@ public class GameManager : MonoBehaviour
     //Sets position of camera based on players
     private void SetCameraTargets()
     {
-        // Create a collection of transforms the same size as the number of tanks.
+        // Get targets of players
         Transform[] targets = new Transform[m_amountofplayers];
 
-        // For each of these transforms...
+
         for (int i = 0; i < targets.Length; i++)
         {
-            // ... set it to the appropriate tank transform.
             targets[i] = m_players.m_playerlist[i].m_Instance.transform;
         }
 
         // These are the targets the camera should follow.
         m_CameraControl.m_Targets = targets;
+    }
+
+    //Spawns next wave when user presses next wave button
+    public void btn_nextwave()
+    {
+        wavephase = true;
     }
 
 }

@@ -2,9 +2,9 @@
 
 public class BulletExplosion : MonoBehaviour
 {
-    public LayerMask m_EnemyMask;                       // Used to filter what the explosion affects, this should be set to "Enemies".
-    public float m_MaxDamage;                    // The amount of damage done if the explosion is centred on a tank.
-    public float m_MaxLifeTime;                    // The time in seconds before the shell is removed.
+    public LayerMask m_EnemyMask;   // Used to filter what the explosion affects, this should be set to "Enemies".
+    public float m_MaxDamage;       // The amount of damage done if the explosion is centred on an enemy.
+    public float m_MaxLifeTime;     // The time in seconds before the shell is removed.
     
     private void Start()
     {
@@ -38,7 +38,7 @@ public class BulletExplosion : MonoBehaviour
             // Calculate the amount of damage the target should take based on it's distance from the shell.
             float damage = m_MaxDamage;
 
-            // Deal this damage to the tank.
+            // Deal this damage to the enemy.
             targetHealth.TakeDamage(damage);
         }
 
