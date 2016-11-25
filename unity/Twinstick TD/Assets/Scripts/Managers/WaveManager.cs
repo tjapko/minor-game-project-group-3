@@ -65,7 +65,7 @@ public class WaveManager
 		do {
 			randomPosition = new Vector3 (Random.Range (x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
 			distance = Vector3.Distance(Base, randomPosition);
-		} while (distance <= crit_distance && !walkable); // distance needs to be smaller than critical distance and the spawnpoint needs to be walkable
+		} while (distance <= crit_distance || !walkable); // distance needs to be smaller than critical distance and the spawnpoint needs to be walkable
 		return randomPosition;
 	}
     // Spawn enemies
