@@ -9,7 +9,7 @@ public class EnemyHealth : MonoBehaviour
 {
     //Public variables
     public float m_StartingHealth;  //Start health of enemy
-    public Slider m_Slider;                             // The slider to represent how much health the tank currently has.
+    public Slider m_Slider;                             // The slider to represent how much health the enemy currently has.
     public Image m_FillImage;                           // The image component of the slider.
     public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
     public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnEnable()
     {
-        // When the tank is enabled, reset the tank's health and whether or not it's dead.
+        // When the enemy is enabled, reset the enemy's health
         m_CurrentHealth = m_StartingHealth;
         m_Dead = false;
 

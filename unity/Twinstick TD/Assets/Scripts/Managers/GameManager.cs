@@ -2,8 +2,6 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Analytics;
-using System.Collections.Generic;
 
 //UNDER CONSTRUCTION
 /// <summary>
@@ -12,62 +10,75 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     //Public variables
+    public int m_amountofplayers;               // Total amount of players that are participating
     public float m_StartDelay = 3f;             // The delay between the start of round and playing of round
-    public float m_waveDelay = 5f;              // The delay between ending and starting of wave
+    public float m_waveDelay = 4f;              // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
     public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
+    public GameObject m_uiprefab;               // Reference to UI prefab
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
     public GameObject m_Enemyprefab;            // Reference to the prefab of the enemies.
-    public BaseManager m_base;                  // The base manager of the base
-    public PlayerManager[] m_players;           // A collection of managers for enabling and disabling different aspects of the player.
-    public Transform Enemyspawnpoint;           // Spawnpoint of enemy
+    public Transform m_Basespawnpoint;            // Spawnpoint of base
+    public Transform m_Playerspawnpoint;          // Spawnpoint of player
+    public Transform m_Enemyspawnpoint;           // Spawnpoint of enemy
 
     //Private variables
+    private MapUIScript m_uiscript;             // The UI script
+    private BaseManager m_base;                 // The base manager of the base
+    private UserManager m_players;              // A collection of managers for enabling and disabling different aspects of the players.
     private WaveManager m_wave;                 // A collection of managers for enabling and disabling different aspects of the enemies.
-    private int m_waveNumber;                   // Which wave the game is currently on.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_waveWait;          // Time between waves (not yet used)
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
+    private int m_waveNumber;                   // Which wave the game is currently on.
+    bool gamepause;                             // Boolean if game is paused
+    bool wavephase;                             // Boolean if game is in wavephase or construction phase 
 
     //Start
     private void Start()
     {
         //Setting up variables
         m_StartWait = new WaitForSeconds(m_StartDelay);
+        m_waveWait = new WaitForSeconds(m_waveDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
         m_waveNumber = 0;
-        this.m_wave = new WaveManager(m_Enemyprefab, Enemyspawnpoint, m_base.m_SpawnPoint);
+        gamepause = false;
+        wavephase = false;
 
-        //Spawning base
-        spawnbase();
-        spawnAllPlayers();
+        //Initialize managers
+        m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint);
+        m_players = new UserManager(m_Playerprefab, m_Playerspawnpoint, m_amountofplayers);
+        m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
+        m_uiscript = new MapUIScript(m_uiprefab, m_players);
 
+        //Spawning base and users
+        m_players.spawnPlayers();
+        m_base.spawnBase();
+
+        //Set camera
         SetCameraTargets();
 
-        // Once the players and base has been created start game
+        // Start the game
         StartCoroutine(GameLoop());
     }
 
-    // Spawn the base
-    private void spawnbase()
+    //Check per frame
+    private void Update()
     {
-        m_base.m_Instance = Instantiate(m_baseprefab, m_base.m_SpawnPoint.position, m_base.m_SpawnPoint.rotation) as GameObject;
-    }
-
-
-    // Spawn all the players
-    private void spawnAllPlayers()
-    {
-        for (int i = 0; i < m_players.Length; i++)
+        //Escape key: pause menu
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
-            m_players[i].m_Instance =
-                Instantiate(m_Playerprefab, m_players[i].m_SpawnPoint.position, m_players[i].m_SpawnPoint.rotation) as GameObject;
-            m_players[i].m_PlayerNumber = i + 1;
-            m_players[i].Setup();
+            gamepause = !gamepause;
+            pauseGame(gamepause);
         }
+        m_uiscript.UIchange(wavephase, gamepause);
+
+        //Update score
+        m_players.Update();
+        m_uiscript.Update();
+
     }
-    
 
     // This is called from start and will run each phase of the game one after another.
     private IEnumerator GameLoop()
@@ -77,137 +88,136 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(Startgame());
 
         //Play round
-        yield return StartCoroutine(RoundPlaying());
+        yield return StartCoroutine(wavePhase());
 
         // Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
-        //yield return StartCoroutine(RoundEnding());
+        yield return StartCoroutine(RoundEnding());
 
-        //Restart game
-        StartCoroutine(GameLoop());
     }
-
 
     // Starting game
     private IEnumerator Startgame()
     {
-        // As soon as the round starts reset the players and make sure they can't move.
-        resetAllPlayers();
-        enablePlayerControl();
+        // Reset all players and enable control
+        m_players.resetAllPlayers();
+        m_players.enablePlayersControl();
+        wavephase = false;
 
-        // Snap the camera's zoom and position to something appropriate for the reset tanks.
-        //m_CameraControl.SetStartPositionAndSize();
+        m_CameraControl.SetStartPositionAndSize();
 
-        // Wait for the specified length of time until yielding control back to the game loop.
+        // Wait m_StartWait of seconds before starting rounds
         yield return m_StartWait;
     }
 
-
-    private IEnumerator RoundPlaying()
+    //Play round
+    private IEnumerator wavePhase()
     {
-        //Increase wave number
-
-
         // Clear the text from the screen.
         // m_MessageText.text = string.Empty;
-
-        //Send next wave and increase wave number
-        //While loop is needed, because EnemiesDead() is not fast enough to detect that a new wave has spawned
-        while (m_wave.EnemiesDead())
+        
+        // Wait until base has no health or players are dead
+        while (!(m_players.playerDead() || m_base.BaseDead()))
         {
-            m_wave.NextWave();
-            m_waveNumber++;
-        }
+            wavephase = true;
+            //Enemies are dead
+            if (m_wave.EnemiesDead())
+            {
+                // Go into construction phase
+                yield return StartCoroutine(constructionPhase());
 
+                //Spawn next wave and remove dead enemies
+                //While loop is needed, because EnemiesDead() is not fast enough to detect that a new wave has spawned
+                m_wave.DestroyEnemies();
+                while (m_wave.EnemiesDead())
+                {
+                    m_wave.NextWave();
+                }
+                m_waveNumber++;
+                Debug.Log("Current wave" + m_waveNumber);
+            }
 
-        // While there is not one tank left...
-        while (!(playerDead() || m_wave.EnemiesDead()))
-        {
-            // ... return on the next frame.
+            // Return next frame without delay
             yield return null;
         }
 
-        //Remove all dead enemies
-        m_wave.DestroyEnemies();
-
-
-        Debug.Log("Current wave" + m_waveNumber);
-        Debug.Log(Analytics.CustomEvent("TestEvent", new Dictionary<string, object> { { "firstObject", 10 } }));
-
-        Analytics.CustomEvent("amount of waves", new Dictionary<string, object>
-        {
-            { "amount of waves", m_waveNumber}
-        });
-        StartCoroutine(RoundPlaying());
-
+        //Player has lost
+        Debug.Log("GAME OVER");
+        
     }
 
-    /*
+    // Construction phase
+    private IEnumerator constructionPhase()
+    {
+        //Set wavephase to false and set timer
+        wavephase = false;
+        StartCoroutine(constructionphaseTimer());
+        
+        //While the game is in construction phase perform actions
+        //Can get out of while loop by getting signal from next wave button
+        //Can get out of while loop when timer reaches time 
+        // Timer must be shorter than time of ending next wave, incase user presses next wave button !!!! (needs fix)
+        while(!wavephase)
+        {
+            yield return null;
+        }
+
+        //Starting wave phase
+    }
+    
+    // Constuction phase countdown
+    private IEnumerator constructionphaseTimer()
+    {
+        yield return m_waveWait;
+        wavephase = true;
+    }
+
+    //Pause game function
+    private void pauseGame(bool status)
+    {
+        if(status)
+        {
+            Time.timeScale = 0;
+            m_players.disablePlayersControl();
+            m_wave.DisableEnemyWaveControl();
+        } else
+        {
+            Time.timeScale = 1;
+            m_players.enablePlayersControl();
+            m_wave.EnableEnemyWaveControl();
+        }
+        
+    }
+
+    
     private IEnumerator RoundEnding()
     {
-        // Stop tanks from moving.
-        disablePlayerControl();
+        // Stop players and waves from moving.
+        m_players.disablePlayersControl();
+        m_wave.DisableEnemyWaveControl();
 
         yield return m_EndWait;
     }
-    */
 
     //Sets position of camera based on players
     private void SetCameraTargets()
     {
-        // Create a collection of transforms the same size as the number of tanks.
-        Transform[] targets = new Transform[m_players.Length];
+        // Get targets of players
+        Transform[] targets = new Transform[m_amountofplayers];
 
-        // For each of these transforms...
+
         for (int i = 0; i < targets.Length; i++)
         {
-            // ... set it to the appropriate tank transform.
-            targets[i] = m_players[i].m_Instance.transform;
+            targets[i] = m_players.m_playerlist[i].m_Instance.transform;
         }
 
         // These are the targets the camera should follow.
         m_CameraControl.m_Targets = targets;
     }
 
-    // Determine if players are dead (hasn't been tested)
-    private bool playerDead()
+    //Spawns next wave when user presses next wave button
+    public void btn_nextwave()
     {
-        for (int i = 0; i < m_players.Length; i++)
-        {
-            if (m_players[i].m_Instance.activeSelf)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        wavephase = true;
     }
-
-    // Reset player position(tested)
-    private void resetAllPlayers()
-    {
-        for (int i = 0; i < m_players.Length; i++)
-        {
-            m_players[i].Reset();
-        }
-    }
-
-    // Enable player control
-    private void enablePlayerControl()
-    {
-        for (int i = 0; i < m_players.Length; i++)
-        {
-            m_players[i].EnableControl();
-        }
-    }
-
-    //Disable player control
-    private void disablePlayerControl()
-    {
-        for (int i = 0; i < m_players.Length; i++)
-        {
-            m_players[i].DisableControl();
-        }
-    }
-
 
 }
