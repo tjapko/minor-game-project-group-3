@@ -46,7 +46,7 @@ public class WaveManager
 	{
 		Vector3 randomPosition;
 
-		float buffer = 1.0f;  	// buffer for extra space between enemies and wall
+		float buffer = 1.0f;  	// buffer for extra space between enemies and wall maybe not needed for later (walkable will fix this)
 		bool walkable = true;	// needs to be implmented! 
 		float distance;		 	// distance between base and enemies spawnpoint 
 
