@@ -28,13 +28,6 @@ public class Basehealth : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         
-        //Enemy
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            other.gameObject.SetActive(false);
-            count++;
-            TakeDamage(40f); //Future damage should be a variable of the enemy
-        }
         //Enemy shell
         if (other.gameObject.CompareTag("EnemyShell"))
         {

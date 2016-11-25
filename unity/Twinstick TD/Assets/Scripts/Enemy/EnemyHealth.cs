@@ -39,7 +39,6 @@ public class EnemyHealth : MonoBehaviour
         //if colide with base, damage base and set enemy to inactive
         if (other.gameObject.CompareTag("Base"))
         {
-            Debug.Log("hoi");
             Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
             if (targetRigidbody)
             {
