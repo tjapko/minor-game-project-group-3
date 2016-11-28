@@ -4,20 +4,37 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System;
 
+/// <summary>
+/// The algorithm for finding the path
+/// </summary>
 public class PathFinding : MonoBehaviour {
 
-	PathRequestManager requestManager;
-	Grid grid;
+	PathRequestManager requestManager; // instance of requestManager
+	Grid grid; // the Grid 
 
+    /// <summary>
+    /// on awake, creating a Pathrequestmanager and a grid
+    /// </summary>
 	void Awake() {
 		requestManager = GetComponent<PathRequestManager> ();
 		grid = GetComponent<Grid> ();
 	}
 
+    /// <summary>
+    /// Start the coroutine Findpath 
+    /// </summary>
+    /// <param name="startPos"></param>
+    /// <param name="targetPos"></param>
 	public void StartFindPath(Vector3 startPos, Vector3 targetPos){
 		StartCoroutine(FindPath(startPos, targetPos));
 	}
 
+    /// <summary>
+    /// Find a path using the grid 
+    /// </summary>
+    /// <param name="startPos"></param>
+    /// <param name="targetPos"></param>
+    
 	IEnumerator FindPath(Vector3 startPos, Vector3 targetPos){
 
 		Vector3[] waypoints = new 	Vector3[0];	
@@ -31,7 +48,7 @@ public class PathFinding : MonoBehaviour {
 			Heap<Node> openSet = new Heap<Node> (grid.MaxSize);
 			HashSet<Node> closedSet = new HashSet<Node> ();
 			openSet.Add (startNode);
-			// Pathfinding loop
+			
 			while (openSet.Count > 0) {
 			Node currentNode = openSet.RemoveFirst ();
 				closedSet.Add (currentNode);
@@ -64,6 +81,12 @@ public class PathFinding : MonoBehaviour {
 		requestManager.FinishedProcessingPath (waypoints, pathSuccess);
 	}
 
+    /// <summary>
+    /// Retrace the path back from the end Node to the start node and reverse this. Returns The final path
+    /// </summary>
+    /// <param name="startNode"></param>
+    /// <param name="endNode"></param>
+    /// <returns name= "waypoints"></returns>
 	Vector3[] RetracePath(Node startNode, Node endNode){
 		List<Node> path = new List<Node> ();
 		Node currentNode = endNode;
@@ -77,6 +100,11 @@ public class PathFinding : MonoBehaviour {
 		return waypoints;
 	}
 	
+    /// <summary>
+    /// Simplifying the path through waypoints. Set a waypoint on the positing where the direction changes.
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
 	Vector3[] SimplifyPath(List<Node> path){
 		List<Vector3> waypoints = new List<Vector3>();
 		Vector2 directionOld = Vector2.zero;
@@ -90,6 +118,12 @@ public class PathFinding : MonoBehaviour {
 			}
 		return waypoints.ToArray();
 	}
+
+    /// <summary>
+    /// Computes the distance between two nodes in the same grid 
+    /// </summary>
+    /// <param name="nodeA"></param>
+    /// <param name="nodeB"></param>
 
 	int GetDistance(Node nodeA, Node nodeB){
 		int distX = Mathf.Abs (nodeA.gridX - nodeB.gridX);

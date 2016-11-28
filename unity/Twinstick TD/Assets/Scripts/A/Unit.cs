@@ -1,17 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// A unit that moves from his original point to the target point 
+/// </summary>
 public class Unit : MonoBehaviour {
 
-	[HideInInspector] public Transform m_target;
-	public float speed = 1;
-	Vector3[] path;
-	int targetIndex;
+	[HideInInspector] public Transform m_target;   // the target 
+	public float speed = 1; // moving speed
+	Vector3[] path; // The walkable path
+	int targetIndex;// The index of the waypointArray. The unit moves to path[targetIndex]  
 
+    /// <summary>
+    /// on Start, requesting a path
+    /// </summary>
 	void Start() {
 		PathRequestManager.RequestPath(transform.position,m_target.position, OnPathFound);
 	}
 
+    /// <summary>
+    /// If there is a path the unit will move over it
+    /// </summary>
+    /// <param name="newPath"></param>
+    /// <param name="pathSuccessful"></param>
 	public void OnPathFound(Vector3[] newPath, bool pathSuccessful) {
 		if (pathSuccessful) {
 			path = newPath;
@@ -20,7 +31,9 @@ public class Unit : MonoBehaviour {
 			StartCoroutine("FollowPath");
 		}
 	}
-
+    /// <summary>
+    /// a coroutine for walking over the path that is given 
+    /// </summary>
 	IEnumerator FollowPath() {
 		Vector3 currentWaypoint = path[0];
 		while (true) {
@@ -35,7 +48,10 @@ public class Unit : MonoBehaviour {
 			yield return null;
 		}
 	}
-
+    
+    /// <summary>
+    /// Visualizing the path with squares on the waypoints 
+    /// </summary>
 	public void OnDrawGizmos() {
 		if (path != null) {
 			for (int i = targetIndex; i < path.Length; i ++) {
