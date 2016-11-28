@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     //Public variables
     public int m_amountofplayers;               // Total amount of players that are participating
     public float m_StartDelay = 3f;             // The delay between the start of round and playing of round
-    public float m_waveDelay = 10f;              // The delay between ending and starting of wave
+    public float m_waveDelay = 15f;              // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
     public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
     public GameObject m_uiprefab;               // Reference to UI prefab
@@ -82,9 +82,13 @@ public class GameManager : MonoBehaviour
         // Mouse click
         if (Input.GetKeyDown("1"))
         {
-            //Debug : restore back to onmouse down and remove the coroutine
+            //For final game : restore back to onmouse down and remove the coroutine
+            //Set player click, and start coroutine object placement
             m_objects.setplayerclick(true);
-            StartCoroutine(m_objects.ObjectPlacement());
+            if(!wavephase)
+            {
+                StartCoroutine(m_objects.ObjectPlacement());
+            }
         }
 
         // Mouse click

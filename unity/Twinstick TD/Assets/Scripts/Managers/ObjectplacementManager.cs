@@ -10,10 +10,10 @@ public class ObjectplacementManager
     //Public variables
     public GameObject m_objectprefab;   //Reference to (to be placed) object prefab
 
+    private UserManager m_usermanager;  //Reference to the user manager
     private bool constructionphase;     //Boolean if game is in construction phase
     private bool playerhasclicked;      //Boolean if player has clicked
-    private UserManager m_usermanager;  //Reference to the user manager
-
+    
     //Constructer
     public ObjectplacementManager(UserManager usermanager, GameObject objectprefab)
     {
@@ -23,9 +23,9 @@ public class ObjectplacementManager
         playerhasclicked = false;
     }
 
+    //Function to place objects
     public IEnumerator ObjectPlacement()
     {
-
         //First instantiate the object
         GameObject newinstance = GameObject.Instantiate(m_objectprefab) as GameObject;
 
@@ -50,7 +50,6 @@ public class ObjectplacementManager
         //Remove the instance
         if (!playerhasclicked)
         {
-            Debug.Log("Object destroyed");
             GameObject.Destroy(newinstance);
         }
 
