@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
+using System.Collections.Generic;
 
 //UNDER CONSTRUCTION
 /// <summary>
@@ -141,6 +143,10 @@ public class GameManager : MonoBehaviour
         }
 
         //Player has lost
+        Debug.Log(m_wave);
+        Analytics.CustomEvent("Total amount of waves", new Dictionary<string, object>{
+            {"wave amount", m_waveNumber }
+        });
         Debug.Log("GAME OVER");
         
     }
@@ -194,7 +200,10 @@ public class GameManager : MonoBehaviour
         // Stop players and waves from moving.
         m_players.disablePlayersControl();
         m_wave.DisableEnemyWaveControl();
-
+        Debug.Log(m_waveNumber);
+        Analytics.CustomEvent("Total amount of waves", new Dictionary<string, object>{
+            {"wave amount", m_waveNumber }
+        });
         yield return m_EndWait;
     }
 
