@@ -12,7 +12,7 @@ public class EnemyManager
     [HideInInspector] public Transform m_TargetPoint;   // Location of target
     [HideInInspector] public int m_EnemyNumber;         // Number of enemy
     [HideInInspector] public GameObject m_Instance;     // A reference to the instance of the enemy
-    [HideInInspector] public EnemyMovement m_Movement;  // Reference to enemy's movement script, used to disable and enable control.
+    [HideInInspector] public Unit m_Movement;  // Reference to enemy's movement script, used to disable and enable control.
     //private GameObject m_CanvasGameObject;            // Used to disable the world space UI during the Starting and Ending phases of each round.
 
     //Constructor
@@ -22,9 +22,8 @@ public class EnemyManager
         m_TargetPoint = target;
         m_EnemyNumber = number;
         m_Instance = instance;
-        m_Movement = m_Instance.GetComponent<EnemyMovement>();
-        m_Movement.m_targetlocation = target;
-        m_Movement.m_targetlocation = m_TargetPoint;
+        m_Movement = m_Instance.GetComponent<Unit>();
+        m_Movement.m_target = m_TargetPoint;
     }
 
     //Setup

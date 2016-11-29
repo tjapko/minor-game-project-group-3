@@ -19,9 +19,9 @@ public class GameManager : MonoBehaviour
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
     public GameObject m_Enemyprefab;            // Reference to the prefab of the enemies.
-    public Transform m_Basespawnpoint;            // Spawnpoint of base
-    public Transform m_Playerspawnpoint;          // Spawnpoint of player
-    public Transform m_Enemyspawnpoint;           // Spawnpoint of enemy
+	public Transform m_Basespawnpoint;            // Spawnpoint of base
+	public Transform m_Playerspawnpoint;          // Spawnpoint of player
+	[HideInInspector]public Transform m_Enemyspawnpoint;           // Spawnpoint of enemy
 
     //Private variables
     private MapUIScript m_uiscript;             // The UI script

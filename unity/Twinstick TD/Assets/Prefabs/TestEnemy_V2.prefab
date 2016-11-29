@@ -92,7 +92,7 @@ GameObject:
   - 65: {fileID: 65000011758794278}
   - 114: {fileID: 114000010321620456}
   m_Layer: 0
-  m_Name: TestEnemy
+  m_Name: TestEnemy_V2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
