@@ -4,8 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
+  - Wall1
+  - Wall2
+  - Wall3
+  - Wall4
   - Base
+  - Enemy
   - EnemyShell
   - PlayerShell
   layers:
@@ -18,7 +22,7 @@ TagManager:
   - 
   - 
   - mouseFloor
-  - 
+  - Unwalkable
   - 
   - 
   - 
