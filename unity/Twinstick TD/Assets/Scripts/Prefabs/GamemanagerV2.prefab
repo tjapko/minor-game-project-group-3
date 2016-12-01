@@ -57,11 +57,11 @@ MonoBehaviour:
   m_EndDelay: 3
   m_CameraControl: {fileID: 0}
   m_uiprefab: {fileID: 1000011379212736, guid: 55b65d527b3aec941a018aa2b6fbe275, type: 2}
-  m_baseprefab: {fileID: 1000011563660048, guid: 08075c56f543cc348a029c91d94bf0e9,
+  m_baseprefab: {fileID: 1000011563660048, guid: da36032e3e7c7489e97c16789df8a54f,
     type: 2}
   m_Playerprefab: {fileID: 1000012244867938, guid: 6526df5f06f78a5438cb83f5730a0724,
     type: 2}
-  m_Enemyprefab: {fileID: 1000012244867938, guid: effe25e49a723e140ae53d42e285572e,
+  m_Enemyprefab: {fileID: 1000012244867938, guid: cb37c0e2daea140e0ae24de0aa88d21d,
     type: 2}
   m_turret: {fileID: 1000012271596080, guid: fade7fc2720943e4d832fbe8c7cc8949, type: 2}
   m_Basespawnpoint: {fileID: 0}
