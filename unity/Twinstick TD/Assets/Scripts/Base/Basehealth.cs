@@ -14,7 +14,6 @@ public class Basehealth : MonoBehaviour {
     //Private variables
     private float m_CurrentHealth;                  //Current health of tower
     private bool m_Dead;                            //Boolean if tower is dead
-    private int count = 0;	                        //number of times enemy hit the base
     
     // OnEnable
     private void OnEnable()

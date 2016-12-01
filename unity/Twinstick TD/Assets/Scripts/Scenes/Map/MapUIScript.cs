@@ -29,7 +29,7 @@ public class MapUIScript {
     public MapUIScript(GameManager gamemanager, GameObject ui_prefab, UserManager usermanager)
     {
         //Setting references
-        m_gamemanager = gamemanager;
+        //m_gamemanager = gamemanager;
         m_instance = GameObject.Instantiate(ui_prefab, Vector3.zero, Quaternion.identity) as GameObject; 
         m_usermanager = usermanager;
 
@@ -38,7 +38,7 @@ public class MapUIScript {
         m_wavecontrol = m_instance.transform.GetChild(1).gameObject;
         m_constructionpanel = m_instance.transform.GetChild(2).gameObject;
         m_textplayer1 = m_instance.transform.GetChild(3).gameObject;
-        m_textplayer2 = m_instance.transform.GetChild(4).gameObject;
+        //m_textplayer2 = m_instance.transform.GetChild(4).gameObject;
 
         //Set active UI
         m_pausemenu.SetActive(false);
