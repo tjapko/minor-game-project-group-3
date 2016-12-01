@@ -22,8 +22,8 @@ public class UIButtonScript : MonoBehaviour {
     }
 
     //Button for placing object
-    public void BTN_construction_1()
-    {
-        StartCoroutine(m_gamemanager.getObjectManager().ObjectPlacement());
-    }
+    //public void BTN_construction_1()
+    //{
+    //    StartCoroutine(m_gamemanager.getObjectManager().ObjectPlacement());
+    //}
 }

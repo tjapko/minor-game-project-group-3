@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     private BaseManager m_base;                 // The base manager of the base
     private UserManager m_players;              // A collection of managers for enabling and disabling different aspects of the players.
     private WaveManager m_wave;                 // A collection of managers for enabling and disabling different aspects of the enemies.
-    private ObjectplacementManager m_objects;   // A collection of managers for enabling and disabling different aspects of the placed objects.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_waveWait;          // Time between waves (not yet used)
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
@@ -51,9 +50,8 @@ public class GameManager : MonoBehaviour
 
         //Initialize managers
         m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint);
-        m_players = new UserManager(m_Playerprefab, m_Playerspawnpoint, m_amountofplayers);
+        m_players = new UserManager(m_Playerprefab, m_turret, m_Playerspawnpoint, m_amountofplayers);
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
-        m_objects = new ObjectplacementManager(m_players, m_turret);
 
         //Initialize UI script
         m_uiscript = new MapUIScript(gameObject.GetComponent<GameManager>(), m_uiprefab, m_players);
@@ -79,33 +77,14 @@ public class GameManager : MonoBehaviour
             pauseGame(gamepause);
             
         }
-        
-        // Mouse click
-        if (Input.GetKeyDown("1"))
-        {
-            //For final game : restore back to onmouse down and remove the coroutine
-            //Set player click, and start coroutine object placement
-            m_objects.setplayerclick(true);
-            if(!wavephase)
-            {
-                StartCoroutine(m_objects.ObjectPlacement());
-            }
-        }
-
-        // Mouse click
-        if (Input.GetKeyUp("1"))
-        {
-            m_objects.setplayerclick(false);
-        }
 
         //Set the Object placement phase
-        m_objects.setconstructionphase(!wavephase);
+        m_players.setConstructionphase(!wavephase);
 
         //Show or hide UI menu depending on wavephase and pause
         m_uiscript.UIchange(wavephase, gamepause);
 
         //Update score
-        m_players.Update();
         m_uiscript.Update();
 
     }
@@ -251,9 +230,4 @@ public class GameManager : MonoBehaviour
         wavephase = true;
     }
 
-    // Returns Object Manager
-    public ObjectplacementManager getObjectManager()
-    {
-        return m_objects;
-    }
 }

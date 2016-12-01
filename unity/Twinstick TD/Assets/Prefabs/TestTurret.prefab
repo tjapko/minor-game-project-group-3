@@ -22,7 +22,7 @@ GameObject:
   - 33: {fileID: 33000012773799686}
   - 65: {fileID: 65000013431518226}
   - 23: {fileID: 23000010190256552}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TestTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -50,7 +50,6 @@ public class MapUIScript {
     // Update is called once per frame
     public void Update()
     {
-        m_usermanager.Update();
         SetCurrencyText();
         SetKillsText();
     }
@@ -95,14 +94,14 @@ public class MapUIScript {
     // sets the currencyText which is visible on the screen to the current Currency
     private void SetCurrencyText()
     {
-        m_textplayer1.transform.GetChild(1).GetComponent<Text>().text = "Currency: " + m_usermanager.m_playerlist[0].getCurrency().ToString();
+        m_textplayer1.transform.GetChild(1).GetComponent<Text>().text = "Currency: " + m_usermanager.m_playerlist[0].m_stats.getCurrency().ToString();
         //m_textplayer2.transform.GetChild(1).GetComponent<Text>().text = "Currency: " + m_usermanager.m_playerlist[1].getCurrency().ToString();
     }
 
     // sets the KillsText which is visible on the screen to the current amount of kills
     private void SetKillsText()
     {
-        m_textplayer1.transform.GetChild(2).GetComponent<Text>().text = "Kills: " + m_usermanager.m_playerlist[0].getkills().ToString();
+        m_textplayer1.transform.GetChild(2).GetComponent<Text>().text = "Kills: " + m_usermanager.m_playerlist[0].m_stats.getkills().ToString();
         //m_textplayer2.transform.GetChild(2).GetComponent<Text>().text = "Kills: " + m_usermanager.m_playerlist[1].getkills().ToString();
     }
 
