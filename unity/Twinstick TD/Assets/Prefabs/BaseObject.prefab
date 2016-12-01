@@ -89,7 +89,6 @@ GameObject:
   m_Component:
   - 224: {fileID: 224000011460226996}
   - 114: {fileID: 114000013968800764}
-  - 114: {fileID: 114000011074741950}
   m_Layer: 5
   m_Name: HealthSlider
   m_TagString: Untagged
@@ -152,7 +151,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011563660048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.204803, y: 2.8412976, z: 11.573343}
+  m_LocalPosition: {x: -7.111396, y: -0.000005693328, z: -47.7591}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -242,17 +241,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114000011074741950
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012684273042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000012234135030
 MonoBehaviour:
   m_ObjectHideFlags: 1
