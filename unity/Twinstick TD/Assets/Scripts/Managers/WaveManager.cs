@@ -7,6 +7,8 @@ public class WaveManager
     public GameObject m_Enemyprefab;       //Reference to prefab of enemy
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
     public Transform m_target;             //Target(s) of enemies
+    public int numberEnemiesPerWave = 25;
+    public double baseDistancePercentage = 0.1;
 
     //Private variables
     private List<EnemyManager> m_enemywave;       //Population of enemies
@@ -26,7 +28,7 @@ public class WaveManager
     // Send next wave
     public void NextWave()
     {
-        SpawnEnemies(2);
+        SpawnEnemies(numberEnemiesPerWave);
     }
 
     //Check if all enemies are dead;
@@ -60,7 +62,7 @@ public class WaveManager
 		float z_maxrange = GameObject.FindGameObjectWithTag ("Wall3").GetComponent<Transform> ().transform.position.z - buffer;
 
 		// enemies needs to be spawned at least 50% of the x-dimenion of the base
-		float crit_distance  = (float)0.5 * (x_maxrange - x_minrange); 
+		float crit_distance  = (float)baseDistancePercentage * (x_maxrange - x_minrange); 
 
 		do {
 			randomPosition = new Vector3 (Random.Range (x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));

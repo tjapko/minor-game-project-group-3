@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayGridGizmos: 1
-  gridWorldSize: {x: 30, y: 30}
+  gridWorldSize: {x: 150, y: 150}
   nodeRadius: 0.5
   unwalkableMask:
     serializedVersion: 2
