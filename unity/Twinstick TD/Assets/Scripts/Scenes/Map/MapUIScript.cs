@@ -11,13 +11,14 @@ using System.Threading;
 public class MapUIScript {
 
     //Private variables
-    private GameObject m_instance;
-    private UserManager m_usermanager;
-    private GameObject m_pausemenu;
-    private GameObject m_wavecontrol;
-    private GameObject m_constructionpanel;
-    private GameObject m_textplayer1;
-    private GameObject m_textplayer2;
+    private GameManager m_gamemanager;      //Reference to game manager (used to invoke next wave)
+    private GameObject m_instance;          //Reference to instance of this script's prefab
+    private UserManager m_usermanager;      //Reference to the usermanager in the game manager
+    private GameObject m_pausemenu;         //Reference to the pausemenu window (child of this GameObject)
+    private GameObject m_wavecontrol;       //Reference to the wave control panel
+    private GameObject m_constructionpanel; //Reference to the construction panel
+    private GameObject m_textplayer1;       //Reference to the statistic panel of player 1
+    private GameObject m_textplayer2;       //Reference to the statistic panel of player 2
 
 
     //private variable 
@@ -25,18 +26,23 @@ public class MapUIScript {
     private Text m_killsText;		// for holding the Kills text which will be visible on the screen
 
     //Constructer
-    public MapUIScript(GameObject ui_prefab, UserManager usermanager)
+    public MapUIScript(GameManager gamemanager, GameObject ui_prefab, UserManager usermanager)
     {
-        m_instance = GameObject.Instantiate(ui_prefab); ;
+        //Setting references
+        m_gamemanager = gamemanager;
+        m_instance = GameObject.Instantiate(ui_prefab, Vector3.zero, Quaternion.identity) as GameObject; 
         m_usermanager = usermanager;
+
+        //Getting references to childrens
         m_pausemenu = m_instance.transform.GetChild(0).gameObject;
         m_wavecontrol = m_instance.transform.GetChild(1).gameObject;
         m_constructionpanel = m_instance.transform.GetChild(2).gameObject;
         m_textplayer1 = m_instance.transform.GetChild(3).gameObject;
         m_textplayer2 = m_instance.transform.GetChild(4).gameObject;
 
+        //Set active UI
         m_pausemenu.SetActive(false);
-        m_wavecontrol.SetActive(false);
+        m_wavecontrol.SetActive(true);
         m_constructionpanel.SetActive(false);
 
     }
@@ -62,13 +68,11 @@ public class MapUIScript {
         {
             if(wavephase)
             {
-                hideConstructonPanel();
-                showWaveControl();
+                UIwavephase();
                 hidePauseMenu();
             } else
             {
-                showConstructonPanel();
-                hideWaveControl();
+                UIbuildphase();
                 hidePauseMenu();
             }
         }
@@ -137,5 +141,4 @@ public class MapUIScript {
     {
         m_constructionpanel.SetActive(false);
     }
-
 }
