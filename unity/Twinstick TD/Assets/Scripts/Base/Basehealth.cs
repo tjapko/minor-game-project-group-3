@@ -43,11 +43,12 @@ public class Basehealth : MonoBehaviour {
     //Take damage function
     public void TakeDamage(float amount)
     {
-        SetHealthUI();
+        
         //Amount must be smaller than zero
         if (amount > 0)
         {
             m_CurrentHealth -= amount;
+            SetHealthUI();
         }
         //Check if base has less than 0 health
         if (m_CurrentHealth <= 0f && !m_Dead)
