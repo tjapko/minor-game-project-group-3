@@ -31,6 +31,13 @@ public class BaseManager
         //m_basehealth = m_Instance.GetComponent<Basehealth>();
     }
 
+    //Destroy base
+    public void destroyBase()
+    {
+        GameObject.Destroy(m_Instance);
+        m_Instance = null;
+    }
+
     //Base has no health
     public bool BaseDead()
     {

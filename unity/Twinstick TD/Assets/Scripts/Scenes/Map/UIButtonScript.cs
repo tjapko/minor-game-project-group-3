@@ -21,6 +21,17 @@ public class UIButtonScript : MonoBehaviour {
         m_gamemanager.btn_nextwave();
     }
 
+    //Function pause button
+    public void BTN_setpause(bool status)
+    {
+        m_gamemanager.setpause(status);
+    }
+
+    //Function restart button
+    public void BTN_restart()
+    {
+        m_gamemanager.btn_restartgame();
+    }
     //Button for placing object
     //public void BTN_construction_1()
     //{
