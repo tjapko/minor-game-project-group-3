@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     private UserManager m_players;              // A collection of managers for enabling and disabling different aspects of the players.
     private WaveManager m_wave;                 // A collection of managers for enabling and disabling different aspects of the enemies.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
-    private WaitForSeconds m_waveWait;          // Time between waves (not yet used)
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
     private int m_waveNumber;                   // Which wave the game is currently on.
     bool gamepause;                             // Boolean if game is paused
@@ -42,7 +41,6 @@ public class GameManager : MonoBehaviour
     {
         //Setting up variables
         m_StartWait = new WaitForSeconds(m_StartDelay);
-        m_waveWait = new WaitForSeconds(m_waveDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
         m_waveNumber = 0;
         gamepause = false;
@@ -177,8 +175,17 @@ public class GameManager : MonoBehaviour
     // Constuction phase countdown
     private IEnumerator constructionphaseTimer()
     {
-        yield return m_waveWait;
+        for(int i = 0; i < 100; i++)
+        {
+            yield return new WaitForSeconds(m_waveDelay/100);
+            
+            if(wavephase)
+            {
+                break;
+            }
+        }
         wavephase = true;
+        
     }
 
     //Pause game function

@@ -9,7 +9,6 @@ public class BulletFire : MonoBehaviour
     public float m_LaunchForce;           // The force given to the shell if the fire button is not held.
     
     private string m_FireButton;                // The input axis that is used for launching shells.
-    private bool m_Fired;                       // Whether or not the shell has been launched with this button press.
 
 
     
@@ -35,8 +34,6 @@ public class BulletFire : MonoBehaviour
 
     private void Fire()
     {
-        // Set the fired flag so only Fire is only called once.
-        m_Fired = true;
 
         // Create an instance of the shell and store a reference to it's rigidbody.
         Rigidbody shellInstance =

@@ -6,13 +6,13 @@ public class PlayerMovement : MonoBehaviour {
 	public int m_PlayerNumber = 1; // not used yet; can be used to identify the different players (later), each players needs different controls!
     public Vector3 mouseposition;
 
-//	public float m_RotationSpeed = 1f; // not used!
+    //public float m_RotationSpeed = 1f; // not used!
 	public float m_MovementSpeed = 10f;
 	private Rigidbody m_playerRigidbody;
 
 	private float m_MovementInputValueV;
 	private float m_MovementInputValueH;
-	private Vector3 m_RotationInputM;
+	//private Vector3 m_RotationInputM;
 
 	private int Floor;
 	private float camRayLength = 100f;
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour {
         // Store the player's input.
         m_MovementInputValueV = Input.GetAxisRaw(m_MovementAxisNameV);   // use Input.GetAxisRaw("Vertical") for instant reaction of the Vertical movement 
 		m_MovementInputValueH = Input.GetAxisRaw(m_MovementAxisNameH); // use Input.GetAxisRaw("Horizontal") for instant reaction of the Horizontal movement 
-		m_RotationInputM = Input.mousePosition;
+		//m_RotationInputM = Input.mousePosition;
 
 		// Move and turn the player.
 		Move();

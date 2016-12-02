@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011702620350}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FireTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - 33: {fileID: 33000010645020724}
   - 65: {fileID: 65000010402232318}
   - 23: {fileID: 23000012922203734}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - 224: {fileID: 224000010205462802}
   - 222: {fileID: 222000013792570228}
   - 114: {fileID: 114000013176624712}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 224000010556820982}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - 224: {fileID: 224000012676931010}
   - 222: {fileID: 222000010215713142}
   - 114: {fileID: 114000010312699818}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - 114: {fileID: 114000014120976380}
   - 114: {fileID: 114000013067947078}
   - 114: {fileID: 114000012987590838}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Testplayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 224000014153953288}
   - 114: {fileID: 114000010434079110}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - 223: {fileID: 223000013481591324}
   - 114: {fileID: 114000013910147460}
   - 114: {fileID: 114000011302973256}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

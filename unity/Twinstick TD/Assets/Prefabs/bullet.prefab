@@ -26,7 +26,7 @@ GameObject:
   - 136: {fileID: 136000013389974852}
   - 108: {fileID: 108000012667704292}
   - 114: {fileID: 114000011854252460}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

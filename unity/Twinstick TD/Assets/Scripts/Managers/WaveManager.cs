@@ -85,13 +85,11 @@ public class WaveManager
     //Remove dead enemies
     public void DestroyEnemies()
     {
-        for (int i = 0; i < m_enemywave.Count; i++)
+        int n = m_enemywave.Count;
+        for (int i = 0; i < n; i++)
         {
-            if (!(m_enemywave[i].m_Instance.activeSelf))
-            {
-                GameObject.Destroy(m_enemywave[i].m_Instance);
-                m_enemywave.RemoveAt(i);
-            }
+            GameObject.Destroy(m_enemywave[0].m_Instance);
+            m_enemywave.RemoveAt(0);
         }
 
     }
