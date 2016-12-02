@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
     public GameObject m_Enemyprefab;            // Reference to the prefab of the enemies.
+    public GameObject m_gridPrefab;             // Reference to the prefab of the grid and path
     public GameObject m_turret;                 // Reference to the turret prefab
     public Transform m_Basespawnpoint;          // Spawnpoint of base
     public Transform m_Playerspawnpoint;        // Spawnpoint of player
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     private BaseManager m_base;                 // The base manager of the base
     private UserManager m_players;              // A collection of managers for enabling and disabling different aspects of the players.
     private WaveManager m_wave;                 // A collection of managers for enabling and disabling different aspects of the enemies.
+    private GridManager m_gridManager;          // Script gridmanager
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
     private int m_waveNumber;                   // Which wave the game is currently on.
@@ -47,7 +49,7 @@ public class GameManager : MonoBehaviour
         wavephase = false;
 
         //Initialize managers
-        m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint);
+        m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint, m_gridPrefab);
         m_players = new UserManager(m_Playerprefab, m_turret, m_Playerspawnpoint, m_amountofplayers);
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
 

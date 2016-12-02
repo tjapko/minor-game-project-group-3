@@ -7,23 +7,30 @@ using System.Collections.Generic;
 /// </summary>
 public class Grid : MonoBehaviour {
     
-	public bool displayGridGizmos; // a boolean for visualizing the grid
-	public Vector2 gridWorldSize; // the size of the whole map in coordinates
-	public float nodeRadius;// radius of the nodes
-	public LayerMask unwalkableMask;// a layer where all the static objects in the map are on
+	[HideInInspector]public bool displayGridGizmos; // a boolean for visualizing the grid
+	[HideInInspector]public Vector2 gridWorldSize; // the size of the whole map in coordinates
+	[HideInInspector]public float nodeRadius;// radius of the nodes
+	[HideInInspector]public LayerMask unwalkableMask;// a layer where all the static objects in the map are on
 	Node[,] grid;  // The Grid: including walkable nodes and NOT walkable nodes.
 
 	float nodeDiameter; // the NodeDiameter 
 	int gridSizeX, gridSizeY; // The size of the whole map in NodeCoordinates 
 
+    public Grid(bool dispGridGizmos, Vector2 worldSize, float radius, LayerMask unwalkable)
+    {
+        this.displayGridGizmos = dispGridGizmos;
+        this.gridWorldSize = worldSize;
+        this.unwalkableMask = unwalkable;
+		this.nodeRadius = radius;
+    }
 
     // creating the grid 
-	void Awake() {
+    void Awake() {
 		nodeDiameter = nodeRadius * 2;
 		gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);// the size of the grid in nodeCoordinates relative X
 		gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);//the size og the grid in nodeCoordinates relative Z
-		CreateGrid ();
-	}
+		CreateGrid();
+    }
 
     // creating every wave a new grid 
     //void update()
@@ -44,7 +51,9 @@ public class Grid : MonoBehaviour {
     /// <summary>
     /// The actual Grid is created.
     /// </summary>
-	void CreateGrid(){
+	public void CreateGrid(){
+		Debug.Log ("CreateGrid");
+
 		grid = new Node[gridSizeX, gridSizeY]; // An empty grid is created 
 		Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.forward * gridWorldSize.y / 2;
 
@@ -55,6 +64,7 @@ public class Grid : MonoBehaviour {
 				grid [x, y] = new Node (walkable, worldPoint, x, y); //adding the Node to the grid
 			}
 		}
+
 	}
 
     /// <summary>
@@ -86,6 +96,7 @@ public class Grid : MonoBehaviour {
     /// <param name="worldPosition"></param>
     /// <returns name = "grid"></returns>
 	public Node NodeFromWorldPoint(Vector3 worldPosition){
+		Debug.Log (gridWorldSize.x);
 		float percentX = (worldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x;
 		float percentY = (worldPosition.z + gridWorldSize.y / 2) / gridWorldSize.y;
 		percentX = Mathf.Clamp01 (percentX);
@@ -101,7 +112,7 @@ public class Grid : MonoBehaviour {
     /// <summary>
     /// Visualizing the grid 
     /// </summary>
-	void OnDrawGizmos() {
+	public void OnDrawGizmos() {
 	Gizmos.DrawWireCube(transform.position, new Vector3 (gridWorldSize.x, 1, gridWorldSize.y));
 
 	if (grid!= null && displayGridGizmos) {

@@ -5,30 +5,34 @@ public class WaveManager
 {
     //Public variables
     public GameObject m_Enemyprefab;       //Reference to prefab of enemy
+	public GameObject m_gridprefab;
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
     public Transform m_target;             //Target(s) of enemies
     public int numberEnemiesPerWave = 25;
     public double baseDistancePercentage = 0.1;
 
     //Private variables
-    private List<EnemyManager> m_enemywave;       //Population of enemies
+    private List<EnemyManager> m_enemywave; //Population of enemies
     private int enemy_number;               //Total amount of enemies spawned
 
     // Use this for initialization
-    public WaveManager(GameObject Enemyprefab, Transform enemyspawnpoints, Transform target)
+	public WaveManager(GameObject Enemyprefab, Transform enemyspawnpoints, Transform target, GameObject gridprefab)
     {
         this.m_Enemyprefab = Enemyprefab;
         this.m_enemyspawnpoints = enemyspawnpoints;
         this.m_target = target;
+		this.m_gridprefab = gridprefab;
 
         enemy_number = 0;
         m_enemywave = new List<EnemyManager>();
     }
 
-    // Send next wave
+    // Send next wave and create new grid
     public void NextWave()
-    {
-        SpawnEnemies(numberEnemiesPerWave);
+	{
+		GridManager m_gridmanager = new GridManager(m_gridprefab);
+		SpawnEnemies(numberEnemiesPerWave);
+		Object.Destroy (m_gridmanager.m_instance, 2f);
     }
 
     //Check if all enemies are dead;
