@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class WaveManager
 {
@@ -9,6 +10,9 @@ public class WaveManager
     public Transform m_target;             //Target(s) of enemies
     public int numberEnemiesPerWave = 25;
     public double baseDistancePercentage = 0.1;
+    Grid grid;
+    public LayerMask unwalkableMask;
+    public float nodeRadius;
 
     //Private variables
     private List<EnemyManager> m_enemywave;       //Population of enemies
@@ -20,9 +24,12 @@ public class WaveManager
         this.m_Enemyprefab = Enemyprefab;
         this.m_enemyspawnpoints = enemyspawnpoints;
         this.m_target = target;
+        
+        grid = GameObject.FindWithTag("grid").GetComponent<Grid>();
 
         enemy_number = 0;
         m_enemywave = new List<EnemyManager>();
+        
     }
 
     // Send next wave
@@ -46,14 +53,15 @@ public class WaveManager
 
 	private Vector3 RandomSpawnPosition() 
 	{
+        
 		Vector3 randomPosition;
-
-		float buffer = 1.0f;  	// buffer for extra space between enemies and wall maybe not needed for later (walkable will fix this)
+        //grid = G
+		float buffer = 0f;  	// buffer for extra space between enemies and wall maybe not needed for later (walkable will fix this)
 		bool walkable = true;	// needs to be implmented! 
 		float distance;		 	// distance between base and enemies spawnpoint 
-
-		// base's spawning position
-		Vector3 Base = GameObject.FindGameObjectWithTag ("Base").GetComponent<Transform> ().transform.position;
+      
+        // base's spawning position
+        Vector3 Base = GameObject.FindGameObjectWithTag ("Base").GetComponent<Transform> ().transform.position;
 
 		// floats for holding dimensions of the map (walls)
 		float x_minrange = GameObject.FindGameObjectWithTag ("Wall4").GetComponent<Transform> ().transform.position.x + buffer;
@@ -65,11 +73,14 @@ public class WaveManager
 		float crit_distance  = (float)baseDistancePercentage * (x_maxrange - x_minrange); 
 
 		do {
-			randomPosition = new Vector3 (Random.Range (x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
-			distance = Vector3.Distance(Base, randomPosition);
+			randomPosition = new Vector3 (UnityEngine.Random.Range (x_minrange, x_maxrange), 0f, UnityEngine.Random.Range (z_minrange, z_maxrange));
+            walkable = !(Physics.CheckSphere(randomPosition, (grid.nodeRadius * 1.4f), grid.unwalkableMask));
+            distance = Vector3.Distance(Base, randomPosition);
 		} while (distance <= crit_distance || !walkable); // distance needs to be smaller than critical distance and the spawnpoint needs to be walkable
 		return randomPosition;
 	}
+
+
     // Spawn enemies
     private void SpawnEnemies(int m_number_enemies)
     {
