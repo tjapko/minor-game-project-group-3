@@ -70,10 +70,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011323583086}
-  - 33: {fileID: 33000013117526038}
   - 23: {fileID: 23000011648567062}
   - 136: {fileID: 136000011336386420}
   - 54: {fileID: 54000012571390232}
+  - 33: {fileID: 33000011245171456}
   m_Layer: 12
   m_Name: Base
   m_TagString: Base
@@ -189,13 +189,13 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &33000013117526038
+--- !u!33 &33000011245171456
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011758717366}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54000012032478890
 Rigidbody:
   m_ObjectHideFlags: 1
