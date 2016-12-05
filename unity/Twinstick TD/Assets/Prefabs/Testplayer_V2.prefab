@@ -106,6 +106,7 @@ GameObject:
   - 114: {fileID: 114000014120976380}
   - 114: {fileID: 114000013067947078}
   - 114: {fileID: 114000012987590838}
+  - 114: {fileID: 114000010317045620}
   m_Layer: 11
   m_Name: Testplayer_V2
   m_TagString: Untagged
@@ -168,7 +169,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010351771752}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -279,6 +280,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000010317045620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012244867938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00bc2aca0e8df4748aaeacbb5bc0f3ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 114000013493940560}
 --- !u!114 &114000010434079110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -407,7 +420,7 @@ MonoBehaviour:
   m_PlayerNumber: 1
   mouseposition: {x: 0, y: 0, z: 0}
   m_MovementSpeed: 15
-  useController: 1
+  useController: 0
 --- !u!114 &114000013910147460
 MonoBehaviour:
   m_ObjectHideFlags: 1
