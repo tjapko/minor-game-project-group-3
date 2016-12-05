@@ -13,6 +13,7 @@ TagManager:
   - EnemyShell
   - PlayerShell
   - Gamemanager
+  - grid
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,7 @@ public class MapUIScript {
     private GameObject m_constructionpanel; //Reference to the construction panel
     private GameObject m_textplayer1;       //Reference to the statistic panel of player 1
     private GameObject m_textplayer2;       //Reference to the statistic panel of player 2
+    private GameObject m_gameovermenu;      //Reference to the game over menu
 
 
     //private variable 
@@ -39,11 +40,13 @@ public class MapUIScript {
         m_constructionpanel = m_instance.transform.GetChild(2).gameObject;
         m_textplayer1 = m_instance.transform.GetChild(3).gameObject;
         //m_textplayer2 = m_instance.transform.GetChild(4).gameObject;
+        m_gameovermenu = m_instance.transform.GetChild(5).gameObject;
 
         //Set active UI
         m_pausemenu.SetActive(false);
         m_wavecontrol.SetActive(true);
         m_constructionpanel.SetActive(false);
+        m_gameovermenu.SetActive(false);
 
     }
 
@@ -56,39 +59,46 @@ public class MapUIScript {
 
     // Changing UI back and fourth between phases
     // Wavephase = true : wavephase, Wavephase = false : build phase
-    public void UIchange(bool wavephase, bool pause)
+    // First check gameover -> game is paused -> phase of game
+    public void UIchange(bool gameover, bool wavephase, bool pause)
     {
-        if(pause)
+        //Check for gameover
+        if (gameover)
         {
-            hideConstructonPanel();
-            hideWaveControl();
-            showPauseMenu();
+            showGameoverMenu(true);
+            showConstructonPanel(false);
+            showWaveControl(false);
+            showPauseMenu(false);
         } else
         {
-            if(wavephase)
+            //Check for pause
+            if (pause)
             {
-                UIwavephase();
-                hidePauseMenu();
-            } else
+                showConstructonPanel(false);
+                showWaveControl(false);
+                showPauseMenu(true);
+                showGameoverMenu(false);
+            }
+            else
             {
-                UIbuildphase();
-                hidePauseMenu();
+                //Check wavephase
+                if (wavephase)
+                {
+                    showWaveControl(true);
+                    showConstructonPanel(false);
+                    showPauseMenu(false);
+                    showGameoverMenu(false);
+                }
+                else
+                {
+                    showWaveControl(true);
+                    showConstructonPanel(true);
+                    showPauseMenu(false);
+                    showGameoverMenu(false);
+                }
             }
         }
-    }
-
-    // Buildphase UI
-    public void UIbuildphase()
-    {
-        showWaveControl();
-        showConstructonPanel();
-    }
-
-    // Wave Phase
-    private void UIwavephase()
-    {
-        showWaveControl();
-        hideConstructonPanel();
+        
     }
 
     // sets the currencyText which is visible on the screen to the current Currency
@@ -105,39 +115,59 @@ public class MapUIScript {
         //m_textplayer2.transform.GetChild(2).GetComponent<Text>().text = "Kills: " + m_usermanager.m_playerlist[1].getkills().ToString();
     }
 
-    // Show Pause menu
-    private void showPauseMenu()
+
+    // Show/hide Pause menu
+    private void showPauseMenu(bool status)
     {
-        m_pausemenu.SetActive(true);
+        if (status)
+        {
+            m_pausemenu.SetActive(true);
+
+        } else
+        {
+            m_pausemenu.SetActive(false);
+        }
+        
     }
 
-    // Show Pause menu
-    private void hidePauseMenu()
+    // Show/hide Pause menu
+    private void showWaveControl(bool status)
     {
-        m_pausemenu.SetActive(false);
+        if (status)
+        {
+            m_wavecontrol.SetActive(true);
+
+        }
+        else
+        {
+            m_wavecontrol.SetActive(false);
+        }
     }
 
-    // Show Pause menu
-    private void showWaveControl()
+    // Show/hide Pause menu
+    private void showConstructonPanel(bool status)
     {
-        m_wavecontrol.SetActive(true);
+        if (status)
+        {
+            m_constructionpanel.SetActive(true);
+
+        }
+        else
+        {
+            m_constructionpanel.SetActive(false);
+        }
+        
     }
 
-    // Show Pause menu
-    private void hideWaveControl()
+    // Show/hide the gameover menu
+    private void showGameoverMenu(bool status)
     {
-        m_wavecontrol.SetActive(false);
-    }
-
-    // Show Pause menu
-    private void showConstructonPanel()
-    {
-        m_constructionpanel.SetActive(true);
-    }
-
-    // Show Pause menu
-    private void hideConstructonPanel()
-    {
-        m_constructionpanel.SetActive(false);
+        if (status)
+        {
+            m_gameovermenu.SetActive(true);
+        } else
+        {
+            m_gameovermenu.SetActive(false);
+        }
     }
 }

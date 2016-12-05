@@ -35,6 +35,16 @@ public class UserManager {
         }
     }
 
+    // Destroy all players
+    public void destroyPlayers()
+    {
+        foreach(PlayerManager player in m_playerlist)
+        {
+            GameObject.Destroy(player.m_Instance);
+        }
+        m_playerlist = new List<PlayerManager>();
+    }
+
     // Spawn a player
     private void createplayer(GameObject prefab, Transform spawn, int playernumber)
     {

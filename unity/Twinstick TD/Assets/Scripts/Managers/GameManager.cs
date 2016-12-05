@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     public float m_StartDelay = 3f;             // The delay between the start of round and playing of round
     public float m_waveDelay = 15f;              // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
-    public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
+
+    //References
     public GameObject m_uiprefab;               // Reference to UI prefab
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
@@ -32,11 +33,13 @@ public class GameManager : MonoBehaviour
     private UserManager m_players;              // A collection of managers for enabling and disabling different aspects of the players.
     private WaveManager m_wave;                 // A collection of managers for enabling and disabling different aspects of the enemies.
     private GridManager m_gridManager;          // Script gridmanager
+    public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
     private int m_waveNumber;                   // Which wave the game is currently on.
-    bool gamepause;                             // Boolean if game is paused
-    bool wavephase;                             // Boolean if game is in wavephase or construction phase 
+    private bool gameover;                      // Boolean if game is over
+    private bool gamepause;                     // Boolean if game is paused
+    private bool wavephase;                     // Boolean if game is in wavephase or construction phase 
 
     //Start
     private void Start()
@@ -44,9 +47,6 @@ public class GameManager : MonoBehaviour
         //Setting up variables
         m_StartWait = new WaitForSeconds(m_StartDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
-        m_waveNumber = 0;
-        gamepause = false;
-        wavephase = false;
 
         //Initialize managers
         m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint, m_gridPrefab);
@@ -55,13 +55,6 @@ public class GameManager : MonoBehaviour
 
         //Initialize UI script
         m_uiscript = new MapUIScript(gameObject.GetComponent<GameManager>(), m_uiprefab, m_players);
-
-        //Spawning base and users
-        m_players.spawnPlayers();
-        m_base.spawnBase();
-
-        //Set camera
-        SetCameraTargets();
 
         // Start the game
         StartCoroutine(GameLoop());
@@ -74,15 +67,14 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             gamepause = !gamepause;
-            pauseGame(gamepause);
-            
         }
+        pauseGame(gamepause);
 
         //Set the Object placement phase
         m_players.setConstructionphase(!wavephase);
 
         //Show or hide UI menu depending on wavephase and pause
-        m_uiscript.UIchange(wavephase, gamepause);
+        m_uiscript.UIchange(gameover, wavephase, gamepause);
 
         //Update score
         m_uiscript.Update();
@@ -93,7 +85,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator GameLoop()
     {
         // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
-
         yield return StartCoroutine(Startgame());
 
         //Play round
@@ -107,11 +98,26 @@ public class GameManager : MonoBehaviour
     // Starting game
     private IEnumerator Startgame()
     {
+        //Spawning base and users
+        m_players.destroyPlayers();
+        m_players.spawnPlayers();
+        m_base.spawnBase();
+
+        //Set camera
+        SetCameraTargets();
+
         // Reset all players and enable control
         m_players.resetAllPlayers();
         m_players.enablePlayersControl();
-        wavephase = false;
+        m_wave.DestroyEnemies();
 
+        //Set variables
+        m_waveNumber = 0;
+        wavephase = false;
+        gamepause = false;
+        gameover =  false;
+
+        //Set camera
         m_CameraControl.SetStartPositionAndSize();
 
         // Wait m_StartWait of seconds before starting rounds
@@ -151,6 +157,8 @@ public class GameManager : MonoBehaviour
         }
 
         //Player has lost
+        gameover = true;
+        gamepause = true;
         Debug.Log("GAME OVER");
         
     }
@@ -187,7 +195,6 @@ public class GameManager : MonoBehaviour
             }
         }
         wavephase = true;
-        
     }
 
     //Pause game function
@@ -233,10 +240,22 @@ public class GameManager : MonoBehaviour
         m_CameraControl.m_Targets = targets;
     }
 
-    //Spawns next wave when user presses next wave button
+    // Input from restart button
+    public void btn_restartgame()
+    {
+        StartCoroutine(GameLoop());
+    }
+
+    // Spawns next wave when user presses next wave button
     public void btn_nextwave()
     {
         wavephase = true;
+    }
+
+    // Input from pause button
+    public void setpause(bool status)
+    {
+        gamepause = status;
     }
 
 }
