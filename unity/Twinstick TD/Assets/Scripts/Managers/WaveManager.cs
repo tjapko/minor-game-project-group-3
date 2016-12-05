@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+//using System;
+
 
 public class WaveManager
 {
@@ -8,7 +10,6 @@ public class WaveManager
 	public GameObject m_gridprefab;
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
     public Transform m_target;             //Target(s) of enemies
-    public int numberEnemiesPerWave = 25;
     public double baseDistancePercentage = 0.1;
     Grid grid;
     public LayerMask unwalkableMask;
@@ -17,6 +18,8 @@ public class WaveManager
     //Private variables
     private List<EnemyManager> m_enemywave; //Population of enemies
     private int enemy_number;               //Total amount of enemies spawned
+	private int m_wavenumber;				//Total amount of waves
+	private int numberEnemiesPerWave;		//Start amount of enemies per wave
 
     // Use this for initialization
 	public WaveManager(GameObject Enemyprefab, Transform enemyspawnpoints, Transform target, GameObject gridprefab)
@@ -26,7 +29,8 @@ public class WaveManager
         this.m_target = target;
 		this.m_gridprefab = gridprefab;
 
-
+		this.m_wavenumber = 0;
+		this.numberEnemiesPerWave = 10;
         enemy_number = 0;
         m_enemywave = new List<EnemyManager>();
     }
@@ -36,9 +40,16 @@ public class WaveManager
 	{
 		GridManager m_gridmanager = new GridManager(m_gridprefab);
         grid = GameObject.FindWithTag("grid").GetComponent<Grid>();
-        SpawnEnemies(numberEnemiesPerWave);
-		Object.Destroy (m_gridmanager.m_instance, 2f);
+		int enemies = numberEnemiesPerWave + EnemiesAmountPerWave ();
+		SpawnEnemies(enemies);
+		GameObject.Destroy (m_gridmanager.m_instance, 2f);
+		m_wavenumber++;
     }
+
+	// Function for amount of enemies next wave
+	public int EnemiesAmountPerWave(){
+		return m_wavenumber*2;
+	}
 
     //Check if all enemies are dead;
     public bool EnemiesDead()
@@ -90,6 +101,7 @@ public class WaveManager
             m_enemywave.Add(new EnemyManager(newinstance, m_enemyspawnpoints, m_target, enemy_number));
             enemy_number++;
         }
+
     }
 
     //Remove dead enemies
