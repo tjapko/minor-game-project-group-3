@@ -107,7 +107,7 @@ GameObject:
   - 114: {fileID: 114000013067947078}
   - 114: {fileID: 114000012987590838}
   m_Layer: 11
-  m_Name: Testplayer
+  m_Name: Testplayer_V2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

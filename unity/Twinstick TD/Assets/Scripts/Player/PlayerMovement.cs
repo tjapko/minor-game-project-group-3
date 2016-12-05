@@ -3,11 +3,12 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-	public int m_PlayerNumber = 1; // not used yet; can be used to identify the different players (later), each players needs different controls!
-    public Vector3 mouseposition;
-
+	[HideInInspector]public int m_PlayerNumber = 1; // not used yet; can be used to identify the different players (later), each players needs different controls!
+	[HideInInspector]public Vector3 mouseposition;
     //public float m_RotationSpeed = 1f; // not used!
 	public float m_MovementSpeed = 10f;
+	public bool useController = false;
+
 	private Rigidbody m_playerRigidbody;
 
 	private float m_MovementInputValueV;
@@ -44,9 +45,13 @@ public class PlayerMovement : MonoBehaviour {
 		m_MovementInputValueH = Input.GetAxisRaw(m_MovementAxisNameH); // use Input.GetAxisRaw("Horizontal") for instant reaction of the Horizontal movement 
 		//m_RotationInputM = Input.mousePosition;
 
-		// Move and turn the player.
-		Move();
-		Turn();
+		Move(); // Move the player (both keyboard and controller)
+
+		if (!useController) {
+			mouseTurn (); // Rotate the player with mouse
+		} else {
+			controllerTurn (); // Rotate the player with controller
+		}
 	}
 
 	// Adjust the position of the player based on the player's keyboard input.
@@ -98,7 +103,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	// Adjust the rotation of the player based on the mousePosition input.
-	void Turn()
+	private void mouseTurn()
 	{
 		// creating a ray from the camera to the mouseposition
 		Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -119,6 +124,18 @@ public class PlayerMovement : MonoBehaviour {
 
 			//Line from Main Camera to the point selected with the mouse (for debugging purposes)
 			Debug.DrawLine (Camera.main.transform.position, floorHit.point, Color.yellow ); 
+		}
+	}
+
+	// Adjust the rotation of the player based on the controller's right-joystick input.
+	private void controllerTurn() {
+		// horizontal & vertical movement, used GetAxis() istead of GetAxisRaw()
+		Vector3 playerDir = Vector3.right * Input.GetAxis ("RightJoystickHorizontal") + 
+							Vector3.forward * -1 * Input.GetAxis ("RightJoystickVertical");  
+
+		// check if player's input isn't zero, sp player is actually rotating 
+		if (playerDir.sqrMagnitude > 0.0f) { 
+			transform.rotation = Quaternion.LookRotation(playerDir, Vector3.up);
 		}
 	}
 
