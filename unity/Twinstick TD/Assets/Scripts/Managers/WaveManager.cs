@@ -9,7 +9,7 @@ public class WaveManager
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
     public Transform m_target;             //Target(s) of enemies
     public int numberEnemiesPerWave = 25;
-    public double baseDistancePercentage = 0.1;
+    public double baseDistancePercentage = 0.3;
     Grid grid;
     public LayerMask unwalkableMask;
     public float nodeRadius;
@@ -37,7 +37,7 @@ public class WaveManager
 		GridManager m_gridmanager = new GridManager(m_gridprefab);
         grid = GameObject.FindWithTag("grid").GetComponent<Grid>();
         SpawnEnemies(numberEnemiesPerWave);
-		Object.Destroy (m_gridmanager.m_instance, 2f);
+		Object.Destroy (m_gridmanager.m_instance, 4f);
     }
 
     //Check if all enemies are dead;
@@ -75,7 +75,7 @@ public class WaveManager
 
 		do {
 			randomPosition = new Vector3 (Random.Range (x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
-            walkable = !(Physics.CheckSphere(randomPosition, (grid.nodeRadius * 1.4f), grid.unwalkableMask));
+            walkable = !(Physics.CheckSphere(randomPosition, (grid.nodeRadius * 2.5f), grid.unwalkableMask));
             distance = Vector3.Distance(Base, randomPosition);
 		} while (distance <= crit_distance || !walkable); // distance needs to be smaller than critical distance and the spawnpoint needs to be walkable
 		return randomPosition;
