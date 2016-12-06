@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     //public float m_RotationSpeed = 1f; // not used!
 	public float m_MovementSpeed = 15f;
 	[HideInInspector]public bool useController;
+	public bool windowsAndXBOX=false; // mac is default 
 
 	private Rigidbody m_playerRigidbody;
 
@@ -49,8 +50,11 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (!useController) {
 			mouseTurn (); // Rotate the player with mouse
-		} else {
-			controllerTurn (); // Rotate the player with controller
+		} else if(useController && !windowsAndXBOX) {
+			controllerTurnMac (); // Rotate the player with controller
+		}
+		else if(useController && windowsAndXBOX) {
+			controllerTurnWindowsAndXBOX (); // Rotate the player with controller
 		}
 	}
 
@@ -127,11 +131,23 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
-	// Adjust the rotation of the player based on the controller's right-joystick input.
-	private void controllerTurn() {
+	// Adjust the rotation of the player based on the controller's right-joystick input for the PS3-controller (windows and mac) and XBOX-controller (mac)
+	private void controllerTurnMac() {
 		// horizontal & vertical movement, used GetAxis() istead of GetAxisRaw()
-		Vector3 playerDir = Vector3.right * Input.GetAxis ("RightJoystickHorizontal") + 
-							Vector3.forward * -1 * Input.GetAxis ("RightJoystickVertical");  
+		Vector3 playerDir = Vector3.right * Input.GetAxis ("RightJoystickHorizontalMacXBOX") + 
+							Vector3.forward * -1 * Input.GetAxis ("RightJoystickVerticalMacXBOX");  
+
+		// check if player's input isn't zero, sp player is actually rotating 
+		if (playerDir.sqrMagnitude > 0.0f) { 
+			transform.rotation = Quaternion.LookRotation(playerDir, Vector3.up);
+		}
+	}
+
+	// Adjust the rotation of the player based on the controller's right-joystick input for the XBOX-controller (windows) 
+	private void controllerTurnWindowsAndXBOX() {
+		// horizontal & vertical movement, used GetAxis() istead of GetAxisRaw()
+		Vector3 playerDir = Vector3.right * Input.GetAxis ("RightJoystickHorizontalWindowsXBOX") + 
+			Vector3.forward * -1 * Input.GetAxis ("RightJoystickVerticalWindowsXBOX");  
 
 		// check if player's input isn't zero, sp player is actually rotating 
 		if (playerDir.sqrMagnitude > 0.0f) { 
