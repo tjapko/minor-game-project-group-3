@@ -3,7 +3,9 @@ using UnityEngine.UI;
 
 public class BulletFire : MonoBehaviour
 {
-	[HideInInspector]public int m_PlayerNumber;              // Used to identify the different players.
+	public int m_PlayerNumber = 1;
+	[HideInInspector]public PlayerManager player;
+//	[HideInInspector]public int m_PlayerNumber;              // Used to identify the different players.
     public Rigidbody m_Bullet;                  // Prefab of the shell.
     public Transform m_FireTransform;           // A child of the player where the shells are spawned.
     public float m_LaunchForce;           // The force given to the shell if the fire button is not held.
@@ -13,7 +15,7 @@ public class BulletFire : MonoBehaviour
     private void Start()
     {
         // The fire axis is based on the player number.
-        m_FireButton = "Fire" + m_PlayerNumber;
+		m_FireButton = "Fire1_" + (m_PlayerNumber);
 
     }
 

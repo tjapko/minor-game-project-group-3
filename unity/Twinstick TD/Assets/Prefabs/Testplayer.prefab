@@ -291,6 +291,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00bc2aca0e8df4748aaeacbb5bc0f3ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player:
+    m_Instance: {fileID: 0}
+    m_SpawnPoint: {fileID: 0}
+    m_movement: {fileID: 0}
+    m_shooting: {fileID: 0}
+    m_stats: {fileID: 0}
+    m_construction: {fileID: 0}
+    m_PlayerNumber: 0
   playerMovement: {fileID: 114000013493940560}
 --- !u!114 &114000010434079110
 MonoBehaviour:
@@ -417,7 +425,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2de21f9d5534a740baef8393047b895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayerNumber: 1
+  player:
+    m_Instance: {fileID: 0}
+    m_SpawnPoint: {fileID: 0}
+    m_movement: {fileID: 0}
+    m_shooting: {fileID: 0}
+    m_stats: {fileID: 0}
+    m_construction: {fileID: 0}
+    m_PlayerNumber: 1
   mouseposition: {x: 0, y: 0, z: 0}
   m_MovementSpeed: 15
   useController: 0
@@ -454,6 +469,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664648c30de440a45bae5047875bb6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player:
+    m_Instance: {fileID: 0}
+    m_SpawnPoint: {fileID: 0}
+    m_movement: {fileID: 0}
+    m_shooting: {fileID: 0}
+    m_stats: {fileID: 0}
+    m_construction: {fileID: 0}
+    m_PlayerNumber: 0
   m_PlayerNumber: 1
   m_Bullet: {fileID: 54000012476593726, guid: 4d22d43c1b361484297b2a7b58b8d4a8, type: 2}
   m_FireTransform: {fileID: 4000011702620350}

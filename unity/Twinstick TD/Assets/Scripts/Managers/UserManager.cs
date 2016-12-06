@@ -12,8 +12,7 @@ public class UserManager {
     public int m_totalplayers;                  //Total amount of players
     public List<PlayerManager> m_playerlist;    //List of players
 
-    //Private variables
-
+    //Private variables       
 
     // Use this for initialization
     public UserManager(GameObject Playerprefab, GameObject Objectprefab, Transform playerspawnpoint, int totalplayers)
@@ -29,7 +28,7 @@ public class UserManager {
     // Spawn all players
     public void spawnPlayers()
     {
-        for (int i = 0; i < m_totalplayers; i++)
+        for (int i = 1; i <= m_totalplayers; i++)
         {
             createplayer(m_Playerprefab, m_playerspawnpoint, i);
         }
@@ -104,4 +103,5 @@ public class UserManager {
             player.Reset();
         }
     }
+		
 }

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SwitchControl : MonoBehaviour {
 
+	public int m_PlayerNumber = 1;
+	[HideInInspector]public PlayerManager player;
 	public PlayerMovement playerMovement; // PlayerMovement script for updating boolean useController 
 
 	// Update is called once per frame
@@ -10,14 +12,14 @@ public class SwitchControl : MonoBehaviour {
 	
 		// detect mouse input, if so set boolean useController to false! 
 		// mouseHovering for orientation 
-		if (Input.GetAxisRaw ("Mouse X") != 0.0f || Input.GetAxisRaw ("Mouse Y") != 0.0f) {
+		if (Input.GetAxisRaw ("Mouse X_" + m_PlayerNumber) != 0.0f || Input.GetAxisRaw ("Mouse Y_" + m_PlayerNumber) != 0.0f) {
 			playerMovement.useController = false;
 		}
 
 		// detect controller input 
 		// rightJoystick for orientation 
-		if (Input.GetAxisRaw ("RightJoystickHorizontalMac") != 0.0f || Input.GetAxisRaw ("RightJoystickVerticalMac") != 0.0f || 
-			Input.GetAxisRaw ("RightJoystickHorizontalWindowsXBOX") != 0.0f || Input.GetAxisRaw ("RightJoystickVerticalWindowsXBOX") != 0.0f ) {
+		if (Input.GetAxisRaw ("RightJoystickHorizontalMac_"+ (m_PlayerNumber)) != 0.0f || Input.GetAxisRaw ("RightJoystickVerticalMac_"+ (m_PlayerNumber)) != 0.0f || 
+			Input.GetAxisRaw ("RightJoystickHorizontalWindowsXBOX_"+ (m_PlayerNumber)) != 0.0f || Input.GetAxisRaw ("RightJoystickVerticalWindowsXBOX_"+ (m_PlayerNumber)) != 0.0f ) {
 			playerMovement.useController = true;
 		}
 
