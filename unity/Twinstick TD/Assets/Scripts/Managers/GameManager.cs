@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         //Initialize managers
-        m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint, m_gridPrefab);
+		m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint, m_Playerprefab.transform, m_gridPrefab);
         m_players = new UserManager(m_Playerprefab, m_turret, m_Playerspawnpoint, m_amountofplayers);
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
 

@@ -13,16 +13,17 @@ public class EnemyHealth : MonoBehaviour
     public Image m_FillImage;                           // The image component of the slider.
     public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
     public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
-    //Private variables
+	public bool basehit;         
+	//Private variables
     private float m_CurrentHealth;  //Current health of enemy
-    private bool m_Dead;            //Enemy is dead or not
+	private bool m_Dead;   //Enemy is dead or not
 
 
-    private void OnEnable()
+    public void OnEnable()
     {
         // When the enemy is enabled, reset the enemy's health
         m_CurrentHealth = m_StartingHealth;
-        m_Dead = false;
+        basehit = false;
 
         // Update the health slider's value and color.
         SetHealthUI();
@@ -44,7 +45,7 @@ public class EnemyHealth : MonoBehaviour
             {
                 Basehealth basehealth = targetRigidbody.GetComponent<Basehealth>();
                 basehealth.TakeDamage(1f);
-                gameObject.SetActive(false);
+				basehit = true;
             }
         }
     }
@@ -59,7 +60,7 @@ public class EnemyHealth : MonoBehaviour
         SetHealthUI();
 
         // If the current health is at or below zero and it has not yet been registered, call OnDeath.
-        if (m_CurrentHealth <= 0f && !m_Dead)
+		if (m_CurrentHealth <= 0f && !m_Dead)
         {
             OnDeath();
         }

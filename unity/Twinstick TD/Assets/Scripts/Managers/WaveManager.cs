@@ -9,7 +9,8 @@ public class WaveManager
     public GameObject m_Enemyprefab;       //Reference to prefab of enemy
 	public GameObject m_gridprefab;
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
-    public Transform m_target;             //Target(s) of enemies
+    public Transform m_basetarget;             //Target(s) of enemies
+	public Transform m_playerpoint;
     public double baseDistancePercentage = 0.1;
     Grid grid;
     public LayerMask unwalkableMask;
@@ -22,11 +23,12 @@ public class WaveManager
 	private int numberEnemiesPerWave;		//Start amount of enemies per wave
 
     // Use this for initialization
-	public WaveManager(GameObject Enemyprefab, Transform enemyspawnpoints, Transform target, GameObject gridprefab)
+	public WaveManager(GameObject Enemyprefab, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab)
     {
         this.m_Enemyprefab = Enemyprefab;
         this.m_enemyspawnpoints = enemyspawnpoints;
-        this.m_target = target;
+        this.m_basetarget = basetarget;
+		this.m_playerpoint = playerpoint;
 		this.m_gridprefab = gridprefab;
 
 		this.m_wavenumber = 0;
@@ -98,8 +100,8 @@ public class WaveManager
         {
 			m_enemyspawnpoints.position = RandomSpawnPosition ();
             GameObject newinstance = GameObject.Instantiate(m_Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
-            m_enemywave.Add(new EnemyManager(newinstance, m_enemyspawnpoints, m_target, enemy_number));
-            enemy_number++;
+			m_enemywave.Add(new Enemy1(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+			enemy_number++;
         }
 
     }
