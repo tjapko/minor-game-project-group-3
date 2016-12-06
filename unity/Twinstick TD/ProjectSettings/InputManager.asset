@@ -183,7 +183,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Fire1
-    descriptiveName: PS3 and XBOX mac
+    descriptiveName: PS3(both) and XBOX (mac)
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: joystick button 11
@@ -199,12 +199,12 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Fire1
-    descriptiveName: 'PS3 and XBOX Windows '
+    descriptiveName: XBOX (Windows)
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 11
+    positiveButton: joystick button 5
     altNegativeButton: 
-    altPositiveButton: joystick button 5
+    altPositiveButton: 
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -311,7 +311,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: RightJoystickHorizontalMac
-    descriptiveName: PS3 and XBOX on mac
+    descriptiveName: PS3 (both) and XBOX (mac)
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -326,8 +326,8 @@ InputManager:
     axis: 2
     joyNum: 0
   - serializedVersion: 3
-    m_Name: RightJoystickHorizontalWindows
-    descriptiveName: PS3 and XBOX on windows
+    m_Name: RightJoystickHorizontalWindowsXBOX
+    descriptiveName: XBOX on windows
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -343,7 +343,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: RightJoystickVerticalMac
-    descriptiveName: PS3 and XBOX on mac
+    descriptiveName: PS3(both) and XBOX (mac)
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
@@ -358,8 +358,8 @@ InputManager:
     axis: 3
     joyNum: 0
   - serializedVersion: 3
-    m_Name: RightJoystickVerticalWindows
-    descriptiveName: PS3 and XBOX on windows
+    m_Name: RightJoystickVerticalWindowsXBOX
+    descriptiveName: XBOX on windows
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 

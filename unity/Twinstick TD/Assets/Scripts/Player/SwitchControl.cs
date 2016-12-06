@@ -16,7 +16,7 @@ public class SwitchControl : MonoBehaviour {
 
 		// detect controller input 
 		// rightJoystick for orientation 
-		if (Input.GetAxisRaw ("RightJoystickHorizontalMacXBOX") != 0.0f || Input.GetAxisRaw ("RightJoystickVerticalMacXBOX") != 0.0f || 
+		if (Input.GetAxisRaw ("RightJoystickHorizontalMac") != 0.0f || Input.GetAxisRaw ("RightJoystickVerticalMac") != 0.0f || 
 			Input.GetAxisRaw ("RightJoystickHorizontalWindowsXBOX") != 0.0f || Input.GetAxisRaw ("RightJoystickVerticalWindowsXBOX") != 0.0f ) {
 			playerMovement.useController = true;
 		}

@@ -50,10 +50,11 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (!useController) {
 			mouseTurn (); // Rotate the player with mouse
-		} else if(useController && !windowsAndXBOX) {
+		} 
+		else if (useController && !windowsAndXBOX) {
 			controllerTurnMac (); // Rotate the player with controller
-		}
-		else if(useController && windowsAndXBOX) {
+		} 
+		else if (useController && windowsAndXBOX) {
 			controllerTurnWindowsAndXBOX (); // Rotate the player with controller
 		}
 	}
@@ -147,7 +148,7 @@ public class PlayerMovement : MonoBehaviour {
 	private void controllerTurnWindowsAndXBOX() {
 		// horizontal & vertical movement, used GetAxis() istead of GetAxisRaw()
 		Vector3 playerDir = Vector3.right * Input.GetAxis ("RightJoystickHorizontalWindowsXBOX") + 
-			Vector3.forward * -1 * Input.GetAxis ("RightJoystickVerticalWindowsXBOX");  
+							Vector3.forward * -1 * Input.GetAxis ("RightJoystickVerticalWindowsXBOX");  
 
 		// check if player's input isn't zero, sp player is actually rotating 
 		if (playerDir.sqrMagnitude > 0.0f) { 
