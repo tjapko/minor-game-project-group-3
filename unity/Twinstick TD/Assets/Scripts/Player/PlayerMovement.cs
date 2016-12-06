@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour {
 		movement = movement *  m_MovementSpeed * Time.deltaTime;
 
 		// Rotates (Vector3) movement 
-		movement = RotateMovementWithView ();
+		movement = RotateWithView (movement);
 
 		// adding movement to player's position
 		movement += m_playerRigidbody.position;
@@ -97,27 +97,7 @@ public class PlayerMovement : MonoBehaviour {
 		m_playerRigidbody.MovePosition(movement);
 
 	}
-
-	// Rotate Vector3 movement with respect to the camera view
-	private Vector3 RotateMovementWithView() 
-	{
-		// camera is moved (not fixed)
-		if (cameraTransform != null) 
-		{
-			// calculate the new rotated, right-oriented movement vector 
-			Vector3 dir = cameraTransform.TransformDirection (movement);
-			dir.y = 0f; // y-value is keeped zero
-			return dir.normalized * movement.magnitude; // same length as before ()
-		}
-		// camera is not moved (fixed)
-		else 
-		{
-			cameraTransform = Camera.main.transform; 
-			return movement; // just return movement (already right orientation)
-		}
-
-	}
-
+		
 	// Adjust the rotation of the player based on the mousePosition input.
 	private void mouseTurn()
 	{
@@ -152,28 +132,29 @@ public class PlayerMovement : MonoBehaviour {
 		// check if player's input isn't zero, sp player is actually rotating 
 		if (playerDir.sqrMagnitude > 0.0f) { 
 			// Extra rotation to fix relative rotation axis
-			playerDir = RotateRotationtWithView();
+			playerDir = RotateWithView(playerDir);
 			// Rotate the player to the newRotation
 			Quaternion newRotation = Quaternion.LookRotation(playerDir);
 			m_playerRigidbody.MoveRotation(newRotation);
 		}
 	}
 		
-	// Rotate Vector3 movement with respect to the camera view
-	private Vector3 RotateRotationtWithView() {
+	// Rotates a Vector3 with respect to the camera view, in order to obtain a relative vector (independent from the camera view)
+	private Vector3 RotateWithView(Vector3 originalVector) 
+	{
 		// camera is moved (not fixed)
 		if (cameraTransform != null) 
 		{
-			// calculate the new rotated, right-oriented movement vector 
-			Vector3 dir = cameraTransform.TransformDirection (playerDir);
+			// calculate the new rotated, right-oriented vector 
+			Vector3 dir = cameraTransform.TransformDirection (originalVector);
 			dir.y = 0f; // y-value is keeped zero
-			return dir.normalized * movement.magnitude; // same length as before ()
+			return dir.normalized * originalVector.magnitude; // same length as before ()
 		}
 		// camera is not moved (fixed)
 		else 
 		{
 			cameraTransform = Camera.main.transform; 
-			return playerDir; // just return playerDir (already right orientation)
+			return originalVector; // just return the orignal vector (already right orientation)
 		}
 
 	}
