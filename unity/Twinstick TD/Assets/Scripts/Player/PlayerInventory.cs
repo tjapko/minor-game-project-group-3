@@ -4,48 +4,51 @@ using System.Collections.Generic;
 
 /// <summary>
 /// Class PlayerInventory
-/// Source: https://www.youtube.com/watch?v=gEfKhGtqU70
 /// </summary>
 public class PlayerInventory : MonoBehaviour {
     //Public variables
-    public int slotsX, slotsY;
+    public int maxslots;
     public List<Item> inventory = new List<Item>();
-    public List<Item> slots = new List<Item>();
-
-    //References
-    public ItemDataBase itemdatabase;
-    public GUISkin skin;
-
-    //Private variables
-    private bool showinventory = false;
-    private bool showtooltip = false;
-    private string tooltiptext;
 
     //Fill the inventory when the player is initialized
-    void start ()
+    void Start ()
     {
-        for(int i = 0; i < slotsX * slotsY; i++)
+        //First add default weapon
+        Item weapon1 = new Item("Default Weapon", 1, "Default weapon!", "Weapon1", Item.ItemType.Weapon);
+        Item weapon2 = new Item("Default Weapon 2", 2, "Default weapon!", "Weapon2", Item.ItemType.Weapon);
+        Item weapon3 = new Item("Default Weapon 3", 3, "Default weapon!", "Weapon3", Item.ItemType.Weapon);
+        inventory.Add(weapon1);
+        inventory.Add(weapon2);
+        inventory.Add(weapon3);
+
+        //Fill up with empty items
+        while (inventory.Count < maxslots)
         {
             inventory.Add(new Item());
-            slots.Add(new Item());
         }
     }
 
-    //Update function
+    //Function update
     void Update()
     {
-        if(Input.GetButtonDown("i"))
+        if (Input.GetKeyDown("q"))
         {
-            showinventory = !showinventory;
+            swapDown();
+        }
+
+        if (Input.GetKeyDown("e"))
+        {
+            swapUp();
         }
     }
+
 
     //Function add item
     public void addItem(Item additem)
     {
         for(int i = 0; i < inventory.Count; i++)
         {
-            if(inventory[i].itemtype != Item.ItemType.Empty)
+            if(inventory[i].itemtype.Equals(Item.ItemType.Empty))
             {
                 inventory[i] = additem;
                 break;
@@ -64,6 +67,29 @@ public class PlayerInventory : MonoBehaviour {
                 break;
             }
         }
+        reorderInventory();
+    }
+
+    //Swap items of index by -1
+    public void swapDown()
+    {
+        Item firstelement = inventory[0];
+        inventory.RemoveAt(0);
+        inventory.Add(firstelement);
+        
+    }
+
+    //Swaps items by +1
+    public void swapUp()
+    {
+        Item firstitem = inventory[0];
+        //While the first item hasn't been moved up one spot
+        while(!inventory[1].equals(firstitem))
+        {
+            Item temp = inventory[0];
+            inventory.RemoveAt(0);
+            inventory.Add(temp);
+        }
     }
 
     //Checks if inventory contans the item
@@ -79,66 +105,26 @@ public class PlayerInventory : MonoBehaviour {
         return false;
     }
 
-
-    //GUI
-    void OnGUI()
+    private void reorderInventory()
     {
-        if (showinventory)
+        List<Item> copy = inventory;
+        inventory = new List<Item>();
+
+        //First add exisiting items
+        foreach (Item copy_item in copy)
         {
-            drawinventory();
-        }
-
-        if(showtooltip)
-        {
-            Rect rect = new Rect(Event.current.mousePosition.x, Event.current.mousePosition.y, 200,200);
-            GUI.Box(rect, tooltiptext);
-            showtooltip = false;
-        }
-    }
-
-    // Creates tooltip
-    private void createtooltip(Item item)
-    {
-        tooltiptext = "";
-        tooltiptext += item.itemdescription;
-
-    }
-    //Function to draw inventory onto screen
-    private void drawinventory()
-    {
-        int item_index = 0;
-
-        //i and j are used for positioning the UI
-        for (int y = 0; y < slotsY; y++)
-        {
-            for (int x = 0; x < slotsX; x++)
+            if(copy_item.itemtype != Item.ItemType.Empty)
             {
-                Rect rect = new Rect(x * 50, y * 50, 50, 50);
-                GUI.Box(rect, "", skin.GetStyle("Slot"));
-
-                if (inventory[item_index].itemtype != Item.ItemType.Empty)
-                {
-                    GUI.DrawTexture(rect, slots[item_index].itemicon);
-                }
-
-                if (rect.Contains(Event.current.mousePosition))
-                {
-                    createtooltip(slots[item_index]);
-                    showtooltip = true;
-                }
-
-
-                item_index++;
+                inventory.Add(copy_item);
             }
         }
+
+        //Fill up with empty items
+        while(inventory.Count < maxslots)
+        {
+            inventory.Add(new Item());
+        }
     }
 
-    //Function to draw tooltip
-    private void drawtooltip()
-    {
-
-    }
     
-
-
 }

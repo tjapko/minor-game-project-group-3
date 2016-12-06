@@ -7,7 +7,7 @@ public class Item {
     public string itemname;
     public int itemID;
     public string itemdescription;
-    public Texture2D itemicon;
+    public Sprite itemicon;
     public ItemType itemtype;
     
     //Enum of itemtype 
@@ -24,7 +24,7 @@ public class Item {
         itemname = name;
         itemID = id;
         itemdescription = description;
-        //itemicon = Resources.Load<Texture2D>("Icons/ItemIcons/" + iconname);
+        itemicon = Resources.Load<Sprite>("Icons/ItemIcons/" + iconname);
         itemtype = type;
     }
 

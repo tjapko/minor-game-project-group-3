@@ -106,6 +106,7 @@ GameObject:
   - 114: {fileID: 114000014120976380}
   - 114: {fileID: 114000013067947078}
   - 114: {fileID: 114000012987590838}
+  - 114: {fileID: 114000013046789916}
   m_Layer: 11
   m_Name: Testplayer
   m_TagString: Untagged
@@ -181,7 +182,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012244867938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.355722, y: -0.0000018675994, z: -15.666562}
+  m_LocalPosition: {x: 97.87714, y: 35.48247, z: -1.140863}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -354,6 +355,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe2f9883b2907c48833e817b52bf8c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114000013046789916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012244867938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd9b7f0388e4984d9fbe21f9963982c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxslots: 3
 --- !u!114 &114000013067947078
 MonoBehaviour:
   m_ObjectHideFlags: 1

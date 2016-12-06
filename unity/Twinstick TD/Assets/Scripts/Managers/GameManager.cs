@@ -75,7 +75,8 @@ public class GameManager : MonoBehaviour
         m_uiscript.UIchange(gameover, wavephase, gamepause);
 
         //Update score
-        m_uiscript.Update();
+        m_uiscript.UpdateUI();
+        
 
     }
 

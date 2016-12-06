@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000014227122780}
+  m_RootGameObject: {fileID: 1000014204400764}
   m_IsPrefabParent: 1
---- !u!1 &1000014227122780
+--- !u!1 &1000014204400764
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000013331641566}
-  - 114: {fileID: 114000010280675354}
+  - 4: {fileID: 4000011148946382}
+  - 114: {fileID: 114000010747135168}
   m_Layer: 0
-  m_Name: GamemanagerPrefab
-  m_TagString: Untagged
+  m_Name: Gamemanager
+  m_TagString: Gamemanager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4000013331641566
+--- !u!4 &4000011148946382
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014227122780}
+  m_GameObject: {fileID: 1000014204400764}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,12 +40,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000010280675354
+--- !u!114 &114000010747135168
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014227122780}
+  m_GameObject: {fileID: 1000014204400764}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac87c7543c3d87d4494cbed3ec8e3b33, type: 3}
@@ -55,15 +55,15 @@ MonoBehaviour:
   m_StartDelay: 3
   m_waveDelay: 5
   m_EndDelay: 3
-  m_CameraControl: {fileID: 0}
   m_uiprefab: {fileID: 1000011379212736, guid: 55b65d527b3aec941a018aa2b6fbe275, type: 2}
-  m_baseprefab: {fileID: 1000011563660048, guid: 08075c56f543cc348a029c91d94bf0e9,
+  m_baseprefab: {fileID: 1000011563660048, guid: da36032e3e7c7489e97c16789df8a54f,
     type: 2}
   m_Playerprefab: {fileID: 1000012244867938, guid: 6526df5f06f78a5438cb83f5730a0724,
     type: 2}
-  m_Enemyprefab: {fileID: 1000012244867938, guid: effe25e49a723e140ae53d42e285572e,
+  m_Enemyprefab: {fileID: 1000012244867938, guid: cb37c0e2daea140e0ae24de0aa88d21d,
     type: 2}
-  m_turret: {fileID: 0}
+  m_turret: {fileID: 1000012271596080, guid: fade7fc2720943e4d832fbe8c7cc8949, type: 2}
   m_Basespawnpoint: {fileID: 0}
   m_Playerspawnpoint: {fileID: 0}
   m_Enemyspawnpoint: {fileID: 0}
+  m_CameraControl: {fileID: 0}
