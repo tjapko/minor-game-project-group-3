@@ -134,8 +134,8 @@ public class PlayerMovement : MonoBehaviour {
 	// Adjust the rotation of the player based on the controller's right-joystick input for the PS3-controller (windows and mac) and XBOX-controller (mac)
 	private void controllerTurnMac() {
 		// horizontal & vertical movement, used GetAxis() istead of GetAxisRaw()
-		Vector3 playerDir = Vector3.right * Input.GetAxis ("RightJoystickHorizontalMacXBOX") + 
-							Vector3.forward * -1 * Input.GetAxis ("RightJoystickVerticalMacXBOX");  
+		Vector3 playerDir = Vector3.right * Input.GetAxis ("RightJoystickHorizontalMac") + 
+							Vector3.forward * -1 * Input.GetAxis ("RightJoystickVerticalMac");  
 
 		// check if player's input isn't zero, sp player is actually rotating 
 		if (playerDir.sqrMagnitude > 0.0f) { 
