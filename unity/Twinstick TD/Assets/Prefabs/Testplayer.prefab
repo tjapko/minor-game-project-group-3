@@ -421,6 +421,7 @@ MonoBehaviour:
   mouseposition: {x: 0, y: 0, z: 0}
   m_MovementSpeed: 15
   useController: 0
+  windowsAndXBOX: 0
 --- !u!114 &114000013910147460
 MonoBehaviour:
   m_ObjectHideFlags: 1

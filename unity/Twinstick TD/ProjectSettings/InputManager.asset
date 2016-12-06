@@ -183,7 +183,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Fire1
-    descriptiveName: PS3(both) and XBOX (mac)
+    descriptiveName: 'PS3(both) and XBOX (mac) '
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: joystick button 11
@@ -202,7 +202,7 @@ InputManager:
     descriptiveName: XBOX (Windows)
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 5
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
