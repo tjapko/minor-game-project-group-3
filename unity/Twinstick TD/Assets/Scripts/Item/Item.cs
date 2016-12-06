@@ -44,8 +44,10 @@ public class Item {
     {
         float fireRate { get; set; }
         float maxDamage { get; set; }
-        float clipSize { get; set; }
-
-        void 
+        int clipSize { get; set; }
+        int ammo { get; set; }
+        Transform bullet { get; set; }
+        Rigidbody m_Bullet { get; set; }
+        void fire();
     }
 }
