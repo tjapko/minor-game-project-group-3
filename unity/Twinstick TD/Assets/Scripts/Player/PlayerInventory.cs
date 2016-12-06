@@ -92,7 +92,7 @@ public class PlayerInventory : MonoBehaviour {
         }
     }
 
-    //Checks if inventory contans the item
+    //Checks if inventory contains the item
     private bool InventoryContains(Item otheritem)
     {
         foreach(Item inv_item in inventory)
