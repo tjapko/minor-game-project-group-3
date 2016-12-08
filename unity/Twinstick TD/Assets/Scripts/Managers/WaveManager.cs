@@ -26,8 +26,8 @@ public class WaveManager
 	private int numberEnemiesPerWave;		 //Start amount of enemies per wave
 	private double m_proportionEnemy1 = 0.4; // proportion of choosing enemy1 each spawning 
 	private double m_proportionEnemy2 = 0.4; // proportion of choosing enemy2 each spawning 
-	private double m_proportionEnemy3 = 0.2; // proportion of choosing enemy3 each spawning 
-	private int m_numberOfWavesPerBoss = 1;  // each m_numberOfWavesPerBoss waves a Boss is spawned
+	private double m_proportionEnemy3; // proportion of choosing enemy3 each spawning 
+	private int m_numberOfWavesPerBoss = 5;  // each m_numberOfWavesPerBoss waves a Boss is spawned
 
     // Use this for initialization
 	public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, 
