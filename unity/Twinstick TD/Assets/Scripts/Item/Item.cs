@@ -40,4 +40,15 @@ public class Item {
         return other.itemID == this.itemID;
 
     }
+
+    interface I_Weapon
+    {
+        float fireRate { get; set; }
+        float maxDamage { get; set; }
+        int clipSize { get; set; }
+        int ammo { get; set; }
+        Transform bullet { get; set; }
+        Rigidbody m_Bullet { get; set; }
+        void fire();
+    }
 }
