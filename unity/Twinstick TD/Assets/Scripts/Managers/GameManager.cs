@@ -19,7 +19,10 @@ public class GameManager : MonoBehaviour
     public GameObject m_uiprefab;               // Reference to UI prefab
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
-    public GameObject m_Enemyprefab;            // Reference to the prefab of the enemies.
+	public GameObject m_Enemyprefab1;       //Reference to prefab of enemy1
+	public GameObject m_Enemyprefab2;       //Reference to prefab of enemy2
+	public GameObject m_Enemyprefab3;       //Reference to prefab of enemy3
+	public GameObject m_Enemyprefab4;       //Reference to prefab of enemy14 (Boss)
     public GameObject m_gridPrefab;             // Reference to the prefab of the grid and path
     public GameObject m_turret;                 // Reference to the turret prefab
     public Transform m_Basespawnpoint;          // Spawnpoint of base
@@ -49,7 +52,7 @@ public class GameManager : MonoBehaviour
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         //Initialize managers
-        m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint, m_gridPrefab);
+		m_wave = new WaveManager(m_Enemyprefab1, m_Enemyprefab2, m_Enemyprefab3, m_Enemyprefab4, m_Enemyspawnpoint, m_Basespawnpoint, m_gridPrefab);
         m_players = new UserManager(m_Playerprefab, m_turret, m_Playerspawnpoint, m_amountofplayers);
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
 

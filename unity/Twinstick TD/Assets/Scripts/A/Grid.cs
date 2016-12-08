@@ -52,7 +52,7 @@ public class Grid : MonoBehaviour {
     /// The actual Grid is created.
     /// </summary>
 	public void CreateGrid(){
-		Debug.Log ("CreateGrid");
+//		Debug.Log ("CreateGrid");
 
 		grid = new Node[gridSizeX, gridSizeY]; // An empty grid is created 
 		Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.forward * gridWorldSize.y / 2;
@@ -96,7 +96,7 @@ public class Grid : MonoBehaviour {
     /// <param name="worldPosition"></param>
     /// <returns name = "grid"></returns>
 	public Node NodeFromWorldPoint(Vector3 worldPosition){
-		Debug.Log (gridWorldSize.x);
+//		Debug.Log (gridWorldSize.x);
 		float percentX = (worldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x;
 		float percentY = (worldPosition.z + gridWorldSize.y / 2) / gridWorldSize.y;
 		percentX = Mathf.Clamp01 (percentX);
