@@ -257,4 +257,10 @@ public class GameManager : MonoBehaviour
         gamepause = status;
     }
 
+    //Get Usermanager
+    public UserManager getUserManager()
+    {
+        return m_players;
+    }
+
 }

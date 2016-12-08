@@ -131,7 +131,6 @@ public class MapUIScript {
     // Gets the icon of the gun
     private Sprite getWeaponIcon(PlayerManager player, int index)
     {
-        Debug.Log(m_usermanager.m_playerlist[0].m_inventory.inventory[0].itemtype);
         return player.m_inventory.inventory[index].itemicon;
     }
 

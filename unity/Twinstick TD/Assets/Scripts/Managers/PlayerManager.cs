@@ -29,11 +29,15 @@ public class PlayerManager
         m_SpawnPoint = spawnpoint;
         m_PlayerNumber = playernumber;
 
+        //Set references
         m_movement = m_Instance.GetComponent<PlayerMovement>();
         m_shooting = m_Instance.GetComponent<BulletFire>();
         m_stats = m_Instance.GetComponent<PlayerStatistics>();
         m_construction = m_Instance.GetComponent<PlayerConstruction>();
         m_inventory = m_Instance.GetComponent<PlayerInventory>();
+
+        //Set variables
+        m_stats.m_playernumber = playernumber;
 
     }
 

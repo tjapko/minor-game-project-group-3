@@ -31,6 +31,7 @@ public class Item {
     //Constructor for empty slots
     public Item () {
         itemtype = ItemType.Empty;
+        itemicon = Resources.Load<Sprite>("Icons/ItemIcons/noweapon");
     }
 
     //Compare items
