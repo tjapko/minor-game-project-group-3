@@ -18,12 +18,12 @@ public abstract class EnemyManager
     //Constructor
 	public EnemyManager(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playertarget, int number)
     {
+		Debug.Log ("ik ben hier");
         m_SpawnPoint = spawnpoint;
         m_BasePoint = basetarget;
         m_EnemyNumber = number;
         m_Instance = instance;
-        m_Movement = m_Instance.GetComponent<Unit>();
-        m_Movement.m_target = m_BasePoint;
+		m_Movement = m_Instance.GetComponent<Unit> ();
     }
 
     // Used during the phases of the game where the enemy shouldn't move

@@ -13,17 +13,16 @@ public class EnemyHealth : MonoBehaviour
     public Image m_FillImage;                           // The image component of the slider.
     public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
     public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
-	public bool basehit;         
+	[HideInInspector] public Transform m_playerPoint;         
 	//Private variables
     private float m_CurrentHealth;  //Current health of enemy
 	private bool m_Dead;   //Enemy is dead or not
-
+	public bool basehit;
 
     public void OnEnable()
     {
         // When the enemy is enabled, reset the enemy's health
         m_CurrentHealth = m_StartingHealth;
-        basehit = false;
 
         // Update the health slider's value and color.
         SetHealthUI();
@@ -45,10 +44,18 @@ public class EnemyHealth : MonoBehaviour
             {
                 Basehealth basehealth = targetRigidbody.GetComponent<Basehealth>();
                 basehealth.TakeDamage(1f);
-				basehit = true;
+				GetComponent<Unit>().enabled = false;
+				invokedit();
+
             }
         }
     }
+
+	public void invokedit(){
+		UnitPlayer m_movement_player = GetComponent<UnitPlayer> ();
+		m_movement_player.player = m_playerPoint;
+		m_movement_player.Start ();
+	}
 
     //Take damage
     public void TakeDamage(float amount)

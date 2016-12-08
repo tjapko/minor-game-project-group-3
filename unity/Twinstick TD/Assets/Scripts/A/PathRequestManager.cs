@@ -31,6 +31,7 @@ public class PathRequestManager : MonoBehaviour {
     /// <param name="pathEnd"></param>
     /// <param name="callback"></param>
 	public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback) {
+		Debug.Log ("at requestpath" + pathEnd);
 		PathRequest newRequest = new PathRequest(pathStart,pathEnd,callback);
 		instance.pathRequestQueue.Enqueue(newRequest);
 		instance.TryProcessNext();

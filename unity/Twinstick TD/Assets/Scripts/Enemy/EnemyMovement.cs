@@ -1,52 +1,22 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using UnityEngine;
 
-/// <summary>
-/// EnemyMovement Class
-/// </summary>
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement: MonoBehaviour
 {
-    //Public variables
-    public float m_speed = 0.1f;    //Speed of enemy
-    public float m_turnspeed = 10f; //Turnspeed of enemy
-    [HideInInspector] public Transform m_targetlocation;     //Location of target (currently not looking for base but spawn of base)
-   
-    //Private variables
-    private Rigidbody m_rigidbody;      //Rigid body 
-    private Transform m_spawnlocation;  //Spawn location of enemy (might not be needed)
-    
-
-    //sets enemy to spawnpoint
-    void Start()
-    {
-        m_rigidbody = GetComponent<Rigidbody>();
-        m_spawnlocation = m_rigidbody.transform;
-        gameObject.SetActive(true);
-        
-    }
-
-    //moves enemy every update closer to tower by speed
-    void FixedUpdate()
-    {
-        m_rigidbody.MovePosition(Vector3.MoveTowards(transform.position, m_targetlocation.position - new Vector3(0, m_targetlocation.transform.position.y, 0), m_speed));
-        turn();
-    }
+	[HideInInspector] public Transform player;
+	float MoveSpeed = 4f;
+	float MaxDist = 10f;
+	float MinDist = 5f;
 
 
-    //Turns enemy facing the base
-    void turn()
-    {
-        Vector3 turn = m_targetlocation.position - transform.position;
-        turn.y = 0;
-        Quaternion rotation = Quaternion.LookRotation(turn);
-        m_rigidbody.MoveRotation(rotation);
-    }
+	private void FixedUpdate(){
+		transform.LookAt(player);
+		if (Vector3.Distance(transform.position, player.position) >= MinDist){
+			transform.position+= transform.forward*MoveSpeed*Time.deltaTime;
+		}
 
-    //Teleport enemy to spawn (volgens mij wordt dit door de game manager geregeld)
-    void tospawnlocation()
-    {
-        transform.position = m_spawnlocation.position;
-    }
-
-
+		if (Vector3.Distance(transform.position, player.position) <= MaxDist){
+			//Here call to shoot
+		}
+	}
 }
