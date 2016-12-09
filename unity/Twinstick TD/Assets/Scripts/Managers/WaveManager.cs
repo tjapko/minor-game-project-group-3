@@ -6,7 +6,10 @@ using System.Collections.Generic;
 public class WaveManager
 {
     //Public variables
-    public GameObject m_Enemyprefab;       //Reference to prefab of enemy
+    public GameObject m_Enemyprefab1;       //Reference to prefab of enemy
+	public GameObject m_EnemyprefabToPlayer;
+
+
 	public GameObject m_gridprefab;
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
     public Transform m_basetarget;             //Target(s) of enemies
@@ -23,9 +26,10 @@ public class WaveManager
 	private int numberEnemiesPerWave;		//Start amount of enemies per wave
 
     // Use this for initialization
-	public WaveManager(GameObject Enemyprefab, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab)
+	public WaveManager(GameObject Enemyprefab, GameObject EnemyToPlayer, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab)
     {
-        this.m_Enemyprefab = Enemyprefab;
+        this.m_Enemyprefab1 = Enemyprefab;
+		this.m_EnemyprefabToPlayer = EnemyToPlayer;
         this.m_enemyspawnpoints = enemyspawnpoints;
         this.m_basetarget = basetarget;
 		this.m_playerpoint = playerpoint;
@@ -99,8 +103,8 @@ public class WaveManager
         for (int i = 0; i < m_number_enemies; i++)
         {
 			m_enemyspawnpoints.position = RandomSpawnPosition ();
-            GameObject newinstance = GameObject.Instantiate(m_Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
-			m_enemywave.Add(new Enemy1(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+            GameObject newinstance = GameObject.Instantiate(m_EnemyprefabToPlayer, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
+			m_enemywave.Add(new EnemyToPlayer(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
 			enemy_number++;
         }
 

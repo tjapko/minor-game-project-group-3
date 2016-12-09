@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour
 	//Private variables
     private float m_CurrentHealth;  //Current health of enemy
 	private bool m_Dead;   //Enemy is dead or not
-	public bool basehit;
+	[HideInInspector] public bool basehit;
 
     public void OnEnable()
     {
