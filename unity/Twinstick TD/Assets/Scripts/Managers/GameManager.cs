@@ -49,9 +49,8 @@ public class GameManager : MonoBehaviour
         m_StartWait = new WaitForSeconds(m_StartDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
-        //Initialize managers
-		m_wave = new WaveManager(m_Enemyprefab1, m_EnemyprefabToPlayer, m_Enemyspawnpoint, m_Basespawnpoint, m_Playerprefab.transform, m_gridPrefab);
-        m_players = new UserManager(m_Playerprefab, m_turret, m_Playerspawnpoint, m_amountofplayers);
+        //Initialize managerss
+		m_players = new UserManager(m_Playerprefab, m_turret, m_Playerspawnpoint, m_amountofplayers);
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
 
         //Initialize UI script
@@ -59,6 +58,9 @@ public class GameManager : MonoBehaviour
 
         // Start the game
         StartCoroutine(GameLoop());
+
+		m_wave = new WaveManager(m_Enemyprefab1, m_EnemyprefabToPlayer, m_Enemyspawnpoint, m_Basespawnpoint, m_players.m_playerlist[0].m_Instance.transform , m_gridPrefab);
+
     }
 
     //Check per frame
