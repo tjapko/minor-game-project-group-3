@@ -15,6 +15,7 @@ public class SwitchControl : MonoBehaviour {
 		if (Input.GetAxisRaw ("Mouse X_" + m_PlayerNumber) != 0.0f || 
 			Input.GetAxisRaw ("Mouse Y_" + m_PlayerNumber) != 0.0f) {
 			playerMovement.useController = false;
+			playerMovement.windowsAndXBOX = false;
 		}
 
 		// detect controller input 

@@ -244,7 +244,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 0
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Horizontal_2
     descriptiveName: joystick player 2
@@ -276,7 +276,7 @@ InputManager:
     invert: 1
     type: 2
     axis: 1
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Vertical_2
     descriptiveName: joystick player 2
@@ -452,7 +452,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 2
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: RightJoystickHorizontalMac_2
     descriptiveName: PS3 (both) and XBOX (mac) joystick player 2
@@ -484,7 +484,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 3
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: RightJoystickHorizontalWindowsXBOX_2
     descriptiveName: XBOX on windows joystick player 2
@@ -516,7 +516,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 3
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: RightJoystickVerticalMac_2
     descriptiveName: PS3(both) and XBOX (mac) joystick player 2
@@ -548,7 +548,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 4
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: RightJoystickVerticalWindowsXBOX_2
     descriptiveName: XBOX on windows joystick player 2
