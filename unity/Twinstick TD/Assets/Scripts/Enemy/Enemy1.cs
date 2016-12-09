@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections;
 using UnityEngine;
 using UnityEditor.VersionControl;
@@ -20,8 +20,8 @@ public class Enemy1 : EnemyManager
 		this.health = m_Instance.GetComponent<EnemyHealth> ();
 		this.playerUnit = m_Instance.GetComponent<UnitPlayer> ();
 		playerUnit.enabled = false;
-		health.m_playerPoint = m_PlayerPoint;
 		m_Movement.m_target = m_BasePoint;
 	}
 
 }
+*/

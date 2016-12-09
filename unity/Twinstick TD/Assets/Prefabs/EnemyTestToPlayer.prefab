@@ -94,7 +94,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!65 &65000010210193040
 BoxCollider:
@@ -119,12 +119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789286e0810556f4da2ca109f5a3fced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartingHealth: 0
+  m_StartingHealth: 10
   m_Slider: {fileID: 0}
   m_FillImage: {fileID: 0}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  m_playerPoint: {fileID: 0}
   basehit: 0
 --- !u!114 &114000012164280692
 MonoBehaviour:
@@ -137,5 +136,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611775b8366d39344bc4e7674cab023c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  m_player: {fileID: 0}
   speed: 1

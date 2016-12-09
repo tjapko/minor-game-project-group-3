@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 public class UnitPlayer : MonoBehaviour {
 
-	[HideInInspector] public Transform player;   // the target 
+	[HideInInspector] public Transform m_player;   // the target 
 	[HideInInspector] public float speed = 1; // moving speed
 	Vector3[] path; // The walkable path
 	int targetIndex;// The index of the waypointArray. The unit moves to path[targetIndex]  
@@ -14,8 +14,14 @@ public class UnitPlayer : MonoBehaviour {
 	/// <summary>
 	/// on Start, requesting a path
 	/// </summary>
-	public void Start() {
-		PathRequestManager.RequestPath (transform.position, player.position, OnPathFound);
+	public void StartIn() {
+		InvokeRepeating ("Starten", 0.05f, 10f);
+	}
+
+	public void Starten(){
+		path = null;
+		targetIndex = 0;
+		PathRequestManager.RequestPath (transform.position, m_player.position, OnPathFound);
 	}
 
 	/// <summary>

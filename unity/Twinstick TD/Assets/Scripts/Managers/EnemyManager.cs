@@ -13,7 +13,7 @@ public abstract class EnemyManager
 	[HideInInspector] public Transform m_PlayerPoint; 	// Location of player
     [HideInInspector] public int m_EnemyNumber;         // Number of enemy
     [HideInInspector] public GameObject m_Instance;     // A reference to the instance of the enemy
-    [HideInInspector] public Unit m_Movement;  			// Reference to enemy's movement script, used to disable and enable control.
+    [HideInInspector] public UnitPlayer m_Movement;  			// Reference to enemy's movement script, used to disable and enable control.
 
     //Constructor
 	public EnemyManager(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playertarget, int number)
@@ -23,7 +23,7 @@ public abstract class EnemyManager
         m_BasePoint = basetarget;
         m_EnemyNumber = number;
         m_Instance = instance;
-		m_Movement = m_Instance.GetComponent<Unit> ();
+		m_Movement = m_Instance.GetComponent<UnitPlayer> ();
     }
 
     // Used during the phases of the game where the enemy shouldn't move

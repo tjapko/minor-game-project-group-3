@@ -24,6 +24,7 @@ public class WaveManager
     private int enemy_number;               //Total amount of enemies spawned
 	private int m_wavenumber;				//Total amount of waves
 	private int numberEnemiesPerWave;		//Start amount of enemies per wave
+	private GridManager m_gridmanager;
 
     // Use this for initialization
 	public WaveManager(GameObject Enemyprefab, GameObject EnemyToPlayer, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab)
@@ -44,11 +45,17 @@ public class WaveManager
     // Send next wave and create new grid
     public void NextWave()
 	{
-		GridManager m_gridmanager = new GridManager(m_gridprefab);
-        grid = GameObject.FindWithTag("grid").GetComponent<Grid>();
+		if (m_wavenumber == 0) {
+			m_gridmanager = new GridManager (m_gridprefab);
+			grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
+		}
+		if (m_wavenumber > 0) {
+			GameObject.Destroy (m_gridmanager.m_instance, 0f);
+			m_gridmanager = new GridManager (m_gridprefab);
+			grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
+		}
 		int enemies = numberEnemiesPerWave + EnemiesAmountPerWave ();
 		SpawnEnemies(enemies);
-		GameObject.Destroy (m_gridmanager.m_instance, 2f);
 		m_wavenumber++;
     }
 
@@ -92,6 +99,7 @@ public class WaveManager
 
 		do {
 			randomPosition = new Vector3 (Random.Range (x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
+
             walkable = !(Physics.CheckSphere(randomPosition, (grid.nodeRadius * 1.4f), grid.unwalkableMask));
             distance = Vector3.Distance(Base, randomPosition);
 		} while (distance <= crit_distance || !walkable); // distance needs to be smaller than critical distance and the spawnpoint needs to be walkable
