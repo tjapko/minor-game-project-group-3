@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour {
 	[HideInInspector]public Vector3 mouseposition;
 	public float m_MovementSpeed = 15f;
 	[HideInInspector]public bool useController;
-	[HideInInspector]public bool windowsAndXBOX; // mac is default 
+	[HideInInspector]public bool windowsAndXBOX = true; // mac is default 
 	// private variables 
 	private Rigidbody m_playerRigidbody;
 	private float m_MovementInputValueV;
