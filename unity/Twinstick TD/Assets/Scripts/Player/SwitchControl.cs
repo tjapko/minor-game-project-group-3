@@ -23,12 +23,12 @@ public class SwitchControl : MonoBehaviour {
 		else if(Input.GetAxisRaw ("RightJoystickHorizontalMac_" + (m_PlayerNumber)) != 0.0f ||
 		    	Input.GetAxisRaw ("RightJoystickVerticalMac_" + (m_PlayerNumber)) != 0.0f) {
 			playerMovement.useController = true;
-			//playerMovement.windowsAndXBOX = false;
+			playerMovement.windowsAndXBOX = false;
 		} 
 		else if(Input.GetAxisRaw ("RightJoystickHorizontalWindowsXBOX_"+ (m_PlayerNumber)) != 0.0f || 
 				Input.GetAxisRaw ("RightJoystickVerticalWindowsXBOX_"+ (m_PlayerNumber)) != 0.0f ) {
 			playerMovement.useController = true;
-			//playerMovement.windowsAndXBOX = true;
+			playerMovement.windowsAndXBOX = true;
 		}
 	}
 
