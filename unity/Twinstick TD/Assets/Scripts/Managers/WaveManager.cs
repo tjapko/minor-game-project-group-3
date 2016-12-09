@@ -10,10 +10,11 @@ public class WaveManager
 	public GameObject m_gridprefab;
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
     public Transform m_target;             //Target(s) of enemies
-    public double baseDistancePercentage = 0.1;
     Grid grid;
     public LayerMask unwalkableMask;
     public float nodeRadius;
+    public int numberEnemiesPerWave = 25;
+    public double baseDistanceProportion = 0.2; // minimal distance to travel for each enemy
 
     //Private variables
     private List<EnemyManager> m_enemywave; //Population of enemies
@@ -81,8 +82,8 @@ public class WaveManager
 		float z_minrange = GameObject.FindGameObjectWithTag ("Wall1").GetComponent<Transform> ().transform.position.z + buffer;
 		float z_maxrange = GameObject.FindGameObjectWithTag ("Wall3").GetComponent<Transform> ().transform.position.z - buffer;
 
-		// enemies needs to be spawned at least 50% of the x-dimenion of the base
-		float crit_distance  = (float)baseDistancePercentage * (x_maxrange - x_minrange); 
+		// enemies needs to be spawned at least 100*baseDistanceProportion% of the x-dimenion (= z-dimension) of the base
+		float crit_distance  = (float)baseDistanceProportion * (x_maxrange - x_minrange); 
 
 		do {
 			randomPosition = new Vector3 (Random.Range (x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
