@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class WaveManager
 {
@@ -26,9 +27,30 @@ public class WaveManager
     }
 
     // Send next wave
-    public void NextWave()
+    public IEnumerator NextWave()
     {
-        SpawnEnemies(numberEnemiesPerWave);
+        //Example algorithm
+        int maxEnemieswave = 20; //Variable needs to be set according to wave
+        int enemiesspawned = 0; //Variable to count the amount of spawned enemies
+        SpawnEnemies(4);
+        enemiesspawned += 4;
+
+        while (true)
+        {
+            yield return null;
+            //Example spawn condition
+            if ((float)NumberEnemiesDead()/(float)enemiesspawned >= 0.4f)
+            {
+                SpawnEnemies(4); //4 could be made variable , i.e. spawn until maxEnemieswave, in portions of 4 enemies per spawn event
+                enemiesspawned += 4;
+            }
+
+            //Example stop spawning condition
+            if (enemiesspawned >= maxEnemieswave)
+            {
+                break;
+            }
+        }
     }
 
     //Check if all enemies are dead;
@@ -42,6 +64,20 @@ public class WaveManager
             }
         }
         return true;
+    }
+
+    //Check amount of dead enemies
+    private int NumberEnemiesDead()
+    {
+        int count = 0;
+        foreach(EnemyManager enemy in m_enemywave)
+        {
+            if(!enemy.m_Instance.activeSelf)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
 	private Vector3 RandomSpawnPosition() 

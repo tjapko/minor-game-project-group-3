@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
                 m_wave.DestroyEnemies();
                 while (m_wave.EnemiesDead())
                 {
-                    m_wave.NextWave();
+                    yield return StartCoroutine(m_wave.NextWave());
                 }
                 m_waveNumber++;
                 Debug.Log("Current wave" + m_waveNumber);
