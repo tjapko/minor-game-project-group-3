@@ -468,7 +468,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 2
-    joyNum: 0
+    joyNum: 1
   - serializedVersion: 3
     m_Name: RightJoystickHorizontalMac_2
     descriptiveName: PS3 (both) and XBOX (mac) joystick player 2
@@ -532,7 +532,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 3
-    joyNum: 0
+    joyNum: 1
   - serializedVersion: 3
     m_Name: RightJoystickVerticalMac_2
     descriptiveName: PS3(both) and XBOX (mac) joystick player 2
