@@ -25,7 +25,6 @@ public class GridManager
 		this.denodeRadius = 1f;
 		this.displayGrid = true;
 		setup ();
-		Debug.Log ("setup");
 	}
 
 	//Sets up the grid and gets the components of the prefab
