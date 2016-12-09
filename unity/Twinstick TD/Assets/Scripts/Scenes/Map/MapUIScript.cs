@@ -38,16 +38,28 @@ public class MapUIScript {
         m_wavecontrol = m_instance.transform.GetChild(1).gameObject;
         m_constructionpanel = m_instance.transform.GetChild(2).gameObject;
         m_textplayer1 = m_instance.transform.GetChild(3).gameObject;
-        //m_textplayer2 = m_instance.transform.GetChild(4).gameObject;
+        m_textplayer2 = m_instance.transform.GetChild(4).gameObject;
         m_gameovermenu = m_instance.transform.GetChild(5).gameObject;
         m_weaponplayer1 = m_instance.transform.GetChild(6).gameObject;
-        //m_weaponplayer2 = m_instance.transform.GetChild(7).gameObject;
+        m_weaponplayer2 = m_instance.transform.GetChild(7).gameObject;
+
 
         //Set active UI
         m_pausemenu.SetActive(false);
         m_wavecontrol.SetActive(true);
         m_constructionpanel.SetActive(false);
         m_gameovermenu.SetActive(false);
+        m_textplayer1.SetActive(true);
+
+        if (gamemanager.m_amountofplayers > 1)
+        {
+            m_textplayer2.SetActive(true);
+            m_weaponplayer2.SetActive(true);
+        } else
+        {
+            m_textplayer2.SetActive(false);
+            m_weaponplayer2.SetActive(false);
+        }
 
     }
 

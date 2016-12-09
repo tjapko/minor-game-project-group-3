@@ -16,8 +16,8 @@ public class PlayerStatistics : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        m_kills = 0;      // start m_kills 
-        m_currency = 1;   // start m_currency
+        m_kills = 0;            // start m_kills 
+        m_currency = 1000;      // start m_currency
 
     }
 	
