@@ -7,7 +7,7 @@ public class WaveManager
     public GameObject m_Enemyprefab;       //Reference to prefab of enemy
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
     public Transform m_target;             //Target(s) of enemies
-    public int numberEnemiesPerWave = 25;
+    public int numberEnemiesPerWave = 10;
     public double baseDistancePercentage = 0.1;
 
     //Private variables

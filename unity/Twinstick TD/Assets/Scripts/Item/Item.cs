@@ -8,6 +8,7 @@ public class Item {
     public int itemID;
     public string itemdescription;
     public Sprite itemicon;
+    public int itemprice;
     public ItemType itemtype;
     
     //Enum of itemtype 
@@ -19,11 +20,12 @@ public class Item {
     }
 
     //Constructor
-    public Item (string name, int id, string description, string iconname, ItemType type)
+    public Item (string name, int id, string description, string iconname, int price, ItemType type)
     {
         itemname = name;
         itemID = id;
         itemdescription = description;
+        itemprice = price;
         itemicon = Resources.Load<Sprite>("Icons/ItemIcons/" + iconname);
         itemtype = type;
     }

@@ -14,7 +14,7 @@ public class PlayerInventory : MonoBehaviour {
     void Start ()
     {
         //First add default weapon
-        Item weapon1 = new Item("Default Weapon", 1, "Default weapon!", "Weapon1", Item.ItemType.Weapon);
+        Item weapon1 = new Item("Default Weapon", 1, "Default weapon!", "Weapon1", 0, Item.ItemType.Weapon);
         //Item weapon2 = new Item("Default Weapon 2", 2, "Default weapon!", "Weapon2", Item.ItemType.Weapon);
         //Item weapon3 = new Item("Default Weapon 3", 3, "Default weapon!", "Weapon3", Item.ItemType.Weapon);
         inventory.Add(weapon1);
@@ -106,7 +106,7 @@ public class PlayerInventory : MonoBehaviour {
     }
 
     //Checks if inventory contans the item
-    private bool InventoryContains(Item otheritem)
+    public bool InventoryContains(Item otheritem)
     {
         foreach(Item inv_item in inventory)
         {

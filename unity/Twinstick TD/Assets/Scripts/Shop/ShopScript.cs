@@ -54,9 +54,9 @@ public class ShopScript : MonoBehaviour {
         showUI = false;
 
         //For testing
-        Item weapon1 = new Item("Default Weapon 1", 1, "Default weapon!", "Weapon1", Item.ItemType.Weapon);
-        Item weapon2 = new Item("Default Weapon 2", 2, "Default weapon!", "Weapon2", Item.ItemType.Weapon);
-        Item weapon3 = new Item("Default Weapon 3", 3, "Default weapon!", "Weapon3", Item.ItemType.Weapon);
+        Item weapon1 = new Item("Default Weapon 1", 1, "Default weapon!", "Weapon1", 100, Item.ItemType.Weapon);
+        Item weapon2 = new Item("Default Weapon 2", 2, "Default weapon!", "Weapon2", 1001, Item.ItemType.Weapon);
+        Item weapon3 = new Item("Default Weapon 3", 3, "Default weapon!", "Weapon3", 100, Item.ItemType.Weapon);
         addWeapon(weapon1);
         addWeapon(weapon2);
         //addWeapon(weapon3);

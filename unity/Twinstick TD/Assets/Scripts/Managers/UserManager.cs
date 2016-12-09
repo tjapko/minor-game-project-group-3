@@ -13,7 +13,7 @@ public class UserManager {
     public List<PlayerManager> m_playerlist;    //List of players
 
     //Private variables
-
+    private int current_wave;
 
     // Use this for initialization
     public UserManager(GameObject Playerprefab, GameObject Objectprefab, Transform playerspawnpoint, int totalplayers)
@@ -24,6 +24,7 @@ public class UserManager {
         m_totalplayers = totalplayers;
 
         m_playerlist = new List<PlayerManager>();
+        current_wave = 0;
     }
 
     // Spawn all players
@@ -69,6 +70,16 @@ public class UserManager {
         return true;
     }
 
+    //Give player currency for completion of wave
+    public void rewardPlayer()
+    {
+        foreach(PlayerManager player in m_playerlist)
+        {
+            player.m_stats.addCurrency(waveCurrency());
+        }
+    }
+    
+
     //Set construction phase for users
     public void setConstructionphase(bool status)
     {
@@ -103,5 +114,12 @@ public class UserManager {
         {
             player.Reset();
         }
+    }
+
+    //Function to determine currency per wave
+    private int waveCurrency()
+    {
+        current_wave++;
+        return current_wave * 1000;
     }
 }

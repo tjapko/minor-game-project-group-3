@@ -147,6 +147,8 @@ public class GameManager : MonoBehaviour
                 {
                     m_wave.NextWave();
                 }
+
+                m_players.rewardPlayer();
                 m_waveNumber++;
                 Debug.Log("Current wave" + m_waveNumber);
             }
