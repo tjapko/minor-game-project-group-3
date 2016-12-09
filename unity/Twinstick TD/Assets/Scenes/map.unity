@@ -373,7 +373,22 @@ Prefab:
     - target: {fileID: 114000012974880486, guid: 50b220b55171a45ada24f61cdfafe5ac,
         type: 2}
       propertyPath: m_minForce
-      value: 20
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012974880486, guid: 50b220b55171a45ada24f61cdfafe5ac,
+        type: 2}
+      propertyPath: m_maxForce
+      value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 54000013900290388, guid: 50b220b55171a45ada24f61cdfafe5ac,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012974880486, guid: 50b220b55171a45ada24f61cdfafe5ac,
+        type: 2}
+      propertyPath: changeDirInterval
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50b220b55171a45ada24f61cdfafe5ac, type: 2}

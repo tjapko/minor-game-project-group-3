@@ -5,7 +5,10 @@ public class RandomMovement : MonoBehaviour {
 
 	public float m_minForce = 10.0f;
 	public float m_maxForce = 50.0f;
-	public float changeDirInterval = .1f;
+	public float changeDirInterval = 1.0f;
+
+	private UserManager player;
+	private bool metPlayer = false; // boolean for registerating if player met the TravelingSalesman, default is false
 
 	Rigidbody rb;
 
@@ -28,6 +31,10 @@ public class RandomMovement : MonoBehaviour {
 			Move ();
 			changeDir = changeDirInterval; 
 		}
+
+		if (metPlayer) {
+			RandomMovement.Destroy ();
+		}
 	}
 
 	// moves the TravellingSalesman into a new direction 
@@ -38,18 +45,11 @@ public class RandomMovement : MonoBehaviour {
 
 		// Vector3 Force = new Vector3 (x, 0.0f, z);
 		Vector3 Force = new Vector3 (x, 0.0f, z);
+		Force.Normalize();
 
 		rb.AddForce (force * Force); // Transform.position instead of AddForce!
-
-//		rb.transform.position += Force;
-
-		// adjusting the movement speed
-		Force = Force *  15 * Time.deltaTime;
-
-		// adding movement to player's position
-		Force += rb.position;
-
-		// move player to the new (moved) position
-		rb.MovePosition(Force);
+//		Vector3 vec = new Vector3(Random.Range(-50,50), 0.0f, Random.Range(-50,50));
+//		rb.MovePosition(Vector3.MoveTowards(transform.position, vec, 1.0f));
 	}
 }
+	

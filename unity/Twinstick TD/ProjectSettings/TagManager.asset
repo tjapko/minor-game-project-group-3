@@ -14,6 +14,7 @@ TagManager:
   - PlayerShell
   - Gamemanager
   - grid
+  - TravelingSalesman
   layers:
   - Default
   - TransparentFX
