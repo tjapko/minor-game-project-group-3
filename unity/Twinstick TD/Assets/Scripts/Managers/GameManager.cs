@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 {
     //Public variables
     public int m_amountofplayers;               // Total amount of players that are participating
-    public float m_StartDelay = 3f;             // The delay between the start of round and playing of round
+    public float m_StartDelay = 0.5f;             // The delay between the start of round and playing of round
     public float m_waveDelay = 15f;              // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
 
