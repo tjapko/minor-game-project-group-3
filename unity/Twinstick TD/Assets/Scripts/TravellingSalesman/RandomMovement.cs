@@ -5,7 +5,7 @@ public class RandomMovement : MonoBehaviour {
 
 	public float m_minForce = 10.0f;
 	public float m_maxForce = 50.0f;
-	public float changeDirInterval = 1.0f;
+	public float changeDirInterval = .1f;
 
 	Rigidbody rb;
 
@@ -36,9 +36,20 @@ public class RandomMovement : MonoBehaviour {
 		x = Random.Range (-1.0f, 1.0f); 
 		z = Random.Range (-1.0f, 1.0f); 
 
-		//		Vector3 Force = new Vector3 (x, 0.0f, z);
+		// Vector3 Force = new Vector3 (x, 0.0f, z);
 		Vector3 Force = new Vector3 (x, 0.0f, z);
 
 		rb.AddForce (force * Force); // Transform.position instead of AddForce!
+
+//		rb.transform.position += Force;
+
+		// adjusting the movement speed
+		Force = Force *  15 * Time.deltaTime;
+
+		// adding movement to player's position
+		Force += rb.position;
+
+		// move player to the new (moved) position
+		rb.MovePosition(Force);
 	}
 }
