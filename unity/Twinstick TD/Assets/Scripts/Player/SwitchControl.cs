@@ -31,5 +31,6 @@ public class SwitchControl : MonoBehaviour {
 			playerMovement.windowsAndXBOX = true;
 		}
 	}
-
 }
+
+

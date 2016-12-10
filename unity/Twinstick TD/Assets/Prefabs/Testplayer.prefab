@@ -439,6 +439,7 @@ MonoBehaviour:
   m_MovementSpeed: 15
   useController: 0
   windowsAndXBOX: 0
+  macAndXBOX: 0
 --- !u!114 &114000013910147460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -483,6 +484,7 @@ MonoBehaviour:
   m_Bullet: {fileID: 54000012476593726, guid: 4d22d43c1b361484297b2a7b58b8d4a8, type: 2}
   m_FireTransform: {fileID: 4000011702620350}
   m_LaunchForce: 50
+  playerMovement: {fileID: 114000013493940560}
 --- !u!222 &222000010215713142
 CanvasRenderer:
   m_ObjectHideFlags: 1
