@@ -6,7 +6,6 @@ public class UserManager {
 
     //References
     public GameObject m_Playerprefab;       // Reference to prefab of player
-    public GameObject m_playerobjects;      // Reference to the objects placed by the user
     public Transform m_playerspawnpoint;    // Spawnpoints of the player
 
     public int m_totalplayers;                  //Total amount of players
@@ -16,10 +15,9 @@ public class UserManager {
     private int current_wave;
 
     // Use this for initialization
-    public UserManager(GameObject Playerprefab, GameObject Objectprefab, Transform playerspawnpoint, int totalplayers)
+    public UserManager(GameObject Playerprefab, Transform playerspawnpoint, int totalplayers)
     {
         m_Playerprefab = Playerprefab;
-        m_playerobjects = Objectprefab;
         m_playerspawnpoint = playerspawnpoint;
         m_totalplayers = totalplayers;
 
@@ -53,7 +51,7 @@ public class UserManager {
         
         GameObject newinstance = GameObject.Instantiate(prefab, spawn.position, spawn.rotation) as GameObject;
         PlayerManager newplayer = new PlayerManager(spawn, playernumber, newinstance);
-        newplayer.m_construction.m_objectprefab = m_playerobjects;  //Set reference to objects that can be placed
+        newinstance.GetComponent<PlayerConstruction>().m_player = newplayer;
         m_playerlist.Add(newplayer);    //Add player to list
     }
 
@@ -75,7 +73,9 @@ public class UserManager {
     {
         foreach(PlayerManager player in m_playerlist)
         {
+            //Reward from clearing wave
             player.m_stats.addCurrency(waveCurrency());
+            player.m_stats.addCurrency(player.m_construction.getCarrots());
         }
     }
     

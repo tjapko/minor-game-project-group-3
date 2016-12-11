@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
     public GameObject m_Enemyprefab;            // Reference to the prefab of the enemies.
-    public GameObject m_turret;                 // Reference to the turret prefab
     public Transform m_Basespawnpoint;          // Spawnpoint of base
     public Transform m_Playerspawnpoint;        // Spawnpoint of player
     [HideInInspector]public Transform m_Enemyspawnpoint;         // Spawnpoint of enemy
@@ -48,7 +47,7 @@ public class GameManager : MonoBehaviour
 
         //Initialize managers
         m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint);
-        m_players = new UserManager(m_Playerprefab, m_turret, m_Playerspawnpoint, m_amountofplayers);
+        m_players = new UserManager(m_Playerprefab, m_Playerspawnpoint, m_amountofplayers);
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
 
         //Initialize UI script
