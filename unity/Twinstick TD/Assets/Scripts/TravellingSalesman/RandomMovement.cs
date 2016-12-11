@@ -23,18 +23,17 @@ public class RandomMovement : MonoBehaviour {
 		changeDir = changeDirInterval;
 		Move ();
 	}
-
-	// Update is called once per frame
-	void Update () {
+		
+	void FixedUpdate () {
 		changeDir -= Time.deltaTime;
 		if (changeDir < 0) {
 			Move ();
 			changeDir = changeDirInterval; 
 		}
 
-		if (metPlayer) {
-			RandomMovement.Destroy ();
-		}
+//		if (metPlayer) {
+//			RandomMovement.Destroy ();
+//		}
 	}
 
 	// moves the TravellingSalesman into a new direction 
