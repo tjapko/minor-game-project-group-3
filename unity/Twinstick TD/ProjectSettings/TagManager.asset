@@ -14,6 +14,9 @@ TagManager:
   - PlayerShell
   - Gamemanager
   - PlayerObject
+  - PlayerWall
+  - PlayerCarrotField
+  - PlayerTurret
   layers:
   - Default
   - TransparentFX

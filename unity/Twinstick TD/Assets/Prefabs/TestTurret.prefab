@@ -22,6 +22,7 @@ GameObject:
   - 33: {fileID: 33000012773799686}
   - 65: {fileID: 65000013431518226}
   - 23: {fileID: 23000010190256552}
+  - 114: {fileID: 114000012654645510}
   m_Layer: 9
   m_Name: TestTurret
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012271596080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.594322, y: -6.615657, z: 7.3802757}
+  m_LocalPosition: {x: 127.695496, y: 11.474957, z: 40.493126}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -90,3 +91,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114000012654645510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012271596080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14808f004a0775b4ab61866601d20afa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxhealth: 0
+  m_owner:
+    m_Instance: {fileID: 0}
+    m_SpawnPoint: {fileID: 0}
+    m_movement: {fileID: 0}
+    m_shooting: {fileID: 0}
+    m_stats: {fileID: 0}
+    m_construction: {fileID: 0}
+    m_inventory: {fileID: 0}
+    m_PlayerNumber: 0

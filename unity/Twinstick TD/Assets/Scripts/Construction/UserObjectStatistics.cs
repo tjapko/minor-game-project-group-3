@@ -10,7 +10,7 @@ public class UserObjectStatistics : MonoBehaviour {
     public int m_maxhealth;     //Max health of the carrot field
 
     //References
-    public PlayerManager m_owner;   //Instantiated by the player in PlayerConstruction
+    [HideInInspector]public PlayerManager m_owner;   //Instantiated by the player in PlayerConstruction
 
     //Private variables
     private int m_health;           //Current health of the object
@@ -46,26 +46,6 @@ public class UserObjectStatistics : MonoBehaviour {
     public void OnTriggerEnter(Collider other)
     {
         intersecting_objects.Add(other.gameObject);
-
-        /*
-        //Only perform this when the object hasn't been placed
-        if (!object_placed)
-        {
-            Debug.Log("Colliding");
-            //Check tags
-            if (other.gameObject.CompareTag("Player") ||
-                other.gameObject.CompareTag("PlayerObject") ||
-                other.gameObject.CompareTag("Enemy") ||
-                other.gameObject.CompareTag("Base") ||
-                other.gameObject.CompareTag("Wall1") ||
-                other.gameObject.CompareTag("Wall2") ||
-                other.gameObject.CompareTag("Wall3") ||
-                other.gameObject.CompareTag("Wall4"))
-            {
-                
-            }
-        }
-        */
     }
 
     //Remove objects that're not blocking anymore

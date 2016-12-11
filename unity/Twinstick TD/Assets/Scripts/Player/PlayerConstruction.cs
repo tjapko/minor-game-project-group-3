@@ -5,13 +5,14 @@ using System.Collections.Generic;
 public class PlayerConstruction : MonoBehaviour {
 
     //Public variables
+    public GameObject m_wallprefab;   //Reference to (to be placed) turret
     public GameObject m_turretprefab;   //Reference to (to be placed) turret
     public GameObject m_carrotfieldprefab;  //Reference to (to be placed) carrot field prefab   
     public List<GameObject> m_placedobjects;    //List containing all the objects the user has placed  
     public PlayerManager m_player;     //Reference to the player manager (set by Usermanager)
 
-    public int m_price_wall = 200;
-    public int m_price_turret = 200;
+    public int m_price_wall = 10;
+    public int m_price_turret = 100;
     public int m_price_carrot = 200;
 
     //Private variables
@@ -84,16 +85,19 @@ public class PlayerConstruction : MonoBehaviour {
                 m_placedobjects.Add(newinstance);   //Add instance to list
                 constructing = false;   //Building has finished
 
-                //Reduce funds
+                //Reduce funds and set tag
                 switch (keyinput)
                 {
                     case "1":
+                        newinstance.tag = "PlayerWall";
                         m_player.m_stats.substractCurrency(m_price_wall);
                         break;
                     case "2":
+                        newinstance.tag = "PlayerCarrotField";
                         m_player.m_stats.substractCurrency(m_price_carrot);
                         break;
                     case "3":
+                        newinstance.tag = "PlayerTurret";
                         m_player.m_stats.substractCurrency(m_price_turret);
                         break;
                     default:
