@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 224000012186586216}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - 33: {fileID: 33000010645020724}
   - 23: {fileID: 23000012922203734}
   - 54: {fileID: 54000012850106202}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 224000011257648214}
   - 114: {fileID: 114000014227036790}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - 223: {fileID: 223000011222552374}
   - 114: {fileID: 114000012918283446}
   - 114: {fileID: 114000010481510842}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: EnemyHealthfab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - 114: {fileID: 114000011184074504}
   - 65: {fileID: 65000011758794278}
   - 114: {fileID: 114000010321620456}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TestEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - 224: {fileID: 224000010861406144}
   - 222: {fileID: 222000010559169826}
   - 114: {fileID: 114000012168267054}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - 224: {fileID: 224000012056406910}
   - 222: {fileID: 222000013568660666}
   - 114: {fileID: 114000010873357294}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}

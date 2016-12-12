@@ -15,8 +15,11 @@ public class ShopScript : MonoBehaviour {
     //Public variables
     public int maxweapons = 3;
     public int maxammotype = 3;
-    public List<Item> weaponsforsale;
-    public List<Item> ammoforsale;
+    public List<Weapon> weaponsforsale;
+    public List<Weapon> ammoforsale;
+    public Rigidbody m_Bullet;  // Prefab of the shell.
+    public Rigidbody m_RayBullet;  // Prefab of the Rayshell.
+    public Transform m_FireTransform;           // A child of the player where the shells are spawned.
 
     //Reference
     public GameObject m_ShopUIprefab;
@@ -30,19 +33,20 @@ public class ShopScript : MonoBehaviour {
 	void Start () {
         //Instantiate Lists
         players_present = new List<GameObject>();
-        weaponsforsale = new List<Item>();
-        ammoforsale = new List<Item>();
+        weaponsforsale = new List<Weapon>();
+        ammoforsale = new List<Weapon>();
+        
 
         //Create empty weaponsforsale
         while (weaponsforsale.Count < maxweapons)
         {
-            weaponsforsale.Add(new Item());
+            weaponsforsale.Add(new Weapon());
         }
 
         //Create empty ammoforsale
         while(ammoforsale.Count < maxammotype)
         {
-            ammoforsale.Add(new global::Item());
+            ammoforsale.Add(new global::Weapon());
         }
 
         //Instantiate UI
@@ -54,9 +58,9 @@ public class ShopScript : MonoBehaviour {
         showUI = false;
 
         //For testing
-        Item weapon1 = new Item("Default Weapon 1", 1, "Default weapon!", "Weapon1", 100, Item.ItemType.Weapon);
-        Item weapon2 = new Item("Default Weapon 2", 2, "Default weapon!", "Weapon2", 1001, Item.ItemType.Weapon);
-        Item weapon3 = new Item("Default Weapon 3", 3, "Default weapon!", "Weapon3", 100, Item.ItemType.Weapon);
+        Weapon weapon1 = new Weapon("Default Weapon 1", 1, "Default weapon!", "Weapon1", 100, Weapon.ItemType.HandGun , 15f ,20f, 35f,1f, 8, 40, 8, m_FireTransform , m_Bullet );
+        Weapon weapon2 = new Weapon("Default Weapon 2", 2, "Default weapon!", "Weapon2", 1001, Weapon.ItemType.Shotgun , 1f, 30f, 25f, 3f, 10, 50, 10, m_FireTransform, m_Bullet);
+        Weapon weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 100, Weapon.ItemType.Sniper, 0.75f, 100f, 100f, 2f, 5, 40, 5, m_FireTransform, m_RayBullet);
         addWeapon(weapon1);
         addWeapon(weapon2);
         //addWeapon(weapon3);
@@ -148,18 +152,22 @@ public class ShopScript : MonoBehaviour {
     //Remove player in player present list
     private void removeplayer(GameObject player)
     {
-        int playernumber = player.GetComponent<PlayerStatistics>().m_playernumber;
-        for(int i = 0; i < players_present.Count; i++)
+        if (players_present.Count >= 1)
         {
-            if (players_present[i].GetComponent<PlayerStatistics>().m_playernumber == playernumber)
+
+            int playernumber = player.GetComponent<PlayerStatistics>().m_playernumber;
+            for (int i = 0; i < players_present.Count; i++)
             {
-                players_present.RemoveAt(i);
+                if (players_present[i].GetComponent<PlayerStatistics>().m_playernumber == playernumber)
+                {
+                    players_present.RemoveAt(i);
+                }
             }
         }
     }
 
     //Add item to forsalelist
-    private void addWeapon(Item newweapon)
+    private void addWeapon(Weapon newweapon)
     {
         for (int i = 0; i < weaponsforsale.Count; i++)
         {
@@ -170,7 +178,7 @@ public class ShopScript : MonoBehaviour {
             }
 
             //Check for empty items
-            if (weaponsforsale[i].itemtype.Equals(Item.ItemType.Empty))
+            if (weaponsforsale[i].itemtype.Equals(Weapon.ItemType.Empty))
             {
                 weaponsforsale[i] = newweapon;
                 break;
@@ -179,21 +187,21 @@ public class ShopScript : MonoBehaviour {
     }
 
     //Remove weapon in weaponforsale
-    private void removeWeapon(Item removeweapon)
+    private void removeWeapon(Weapon removeweapon)
     {
         for (int i = 0; i < weaponsforsale.Count; i++)
         {
             if (removeweapon.equals(weaponsforsale[i]))
             {
                 weaponsforsale.RemoveAt(i);
-                weaponsforsale.Add(new Item());
+                weaponsforsale.Add(new Weapon());
                 break;
             }
         }
     }
 
     //Add item to forsalelist
-    private void addAmmo(Item newAmmo)
+    private void addAmmo(Weapon newAmmo)
     {
         for (int i = 0; i < ammoforsale.Count; i++)
         {
@@ -204,7 +212,7 @@ public class ShopScript : MonoBehaviour {
             }
 
             //Check for empty items
-            if (ammoforsale[i].itemtype.Equals(Item.ItemType.Empty))
+            if (ammoforsale[i].itemtype.Equals(Weapon.ItemType.Empty))
             {
                 ammoforsale[i] = newAmmo;
                 break;
@@ -213,14 +221,14 @@ public class ShopScript : MonoBehaviour {
     }
 
     //Remove Ammo in ammo for sale
-    private void removeAmmo(Item removeAmmo)
+    private void removeAmmo(Weapon removeAmmo)
     {
         for (int i = 0; i < ammoforsale.Count; i++)
         {
             if (removeAmmo.equals(ammoforsale[i]))
             {
                 ammoforsale.RemoveAt(i);
-                ammoforsale.Add(new Item());
+                ammoforsale.Add(new Weapon());
                 break;
             }
         }

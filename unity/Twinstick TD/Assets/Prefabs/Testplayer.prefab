@@ -381,6 +381,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxslots: 3
+  m_Bullet: {fileID: 54000012476593726, guid: 4d22d43c1b361484297b2a7b58b8d4a8, type: 2}
+  m_FireTransform: {fileID: 4000011702620350}
+  m_RayBullet: {fileID: 54000012476593726, guid: 0261b5d85b6ae8747bfa627544ea2578,
+    type: 2}
 --- !u!114 &114000013067947078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -466,10 +470,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664648c30de440a45bae5047875bb6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxBulletDistance: 0
   m_PlayerNumber: 1
   m_Bullet: {fileID: 54000012476593726, guid: 4d22d43c1b361484297b2a7b58b8d4a8, type: 2}
+  m_RayBullet: {fileID: 54000012476593726, guid: 0261b5d85b6ae8747bfa627544ea2578,
+    type: 2}
   m_FireTransform: {fileID: 4000011702620350}
-  m_LaunchForce: 50
+  enemyLayer: 0
 --- !u!222 &222000010215713142
 CanvasRenderer:
   m_ObjectHideFlags: 1

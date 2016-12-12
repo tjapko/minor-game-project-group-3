@@ -8,23 +8,25 @@ using System.Collections.Generic;
 public class PlayerInventory : MonoBehaviour {
     //Public variables
     public int maxslots;
-    public List<Item> inventory = new List<Item>();
-
+    public List<Weapon> inventory = new List<Weapon>();
+    public Rigidbody m_Bullet;
+    public Transform m_FireTransform;
+    public Rigidbody m_RayBullet;
     //Fill the inventory when the player is initialized
     void Start ()
     {
-        //First add default weapon
-        Item weapon1 = new Item("Default Weapon", 1, "Default weapon!", "Weapon1", 0, Item.ItemType.Weapon);
-        //Item weapon2 = new Item("Default Weapon 2", 2, "Default weapon!", "Weapon2", Item.ItemType.Weapon);
-        //Item weapon3 = new Item("Default Weapon 3", 3, "Default weapon!", "Weapon3", Item.ItemType.Weapon);
+        //First add default // weapon(name , id , description , iconname , itemtype, price , fireratef , launchforcef , maxDamagef, reloadTimef,clipsize ,  ammo , ammoInClip, bullet , m_bullet)
+        Weapon weapon1 = new Weapon("Default Weapon", 1, "Default weapon!", "Weapon1",0 , Weapon.ItemType.HandGun,  1000f, 5f, 30f, 2f , 8 , 30 , 8,  m_FireTransform, m_Bullet);
+        Weapon weapon2 = new Weapon("Default Weapon 2", 2, "Default weapon!", "Weapon2", 1001, Weapon.ItemType.Shotgun, 1f, 5f, 25f, 3f, 10, 50, 10, m_FireTransform, m_Bullet);
+        Weapon weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 100, Weapon.ItemType.Sniper, 0.75f, 50f, 100f, 2f, 5, 40, 5, m_FireTransform, m_RayBullet);
         inventory.Add(weapon1);
-        //inventory.Add(weapon2);
-        //inventory.Add(weapon3);
+        inventory.Add(weapon2);
+        inventory.Add(weapon3);
 
         //Fill up with empty items
         while (inventory.Count < maxslots)
         {
-            inventory.Add(new Item());
+            inventory.Add(new Weapon());
         }
     }
 
@@ -44,7 +46,7 @@ public class PlayerInventory : MonoBehaviour {
 
 
     //Function add item
-    public void addItem(Item additem)
+    public void addItem(Weapon additem)
     {
         for(int i = 0; i < inventory.Count; i++)
         {
@@ -55,7 +57,7 @@ public class PlayerInventory : MonoBehaviour {
             }
 
             //Check for empty items
-            if(inventory[i].itemtype.Equals(Item.ItemType.Empty))
+            if(inventory[i].itemtype.Equals(Weapon.ItemType.Empty))
             {
                 inventory[i] = additem;
                 break;
@@ -64,13 +66,13 @@ public class PlayerInventory : MonoBehaviour {
     }
 
     //Function remove item
-    public void removeItem(Item removeitem)
+    public void removeItem(Weapon removeitem)
     {
         for(int i = 0; i < inventory.Count; i++)
         {
             if (removeitem.equals(inventory[i]))
             {
-                inventory[i] = new Item();
+                inventory[i] = new Weapon();
                 break;
             }
         }
@@ -80,9 +82,9 @@ public class PlayerInventory : MonoBehaviour {
     //Swap items of index by -1
     public void swapDown()
     {
-        if(inventory[1].itemtype != Item.ItemType.Empty)
+        if(inventory[1].itemtype != Weapon.ItemType.Empty)
         {
-            Item firstelement = inventory[0];
+            Weapon firstelement = inventory[0];
             inventory.RemoveAt(0);
             inventory.Add(firstelement);
         }
@@ -92,13 +94,13 @@ public class PlayerInventory : MonoBehaviour {
     //Swaps items by +1
     public void swapUp()
     {
-        if(inventory[inventory.Count-1].itemtype != Item.ItemType.Empty)
+        if(inventory[inventory.Count-1].itemtype != Weapon.ItemType.Empty)
         {
-            Item firstitem = inventory[0];
+            Weapon firstitem = inventory[0];
             //While the first item hasn't been moved up one spot
             while (!inventory[1].equals(firstitem))
             {
-                Item temp = inventory[0];
+                Weapon temp = inventory[0];
                 inventory.RemoveAt(0);
                 inventory.Add(temp);
             }
@@ -106,9 +108,9 @@ public class PlayerInventory : MonoBehaviour {
     }
 
     //Checks if inventory contans the item
-    public bool InventoryContains(Item otheritem)
+    public bool InventoryContains(Weapon otheritem)
     {
-        foreach(Item inv_item in inventory)
+        foreach(Weapon inv_item in inventory)
         {
             if (otheritem.equals(inv_item))
             {
@@ -121,11 +123,11 @@ public class PlayerInventory : MonoBehaviour {
     //Re-order inventory
     private void reorderInventory()
     {
-        List<Item> copy = inventory;
-        inventory = new List<Item>();
+        List<Weapon> copy = inventory;
+        inventory = new List<Weapon>();
 
         //First add exisiting items
-        foreach (Item copy_item in copy)
+        foreach (Weapon copy_item in copy)
         {
             if(copy_item.itemtype != Item.ItemType.Empty)
             {
@@ -136,7 +138,7 @@ public class PlayerInventory : MonoBehaviour {
         //Fill up with empty items
         while(inventory.Count < maxslots)
         {
-            inventory.Add(new Item());
+            inventory.Add(new Weapon());
         }
     }
 
