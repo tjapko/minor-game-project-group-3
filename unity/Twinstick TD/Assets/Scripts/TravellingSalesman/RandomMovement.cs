@@ -3,52 +3,38 @@ using System.Collections;
 
 public class RandomMovement : MonoBehaviour {
 
-	public float m_minForce = 10.0f;
-	public float m_maxForce = 50.0f;
-	public float changeDirInterval = 1.0f;
+	// public variables
+	public int m_changeDirTimeInterval = 2; // interval in which the direction (of walking) is keeped fixed
+	// private variables
+	private float m_timer; // variable to check if the travelling Salesman has to change it's direction 
+	private NavMeshAgent m_nav; // used to move the travelling Salesman
+	private Vector3 m_target;   // the new target of the travelling Salesman  
+	private int rotation = 75;  
 
-	private UserManager player;
-	private bool metPlayer = false; // boolean for registerating if player met the TravelingSalesman, default is false
 
-	Rigidbody rb;
-
-	private float force;
-	private float x;
-	private float z;
-	private float changeDir; 
-
-	// Use this for initialization
 	void Start () {
-		rb = GetComponent<Rigidbody>(); 
-		changeDir = changeDirInterval;
-		Move ();
+		m_timer = 0.0f; // restart m_timer
+		m_nav = gameObject.GetComponent<NavMeshAgent> (); // search for the NavMeshAgent component of the travellingSalesman
 	}
-		
+
 	void FixedUpdate () {
-		changeDir -= Time.deltaTime;
-		if (changeDir < 0) {
-			Move ();
-			changeDir = changeDirInterval; 
+		m_timer += Time.deltaTime;  // the m_timer is updated 
+		if (m_timer >= m_changeDirTimeInterval) { // check interval 
+			newTarget (); // set new target of the travellingSalesman
+			m_timer = 0.0f;	// reset the m_timer
 		}
-
-//		if (metPlayer) {
-//			RandomMovement.Destroy ();
-//		}
 	}
 
-	// moves the TravellingSalesman into a new direction 
-	void Move () {
-		force = Random.Range (m_minForce, m_maxForce);
-		x = Random.Range (-1.0f, 1.0f); 
-		z = Random.Range (-1.0f, 1.0f); 
-
-		// Vector3 Force = new Vector3 (x, 0.0f, z);
-		Vector3 Force = new Vector3 (x, 0.0f, z);
-		Force.Normalize();
-
-		rb.AddForce (force * Force); // Transform.position instead of AddForce!
-//		Vector3 vec = new Vector3(Random.Range(-50,50), 0.0f, Random.Range(-50,50));
-//		rb.MovePosition(Vector3.MoveTowards(transform.position, vec, 1.0f));
+	private void newTarget() {
+		//position of the travellingSalesman:
+		float x = gameObject.transform.position.x; 
+		float z = gameObject.transform.position.z;
+		//position of the new target:
+		x += Random.Range (x - rotation, x + rotation);
+		z += Random.Range (z - rotation, z + rotation);
+		//set new target
+		m_target = new Vector3(x, 0.0f, z);
+		// move the travellingSalesman to the new target
+		m_nav.SetDestination (m_target);
 	}
 }
-	
