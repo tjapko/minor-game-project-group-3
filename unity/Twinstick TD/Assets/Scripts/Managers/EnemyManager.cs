@@ -5,7 +5,7 @@ using UnityEngine;
 /// Class enemy manager
 /// </summary>
 [Serializable]
-public abstract class EnemyManager
+public abstract class EnemyManager : MonoBehaviour
 {
     //Public variables
     public Transform m_SpawnPoint;                      // Spawn position of enemy (should be appointed by Gamemanger instead of manual)
@@ -13,30 +13,39 @@ public abstract class EnemyManager
 	[HideInInspector] public Transform m_PlayerPoint; 	// Location of player
     [HideInInspector] public int m_EnemyNumber;         // Number of enemy
     [HideInInspector] public GameObject m_Instance;     // A reference to the instance of the enemy
-    [HideInInspector] public UnitPlayer m_Movement;  			// Reference to enemy's movement script, used to disable and enable control.
+    [HideInInspector] public UnitPlayer m_MovementPlayer;  	// Reference to enemy's movement script, used to disable and enable control.
+	[HideInInspector] public Unit m_MovementUnit;
+	[HideInInspector] public EnemyHealth health;
 
     //Constructor
 	public EnemyManager(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playertarget, int number)
     {
-		Debug.Log ("ik ben hier");
         m_SpawnPoint = spawnpoint;
         m_BasePoint = basetarget;
         m_EnemyNumber = number;
         m_Instance = instance;
-		m_Movement = m_Instance.GetComponent<UnitPlayer> ();
+		this.health = m_Instance.GetComponent<EnemyHealth> ();
     }
+
+	void FixedUpdate(){
+		if (health.basehit) {
+			movementSwitch ();
+		}
+	}
+
+	public abstract void movementSwitch ();
 
     // Used during the phases of the game where the enemy shouldn't move
     public void DisableControl()
     {
-        m_Movement.enabled = false;
+        m_MovementUnit.enabled = false;
     }
 
 
     // Used during the phases of the game where the enemy should be able to move
     public void EnableControl()
     {
-        m_Movement.enabled = true;
+        m_MovementUnit.enabled = true;
     }
 
 

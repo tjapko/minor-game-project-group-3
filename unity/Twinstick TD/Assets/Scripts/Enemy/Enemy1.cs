@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 using UnityEditor.VersionControl;
@@ -6,7 +6,6 @@ using UnityEditor.VersionControl;
 public class Enemy1 : EnemyManager
 {
 	public GameObject enemy1Prefab;
-	public EnemyHealth health;
 	public UnitPlayer playerUnit;
 
 	public Enemy1 (GameObject instance, Transform spawnpoint, Transform basetarget, Transform playerpoint, int number) : base(instance, spawnpoint, basetarget, playerpoint, number)
@@ -16,12 +15,16 @@ public class Enemy1 : EnemyManager
 		this.m_EnemyNumber = number;
 		this.m_Instance = instance;
 		this.m_PlayerPoint = playerpoint;
-		this.m_Movement = m_Instance.GetComponent<Unit> ();
+		m_Instance.AddComponent<Unit> ();
+		this.m_MovementUnit = m_Instance.GetComponent<Unit> ();
 		this.health = m_Instance.GetComponent<EnemyHealth> ();
-		this.playerUnit = m_Instance.GetComponent<UnitPlayer> ();
-		playerUnit.enabled = false;
-		m_Movement.m_target = m_BasePoint;
+		m_MovementUnit.m_target = m_BasePoint;
 	}
 
+	public override void movementSwitch(){
+		//delete component Unit
+		m_Instance.SetActive(false);
+		m_Instance.AddComponent<UnitPlayer>();
+		this.m_MovementPlayer = m_Instance.GetComponent<UnitPlayer> ();
+	}
 }
-*/

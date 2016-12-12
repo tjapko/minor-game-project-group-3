@@ -24,7 +24,6 @@ GameObject:
   - 23: {fileID: 23000010531011956}
   - 54: {fileID: 54000012153178914}
   - 114: {fileID: 114000011276799866}
-  - 114: {fileID: 114000012164280692}
   m_Layer: 0
   m_Name: EnemyTestToPlayer
   m_TagString: Enemy
@@ -125,16 +124,3 @@ MonoBehaviour:
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   basehit: 0
---- !u!114 &114000012164280692
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013317618446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 611775b8366d39344bc4e7674cab023c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_player: {fileID: 0}
-  speed: 1
