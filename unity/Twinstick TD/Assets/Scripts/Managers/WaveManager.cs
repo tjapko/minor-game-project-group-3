@@ -6,10 +6,6 @@ using System.Collections.Generic;
 public class WaveManager
 {
     //Public variables
-	public GameObject m_EnemyprefabToPlayer;
-
-
-	public GameObject m_gridprefab;
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
     public Transform m_basetarget;             //Target(s) of enemies
 	public Transform m_playerpoint;
@@ -17,7 +13,7 @@ public class WaveManager
 
     public GameObject m_Enemyprefab1;	//Reference to prefab of enemy1
 	public GameObject m_Enemyprefab2;   //Reference to prefab of enemy2
-	//public GameObject m_Enemyprefab3;   //Reference to prefab of enemy3
+	public GameObject m_Enemyprefab3;   //Reference to prefab of enemy3
 	public GameObject m_Enemyprefab4;   //Reference to prefab of enemy14 (Boss)
 	public GameObject m_gridprefab;
 
@@ -44,7 +40,7 @@ public class WaveManager
         this.m_Enemyprefab1 = Enemyprefab1;
         this.m_Enemyprefab2 = Enemyprefab2;
         this.m_Enemyprefab4 = Enemyprefab4;
-        this.m_EnemyprefabToPlayer = Enemyprefab3;
+		this.m_Enemyprefab3 = Enemyprefab3;
         this.m_enemyspawnpoints = enemyspawnpoints;
         this.m_basetarget = basetarget;
         this.m_playerpoint = playerpoint;
@@ -74,7 +70,6 @@ public class WaveManager
 
 		proportionEnemies (); // update the proportions of the enemies per wave
 		SpawnAllEnemies(enemies);
-		GameObject.Destroy (m_gridmanager.m_instance, 2f);
 		m_wavenumber++;
     }
 

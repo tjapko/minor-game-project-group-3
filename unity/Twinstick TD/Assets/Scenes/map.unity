@@ -793,9 +793,13 @@ MonoBehaviour:
     type: 2}
   m_Playerprefab: {fileID: 1000012244867938, guid: 6526df5f06f78a5438cb83f5730a0724,
     type: 2}
-  m_Enemyprefab1: {fileID: 1000012244867938, guid: cb37c0e2daea140e0ae24de0aa88d21d,
+  m_Enemyprefab1: {fileID: 1000013317618446, guid: bd8b2147d277ad74d90e9e671ff62e19,
     type: 2}
-  m_EnemyprefabToPlayer: {fileID: 1000013317618446, guid: bd8b2147d277ad74d90e9e671ff62e19,
+  m_Enemyprefab2: {fileID: 1000013317618446, guid: bd8b2147d277ad74d90e9e671ff62e19,
+    type: 2}
+  m_Enemyprefab3: {fileID: 1000013317618446, guid: bd8b2147d277ad74d90e9e671ff62e19,
+    type: 2}
+  m_Enemyprefab4: {fileID: 1000013317618446, guid: bd8b2147d277ad74d90e9e671ff62e19,
     type: 2}
   m_gridPrefab: {fileID: 1000012960333274, guid: 48024340347a2455491df3d8fa04ac92,
     type: 2}

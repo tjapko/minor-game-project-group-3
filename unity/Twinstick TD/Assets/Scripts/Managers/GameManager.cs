@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         //Initialize managers
         //		m_wave = new WaveManager(m_Enemyprefab1, m_Enemyprefab2, m_Enemyprefab3, m_Enemyprefab4, m_Enemyspawnpoint, m_Basespawnpoint, m_gridPrefab);
-        m_players = new UserManager(m_Playerprefab1, m_turret, m_Playerspawnpoint, m_amountofplayers);
+		m_players = new UserManager(m_Playerprefab, m_turret, m_Playerspawnpoint, m_amountofplayers);
 
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
 
