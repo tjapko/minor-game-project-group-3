@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_amountofplayers: 1
-  m_StartDelay: 3
-  m_waveDelay: 5
+  m_StartDelay: 0.5
+  m_waveDelay: 20
   m_EndDelay: 3
   m_uiprefab: {fileID: 1000011379212736, guid: 55b65d527b3aec941a018aa2b6fbe275, type: 2}
   m_baseprefab: {fileID: 1000011563660048, guid: da36032e3e7c7489e97c16789df8a54f,
@@ -62,7 +62,6 @@ MonoBehaviour:
     type: 2}
   m_Enemyprefab: {fileID: 1000012244867938, guid: cb37c0e2daea140e0ae24de0aa88d21d,
     type: 2}
-  m_turret: {fileID: 1000012271596080, guid: fade7fc2720943e4d832fbe8c7cc8949, type: 2}
   m_Basespawnpoint: {fileID: 0}
   m_Playerspawnpoint: {fileID: 0}
   m_Enemyspawnpoint: {fileID: 0}

@@ -45,7 +45,11 @@ public class UserObjectStatistics : MonoBehaviour {
     //Object is intersecting with the to be placed object
     public void OnTriggerEnter(Collider other)
     {
-        intersecting_objects.Add(other.gameObject);
+        if (!other.gameObject.CompareTag("PlayerConstructionMarker"))
+        {
+            intersecting_objects.Add(other.gameObject);
+        }
+        
     }
 
     //Remove objects that're not blocking anymore

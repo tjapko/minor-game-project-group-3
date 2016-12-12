@@ -392,6 +392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cdc8a7389f9c34b840ab01f09028ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_markerprefab: {fileID: 1000011497653828, guid: e43e08069b90c8d409bb0d4bbd06a5e1,
+    type: 2}
   m_wallprefab: {fileID: 1000012271596080, guid: fade7fc2720943e4d832fbe8c7cc8949,
     type: 2}
   m_turretprefab: {fileID: 1000012271596080, guid: fade7fc2720943e4d832fbe8c7cc8949,

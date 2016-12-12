@@ -589,36 +589,6 @@ Prefab:
       propertyPath: m_CameraControl
       value: 
       objectReference: {fileID: 922648188}
-    - target: {fileID: 114000010747135168, guid: 1fc7597b95040bc4b93a45cbf9d6a355,
-        type: 2}
-      propertyPath: m_baseprefab
-      value: 
-      objectReference: {fileID: 1000011563660048, guid: da36032e3e7c7489e97c16789df8a54f,
-        type: 2}
-    - target: {fileID: 114000010747135168, guid: 1fc7597b95040bc4b93a45cbf9d6a355,
-        type: 2}
-      propertyPath: m_Enemyprefab
-      value: 
-      objectReference: {fileID: 1000012244867938, guid: cb37c0e2daea140e0ae24de0aa88d21d,
-        type: 2}
-    - target: {fileID: 114000010747135168, guid: 1fc7597b95040bc4b93a45cbf9d6a355,
-        type: 2}
-      propertyPath: m_turret
-      value: 
-      objectReference: {fileID: 1000012271596080, guid: fade7fc2720943e4d832fbe8c7cc8949,
-        type: 2}
-    - target: {fileID: 114000010747135168, guid: 1fc7597b95040bc4b93a45cbf9d6a355,
-        type: 2}
-      propertyPath: m_Playerprefab
-      value: 
-      objectReference: {fileID: 1000012244867938, guid: 6526df5f06f78a5438cb83f5730a0724,
-        type: 2}
-    - target: {fileID: 114000010747135168, guid: 1fc7597b95040bc4b93a45cbf9d6a355,
-        type: 2}
-      propertyPath: m_uiprefab
-      value: 
-      objectReference: {fileID: 1000011379212736, guid: 55b65d527b3aec941a018aa2b6fbe275,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fc7597b95040bc4b93a45cbf9d6a355, type: 2}
   m_IsPrefabParent: 0
