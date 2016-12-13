@@ -67,8 +67,8 @@ public class TravellingSalesmanManager
 	//Destroy base
 	public void destroyTravellingSalesman()
 	{
-		GameObject.Destroy(m_Instance);
-		m_Instance.SetActive(false);
+		GameObject.Destroy(m_Instance.gameObject);
+//		m_Instance.SetActive(false);
 		m_Instance = null;
 	}
 		
@@ -82,12 +82,12 @@ public class TravellingSalesmanManager
 		return metPlayer;
 	}
 
-	// checks if a playr has met the Salesman
+	// checks if a playr has met the Salesman (maybe playerposition - salesmanposition - buffer)
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag("Player"))
 		{
 			metPlayer = true;
-//			destroyTravellingSalesman ();
+			destroyTravellingSalesman ();
 		}
 	}
 

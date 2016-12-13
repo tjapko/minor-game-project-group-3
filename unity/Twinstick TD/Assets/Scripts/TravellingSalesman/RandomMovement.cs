@@ -26,12 +26,28 @@ public class RandomMovement : MonoBehaviour {
 	}
 
 	private void newTarget() {
+
+		float buffer = 10.0f;
+
 		//position of the travellingSalesman:
 		float x = gameObject.transform.position.x; 
 		float z = gameObject.transform.position.z;
+
+		// floats for holding dimensions of the map (walls)
+		float x_minrange = GameObject.FindGameObjectWithTag ("Wall4").GetComponent<Transform> ().transform.position.x + buffer;
+		float x_maxrange = GameObject.FindGameObjectWithTag ("Wall2").GetComponent<Transform> ().transform.position.x - buffer;
+		float z_minrange = GameObject.FindGameObjectWithTag ("Wall1").GetComponent<Transform> ().transform.position.z + buffer;
+		float z_maxrange = GameObject.FindGameObjectWithTag ("Wall3").GetComponent<Transform> ().transform.position.z - buffer;
+
+		//position of the new target: (TOO much calculations near the walls (LAG!))
+//		do {
+//			x += Random.Range (x - rotation, x + rotation);
+//			z += Random.Range (z - rotation, z + rotation);
+//		} while(x < x_minrange || x > x_maxrange || z < z_minrange || z > z_maxrange);
+
 		//position of the new target:
-		x += Random.Range (x - rotation, x + rotation);
-		z += Random.Range (z - rotation, z + rotation);
+		x += Random.Range (x_minrange, x_maxrange);
+		z += Random.Range (z_minrange, z_maxrange);
 		//set new target
 		m_target = new Vector3(x, 0.0f, z);
 		// move the travellingSalesman to the new target
