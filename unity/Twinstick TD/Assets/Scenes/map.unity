@@ -802,7 +802,8 @@ MonoBehaviour:
   m_gridPrefab: {fileID: 1000012960333274, guid: 48024340347a2455491df3d8fa04ac92,
     type: 2}
   m_turret: {fileID: 1000012271596080, guid: fade7fc2720943e4d832fbe8c7cc8949, type: 2}
-  m_travellingSalesman: {fileID: 0}
+  m_travellingSalesman: {fileID: 1000014281497466, guid: 50b220b55171a45ada24f61cdfafe5ac,
+    type: 2}
   m_Basespawnpoint: {fileID: 2120996593}
   m_Playerspawnpoint: {fileID: 500508974}
   m_Enemyspawnpoint: {fileID: 2135807968}

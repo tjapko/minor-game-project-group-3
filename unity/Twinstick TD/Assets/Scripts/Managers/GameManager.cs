@@ -263,7 +263,7 @@ public class GameManager : MonoBehaviour
 
 	private void TravellingSalesman() {
 		// spawning of the travellingSalesman
-		if (m_waveNumber == m_travellingSalesmanManager.getWavePerTravellingSalesman()) {
+		if (m_waveNumber % m_travellingSalesmanManager.getWavePerTravellingSalesman()==0 && !m_travellingSalesmanManager.getWork()) {
 			m_travellingSalesmanManager.spawnTravellingSalesman ();
 			if (m_travellingSalesmanManager.getMetPlayer()) {
 				m_travellingSalesmanManager.destroyTravellingSalesman ();

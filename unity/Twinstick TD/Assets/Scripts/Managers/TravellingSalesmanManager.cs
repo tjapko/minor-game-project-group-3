@@ -13,7 +13,8 @@ public class TravellingSalesmanManager
 	//	private variables
 	private bool metPlayer = false;
 	private float travellingSalesmanDistancePercentage = 0.4f; // (0.5 - travellingSalesmanDistancePercentage) * x-dimension of the base 
-	private int wavePerTravellingSalesman = 0;
+	private int wavePerTravellingSalesman = 1;
+	private bool m_work = false;
 
 	//Constructor
 	public TravellingSalesmanManager (GameObject m_travellingSalesman)
@@ -61,15 +62,26 @@ public class TravellingSalesmanManager
 		m_travellingSalesmanPrefab.transform.position = RandomSpawnPosition();
 		GameObject newTravellingSalesman = GameObject.Instantiate(m_travellingSalesmanPrefab.gameObject) as GameObject;
 		m_Instance = newTravellingSalesman;
+		m_work = true; // Added Salesman 
 	
 	}
 
 	//Destroy base
 	public void destroyTravellingSalesman()
 	{
-		GameObject.Destroy(m_Instance.gameObject);
+//		GameObject.DestroyImmediate(m_Instance.gameObject);
+//		GameObject.DestroyImmediate(m_Instance.transform.root.gameObject);
+//		GameObject.DestroyImmediate(m_travellingSalesmanPrefab.gameObject);
 //		m_Instance.SetActive(false);
-		m_Instance = null;
+//		m_Instance = null;
+
+		GameObject ts = GameObject.FindGameObjectWithTag ("TravellingSalesman");
+		GameObject.Destroy (ts);
+		GameObject.DestroyImmediate (ts);
+		GameObject.DestroyObject (ts);
+		ts.SetActive(false);
+		ts = null;
+
 	}
 		
 	// getter for wavePerTravellingSalesman
@@ -82,12 +94,17 @@ public class TravellingSalesmanManager
 		return metPlayer;
 	}
 
-	// checks if a playr has met the Salesman (maybe playerposition - salesmanposition - buffer)
+	// getter for m_work
+	public bool getWork() {
+		return m_work;
+	}
+
+	// checks if a player has met the Salesman (maybe later: playerposition - salesmanposition - buffer)
 	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.CompareTag("Player"))
-		{
+		if (other.gameObject.CompareTag ("Player")) {
 			metPlayer = true;
 			destroyTravellingSalesman ();
+			m_work = false; // Salesman removed
 		}
 	}
 
