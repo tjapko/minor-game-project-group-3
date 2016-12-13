@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint, m_gridPrefab);
         m_players = new UserManager(m_Playerprefab, m_turret, m_Playerspawnpoint, m_amountofplayers);
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
+		m_gridManager = new GridManager(m_gridPrefab);
 
         //Initialize UI script
         m_uiscript = new MapUIScript(gameObject.GetComponent<GameManager>(), m_uiprefab, m_players);
@@ -264,7 +265,7 @@ public class GameManager : MonoBehaviour
 	private void TravellingSalesman() {
 		// spawning of the travellingSalesman
 		if (m_waveNumber % m_travellingSalesmanManager.getWavePerTravellingSalesman()==0 && !m_travellingSalesmanManager.getWork()) {
-			m_travellingSalesmanManager.spawnTravellingSalesman ();
+			m_travellingSalesmanManager.spawnTravellingSalesman (m_gridManager.m_grid);
 			if (m_travellingSalesmanManager.getMetPlayer()) {
 				m_travellingSalesmanManager.destroyTravellingSalesman ();
 			}

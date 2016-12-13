@@ -24,11 +24,11 @@ public class TravellingSalesmanManager
 
 	void Start () {
 //		GridManager m_gridmanager = new GridManager(m_gridprefab);
-		grid = GameObject.FindWithTag("grid").GetComponent<Grid>();
+//		grid = GameObject.FindWithTag("grid").GetComponent<Grid>();
 //		GameObject.Destroy (m_gridmanager.m_instance, 2f);
 	} 
 
-	public Vector3 RandomSpawnPosition() 
+	public Vector3 RandomSpawnPosition(Grid grid) 
 	{
 		Vector3 randomPosition;
 
@@ -50,16 +50,16 @@ public class TravellingSalesmanManager
 
 		do {
 			randomPosition = new Vector3 (UnityEngine.Random.Range (x_minrange, x_maxrange), 0f, UnityEngine.Random.Range (z_minrange, z_maxrange));
-//			walkable = !(Physics.CheckSphere(randomPosition, (grid.nodeRadius * 1.4f), grid.unwalkableMask));
+			walkable = !(Physics.CheckSphere(randomPosition, (grid.nodeRadius * 1.4f), grid.unwalkableMask));
 			distance = Vector3.Distance(Base, randomPosition);
 		} while (distance <= crit_distance || !walkable); // distance needs to be smaller than critical distance and the spawnpoint needs to be walkable
 		return randomPosition;
 	}
 
 	//Spawn base
-	public void spawnTravellingSalesman()
+	public void spawnTravellingSalesman(Grid grid)
 	{
-		m_travellingSalesmanPrefab.transform.position = RandomSpawnPosition();
+		m_travellingSalesmanPrefab.transform.position = RandomSpawnPosition(grid);
 		GameObject newTravellingSalesman = GameObject.Instantiate(m_travellingSalesmanPrefab.gameObject) as GameObject;
 		m_Instance = newTravellingSalesman;
 		m_work = true; // Added Salesman 
