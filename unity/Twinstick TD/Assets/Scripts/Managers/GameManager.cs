@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject m_Enemyprefab;            // Reference to the prefab of the enemies.
     public GameObject m_gridPrefab;             // Reference to the prefab of the grid and path
     public GameObject m_turret;                 // Reference to the turret prefab
-	public GameObject m_travellingSalesmanPrefab;     // Reference to the travelling Salesman
+	public GameObject m_travellingSalesman;     // Reference to the travelling Salesman
     public Transform m_Basespawnpoint;          // Spawnpoint of base
     public Transform m_Playerspawnpoint;        // Spawnpoint of player
     [HideInInspector]public Transform m_Enemyspawnpoint;         // Spawnpoint of enemy
@@ -50,11 +50,11 @@ public class GameManager : MonoBehaviour
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         //Initialize managers
+		m_travellingSalesmanManager = new TravellingSalesmanManager(m_travellingSalesman);
         m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint, m_gridPrefab);
         m_players = new UserManager(m_Playerprefab, m_turret, m_Playerspawnpoint, m_amountofplayers);
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
-		m_travellingSalesmanManager = new TravellingSalesmanManager(m_travellingSalesmanPrefab);
-//		m_travellingSalesmanManager.Start ();
+
         //Initialize UI script
         m_uiscript = new MapUIScript(gameObject.GetComponent<GameManager>(), m_uiprefab, m_players);
 
@@ -80,9 +80,6 @@ public class GameManager : MonoBehaviour
 
         //Update score
         m_uiscript.Update();
-
-		//Update metPlayer boolean of the travellingSalesman
-		m_travellingSalesmanManager.updateMetPlayer();
 
     }
 
@@ -140,14 +137,6 @@ public class GameManager : MonoBehaviour
         {
             wavephase = true;
 
-			// spawning of the travellingSalesman
-			if (m_waveNumber == m_travellingSalesmanManager.getWavePerTravellingSalesman()) {
-				m_travellingSalesmanManager.spawnTravellingSalesman ();
-				if (m_travellingSalesmanManager.getMetPlayer()) {
-					m_travellingSalesmanManager.destroyTravellingSalesman ();
-				}
-			}
-
             //Enemies are dead
             if (m_wave.EnemiesDead())
             {
@@ -160,6 +149,7 @@ public class GameManager : MonoBehaviour
                 while (m_wave.EnemiesDead())
                 {
                     m_wave.NextWave();
+					TravellingSalesman ();
                 }
                 m_waveNumber++;
                 Debug.Log("Current wave" + m_waveNumber);
@@ -270,5 +260,15 @@ public class GameManager : MonoBehaviour
     {
         gamepause = status;
     }
+
+	private void TravellingSalesman() {
+		// spawning of the travellingSalesman
+		if (m_waveNumber == m_travellingSalesmanManager.getWavePerTravellingSalesman()) {
+			m_travellingSalesmanManager.spawnTravellingSalesman ();
+			if (m_travellingSalesmanManager.getMetPlayer()) {
+				m_travellingSalesmanManager.destroyTravellingSalesman ();
+			}
+		}
+	}
 
 }

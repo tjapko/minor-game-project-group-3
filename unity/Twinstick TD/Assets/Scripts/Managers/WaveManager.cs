@@ -21,6 +21,7 @@ public class WaveManager
 	private int m_wavenumber;				//Total amount of waves
 	private int numberEnemiesPerWave;		//Start amount of enemies per wave
 
+
     // Use this for initialization
 	public WaveManager(GameObject Enemyprefab, Transform enemyspawnpoints, Transform target, GameObject gridprefab)
     {
@@ -101,7 +102,7 @@ public class WaveManager
             m_enemywave.Add(new EnemyManager(newinstance, m_enemyspawnpoints, m_target, enemy_number));
             enemy_number++;
         }
-
+			
     }
 
     //Remove dead enemies
