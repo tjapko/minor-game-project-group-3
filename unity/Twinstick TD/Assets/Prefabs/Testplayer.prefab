@@ -183,7 +183,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012244867938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 128.22157, y: 11.449169, z: 40.2611}
+  m_LocalPosition: {x: -0.38896763, y: -0.00000030344665, z: -2.5454953}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -369,6 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playernumber: 0
+  m_playerstartcurrency: 10000
 --- !u!114 &114000013046789916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -396,9 +397,11 @@ MonoBehaviour:
     type: 2}
   m_wallprefab: {fileID: 1000012271596080, guid: fade7fc2720943e4d832fbe8c7cc8949,
     type: 2}
-  m_turretprefab: {fileID: 1000012271596080, guid: fade7fc2720943e4d832fbe8c7cc8949,
+  m_turretprefab: {fileID: 1000013817965468, guid: 0037f108a08e3124aa89648971001aea,
     type: 2}
   m_carrotfieldprefab: {fileID: 1000013281537698, guid: c21fb4dac3cecb640bcb9c111c467a96,
+    type: 2}
+  m_mudprefab: {fileID: 1000013911877710, guid: b4c3a001e54be8748ad4a0e439f75526,
     type: 2}
   m_placedobjects: []
   m_player:
@@ -413,6 +416,7 @@ MonoBehaviour:
   m_price_wall: 10
   m_price_turret: 150
   m_price_carrot: 200
+  m_price_mud: 200
 --- !u!114 &114000013176624712
 MonoBehaviour:
   m_ObjectHideFlags: 1

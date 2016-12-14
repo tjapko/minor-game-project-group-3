@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator Startgame()
     {
         //Spawning base and users
+        m_players.resetAllPlayers();
         m_players.destroyPlayers();
         m_players.spawnPlayers();
         m_base.spawnBase();

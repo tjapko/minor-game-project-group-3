@@ -66,6 +66,7 @@ public class PlayerManager
     {
         m_Instance.transform.position = m_SpawnPoint.position;
         m_Instance.transform.rotation = m_SpawnPoint.rotation;
+        m_construction.removePlayerConstructions();
 
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
