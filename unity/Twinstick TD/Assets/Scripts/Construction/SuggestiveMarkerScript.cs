@@ -42,7 +42,6 @@ public class SuggestiveMarkerScript : MonoBehaviour {
             //Destroy marker if it's intersecting 
             if (other.gameObject.CompareTag(tag))
             {
-                Debug.Log("object has tag:" + tag);
                 destroy_object = false;
                 break;
             }

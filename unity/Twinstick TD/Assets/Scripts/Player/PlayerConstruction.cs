@@ -143,11 +143,11 @@ public class PlayerConstruction : MonoBehaviour {
                         m_player.m_stats.substractCurrency(m_price_wall);
                         break;
                     case "2":
-                        newinstance.tag = "PlayerCarrotField";
+                        newinstance.tag = "PlayerTurret";
                         m_player.m_stats.substractCurrency(m_price_turret);
                         break;
                     case "3":
-                        newinstance.tag = "PlayerTurret";
+                        newinstance.tag = "PlayerCarrotField";
                         m_player.m_stats.substractCurrency(m_price_carrot);
                         break;
                     case "4":
@@ -213,6 +213,7 @@ public class PlayerConstruction : MonoBehaviour {
         suggestedpos = pos;
     }
 
+    //Remove constructions of player
     public void removePlayerConstructions()
     {
         int n = m_placedobjects.Count;
@@ -238,6 +239,7 @@ public class PlayerConstruction : MonoBehaviour {
             {
                 continue;
             }
+
             foreach (Vector3 vector in surrounding_vector)
             {
                 Vector3 spawnpos = existing_obj.transform.position + vector;
@@ -259,6 +261,7 @@ public class PlayerConstruction : MonoBehaviour {
         return markers;
     }
 
+    //Destroy the markers
     private void destroyMarkers(List<GameObject> markers)
     {
         foreach(GameObject marker in markers)
@@ -267,6 +270,7 @@ public class PlayerConstruction : MonoBehaviour {
         }
     }
 
+    //Create vectors for the markers
     private List<Vector3> setVector(PlayerObjectType existing_object_type, PlayerObjectType new_object_type)
     {
         List<Vector3> vec = null;
@@ -301,7 +305,7 @@ public class PlayerConstruction : MonoBehaviour {
                 break;
                 //Placing a turret
             case PlayerObjectType.PlayerCarrotField:
-                amount = 2.1f;
+                amount = 2.01f;
                 //Places the marker
                 switch (new_object_type)
                 {
@@ -324,7 +328,7 @@ public class PlayerConstruction : MonoBehaviour {
                 }
                 break;
             case PlayerObjectType.PlayerTurret:
-                amount = 2.1f;
+                amount = 2.01f;
                 //Places the marker
                 switch (new_object_type)
                 {
@@ -347,7 +351,7 @@ public class PlayerConstruction : MonoBehaviour {
                 }
                 break;
             case PlayerObjectType.PlayerMud:
-                amount = 2.1f;
+                amount = 2.01f;
                 //Places the marker
                 switch (new_object_type)
                 {
@@ -374,6 +378,7 @@ public class PlayerConstruction : MonoBehaviour {
         return vec;
     }
 
+    //Diagonal markers
     private List<Vector3> markerDiagonal(float amount)
     {
         List<Vector3> ans = new List<Vector3>();
@@ -384,6 +389,7 @@ public class PlayerConstruction : MonoBehaviour {
         return ans;
     }
 
+    //Vertical markers
     private List<Vector3> markerHorizontalVertical(float amount)
     {
         List<Vector3> ans = new List<Vector3>();

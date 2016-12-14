@@ -40,7 +40,7 @@ GameObject:
   - 114: {fileID: 114000013533696280}
   - 114: {fileID: 114000011604227322}
   m_Layer: 0
-  m_Name: CarrotField
+  m_Name: ConstructionCarrotField
   m_TagString: PlayerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

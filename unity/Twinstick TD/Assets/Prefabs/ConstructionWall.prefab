@@ -39,7 +39,7 @@ GameObject:
   - 65: {fileID: 65000013431518226}
   - 114: {fileID: 114000012654645510}
   m_Layer: 9
-  m_Name: TestTurret
+  m_Name: ConstructionWall
   m_TagString: PlayerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_maxhealth: 0
-  m_object_type: 0
   m_owner:
     m_Instance: {fileID: 0}
     m_SpawnPoint: {fileID: 0}
