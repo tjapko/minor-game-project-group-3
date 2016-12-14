@@ -61,6 +61,8 @@ public class SuggestiveMarkerScript : MonoBehaviour {
         {
             //The marker is set by a PlayerWall
             case PlayerConstruction.PlayerObjectType.PlayerWall:
+                listallowedtags.Add("Player");
+                listallowedtags.Add("Enemy");
                 listallowedtags.Add("PlayerShell");
                 listallowedtags.Add("EnemyShell");
                 listallowedtags.Add("PlayerConstructionMarker");
@@ -71,18 +73,24 @@ public class SuggestiveMarkerScript : MonoBehaviour {
                 break;
             //The marker is set by a Turret
             case PlayerConstruction.PlayerObjectType.PlayerTurret:
+                listallowedtags.Add("Player");
+                listallowedtags.Add("Enemy");
                 listallowedtags.Add("PlayerShell");
                 listallowedtags.Add("EnemyShell");
                 listallowedtags.Add("PlayerConstructionMarker");
                 listallowedtags.Add("PlayerWall"); //Walls may not intersect with walls
                 break;
             case PlayerConstruction.PlayerObjectType.PlayerCarrotField:
+                listallowedtags.Add("Player");
+                listallowedtags.Add("Enemy");
                 listallowedtags.Add("PlayerShell");
                 listallowedtags.Add("EnemyShell");
                 listallowedtags.Add("PlayerConstructionMarker");
                 listallowedtags.Add("PlayerWall"); //Walls may not intersect with walls
                 break;
             case PlayerConstruction.PlayerObjectType.PlayerMud:
+                listallowedtags.Add("Player");
+                listallowedtags.Add("Enemy");
                 listallowedtags.Add("PlayerShell");
                 listallowedtags.Add("EnemyShell");
                 listallowedtags.Add("PlayerConstructionMarker");

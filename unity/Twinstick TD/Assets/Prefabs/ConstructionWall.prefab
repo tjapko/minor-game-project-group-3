@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000010353692536}
   - 33: {fileID: 33000014048544770}
   - 23: {fileID: 23000010498867398}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,8 @@ GameObject:
   - 4: {fileID: 4000013070086712}
   - 65: {fileID: 65000013431518226}
   - 114: {fileID: 114000012654645510}
-  m_Layer: 9
+  - 65: {fileID: 65000013333670152}
+  m_Layer: 10
   m_Name: ConstructionWall
   m_TagString: PlayerObject
   m_Icon: {fileID: 0}
@@ -108,6 +109,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011193258464}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65000013333670152
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012271596080}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!65 &65000013431518226
 BoxCollider:
   m_ObjectHideFlags: 1

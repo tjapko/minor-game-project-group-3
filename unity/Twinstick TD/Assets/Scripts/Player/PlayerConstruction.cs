@@ -106,7 +106,8 @@ public class PlayerConstruction : MonoBehaviour {
         GameObject newinstance = GameObject.Instantiate(prefab) as GameObject;
         UserObjectStatistics instancestats = newinstance.GetComponent<UserObjectStatistics>();
         instancestats.setOwner(m_player.m_PlayerNumber);    //Give a reference to the player
-        instancestats.setObjectType(objecttype);
+        instancestats.setObjectType(objecttype);    //Set the object type
+        newinstance.layer = 10;
 
         //Create the suggestive markers
         List<GameObject> markers = setConstructionMarker(objecttype);
@@ -134,6 +135,7 @@ public class PlayerConstruction : MonoBehaviour {
                 newinstance.GetComponent<Rigidbody>().isKinematic = true;   //Make the rigidbody kinematic, such that it's not affected by physics
                 m_placedobjects.Add(newinstance);   //Add instance to list
                 constructing = false;   //Building has finished
+                newinstance.layer = 9;
 
                 //Reduce funds and set tag
                 switch (keyinput)
@@ -305,7 +307,7 @@ public class PlayerConstruction : MonoBehaviour {
                 break;
                 //Placing a turret
             case PlayerObjectType.PlayerCarrotField:
-                amount = 2.01f;
+                amount = 2.05f;
                 //Places the marker
                 switch (new_object_type)
                 {
@@ -328,7 +330,7 @@ public class PlayerConstruction : MonoBehaviour {
                 }
                 break;
             case PlayerObjectType.PlayerTurret:
-                amount = 2.01f;
+                amount = 2.05f;
                 //Places the marker
                 switch (new_object_type)
                 {
@@ -351,7 +353,7 @@ public class PlayerConstruction : MonoBehaviour {
                 }
                 break;
             case PlayerObjectType.PlayerMud:
-                amount = 2.01f;
+                amount = 2.05f;
                 //Places the marker
                 switch (new_object_type)
                 {

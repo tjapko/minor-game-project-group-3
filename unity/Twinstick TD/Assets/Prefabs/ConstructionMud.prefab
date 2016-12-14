@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013842091060}
   - 114: {fileID: 114000013960979630}
-  - 65: {fileID: 65000013153794270}
+  - 65: {fileID: 65000010233987306}
   m_Layer: 0
   m_Name: ConstructionMud
   m_TagString: PlayerObject
@@ -108,14 +108,14 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011842935712}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65000013153794270
+--- !u!65 &65000010233987306
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013911877710}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2, y: 0.5, z: 2}
