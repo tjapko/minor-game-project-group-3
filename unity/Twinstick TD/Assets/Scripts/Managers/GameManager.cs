@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
                 while (m_wave.EnemiesDead())
                 {
                     m_wave.NextWave();
-					TravellingSalesman ();
+					TravellingSalesman (); // spawning of the TravellingSalesman
                 }
                 m_waveNumber++;
                 Debug.Log("Current wave" + m_waveNumber);
@@ -262,13 +262,12 @@ public class GameManager : MonoBehaviour
         gamepause = status;
     }
 
+	// spawning of the travellingSalesman
 	private void TravellingSalesman() {
-		// spawning of the travellingSalesman
-		if (m_waveNumber % m_travellingSalesmanManager.getWavePerTravellingSalesman()==0 && !m_travellingSalesmanManager.getWork()) {
+		// check if the Salesman needs to be spawned and not already spawned
+		if (m_waveNumber % m_travellingSalesmanManager.getWavePerTravellingSalesman()==0 &&
+			m_waveNumber != 0 && !m_travellingSalesmanManager.getWork()) {
 			m_travellingSalesmanManager.spawnTravellingSalesman (m_gridManager.m_grid);
-			if (m_travellingSalesmanManager.getMetPlayer()) {
-				m_travellingSalesmanManager.destroyTravellingSalesman ();
-			}
 		}
 	}
 

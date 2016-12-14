@@ -7,34 +7,26 @@ public class TravellingSalesmanManager
 	//public variables
 	public GameObject m_travellingSalesmanPrefab;       // Reference to the travelling Salesman
 	public GameObject m_Instance;                       // Reference to instance of salesman 
-	public GameObject m_gridprefab;                     // Reference to the gridprefab 
-	private Grid grid;									// Reference to the Grid script  
 
 	//	private variables
-	private bool metPlayer = false;
+	private bool metPlayer = false;  // if the Salesman has met the player this value is turned true
 	private float travellingSalesmanDistancePercentage = 0.4f; // (0.5 - travellingSalesmanDistancePercentage) * x-dimension of the base 
-	private int wavePerTravellingSalesman = 1;
-	private bool m_work = false;
+	private int wavePerTravellingSalesman = 1; // number of waves per Travelling Salesman
 
 	//Constructor
 	public TravellingSalesmanManager (GameObject m_travellingSalesman)
 	{
 		this.m_travellingSalesmanPrefab = m_travellingSalesman;
 	}
-
-	void Start () {
-//		GridManager m_gridmanager = new GridManager(m_gridprefab);
-//		grid = GameObject.FindWithTag("grid").GetComponent<Grid>();
-//		GameObject.Destroy (m_gridmanager.m_instance, 2f);
-	} 
-
+		
+	// Determining random spawnposition (with extra conditions) 
 	public Vector3 RandomSpawnPosition(Grid grid) 
 	{
 		Vector3 randomPosition;
 
-		float buffer = 1.0f;  	// buffer for extra space between enemies and wall maybe not needed for later (walkable will fix this)
+		float buffer = 1.0f;  	// buffer for extra space between Salesman and wall maybe not needed for later (walkable will fix this)
 		bool walkable = true;	 
-		float distance;		 	// distance between base and enemies spawnpoint 
+		float distance;		 	// distance between base and Salesman spawnpoint 
 
 		// base's spawning position
 		Vector3 Base = GameObject.FindGameObjectWithTag ("Base").GetComponent<Transform> ().transform.position;
@@ -45,7 +37,7 @@ public class TravellingSalesmanManager
 		float z_minrange = GameObject.FindGameObjectWithTag ("Wall1").GetComponent<Transform> ().transform.position.z + buffer;
 		float z_maxrange = GameObject.FindGameObjectWithTag ("Wall3").GetComponent<Transform> ().transform.position.z - buffer;
 
-		// enemies needs to be spawned at least (travellingSalesmanDistancePercentage*100)% of the x-dimenion of the base
+		// Salesman needs to be spawned at least (travellingSalesmanDistancePercentage*100)% of the x-dimenion of the base
 		float crit_distance  = travellingSalesmanDistancePercentage * (x_maxrange - x_minrange); 
 
 		do {
@@ -56,34 +48,15 @@ public class TravellingSalesmanManager
 		return randomPosition;
 	}
 
-	//Spawn base
+	//Spawn TravellingSalesman
 	public void spawnTravellingSalesman(Grid grid)
 	{
 		m_travellingSalesmanPrefab.transform.position = RandomSpawnPosition(grid);
 		GameObject newTravellingSalesman = GameObject.Instantiate(m_travellingSalesmanPrefab.gameObject) as GameObject;
 		m_Instance = newTravellingSalesman;
-		m_work = true; // Added Salesman 
-	
+		RandomMovement.setWorkToTrue(); // Added "working/selling" Salesman 
 	}
-
-	//Destroy base
-	public void destroyTravellingSalesman()
-	{
-//		GameObject.DestroyImmediate(m_Instance.gameObject);
-//		GameObject.DestroyImmediate(m_Instance.transform.root.gameObject);
-//		GameObject.DestroyImmediate(m_travellingSalesmanPrefab.gameObject);
-//		m_Instance.SetActive(false);
-//		m_Instance = null;
-
-		GameObject ts = GameObject.FindGameObjectWithTag ("TravellingSalesman");
-		GameObject.Destroy (ts);
-		GameObject.DestroyImmediate (ts);
-		GameObject.DestroyObject (ts);
-		ts.SetActive(false);
-		ts = null;
-
-	}
-		
+				
 	// getter for wavePerTravellingSalesman
 	public int getWavePerTravellingSalesman() {
 		return wavePerTravellingSalesman;
@@ -94,18 +67,9 @@ public class TravellingSalesmanManager
 		return metPlayer;
 	}
 
-	// getter for m_work
+	// getter for m_work from RandomMovement 
 	public bool getWork() {
-		return m_work;
-	}
-
-	// checks if a player has met the Salesman (maybe later: playerposition - salesmanposition - buffer)
-	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.CompareTag ("Player")) {
-			metPlayer = true;
-			destroyTravellingSalesman ();
-			m_work = false; // Salesman removed
-		}
+		return RandomMovement.getWork ();
 	}
 
 }

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Random movement old. NOT USED ANYMORE!
+/// </summary>
 public class RandomMovementOld : MonoBehaviour {
 
 	public float m_minForce = 10.0f;

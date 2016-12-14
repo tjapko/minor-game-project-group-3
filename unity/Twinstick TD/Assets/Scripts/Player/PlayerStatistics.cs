@@ -9,13 +9,14 @@ public class PlayerStatistics : MonoBehaviour {
     //Private variables
     private int m_kills;      // int which will hold the number of kills per player
     private int m_currency;  // the currency can be the amount of carrots in the base (Carrots-farm) = baseHealth
+	private int m_metSalesmanAmount;  // the amount that the player meets the Salesman
 
 
     // Use this for initialization
     void Start () {
         m_kills = 0;      // start m_kills 
         m_currency = 1;   // start m_currency
-
+		m_metSalesmanAmount = 0;  // start m_metSalesmanAmount
     }
 	
 	// Update is called once per frame
@@ -91,15 +92,35 @@ public class PlayerStatistics : MonoBehaviour {
         m_currency -= amount;
     }
 
-    // Get currency
+    // Get m_currency
     public int getCurrency()
     {
         return m_currency;
     }
 
-    // Get kills
+    // Get m_kills
     public int getkills()
     {
         return m_kills;
     }
+
+	// Get m_metSalesmanAmount
+	public int getMetSalesmanAmount()
+	{
+		return m_metSalesmanAmount;
+	}
+
+	// Set m_metSalesmanAmount
+	public void setMetSalesmanAmount()
+	{
+		m_metSalesmanAmount += 1;
+	}
+
+	// checks if a player has met the Salesman
+	void OnTriggerEnter(Collider other) { 
+		if (other.gameObject.tag == "TravellingSalesman") {
+			setMetSalesmanAmount ();
+//			Debug.Log ("met Salesman: " + m_metSalesmanAmount.ToString() +" times");
+		}
+	}
 }
