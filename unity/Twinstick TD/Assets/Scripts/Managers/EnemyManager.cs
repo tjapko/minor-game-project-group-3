@@ -14,8 +14,7 @@ public abstract class EnemyManager : MonoBehaviour
     [HideInInspector] public int m_EnemyNumber;         // Number of enemy
     [HideInInspector] public GameObject m_Instance;     // A reference to the instance of the enemy
     [HideInInspector] public UnitPlayer m_MovementPlayer;  	// Reference to enemy's movement script, used to disable and enable control.
-	[HideInInspector] public Unit m_MovementUnit;
-	[HideInInspector] public EnemyHealth health;
+	[HideInInspector] public EnemyHealth health;		//Enemie health script
 
 
     //Constructor
@@ -29,11 +28,17 @@ public abstract class EnemyManager : MonoBehaviour
     }
 
 
-    // Used during the phases of the game where the enemy shouldn't move
-	public abstract void DisableControl();
+	// Used during the phases of the game where the enemy shouldn't move
+	public void EnableControl()
+	{
+		m_Instance.GetComponent<UnitPlayer> ().enabled  = true;
+	}
 
 	// Used during the phases of the game where the enemy should be able to move
-	public abstract void EnableControl();
+	public void DisableControl()
+	{
+		m_Instance.GetComponent<UnitPlayer> ().enabled = false;
+	}
 
     // Used at the start of each round to put the enemy into the default state
     public void Reset()

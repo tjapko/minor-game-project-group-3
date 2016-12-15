@@ -8,43 +8,27 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     //Public variables
-    public float m_StartingHealth;  //Start health of enemy
-    public Slider m_Slider;                             // The slider to represent how much health the enemy currently has.
+	public float m_StartingHealth;						//Start health of enemy
+    public Slider m_Slider;                           	// The slider to represent how much health the enemy currently has.
     public Image m_FillImage;                           // The image component of the slider.
     public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
     public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
-	[HideInInspector] public UnitPlayer playerUnit;
-
+	[HideInInspector] public UnitPlayer playerUnit;		// Script UnitPlayer to access it
+	public float damageToTower;							// Damage done to tower
 	//Private variables
-    private float m_CurrentHealth;  //Current health of enemy
-	private bool m_Dead;   //Enemy is dead or not
-	[HideInInspector] public bool basehit;
+    private float m_CurrentHealth;  					//Current health of enemy
+	private bool m_Dead;  								//Enemy is dead or not
+	[HideInInspector] public bool basehit;				//Enemy has hit base or not
 
-    public void OnEnable()
+    public void Start()
     {
         // When the enemy is enabled, reset the enemy's health
         m_CurrentHealth = m_StartingHealth;
-
         // Update the health slider's value and color.
         SetHealthUI();
     }
 
- /*   //Gets called every time something hits the base and playerShell will be set inactive
-    public void OnTriggerEnter(Collider other)
-    {
-		if (GetType() == typeof(BoxCollider)){
-			boxCollider(other);
-		}else if (GetType() == typeof(SphereCollider)){
-			sphereCollider(other);
-		}
-    }
-	*/
 	public void OnTriggerEnter(Collider other){
-		if (other.gameObject.CompareTag("PlayerShell"))
-		{
-			other.gameObject.SetActive(false);
-			TakeDamage(1f);
-		}
 		//if colide with base, damage base and set enemy to inactive
 		if (other.gameObject.CompareTag("Base"))
 		{
@@ -52,15 +36,13 @@ public class EnemyHealth : MonoBehaviour
 			if (targetRigidbody)
 			{
 				Basehealth basehealth = targetRigidbody.GetComponent<Basehealth>();
-				basehealth.TakeDamage(1f);
+				basehealth.TakeDamage(damageToTower);
+				//if it has to go to player dont die, otherwise OnDeath()
 				if (playerUnit.playerFirst == false) {
 					playerUnit.goToPlayer ();
 				} else if (playerUnit.playerFirst) {
 					OnDeath ();
 				}
-				//	GetComponent<Unit>().enabled = false;
-				//	invokedit();
-
 			}
 		}
 	}
@@ -70,7 +52,6 @@ public class EnemyHealth : MonoBehaviour
     {
         // Reduce current health by the amount of damage done.
         m_CurrentHealth -= amount;
-
         // Change the UI elements appropriately.
         SetHealthUI();
 
@@ -93,6 +74,8 @@ public class EnemyHealth : MonoBehaviour
     private void OnDeath()
     {
         m_Dead = true;
+//		Destroy (playerUnit);
+//		Destroy (gameObject);
         gameObject.SetActive(false);
     }
 }

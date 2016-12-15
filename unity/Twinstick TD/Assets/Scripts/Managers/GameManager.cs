@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     public GameObject m_uiprefab;               // Reference to UI prefab
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
-//	public GameObject m_EnemyprefabToPlayer;
 	public GameObject m_Enemyprefab1;       //Reference to prefab of enemy1
 	public GameObject m_Enemyprefab2;       //Reference to prefab of enemy2
 	public GameObject m_Enemyprefab3;       //Reference to prefab of enemy3
@@ -118,7 +117,8 @@ public class GameManager : MonoBehaviour
         // Reset all players and enable control
         m_players.resetAllPlayers();
         m_players.enablePlayersControl();
-        m_wave.DestroyEnemies();
+
+        //m_wave.DestroyEnemies();
 
         //Set variables
         m_waveNumber = 0;

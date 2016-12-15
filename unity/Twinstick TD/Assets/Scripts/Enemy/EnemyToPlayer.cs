@@ -23,22 +23,4 @@ public class EnemyToPlayer : EnemyManager
 		m_MovementPlayer.playerFirst = true;
 		m_MovementPlayer.calcDistance ();
 	}
-
-	public override void EnableControl()
-	{
-		if (m_Instance.GetComponent<Unit> () == (null)) {
-			m_Instance.GetComponent<UnitPlayer> ().enabled = true;
-		} else {
-			m_Instance.GetComponent<Unit> ().enabled  = true;
-		}
-	}
-
-	public override void DisableControl()
-	{
-		if (m_Instance.GetComponent<Unit> ()  == (null)) {
-			m_Instance.GetComponent<UnitPlayer> ().enabled = true;
-		} else {
-			m_Instance.GetComponent<Unit> ().enabled = true;
-		}    
-	}
 }
