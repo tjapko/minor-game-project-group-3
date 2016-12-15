@@ -14,7 +14,11 @@ public class Item {
     //Enum of itemtype 
     public enum ItemType
     {
-        Weapon,
+        MachineGun,
+        HandGun,
+        Sniper,
+        Shotgun,
+        GrenadeLauncher,
         Consumable,
         Empty
     }

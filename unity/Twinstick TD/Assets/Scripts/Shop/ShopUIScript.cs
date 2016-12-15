@@ -18,8 +18,8 @@ public class ShopUIScript : MonoBehaviour {
     private GameObject ammoPurchaseTab;     //Reference to the Ammo purchase buttons tab
 
     //Variables
-    private List<Item> weaponlist;
-    private List<Item> ammolist;
+    private List<Weapon> weaponlist;
+    private List<Weapon> ammolist;
 
 	// Use this for initialization
 	void Start () {

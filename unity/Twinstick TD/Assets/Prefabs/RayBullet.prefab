@@ -25,10 +25,10 @@ GameObject:
   - 54: {fileID: 54000012476593726}
   - 136: {fileID: 136000013389974852}
   - 108: {fileID: 108000012667704292}
-  - 114: {fileID: 114000011854252460}
+  - 114: {fileID: 114000012278938372}
   m_Layer: 10
-  m_Name: bullet
-  m_TagString: PlayerShell
+  m_Name: RayBullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,7 +148,7 @@ Light:
   m_BounceIntensity: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114000011854252460
+--- !u!114 &114000012278938372
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -156,14 +156,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000011954050754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4da92f37a3474944bea398e251fdc5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 182763d9e657ca14e8354cbcc8e0de57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyMask:
-    serializedVersion: 2
-    m_Bits: 8193
-  m_MaxDamage: 50
-  m_MaxLifeTime: 2
+  m_MaxLifeTime: 5
+  bulletFire: {fileID: 114000014120976380, guid: 6526df5f06f78a5438cb83f5730a0724,
+    type: 2}
 --- !u!136 &136000013389974852
 CapsuleCollider:
   m_ObjectHideFlags: 1
