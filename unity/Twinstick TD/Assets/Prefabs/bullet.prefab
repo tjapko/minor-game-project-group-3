@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 8193
   m_MaxDamage: 50
   m_MaxLifeTime: 2
 --- !u!136 &136000013389974852

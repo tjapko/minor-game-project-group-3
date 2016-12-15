@@ -15,6 +15,7 @@ public class BulletFire : MonoBehaviour
     Weapon currentWeapon;
     private string m_FireButton;                // The input axis that is used for launching shells.
     PlayerInventory playerinventory;
+    private string reloadButton;
 
 
 
@@ -27,7 +28,7 @@ public class BulletFire : MonoBehaviour
         m_FireButton = "Fire" + m_PlayerNumber;
         playerinventory = GetComponent<PlayerInventory>();
         Debug.Log(enemyLayer);
-
+        reloadButton = "r"; // Reload Button   ////// NEED FIX NOT YET IMPLEMENTED 
     }
 
 
@@ -40,11 +41,20 @@ public class BulletFire : MonoBehaviour
         {
             Fire();
         }
+        if (Input.GetButtonUp(reloadButton))
+        {
+            Reload();
+        }
+
     }
 
     public void Fire()
     {
-        if (currentWeapon.itemtype == Weapon.ItemType.HandGun)
+        if(currentWeapon.ammoInClip== 0 && currentWeapon.ammo !=0)
+        {
+            Reload();
+        }
+        else if (currentWeapon.itemtype == Weapon.ItemType.HandGun)
         {
             FireHandGun();
         }
@@ -57,6 +67,28 @@ public class BulletFire : MonoBehaviour
             FireRay();
         }
     }
+
+    public void Reload()
+    {
+
+        if (currentWeapon.ammo > currentWeapon.clipSize)
+        {
+            currentWeapon.ammo -= (currentWeapon.clipSize - currentWeapon.ammoInClip);
+
+            currentWeapon.ammoInClip = currentWeapon.clipSize;
+        }
+        else
+        {
+            currentWeapon.ammoInClip = currentWeapon.ammo;
+            currentWeapon.ammo = 0;
+
+
+        }
+
+        System.Threading.Thread.Sleep( ((int)currentWeapon.reloadTime) * 1000);
+
+    }
+
 
     public void FireRay()
     {
@@ -93,8 +125,8 @@ public class BulletFire : MonoBehaviour
             // Set the shell's velocity to the launch force in the fire position's forward direction.
             shellInstance.velocity = currentWeapon.launchForce * m_FireTransform.forward;
 
-            //ammo--;
-            //ammoInClip--;
+            currentWeapon.ammo--;
+            currentWeapon.ammoInClip--;
         }
     }
 
