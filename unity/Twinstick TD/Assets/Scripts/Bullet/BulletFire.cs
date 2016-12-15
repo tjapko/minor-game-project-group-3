@@ -8,10 +8,10 @@ public class BulletFire : MonoBehaviour
 
     public int maxBulletDistance;
     public RaycastHit RayHit;
-    public int m_PlayerNumber;              // Used to identify the different players.
-    public Rigidbody m_Bullet;  // Prefab of the shell.
-    public Rigidbody m_RayBullet;  // Prefab of the Rayshell.
-    public Transform m_FireTransform;           // A child of the player where the shells are spawned.
+    public int m_PlayerNumber;      // Used to identify the different players.
+    public Rigidbody m_Bullet;      // Prefab of the shell.
+    public Rigidbody m_RayBullet;   // Prefab of the Rayshell.
+    public Transform m_FireTransform;   // A child of the player where the shells are spawned.
     public LayerMask enemyLayer;
     Weapon currentWeapon;
     private string m_FireButton;                // The input axis that is used for launching shells.
@@ -19,7 +19,7 @@ public class BulletFire : MonoBehaviour
     private string reloadButton;
 
     //Private variables
-    private bool weapon_reloading;
+    private bool weapon_reloading;      //Boolean if weapons is reloading
 
 
 
@@ -57,7 +57,7 @@ public class BulletFire : MonoBehaviour
     {
         if(currentWeapon.ammoInClip== 0 && currentWeapon.ammo !=0)
         {
-            Reload();
+            StartCoroutine(Reload());
         }
         else if (currentWeapon.itemtype == Weapon.ItemType.HandGun)
         {

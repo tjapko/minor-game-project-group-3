@@ -7,13 +7,10 @@ public class DestroyRayBullet : MonoBehaviour
     public Weapon weapon;
     public BulletFire bulletFire;
 
-
-
     void Start()
     {
         bulletFire.GetComponent<BulletFire>();
         Destroy(gameObject, m_MaxLifeTime);
-        Debug.Log(bulletFire.m_PlayerNumber);
     }
 
 
