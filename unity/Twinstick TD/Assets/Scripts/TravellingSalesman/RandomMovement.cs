@@ -10,7 +10,8 @@ public class RandomMovement : MonoBehaviour {
 	private NavMeshAgent m_nav; // used to move the travelling Salesman
 	private Vector3 m_target;   // the new target of the travelling Salesman
 	private static bool m_work = false; // bool m_work checks if the Salesman has sold something
-
+	private float m_lifetime = 5; 
+	private float m_timer2;
 
 	void Start () {
 		m_timer = 0.0f; // restart m_timer
@@ -19,10 +20,15 @@ public class RandomMovement : MonoBehaviour {
 
 	void FixedUpdate () {
 		m_timer += Time.deltaTime;  // the m_timer is updated 
+		m_timer2 += Time.deltaTime;  // the m_timer is updated 
 		if (m_timer >= m_changeDirTimeInterval) { // check interval 
 			newTarget (); // set new target of the travellingSalesman
 			m_timer = 0.0f;	// reset the m_timer
 		}
+		if (m_timer2 > m_lifetime) {
+			destroyTravellingSalesman ();
+		}
+
 	}
 
 	private void newTarget() {
