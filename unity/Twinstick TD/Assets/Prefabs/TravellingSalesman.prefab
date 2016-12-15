@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014281497466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 65.8125, y: 0, z: 35.293694}
+  m_LocalPosition: {x: -66.5363, y: 0, z: 67.346725}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -161,7 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83117126b5b4347b387bf37a399976b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_changeDirTimeInterval: 2
+  m_changeDirTimeInterval: 3
+  m_lifetime: 30
 --- !u!195 &195000013400610850
 NavMeshAgent:
   m_ObjectHideFlags: 1

@@ -5,12 +5,12 @@ public class RandomMovement : MonoBehaviour {
 
 	// public variables
 	public int m_changeDirTimeInterval = 2; // interval in which the direction (of walking) is keeped fixed
+	public int m_lifetime = 30;
 	// private variables
 	private float m_timer; // variable to check if the travelling Salesman has to change it's direction 
 	private NavMeshAgent m_nav; // used to move the travelling Salesman
 	private Vector3 m_target;   // the new target of the travelling Salesman
-	private static bool m_work = false; // bool m_work checks if the Salesman has sold something
-	private float m_lifetime = 5; 
+	private static bool m_work = false; // bool m_work checks if the Salesman has sold something 
 	private float m_timer2;
 
 	void Start () {
@@ -25,7 +25,8 @@ public class RandomMovement : MonoBehaviour {
 			newTarget (); // set new target of the travellingSalesman
 			m_timer = 0.0f;	// reset the m_timer
 		}
-		if (m_timer2 > m_lifetime) {
+		if (m_timer2 > m_lifetime || !GameManager.getWavephase()) {
+			setWorkToFalse (); // Salesman removed (is not selling anymore)
 			destroyTravellingSalesman ();
 		}
 

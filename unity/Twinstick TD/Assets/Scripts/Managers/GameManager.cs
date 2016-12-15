@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     private int m_waveNumber;                   // Which wave the game is currently on.
     private bool gameover;                      // Boolean if game is over
     private bool gamepause;                     // Boolean if game is paused
-    private bool wavephase;                     // Boolean if game is in wavephase or construction phase 
+    private static bool wavephase;                     // Boolean if game is in wavephase or construction phase 
 
     //Start
     private void Start()
@@ -269,6 +269,11 @@ public class GameManager : MonoBehaviour
 			!m_travellingSalesmanManager.getWork()) {
 			m_travellingSalesmanManager.spawnTravellingSalesman (m_gridManager.m_grid);
 		}
+	}
+
+	// getter for wavephase
+	public static bool getWavephase() {
+		return wavephase;
 	}
 
 }
