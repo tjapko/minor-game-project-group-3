@@ -595,6 +595,11 @@ Prefab:
       propertyPath: m_CameraControl
       value: 
       objectReference: {fileID: 922648188}
+    - target: {fileID: 114000010747135168, guid: 1fc7597b95040bc4b93a45cbf9d6a355,
+        type: 2}
+      propertyPath: m_waveDelay
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fc7597b95040bc4b93a45cbf9d6a355, type: 2}
   m_IsPrefabParent: 0

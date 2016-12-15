@@ -558,11 +558,12 @@ MonoBehaviour:
   m_RayBullet: {fileID: 54000012476593726, guid: 0261b5d85b6ae8747bfa627544ea2578,
     type: 2}
   m_FireTransform: {fileID: 4000013980911784}
-  m_FireTransformSG: {fileID: 0}
-  m_FireTransformSG2: {fileID: 0}
+  m_FireTransformSG: {fileID: 4000013692484732}
+  m_FireTransformSG2: {fileID: 4000011702620350}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
+  hitpos: {x: 0, y: 0, z: 0}
 --- !u!222 &222000010215713142
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -1,39 +1,40 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// The script that contains firing your weapon.
+/// </summary>
 public class BulletFire : MonoBehaviour
 {
 
 
-    public int maxBulletDistance;
-    public RaycastHit RayHit;
+    public float maxBulletDistance;         // maximum bulletdistance (applied in Raycast shooting, the length of the ray)
+    public RaycastHit RayHit;               // contains the information of the Raycast Hit
     public int m_PlayerNumber;              // Used to identify the different players.
-    public Rigidbody m_Bullet;  // Prefab of the shell.
-    public Rigidbody m_RayBullet;  // Prefab of the Rayshell.
-    public Transform m_FireTransform;           // A child of the player where the shells are spawned.
-    public Transform m_FireTransformSG;
-    public Transform m_FireTransformSG2;
-    public LayerMask enemyLayer;
-    Weapon currentWeapon;
-    private string m_FireButton;                // The input axis that is used for launching shells.
-    PlayerInventory playerinventory;
-    private string reloadButton;
+    public Rigidbody m_Bullet;              // Prefab of the shell.
+    public Rigidbody m_RayBullet;           // Prefab of the Rayshell.
+    public Transform m_FireTransform;       // A child of the player where the shells are spawned.
+    public Transform m_FireTransformSG;     // second transform for the Shotgun (only difference is the rotation)
+    public Transform m_FireTransformSG2;    // third transform for the Shotgun (only difference is the rotation) 
+    Weapon currentWeapon;                   // the current weapon the player is holding
+    private string m_FireButton;            // The input axis that is used for launching shells.
+    PlayerInventory playerinventory;        // The playerinventory of this player
+    private string reloadButton;            // The reloadButton set on the 'r' button
+    
 
-
-
+    /// <summary>
+    ///  initiating the fire and reload button and retrieving the related inventory 
+    /// </summary>
     private void Start()
-    {
-
-
-        // The fire axis is based on the player number.
-        enemyLayer = LayerMask.GetMask("enemy");
+    {       
         m_FireButton = "Fire" + m_PlayerNumber;
         playerinventory = GetComponent<PlayerInventory>();
-        Debug.Log(enemyLayer);
-        reloadButton = "r"; // Reload Button   ////// NEED FIX NOT YET IMPLEMENTED 
+        reloadButton = "r";    
     }
 
 
+    /// <summary>
+    ///  checking every updateFrame if the fire or reload button is pressed  
+    /// </summary>
     private void Update()
     {
 
@@ -43,20 +44,22 @@ public class BulletFire : MonoBehaviour
         {
             Fire();
         }
-        if (Input.GetKeyDown(reloadButton))
+        if (Input.GetKeyUp(reloadButton))
         {
             Reload();
         }
 
     }
 
+
+    /// <summary>
+    /// invokes the right firemethod for the currentweapon when this method is called.
+    /// More weapons must be implemented manually 
+    /// </summary>
     public void Fire()
     {
-        if(currentWeapon.ammoInClip== 0 && currentWeapon.ammo !=0)
-        {
-            Reload();
-        }
-        else if (currentWeapon.itemtype == Weapon.ItemType.HandGun)
+        
+        if (currentWeapon.itemtype == Weapon.ItemType.HandGun)
         {
             FireHandGun();
         }
@@ -68,8 +71,16 @@ public class BulletFire : MonoBehaviour
         {
             FireRay();
         }
+        if(currentWeapon.ammoInClip== 0 && currentWeapon.ammo !=0)
+        {
+             Reload();
+        }
     }
 
+
+    /// <summary>
+    /// Reloading the weapon.
+    /// </summary>
     public void Reload()
     {
 
@@ -86,12 +97,13 @@ public class BulletFire : MonoBehaviour
 
 
         }
-
-        System.Threading.Thread.Sleep( ((int)currentWeapon.reloadTime) * 1000);
-
     }
 
 
+    /// <summary>
+    /// Fire the weapon from the raycast principle.
+    /// cast a ray. When it hits an enemy , deal damage. 
+    /// </summary>
     public void FireRay()
     {
         if (currentWeapon.hasAmmo()) {
@@ -99,25 +111,40 @@ public class BulletFire : MonoBehaviour
                      GameObject.Instantiate(m_RayBullet, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
 
             // Set the shell's velocity to the launch force in the fire position's forward direction.
-            shellInstance.velocity = currentWeapon.launchForce * m_FireTransform.forward;
-
+           // shellInstance.velocity = currentWeapon.launchForce * m_FireTransform.forward;
+            DestroyRayBullet bullet = shellInstance.GetComponent<DestroyRayBullet>();
 
             currentWeapon.ammoInClip--;
 
-            Debug.DrawRay(m_FireTransform.position, transform.forward * 20, Color.green, 5f);
+           
             if (Physics.Raycast(m_FireTransform.position, transform.forward, out RayHit, maxBulletDistance))
             {
 
+                
+                bullet.hit = true;
+
+
+                bullet.timeToTarget = RayHit.distance / currentWeapon.launchForce;
+                bullet.endPos = RayHit.point;
+               
                 float damage = currentWeapon.maxDamage;
                 if (RayHit.collider.CompareTag("Enemy"))
                 {
                     RayHit.transform.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
                 }
             }
+            else
+            {
+                shellInstance.velocity = currentWeapon.launchForce * m_FireTransform.forward;
+            }
         }
     }
 
 
+    /// <summary>
+    /// Firing the weapon from the Handgun principle (default).
+    /// Launching a single bullet, when it hits an enemy the bullet deals damage.
+    /// </summary>
     public void FireHandGun()
     {
         if (currentWeapon.hasAmmo())
@@ -135,6 +162,11 @@ public class BulletFire : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Firing the weapon from the Shotgun principle.
+    /// launching 3 bullets with each a different rotation. 
+    /// </summary>
     public void FireSG()
     {
 
@@ -148,9 +180,6 @@ public class BulletFire : MonoBehaviour
                GameObject.Instantiate(m_Bullet, m_FireTransformSG.position, m_FireTransformSG.rotation) as Rigidbody;
             Rigidbody shellInstance3 =
                GameObject.Instantiate(m_Bullet, m_FireTransformSG2.position, m_FireTransformSG2.rotation) as Rigidbody;
-
-            Debug.DrawRay(m_FireTransform.position, m_FireTransformSG.forward * 20, Color.red, 5f);
-            Debug.DrawRay(m_FireTransform.position, m_FireTransformSG2.forward * 20, Color.cyan, 5f);
 
 
             // Set the shell's velocity to the launch force in the fire position's forward direction.

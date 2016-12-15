@@ -162,6 +162,10 @@ MonoBehaviour:
   m_MaxLifeTime: 5
   bulletFire: {fileID: 114000014120976380, guid: 6526df5f06f78a5438cb83f5730a0724,
     type: 2}
+  endPos: {x: 0, y: 0, z: 0}
+  timeToTarget: 10
+  StartPos: {x: 0, y: 0, z: 0}
+  hit: 0
 --- !u!136 &136000013389974852
 CapsuleCollider:
   m_ObjectHideFlags: 1
