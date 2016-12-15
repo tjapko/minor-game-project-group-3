@@ -33,7 +33,6 @@ public class DestroyRayBullet : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     { 
-
         // Destroy the shell.
         Destroy(gameObject);
     }

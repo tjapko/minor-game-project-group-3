@@ -113,7 +113,16 @@ public class BulletFire : MonoBehaviour
             {
 
                 float damage = currentWeapon.maxDamage;
-                RayHit.transform.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+                GameObject enemy = RayHit.transform.gameObject;
+                if (enemy.activeSelf)
+                {
+                    EnemyHealth healthscript = enemy.GetComponent<EnemyHealth>();
+                    if (healthscript != null)
+                    {
+                        healthscript.setLastHit(m_PlayerNumber);
+                        RayHit.transform.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+                    }
+                }
             }
         }
         
@@ -128,6 +137,7 @@ public class BulletFire : MonoBehaviour
             // Create an instance of the shell and store a reference to it's rigidbody.
             Rigidbody shellInstance =
                 GameObject.Instantiate(m_Bullet, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
+            shellInstance.gameObject.GetComponent<BulletExplosion>().setPlayernumber(m_PlayerNumber);
             shellInstance.transform.Rotate(0f, 90f, 0);
             
             // Set the shell's velocity to the launch force in the fire position's forward direction.
@@ -144,10 +154,13 @@ public class BulletFire : MonoBehaviour
         {
             Rigidbody shellInstance1 =
                GameObject.Instantiate(m_Bullet, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
+            shellInstance1.gameObject.GetComponent<BulletExplosion>().setPlayernumber(m_PlayerNumber);
             Rigidbody shellInstance2 =
                GameObject.Instantiate(m_Bullet, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
+            shellInstance2.gameObject.GetComponent<BulletExplosion>().setPlayernumber(m_PlayerNumber);
             Rigidbody shellInstance3 =
                GameObject.Instantiate(m_Bullet, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
+            shellInstance3.gameObject.GetComponent<BulletExplosion>().setPlayernumber(m_PlayerNumber);
 
             shellInstance2.transform.Rotate(0, 90f, 0);
             shellInstance3.transform.Rotate(0, -90f, 0);
