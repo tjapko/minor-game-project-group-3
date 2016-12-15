@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Class enemy manager
 /// </summary>
-[Serializable]
+//[Serializable]
 public abstract class EnemyManager : MonoBehaviour
 {
     //Public variables
@@ -17,6 +17,7 @@ public abstract class EnemyManager : MonoBehaviour
 	[HideInInspector] public Unit m_MovementUnit;
 	[HideInInspector] public EnemyHealth health;
 
+
     //Constructor
 	public EnemyManager(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playertarget, int number)
     {
@@ -27,27 +28,12 @@ public abstract class EnemyManager : MonoBehaviour
 		this.health = m_Instance.GetComponent<EnemyHealth> ();
     }
 
-	void FixedUpdate(){
-		if (health.basehit) {
-			movementSwitch ();
-		}
-	}
-
-	public abstract void movementSwitch ();
 
     // Used during the phases of the game where the enemy shouldn't move
-    public void DisableControl()
-    {
-        m_MovementUnit.enabled = false;
-    }
+	public abstract void DisableControl();
 
-
-    // Used during the phases of the game where the enemy should be able to move
-    public void EnableControl()
-    {
-        m_MovementUnit.enabled = true;
-    }
-
+	// Used during the phases of the game where the enemy should be able to move
+	public abstract void EnableControl();
 
     // Used at the start of each round to put the enemy into the default state
     public void Reset()

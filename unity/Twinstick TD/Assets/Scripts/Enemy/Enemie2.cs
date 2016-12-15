@@ -3,11 +3,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEditor.VersionControl;
 
-public class EnemyToPlayer : EnemyManager
+public class Enemie2 : EnemyManager
 {
 	public GameObject enemyPrefab;
 
-	public EnemyToPlayer (GameObject instance, Transform spawnpoint, Transform basetarget, Transform playerpoint, int number) : base(instance, spawnpoint, basetarget, playerpoint, number)
+	public Enemie2 (GameObject instance, Transform spawnpoint, Transform basetarget, Transform playerpoint, int number) : base(instance, spawnpoint, basetarget, playerpoint, number)
 	{
 		this.m_SpawnPoint = spawnpoint;
 		this.m_BasePoint = basetarget;
@@ -21,24 +21,16 @@ public class EnemyToPlayer : EnemyManager
 		m_MovementPlayer.m_player = m_PlayerPoint;
 		m_MovementPlayer.m_base = m_BasePoint;
 		m_MovementPlayer.playerFirst = true;
-		m_MovementPlayer.calcDistance ();
+		m_MovementPlayer.goToPlayer ();
 	}
 
 	public override void EnableControl()
 	{
-		if (m_Instance.GetComponent<Unit> () == (null)) {
-			m_Instance.GetComponent<UnitPlayer> ().enabled = true;
-		} else {
-			m_Instance.GetComponent<Unit> ().enabled  = true;
-		}
+		m_Instance.GetComponent<UnitPlayer> ().enabled  = true;
 	}
 
 	public override void DisableControl()
 	{
-		if (m_Instance.GetComponent<Unit> ()  == (null)) {
-			m_Instance.GetComponent<UnitPlayer> ().enabled = true;
-		} else {
-			m_Instance.GetComponent<Unit> ().enabled = true;
-		}    
+		m_Instance.GetComponent<UnitPlayer> ().enabled = true;
 	}
 }

@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour
     public Image m_FillImage;                           // The image component of the slider.
     public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
     public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
+	[HideInInspector] public UnitPlayer playerUnit;
 
 	//Private variables
     private float m_CurrentHealth;  //Current health of enemy
@@ -28,35 +29,42 @@ public class EnemyHealth : MonoBehaviour
         SetHealthUI();
     }
 
-    //Gets called every time something hits the base and playerShell will be set inactive
+ /*   //Gets called every time something hits the base and playerShell will be set inactive
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("PlayerShell"))
-        {
-            other.gameObject.SetActive(false);
-            TakeDamage(1f);
-        }
-        //if colide with base, damage base and set enemy to inactive
-        if (other.gameObject.CompareTag("Base"))
-        {
-            Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
-            if (targetRigidbody)
-            {
-                Basehealth basehealth = targetRigidbody.GetComponent<Basehealth>();
-                basehealth.TakeDamage(1f);
-			//	GetComponent<Unit>().enabled = false;
-			//	invokedit();
-
-            }
-        }
+		if (GetType() == typeof(BoxCollider)){
+			boxCollider(other);
+		}else if (GetType() == typeof(SphereCollider)){
+			sphereCollider(other);
+		}
     }
-	/*
-	public void invokedit(){
-		UnitPlayer m_movement_player = GetComponent<UnitPlayer> ();
-		m_movement_player.player = m_playerPoint;
-		m_movement_player.Start ();
-	}
 	*/
+	public void OnTriggerEnter(Collider other){
+		if (other.gameObject.CompareTag("PlayerShell"))
+		{
+			other.gameObject.SetActive(false);
+			TakeDamage(1f);
+		}
+		//if colide with base, damage base and set enemy to inactive
+		if (other.gameObject.CompareTag("Base"))
+		{
+			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
+			if (targetRigidbody)
+			{
+				Basehealth basehealth = targetRigidbody.GetComponent<Basehealth>();
+				basehealth.TakeDamage(1f);
+				if (playerUnit.playerFirst == false) {
+					playerUnit.goToPlayer ();
+				} else if (playerUnit.playerFirst) {
+					OnDeath ();
+				}
+				//	GetComponent<Unit>().enabled = false;
+				//	invokedit();
+
+			}
+		}
+	}
+
     //Take damage
     public void TakeDamage(float amount)
     {

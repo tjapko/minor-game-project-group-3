@@ -38,7 +38,6 @@ GameObject:
   - 4: {fileID: 4000012460266978}
   - 54: {fileID: 54000012032478890}
   - 114: {fileID: 114000013117289992}
-  - 65: {fileID: 65000010924272000}
   - 65: {fileID: 65000012455177746}
   m_Layer: 12
   m_Name: BaseObject
@@ -226,18 +225,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &65000010924272000
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011563660048}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.5, y: 2, z: 1.25}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!65 &65000012455177746
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -325,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8b16943c2a36143a2c727a7b67ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartingHealth: 5100
+  m_StartingHealth: 1006
   m_maxhealth: 10000
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}

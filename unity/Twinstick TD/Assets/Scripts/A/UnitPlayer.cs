@@ -6,23 +6,59 @@ using System.Collections;
 /// </summary>
 public class UnitPlayer : MonoBehaviour {
 
-	[HideInInspector] public Transform m_player;   // the target 
-	[HideInInspector] public float speed; // moving speed
+	[HideInInspector] public Transform m_base;   // the target 
+	[HideInInspector] public Transform m_player;
+	[HideInInspector] public float speed = 5f; // moving speed
+	[HideInInspector] public bool playerFirst;
+	public bool baseHit = false;
+
+	private float distanceToPlayer;
 	Vector3[] path; // The walkable path
 	int targetIndex;// The index of the waypointArray. The unit moves to path[targetIndex]  
 
 	/// <summary>
 	/// on Start, requesting a path
 	/// </summary>
-	public void StartIn() {
+/*	public void StartIn() {
 		speed = 5f;
-		InvokeRepeating ("Starten", 0.05f, 1f);
+		baseHit = false;
 	}
+*/
+	public void calcDistance(){
+		float distToPlayer = Vector3.Distance (transform.position, m_player.position);
+		float distToBase = Vector3.Distance (transform.position, m_base.position);
+		if (distToBase <= distToPlayer) {
+			goToBase ();
+			playerFirst = false;
+		} else {
+			goToPlayer ();
+			playerFirst = true;
+		}
+	}
+
+	public void goToPlayer(){
+		InvokeRepeating ("Starten", 0f, 1f);
+	}
+
+	public void goToBase(){
+		PathRequestManager.RequestPath (transform.position, m_base.position, OnPathFound);
+	}
+
+
 
 	public void Starten(){
 		path = null;
 		targetIndex = 0;
 		PathRequestManager.RequestPath (transform.position, m_player.position, OnPathFound);
+		if (playerFirst && Vector3.Distance (transform.position, m_player.position) <= 8f) {
+			InvokeCancel ();
+		}
+	}
+
+	public void InvokeCancel(){
+		Debug.Log ("Invokecancel");
+		CancelInvoke ();
+		PathRequestManager.RequestPath (transform.position, m_base.position, OnPathFound);
 	}
 
 	/// <summary>
@@ -38,6 +74,7 @@ public class UnitPlayer : MonoBehaviour {
 			StartCoroutine("FollowPath");
 		}
 	}
+
 	/// <summary>
 	/// a coroutine for walking over the path that is given 
 	/// </summary>

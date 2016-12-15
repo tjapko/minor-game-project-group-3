@@ -136,7 +136,16 @@ public class WaveManager
 	private void InstatiateEnemy (GameObject Enemyprefab, bool boss) {
 		m_enemyspawnpoints.position = RandomSpawnPosition (boss);
 		GameObject newinstance = GameObject.Instantiate (Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
-		m_enemywave.Add (new EnemyToPlayer(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+
+		if (Enemyprefab.Equals (m_Enemyprefab1)) {
+			m_enemywave.Add (new Enemie1 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+		} else if (Enemyprefab.Equals (m_Enemyprefab2)) {
+			m_enemywave.Add (new Enemie2 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+		} else if (Enemyprefab.Equals (m_Enemyprefab3)) {
+			m_enemywave.Add (new Enemie3 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+		} else if (boss) {
+			m_enemywave.Add (new Enemie4 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+		}
         enemy_number++;
 	}
 
@@ -171,7 +180,7 @@ public class WaveManager
     //Remove dead enemies
     public void DestroyEnemies()
     {
-        int n = m_enemywave.Count;
+		int n = m_enemywave.Count;
         for (int i = 0; i < n; i++)
         {
             GameObject.Destroy(m_enemywave[0].m_Instance);
