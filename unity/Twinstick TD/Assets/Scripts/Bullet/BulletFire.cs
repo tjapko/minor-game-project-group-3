@@ -31,7 +31,6 @@ public class BulletFire : MonoBehaviour
         enemyLayer = LayerMask.GetMask("enemy");
         m_FireButton = "Fire" + m_PlayerNumber;
         playerinventory = GetComponent<PlayerInventory>();
-        Debug.Log(enemyLayer);
         reloadButton = "r"; // Reload Button   ////// NEED FIX NOT YET IMPLEMENTED 
 
         weapon_reloading = false; //Set weapon reloading to false

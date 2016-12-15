@@ -17,13 +17,6 @@ public class SuggestiveMarkerScript : MonoBehaviour {
     //Object is intersecting with the to be placed object
     public void OnTriggerEnter(Collider other)
     {
-        //Check if player is trying to access the marker
-        if (other.gameObject.CompareTag("PlayerObject"))
-        {
-            //Set the suggested location
-            PlayerManager player = other.gameObject.GetComponent<UserObjectStatistics>().m_owner;
-            player.m_Instance.GetComponent<PlayerConstruction>().setSuggestedPosition(m_position);
-        }
 
         //Check if marker is intersecting with existing object
         if(other.GetComponent<Rigidbody>() != null)
