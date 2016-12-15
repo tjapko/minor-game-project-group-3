@@ -89,7 +89,7 @@ NavMeshSettings:
     minRegionArea: 2
     cellSize: 0.16666667
     manualCellSize: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: e5b3b52fba16e4e7cb82c0a3764860b7, type: 2}
 --- !u!1 &116444448
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +581,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013923057834, guid: bc74c621dd416704288cabee4879cf8b, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bc74c621dd416704288cabee4879cf8b, type: 2}
   m_IsPrefabParent: 0
@@ -798,6 +802,8 @@ MonoBehaviour:
   m_gridPrefab: {fileID: 1000012960333274, guid: 48024340347a2455491df3d8fa04ac92,
     type: 2}
   m_turret: {fileID: 1000012271596080, guid: fade7fc2720943e4d832fbe8c7cc8949, type: 2}
+  m_travellingSalesman: {fileID: 1000014281497466, guid: 50b220b55171a45ada24f61cdfafe5ac,
+    type: 2}
   m_Basespawnpoint: {fileID: 2120996593}
   m_Playerspawnpoint: {fileID: 500508974}
   m_Enemyspawnpoint: {fileID: 2135807968}

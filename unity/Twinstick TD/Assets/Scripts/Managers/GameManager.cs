@@ -22,10 +22,11 @@ public class GameManager : MonoBehaviour
     public GameObject m_Enemyprefab;            // Reference to the prefab of the enemies.
     public GameObject m_gridPrefab;             // Reference to the prefab of the grid and path
     public GameObject m_turret;                 // Reference to the turret prefab
+	public GameObject m_travellingSalesman;     // Reference to the travelling Salesman
     public Transform m_Basespawnpoint;          // Spawnpoint of base
     public Transform m_Playerspawnpoint;        // Spawnpoint of player
     [HideInInspector]public Transform m_Enemyspawnpoint;         // Spawnpoint of enemy
-
+	public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
 
     //Private variables
     private MapUIScript m_uiscript;             // The UI script
@@ -33,13 +34,13 @@ public class GameManager : MonoBehaviour
     private UserManager m_players;              // A collection of managers for enabling and disabling different aspects of the players.
     private WaveManager m_wave;                 // A collection of managers for enabling and disabling different aspects of the enemies.
     private GridManager m_gridManager;          // Script gridmanager
-    public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
+	private TravellingSalesmanManager m_travellingSalesmanManager;     // The manager of the travelling Salesman 
     private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
     private int m_waveNumber;                   // Which wave the game is currently on.
     private bool gameover;                      // Boolean if game is over
     private bool gamepause;                     // Boolean if game is paused
-    private bool wavephase;                     // Boolean if game is in wavephase or construction phase 
+    private static bool wavephase;                     // Boolean if game is in wavephase or construction phase 
 
     //Start
     private void Start()
@@ -49,9 +50,11 @@ public class GameManager : MonoBehaviour
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         //Initialize managers
+		m_travellingSalesmanManager = new TravellingSalesmanManager(m_travellingSalesman);
         m_wave = new WaveManager(m_Enemyprefab, m_Enemyspawnpoint, m_Basespawnpoint, m_gridPrefab);
         m_players = new UserManager(m_Playerprefab, m_turret, m_Playerspawnpoint, m_amountofplayers);
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
+		m_gridManager = new GridManager(m_gridPrefab);
 
         //Initialize UI script
         m_uiscript = new MapUIScript(gameObject.GetComponent<GameManager>(), m_uiprefab, m_players);
@@ -149,9 +152,10 @@ public class GameManager : MonoBehaviour
                     m_wave.NextWave();
                 }
                 m_waveNumber++;
+				TravellingSalesman (); // spawning of the TravellingSalesman
                 Debug.Log("Current wave" + m_waveNumber);
             }
-
+				
             // Return next frame without delay
             yield return null;
         }
@@ -257,5 +261,19 @@ public class GameManager : MonoBehaviour
     {
         gamepause = status;
     }
+
+	// spawning of the travellingSalesman
+	private void TravellingSalesman() {
+		// check if the Salesman needs to be spawned and not already spawned
+		if (m_waveNumber % m_travellingSalesmanManager.getWavePerTravellingSalesman()==0 &&
+			!m_travellingSalesmanManager.getWork()) {
+			m_travellingSalesmanManager.spawnTravellingSalesman (m_gridManager.m_grid);
+		}
+	}
+
+	// getter for wavephase
+	public static bool getWavephase() {
+		return wavephase;
+	}
 
 }

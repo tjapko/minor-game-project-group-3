@@ -7,11 +7,12 @@ public class PlayerMovement : MonoBehaviour {
 	[HideInInspector]public int m_PlayerNumber = 1; //Used to identify differnt players. Needs to be updated automatically when multiplayed-mode
 	[HideInInspector]public PlayerManager player;
 	[HideInInspector]public Vector3 mouseposition;
-	public float m_MovementSpeed = 15f;
+	public float m_MovementSpeed = 10f;
 	[HideInInspector]public bool useController;
 	[HideInInspector]public bool windowsAndXBOX; 
 	public bool macAndXBOX;
-	// private variables 
+	[HideInInspector]public int m_PlayerNumber = 1; // not used yet; can be used to identify the different players (later), each players needs different controls!
+
 	private Rigidbody m_playerRigidbody;
 	private float m_MovementInputValueV;
 	private float m_MovementInputValueH;

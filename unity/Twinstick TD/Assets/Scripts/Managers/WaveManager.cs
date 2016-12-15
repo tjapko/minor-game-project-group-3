@@ -20,7 +20,8 @@ public class WaveManager
     private List<EnemyManager> m_enemywave; //Population of enemies
     private int enemy_number;               //Total amount of enemies spawned
 	private int m_wavenumber;				//Total amount of waves
-		
+	private int numberEnemiesPerWave;		//Start amount of enemies per wave
+
     // Use this for initialization
 	public WaveManager(GameObject Enemyprefab, Transform enemyspawnpoints, Transform target, GameObject gridprefab)
     {
@@ -69,7 +70,7 @@ public class WaveManager
 		Vector3 randomPosition;
 
 		float buffer = 1.0f;  	// buffer for extra space between enemies and wall maybe not needed for later (walkable will fix this)
-		bool walkable = true;	// needs to be implmented! 
+		bool walkable;
 		float distance;		 	// distance between base and enemies spawnpoint 
 
 		// base's spawning position
@@ -101,7 +102,7 @@ public class WaveManager
             m_enemywave.Add(new EnemyManager(newinstance, m_enemyspawnpoints, m_target, enemy_number));
             enemy_number++;
         }
-
+			
     }
 
     //Remove dead enemies
