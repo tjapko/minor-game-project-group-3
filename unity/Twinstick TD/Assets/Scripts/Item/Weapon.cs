@@ -15,18 +15,14 @@ public class Weapon : Item {
     public float reloadTime;
     public int ammo;
     public int ammoInClip;
-    Transform bullet;
-    Rigidbody m_Bullet;
     // weapon(name , id , description , iconname , itemtype, price , fireratef , launchforcef , maxDamagef, reloadTimef,clipsize ,  ammo , ammoInClip, bullet , m_bullet)
-    public Weapon(string name, int id, string description, string iconname,  int price,ItemType type, float _fireRate, float _launchForce, float _maxDamage, float _reloadTime, int _clipSize, int _ammo, int _ammoInClip, Transform _bullet, Rigidbody _m_Bullet) : base(name, id, description, iconname, price, type)
+    public Weapon(string name, int id, string description, string iconname,  int price,ItemType type, float _fireRate, float _launchForce, float _maxDamage, float _reloadTime, int _clipSize, int _ammo, int _ammoInClip) : base(name, id, description, iconname, price, type)
     {
         fireRate = _fireRate;
         launchForce = _launchForce;
         maxDamage = _maxDamage;
         clipSize = _clipSize;
         ammo = _ammo;
-        bullet = _bullet;
-        m_Bullet = _m_Bullet;
         ammoInClip = _ammoInClip;
         reloadTime = _reloadTime;
     }

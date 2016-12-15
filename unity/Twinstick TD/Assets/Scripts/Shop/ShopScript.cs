@@ -58,9 +58,9 @@ public class ShopScript : MonoBehaviour {
         showUI = false;
 
         //For testing
-        Weapon weapon1 = new Weapon("Default Weapon 1", 1, "Default weapon!", "Weapon1", 100, Weapon.ItemType.HandGun , 15f ,20f, 35f,1f, 8, 40, 8, m_FireTransform , m_Bullet );
-        Weapon weapon2 = new Weapon("Default Weapon 2", 2, "Default weapon!", "Weapon2", 1001, Weapon.ItemType.Shotgun , 1f, 30f, 25f, 3f, 10, 50, 10, m_FireTransform, m_Bullet);
-        Weapon weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 100, Weapon.ItemType.Sniper, 0.75f, 100f, 100f, 2f, 5, 40, 5, m_FireTransform, m_RayBullet);
+        Weapon weapon1 = new Weapon("Default Weapon 1", 1, "Default weapon!", "Weapon1", 100, Weapon.ItemType.HandGun , 15f ,20f, 35f,1f, 8, 40, 8);
+        Weapon weapon2 = new Weapon("Default Weapon 2", 2, "Default weapon!", "Weapon2", 1001, Weapon.ItemType.Shotgun , 1f, 30f, 25f, 3f, 10, 50, 10);
+        Weapon weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 100, Weapon.ItemType.Sniper, 0.75f, 100f, 100f, 2f, 5, 40, 5);
         addWeapon(weapon1);
         addWeapon(weapon2);
         //addWeapon(weapon3);
