@@ -35,8 +35,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010639275598}
   - 33: {fileID: 33000010645020724}
-  - 65: {fileID: 65000010402232318}
   - 23: {fileID: 23000012922203734}
+  - 65: {fileID: 65000011531873242}
   m_Layer: 11
   m_Name: Cube
   m_TagString: Player
@@ -154,10 +154,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010358593608}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 2.85, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_Children:
   - {fileID: 224000011267893584}
   m_Father: {fileID: 4000013963118164}
@@ -169,7 +169,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010351771752}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1}
+  m_LocalPosition: {x: -0.12, y: 1.79, z: 0.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -225,7 +225,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010358593608}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300038, guid: 6af17e60797cb5e428cce9d6f8708c6f, type: 3}
 --- !u!54 &54000010105218992
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -241,7 +241,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!65 &65000010402232318
+--- !u!65 &65000011531873242
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -251,8 +251,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.64, y: 2.063904, z: 6.981275}
+  m_Center: {x: 0.0003966093, y: 0.10921559, z: 2.2073567}
 --- !u!114 &114000010312699818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -292,15 +292,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerNumber: 1
-  player:
-    m_Instance: {fileID: 0}
-    m_SpawnPoint: {fileID: 0}
-    m_movement: {fileID: 0}
-    m_shooting: {fileID: 0}
-    m_stats: {fileID: 0}
-    m_construction: {fileID: 0}
-    m_PlayerNumber: 0
-  playerMovement: {fileID: 114000013493940560}
 --- !u!114 &114000010434079110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -437,9 +428,6 @@ MonoBehaviour:
     m_PlayerNumber: 1
   mouseposition: {x: 0, y: 0, z: 0}
   m_MovementSpeed: 15
-  useController: 0
-  windowsAndXBOX: 0
-  macAndXBOX: 0
 --- !u!114 &114000013910147460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -473,18 +461,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerNumber: 1
-  player:
-    m_Instance: {fileID: 0}
-    m_SpawnPoint: {fileID: 0}
-    m_movement: {fileID: 0}
-    m_shooting: {fileID: 0}
-    m_stats: {fileID: 0}
-    m_construction: {fileID: 0}
-    m_PlayerNumber: 0
   m_Bullet: {fileID: 54000012476593726, guid: 4d22d43c1b361484297b2a7b58b8d4a8, type: 2}
   m_FireTransform: {fileID: 4000011702620350}
   m_LaunchForce: 50
-  playerMovement: {fileID: 114000013493940560}
 --- !u!222 &222000010215713142
 CanvasRenderer:
   m_ObjectHideFlags: 1

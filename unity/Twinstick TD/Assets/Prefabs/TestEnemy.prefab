@@ -88,8 +88,8 @@ GameObject:
   - 4: {fileID: 4000013963118164}
   - 54: {fileID: 54000010105218992}
   - 114: {fileID: 114000011184074504}
-  - 65: {fileID: 65000011758794278}
   - 114: {fileID: 114000010321620456}
+  - 136: {fileID: 136000012896863520}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Enemy
@@ -138,8 +138,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010358593608}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.74, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000013963118164}
@@ -194,7 +194,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010358593608}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: a97010b2cbbc25d48a49aebfd74dc880, type: 3}
 --- !u!54 &54000010105218992
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -225,18 +225,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
---- !u!65 &65000011758794278
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012244867938}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &114000010321620456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -405,6 +393,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!136 &136000012896863520
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012244867938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.97
+  m_Height: 5.81
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.73, z: 0}
 --- !u!222 &222000010559169826
 CanvasRenderer:
   m_ObjectHideFlags: 1
