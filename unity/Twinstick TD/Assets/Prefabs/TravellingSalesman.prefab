@@ -43,7 +43,7 @@ GameObject:
   - 114: {fileID: 114000012974880486}
   m_Layer: 0
   m_Name: TravellingSalesman
-  m_TagString: TravelingSalesman
+  m_TagString: TravellingSalesman
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014281497466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -54.837574, y: 0, z: 65.64145}
+  m_LocalPosition: {x: 61.685486, y: 0, z: -12.975586}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:

@@ -4,14 +4,14 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
 	// public variables 
-	[HideInInspector]public int m_PlayerNumber = 1; //Used to identify differnt players. Needs to be updated automatically when multiplayed-mode
+	[HideInInspector]public int m_PlayerNumber = 1; // not used yet; can be used to identify the different players (later), each players needs different controls!
 	[HideInInspector]public PlayerManager player;
 	[HideInInspector]public Vector3 mouseposition;
 	public float m_MovementSpeed = 10f;
-	[HideInInspector]public bool useController;
-	[HideInInspector]public bool windowsAndXBOX; 
-	public bool macAndXBOX;
-	[HideInInspector]public int m_PlayerNumber = 1; // not used yet; can be used to identify the different players (later), each players needs different controls!
+	[HideInInspector]public static bool useController;
+	[HideInInspector]public static bool windowsAndXBOX; 
+	public static bool macAndXBOX;
+
 
 	private Rigidbody m_playerRigidbody;
 	private float m_MovementInputValueV;

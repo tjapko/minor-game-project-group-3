@@ -20,7 +20,6 @@ public class WaveManager
     private List<EnemyManager> m_enemywave; //Population of enemies
     private int enemy_number;               //Total amount of enemies spawned
 	private int m_wavenumber;				//Total amount of waves
-	private int numberEnemiesPerWave;		//Start amount of enemies per wave
 
     // Use this for initialization
 	public WaveManager(GameObject Enemyprefab, Transform enemyspawnpoints, Transform target, GameObject gridprefab)
