@@ -15,6 +15,8 @@ public class UnitPlayer : MonoBehaviour {
 	Vector3[] path; // The walkable path
 	int targetIndex;// The index of the waypointArray. The unit moves to path[targetIndex]  
 
+	//if locatie player is niet walkable, doe dan de vorige locatie
+
 	//For enemy 3, it calculates distance to base and player and chooses closest as target
 	public void calcDistance(){
 		float distToPlayer = Vector3.Distance (transform.position, m_player.position);
@@ -49,7 +51,6 @@ public class UnitPlayer : MonoBehaviour {
 
 	//Cancels the invokerepeating function of goToPlayer()
 	public void InvokeCancel(){
-		Debug.Log ("Invokecancel");
 		CancelInvoke ();
 		PathRequestManager.RequestPath (transform.position, m_base.position, OnPathFound);
 	}
@@ -74,6 +75,9 @@ public class UnitPlayer : MonoBehaviour {
 	/// a coroutine for walking over the path that is given 
 	/// </summary>
 	IEnumerator FollowPath() {
+		if (path.Length == 0) {
+			yield break;
+		}
 		Vector3 currentWaypoint = path[0];
 		while (true) {
 			if (transform.position == currentWaypoint) {

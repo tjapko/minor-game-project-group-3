@@ -5,7 +5,7 @@ using UnityEngine;
 /// Class enemy manager
 /// </summary>
 //[Serializable]
-public abstract class EnemyManager : MonoBehaviour
+public abstract class EnemyManager
 {
     //Public variables
     public Transform m_SpawnPoint;                      // Spawn position of enemy (should be appointed by Gamemanger instead of manual)

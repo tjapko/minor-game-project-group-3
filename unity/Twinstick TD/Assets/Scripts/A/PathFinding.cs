@@ -43,7 +43,17 @@ public class PathFinding : MonoBehaviour {
 		Node startNode = grid.NodeFromWorldPoint (startPos);
 		Node targetNode = grid.NodeFromWorldPoint (targetPos);
 
-		if (startNode.walkable && targetNode.walkable) {
+		//if targetNode niet walkable, zoek dan naar een neighbour die wel walkable is
+		while (!targetNode.walkable) {
+			foreach (Node neighbour in grid.GetNeighbours(targetNode)) {
+				if (neighbour.walkable) {
+					targetNode = neighbour;
+				}
+			}
+		}
+
+		//if (startNode.walkable && targetNode.walkable) {
+		if (startNode.walkable) {
 
 			Heap<Node> openSet = new Heap<Node> (grid.MaxSize);
 			HashSet<Node> closedSet = new HashSet<Node> ();
