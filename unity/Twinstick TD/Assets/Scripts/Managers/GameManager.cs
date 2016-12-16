@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
 	public GameObject m_Enemyprefab4;       //Reference to prefab of enemy14 (Boss)
 
     public GameObject m_gridPrefab;             // Reference to the prefab of the grid and path
-    public GameObject m_turret;                 // Reference to the turret prefab
 	public GameObject m_travellingSalesman;     // Reference to the travelling Salesman
     public Transform m_Basespawnpoint;          // Spawnpoint of base
     public Transform m_Playerspawnpoint;        // Spawnpoint of player
@@ -55,8 +54,7 @@ public class GameManager : MonoBehaviour
 
         //Initialize managers
 		m_travellingSalesmanManager = new TravellingSalesmanManager(m_travellingSalesman);
-		m_players = new UserManager(m_Playerprefab, m_turret, m_Playerspawnpoint, m_amountofplayers);
-        // m_players = new UserManager(m_Playerprefab, m_Playerspawnpoint, m_amountofplayers);
+        m_players = new UserManager(m_Playerprefab, m_Playerspawnpoint, m_amountofplayers);
 
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
 		m_gridManager = new GridManager(m_gridPrefab);
@@ -294,8 +292,6 @@ public class GameManager : MonoBehaviour
 	public static bool getWavephase() {
 		return wavephase;
 	}
-
-}
 
     //Get Usermanager
     public UserManager getUserManager()

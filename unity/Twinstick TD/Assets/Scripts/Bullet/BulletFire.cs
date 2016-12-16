@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class BulletFire : MonoBehaviour
 {
 
-
-
     public float maxBulletDistance;         // maximum bulletdistance (applied in Raycast shooting, the length of the ray)
     public RaycastHit RayHit;               // contains the information of the Raycast Hit
     public int m_PlayerNumber;              // Used to identify the different players.
@@ -28,6 +26,7 @@ public class BulletFire : MonoBehaviour
     /// </summary>
     private void Start()
     {       
+
         m_FireButton = "Fire" + m_PlayerNumber;
         playerinventory = GetComponent<PlayerInventory>();
 
