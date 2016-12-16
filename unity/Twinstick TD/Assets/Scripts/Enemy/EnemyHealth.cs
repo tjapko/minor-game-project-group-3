@@ -79,7 +79,6 @@ public class EnemyHealth : MonoBehaviour
     // OnDeath
     private void OnDeath()
     {
-		Debug.Log ("lasthit: " + m_lasthit);
         //Give player money
         GameObject root = GameObject.FindWithTag("Gamemanager");
         GameManager gamemanager = root.GetComponent<GameManager>();

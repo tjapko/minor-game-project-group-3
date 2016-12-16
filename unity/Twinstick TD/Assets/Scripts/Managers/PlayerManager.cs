@@ -28,7 +28,6 @@ public class PlayerManager
         m_Instance = instance;
         m_SpawnPoint = spawnpoint;
         m_PlayerNumber = playernumber;
-		Debug.Log (m_PlayerNumber);
         //Set references
         m_movement = m_Instance.GetComponent<PlayerMovement>();
         m_shooting = m_Instance.GetComponent<BulletFire>();
