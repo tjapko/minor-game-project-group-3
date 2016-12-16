@@ -3,7 +3,7 @@
 public class BulletExplosion : MonoBehaviour
 {
     public LayerMask m_EnemyMask;   // Used to filter what the explosion affects, this should be set to "Enemies".
-    public float m_MaxDamage;       // The amount of damage done if the explosion is centred on an enemy.
+    public float m_MaxDamage = 1f;       // The amount of damage done if the explosion is centred on an enemy.
     public float m_MaxLifeTime;     // The time in seconds before the shell is removed.
     
     private void Start()

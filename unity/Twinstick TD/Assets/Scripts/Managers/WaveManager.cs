@@ -6,10 +6,19 @@ using System.Collections.Generic;
 public class WaveManager
 {
     //Public variables
-    public GameObject m_Enemyprefab;       //Reference to prefab of enemy
-	public GameObject m_gridprefab;
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
-    public Transform m_target;             //Target(s) of enemies
+    public Transform m_basetarget;             //Target(s) of enemies
+	public Transform m_playerpoint;
+    public double baseDistancePercentage = 0.1;
+
+    public GameObject m_Enemyprefab1;	//Reference to prefab of enemy1
+	public GameObject m_Enemyprefab2;   //Reference to prefab of enemy2
+	public GameObject m_Enemyprefab3;   //Reference to prefab of enemy3
+	public GameObject m_Enemyprefab4;   //Reference to prefab of enemy14 (Boss)
+	public GameObject m_gridprefab;
+
+    public double baseDistancePercentageBoss = 0.5; // distance to be travlled by the Boss to the base
+
     Grid grid;
     public LayerMask unwalkableMask;
     public float nodeRadius;
@@ -22,27 +31,49 @@ public class WaveManager
 	private int m_wavenumber;				//Total amount of waves
 
     // Use this for initialization
-	public WaveManager(GameObject Enemyprefab, Transform enemyspawnpoints, Transform target, GameObject gridprefab)
-    {
-        this.m_Enemyprefab = Enemyprefab;
-        this.m_enemyspawnpoints = enemyspawnpoints;
-        this.m_target = target;
-		this.m_gridprefab = gridprefab;
+	private int numberEnemiesPerWave;		//Start amount of enemies per wave
+	private GridManager m_gridmanager;
+    private double m_proportionEnemy1 = 0.4; // proportion of choosing enemy1 each spawning 
+    private double m_proportionEnemy2 = 0.4; // proportion of choosing enemy2 each spawning 
+    private double m_proportionEnemy3; // proportion of choosing enemy3 each spawning 
+    private int m_numberOfWavesPerBoss = 1;  // each m_numberOfWavesPerBoss waves a Boss is spawned
+                                             // Use this for initialization
 
-		this.m_wavenumber = 0;
-		this.numberEnemiesPerWave = 10;
+    public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab)
+    {
+        this.m_Enemyprefab1 = Enemyprefab1;
+        this.m_Enemyprefab2 = Enemyprefab2;
+        this.m_Enemyprefab4 = Enemyprefab4;
+		this.m_Enemyprefab3 = Enemyprefab3;
+        this.m_enemyspawnpoints = enemyspawnpoints;
+        this.m_basetarget = basetarget;
+        this.m_playerpoint = playerpoint;
+        this.m_gridprefab = gridprefab;
+
+        this.m_wavenumber = 0;
+        this.numberEnemiesPerWave = 10;
         enemy_number = 0;
         m_enemywave = new List<EnemyManager>();
     }
 
+
     // Send next wave and create new grid
     public void NextWave()
 	{
-		GridManager m_gridmanager = new GridManager(m_gridprefab);
-        grid = GameObject.FindWithTag("grid").GetComponent<Grid>();
+		if (m_wavenumber == 0) {
+			m_gridmanager = new GridManager (m_gridprefab);
+			grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
+		}
+		if (m_wavenumber > 0) {
+			GameObject.Destroy (m_gridmanager.m_instance, 0f);
+			m_gridmanager = new GridManager (m_gridprefab);
+			grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
+		}
 		int enemies = numberEnemiesPerWave + EnemiesAmountPerWave ();
-		SpawnEnemies(enemies);
-		GameObject.Destroy (m_gridmanager.m_instance, 2f);
+
+
+		proportionEnemies (); // update the proportions of the enemies per wave
+		SpawnAllEnemies(enemies);
 		m_wavenumber++;
     }
 
@@ -50,27 +81,16 @@ public class WaveManager
 	public int EnemiesAmountPerWave(){
 		return m_wavenumber*2;
 	}
-
-    //Check if all enemies are dead;
-    public bool EnemiesDead()
-    {
-        foreach (EnemyManager enemy in m_enemywave)
-        {
-            if (enemy.m_Instance.activeSelf)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-	private Vector3 RandomSpawnPosition() 
+		
+	// produces a random spawnpoint for the enemy
+	private Vector3 RandomSpawnPosition(bool boss) 
 	{
 		Vector3 randomPosition;
 
 		float buffer = 1.0f;  	// buffer for extra space between enemies and wall maybe not needed for later (walkable will fix this)
 		bool walkable;
 		float distance;		 	// distance between base and enemies spawnpoint 
+		float crit_distance;	// minimal distance to be travelled by the enemies 
 
 		// base's spawning position
 		Vector3 Base = GameObject.FindGameObjectWithTag ("Base").GetComponent<Transform> ().transform.position;
@@ -81,33 +101,90 @@ public class WaveManager
 		float z_minrange = GameObject.FindGameObjectWithTag ("Wall1").GetComponent<Transform> ().transform.position.z + buffer;
 		float z_maxrange = GameObject.FindGameObjectWithTag ("Wall3").GetComponent<Transform> ().transform.position.z - buffer;
 
-		// enemies needs to be spawned at least 100*baseDistanceProportion% of the x-dimenion (= z-dimension) of the base
-		float crit_distance  = (float)baseDistanceProportion * (x_maxrange - x_minrange); 
+		if (!boss) {
+			// enemies needs to be spawned at least (baseDistancePercentage*100)% of the x-dimenion of the base
+			crit_distance = (float)baseDistancePercentage * (x_maxrange - x_minrange); 
+		} else {
+			// boss needs to be spawned at least (baseDistancePercentage*100)% of the x-dimenion of the base
+			crit_distance = (float)baseDistancePercentageBoss * (x_maxrange - x_minrange); 
+		}
 
 		do {
 			randomPosition = new Vector3 (Random.Range (x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
+
             walkable = !(Physics.CheckSphere(randomPosition, (grid.nodeRadius * 1.4f), grid.unwalkableMask));
             distance = Vector3.Distance(Base, randomPosition);
 		} while (distance <= crit_distance || !walkable); // distance needs to be smaller than critical distance and the spawnpoint needs to be walkable
 		return randomPosition;
 	}
-    // Spawn enemies
-    private void SpawnEnemies(int m_number_enemies)
-    {
-        for (int i = 0; i < m_number_enemies; i++)
-        {
-			m_enemyspawnpoints.position = RandomSpawnPosition ();
-            GameObject newinstance = GameObject.Instantiate(m_Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
-            m_enemywave.Add(new EnemyManager(newinstance, m_enemyspawnpoints, m_target, enemy_number));
-            enemy_number++;
-        }
-			
-    }
+		
+	// Roulette-wheel function 
+	private void RouletteWheelSpawnEnemy() {
 
+		double rnd = Random.value;
+
+		if (rnd < m_proportionEnemy1) {
+			// instantiate enemy type 1
+			InstatiateEnemy(m_Enemyprefab1, false);
+		} else if (rnd - m_proportionEnemy1 < m_proportionEnemy2) {
+			// instantiate enemy type 2
+			InstatiateEnemy(m_Enemyprefab2, false);
+		} else {
+			// instantiate enemy type 3
+			InstatiateEnemy(m_Enemyprefab3, false);
+		} 
+//		Debug.Log ("rnd: " + rnd);
+	}
+
+	// instantiate enemy
+	private void InstatiateEnemy (GameObject Enemyprefab, bool boss) {
+		m_enemyspawnpoints.position = RandomSpawnPosition (boss);
+		GameObject newinstance = GameObject.Instantiate (Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
+
+		if (Enemyprefab.Equals (m_Enemyprefab1)) {
+			m_enemywave.Add (new Enemie1 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+		} else if (Enemyprefab.Equals (m_Enemyprefab2)) {
+			m_enemywave.Add (new Enemie2 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+		} else if (Enemyprefab.Equals (m_Enemyprefab3)) {
+			m_enemywave.Add (new Enemie3 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+		} else if (boss) {
+			m_enemywave.Add (new Enemie4 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+		}
+        enemy_number++;
+	}
+
+	// Spawning all enemies
+	private void SpawnAllEnemies(int m_number_enemies) {
+			
+		for (int i = 0; i < m_number_enemies - 1; i++) {
+				RouletteWheelSpawnEnemy(); // for random spawning of the enemies 1, 2 and 3
+			}
+		if (m_wavenumber % m_numberOfWavesPerBoss == 0 && m_wavenumber >0) { // wavenumber needs to start at zero
+			// spawning the Boss:
+			InstatiateEnemy(m_Enemyprefab4, true); // for spawning the boss 
+		}
+		else {
+				RouletteWheelSpawnEnemy (); 
+			}
+		}
+		
+	//Check if all enemies are dead;
+	public bool EnemiesDead()
+	{
+		foreach (EnemyManager enemy in m_enemywave)
+		{
+			if (enemy.m_Instance.activeSelf)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+		
     //Remove dead enemies
     public void DestroyEnemies()
     {
-        int n = m_enemywave.Count;
+		int n = m_enemywave.Count;
         for (int i = 0; i < n; i++)
         {
             GameObject.Destroy(m_enemywave[0].m_Instance);
@@ -133,5 +210,21 @@ public class WaveManager
             enemy.DisableControl();
         }
     }
+		
+	// proportions adjusments when m_wavenumber is increasing 
+	private void proportionEnemies () {
+		// proportion of enemy1 decreases each wave
+		m_proportionEnemy1 = m_proportionEnemy1 - m_wavenumber / 100.0;
+		if (m_proportionEnemy1 < 0.2) {
+			m_proportionEnemy1 = 0.2;
+		}
+		// proportion of enemy2 decreases each wave
+		m_proportionEnemy2 = m_proportionEnemy2 - m_wavenumber / 100.0;
+		if (m_proportionEnemy2 < 0.2) {
+			m_proportionEnemy2 = 0.2;
+		}
+		// proportion of enemy3 increases each wave (because m_proportionEnemy1 & m_proportionEnemy2 both decrease each wave)
+		m_proportionEnemy3 = 1 - m_proportionEnemy1 - m_proportionEnemy2;
+	}
 
 }
