@@ -20,7 +20,6 @@ public class PlayerConstruction : MonoBehaviour {
 
     //Private variables
     private Vector3 mouseposition;      // Position of mouse
-    private Transform suggestedpos;     // Suggested position to place gameobject
     private bool constructing;          // Boolean : boolean if player is constructing
     private bool constructionphase;     // Boolean : (true = construction phase, false = wavephase), set by game manager
 
@@ -107,7 +106,7 @@ public class PlayerConstruction : MonoBehaviour {
         UserObjectStatistics instancestats = newinstance.GetComponent<UserObjectStatistics>();
         instancestats.setOwner(m_player.m_PlayerNumber);    //Give a reference to the player
         instancestats.setObjectType(objecttype);    //Set the object type
-        newinstance.layer = 10;
+        newinstance.layer = 10; //Set layer of new instance s.t. the object doesnt collide with he player
 
         //Create the suggestive markers
         List<GameObject> markers = setConstructionMarker(objecttype);
@@ -116,26 +115,20 @@ public class PlayerConstruction : MonoBehaviour {
         while (constructionphase)
         {
             //Set the location of the object to the mouse position or the suggested position
-            if((suggestedpos != null) && Vector3.Distance(mouseposition, suggestedpos.position) < 1.0)
-            {
-                newinstance.transform.position = suggestedpos.position;
-            } else
-            {
-                newinstance.transform.position = mouseposition;
-            }
-            
+            newinstance.transform.position = suggestedPosition(newinstance);
+
             //Return next frame
             yield return null;
 
             //Exit 
             if (Input.GetKeyDown(keyinput) && instancestats.getGroundClear())
-            {   
+            {
                 instancestats.setPlacement(true);    //The object is now placed onto the ground
                 newinstance.AddComponent<Rigidbody>();  //Create a rigid body, for OnTriggerEnter to work properly
                 newinstance.GetComponent<Rigidbody>().isKinematic = true;   //Make the rigidbody kinematic, such that it's not affected by physics
                 m_placedobjects.Add(newinstance);   //Add instance to list
                 constructing = false;   //Building has finished
-                newinstance.layer = 9;
+                newinstance.layer = 9;  //Set layer of the object as unwalkable
 
                 //Reduce funds and set tag
                 switch (keyinput)
@@ -161,6 +154,13 @@ public class PlayerConstruction : MonoBehaviour {
                 }
                 break;
             }
+
+            //Escape button
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                constructing = true;
+                break;
+            }
         }
 
         //If player hasn't clicked (and construction timer has expired) remove the instance
@@ -169,7 +169,6 @@ public class PlayerConstruction : MonoBehaviour {
             constructing = false;
             GameObject.Destroy(newinstance);
         }
-
         destroyMarkers(markers);
 
     }
@@ -207,12 +206,6 @@ public class PlayerConstruction : MonoBehaviour {
             }
         }
         return amount;
-    }
-
-    //Set the Suggested position to place the object
-    public void setSuggestedPosition(Transform pos)
-    {
-        suggestedpos = pos;
     }
 
     //Remove constructions of player
@@ -269,6 +262,55 @@ public class PlayerConstruction : MonoBehaviour {
         foreach(GameObject marker in markers)
         {
             Destroy(marker);
+        }
+    }
+
+    //Suggested position 
+    private Vector3 suggestedPosition(GameObject newobject)
+    {
+        List<GameObject> markers = newobject.GetComponent<UserObjectStatistics>().getMarkers();
+
+        if (markers == null)
+        {
+            return mouseposition;
+        }
+
+        if(markers.Count == 0)
+        {
+            return mouseposition;
+        } else
+        {
+            try
+            {
+                float min_distance = 1.5f;
+                GameObject selected_marker = null;
+
+                //Check distance to each marker and pick closest marker
+                foreach (GameObject marker in markers)
+                {
+                    if(marker == null)
+                    {
+                        continue;
+                    }
+                    float distance_marker = Vector3.Distance(mouseposition, marker.transform.position);
+
+                    if (distance_marker < min_distance)
+                    {
+                        min_distance = distance_marker;
+                        selected_marker = marker;
+                    }
+                }
+
+                if (selected_marker != null)
+                {
+                    return selected_marker.transform.position;
+                }
+            } catch
+            {
+
+            }
+
+            return mouseposition;
         }
     }
 
@@ -400,5 +442,11 @@ public class PlayerConstruction : MonoBehaviour {
         ans.Add(new Vector3(amount, 0f, 0f));
         ans.Add(new Vector3(-amount, 0f, 0f));
         return ans;
+    }
+
+    //Getter for boolean constructing: player is constucting
+    public bool getPlayerisConstructing()
+    {
+        return constructing;
     }
 }

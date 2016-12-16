@@ -21,7 +21,7 @@ public class DestroyRayBullet : MonoBehaviour
 
         StartPos = transform.position;
         Destroy(gameObject, m_MaxLifeTime);
-      
+
     }
 
     /// <summary>
@@ -47,7 +47,6 @@ public class DestroyRayBullet : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     { 
-
         // Destroy the shell.
         Destroy(gameObject);
     }

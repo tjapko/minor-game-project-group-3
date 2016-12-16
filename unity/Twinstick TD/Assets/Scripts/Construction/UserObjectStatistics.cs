@@ -16,7 +16,8 @@ public class UserObjectStatistics : MonoBehaviour {
     private int m_health;        //Current health of the object
     private PlayerConstruction.PlayerObjectType m_object_type;   //Type of object (set by PlayerConstruction (script))
     private bool object_placed; //Boolean if object is placed
-    private List<GameObject> intersecting_objects;  //List of objects intersecting with this object
+    private List<GameObject> colliding_objects;  //List of objects colliding with this object
+    private List<GameObject> colliding_markers;  //List of markers colliding with this object
     private List<string> m_allowedtags;  //Tags of objects that are allowed to intersect
 
     // Use this for initialization
@@ -24,7 +25,8 @@ public class UserObjectStatistics : MonoBehaviour {
     {
         m_health = m_maxhealth;
         object_placed = false;
-        intersecting_objects = new List<GameObject>();
+        colliding_objects = new List<GameObject>();
+        colliding_markers = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -36,36 +38,22 @@ public class UserObjectStatistics : MonoBehaviour {
     //Object is intersecting with the to be placed object
     public void OnTriggerEnter(Collider other)
     {
-        bool intersection = true;
-        foreach(string tag in m_allowedtags)
-        {
-            if (other.gameObject.CompareTag(tag))
-            {
-                intersection = false;
-                break;
-            }
-        }
+        //Check if this object is colliding with another object
+        checkEnterExistingObject(other);
 
-        if (intersection)
-        {
-            intersecting_objects.Add(other.gameObject);
-        }
+        //Check for markers
+        checkEnterMarkers(other);
 
     }
 
     //Remove objects that're not blocking anymore
     public void OnTriggerExit(Collider other)
     {
-        GameObject obj = other.gameObject;
-        
-        for(int i = 0; i < intersecting_objects.Count; i++)
-        {
-            if(obj.GetInstanceID() == intersecting_objects[i].GetInstanceID())
-            {
-                intersecting_objects.RemoveAt(i);
-                break;
-            }
-        }
+        //Check for objects leaving this object
+        checkExitExistingObject(other);
+
+        //Check for markers leaving this object
+        checkExitMarkers(other);
 
     }
 
@@ -97,7 +85,7 @@ public class UserObjectStatistics : MonoBehaviour {
     //Get ground clear
     public bool getGroundClear()
     {
-        return intersecting_objects.Count == 0;
+        return colliding_objects.Count == 0;
     }
 
     // Set owner of object (executed by the PlayerConstructon script)
@@ -159,5 +147,83 @@ public class UserObjectStatistics : MonoBehaviour {
     public PlayerConstruction.PlayerObjectType getObjectType()
     {
         return m_object_type;
+    }
+
+    //OnTriggerEnter check for illegal tags
+    private void checkEnterExistingObject(Collider other)
+    {
+        bool collide = true;
+        foreach (string tag in m_allowedtags)
+        {
+            if (other.gameObject.CompareTag(tag))
+            {
+                collide = false;
+                break;
+            }
+        }
+
+        if (collide)
+        {
+            colliding_objects.Add(other.gameObject);
+        }
+    }
+
+    //OnTriggerEnter check for markers
+    private void checkEnterMarkers(Collider other)
+    {
+        GameObject new_marker = other.gameObject;
+        if (other.gameObject.CompareTag("PlayerConstructionMarker"))
+        {
+            bool unique = true;
+            foreach(GameObject marker in colliding_markers)
+            {
+                if(new_marker.GetInstanceID() == marker.GetInstanceID())
+                {
+                    unique = false;
+                    break;
+                }
+            }
+
+            if (unique)
+            {
+                colliding_markers.Add(new_marker);
+            }
+        }
+    }
+
+    //OnTriggerExit check for illegal tags
+    private void checkExitExistingObject(Collider other)
+    {
+        GameObject obj = other.gameObject;
+
+        for (int i = 0; i < colliding_objects.Count; i++)
+        {
+            if (obj.GetInstanceID() == colliding_objects[i].GetInstanceID())
+            {
+                colliding_objects.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    //OnTriggerExit check for markers
+    private void checkExitMarkers(Collider other)
+    {
+        GameObject obj = other.gameObject;
+
+        for (int i = 0; i < colliding_markers.Count; i++)
+        {
+            if (obj.GetInstanceID() == colliding_markers[i].GetInstanceID())
+            {
+                colliding_markers.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    //Getter for markers
+    public List<GameObject> getMarkers()
+    {
+        return colliding_markers != null? colliding_markers:null;
     }
 }
