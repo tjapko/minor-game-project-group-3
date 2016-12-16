@@ -24,7 +24,7 @@ public class UserManager {
     // Spawn all players
     public void spawnPlayers()
     {
-        for (int i = 0; i <= m_totalplayers; i++)
+        for (int i = 0; i < m_totalplayers; i++)
         {
             createplayer(m_Playerprefab, m_playerspawnpoint, i);
         }

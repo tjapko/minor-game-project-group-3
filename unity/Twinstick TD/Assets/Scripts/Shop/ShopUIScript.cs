@@ -50,13 +50,13 @@ public class ShopUIScript : MonoBehaviour {
 
             if (m_currentplayer != null)
             {
-                //m_currentplayer.m_shooting.enabled = false;
+                m_currentplayer.m_shooting.enabled = false;
             }
         } else
         {
             if(m_currentplayer != null)
             {
-                //m_currentplayer.m_shooting.enabled = true;
+                m_currentplayer.m_shooting.enabled = true;
             }
         }
 	}
@@ -68,7 +68,6 @@ public class ShopUIScript : MonoBehaviour {
         if (weaponlist.Count >= index)
         {
             //Check if player has empty slot
-            Debug.Log(m_currentplayer);
             bool empty_slot = m_currentplayer.m_inventory.InventoryContains(new Weapon());
 
             //Player has empty slot
