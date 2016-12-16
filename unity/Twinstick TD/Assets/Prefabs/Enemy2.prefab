@@ -51,8 +51,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013019055296}
-  - 33: {fileID: 33000010016343466}
   - 23: {fileID: 23000010657210376}
+  - 33: {fileID: 33000014066299134}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Enemy
@@ -151,8 +151,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012451229206}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.74, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000010523822834}
@@ -186,13 +186,13 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &33000010016343466
+--- !u!33 &33000014066299134
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012451229206}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: e3b7901d4091349da9ca201b1f049371, type: 3}
 --- !u!54 &54000013819564086
 Rigidbody:
   m_ObjectHideFlags: 1
