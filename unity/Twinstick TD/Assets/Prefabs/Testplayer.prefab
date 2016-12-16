@@ -284,7 +284,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010358593608}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300038, guid: 814f93fdd0aaa49189a76db67453ff3b, type: 3}
 --- !u!54 &54000010105218992
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -517,7 +517,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2de21f9d5534a740baef8393047b895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayerNumber: 1
+  player:
+    m_Instance: {fileID: 0}
+    m_SpawnPoint: {fileID: 0}
+    m_movement: {fileID: 0}
+    m_shooting: {fileID: 0}
+    m_stats: {fileID: 0}
+    m_construction: {fileID: 0}
+    m_inventory: {fileID: 0}
+    m_PlayerNumber: 0
   mouseposition: {x: 0, y: 0, z: 0}
   m_MovementSpeed: 12
 --- !u!114 &114000013910147460
@@ -553,17 +561,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBulletDistance: 30
-  m_PlayerNumber: 1
   m_Bullet: {fileID: 54000012476593726, guid: 4d22d43c1b361484297b2a7b58b8d4a8, type: 2}
   m_RayBullet: {fileID: 54000012476593726, guid: 0261b5d85b6ae8747bfa627544ea2578,
     type: 2}
   m_FireTransform: {fileID: 4000013980911784}
   m_FireTransformSG: {fileID: 4000013692484732}
   m_FireTransformSG2: {fileID: 4000011702620350}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  hitpos: {x: 0, y: 0, z: 0}
 --- !u!222 &222000010215713142
 CanvasRenderer:
   m_ObjectHideFlags: 1
