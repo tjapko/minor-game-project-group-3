@@ -31,7 +31,6 @@ public class WaveManager
 	private int m_wavenumber;				//Total amount of waves
 
     // Use this for initialization
-	private int numberEnemiesPerWave;		//Start amount of enemies per wave
 	private GridManager m_gridmanager;
     private double m_proportionEnemy1 = 0.4; // proportion of choosing enemy1 each spawning 
     private double m_proportionEnemy2 = 0.4; // proportion of choosing enemy2 each spawning 
