@@ -12,7 +12,7 @@ public class SwitchControl : MonoBehaviour {
 		// detect mouse input, if so set (boolean) useController to false! 
 		// mouseHovering for orientation 
 		if (Input.GetAxisRaw ("Mouse X_" + (m_PlayerNumber+1)) != 0.0f || 
-			Input.GetAxisRaw ("Mouse Y_" + m_PlayerNumber) != 0.0f) {
+			Input.GetAxisRaw ("Mouse Y_" + (m_PlayerNumber+1)) != 0.0f) {
 			PlayerMovement.useController = false;
 			PlayerMovement.windowsAndXBOX = false;
 		}
