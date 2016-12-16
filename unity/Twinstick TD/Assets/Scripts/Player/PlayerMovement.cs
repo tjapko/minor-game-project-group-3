@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
 	// public variables 
-	[HideInInspector]public int m_PlayerNumber = 1; // not used yet; can be used to identify the different players (later), each players needs different controls!
+	[HideInInspector]public int m_PlayerNumber = 0; // not used yet; can be used to identify the different players (later), each players needs different controls!
 	[HideInInspector]public PlayerManager player;
 	[HideInInspector]public Vector3 mouseposition;
 	public float m_MovementSpeed = 10f;
@@ -39,17 +39,17 @@ public class PlayerMovement : MonoBehaviour {
     {
         m_playerRigidbody = GetComponent<Rigidbody>();
 		// input field for movement 
-		m_MovementAxisNameV = "Vertical_" + m_PlayerNumber; 
-		m_MovementAxisNameH = "Horizontal_" + m_PlayerNumber;
+		m_MovementAxisNameV = "Vertical_" + (m_PlayerNumber+1); 
+		m_MovementAxisNameH = "Horizontal_" + (m_PlayerNumber+1);
 		// input field for rotation, mac 
 		if (!windowsAndXBOX) {
-			m_RotationAxisNameH = "RightJoystickHorizontalMac_" + m_PlayerNumber;
-			m_RotationAxisNameV = "RightJoystickVerticalMac_" + m_PlayerNumber;
+			m_RotationAxisNameH = "RightJoystickHorizontalMac_" + (m_PlayerNumber+1);
+			m_RotationAxisNameV = "RightJoystickVerticalMac_" + (m_PlayerNumber+1);
 		}
 		// input field for rotation, for using XBOX controller on windows 
 		else {
-			m_RotationAxisNameH = "RightJoystickHorizontalWindowsXBOX_" + m_PlayerNumber;
-			m_RotationAxisNameV = "RightJoystickVerticalWindowsXBOX_" + m_PlayerNumber;
+			m_RotationAxisNameH = "RightJoystickHorizontalWindowsXBOX_" + (m_PlayerNumber+1);
+			m_RotationAxisNameV = "RightJoystickVerticalWindowsXBOX_" + (m_PlayerNumber+1);
 		}
 
     }
