@@ -122,4 +122,17 @@ public class UserManager {
         current_wave++;
         return current_wave * 1000;
     }
+
+    //Function to check if any player is constructing
+    public bool checkConstruction()
+    {
+        foreach(PlayerManager player in m_playerlist)
+        {
+            if (player.m_construction.getPlayerisConstructing())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

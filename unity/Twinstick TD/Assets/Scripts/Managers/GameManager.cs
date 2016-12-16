@@ -63,7 +63,12 @@ public class GameManager : MonoBehaviour
         //Escape key: pause menu
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            gamepause = !gamepause;
+            //Check if players are constructing
+            //Escape button is then used to quit building
+            if (!m_players.checkConstruction())
+            {
+                gamepause = !gamepause;
+            }
         }
         pauseGame(gamepause);
 

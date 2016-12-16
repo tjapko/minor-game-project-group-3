@@ -156,7 +156,7 @@ public class PlayerConstruction : MonoBehaviour {
             }
 
             //Escape button
-            if (Input.GetKeyDown("f"))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 constructing = true;
                 break;
@@ -442,5 +442,11 @@ public class PlayerConstruction : MonoBehaviour {
         ans.Add(new Vector3(amount, 0f, 0f));
         ans.Add(new Vector3(-amount, 0f, 0f));
         return ans;
+    }
+
+    //Getter for boolean constructing: player is constucting
+    public bool getPlayerisConstructing()
+    {
+        return constructing;
     }
 }
