@@ -6,19 +6,15 @@ public class UserManager {
 
     //References
     public GameObject m_Playerprefab;       // Reference to prefab of player
-    public GameObject m_playerobjects;      // Reference to the objects placed by the user
     public Transform m_playerspawnpoint;    // Spawnpoints of the player
 
     public int m_totalplayers;                  //Total amount of players
     public List<PlayerManager> m_playerlist;    //List of players
 
-    //Private variables       
-
     // Use this for initialization
-    public UserManager(GameObject Playerprefab, GameObject Objectprefab, Transform playerspawnpoint, int totalplayers)
+    public UserManager(GameObject Playerprefab, Transform playerspawnpoint, int totalplayers)
     {
         m_Playerprefab = Playerprefab;
-        m_playerobjects = Objectprefab;
         m_playerspawnpoint = playerspawnpoint;
         m_totalplayers = totalplayers;
 
@@ -51,7 +47,7 @@ public class UserManager {
         
         GameObject newinstance = GameObject.Instantiate(prefab, spawn.position, spawn.rotation) as GameObject;
         PlayerManager newplayer = new PlayerManager(spawn, playernumber, newinstance);
-        newplayer.m_construction.m_objectprefab = m_playerobjects;  //Set reference to objects that can be placed
+        newinstance.GetComponent<PlayerConstruction>().m_player = newplayer;
         m_playerlist.Add(newplayer);    //Add player to list
     }
 
@@ -67,6 +63,18 @@ public class UserManager {
         }
         return true;
     }
+
+    //Give player currency for completion of wave
+    public void rewardPlayer()
+    {
+        foreach(PlayerManager player in m_playerlist)
+        {
+            //Reward from clearing wave
+            player.m_stats.addCurrency(waveCurrency());
+            player.m_stats.addCurrency(player.m_construction.getCarrots());
+        }
+    }
+    
 
     //Set construction phase for users
     public void setConstructionphase(bool status)
@@ -103,5 +111,25 @@ public class UserManager {
             player.Reset();
         }
     }
-		
+
+    //Function to determine currency per wave
+    private int waveCurrency()
+    {
+        GameObject m_root = GameObject.FindWithTag("Gamemanager");
+        GameManager m_gamemanager = m_root.GetComponent<GameManager>();
+        return m_gamemanager.getWaveNumber() * 1000;
+    }
+
+    //Function to check if any player is constructing
+    public bool checkConstruction()
+    {
+        foreach(PlayerManager player in m_playerlist)
+        {
+            if (player.m_construction.getPlayerisConstructing())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

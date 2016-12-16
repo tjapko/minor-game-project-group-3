@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 224000012186586216}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - 33: {fileID: 33000010645020724}
   - 23: {fileID: 23000012922203734}
   - 54: {fileID: 54000012850106202}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 224000011257648214}
   - 114: {fileID: 114000014227036790}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - 223: {fileID: 223000011222552374}
   - 114: {fileID: 114000012918283446}
   - 114: {fileID: 114000010481510842}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: EnemyHealthfab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,9 +88,9 @@ GameObject:
   - 4: {fileID: 4000013963118164}
   - 54: {fileID: 54000010105218992}
   - 114: {fileID: 114000011184074504}
+  - 65: {fileID: 65000011758794278}
   - 114: {fileID: 114000010321620456}
-  - 136: {fileID: 136000012896863520}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TestEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - 224: {fileID: 224000010861406144}
   - 222: {fileID: 222000010559169826}
   - 114: {fileID: 114000012168267054}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - 224: {fileID: 224000012056406910}
   - 222: {fileID: 222000013568660666}
   - 114: {fileID: 114000010873357294}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,8 +138,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010358593608}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.74, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000013963118164}
@@ -194,7 +194,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010358593608}
-  m_Mesh: {fileID: 4300000, guid: e3b7901d4091349da9ca201b1f049371, type: 3}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54000010105218992
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -225,6 +225,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
+--- !u!65 &65000011758794278
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012244867938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &114000010321620456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -292,14 +304,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789286e0810556f4da2ca109f5a3fced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartingHealth: 0
+  m_StartingHealth: 50
   m_Slider: {fileID: 114000014227036790}
   m_FillImage: {fileID: 114000012168267054}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  playerUnit: {fileID: 0}
-  damageToTower: 0
-  basehit: 0
 --- !u!114 &114000012168267054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -396,19 +405,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!136 &136000012896863520
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012244867938}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.97
-  m_Height: 5.81
-  m_Direction: 1
-  m_Center: {x: 0, y: 2.73, z: 0}
 --- !u!222 &222000010559169826
 CanvasRenderer:
   m_ObjectHideFlags: 1

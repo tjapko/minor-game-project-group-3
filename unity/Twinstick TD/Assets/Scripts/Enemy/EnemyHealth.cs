@@ -7,6 +7,9 @@ using UnityEngine.UI;
 /// </summary>
 public class EnemyHealth : MonoBehaviour
 {
+    //Notes:
+    //OnDeath() : needs a reference to how much the enemy is worth
+
     //Public variables
 	public float m_StartingHealth;						//Start health of enemy
     public Slider m_Slider;                           	// The slider to represent how much health the enemy currently has.
@@ -19,6 +22,8 @@ public class EnemyHealth : MonoBehaviour
     private float m_CurrentHealth;  					//Current health of enemy
 	private bool m_Dead;  								//Enemy is dead or not
 	[HideInInspector] public bool basehit;				//Enemy has hit base or not
+    private int m_lasthit;          //Playernumber of last hit
+
 
     public void Start()
     {
@@ -73,9 +78,26 @@ public class EnemyHealth : MonoBehaviour
     // OnDeath
     private void OnDeath()
     {
+        //Give player money
+        GameObject root = GameObject.FindWithTag("Gamemanager");
+        GameManager gamemanager = root.GetComponent<GameManager>();
+        PlayerManager playermanager = gamemanager.getUserManager().m_playerlist[m_lasthit - 1];
+
+        if(playermanager != null)
+        {
+            playermanager.m_stats.addCurrency(100); //Reference needs to be set
+            playermanager.m_stats.addKill();
+        }
+
         m_Dead = true;
 //		Destroy (playerUnit);
 //		Destroy (gameObject);
         gameObject.SetActive(false);
+    }
+
+    //Set player number of last hit
+    public void setLastHit(int playernumber)
+    {
+        m_lasthit = playernumber;
     }
 }

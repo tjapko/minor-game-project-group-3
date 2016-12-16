@@ -7,16 +7,16 @@ public class WaveManager
 {
     //Public variables
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
+
     public Transform m_basetarget;             //Target(s) of enemies
 	public Transform m_playerpoint;
+    public Transform m_target;             //Target(s) of enemies
     public double baseDistancePercentage = 0.1;
-
     public GameObject m_Enemyprefab1;	//Reference to prefab of enemy1
 	public GameObject m_Enemyprefab2;   //Reference to prefab of enemy2
 	public GameObject m_Enemyprefab3;   //Reference to prefab of enemy3
 	public GameObject m_Enemyprefab4;   //Reference to prefab of enemy14 (Boss)
 	public GameObject m_gridprefab;
-
     public double baseDistancePercentageBoss = 0.5; // distance to be travlled by the Boss to the base
 
     Grid grid;

@@ -27,18 +27,7 @@ public class Basehealth : MonoBehaviour {
         SetHealthUI();
     }
 
-    //Gets called every time something hits the base and enemy or enemyShell will be set inactive
-    void OnTriggerEnter(Collider other)
-    {
-        
-        //Enemy shell
-        if (other.gameObject.CompareTag("EnemyShell"))
-        {
-            other.gameObject.SetActive(false);
-            TakeDamage(20f); //Future damage should be a variable of the enemy
-        }
-
-    }
+    
 
     //Take damage function
     public void TakeDamage(float amount)
