@@ -53,8 +53,8 @@ public class ShopUIScript : MonoBehaviour {
     //Function to purchase weapon (button)
     public void purchase_weapon(int index)
     {
-        
-        if(m_currentplayer.m_stats.getCurrency() >= weaponlist[index].itemprice &&
+        if (weaponlist.Count >= index &&
+            m_currentplayer.m_stats.getCurrency() >= weaponlist[index].itemprice &&
             !m_currentplayer.m_inventory.InventoryContains(weaponlist[index]))
         {
             m_currentplayer.m_stats.addCurrency(-1 * weaponlist[index].itemprice);
