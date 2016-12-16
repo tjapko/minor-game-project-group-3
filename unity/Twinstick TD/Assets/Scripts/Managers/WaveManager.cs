@@ -32,7 +32,7 @@ public class WaveManager
     private double m_proportionEnemy1 = 0.4; // proportion of choosing enemy1 each spawning 
     private double m_proportionEnemy2 = 0.4; // proportion of choosing enemy2 each spawning 
     private double m_proportionEnemy3; // proportion of choosing enemy3 each spawning 
-    private int m_numberOfWavesPerBoss = 5;  // each m_numberOfWavesPerBoss waves a Boss is spawned
+    private int m_numberOfWavesPerBoss = 1;  // each m_numberOfWavesPerBoss waves a Boss is spawned
                                              // Use this for initialization
 
     public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab)
@@ -155,7 +155,7 @@ public class WaveManager
 		for (int i = 0; i < m_number_enemies - 1; i++) {
 				RouletteWheelSpawnEnemy(); // for random spawning of the enemies 1, 2 and 3
 			}
-		if (m_wavenumber % m_numberOfWavesPerBoss == 0 && m_wavenumber > 0) {
+		if (m_wavenumber % m_numberOfWavesPerBoss == 0 && m_wavenumber >0) { // wavenumber needs to start at zero
 			// spawning the Boss:
 			InstatiateEnemy(m_Enemyprefab4, true); // for spawning the boss 
 		}

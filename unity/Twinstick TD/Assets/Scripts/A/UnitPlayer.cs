@@ -11,6 +11,7 @@ public class UnitPlayer : MonoBehaviour {
 	[HideInInspector] public float speed = 5f; 	// moving speed
 	[HideInInspector] public bool playerFirst; 	// walking to player first or not
 	public bool baseHit = false; 				// has hit the base or not
+	public float m_threshold = 0f; // maybe variable for GA
 
 	Vector3[] path; // The walkable path
 	int targetIndex;// The index of the waypointArray. The unit moves to path[targetIndex]  
@@ -21,7 +22,7 @@ public class UnitPlayer : MonoBehaviour {
 	public void calcDistance(){
 		float distToPlayer = Vector3.Distance (transform.position, m_player.position);
 		float distToBase = Vector3.Distance (transform.position, m_base.position);
-		if (distToBase <= distToPlayer) {
+		if (distToBase + m_threshold <= distToPlayer) {
 			goToBase ();
 			playerFirst = false;
 		} else {
