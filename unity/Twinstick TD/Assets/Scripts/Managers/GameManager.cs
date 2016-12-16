@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
 
                 m_players.rewardPlayer();
                 m_waveNumber++;
-                Debug.Log("Current wave" + m_waveNumber);
+                StartCoroutine(m_uiscript.showWaveStatsUI());
             }
 
             // Return next frame without delay
@@ -268,6 +268,12 @@ public class GameManager : MonoBehaviour
     public UserManager getUserManager()
     {
         return m_players;
+    }
+
+    //Getter for the wave number
+    public int getWaveNumber()
+    {
+        return m_waveNumber;
     }
 
 }

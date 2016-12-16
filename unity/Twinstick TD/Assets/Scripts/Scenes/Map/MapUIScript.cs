@@ -24,12 +24,13 @@ public class MapUIScript {
     private GameObject m_gameovermenu;      //Reference to the game over menu
     private GameObject m_weaponplayer1;     //Reference to the weapon UI panel of player 1
     private GameObject m_weaponplayer2;     //Reference to the Weapon UI panel of player 2
+    private GameObject m_wavestats;         //Reference tot he Wave stats UI panel
 
     //Constructer
     public MapUIScript(GameManager gamemanager, GameObject ui_prefab, UserManager usermanager)
     {
         //Setting references
-        //m_gamemanager = gamemanager;
+        m_gamemanager = gamemanager;
         m_instance = GameObject.Instantiate(ui_prefab, Vector3.zero, Quaternion.identity) as GameObject; 
         m_usermanager = usermanager;
 
@@ -42,7 +43,7 @@ public class MapUIScript {
         m_gameovermenu = m_instance.transform.GetChild(5).gameObject;
         m_weaponplayer1 = m_instance.transform.GetChild(6).gameObject;
         m_weaponplayer2 = m_instance.transform.GetChild(7).gameObject;
-
+        m_wavestats = m_instance.transform.GetChild(8).gameObject;
 
         //Set active UI
         m_pausemenu.SetActive(false);
@@ -113,6 +114,24 @@ public class MapUIScript {
             }
         }
         
+    }
+
+    //Show or hide the UI panel
+    public IEnumerator showWaveStatsUI()
+    {
+        //Set the text of the UI
+        int wavenumber = m_gamemanager.getWaveNumber();
+        m_wavestats.transform.GetChild(0).GetComponent<Text>().text = "Wave " + wavenumber;
+
+        m_wavestats.SetActive(true);
+        m_wavestats.GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, false);
+        m_wavestats.transform.GetChild(0).GetComponent<Text>().CrossFadeAlpha(1.0f, 2.0f, false);
+
+        yield return new WaitForSeconds(1.0f);
+
+        m_wavestats.GetComponent<Image>().CrossFadeAlpha(0.0f, 2.0f, false);
+        m_wavestats.transform.GetChild(0).GetComponent<Text>().CrossFadeAlpha(0.0f, 2.0f, false);
+        m_wavestats.SetActive(false);
     }
 
     // sets the currencyText which is visible on the screen to the current Currency
