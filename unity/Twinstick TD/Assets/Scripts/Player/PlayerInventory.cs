@@ -22,8 +22,8 @@ public class PlayerInventory : MonoBehaviour {
         Weapon weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 100, Weapon.ItemType.Sniper, 0.75f, 100f, 100f, 2f, 5, 40, 5);
 
         inventory.Add(weapon1);
-        inventory.Add(weapon2);
-        inventory.Add(weapon3);
+        //inventory.Add(weapon2);
+        //inventory.Add(weapon3);
 
         //Fill up with empty items
         while (inventory.Count < maxslots)

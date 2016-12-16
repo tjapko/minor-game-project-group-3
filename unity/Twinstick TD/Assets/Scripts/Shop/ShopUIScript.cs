@@ -47,19 +47,54 @@ public class ShopUIScript : MonoBehaviour {
             weaponIconsTab.transform.GetChild(0).GetComponent<Image>().sprite = weaponlist[0].itemicon;
             weaponIconsTab.transform.GetChild(1).GetComponent<Image>().sprite = weaponlist[1].itemicon;
             weaponIconsTab.transform.GetChild(2).GetComponent<Image>().sprite = weaponlist[2].itemicon;
+
+            if (m_currentplayer != null)
+            {
+                m_currentplayer.m_shooting.enabled = false;
+            }
+        } else
+        {
+            if(m_currentplayer != null)
+            {
+                m_currentplayer.m_shooting.enabled = true;
+            }
         }
 	}
 
     //Function to purchase weapon (button)
     public void purchase_weapon(int index)
     {
-        if (weaponlist.Count >= index &&
-            m_currentplayer.m_stats.getCurrency() >= weaponlist[index].itemprice &&
-            !m_currentplayer.m_inventory.InventoryContains(weaponlist[index]))
+        //First check if weapon exists in the list
+        if (weaponlist.Count >= index)
         {
-            m_currentplayer.m_stats.addCurrency(-1 * weaponlist[index].itemprice);
-            m_currentplayer.m_inventory.addItem(weaponlist[index]);
+            //Check if player has empty slot
+            bool empty_slot = m_currentplayer.m_inventory.InventoryContains(new Weapon());
+
+            //Player has empty slot
+            if (empty_slot)
+            {
+                //Check if player has enough money and inventory does not contain the weapon already
+                if(m_currentplayer.m_stats.getCurrency() >= weaponlist[index].itemprice &&
+                  !m_currentplayer.m_inventory.InventoryContains(weaponlist[index]))
+                {
+                    m_currentplayer.m_stats.addCurrency(-1 * weaponlist[index].itemprice);
+                    m_currentplayer.m_inventory.addItem(weaponlist[index]);
+                }
+            } else
+            {
+                //Check if player has enough money and inventory does not contain the weapon already
+                if (m_currentplayer.m_stats.getCurrency() >= weaponlist[index].itemprice &&
+                  !m_currentplayer.m_inventory.InventoryContains(weaponlist[index]))
+                {
+                    m_currentplayer.m_stats.addCurrency(-1 * weaponlist[index].itemprice);
+                    m_currentplayer.m_inventory.inventory[0] = weaponlist[index];
+                }
+            }
         }
-        
+    }
+
+    //Function to purchase ammo (button)
+    public void purchase_ammo() {
+        m_currentplayer.m_inventory.inventory[0].ammo += 10;
     }
 }

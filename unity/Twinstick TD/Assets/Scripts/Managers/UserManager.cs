@@ -11,9 +11,6 @@ public class UserManager {
     public int m_totalplayers;                  //Total amount of players
     public List<PlayerManager> m_playerlist;    //List of players
 
-    //Private variables
-    private int current_wave;
-
     // Use this for initialization
     public UserManager(GameObject Playerprefab, Transform playerspawnpoint, int totalplayers)
     {
@@ -22,7 +19,6 @@ public class UserManager {
         m_totalplayers = totalplayers;
 
         m_playerlist = new List<PlayerManager>();
-        current_wave = 0;
     }
 
     // Spawn all players
@@ -119,8 +115,9 @@ public class UserManager {
     //Function to determine currency per wave
     private int waveCurrency()
     {
-        current_wave++;
-        return current_wave * 1000;
+        GameObject m_root = GameObject.FindWithTag("Gamemanager");
+        GameManager m_gamemanager = m_root.GetComponent<GameManager>();
+        return m_gamemanager.getWaveNumber() * 1000;
     }
 
     //Function to check if any player is constructing

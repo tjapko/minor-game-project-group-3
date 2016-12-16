@@ -251,6 +251,7 @@ public class MapUIScript {
     public void setScore()
     {
         Text scoretext = m_gameovermenu.transform.GetChild(1).GetComponent<Text>();
+        scoretext.text = "";
 
         List<PlayerManager> playerlist = m_gamemanager.getUserManager().m_playerlist;
         int amountofplayers = playerlist.Count;

@@ -63,7 +63,7 @@ public class ShopScript : MonoBehaviour {
         Weapon weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 100, Weapon.ItemType.Sniper, 0.75f, 100f, 100f, 2f, 5, 40, 5);
         addWeapon(weapon1);
         addWeapon(weapon2);
-        //addWeapon(weapon3);
+        addWeapon(weapon3);
 
     }
 
