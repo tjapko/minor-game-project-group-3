@@ -4,7 +4,7 @@ using System.Collections;
 public class SwitchControl : MonoBehaviour {
 
 	// public variables 
-	[HideInInspector]public int m_PlayerNumber = 0;  //Used to identify differnt players. Needs to be updated automatically when multiplayed-mode
+	private int m_PlayerNumber = 0;  //Used to identify differnt players. Needs to be updated automatically when multiplayed-mode
 //	public PlayerMovement PlayerMovement; // PlayerMovement script for updating boolean useController 
 
 	// Update is called once per frame

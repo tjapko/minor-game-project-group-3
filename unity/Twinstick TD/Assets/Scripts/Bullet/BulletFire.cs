@@ -9,7 +9,7 @@ public class BulletFire : MonoBehaviour
 
     public float maxBulletDistance;         // maximum bulletdistance (applied in Raycast shooting, the length of the ray)
     public RaycastHit RayHit;               // contains the information of the Raycast Hit
-    public int m_PlayerNumber = 0;              // Used to identify the different players.
+	private int m_PlayerNumber = 0;              // Used to identify the different players.
     public Rigidbody m_Bullet;              // Prefab of the shell.
     public Rigidbody m_RayBullet;           // Prefab of the Rayshell.
     public Transform m_FireTransform;       // A child of the player where the shells are spawned.

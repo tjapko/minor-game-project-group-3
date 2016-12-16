@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
 	// public variables 
-	[HideInInspector]public int m_PlayerNumber = 0; // not used yet; can be used to identify the different players (later), each players needs different controls!
+	private int m_PlayerNumber = 0; // not used yet; can be used to identify the different players (later), each players needs different controls!
 	[HideInInspector]public PlayerManager player;
 	[HideInInspector]public Vector3 mouseposition;
 	public float m_MovementSpeed = 10f;
