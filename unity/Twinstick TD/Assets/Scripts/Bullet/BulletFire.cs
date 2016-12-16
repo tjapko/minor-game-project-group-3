@@ -9,7 +9,8 @@ public class BulletFire : MonoBehaviour
 
     public float maxBulletDistance;         // maximum bulletdistance (applied in Raycast shooting, the length of the ray)
     public RaycastHit RayHit;               // contains the information of the Raycast Hit
-	private int m_PlayerNumber = 0;              // Used to identify the different players.
+	[HideInInspector] public int m_PlayerNumber;              // Used to identify the different players.
+//	private int m_PlayerNumber = 0;              // Used to identify the different players.
     public Rigidbody m_Bullet;              // Prefab of the shell.
     public Rigidbody m_RayBullet;           // Prefab of the Rayshell.
     public Transform m_FireTransform;       // A child of the player where the shells are spawned.
@@ -150,7 +151,7 @@ public class BulletFire : MonoBehaviour
                         EnemyHealth healthscript = enemy.GetComponent<EnemyHealth>();
                         if (healthscript != null)
                         {
-							healthscript.setLastHit((m_PlayerNumber+1));
+							healthscript.setLastHit((m_PlayerNumber));
                             RayHit.transform.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
                         }
                     }
@@ -177,7 +178,7 @@ public class BulletFire : MonoBehaviour
             // Create an instance of the shell and store a reference to it's rigidbody.
             Rigidbody shellInstance =
                 GameObject.Instantiate(m_Bullet, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
-			shellInstance.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber+1));
+			shellInstance.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber));
             shellInstance.transform.Rotate(0f, 90f, 0);
             
             // Set the shell's velocity to the launch force in the fire position's forward direction.
@@ -201,15 +202,15 @@ public class BulletFire : MonoBehaviour
                     
             Rigidbody shellInstance1 =
                GameObject.Instantiate(m_Bullet, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
-			shellInstance1.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber+1));
+			shellInstance1.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber));
 
             Rigidbody shellInstance2 =
                 GameObject.Instantiate(m_Bullet, m_FireTransformSG.position, m_FireTransformSG.rotation) as Rigidbody;
-			shellInstance2.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber+1));
+			shellInstance2.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber));
 
             Rigidbody shellInstance3 =
                GameObject.Instantiate(m_Bullet, m_FireTransformSG2.position, m_FireTransformSG2.rotation) as Rigidbody;
-			shellInstance3.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber+1));
+			shellInstance3.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber));
 
             
 

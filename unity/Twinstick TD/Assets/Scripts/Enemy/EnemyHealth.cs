@@ -65,6 +65,7 @@ public class EnemyHealth : MonoBehaviour
         {
             OnDeath();
         }
+
     }
 
     private void SetHealthUI()
@@ -78,10 +79,12 @@ public class EnemyHealth : MonoBehaviour
     // OnDeath
     private void OnDeath()
     {
+		Debug.Log ("lasthit: " + m_lasthit);
         //Give player money
         GameObject root = GameObject.FindWithTag("Gamemanager");
         GameManager gamemanager = root.GetComponent<GameManager>();
-        PlayerManager playermanager = gamemanager.getUserManager().m_playerlist[m_lasthit - 1];
+        PlayerManager playermanager = gamemanager.getUserManager().m_playerlist[m_lasthit];
+
 
         if(playermanager != null)
         {
@@ -93,6 +96,7 @@ public class EnemyHealth : MonoBehaviour
 //		Destroy (playerUnit);
 //		Destroy (gameObject);
         gameObject.SetActive(false);
+	
     }
 
     //Set player number of last hit

@@ -16,10 +16,10 @@ public class PlayerInventory : MonoBehaviour {
     void Start ()
     {
 
-        //First add default // weapon(name , id , description , iconname ,price , itemtype,  fireratef , launchforcef , maxDamagef, reloadTimef,clipsize ,  ammo , ammoInClip, bullet , m_bullet)
-        Weapon weapon1 = new Weapon("Default Weapon", 1, "Default weapon!", "Weapon1",0 , Weapon.ItemType.HandGun,  1000f, 5f, 30f, 2f , 8 , 30 , 8);
-        Weapon weapon2 = new Weapon("Default Weapon 2", 2, "Default weapon!", "Weapon2", 1001, Weapon.ItemType.Shotgun, 1f, 5f, 25f, 3f, 10, 50, 10);
-        Weapon weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 100, Weapon.ItemType.Sniper, 0.75f, 100f, 100f, 2f, 5, 40, 5);
+        //First add default // weapon(name , id , description , iconname ,price , itemtype,  fireratef , launchforcef , maxDamagef, reloadTimef,clipsize ,  ammo , ammoInClip)
+        Weapon weapon1 = new Weapon("Default Weapon", 1, "Default weapon!", "Weapon1",0 , Weapon.ItemType.HandGun,  1000f, 10f, 30f, 0.5f , 8 , 30 , 8);
+        Weapon weapon2 = new Weapon("Default Weapon 2", 2, "Default weapon!", "Weapon2", 1001, Weapon.ItemType.Shotgun, 1f, 5f, 25f, 0.5f, 10, 50, 10);
+        Weapon weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 100, Weapon.ItemType.Sniper, 0.75f, 100f, 100f, 0.5f, 5, 40, 5);
 
         inventory.Add(weapon1);
         //inventory.Add(weapon2);
