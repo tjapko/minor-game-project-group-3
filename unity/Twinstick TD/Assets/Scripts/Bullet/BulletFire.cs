@@ -27,7 +27,7 @@ public class BulletFire : MonoBehaviour
     private void Start()
     {       
 
-        m_FireButton = "Fire" + m_PlayerNumber;
+		m_FireButton = "Fire1_" + (m_PlayerNumber);
         playerinventory = GetComponent<PlayerInventory>();
 
         reloadButton = "r"; // Reload Button   ////// NEED FIX NOT YET IMPLEMENTED 
