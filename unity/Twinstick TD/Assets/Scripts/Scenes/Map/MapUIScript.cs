@@ -132,12 +132,23 @@ public class MapUIScript {
     // Sets the icons of the guns
     private void updateWeaponIcon()
     {
-        if(m_usermanager.m_playerlist[0].m_inventory.inventory.Count > 0)
+
+        if(m_usermanager.m_playerlist.Count > 0)
         {
             m_weaponplayer1.transform.GetChild(0).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 0);
             m_weaponplayer1.transform.GetChild(1).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 1);
             m_weaponplayer1.transform.GetChild(2).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 2);
+            m_weaponplayer1.transform.GetChild(3).GetComponent<Text>().text = m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammoInClip + "/" + m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammo;
         }
+
+        if (m_usermanager.m_playerlist.Count > 1)
+        {
+            m_weaponplayer2.transform.GetChild(0).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[1], 0);
+            m_weaponplayer2.transform.GetChild(1).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[1], 1);
+            m_weaponplayer2.transform.GetChild(2).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[1], 2);
+            m_weaponplayer2.transform.GetChild(3).GetComponent<Text>().text = m_usermanager.m_playerlist[1].m_inventory.inventory[0].ammoInClip + "/" + m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammo;
+        }
+
     }
 
     // Gets the icon of the gun
