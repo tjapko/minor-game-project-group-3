@@ -137,37 +137,53 @@ public class MapUIScript {
     // sets the currencyText which is visible on the screen to the current Currency
     private void SetCurrencyText()
     {
-        m_textplayer1.transform.GetChild(1).GetComponent<Text>().text = "Currency: " + m_usermanager.m_playerlist[0].m_stats.getCurrency().ToString();
-        //m_textplayer2.transform.GetChild(1).GetComponent<Text>().text = "Currency: " + m_usermanager.m_playerlist[1].getCurrency().ToString();
+        try
+        {
+            m_textplayer1.transform.GetChild(1).GetComponent<Text>().text = "Currency: " + m_usermanager.m_playerlist[0].m_stats.getCurrency().ToString();
+            //m_textplayer2.transform.GetChild(1).GetComponent<Text>().text = "Currency: " + m_usermanager.m_playerlist[1].getCurrency().ToString();
+        } catch
+        {
+
+        }
     }
 
     // sets the KillsText which is visible on the screen to the current amount of kills
     private void SetKillsText()
     {
-        m_textplayer1.transform.GetChild(2).GetComponent<Text>().text = "Kills: " + m_usermanager.m_playerlist[0].m_stats.getkills().ToString();
-        //m_textplayer2.transform.GetChild(2).GetComponent<Text>().text = "Kills: " + m_usermanager.m_playerlist[1].getkills().ToString();
+        try
+        {
+            m_textplayer1.transform.GetChild(2).GetComponent<Text>().text = "Kills: " + m_usermanager.m_playerlist[0].m_stats.getkills().ToString();
+            //m_textplayer2.transform.GetChild(2).GetComponent<Text>().text = "Kills: " + m_usermanager.m_playerlist[1].getkills().ToString();
+        } catch
+        {
+
+        }
     }
 
     // Sets the icons of the guns
     private void updateWeaponIcon()
     {
-
-        if(m_usermanager.m_playerlist.Count > 0)
+        try
         {
-            m_weaponplayer1.transform.GetChild(0).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 0);
-            m_weaponplayer1.transform.GetChild(1).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 1);
-            m_weaponplayer1.transform.GetChild(2).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 2);
-            m_weaponplayer1.transform.GetChild(3).GetComponent<Text>().text = m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammoInClip + "/" + m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammo;
-        }
+            if (m_usermanager.m_playerlist.Count > 0)
+            {
+                m_weaponplayer1.transform.GetChild(0).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 0);
+                m_weaponplayer1.transform.GetChild(1).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 1);
+                m_weaponplayer1.transform.GetChild(2).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 2);
+                m_weaponplayer1.transform.GetChild(3).GetComponent<Text>().text = m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammoInClip + "/" + m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammo;
+            }
 
-        if (m_usermanager.m_playerlist.Count > 1)
+            if (m_usermanager.m_playerlist.Count > 1)
+            {
+                m_weaponplayer2.transform.GetChild(0).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[1], 0);
+                m_weaponplayer2.transform.GetChild(1).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[1], 1);
+                m_weaponplayer2.transform.GetChild(2).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[1], 2);
+                m_weaponplayer2.transform.GetChild(3).GetComponent<Text>().text = m_usermanager.m_playerlist[1].m_inventory.inventory[0].ammoInClip + "/" + m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammo;
+            }
+        } catch
         {
-            m_weaponplayer2.transform.GetChild(0).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[1], 0);
-            m_weaponplayer2.transform.GetChild(1).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[1], 1);
-            m_weaponplayer2.transform.GetChild(2).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[1], 2);
-            m_weaponplayer2.transform.GetChild(3).GetComponent<Text>().text = m_usermanager.m_playerlist[1].m_inventory.inventory[0].ammoInClip + "/" + m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammo;
-        }
 
+        }
     }
 
     // Gets the icon of the gun
@@ -229,5 +245,23 @@ public class MapUIScript {
         {
             m_gameovermenu.SetActive(false);
         }
+    }
+
+    // Get the score of the player
+    public void setScore()
+    {
+        Text scoretext = m_gameovermenu.transform.GetChild(1).GetComponent<Text>();
+
+        List<PlayerManager> playerlist = m_gamemanager.getUserManager().m_playerlist;
+        int amountofplayers = playerlist.Count;
+        int[] score = new int[amountofplayers];
+
+        for(int i = 0; i < amountofplayers; i++)
+        {
+            PlayerManager player = playerlist[i];
+            score[i] = player.m_stats.getkills() * 10 + player.m_stats.getCurrency();
+            scoretext.text += "Player" + (i+1) + " : " + score[i];
+        }
+
     }
 }

@@ -80,7 +80,6 @@ public class GameManager : MonoBehaviour
 
         //Update score
         m_uiscript.UpdateUI();
-        
 
     }
 
@@ -223,6 +222,7 @@ public class GameManager : MonoBehaviour
     
     private IEnumerator RoundEnding()
     {
+        m_uiscript.setScore();
         // Stop players and waves from moving.
         m_players.disablePlayersControl();
         m_wave.DisableEnemyWaveControl();
