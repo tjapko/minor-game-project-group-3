@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
 {
     //Public variables
     public int m_amountofplayers;               // Total amount of players that are participating
-    public float m_StartDelay = 3f;             // The delay between the start of round and playing of round
     public float m_waveDelay = 15f;              // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
 
@@ -49,7 +48,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //Setting up variables
-        m_StartWait = new WaitForSeconds(m_StartDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         //Initialize managers
@@ -135,9 +133,9 @@ public class GameManager : MonoBehaviour
 
         //Set camera
         m_CameraControl.SetStartPositionAndSize();
-
+        
         // Wait m_StartWait of seconds before starting rounds
-        yield return m_StartWait;
+        yield return null;
     }
 
     //Play round
@@ -160,10 +158,8 @@ public class GameManager : MonoBehaviour
                 //Spawn next wave and remove dead enemies
                 //While loop is needed, because EnemiesDead() is not fast enough to detect that a new wave has spawned
                 m_wave.DestroyEnemies();
-                while (m_wave.EnemiesDead())
-                {
-                    m_wave.NextWave();
-                }
+
+                yield return StartCoroutine(m_wave.NextWave());
 
                 m_players.rewardPlayer();
                 m_waveNumber++;

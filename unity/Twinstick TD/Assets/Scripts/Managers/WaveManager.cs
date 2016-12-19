@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 //using System;
 
 
@@ -57,7 +58,7 @@ public class WaveManager
 
 
     // Send next wave and create new grid
-    public void NextWave()
+    public IEnumerator NextWave()
 	{
 		if (m_wavenumber == 0) {
 			m_gridmanager = new GridManager (m_gridprefab);
@@ -72,7 +73,7 @@ public class WaveManager
 
 
 		proportionEnemies (); // update the proportions of the enemies per wave
-		SpawnAllEnemies(enemies);
+		yield return SpawnAllEnemies(enemies);
 		m_wavenumber++;
     }
 
@@ -153,11 +154,26 @@ public class WaveManager
 	}
 
 	// Spawning all enemies
-	private void SpawnAllEnemies(int m_number_enemies) {
-			
-		for (int i = 0; i < m_number_enemies - 1; i++) {
-				RouletteWheelSpawnEnemy(); // for random spawning of the enemies 1, 2 and 3
-			}
+	private IEnumerator SpawnAllEnemies(int m_number_enemies) {
+        //Spawning algorithm (example)
+        int enemies_spawned = 0;
+        while (true)
+        {
+            if(enemiesPresent() < m_number_enemies * 0.4)
+            {
+                RouletteWheelSpawnEnemy();
+                enemies_spawned++;
+            }
+
+            if(enemies_spawned >= m_number_enemies - 1)
+            {
+                break;
+            }
+
+            yield return null;
+        }
+
+        //Spawn boss or last enemy
 		if (m_wavenumber % m_numberOfWavesPerBoss == 0 && m_wavenumber >0) { // wavenumber needs to start at zero
 			// spawning the Boss:
 			InstatiateEnemy(m_Enemyprefab4, true); // for spawning the boss 
@@ -165,6 +181,8 @@ public class WaveManager
 		else {
 				RouletteWheelSpawnEnemy (); 
 			}
+
+        yield return null;
 		}
 		
 	//Check if all enemies are dead;
@@ -225,5 +243,20 @@ public class WaveManager
 		// proportion of enemy3 increases each wave (because m_proportionEnemy1 & m_proportionEnemy2 both decrease each wave)
 		m_proportionEnemy3 = 1 - m_proportionEnemy1 - m_proportionEnemy2;
 	}
+
+    //Amount of enemies are present 
+    private int enemiesPresent()
+    {
+        int answer = 0;
+        foreach (EnemyManager enemy in m_enemywave)
+        {
+            if (enemy.m_Instance.activeSelf)
+            {
+                answer++;
+            }
+        }
+
+        return answer;
+    }
 
 }
