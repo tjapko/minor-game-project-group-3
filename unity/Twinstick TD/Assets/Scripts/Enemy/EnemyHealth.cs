@@ -41,6 +41,7 @@ public class EnemyHealth : MonoBehaviour
         {
             Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
             if (targetRigidbody)
+
             {
                 Basehealth basehealth = targetRigidbody.GetComponent<Basehealth>();
                 basehealth.TakeDamage(1f);
