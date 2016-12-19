@@ -325,7 +325,6 @@ MonoBehaviour:
     m_inventory: {fileID: 0}
     m_PlayerNumber: 0
   mouseposition: {x: 0, y: 0, z: 0}
-  m_MovementSpeed: 12
 --- !u!114 &114000014120976380
 MonoBehaviour:
   m_ObjectHideFlags: 1

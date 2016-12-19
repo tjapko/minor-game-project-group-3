@@ -148,23 +148,23 @@ public class GameManager : MonoBehaviour
         while (!(m_players.playerDead() || m_base.BaseDead()))
         {
             wavephase = true;
-
             //Enemies are dead
             if (m_wave.EnemiesDead())
             {
+				m_players.rewardPlayer();
                 // Go into construction phase
                 yield return StartCoroutine(constructionPhase());
-
+				m_waveNumber++;
+				StartCoroutine(m_uiscript.showWaveStatsUI());
                 //Spawn next wave and remove dead enemies
                 //While loop is needed, because EnemiesDead() is not fast enough to detect that a new wave has spawned
                 m_wave.DestroyEnemies();
 
                 yield return StartCoroutine(m_wave.NextWave());
 
-                m_players.rewardPlayer();
-                m_waveNumber++;
+               
+                
 				TravellingSalesman (); // spawning of the TravellingSalesman
-                StartCoroutine(m_uiscript.showWaveStatsUI());
 
             }
 				

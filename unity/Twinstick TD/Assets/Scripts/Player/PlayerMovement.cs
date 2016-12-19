@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 	private int m_PlayerNumber = 0; // not used yet; can be used to identify the different players (later), each players needs different controls!
 	[HideInInspector]public PlayerManager player;
 	[HideInInspector]public Vector3 mouseposition;
-	public float m_MovementSpeed = 10f;
+	private float m_MovementSpeed = 15f;
 	[HideInInspector]public static bool useController;
 	[HideInInspector]public static bool windowsAndXBOX; 
 	public static bool macAndXBOX;
@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour {
 //	private Vector3 m_RotationInputM; not used 
 	private int Floor;
 	private float camRayLength = 100f;
-	private Vector3 movement; 
+	private Vector3 movement;
 	private Vector3 playerDir;
 	private Transform cameraTransform;
 	private string m_MovementAxisNameV;

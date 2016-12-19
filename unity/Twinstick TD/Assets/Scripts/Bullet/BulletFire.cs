@@ -21,6 +21,7 @@ public class BulletFire : MonoBehaviour
     PlayerInventory playerinventory;        // The playerinventory of this player
     private string reloadButton;            // The reloadButton set on the 'r' button
     private bool weapon_reloading;          //Boolean if weapons is reloading
+	private float m_timer = 0.0f;
 
     /// <summary>
     ///  initiating the fire and reload button and retrieving the related inventory 
@@ -56,7 +57,7 @@ public class BulletFire : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
-
+		m_timer += Time.deltaTime;  // the m_timer is updated 
     }
 
 
@@ -66,23 +67,22 @@ public class BulletFire : MonoBehaviour
     /// </summary>
     public void Fire()
     {
-
-        if (currentWeapon.itemtype == Weapon.ItemType.HandGun)
-        {
-            FireHandGun();
-        }
-        else if (currentWeapon.itemtype == Weapon.ItemType.Shotgun)
-        {
-            FireSG();
-        }
-        else
-        {
-            FireRay();
-        }
-        if(currentWeapon.ammoInClip== 0 && currentWeapon.ammo !=0)
-        {
-            StartCoroutine(Reload());
-        }
+		
+		if (m_timer >= 1.0f / currentWeapon.fireRate) { 
+			
+			if (currentWeapon.itemtype == Weapon.ItemType.HandGun) {
+				FireHandGun ();
+				
+			} else if (currentWeapon.itemtype == Weapon.ItemType.Shotgun) {
+				FireSG ();
+			} else {
+				FireRay ();
+			}
+			if (currentWeapon.ammoInClip == 0 && currentWeapon.ammo != 0) {
+				StartCoroutine (Reload ());
+			}
+			m_timer = 0.0f;
+		}
     }
 
 
