@@ -24,10 +24,8 @@ public class UnitPlayer : MonoBehaviour {
 		float distToBase = Vector3.Distance (transform.position, m_base.position);
 		if (distToBase + m_threshold <= distToPlayer) {
 			goToBase ();
-			playerFirst = false;
 		} else {
 			goToPlayer ();
-			playerFirst = true;
 		}
 	}
 	//Starts the function walkToPlayer every 1 second
@@ -45,15 +43,6 @@ public class UnitPlayer : MonoBehaviour {
 		path = null;
 		targetIndex = 0;
 		PathRequestManager.RequestPath (transform.position, m_player.position, OnPathFound);
-		if (playerFirst && Vector3.Distance (transform.position, m_player.position) <= 8f) {
-			InvokeCancel ();
-		}
-	}
-
-	//Cancels the invokerepeating function of goToPlayer()
-	public void InvokeCancel(){
-		CancelInvoke ();
-		PathRequestManager.RequestPath (transform.position, m_base.position, OnPathFound);
 	}
 
 	/// <summary>
