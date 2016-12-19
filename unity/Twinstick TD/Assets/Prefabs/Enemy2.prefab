@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 224000013023089926}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - 224: {fileID: 224000013001048206}
   - 222: {fileID: 222000011086855750}
   - 114: {fileID: 114000010395895614}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - 4: {fileID: 4000013019055296}
   - 23: {fileID: 23000010657210376}
   - 33: {fileID: 33000014066299134}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 224000013075356942}
   - 114: {fileID: 114000010470969668}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - 224: {fileID: 224000013531561470}
   - 222: {fileID: 222000012577853126}
   - 114: {fileID: 114000012100585602}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - 54: {fileID: 54000013819564086}
   - 65: {fileID: 65000011010011594}
   - 114: {fileID: 114000011638556710}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Enemy2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - 223: {fileID: 223000011853135182}
   - 114: {fileID: 114000011202591844}
   - 114: {fileID: 114000012162060124}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: EnemyHealthfab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   playerUnit: {fileID: 0}
-  damageToTower: 0
+  damageToTower: 50
   basehit: 0
 --- !u!114 &114000012100585602
 MonoBehaviour:
