@@ -19,6 +19,9 @@ TagManager:
   - PlayerTurret
   - PlayerMud
   - PlayerConstructionMarker
+  - grid
+  - TravellingSalesman
+  - Base1
   layers:
   - Default
   - TransparentFX

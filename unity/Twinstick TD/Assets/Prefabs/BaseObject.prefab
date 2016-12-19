@@ -235,7 +235,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 2, z: 1.25}
+  m_Size: {x: 3, y: 2, z: 2}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &114000010265985860
 MonoBehaviour:
@@ -312,12 +312,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8b16943c2a36143a2c727a7b67ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartingHealth: 500
-  m_maxhealth: 500
+  m_StartingHealth: 10
+  m_maxhealth: 10
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   m_Slider: {fileID: 114000013968800764}
   m_FillImage: {fileID: 114000012582693484}
+  m_Dead: 0
 --- !u!114 &114000013662949670
 MonoBehaviour:
   m_ObjectHideFlags: 1

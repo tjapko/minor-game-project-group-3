@@ -173,9 +173,9 @@ public class GameManager : MonoBehaviour
         }
 
         //Player has lost
-        gameover = true;
-        gamepause = true;
-        Debug.Log("GAME OVER");
+        //gameover = true;
+        //gamepause = true;
+        //Debug.Log("GAME OVER");
         
     }
 

@@ -16,15 +16,14 @@ public class Basehealth : MonoBehaviour {
     public Image m_FillImage;
     //Private variables
     private float m_CurrentHealth;                  //Current health of tower
-    private bool m_Dead;                            //Boolean if tower is dead
+    public bool m_Dead = false;                            //Boolean if tower is dead
     
     // OnEnable
     private void OnEnable()
     {   
         //Set starting variables
         m_CurrentHealth = m_StartingHealth;
-        m_Dead = false;
-        SetHealthUI();
+		SetHealthUI();
     }
 
     
@@ -34,7 +33,6 @@ public class Basehealth : MonoBehaviour {
     {
 		Debug.Log ("take damage: " + amount);
 
-        
         //Amount must be smaller than zero
         if (amount > 0)
         {
@@ -45,7 +43,7 @@ public class Basehealth : MonoBehaviour {
         if (m_CurrentHealth <= 0f && !m_Dead)
         {
             m_CurrentHealth = 0f;
-            OnDeath();
+			OnDeath ();
         }
     }
 
@@ -75,7 +73,7 @@ public class Basehealth : MonoBehaviour {
     private void OnDeath()
     {
         m_Dead = true;
-
         gameObject.SetActive(false);
+		Destroy (gameObject);
     }
 }
