@@ -159,7 +159,7 @@ public class WaveManager
         int enemies_spawned = 0;
         while (true)
         {
-            if(enemiesPresent() < m_number_enemies * 0.4)
+            if(enemiesPresent() < m_number_enemies * 0.4f)
             {
                 RouletteWheelSpawnEnemy();
                 enemies_spawned++;

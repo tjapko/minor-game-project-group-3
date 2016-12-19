@@ -344,10 +344,10 @@ MonoBehaviour:
     type: 2}
   m_turretFireTransform: {fileID: 4000011407746192}
   m_turretbarrel: {fileID: 1000014255190380}
-  m_damage: 50
-  m_range: 10
+  m_damage: 100
+  m_range: 200
   m_launchspeed: 100
-  m_fireRate: 20
+  m_fireRate: 1
   m_turnrate: 10
   m_accuracy: 1000
 --- !u!114 &114000013306829072

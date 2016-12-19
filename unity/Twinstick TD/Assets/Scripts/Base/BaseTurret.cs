@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TurretScript : MonoBehaviour {
+public class BaseTurret : MonoBehaviour {
 
     //References
     [Header("References")]
@@ -12,7 +12,7 @@ public class TurretScript : MonoBehaviour {
     //Public variables
     [Header("Public variables")]
     public float m_damage = 100f;    //damage of the turret
-    public float m_range = 100f;     //Range of the turret
+    public float m_range = 200f;     //Range of the turret
     public float m_launchspeed = 10f;   //Launch speed of the bullet
     public float m_fireRate = 1f;   //Fire rate of the turret
     public float m_turnrate = 1f;   //Turn rate of the turret
@@ -23,20 +23,22 @@ public class TurretScript : MonoBehaviour {
     private Transform m_targetlocation; //Location of target
     private float m_firecountdown;      //Countdown until next shot
     private Transform m_rotation;       //Rotation of turret
-    private int m_PlayerNumber;
+    private int m_PlayerNumber = 0;     //FIX PLZ
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         InvokeRepeating("getTarget", 0f, 0.5f);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         if (m_target != null)
         {
             TurnTurret();
 
-            if(m_firecountdown > 1/m_fireRate)
+            if (m_firecountdown > 1 / m_fireRate)
             {
                 Fire();
                 m_firecountdown = 0;
@@ -51,7 +53,7 @@ public class TurretScript : MonoBehaviour {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject targetenemy = null;
         float min_distance = m_range;
-        
+
         foreach (GameObject enemy in enemies)
         {
             float distance_enemy = Vector3.Distance(transform.position, enemy.transform.position);
@@ -83,7 +85,7 @@ public class TurretScript : MonoBehaviour {
         bullet_direction.y += Random.Range(-acc_factor, acc_factor);
         bullet_direction.z += Random.Range(-acc_factor, acc_factor);
         bullet_direction.Normalize();
-        bullet_direction = bullet_direction* m_launchspeed;
+        bullet_direction = bullet_direction * m_launchspeed;
         newbullet.GetComponent<Rigidbody>().velocity = bullet_direction;
 
         newbullet.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber));
@@ -92,14 +94,14 @@ public class TurretScript : MonoBehaviour {
     //Function to turn turret
     private void TurnTurret()
     {
-        if(m_target != null)
+        if (m_target != null)
         {
             Vector3 dir = m_target.transform.position - m_turretFireTransform.transform.position;
             Quaternion dir_to_face = Quaternion.LookRotation(dir);
             Vector3 rotation = Quaternion.Lerp(m_turretFireTransform.transform.rotation, dir_to_face, Time.deltaTime * m_turnrate).eulerAngles;
             m_turretbarrel.transform.rotation = Quaternion.Euler(rotation.x, rotation.y, 0f);
         }
-        
+
     }
 
     //Shows the range of the turret
@@ -107,11 +109,5 @@ public class TurretScript : MonoBehaviour {
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, m_range);
-    }
-
-    //Set player number (passed through bullet)
-    public void setPlayerNumber(int number)
-    {
-        m_PlayerNumber = number;
     }
 }
