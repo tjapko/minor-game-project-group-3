@@ -179,7 +179,6 @@ public class BulletFire : MonoBehaviour
             Rigidbody shellInstance =
                 GameObject.Instantiate(m_Bullet, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
 			shellInstance.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber));
-            shellInstance.transform.Rotate(0f, 90f, 0);
             
             // Set the shell's velocity to the launch force in the fire position's forward direction.
             shellInstance.velocity = currentWeapon.launchForce * m_FireTransform.forward;

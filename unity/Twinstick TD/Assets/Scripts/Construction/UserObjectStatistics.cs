@@ -95,6 +95,12 @@ public class UserObjectStatistics : MonoBehaviour {
         GameManager m_gamemanager = m_root.GetComponent<GameManager>();
         m_owner = m_gamemanager.getUserManager().m_playerlist[playernumber];
 
+        TurretScript ts = gameObject.GetComponent<TurretScript>();
+        if(ts != null)
+        {
+            ts.setPlayerNumber(playernumber);
+        }
+
     }
 
     //Sets the object type and allowed tags
