@@ -23,7 +23,7 @@ public class WaveManager
     Grid grid;
     public LayerMask unwalkableMask;
     public float nodeRadius;
-	public int numberEnemiesPerWave = 25; //Start amount of enemies per wave
+	public int numberEnemiesPerWave; //Start amount of enemies per wave
     public double baseDistanceProportion = 0.2; // minimal distance to travel for each enemy
 
     //Private variables
@@ -37,7 +37,7 @@ public class WaveManager
     private double m_proportionEnemy2 = 0.4; // proportion of choosing enemy2 each spawning 
     private double m_proportionEnemy3; // proportion of choosing enemy3 each spawning 
     private int m_numberOfWavesPerBoss = 1;  // each m_numberOfWavesPerBoss waves a Boss is spawned
-                                             // Use this for initialization
+	private float m_clusterProportion = 1.0f;
 
     public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab)
     {
@@ -159,7 +159,7 @@ public class WaveManager
         int enemies_spawned = 0;
         while (true)
         {
-            if(enemiesPresent() < m_number_enemies * 0.4)
+            if(enemiesPresent() < m_number_enemies * m_clusterProportion)
             {
                 RouletteWheelSpawnEnemy();
                 enemies_spawned++;

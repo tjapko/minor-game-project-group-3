@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 	private int m_PlayerNumber = 0; // not used yet; can be used to identify the different players (later), each players needs different controls!
 	[HideInInspector]public PlayerManager player;
 	[HideInInspector]public Vector3 mouseposition;
-	[HideInInspector]public float m_MovementSpeed = 15f;
+	private float m_MovementSpeed = 15f;
 	[HideInInspector]public static bool useController;
 	[HideInInspector]public static bool windowsAndXBOX; 
 	public static bool macAndXBOX;
