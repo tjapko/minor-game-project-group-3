@@ -280,7 +280,7 @@ MonoBehaviour:
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   playerUnit: {fileID: 0}
-  damageToTower: 0
+  damageToTower: 50
   basehit: 0
 --- !u!114 &114000013079518424
 MonoBehaviour:
