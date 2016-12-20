@@ -37,7 +37,7 @@ public class WaveManager
     private double m_proportionEnemy2 = 0.4; // proportion of choosing enemy2 each spawning 
     private double m_proportionEnemy3; 		 // proportion of choosing enemy3 each spawning 
     private int m_numberOfWavesPerBoss = 1;  // each m_numberOfWavesPerBoss waves a Boss is spawned
-	private float m_scaleEnemies = 10;
+	private float m_scaleEnemies = 100.0f;
 	// time between spawning variables:
 	private float time;							// total spawnTime of the wave 
 	private float m_startSpawnDelayTime = 1.0f; // starting spawnTime
@@ -84,8 +84,7 @@ public class WaveManager
 
 	// Function for amount of enemies next wave
 	public int EnemiesAmountPerWave() {
-		int amount =  Mathf.RoundToInt(m_wavenumber / (m_wavenumber + 10) * m_scaleEnemies);
-		Debug.Log (amount);
+		int amount =  Mathf.RoundToInt(m_wavenumber * m_scaleEnemies / (m_wavenumber + 10));
 		return amount;
 	}
 		
