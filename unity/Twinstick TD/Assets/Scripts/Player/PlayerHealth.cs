@@ -5,7 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-	public float m_StartingHealth;						//Start health of enemy
+
+    //References
+    [Header("References")]
+    public GameObject m_hitFriendlyCanvasPrefab;    //Reference to friendlyHit canvas;
+
+    public float m_StartingHealth;						//Start health of enemy
 	public Slider m_Slider;                           	// The slider to represent how much health the enemy currently has.
 	public Image m_FillImage;                           // The image component of the slider.
 	public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
@@ -33,17 +38,28 @@ public class PlayerHealth : MonoBehaviour
 
 	//Decrease health of base
 	public void takeDamage(float amountSec){
-		m_CurrentHealth = m_CurrentHealth - amountSec;
+        //Create hitmark
+        createHitMark(m_hitFriendlyCanvasPrefab, amountSec);
+
+        m_CurrentHealth = m_CurrentHealth - amountSec;
 		SetHealthUI ();
 		if (m_CurrentHealth == 0) {
 			OnDeath ();
 		}
 	}
 
-	// OnDeath
-	private void OnDeath()
-	{
-		m_Dead = true;
-		gameObject.SetActive (false);
-	}
+    // OnDeath
+    private void OnDeath()
+    {
+        m_Dead = true;
+        gameObject.SetActive(false);
+    }
+
+    //Spawn hitmark
+    private void createHitMark(GameObject prefab, float amount)
+    {
+        //Set hitmark
+        GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+        hitbox.GetComponent<HitMarkScript>().setDamage(amount);
+    }
 }
