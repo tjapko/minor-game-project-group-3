@@ -56,7 +56,7 @@ public class WaveManager
         this.m_gridprefab = gridprefab;
 
         this.m_wavenumber = 0;
-		this.numberEnemiesPerWave = 10;
+		this.numberEnemiesPerWave = 15;
         enemy_number = 0;
         m_enemywave = new List<EnemyManager>();
 		this.time = this.m_startSpawnDelayTime;
@@ -84,7 +84,7 @@ public class WaveManager
 
 	// Function for amount of enemies next wave
 	public int EnemiesAmountPerWave() {
-		int amount =  Mathf.RoundToInt(m_wavenumber * m_scaleEnemies / (m_wavenumber + 10));
+		int amount =  Mathf.RoundToInt(m_wavenumber * 1.5f * m_scaleEnemies / (m_wavenumber + 10)); // m_scaleEnemies after 20 waves (*1.5 factor)
 		return amount;
 	}
 		
