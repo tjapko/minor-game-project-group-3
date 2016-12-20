@@ -11,7 +11,8 @@ public class PlayerHealth : MonoBehaviour
 	public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
 	public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
 	private float m_CurrentHealth;  					//Current health of enemy
-	private bool m_Dead = false;  						//Enemy is dead or not
+	public bool m_Dead = false;  						//Enemy is dead or not
+
 
 	public void Start()
 	{

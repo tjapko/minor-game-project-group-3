@@ -153,9 +153,9 @@ public class GameManager : MonoBehaviour
     {
         // Clear the text from the screen.
         // m_MessageText.text = string.Empty;
-        
+
         // Wait until base has no health or players are dead
-        while (!m_players.playerDead())
+		while (!playersDead())
         {
             wavephase = true;
             //Enemies are dead
@@ -187,6 +187,16 @@ public class GameManager : MonoBehaviour
         Debug.Log("GAME OVER");
         
     }
+
+	// called in wavePhase untill playersDead is true
+	private bool playersDead(){
+		foreach (PlayerManager player in m_players.m_playerlist) {
+			if (!player.m_playerhealth.m_Dead) {
+				return false;
+			}
+		}
+		return true;
+	}
 
     // Construction phase
     private IEnumerator constructionPhase()

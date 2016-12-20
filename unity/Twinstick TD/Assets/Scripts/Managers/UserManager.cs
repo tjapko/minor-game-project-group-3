@@ -17,7 +17,6 @@ public class UserManager {
         m_Playerprefab = Playerprefab;
         m_playerspawnpoint = playerspawnpoint;
         m_totalplayers = totalplayers;
-
         m_playerlist = new List<PlayerManager>();
     }
 
@@ -49,19 +48,6 @@ public class UserManager {
         PlayerManager newplayer = new PlayerManager(spawn, playernumber, newinstance);
         newinstance.GetComponent<PlayerConstruction>().m_player = newplayer;
         m_playerlist.Add(newplayer);    //Add player to list
-    }
-
-    // Determine if players are dead (hasn't been tested)
-    public bool playerDead()
-    {
-        foreach (PlayerManager player in m_playerlist)
-        {
-            if(player.m_Instance.activeSelf)
-            {
-                return false;
-            }
-        }
-        return true;
     }
 
     //Give player currency for completion of wave

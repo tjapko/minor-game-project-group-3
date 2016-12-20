@@ -26,7 +26,6 @@ public class EnemyHealth : MonoBehaviour
     private int m_lasthit;          					//Playernumber of last hit
 	private PlayerHealth playerhealth;					//playerhealth script
 	private Basehealth basehealth;						//Basehealth script
-	private bool toPlayer = false;
 
     public void Start()
     {

@@ -17,7 +17,8 @@ public class PlayerManager
     public BulletFire m_shooting;       // Reference to player's shooting script
     public PlayerStatistics m_stats;    // Reference to player's statisitics script
     public PlayerConstruction m_construction; // Reference to player's construction script
-    public PlayerInventory m_inventory;
+    public PlayerInventory m_inventory;	// Reference to player's inventory script
+	public PlayerHealth m_playerhealth;	// Reference to player's health script
 
     //Private variables
     public int m_PlayerNumber;          // Number of player
@@ -28,7 +29,9 @@ public class PlayerManager
         m_Instance = instance;
         m_SpawnPoint = spawnpoint;
         m_PlayerNumber = playernumber;
-        //Set references
+        
+		//Set references
+		m_playerhealth = m_Instance.GetComponent<PlayerHealth>();
         m_movement = m_Instance.GetComponent<PlayerMovement>();
         m_shooting = m_Instance.GetComponent<BulletFire>();
         m_stats = m_Instance.GetComponent<PlayerStatistics>();
