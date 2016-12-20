@@ -240,7 +240,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -281,7 +281,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -303,7 +303,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!114 &114000010771755046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,8 +412,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664648c30de440a45bae5047875bb6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Explodingaudio: {fileID: 82000012739770022}
-  audioClip: {fileID: 8300000, guid: 41ee1da7628eb914f81b386db5973d9d, type: 3}
+  reloadSource: {fileID: 82000012739770022}
+  reloadingSound: {fileID: 8300000, guid: 2ee02f42715c0c740bf3f71803bb22d1, type: 3}
   maxBulletDistance: 30
   m_PlayerNumber: 0
   m_Bullet: {fileID: 54000012476593726, guid: 4d22d43c1b361484297b2a7b58b8d4a8, type: 2}

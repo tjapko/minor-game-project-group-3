@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000013354743904}
   - 82: {fileID: 82000011719693890}
   m_Layer: 10
-  m_Name: GameObject
+  m_Name: audioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_MaxDamage: 50
   m_MaxLifeTime: 2
   Explodingaudio: {fileID: 82000011719693890}
-  audioClip: {fileID: 8300000, guid: 41ee1da7628eb914f81b386db5973d9d, type: 3}
+  audioClip: {fileID: 8300000, guid: 44a94965b69e44847bf369847df0bf42, type: 3}
 --- !u!136 &136000013389974852
 CapsuleCollider:
   m_ObjectHideFlags: 1

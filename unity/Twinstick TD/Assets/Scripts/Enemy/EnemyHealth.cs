@@ -118,6 +118,7 @@ public class EnemyHealth : MonoBehaviour
         }
 
         m_Dead = true;
+
         audioSource.transform.parent = null;
         
         audioSource.clip = dyingSound;
