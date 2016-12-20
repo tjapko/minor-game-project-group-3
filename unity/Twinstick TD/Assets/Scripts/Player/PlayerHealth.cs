@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
 	public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
 	public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
 	private float m_CurrentHealth;  					//Current health of enemy
-	private bool m_Dead;  								//Enemy is dead or not
+	private bool m_Dead = false;  						//Enemy is dead or not
 
 	public void Start()
 	{
@@ -20,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
 		// Update the health slider's value and color.
 		SetHealthUI();
 	}
+
 
 	private void SetHealthUI()
 	{
@@ -30,8 +31,20 @@ public class PlayerHealth : MonoBehaviour
 		m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
 	}
 
+	//Decrease health of base
 	public void takeDamage(float amountSec){
-		Debug.Log ("player take damage: " + amountSec);
-		m_CurrentHealth =+ -amountSec;
+		Debug.Log ("player take damage: " + m_CurrentHealth);
+		m_CurrentHealth = m_CurrentHealth - amountSec;
+		SetHealthUI ();
+		if (m_CurrentHealth == 0) {
+			OnDeath ();
+		}
+	}
+
+	// OnDeath
+	private void OnDeath()
+	{
+		m_Dead = true;
+		gameObject.SetActive (false);
 	}
 }

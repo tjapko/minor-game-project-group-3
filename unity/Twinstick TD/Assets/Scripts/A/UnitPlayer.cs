@@ -6,42 +6,48 @@ using System.Collections;
 /// </summary>
 public class UnitPlayer : MonoBehaviour {
 
-	[HideInInspector] public Transform m_base;  // the baselocation 
-	[HideInInspector] public Transform m_player;// the playerlocation
-	[HideInInspector] public float speed = 5f; 	// moving speed
-	[HideInInspector] public bool playerFirst; 	// walking to player first or not
+	public Transform m_base;  // the baselocation 
+	public Transform m_player;// the playerlocation
+	public float speed = 5f; 	// moving speed
+	public bool playerFirst; 	// walking to player first or not
 	public bool baseHit = false; 				// has hit the base or not
 	public float m_threshold = -20.0f; // maybe variable for GA
+	public float timeNewPath = 1f; // interval between new pathcalculation to enemy
 
 	Vector3[] path; // The walkable path
 	int targetIndex;// The index of the waypointArray. The unit moves to path[targetIndex]  
 
-	//if locatie player is niet walkable, doe dan de vorige locatie
+
 
 	//For enemy 3, it calculates distance to base and player and chooses closest as target
 	public void calcDistance(){
 		float distToPlayer = Vector3.Distance (transform.position, m_player.position);
 		float distToBase = Vector3.Distance (transform.position, m_base.position);
-		if (distToBase + m_threshold <= distToPlayer) {
-			goToBase ();
+		if (GameObject.FindGameObjectWithTag("Base1") != null) {
+			if (distToBase + m_threshold <= distToPlayer) {
+				goToBase ();
+			} else {
+				goToPlayer ();
+			}
 		} else {
 			goToPlayer ();
 		}
 	}
+
 	//Starts the function walkToPlayer every 1 second
 	public void goToPlayer(){
-		InvokeRepeating ("walkToPlayer", 0f, 1f);
+		playerFirst = true;
+		InvokeRepeating ("walkToPlayer", 0f, timeNewPath);
 	}
 
 	//Calculates path to base and walks towards
 	public void goToBase(){
+		playerFirst = false;
 		PathRequestManager.RequestPath (transform.position, m_base.position, OnPathFound);
 	}
 
 	//Calculates path to player and walks towards till distance is small enough when it walks to player first
 	public void walkToPlayer(){
-		path = null;
-		targetIndex = 0;
 		PathRequestManager.RequestPath (transform.position, m_player.position, OnPathFound);
 	}
 
@@ -77,7 +83,13 @@ public class UnitPlayer : MonoBehaviour {
 				}
 				currentWaypoint = path[targetIndex];
 			}
+			transform.LookAt(currentWaypoint);
 			transform.position = Vector3.MoveTowards(transform.position,currentWaypoint,speed * Time.deltaTime);
+			// if enemie has hit the base, stop walking
+			if (!playerFirst && baseHit) {
+				yield break;
+			}
+
 			yield return null;
 		}
 	}

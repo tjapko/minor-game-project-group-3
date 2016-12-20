@@ -23,7 +23,6 @@ public class Enemie2 : EnemyManager
 		health.playerUnit = m_MovementPlayer;
 		m_MovementPlayer.m_player = m_PlayerPoint;
 		m_MovementPlayer.m_base = m_BasePoint;
-		m_MovementPlayer.playerFirst = true;
 		m_MovementPlayer.goToPlayer ();
 	}
 }

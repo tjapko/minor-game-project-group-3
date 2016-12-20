@@ -11,8 +11,8 @@ public class EnemyHealth : MonoBehaviour
     //OnDeath() : needs a reference to how much the enemy is worth
 
     //Public variables
-	public float m_damageToTowerSec;
-	public float m_damageToPlayerSec;
+	public float m_damageToTowerSec;					//damage to tower per second
+	public float m_damageToPlayerSec;					//damage to player per second
 	public float m_StartingHealth;						//Start health of enemy
     public Slider m_Slider;                           	// The slider to represent how much health the enemy currently has.
     public Image m_FillImage;                           // The image component of the slider.
@@ -23,9 +23,10 @@ public class EnemyHealth : MonoBehaviour
     private float m_CurrentHealth;  					//Current health of enemy
 	private bool m_Dead;  								//Enemy is dead or not
 	[HideInInspector] public bool basehit;				//Enemy has hit base or not
-    private int m_lasthit;          //Playernumber of last hit
-	private PlayerHealth playerhealth;
-	private Basehealth basehealth;
+    private int m_lasthit;          					//Playernumber of last hit
+	private PlayerHealth playerhealth;					//playerhealth script
+	private Basehealth basehealth;						//Basehealth script
+	private bool toPlayer = false;
 
     public void Start()
     {
@@ -33,16 +34,18 @@ public class EnemyHealth : MonoBehaviour
         m_CurrentHealth = m_StartingHealth;
         // Update the health slider's value and color.
         SetHealthUI();
-    }
+	}
 
 	public void OnTriggerEnter(Collider other){
 		//if colide with base, damage base and set enemy to inactive
-		if (other.gameObject.CompareTag ("Player")) {
+		if (other.gameObject.CompareTag ("Player")) 
+		{
 			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
-			if (targetRigidbody) {
+			if (targetRigidbody) 
+			{
 				playerhealth = targetRigidbody.GetComponent<PlayerHealth> ();
 				InvokeRepeating ("playerDamage", 0f, 1f);
-			}	
+			}
 		}
 		if (other.gameObject.CompareTag("Base"))
 		{
@@ -51,25 +54,22 @@ public class EnemyHealth : MonoBehaviour
 			{
 				basehealth = targetRigidbody.GetComponent<Basehealth>();
 				InvokeRepeating("baseDamage", 0f, 1f);
-
-				//if it has to go to player dont die, otherwise OnDeath()
-				//if (playerUnit.playerFirst == false) {
-				//	playerUnit.goToPlayer ();
-				//} else if (playerUnit.playerFirst) {
-				//	OnDeath ();
-				//}
+				playerUnit.baseHit = true;
 			}
 		}
 	}
 
+	//Give tower damage
 	private void baseDamage(){
 		basehealth.TakeDamage (m_damageToTowerSec);
 	}
 
+	//give player damage
 	private void playerDamage(){
 		playerhealth.takeDamage(m_damageToPlayerSec);
 	}
 
+	//stop invoke if colliders are not touching anymore
 	public void OnTriggerExit (Collider other){
 		CancelInvoke ();
 	}
@@ -99,6 +99,7 @@ public class EnemyHealth : MonoBehaviour
         // Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
         m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
     }
+
     // OnDeath
     private void OnDeath()
     {
@@ -118,7 +119,6 @@ public class EnemyHealth : MonoBehaviour
 //		Destroy (playerUnit);
 //		Destroy (gameObject);
         gameObject.SetActive(false);
-	
     }
 
     //Set player number of last hit

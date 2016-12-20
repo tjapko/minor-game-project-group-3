@@ -34,14 +34,8 @@ public class BaseManager
     //Destroy base
     public void destroyBase()
     {
-        GameObject.Destroy(m_Instance);
-        m_Instance = null;
-    }
-
-    //Base has no health
-    public bool BaseDead()
-    {
-        return !(m_Instance.activeInHierarchy);
+		m_Instance.SetActive (false);
+		m_Instance = null;
     }
 
     //Reset function
