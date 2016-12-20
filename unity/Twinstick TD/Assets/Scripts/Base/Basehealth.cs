@@ -7,6 +7,10 @@ using UnityEngine.UI;
 /// </summary>
 public class Basehealth : MonoBehaviour {
 
+    //References
+    [Header("References")]
+    public GameObject m_hitFriendlyCanvasPrefab;    //Reference to friendlyHit canvas;
+
     //Public variables
     public float m_StartingHealth = 100f;           //Starting health
     public float m_maxhealth = 100f;                //Maximum health
@@ -32,9 +36,7 @@ public class Basehealth : MonoBehaviour {
     //Take damage function
     public void TakeDamage(float amount)
     {
-		Debug.Log ("take damage: " + amount);
-
-        
+        createHitMark(m_hitFriendlyCanvasPrefab, -amount);
         //Amount must be smaller than zero
         if (amount > 0)
         {
@@ -77,5 +79,13 @@ public class Basehealth : MonoBehaviour {
         m_Dead = true;
 
         gameObject.SetActive(false);
+    }
+
+    //Spawn hitmark
+    private void createHitMark(GameObject prefab, float amount)
+    {
+        //Set hitmark
+        GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+        hitbox.GetComponent<HitMarkScript>().setDamage(amount);
     }
 }

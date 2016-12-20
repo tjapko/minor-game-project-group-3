@@ -10,8 +10,12 @@ public class EnemyHealth : MonoBehaviour
     //Notes:
     //OnDeath() : needs a reference to how much the enemy is worth
 
+    //References
+    [Header("References")]
+    public GameObject m_hitEnemyCanvasPrefab;       //Reference to enemyHit canbas
+
     //Public variables
-	public float m_damageToTowerSec;
+    public float m_damageToTowerSec;
 	public float m_damageToPlayerSec;
 	public float m_StartingHealth;						//Start health of enemy
     public Slider m_Slider;                           	// The slider to represent how much health the enemy currently has.
@@ -19,7 +23,8 @@ public class EnemyHealth : MonoBehaviour
     public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
     public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
 	[HideInInspector] public UnitPlayer playerUnit;		// Script UnitPlayer to access it
-	//Private variables
+	
+    //Private variables
     private float m_CurrentHealth;  					//Current health of enemy
 	private bool m_Dead;  								//Enemy is dead or not
 	[HideInInspector] public bool basehit;				//Enemy has hit base or not
@@ -63,12 +68,26 @@ public class EnemyHealth : MonoBehaviour
 	}
 
 	private void baseDamage(){
-		basehealth.TakeDamage (m_damageToTowerSec);
+        if(basehealth != null)
+        {
+            basehealth.TakeDamage(m_damageToTowerSec);
+        }
 	}
 
 	private void playerDamage(){
-		playerhealth.takeDamage(m_damageToPlayerSec);
+        if(playerhealth != null)
+        {
+            playerhealth.takeDamage(m_damageToPlayerSec);
+        }
 	}
+
+    //Spawn hitmark
+    private void createHitMark(GameObject prefab, float amount)
+    {
+        //Set hitmark
+        GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+        hitbox.GetComponent<HitMarkScript>().setDamage(amount);
+    }
 
 	public void OnTriggerExit (Collider other){
 		CancelInvoke ();
@@ -77,6 +96,9 @@ public class EnemyHealth : MonoBehaviour
     //Take damage
     public void TakeDamage(float amount)
     {
+        //Set hitmark
+        createHitMark(m_hitEnemyCanvasPrefab, amount);
+
         // Reduce current health by the amount of damage done.
         m_CurrentHealth -= amount;
         // Change the UI elements appropriately.
