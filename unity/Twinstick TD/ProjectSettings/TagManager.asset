@@ -19,6 +19,9 @@ TagManager:
   - PlayerTurret
   - PlayerMud
   - PlayerConstructionMarker
+  - TravellingSalesman
+  - grid
+  - ShopUI
   layers:
   - Default
   - TransparentFX

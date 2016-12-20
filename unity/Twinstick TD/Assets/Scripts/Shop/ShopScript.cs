@@ -71,21 +71,29 @@ public class ShopScript : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         //Change plz (check for every player)
-        if (players_present.Count > 0 && Input.GetKeyDown(use_button))
+        if (players_present.Count > 0)
         {
-            //Show or hide the UI
-            showUI = !showUI;
-            m_instance_UI.SetActive(showUI);
+            if (Input.GetKeyDown(use_button))
+            {
+                showUI = !showUI;
+                m_instance_UI.SetActive(showUI);
 
-            //Set reference to player that has opened the UI
-            GameObject root = GameObject.FindWithTag("Gamemanager");
-            GameManager gm = root.GetComponent<GameManager>();
+                //Set reference to player that has opened the UI
+                GameObject root = GameObject.FindWithTag("Gamemanager");
+                GameManager gm = root.GetComponent<GameManager>();
 
-            //NEEDS FIX
-            int playernumber = players_present[0].GetComponent<PlayerStatistics>().m_playernumber;
-            PlayerManager player = gm.getUserManager().m_playerlist[playernumber];
-            m_instance_UI.GetComponent<ShopUIScript>().m_currentplayer = player;
-           
+                //NEEDS FIX
+                int playernumber = players_present[0].GetComponent<PlayerStatistics>().m_playernumber;
+                PlayerManager player = gm.getUserManager().m_playerlist[playernumber];
+                m_instance_UI.GetComponent<ShopUIScript>().m_currentplayer = player;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                //Show or hide the UI
+                showUI = false;
+                m_instance_UI.SetActive(showUI);
+            }
         }
 
         // Disable UI

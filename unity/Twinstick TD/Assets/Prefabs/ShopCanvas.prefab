@@ -111,7 +111,7 @@ GameObject:
   - 114: {fileID: 114000013500322066}
   m_Layer: 5
   m_Name: ShopCanvas
-  m_TagString: Untagged
+  m_TagString: ShopUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

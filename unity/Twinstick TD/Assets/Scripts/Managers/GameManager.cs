@@ -77,7 +77,12 @@ public class GameManager : MonoBehaviour
             //Escape button is then used to quit building
             if (!m_players.checkConstruction())
             {
-                gamepause = !gamepause;
+                //Check if player(s) are using the shop
+                GameObject shopUI = GameObject.FindWithTag("ShopUI");
+                if (!shopUI.activeSelf)
+                {
+                    gamepause = !gamepause;
+                }
             }
         }
         pauseGame(gamepause);
