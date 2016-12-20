@@ -86,6 +86,7 @@ public class WaveManager
 	private Vector3 RandomSpawnPosition(bool boss) 
 	{
 		Vector3 randomPosition;
+		Vector3 randomNodePosition;
 
 		float buffer = 1.0f;  	// buffer for extra space between enemies and wall maybe not needed for later (walkable will fix this)
 		bool walkable;
@@ -111,11 +112,15 @@ public class WaveManager
 
 		do {
 			randomPosition = new Vector3 (Random.Range (x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
+			Node node = grid.NodeFromWorldPoint (randomPosition);
+			float xNodePosition = node.gridX;
+			float zNodePosition = node.gridY;
+			randomNodePosition = new Vector3(xNodePosition, 0.0f, zNodePosition);
 
-            walkable = !(Physics.CheckSphere(randomPosition, (grid.nodeRadius * 1.4f), grid.unwalkableMask));
-            distance = Vector3.Distance(Base, randomPosition);
+			walkable = !(Physics.CheckSphere(randomNodePosition, (grid.nodeRadius * 1.4f), grid.unwalkableMask));
+			distance = Vector3.Distance(Base, randomNodePosition);
 		} while (distance <= crit_distance || !walkable); // distance needs to be smaller than critical distance and the spawnpoint needs to be walkable
-		return randomPosition;
+		return randomNodePosition;
 	}
 		
 	// Roulette-wheel function 
