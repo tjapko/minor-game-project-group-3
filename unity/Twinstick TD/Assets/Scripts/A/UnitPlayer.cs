@@ -11,7 +11,7 @@ public class UnitPlayer : MonoBehaviour {
 	[HideInInspector] public float speed = 5f; 	// moving speed
 	[HideInInspector] public bool playerFirst; 	// walking to player first or not
 	public bool baseHit = false; 				// has hit the base or not
-	public float m_threshold = 0f; // maybe variable for GA
+	public float m_threshold = -20.0f; // maybe variable for GA
 
 	Vector3[] path; // The walkable path
 	int targetIndex;// The index of the waypointArray. The unit moves to path[targetIndex]  
