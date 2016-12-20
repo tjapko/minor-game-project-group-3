@@ -23,12 +23,8 @@ public class UnitPlayer : MonoBehaviour {
 	public void calcDistance(){
 		float distToPlayer = Vector3.Distance (transform.position, m_player.position);
 		float distToBase = Vector3.Distance (transform.position, m_base.position);
-		if (GameObject.FindGameObjectWithTag("Base1") != null) {
-			if (distToBase + m_threshold <= distToPlayer) {
-				goToBase ();
-			} else {
-				goToPlayer ();
-			}
+		if (distToBase + m_threshold <= distToPlayer) {
+			goToBase ();
 		} else {
 			goToPlayer ();
 		}

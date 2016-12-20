@@ -33,7 +33,6 @@ public class PlayerHealth : MonoBehaviour
 
 	//Decrease health of base
 	public void takeDamage(float amountSec){
-		Debug.Log ("player take damage: " + m_CurrentHealth);
 		m_CurrentHealth = m_CurrentHealth - amountSec;
 		SetHealthUI ();
 		if (m_CurrentHealth == 0) {

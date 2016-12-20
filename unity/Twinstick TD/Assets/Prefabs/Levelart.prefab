@@ -784,7 +784,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011602441264}
   m_Layer: 8
-  m_Name: Levelart 1
+  m_Name: Levelart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
