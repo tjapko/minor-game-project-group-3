@@ -274,6 +274,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789286e0810556f4da2ca109f5a3fced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_hitEnemyCanvasPrefab: {fileID: 1000014289387730, guid: 5bf9826c3300eab429f0e67a4fcdb4f9,
+    type: 2}
   m_damageToTowerSec: 1
   m_damageToPlayerSec: 1
   m_StartingHealth: 1

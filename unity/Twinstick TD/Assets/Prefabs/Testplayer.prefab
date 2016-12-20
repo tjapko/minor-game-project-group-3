@@ -497,6 +497,7 @@ MonoBehaviour:
     m_stats: {fileID: 0}
     m_construction: {fileID: 0}
     m_inventory: {fileID: 0}
+    m_playerhealth: {fileID: 0}
     m_PlayerNumber: 0
   m_price_wall: 10
   m_price_turret: 150
@@ -548,9 +549,9 @@ MonoBehaviour:
     m_stats: {fileID: 0}
     m_construction: {fileID: 0}
     m_inventory: {fileID: 0}
+    m_playerhealth: {fileID: 0}
     m_PlayerNumber: 0
   mouseposition: {x: 0, y: 0, z: 0}
-  m_MovementSpeed: 12
 --- !u!114 &114000014108469366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -562,11 +563,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96c17d720e33504d8aa5764beb3a5c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_hitFriendlyCanvasPrefab: {fileID: 1000014289387730, guid: 34dffa4b43b2333489644d9d44bab2b1,
+    type: 2}
   m_StartingHealth: 10
   m_Slider: {fileID: 114000011672887518}
   m_FillImage: {fileID: 114000013388209428}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  m_Dead: 0
 --- !u!114 &114000014120976380
 MonoBehaviour:
   m_ObjectHideFlags: 1
