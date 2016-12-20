@@ -91,6 +91,11 @@ public class GameManager : MonoBehaviour
         //Update score
         m_uiscript.UpdateUI();
 
+		// if base is dead, all existing enemies move to player
+		if (!m_wave.baseDead && m_base.m_Instance == null) {
+			m_wave.baseDead = true;
+			m_wave.enemiesToPlayer ();
+		}
     }
 
     // This is called from start and will run each phase of the game one after another.
@@ -145,7 +150,7 @@ public class GameManager : MonoBehaviour
         // m_MessageText.text = string.Empty;
         
         // Wait until base has no health or players are dead
-        while (!(m_players.playerDead() || m_base.BaseDead()))
+        while (!m_players.playerDead())
         {
             wavephase = true;
 
@@ -165,17 +170,15 @@ public class GameManager : MonoBehaviour
                 m_waveNumber++;
 				TravellingSalesman (); // spawning of the TravellingSalesman
                 StartCoroutine(m_uiscript.showWaveStatsUI());
-
-            }
-				
+            }				
             // Return next frame without delay
             yield return null;
         }
 
         //Player has lost
-        //gameover = true;
-        //gamepause = true;
-        //Debug.Log("GAME OVER");
+        gameover = true;
+        gamepause = true;
+        Debug.Log("GAME OVER");
         
     }
 

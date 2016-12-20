@@ -59,21 +59,10 @@ public class EnemyHealth : MonoBehaviour
 		}
 	}
 
-	//If base is dead, attack player
-	public void Update(){
-		if (playerUnit.baseHit && !toPlayer) {
-			if (basehealth.m_Dead) {
-				playerUnit.goToPlayer ();
-				toPlayer = true;
-			}
-		}
-	}
-
 	//Give tower damage
 	private void baseDamage(){
 		basehealth.TakeDamage (m_damageToTowerSec);
 	}
-
 
 	//give player damage
 	private void playerDamage(){
@@ -110,6 +99,7 @@ public class EnemyHealth : MonoBehaviour
         // Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
         m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
     }
+
     // OnDeath
     private void OnDeath()
     {
@@ -129,7 +119,6 @@ public class EnemyHealth : MonoBehaviour
 //		Destroy (playerUnit);
 //		Destroy (gameObject);
         gameObject.SetActive(false);
-	
     }
 
     //Set player number of last hit

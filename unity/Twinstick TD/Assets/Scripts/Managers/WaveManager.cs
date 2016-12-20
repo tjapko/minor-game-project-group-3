@@ -23,8 +23,9 @@ public class WaveManager
     Grid grid;
     public LayerMask unwalkableMask;
     public float nodeRadius;
-	public int numberEnemiesPerWave = 25; //Start amount of enemies per wave
+	public int numberEnemiesPerWave = 25; 		//Start amount of enemies per wave
     public double baseDistanceProportion = 0.2; // minimal distance to travel for each enemy
+	public bool baseDead = false;				// if baseDead, all enemies walk towards player
 
     //Private variables
     private List<EnemyManager> m_enemywave; //Population of enemies
@@ -132,7 +133,7 @@ public class WaveManager
 		} else {
 			// instantiate enemy type 3
 			InstatiateEnemy(m_Enemyprefab3, false);
-		} 
+		}
 //		Debug.Log ("rnd: " + rnd);
 	}
 
@@ -150,6 +151,12 @@ public class WaveManager
 		} else if (boss) {
 			m_enemywave.Add (new Enemie4 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
 		}
+
+		//if base is dead and enemy is not already moving to player -> go to player
+		if (baseDead && !m_enemywave[m_enemywave.Count-1].m_MovementPlayer.playerFirst) {
+			m_enemywave[m_enemywave.Count-1].m_MovementPlayer.goToPlayer ();
+		}
+
         enemy_number++;
 	}
 
@@ -259,4 +266,12 @@ public class WaveManager
         return answer;
     }
 
+	// for all existing enemies in m_enemywave, let them walk to player
+	public void enemiesToPlayer(){
+		foreach (var enemy in m_enemywave) {
+			if (baseDead && !enemy.m_MovementPlayer.playerFirst) {
+				enemy.m_MovementPlayer.goToPlayer ();
+			}
+		}
+	}
 }

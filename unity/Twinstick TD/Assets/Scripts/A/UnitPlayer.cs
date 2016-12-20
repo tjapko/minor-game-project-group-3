@@ -12,7 +12,7 @@ public class UnitPlayer : MonoBehaviour {
 	public bool playerFirst; 	// walking to player first or not
 	public bool baseHit = false; 				// has hit the base or not
 	public float m_threshold = 0f; // maybe variable for GA
-	private GameObject Base;
+	public float timeNewPath = 1f; // interval between new pathcalculation to enemy
 
 	Vector3[] path; // The walkable path
 	int targetIndex;// The index of the waypointArray. The unit moves to path[targetIndex]  
@@ -34,18 +34,10 @@ public class UnitPlayer : MonoBehaviour {
 		}
 	}
 
-	//if base is dead when spawn, go to player
-	public void Update(){
-		Debug.Log (playerFirst + " " + GameObject.Find("hoi"));
-		if (!playerFirst && GameObject.FindGameObjectWithTag("Base1") == null) {
-			goToPlayer ();
-		}
-	}
-
 	//Starts the function walkToPlayer every 1 second
 	public void goToPlayer(){
 		playerFirst = true;
-		InvokeRepeating ("walkToPlayer", 0f, 1f);
+		InvokeRepeating ("walkToPlayer", 0f, timeNewPath);
 	}
 
 	//Calculates path to base and walks towards
@@ -93,10 +85,11 @@ public class UnitPlayer : MonoBehaviour {
 			}
 			transform.LookAt(currentWaypoint);
 			transform.position = Vector3.MoveTowards(transform.position,currentWaypoint,speed * Time.deltaTime);
+			// if enemie has hit the base, stop walking
 			if (!playerFirst && baseHit) {
-				Debug.Log ("break deze shit");
 				yield break;
 			}
+
 			yield return null;
 		}
 	}
