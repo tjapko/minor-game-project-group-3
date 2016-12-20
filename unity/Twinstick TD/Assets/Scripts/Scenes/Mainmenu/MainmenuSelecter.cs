@@ -17,7 +17,7 @@ public class MainmenuSelecter : MonoBehaviour {
     {
         // Check for input of user
         // Not a single button has been selected yet
-        if (Input.GetAxisRaw("Vertical") != 0 && buttonSelected == false)
+        if (Input.GetAxisRaw("Vertical_1") != 0 && buttonSelected == false)
         {
             eventSystem.SetSelectedGameObject(selectedObject);  //Select a button 
             buttonSelected = true;

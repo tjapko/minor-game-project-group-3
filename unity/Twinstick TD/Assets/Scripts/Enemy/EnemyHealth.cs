@@ -11,6 +11,9 @@ public class EnemyHealth : MonoBehaviour
     //OnDeath() : needs a reference to how much the enemy is worth
 
     //Public variables
+    public AudioClip dyingSound;                        // sound of dying bunny
+    public AudioSource audioSource;                     // AudioSource
+
 	public float m_damageToTowerSec;
 	public float m_damageToPlayerSec;
 	public float m_StartingHealth;						//Start health of enemy
@@ -115,6 +118,11 @@ public class EnemyHealth : MonoBehaviour
         }
 
         m_Dead = true;
+        audioSource.transform.parent = null;
+        
+        audioSource.clip = dyingSound;
+        audioSource.Play();
+        Destroy(audioSource.gameObject, 1f);
 //		Destroy (playerUnit);
 //		Destroy (gameObject);
         gameObject.SetActive(false);

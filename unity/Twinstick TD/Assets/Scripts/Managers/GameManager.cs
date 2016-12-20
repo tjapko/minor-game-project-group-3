@@ -10,8 +10,12 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     //Public variables
+    public AudioSource audioSource;
+    public AudioSource backGround;
+    public AudioClip gong;
+    public AudioClip[] backgroundmusic;                        
     public int m_amountofplayers;               // Total amount of players that are participating
-    public float m_waveDelay = 15f;              // The delay between ending and starting of wave
+    public float m_waveDelay = 15f;             // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
 
     //References
@@ -47,6 +51,9 @@ public class GameManager : MonoBehaviour
     //Start
     private void Start()
     {
+
+        backGround.clip = backgroundmusic[Random.Range(0, backgroundmusic.Length)];
+        backGround.Play();
         //Setting up variables
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
@@ -160,6 +167,9 @@ public class GameManager : MonoBehaviour
                 m_wave.DestroyEnemies();
 
                 yield return StartCoroutine(m_wave.NextWave());
+
+                audioSource.clip = gong;
+                audioSource.Play();
 
                 m_players.rewardPlayer();
                 m_waveNumber++;
