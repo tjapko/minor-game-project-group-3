@@ -201,8 +201,8 @@ Rigidbody:
   m_GameObject: {fileID: 1000013264635836}
   serializedVersion: 2
   m_Mass: 40
-  m_Drag: 1
-  m_AngularDrag: 0.1
+  m_Drag: 10
+  m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -219,13 +219,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789286e0810556f4da2ca109f5a3fced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_damageToTowerSec: 0
+  m_damageToPlayerSec: 0
   m_StartingHealth: 20
   m_Slider: {fileID: 114000011600059752}
   m_FillImage: {fileID: 114000010710730168}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   playerUnit: {fileID: 0}
-  damageToTower: 1
   basehit: 0
 --- !u!114 &114000010653276240
 MonoBehaviour:
