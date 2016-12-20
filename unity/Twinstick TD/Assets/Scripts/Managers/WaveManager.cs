@@ -36,7 +36,7 @@ public class WaveManager
     private double m_proportionEnemy1 = 0.4; // proportion of choosing enemy1 each spawning 
     private double m_proportionEnemy2 = 0.4; // proportion of choosing enemy2 each spawning 
     private double m_proportionEnemy3; 		 // proportion of choosing enemy3 each spawning 
-    private int m_numberOfWavesPerBoss = 1;  // each m_numberOfWavesPerBoss waves a Boss is spawned
+    private int m_numberOfWavesPerBoss = 5;  // each m_numberOfWavesPerBoss waves a Boss is spawned
 	private float m_scaleEnemies = 100.0f;
 	// time between spawning variables:
 	private float time;							// total spawnTime of the wave 
