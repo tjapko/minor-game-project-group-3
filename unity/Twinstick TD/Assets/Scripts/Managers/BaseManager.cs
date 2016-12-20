@@ -25,8 +25,7 @@ public class BaseManager
     //Spawn base
     public void spawnBase()
     {
-        GameObject newbase = GameObject.Instantiate(m_baseprefab, m_SpawnPoint.position, m_SpawnPoint.rotation) as GameObject;
-        m_Instance = newbase;
+        m_Instance = GameObject.Instantiate(m_baseprefab, m_SpawnPoint.position, m_SpawnPoint.rotation) as GameObject;
         m_SpawnPoint = m_Instance.transform;
         //m_basehealth = m_Instance.GetComponent<Basehealth>();
     }

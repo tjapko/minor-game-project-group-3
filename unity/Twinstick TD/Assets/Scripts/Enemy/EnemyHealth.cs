@@ -10,6 +10,10 @@ public class EnemyHealth : MonoBehaviour
     //Notes:
     //OnDeath() : needs a reference to how much the enemy is worth
 
+    //References
+    [Header("References")]
+    public GameObject m_hitEnemyCanvasPrefab;       //Reference to enemyHit canbas
+
     //Public variables
 	public float m_damageToTowerSec;					//damage to tower per second
 	public float m_damageToPlayerSec;					//damage to player per second
@@ -19,7 +23,8 @@ public class EnemyHealth : MonoBehaviour
     public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
     public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
 	[HideInInspector] public UnitPlayer playerUnit;		// Script UnitPlayer to access it
-	//Private variables
+	
+    //Private variables
     private float m_CurrentHealth;  					//Current health of enemy
 	private bool m_Dead;  								//Enemy is dead or not
 	[HideInInspector] public bool basehit;				//Enemy has hit base or not
@@ -60,22 +65,39 @@ public class EnemyHealth : MonoBehaviour
 
 	//Give tower damage
 	private void baseDamage(){
-		basehealth.TakeDamage (m_damageToTowerSec);
+        if(basehealth != null)
+        {
+            basehealth.TakeDamage(m_damageToTowerSec);
+        }
 	}
 
 	//give player damage
 	private void playerDamage(){
-		playerhealth.takeDamage(m_damageToPlayerSec);
+        if(playerhealth != null)
+        {
+            playerhealth.takeDamage(m_damageToPlayerSec);
+        }
 	}
 
-	//stop invoke if colliders are not touching anymore
-	public void OnTriggerExit (Collider other){
+    //Spawn hitmark
+    private void createHitMark(GameObject prefab, float amount)
+    {
+        //Set hitmark
+        GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+        hitbox.GetComponent<HitMarkScript>().setDamage(amount);
+    }
+
+    //stop invoke if colliders are not touching anymore
+    public void OnTriggerExit (Collider other){
 		CancelInvoke ();
 	}
 
     //Take damage
     public void TakeDamage(float amount)
     {
+        //Set hitmark
+        createHitMark(m_hitEnemyCanvasPrefab, amount);
+
         // Reduce current health by the amount of damage done.
         m_CurrentHealth -= amount;
         // Change the UI elements appropriately.
