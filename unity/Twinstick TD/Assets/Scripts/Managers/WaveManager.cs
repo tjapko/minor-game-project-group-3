@@ -24,7 +24,7 @@ public class WaveManager
     public LayerMask unwalkableMask;
     public float nodeRadius;
 	public int numberEnemiesPerWave; //Start amount of enemies per wave
-    public double baseDistanceProportion = 0.2; // minimal distance to travel for each enemy
+    public double baseDistanceProportion = 0.25; // minimal distance to travel for each enemy
 
     //Private variables
     private List<EnemyManager> m_enemywave; //Population of enemies
@@ -86,6 +86,7 @@ public class WaveManager
 	private Vector3 RandomSpawnPosition(bool boss) 
 	{
 		Vector3 randomPosition;
+		Vector3 randomNodePosition;
 
 		float buffer = 1.0f;  	// buffer for extra space between enemies and wall maybe not needed for later (walkable will fix this)
 		bool walkable;
@@ -111,11 +112,14 @@ public class WaveManager
 
 		do {
 			randomPosition = new Vector3 (Random.Range (x_minrange, x_maxrange), 0f, Random.Range (z_minrange, z_maxrange));
+			// from random World position to random (center of) Node position:
+			Node node = grid.NodeFromWorldPoint (randomPosition);
+			randomNodePosition = node.worldPosition;
 
-            walkable = !(Physics.CheckSphere(randomPosition, (grid.nodeRadius * 1.4f), grid.unwalkableMask));
-            distance = Vector3.Distance(Base, randomPosition);
+			walkable = !(Physics.CheckSphere(randomNodePosition, (grid.nodeRadius * 1.4f), grid.unwalkableMask));
+			distance = Vector3.Distance(Base, randomNodePosition);
 		} while (distance <= crit_distance || !walkable); // distance needs to be smaller than critical distance and the spawnpoint needs to be walkable
-		return randomPosition;
+		return randomNodePosition;
 	}
 		
 	// Roulette-wheel function 
