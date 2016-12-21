@@ -314,7 +314,6 @@ GameObject:
   - 222: {fileID: 222000010276866820}
   - 114: {fileID: 114000013808717052}
   - 114: {fileID: 114000012751558266}
-  - 114: {fileID: 114000012343601152}
   m_Layer: 5
   m_Name: ButtonWeapon1
   m_TagString: Untagged
@@ -509,7 +508,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114000013790378648}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114000013500322066}
+        m_MethodName: purchase_ammo
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114000010794610464
@@ -750,7 +760,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Purchase
 
-    Weapon'
+    Shotgun'
 --- !u!114 &114000011802479416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -826,7 +836,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Purchase
 
-    Weapon'
+    Sniper'
 --- !u!114 &114000011964113448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -974,17 +984,6 @@ MonoBehaviour:
   m_Text: 'Purchase
 
     Ammo'
---- !u!114 &114000012343601152
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013208283216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e9731dfe1e49354d8c512dd88b8f04b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000012361392902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1053,7 +1052,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114000013500322066}
         m_MethodName: purchase_ammo
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1156,7 +1155,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114000012810011814}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114000013500322066}
+        m_MethodName: purchase_ammo
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114000013500322066
@@ -1179,6 +1189,7 @@ MonoBehaviour:
     m_stats: {fileID: 0}
     m_construction: {fileID: 0}
     m_inventory: {fileID: 0}
+    m_playerhealth: {fileID: 0}
     m_PlayerNumber: 0
 --- !u!114 &114000013514318632
 MonoBehaviour:
@@ -1277,7 +1288,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Purchase
 
-    Weapon'
+    Handgun'
 --- !u!114 &114000013790378648
 MonoBehaviour:
   m_ObjectHideFlags: 1
