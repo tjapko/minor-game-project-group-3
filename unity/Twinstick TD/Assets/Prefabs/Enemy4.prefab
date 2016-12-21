@@ -221,9 +221,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_hitEnemyCanvasPrefab: {fileID: 1000014289387730, guid: 5bf9826c3300eab429f0e67a4fcdb4f9,
     type: 2}
-  m_damageToTowerSec: 20
-  m_damageToPlayerSec: 20
-  m_StartingHealth: 20
+  m_damageToTowerSec: 5
+  m_damageToPlayerSec: 5
+  m_StartingHealth: 10
   m_Slider: {fileID: 114000011600059752}
   m_FillImage: {fileID: 114000010710730168}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
