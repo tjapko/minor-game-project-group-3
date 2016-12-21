@@ -36,13 +36,14 @@ public class PlayerInventory : MonoBehaviour {
     //Function update
     void Update()
     {
-        if (Input.GetKeyDown("q"))
+		float scroll = Input.GetAxis("Mouse ScrollWheel");
+		if (scroll > 0)
         {
-            swapUp();
+			swapUp();
         }
 
-        if (Input.GetKeyDown("e"))
-        {
+		if (scroll < 0)
+		{
             swapDown();
         }
     }
