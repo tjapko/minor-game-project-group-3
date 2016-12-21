@@ -1106,7 +1106,7 @@ GameObject:
   - 222: {fileID: 422470887}
   - 114: {fileID: 422470886}
   m_Layer: 5
-  m_Name: CreditText
+  m_Name: ControlsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1153,7 +1153,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
@@ -1162,23 +1162,23 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "# Controls instruction\n\n// Moving character:\n(w): up\n(s): down\n(a):
-    left\n(d): right\n\n// Orientation character:\nThe character will face every direction
-    where the (mouse is pointing at).\n\n// Shooting:\nClick the (left-mouse button)
-    for shooting bullets.\n\n// Switching weapons:\nPress (e) for changing the weapons-order
-    (in the inventory) clockwise.\nPress (q) for chagning the weapons-order (in the
-    inventory) anti-clockwise.\n\n// Self-reloading:\nPress (r) to reload the weapon.\n\n//
-    Entering and leaving the shop:\nTo enter the shop you need to press (f), to close
-    the purchasing window press (esc)/(f) or just leave the shop.\n\n// purchasing
-    weapons and ammo:\nJust press the button for purchasing the items.\n\n// Placing
-    Power-Ups:\nBefore every wave there is a construction-phase, in which it is possible
-    to place power-ups.\n\nFor placing a Wall: press (1) for picking up the item,
-    and press (1) a second time for releasing the item at the mouse-position. \n\nFor
-    placing a Turret: press (2) for picking up the item, and press (2) a second time
-    for releasing the item at the mouse-position. \n\nFor placing a CarrotField: press
-    (3) for picking up the item, and press (3) a second time for releasing the item
-    at the mouse-position. \n\nFor placing Mud: press (4) for picking up the item,
-    and press (4) a second time for releasing the item at the mouse-position. "
+  m_Text: "Moving character:\n(w): up, (s): down, (a): left, (d): right\n\nOrientation
+    character:\nThe character will face every direction where the (mouse is pointing
+    at).\n\nShooting:\nClick the (left-mouse button) for shooting bullets.\n\nSwitching
+    weapons:\nPress (e) for changing the weapons-order (in the inventory) clockwise.\nPress
+    (q) for chagning the weapons-order (in the inventory) anti-clockwise.\n\nSelf-reloading:\nPress
+    (r) to reload the weapon.\n\nEntering and leaving the shop:\nTo enter the shop
+    you need to press (f), to close the purchasing window press (esc)/(f) or just
+    leave the shop.\n\nPurchasing weapons and ammo:\nJust press the button for purchasing
+    the items.\n\nPlacing Power-Ups:\nBefore every wave there is a construction-phase,
+    in which it is possible to place power-ups.\n\nFor placing a Wall: press (1) for
+    picking up the item, and press (1) a second time for releasing the item at the
+    mouse-position. \n\nFor placing a Turret: press (2) for picking up the item, and
+    press (2) a second time for releasing the item at the mouse-position. \n\nFor
+    placing a CarrotField: press (3) for picking up the item, and press (3) a second
+    time for releasing the item at the mouse-position. \n\nFor placing Mud: press
+    (4) for picking up the item, and press (4) a second time for releasing the item
+    at the mouse-position. "
 --- !u!222 &422470887
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1525,7 +1525,7 @@ GameObject:
   - 222: {fileID: 748332694}
   - 114: {fileID: 748332693}
   m_Layer: 5
-  m_Name: CreditsLabel
+  m_Name: ControlsLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1581,7 +1581,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Controls
+  m_Text: 'Controls Instruction
+
+'
 --- !u!222 &748332694
 CanvasRenderer:
   m_ObjectHideFlags: 0
