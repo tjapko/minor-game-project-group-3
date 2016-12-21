@@ -16,7 +16,7 @@ public class PlayerInventory : MonoBehaviour {
     void Start ()
     {
 
-        //.................. Weapon(name              , id, description      , iconname , price , itemtype               ,  fireratef , launchforcef , maxDamagef, reloadTimef, clipsize ,  ammo , ammoInClip)
+        //.................. Weapon(name              ,id , description      , iconname , price , itemtype               ,  fireratef , launchforcef , maxDamagef, reloadTimef, clipsize ,  ammo , ammoInClip)
         Weapon weapon1 = new Weapon("Default Weapon"  , 1 , "Default weapon!", "Weapon1", 100   , Weapon.ItemType.HandGun, 10f        , 35f          , 1f       , 0.1f       , 20        , 1000000    , 20);
         Weapon weapon2 = new Weapon("Default Weapon 2", 2 , "Default weapon!", "Weapon2", 200   , Weapon.ItemType.Shotgun, 5.0f       , 50f          , 2f       , 0.5f       , 10        , 1000000    , 10);
         Weapon weapon3 = new Weapon("Default Weapon 3", 3 , "Default weapon!", "Weapon3", 300   , Weapon.ItemType.Sniper , 0.5f       , 100f         , 10f      , 1.0f       , 5         , 1000000    , 5 );
