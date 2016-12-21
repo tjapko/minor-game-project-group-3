@@ -23,7 +23,7 @@ public class WaveManager
     Grid grid;
     public LayerMask unwalkableMask;
     public float nodeRadius;
-	public int numberEnemiesPerWave = 25; //Start amount of enemies per wave
+	public int numberEnemiesPerWave = 100; //Start amount of enemies per wave
     public double baseDistanceProportion = 0.2; // minimal distance to travel for each enemy
 
     //Private variables
@@ -51,7 +51,7 @@ public class WaveManager
         this.m_gridprefab = gridprefab;
 
         this.m_wavenumber = 0;
-        this.numberEnemiesPerWave = 10;
+        this.numberEnemiesPerWave = 100;
         enemy_number = 0;
         m_enemywave = new List<EnemyManager>();
     }
@@ -159,7 +159,7 @@ public class WaveManager
         int enemies_spawned = 0;
         while (true)
         {
-            if(enemiesPresent() < m_number_enemies * 0.4)
+            if(enemiesPresent() < m_number_enemies * 1)
             {
                 RouletteWheelSpawnEnemy();
                 enemies_spawned++;
