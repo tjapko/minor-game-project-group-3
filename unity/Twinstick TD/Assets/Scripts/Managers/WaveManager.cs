@@ -159,13 +159,21 @@ public class WaveManager
 		GameObject newinstance = GameObject.Instantiate (Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
 
 		if (Enemyprefab.Equals (m_Enemyprefab1)) {
-			m_enemywave.Add (new Enemie1 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+            Enemie1 instance = new Enemie1(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
+            instance.health.setMaxHealth(sethealt());
+            m_enemywave.Add (instance);
 		} else if (Enemyprefab.Equals (m_Enemyprefab2)) {
-			m_enemywave.Add (new Enemie2 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+            Enemie2 instance = new Enemie2(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
+            instance.health.setMaxHealth(sethealt());
+            m_enemywave.Add (instance);
 		} else if (Enemyprefab.Equals (m_Enemyprefab3)) {
-			m_enemywave.Add (new Enemie3 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+            Enemie3 instance = new Enemie3(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
+            instance.health.setMaxHealth(sethealt());
+            m_enemywave.Add (instance);
 		} else if (boss) {
-			m_enemywave.Add (new Enemie4 (newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number));
+            Enemie4 instance = new Enemie4(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
+            instance.health.setMaxHealth(sethealt());
+            m_enemywave.Add (instance);
 		}
 
 		//if base is dead and enemy is not already moving to player -> go to player
@@ -305,4 +313,9 @@ public class WaveManager
 		return time;
 	}
 
+    private int sethealt()
+    {
+        //Example algorithm
+        return (int) (Mathf.Pow(1.4f , m_wavenumber));
+    }
 }

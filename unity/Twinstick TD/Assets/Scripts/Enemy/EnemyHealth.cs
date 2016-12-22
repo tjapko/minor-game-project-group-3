@@ -153,4 +153,11 @@ public class EnemyHealth : MonoBehaviour
     {
         m_lasthit = playernumber;
     }
+
+    //Set max health of player
+    public void setMaxHealth(int value)
+    {
+        m_StartingHealth = value;
+        Start();
+    }
 }
