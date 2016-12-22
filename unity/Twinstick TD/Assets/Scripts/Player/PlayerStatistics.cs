@@ -8,7 +8,7 @@ public class PlayerStatistics : MonoBehaviour {
 
     //Public variables
     public int m_playernumber;  // Current player number
-    public int m_playerstartcurrency = 10000;   //Start currency of player
+    public int m_playerstartcurrency = 1000;   //Start currency of player
 
     //Private variables
 
@@ -127,4 +127,11 @@ public class PlayerStatistics : MonoBehaviour {
 //			Debug.Log ("met Salesman: " + m_metSalesmanAmount.ToString() +" times");
 		}
 	}
+
+    public void reset()
+    {
+        m_kills = 0;
+        m_currency = m_playerstartcurrency;
+
+    }
 }

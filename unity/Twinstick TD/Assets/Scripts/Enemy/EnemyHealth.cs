@@ -138,7 +138,7 @@ public class EnemyHealth : MonoBehaviour
 
         if(playermanager != null)
         {
-            playermanager.m_stats.addCurrency(100); //Reference needs to be set
+            playermanager.m_stats.addCurrency(50); //Reference needs to be set
             playermanager.m_stats.addKill();
         }
 
@@ -152,5 +152,12 @@ public class EnemyHealth : MonoBehaviour
     public void setLastHit(int playernumber)
     {
         m_lasthit = playernumber;
+    }
+
+    //Set max health of player
+    public void setMaxHealth(int value)
+    {
+        m_StartingHealth = value;
+        Start();
     }
 }
