@@ -328,7 +328,8 @@ MonoBehaviour:
     type: 2}
   enemySource: {fileID: 82000010870966878}
   deathSound: {fileID: 8300000, guid: fe1c76f527b55fa47b58fa9bcf795b0d, type: 3}
-  m_damageToTowerSec: 5
+  m_damageToTowerSec: 25
+  m_towerpersecond: 2
   m_damageToPlayerSec: 5
   m_StartingHealth: 10
   m_Slider: {fileID: 114000011600059752}

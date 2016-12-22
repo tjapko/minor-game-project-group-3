@@ -18,6 +18,7 @@ public class EnemyHealth : MonoBehaviour
     public AudioClip deathSound;
     //Public variables
 	public float m_damageToTowerSec;					//damage to tower per second
+    public float m_towerpersecond ;
 	public float m_damageToPlayerSec;					//damage to player per second
 	public float m_StartingHealth;						//Start health of enemy
     public Slider m_Slider;                           	// The slider to represent how much health the enemy currently has.
@@ -59,7 +60,7 @@ public class EnemyHealth : MonoBehaviour
 			if (targetRigidbody)
 			{
 				basehealth = targetRigidbody.GetComponent<Basehealth>();
-				InvokeRepeating("baseDamage", 0f, 1f);
+				InvokeRepeating("baseDamage", 0f, m_towerpersecond);
 				playerUnit.baseHit = true;
 			}
 		}

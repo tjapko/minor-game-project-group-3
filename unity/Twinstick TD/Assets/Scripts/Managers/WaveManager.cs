@@ -24,7 +24,7 @@ public class WaveManager
     Grid grid;
     public LayerMask unwalkableMask;
     public float nodeRadius;
-	public int numberEnemiesPerWave = 25; 		//Start amount of enemies per wave
+	public int numberEnemiesPerWave; 		//Start amount of enemies per wave
     public double baseDistanceProportion = 0.2; // minimal distance to travel for each enemy
 	public bool baseDead = false;				// if baseDead, all enemies walk towards player
 
@@ -39,7 +39,7 @@ public class WaveManager
     private double m_proportionEnemy2 = 0.4; // proportion of choosing enemy2 each spawning 
     private double m_proportionEnemy3; 		 // proportion of choosing enemy3 each spawning 
     private int m_numberOfWavesPerBoss = 5;  // each m_numberOfWavesPerBoss waves a Boss is spawned
-	private float m_scaleEnemies = 100.0f;
+	private float m_scaleEnemies = 50.0f;
 	// time between spawning variables:
 	private float time;							// total spawnTime of the wave 
 	private float m_startSpawnDelayTime; // starting spawnTime
@@ -59,7 +59,7 @@ public class WaveManager
         this.m_gridprefab = gridprefab;
 
         this.m_wavenumber = 0;
-		this.numberEnemiesPerWave = 10;
+		this.numberEnemiesPerWave = 6;
         enemy_number = 0;
         m_enemywave = new List<EnemyManager>();
 		this.m_startSpawnDelayTime = this.numberEnemiesPerWave*0.5f;

@@ -26,7 +26,7 @@ GameObject:
   - 136: {fileID: 136000013389974852}
   - 114: {fileID: 114000011854252460}
   m_Layer: 10
-  m_Name: bullet
+  m_Name: bulletTurret
   m_TagString: PlayerShell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,8 +138,8 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.31
+  m_Pitch: 3
   Loop: 0
   Mute: 0
   Spatialize: 0

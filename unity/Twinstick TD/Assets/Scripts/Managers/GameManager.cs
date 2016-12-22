@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
             {
                 //Check if player(s) are using the shop
                 GameObject shopUI = GameObject.FindWithTag("ShopUI");
-                if (!shopUI.activeSelf)
+                if (shopUI == null || !shopUI.activeSelf)
                 {
                     gamepause = !gamepause;
                 }
