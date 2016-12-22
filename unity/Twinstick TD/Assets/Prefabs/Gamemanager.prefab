@@ -212,7 +212,7 @@ MonoBehaviour:
   gongSource: {fileID: 82000011364484344}
   gongSound: {fileID: 8300000, guid: 73e875b1afb672e43b0a803abb4a21d8, type: 3}
   m_uiprefab: {fileID: 1000011379212736, guid: 55b65d527b3aec941a018aa2b6fbe275, type: 2}
-  m_baseprefab: {fileID: 1000013595951870, guid: 1b1b7eb4c86b8474f8f9ca5a0780749b,
+  m_baseprefab: {fileID: 1000011563660048, guid: 1b1b7eb4c86b8474f8f9ca5a0780749b,
     type: 2}
   m_Playerprefab: {fileID: 1000012244867938, guid: 6526df5f06f78a5438cb83f5730a0724,
     type: 2}
