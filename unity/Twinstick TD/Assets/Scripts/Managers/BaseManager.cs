@@ -25,16 +25,13 @@ public class BaseManager
     //Spawn base
     public void spawnBase()
     {
-        m_Instance = GameObject.Instantiate(m_baseprefab, m_SpawnPoint.position, m_SpawnPoint.rotation) as GameObject;
-        m_SpawnPoint = m_Instance.transform;
-        //m_basehealth = m_Instance.GetComponent<Basehealth>();
-    }
-
-    //Destroy base
-    public void destroyBase()
-    {
-		m_Instance.SetActive (false);
-		m_Instance = null;
+		if (m_Instance != null) {
+			m_Instance.GetComponent<Basehealth> ().OnEnable();
+		} else {
+        	m_Instance = GameObject.Instantiate(m_baseprefab, m_SpawnPoint.position, m_SpawnPoint.rotation) as GameObject;
+        	m_SpawnPoint = m_Instance.transform;
+        	//m_basehealth = m_Instance.GetComponent<Basehealth>();
+		}
     }
 
     //Reset function

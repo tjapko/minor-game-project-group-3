@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
 
 	public void Start()
 	{
-
+		m_Dead = false;
 		// When the enemy is enabled, reset the enemy's health
 		m_CurrentHealth = m_StartingHealth;
 		// Update the health slider's value and color.

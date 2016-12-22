@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     private bool gamepause;                     // Boolean if game is paused
     private static bool wavephase;                     // Boolean if game is in wavephase or construction phase 
 
+
     //Start
     private void Start()
     {
@@ -75,7 +76,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GameLoop());
 
         m_wave = new WaveManager(m_Enemyprefab1, m_Enemyprefab2, m_Enemyprefab3, m_Enemyprefab4, m_Enemyspawnpoint, m_Basespawnpoint, m_players.m_playerlist[0].m_Instance.transform, m_gridPrefab);
-
 
         backgroundSource.clip = backgroundSounds[Random.Range(0, backgroundSounds.Length)];
         backgroundSource.Play();
@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
         m_uiscript.UpdateUI();
 
 		// if base is dead, all existing enemies move to player
-		if (!m_wave.baseDead && m_base.m_Instance == null) {
+		if (!m_wave.baseDead && m_base.m_Instance.activeSelf == false) {
 			m_wave.baseDead = true;
 			m_wave.enemiesToPlayer ();
 		}
@@ -137,10 +137,19 @@ public class GameManager : MonoBehaviour
     // Starting game
     private IEnumerator Startgame()
     {
+		// when pressed restart (m_wave not build yet), destroy enemies
+		if (m_wave != null) {
+			m_wave.DestroyEnemies ();
+		}
+
+
         //Spawning base and users
         m_players.resetAllPlayers();
-        m_players.destroyPlayers();
-        m_players.spawnPlayers();
+        //m_players.destroyPlayers();
+		if (m_players.m_playerlist.Count == 0) {
+			m_players.spawnPlayers ();
+		}
+		//spawn base
         m_base.spawnBase();
 
         //Set camera
@@ -204,6 +213,12 @@ public class GameManager : MonoBehaviour
             // Return next frame without delay
             yield return null;
         }
+
+		//Destroy hitcanvas when game over
+		GameObject[] canvasList = GameObject.FindGameObjectsWithTag ("HitCanvas");
+		foreach (GameObject element in canvasList) {
+			Destroy (element);
+		}
 
         //Player has lost
         gameover = true;

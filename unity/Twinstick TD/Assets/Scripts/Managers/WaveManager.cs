@@ -217,6 +217,7 @@ public class WaveManager
     //Remove dead enemies
     public void DestroyEnemies()
     {
+		
 		int n = m_enemywave.Count;
         for (int i = 0; i < n; i++)
         {
@@ -224,6 +225,7 @@ public class WaveManager
             m_enemywave.RemoveAt(0);
         }
 
+		baseDead = false;
     }
 
     //Enable control of enemies

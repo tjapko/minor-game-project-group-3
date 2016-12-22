@@ -23,8 +23,10 @@ public class Basehealth : MonoBehaviour {
     public bool m_Dead = false;                            //Boolean if tower is dead
     
     // OnEnable
-    private void OnEnable()
+    public void OnEnable()
     {   
+		m_Dead = false;
+		gameObject.SetActive (true);
         //Set starting variables
         m_CurrentHealth = m_StartingHealth;
 		SetHealthUI();
@@ -35,19 +37,19 @@ public class Basehealth : MonoBehaviour {
     //Take damage function
     public void TakeDamage(float amount)
     {
-		createHitMark(m_hitBaseCanvasPrefab, -amount);
-        //Amount must be smaller than zero
-        if (amount > 0)
-        {
-            m_CurrentHealth -= amount;
-            SetHealthUI();
-        }
-        //Check if base has less than 0 health
-        if (m_CurrentHealth <= 0f && !m_Dead)
-        {
-            m_CurrentHealth = 0f;
-			OnDeath ();
-        }
+		if (gameObject.activeInHierarchy == true) {
+			createHitMark (m_hitBaseCanvasPrefab, -amount);
+			//Amount must be smaller than zero
+			if (amount > 0) {
+				m_CurrentHealth -= amount;
+				SetHealthUI ();
+			}
+			//Check if base has less than 0 health
+			if (m_CurrentHealth <= 0f && !m_Dead) {
+				m_CurrentHealth = 0f;
+				OnDeath ();
+			}
+		}
     }
 
     //Heal base
@@ -77,7 +79,6 @@ public class Basehealth : MonoBehaviour {
     {
         m_Dead = true;
         gameObject.SetActive(false);
-		Destroy (gameObject);
     }
 
     //Spawn hitmark
