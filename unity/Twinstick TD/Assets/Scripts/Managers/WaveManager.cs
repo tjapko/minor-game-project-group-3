@@ -168,7 +168,7 @@ public class WaveManager
         //Spawning algorithm (example)
         int enemies_spawned = 0;
 		time = spawnDelayTime ();
-		Debug.Log ("wave:" + m_wavenumber + ", spawing time:  " + time + ", amount of enemies: " + m_number_enemies);
+//		Debug.Log ("wave:" + m_wavenumber + ", spawing time:  " + time + ", amount of enemies: " + m_number_enemies);
 	    while (true)
         {
             RouletteWheelSpawnEnemy();
