@@ -16,6 +16,7 @@ public class UserObjectStatistics : MonoBehaviour {
     private int m_health;        //Current health of the object
     private PlayerConstruction.PlayerObjectType m_object_type;   //Type of object (set by PlayerConstruction (script))
     private bool object_placed; //Boolean if object is placed
+    private bool player_present;    //Boolean if player is standing near the object
     private List<GameObject> colliding_objects;  //List of objects colliding with this object
     private List<GameObject> colliding_markers;  //List of markers colliding with this object
     private List<string> m_allowedtags;  //Tags of objects that are allowed to intersect
@@ -25,14 +26,17 @@ public class UserObjectStatistics : MonoBehaviour {
     {
         m_health = m_maxhealth;
         object_placed = false;
+        player_present = false;
         colliding_objects = new List<GameObject>();
         colliding_markers = new List<GameObject>();
+
+        InvokeRepeating("checkforPlayer", 0f, 0.1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     //Object is intersecting with the to be placed object
@@ -55,6 +59,29 @@ public class UserObjectStatistics : MonoBehaviour {
         //Check for markers leaving this object
         checkExitMarkers(other);
 
+    }
+
+    // Check if player is standing near turret
+    private void checkforPlayer()
+    {
+        bool playerisPresent = false;
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject player in players)
+        {
+            if(Vector3.Distance(player.transform.position, gameObject.transform.position) < 2)
+            {
+                playerisPresent = true;
+                break;
+            }
+        }
+
+        if (playerisPresent)
+        {
+            player_present = true;
+        } else
+        {
+            player_present = false;
+        }
     }
 
     // Function add health
@@ -85,7 +112,7 @@ public class UserObjectStatistics : MonoBehaviour {
     //Get ground clear
     public bool getGroundClear()
     {
-        return colliding_objects.Count == 0;
+        return (colliding_objects.Count == 0) && !player_present;
     }
 
     // Set owner of object (executed by the PlayerConstructon script)
@@ -147,6 +174,11 @@ public class UserObjectStatistics : MonoBehaviour {
     public void setPlacement(bool status)
     {
         object_placed = status;
+
+        if (status)
+        {
+            CancelInvoke("checkforPlayer");
+        }
     }
 
     //Get the object type
