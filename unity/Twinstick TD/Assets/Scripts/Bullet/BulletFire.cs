@@ -103,7 +103,7 @@ public class BulletFire : MonoBehaviour
 
             if (reload_weapon.equals(currentWeapon))
             {
-                if (currentWeapon.ammo > currentWeapon.clipSize)
+                if ((currentWeapon.ammo + currentWeapon.ammoInClip) >= currentWeapon.clipSize)
                 {
                     currentWeapon.ammo -= (currentWeapon.clipSize - currentWeapon.ammoInClip);
 
@@ -111,8 +111,9 @@ public class BulletFire : MonoBehaviour
                 }
                 else
                 {
-                    currentWeapon.ammoInClip = currentWeapon.ammo;
+                    currentWeapon.ammoInClip += currentWeapon.ammo;
                     currentWeapon.ammo = 0;
+
                 }
                 gunSource.clip = reloadingSound;
                 gunSource.Play();
