@@ -48,16 +48,31 @@ public class BulletFire : MonoBehaviour
     {
 
         currentWeapon = playerinventory.inventory[0];
-       
-        if (Input.GetButtonDown(m_FireButton))
+        if (currentWeapon.itemtype == Weapon.ItemType.MachineGun)
         {
-            Fire();
+            if (Input.GetButton(m_FireButton))
+            {
+                Fire();
+            }
+
+            if (Input.GetKeyUp(reloadButton))
+
+            {
+                StartCoroutine(Reload());
+            }
         }
-
-        if (Input.GetKeyUp(reloadButton))
-
+        else
         {
-            StartCoroutine(Reload());
+            if (Input.GetButtonDown(m_FireButton))
+            {
+                Fire();
+            }
+
+            if (Input.GetKeyUp(reloadButton))
+
+            {
+                StartCoroutine(Reload());
+            }
         }
 		m_timer += Time.deltaTime;  // the m_timer is updated 
     }
@@ -72,7 +87,7 @@ public class BulletFire : MonoBehaviour
 		
 		if (m_timer >= 1.0f / currentWeapon.fireRate) { 
 			
-			if (currentWeapon.itemtype == Weapon.ItemType.HandGun) {
+			if (currentWeapon.itemtype == Weapon.ItemType.HandGun || currentWeapon.itemtype == Weapon.ItemType.MachineGun) {
 				FireHandGun ();
 				
 			} else if (currentWeapon.itemtype == Weapon.ItemType.Shotgun) {
