@@ -138,7 +138,7 @@ public class EnemyHealth : MonoBehaviour
 
         if(playermanager != null)
         {
-            playermanager.m_stats.addCurrency(100); //Reference needs to be set
+            playermanager.m_stats.addCurrency(50); //Reference needs to be set
             playermanager.m_stats.addKill();
         }
 

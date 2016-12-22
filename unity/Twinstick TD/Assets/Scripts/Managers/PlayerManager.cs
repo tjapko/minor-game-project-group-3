@@ -71,6 +71,8 @@ public class PlayerManager
         m_construction.removePlayerConstructions();
 
 		m_playerhealth.Start();
+        m_stats.reset();
+        m_inventory.reset();
 
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
