@@ -122,10 +122,7 @@ public class GameManager : MonoBehaviour
     {
         // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
         yield return StartCoroutine(Startgame());
-        // play sound
-        
-
-
+  
         //Play round
         yield return StartCoroutine(wavePhase());
         

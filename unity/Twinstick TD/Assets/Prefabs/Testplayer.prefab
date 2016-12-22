@@ -298,8 +298,8 @@ Rigidbody:
   m_GameObject: {fileID: 1000012244867938}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 1
+  m_Drag: 10
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -602,7 +602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playernumber: 0
-  m_playerstartcurrency: 100000
+  m_playerstartcurrency: 1000
 --- !u!114 &114000013046789916
 MonoBehaviour:
   m_ObjectHideFlags: 1
