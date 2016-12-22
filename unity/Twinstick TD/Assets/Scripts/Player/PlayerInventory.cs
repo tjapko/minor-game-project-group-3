@@ -15,11 +15,10 @@ public class PlayerInventory : MonoBehaviour {
     //Fill the inventory when the player is initialized
     void Start ()
     {
-
-        //.................. Weapon(name              ,id , description      , iconname , price , itemtype               ,  fireratef , launchforcef , maxDamagef, reloadTimef, clipsize ,  ammo , ammoInClip)
-        Weapon weapon1 = new Weapon("Default Weapon"  , 1 , "Default weapon!", "Weapon1", 100   , Weapon.ItemType.HandGun, 10f        , 35f          , 1f       , 0.1f       , 20        , 1000000    , 20  , 2f);
-        Weapon weapon2 = new Weapon("Default Weapon 2", 2 , "Default weapon!", "Weapon2", 200   , Weapon.ItemType.Shotgun, 5.0f       , 50f          , 2f       , 0.5f       , 10        , 1000000    , 10  , 1f );
-        Weapon weapon3 = new Weapon("Default Weapon 3", 3 , "Default weapon!", "Weapon3", 300   , Weapon.ItemType.Sniper , 0.5f       , 100f         , 10f      , 1.0f       , 5         , 1000000    , 5   , 2f );
+		//.................. Weapon(name              , id, description      , iconname , price , itemtype               ,  fireratef , launchforcef , maxDamagef, reloadTimef, clipsize ,  ammo , ammopriceperclip, ammoInClip, maxAmmo)
+		Weapon weapon1 = new Weapon("Default Weapon"  , 1 , "Default weapon!", "Weapon1", 100   , Weapon.ItemType.HandGun, 1000f      , 35f          , 1f       , 0.1f       , 20        , 50    , 50				,20 		,500     , 2f);
+		Weapon weapon2 = new Weapon("Default Weapon 2", 2 , "Default weapon!", "Weapon2", 200   , Weapon.ItemType.Shotgun, 1f         , 50f          , 2f       , 0.5f       , 10        , 20    , 30				,10			,200     , 1f);
+		Weapon weapon3 = new Weapon("Default Weapon 3", 3 , "Default weapon!", "Weapon3", 300   , Weapon.ItemType.Sniper , 0.75f      , 100f         , 10f      , 1.0f       , 5         , 10    , 20				,5 			,50      , 2f);
 
 		//First add default
         inventory.Add(weapon1);
@@ -36,13 +35,14 @@ public class PlayerInventory : MonoBehaviour {
     //Function update
     void Update()
     {
-        if (Input.GetKeyDown("q"))
+		float scroll = Input.GetAxis("Mouse ScrollWheel");
+		if (scroll > 0)
         {
-            swapUp();
+			swapUp();
         }
 
-        if (Input.GetKeyDown("e"))
-        {
+		if (scroll < 0)
+		{
             swapDown();
         }
     }

@@ -38,7 +38,7 @@ public class ShopUIScript : MonoBehaviour {
 	void Update () {
         //If the UI is active update the list of weapons and ammo
         if(gameObject.activeSelf)
-        {
+		{
             //Set the lists
             weaponlist = m_shopscript.weaponsforsale;
             ammolist = m_shopscript.ammoforsale;
@@ -64,7 +64,7 @@ public class ShopUIScript : MonoBehaviour {
     //Function to purchase weapon (button)
     public void purchase_weapon(int index)
     {
-        //First check if weapon exists in the list
+		//First check if weapon exists in the list
         if (weaponlist.Count >= index)
         {
             //Check if player has empty slot
@@ -93,8 +93,43 @@ public class ShopUIScript : MonoBehaviour {
         }
     }
 
+	//function that sets index to right index because of scrolling through weapons
+	private int setIndex(int change, int index){
+		if (change == 1){
+			index++;
+			if (index == 3){
+				index = 0;
+			}
+		} else if (change == 2){
+			index = index+2;
+			if (index == 3){
+				index = 0;
+			} else if (index == 4){
+				index = 1;
+			}
+		}
+		return index;
+	}
+
     //Function to purchase ammo (button)
-    public void purchase_ammo() {
-        m_currentplayer.m_inventory.inventory[0].ammo += 10;
+	public void purchase_ammo(int index) {
+		//check where what weapon is in the inventory
+		int change = 0;
+		for (int i = 0; i < 3; i++) {
+			if (m_currentplayer.m_inventory.inventory [i].itemtype == weaponlist [0].itemtype) {
+				change = i;
+			}
+		}
+
+		index = setIndex (change, index);
+
+		// check whether player got enough money & doesn't have max ammo already
+		if (m_currentplayer.m_stats.getCurrency () >= weaponlist [index].ammoprice && (m_currentplayer.m_inventory.inventory[index].ammo + weaponlist[index].ammoInClip) < weaponlist[index].maxAmmo) {
+			//decrease currency
+			m_currentplayer.m_stats.addCurrency(-weaponlist[index].ammoprice);
+
+			//add ammo (amount that goes in one clip) to certain weapon
+			m_currentplayer.m_inventory.inventory[index].ammo += weaponlist[index].ammoInClip;
+		}
     }
 }

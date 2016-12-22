@@ -70,6 +70,7 @@ public class MapUIScript {
         SetCurrencyText();
         SetKillsText();
         updateWeaponIcon();
+
     }
 
     // Changing UI back and fourth between phases
@@ -170,7 +171,7 @@ public class MapUIScript {
                 m_weaponplayer1.transform.GetChild(0).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 0);
                 m_weaponplayer1.transform.GetChild(1).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 1);
                 m_weaponplayer1.transform.GetChild(2).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 2);
-                m_weaponplayer1.transform.GetChild(3).GetComponent<Text>().text = m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammoInClip + "/" + m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammo;
+				m_weaponplayer1.transform.GetChild(3).GetComponent<Text>().text = m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammoInClip + "/" + m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammo;
             }
 
             if (m_usermanager.m_playerlist.Count > 1)

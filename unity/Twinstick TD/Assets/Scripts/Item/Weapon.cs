@@ -15,19 +15,23 @@ public class Weapon : Item {
     public int clipSize;            // the size of the clip 
     public float reloadTime;        // the time it takes to reload 
     public int ammo;                // the ammo there is left (excluding the ammoInClip)
+	public int ammoprice;			// the price for new ammo !!per clip!!
     public int ammoInClip;          // the ammo in the clip 
-
+	public int maxAmmo;				// max ammo player can carry
+    
     //Constructor
-    // weapon(name , id , description , iconname ,price ,itemtype, fireratef , launchforcef , maxDamagef, reloadTimef,clipsize ,  ammo , ammoInClip, bulletLifeTime)
-    public Weapon(string name, int id, string description, string iconname,  int price,ItemType type, float _fireRate, float _launchForce, float _maxDamage, float _reloadTime, int _clipSize, int _ammo, int _ammoInClip , float _bulletLifeTime) : base(name, id, description, iconname, price, type)
+    // weapon(name , id , description , iconname ,price ,itemtype, fireratef , launchforcef , maxDamagef, reloadTimef,clipsize ,  ammo , ammoInClip)
+	public Weapon(string name, int id, string description, string iconname,  int price, ItemType type, float _fireRate, float _launchForce, float _maxDamage, float _reloadTime, int _clipSize, int _ammo, int _ammoprice, int _ammoInClip, int _maxAmmo, float _bulletLifeTime) : base(name, id, description, iconname, price, type)
     {
         fireRate = _fireRate;
         launchForce = _launchForce;
         maxDamage = _maxDamage;
         clipSize = _clipSize;
         ammo = _ammo;
+		ammoprice = _ammoprice;
         ammoInClip = _ammoInClip;
         reloadTime = _reloadTime;
+		maxAmmo = _maxAmmo;
         bulletLifeTime = _bulletLifeTime;
     }
 

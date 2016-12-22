@@ -27,10 +27,14 @@ public class BulletExplosion : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyHealth>().setLastHit(m_playernumber);
             other.gameObject.GetComponent<EnemyHealth>().TakeDamage(m_MaxDamage);
-        }
+
+		}
+		if (!other.gameObject.CompareTag("River") && !other.gameObject.CompareTag("Shop")) {
+			// Destroy the shell.
+			Destroy(gameObject);
+		}
               
-        // Destroy the shell.
-        Destroy(gameObject);
+
     }
 
     //Set player number

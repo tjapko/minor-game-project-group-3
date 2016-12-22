@@ -105,7 +105,7 @@ GameObject:
   - 23: {fileID: 135120919}
   m_Layer: 9
   m_Name: Cube (15)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -389,7 +389,7 @@ GameObject:
   - 23: {fileID: 302516523}
   m_Layer: 9
   m_Name: Cube (6)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -473,7 +473,7 @@ GameObject:
   - 23: {fileID: 316336157}
   m_Layer: 9
   m_Name: Cube (22)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -704,7 +704,7 @@ GameObject:
   - 23: {fileID: 372400076}
   m_Layer: 9
   m_Name: Cube (16)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -788,7 +788,7 @@ GameObject:
   - 23: {fileID: 383860554}
   m_Layer: 9
   m_Name: Cube (7)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -974,7 +974,7 @@ GameObject:
   - 64: {fileID: 502349189}
   m_Layer: 9
   m_Name: Rivercollider
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1218,6 +1218,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012813041466, guid: 554d735d61e85354082e2f240e04326d, type: 2}
+      propertyPath: m_TagString
+      value: Shop
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 554d735d61e85354082e2f240e04326d, type: 2}
   m_IsPrefabParent: 0
@@ -1359,7 +1363,7 @@ GameObject:
   - 23: {fileID: 742937266}
   m_Layer: 9
   m_Name: Cube (24)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1443,7 +1447,7 @@ GameObject:
   - 23: {fileID: 757471252}
   m_Layer: 9
   m_Name: Cube (8)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1601,7 +1605,7 @@ GameObject:
   - 23: {fileID: 817722356}
   m_Layer: 9
   m_Name: Cube (20)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1898,7 +1902,7 @@ GameObject:
   - 23: {fileID: 952425647}
   m_Layer: 9
   m_Name: Cube (19)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2232,7 +2236,7 @@ GameObject:
   - 23: {fileID: 1083572590}
   m_Layer: 9
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2316,7 +2320,7 @@ GameObject:
   - 23: {fileID: 1114183792}
   m_Layer: 9
   m_Name: Cube (5)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2400,7 +2404,7 @@ GameObject:
   - 23: {fileID: 1114988985}
   m_Layer: 9
   m_Name: Cube (14)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2484,7 +2488,7 @@ GameObject:
   - 23: {fileID: 1151662126}
   m_Layer: 9
   m_Name: Cube (13)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2568,7 +2572,7 @@ GameObject:
   - 23: {fileID: 1250083996}
   m_Layer: 9
   m_Name: Cube (4)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2678,7 +2682,7 @@ GameObject:
   - 33: {fileID: 1292495621}
   - 23: {fileID: 1292495620}
   - 64: {fileID: 1292495619}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: river
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2762,7 +2766,7 @@ GameObject:
   - 23: {fileID: 1305184100}
   m_Layer: 9
   m_Name: Cube (17)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2930,7 +2934,7 @@ GameObject:
   - 23: {fileID: 1368215090}
   m_Layer: 9
   m_Name: Cube (11)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3014,7 +3018,7 @@ GameObject:
   - 23: {fileID: 1418595149}
   m_Layer: 9
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3098,7 +3102,7 @@ GameObject:
   - 23: {fileID: 1419809334}
   m_Layer: 9
   m_Name: Cube (9)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3182,7 +3186,7 @@ GameObject:
   - 23: {fileID: 1439012687}
   m_Layer: 9
   m_Name: Cube (12)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3266,7 +3270,7 @@ GameObject:
   - 23: {fileID: 1449440998}
   m_Layer: 9
   m_Name: Cube (25)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3350,7 +3354,7 @@ GameObject:
   - 23: {fileID: 1472742377}
   m_Layer: 9
   m_Name: Cube (23)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3434,7 +3438,7 @@ GameObject:
   - 23: {fileID: 1497543918}
   m_Layer: 9
   m_Name: Cube (18)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -4168,7 +4172,7 @@ GameObject:
   - 23: {fileID: 1833466212}
   m_Layer: 9
   m_Name: Cube (21)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -4461,7 +4465,7 @@ GameObject:
   - 23: {fileID: 1957731075}
   m_Layer: 9
   m_Name: Cube (10)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -4629,7 +4633,7 @@ GameObject:
   - 23: {fileID: 2057768982}
   m_Layer: 9
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
