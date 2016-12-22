@@ -21,10 +21,15 @@ public class BulletExplosion : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyHealth>().setLastHit(m_playernumber);
             other.gameObject.GetComponent<EnemyHealth>().TakeDamage(m_MaxDamage);
+
+		}
+		if (!other.gameObject.CompareTag("River")) {
+			Debug.Log ("Destroy bullet from collision with tag: " + other.gameObject.tag);
 			Destroy(gameObject);
 		}
               
         // Destroy the shell.
+
     }
 
     //Set player number

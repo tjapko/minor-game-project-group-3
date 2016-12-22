@@ -22,6 +22,7 @@ TagManager:
   - TravellingSalesman
   - grid
   - ShopUI
+  - River
   layers:
   - Default
   - TransparentFX
