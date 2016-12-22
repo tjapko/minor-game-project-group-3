@@ -27,7 +27,7 @@ public class Weapon : Item {
         maxDamage = _maxDamage;
         clipSize = _clipSize;
         ammo = _ammo;
-		_ammoprice = _ammoprice;
+		ammoprice = _ammoprice;
         ammoInClip = _ammoInClip;
         reloadTime = _reloadTime;
 		maxAmmo = _maxAmmo;
