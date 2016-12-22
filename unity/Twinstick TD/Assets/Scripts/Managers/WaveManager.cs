@@ -8,6 +8,7 @@ public class WaveManager
 {
     //Public variables
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
+    public GameManager gameManager;
 
     public Transform m_basetarget;             //Target(s) of enemies
 	public Transform m_playerpoint;
@@ -43,6 +44,7 @@ public class WaveManager
 
     public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab)
     {
+     
         this.m_Enemyprefab1 = Enemyprefab1;
         this.m_Enemyprefab2 = Enemyprefab2;
         this.m_Enemyprefab4 = Enemyprefab4;
@@ -75,7 +77,9 @@ public class WaveManager
 
 
 		proportionEnemies (); // update the proportions of the enemies per wave
-		yield return SpawnAllEnemies(enemies);
+
+        
+        yield return SpawnAllEnemies(enemies);
 		m_wavenumber++;
     }
 

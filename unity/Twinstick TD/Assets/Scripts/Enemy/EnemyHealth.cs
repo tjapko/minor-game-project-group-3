@@ -14,6 +14,8 @@ public class EnemyHealth : MonoBehaviour
     [Header("References")]
     public GameObject m_hitEnemyCanvasPrefab;       //Reference to enemyHit canbas
 
+    public AudioSource enemySource;
+    public AudioClip deathSound;
     //Public variables
 	public float m_damageToTowerSec;					//damage to tower per second
 	public float m_damageToPlayerSec;					//damage to player per second
@@ -129,6 +131,10 @@ public class EnemyHealth : MonoBehaviour
         GameManager gamemanager = root.GetComponent<GameManager>();
         PlayerManager playermanager = gamemanager.getUserManager().m_playerlist[m_lasthit];
 
+        enemySource.transform.parent = null;
+        enemySource.clip = deathSound;
+        enemySource.Play();
+        Destroy(enemySource.gameObject , 1f);
 
         if(playermanager != null)
         {

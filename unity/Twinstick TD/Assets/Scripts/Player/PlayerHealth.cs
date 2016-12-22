@@ -9,6 +9,9 @@ public class PlayerHealth : MonoBehaviour
     //References
     public GameObject m_hitFriendlyCanvasPrefab;    //Reference to friendlyHit canvas;
 
+    public AudioSource beatSource;
+    
+
     public float m_StartingHealth;						//Start health of enemy
 	public Slider m_Slider;                           	// The slider to represent how much health the enemy currently has.
 	public Image m_FillImage;                           // The image component of the slider.
@@ -20,11 +23,26 @@ public class PlayerHealth : MonoBehaviour
 
 	public void Start()
 	{
+
 		// When the enemy is enabled, reset the enemy's health
 		m_CurrentHealth = m_StartingHealth;
 		// Update the health slider's value and color.
 		SetHealthUI();
-	}
+
+    }
+
+    public void fixedUpdate()
+    {
+        
+        if (!beatSource.isPlaying && m_CurrentHealth <= 10) {
+           
+            beatSource.Play();
+        }
+        else if (beatSource.isPlaying && m_CurrentHealth > 10)
+        {
+            beatSource.Stop();
+        }
+    }
 
 
 	private void SetHealthUI()

@@ -6,7 +6,9 @@ using UnityEngine.UI;
 /// </summary>
 public class BulletFire : MonoBehaviour
 {
-
+    public AudioSource gunSource;
+    public AudioClip reloadingSound;
+    public AudioClip emptyGunSound;
     public float maxBulletDistance;         // maximum bulletdistance (applied in Raycast shooting, the length of the ray)
     public RaycastHit RayHit;               // contains the information of the Raycast Hit
 	[HideInInspector] public int m_PlayerNumber;              // Used to identify the different players.
@@ -106,6 +108,8 @@ public class BulletFire : MonoBehaviour
                 currentWeapon.ammoInClip = currentWeapon.ammo;
                 currentWeapon.ammo = 0;
             }
+            gunSource.clip = reloadingSound;
+            gunSource.Play();
 
             weapon_reloading = true;
             yield return new WaitForSeconds(currentWeapon.reloadTime);
@@ -163,6 +167,11 @@ public class BulletFire : MonoBehaviour
                 shellInstance.velocity = currentWeapon.launchForce * m_FireTransform.forward;
             }
 
+        }
+        else
+        {
+            gunSource.clip = emptyGunSound;
+            gunSource.Play();
         }
     }
 

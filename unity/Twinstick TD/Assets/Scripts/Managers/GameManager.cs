@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     public int m_amountofplayers;               // Total amount of players that are participating
     public float m_waveDelay = 15f;              // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
+    public AudioSource backgroundSource;
+    public AudioClip[] backgroundSounds;
+    public AudioSource gongSource;
+    public AudioClip gongSound;
 
     //References
     public GameObject m_uiprefab;               // Reference to UI prefab
@@ -47,12 +51,14 @@ public class GameManager : MonoBehaviour
     //Start
     private void Start()
     {
+       
         //Setting up variables
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         //Initialize managers
 		m_travellingSalesmanManager = new TravellingSalesmanManager(m_travellingSalesman);
         m_players = new UserManager(m_Playerprefab, m_Playerspawnpoint, m_amountofplayers);
+        
 
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
 		m_gridManager = new GridManager(m_gridPrefab);
@@ -60,11 +66,19 @@ public class GameManager : MonoBehaviour
         //Initialize UI script
         m_uiscript = new MapUIScript(gameObject.GetComponent<GameManager>(), m_uiprefab, m_players);
 
+        
+
+           
+         Debug.Log("wave " + m_wave);
+        
         // Start the game
         StartCoroutine(GameLoop());
 
-		m_wave = new WaveManager(m_Enemyprefab1, m_Enemyprefab2, m_Enemyprefab3, m_Enemyprefab4, m_Enemyspawnpoint, m_Basespawnpoint, m_players.m_playerlist[0].m_Instance.transform , m_gridPrefab);
+        m_wave = new WaveManager(m_Enemyprefab1, m_Enemyprefab2, m_Enemyprefab3, m_Enemyprefab4, m_Enemyspawnpoint, m_Basespawnpoint, m_players.m_playerlist[0].m_Instance.transform, m_gridPrefab);
 
+
+        backgroundSource.clip = backgroundSounds[Random.Range(0, backgroundSounds.Length)];
+        backgroundSource.Play();
     }
 
     //Check per frame
@@ -108,10 +122,13 @@ public class GameManager : MonoBehaviour
     {
         // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
         yield return StartCoroutine(Startgame());
+        // play sound
+        
+
 
         //Play round
         yield return StartCoroutine(wavePhase());
-
+        
         // Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
         yield return StartCoroutine(RoundEnding());
 
@@ -153,11 +170,14 @@ public class GameManager : MonoBehaviour
     {
         // Clear the text from the screen.
         // m_MessageText.text = string.Empty;
+        
 
         // Wait until base has no health or players are dead
-		while (!playersDead())
+        while (!playersDead())
         {
             wavephase = true;
+            
+
             //Enemies are dead
             if (m_wave.EnemiesDead())
             {
@@ -169,10 +189,12 @@ public class GameManager : MonoBehaviour
                 //Spawn next wave and remove dead enemies
                 //While loop is needed, because EnemiesDead() is not fast enough to detect that a new wave has spawned
                 m_wave.DestroyEnemies();
+                gongSource.clip = gongSound;
+                gongSource.Play();
 
                 yield return StartCoroutine(m_wave.NextWave());
 
-               
+              
                 
 				TravellingSalesman (); // spawning of the TravellingSalesman
 
@@ -242,9 +264,12 @@ public class GameManager : MonoBehaviour
             m_wave.DisableEnemyWaveControl();
         } else
         {
+
+            Debug.Log("2)players  " + m_players  + "   3)wave:   " + m_wave  );
             Time.timeScale = 1;
             m_players.enablePlayersControl();
             m_wave.EnableEnemyWaveControl();
+            
         }
         
     }
