@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
         
 
            
-         Debug.Log("wave " + m_wave);
+        
         
         // Start the game
         StartCoroutine(GameLoop());
@@ -267,7 +267,7 @@ public class GameManager : MonoBehaviour
         } else
         {
 
-            Debug.Log("2)players  " + m_players  + "   3)wave:   " + m_wave  );
+           
             Time.timeScale = 1;
             m_players.enablePlayersControl();
             m_wave.EnableEnemyWaveControl();

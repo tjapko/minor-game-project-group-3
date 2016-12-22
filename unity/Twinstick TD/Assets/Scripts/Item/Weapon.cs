@@ -8,7 +8,7 @@ using System;
 /// </summary>
 public class Weapon : Item {
 
-    
+    public float bulletLifeTime;    // the lifetime of the bullet 
     public float fireRate;          // the fire rate of the weapon 
     public float launchForce;       // the launchforce of the weapon for the bullet (speed)
     public float maxDamage;         // the damage of the weapon if there is a full hit. 
@@ -18,8 +18,8 @@ public class Weapon : Item {
     public int ammoInClip;          // the ammo in the clip 
 
     //Constructor
-    // weapon(name , id , description , iconname ,price ,itemtype, fireratef , launchforcef , maxDamagef, reloadTimef,clipsize ,  ammo , ammoInClip)
-    public Weapon(string name, int id, string description, string iconname,  int price,ItemType type, float _fireRate, float _launchForce, float _maxDamage, float _reloadTime, int _clipSize, int _ammo, int _ammoInClip) : base(name, id, description, iconname, price, type)
+    // weapon(name , id , description , iconname ,price ,itemtype, fireratef , launchforcef , maxDamagef, reloadTimef,clipsize ,  ammo , ammoInClip, bulletLifeTime)
+    public Weapon(string name, int id, string description, string iconname,  int price,ItemType type, float _fireRate, float _launchForce, float _maxDamage, float _reloadTime, int _clipSize, int _ammo, int _ammoInClip , float _bulletLifeTime) : base(name, id, description, iconname, price, type)
     {
         fireRate = _fireRate;
         launchForce = _launchForce;
@@ -28,6 +28,7 @@ public class Weapon : Item {
         ammo = _ammo;
         ammoInClip = _ammoInClip;
         reloadTime = _reloadTime;
+        bulletLifeTime = _bulletLifeTime;
     }
 
     // empty Weapon constructor, needed for the inventory

@@ -143,7 +143,7 @@ public class WaveManager
 			// instantiate enemy type 3
 			InstatiateEnemy(m_Enemyprefab3, false);
 		}
-//		Debug.Log ("rnd: " + rnd);
+
 	}
 
 	// instantiate enemy

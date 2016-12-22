@@ -5,13 +5,14 @@ using System.Collections;
 /// </summary>
 public class DestroyRayBullet : MonoBehaviour
 {
-    public float m_MaxLifeTime;     // The time in seconds before the shell is removed.
+    [HideInInspector]public float m_MaxLifeTime;     // The time in seconds before the shell is removed.
     public Vector3 endPos;          // The endposition of this bullet. Where the Ray hitted a collider
     public float timeToTarget;      // The time it takes to travel from the beginposition to the endposition (distance / launchforce)
     public Vector3 StartPos;        // the position where the bullet is initiated (m_FireTransform)
     public bool hit = false;        // is true when the ray hits a target
 
     private float t;                // a float to store the time data each updateframe
+    internal object m_MaxDamage;
 
     /// <summary>
     /// On start, defining the startposition and set the maxLifetime of this bullet

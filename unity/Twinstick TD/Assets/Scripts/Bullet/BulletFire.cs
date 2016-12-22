@@ -49,7 +49,7 @@ public class BulletFire : MonoBehaviour
 
         currentWeapon = playerinventory.inventory[0];
        
-        if (Input.GetButtonUp(m_FireButton))
+        if (Input.GetButtonDown(m_FireButton))
         {
             Fire();
         }
@@ -129,9 +129,11 @@ public class BulletFire : MonoBehaviour
             Rigidbody shellInstance =
                      GameObject.Instantiate(m_RayBullet, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
 
-            // Set the shell's velocity to the launch force in the fire position's forward direction.
+            
+           
            // shellInstance.velocity = currentWeapon.launchForce * m_FireTransform.forward;
             DestroyRayBullet bullet = shellInstance.GetComponent<DestroyRayBullet>();
+            bullet.m_MaxLifeTime = currentWeapon.bulletLifeTime;
 
             currentWeapon.ammoInClip--;
 
@@ -163,12 +165,13 @@ public class BulletFire : MonoBehaviour
                 }
             }
             else
-            {
+            { 
+                // Set the shell's velocity to the launch force in the fire position's forward direction.
                 shellInstance.velocity = currentWeapon.launchForce * m_FireTransform.forward;
             }
 
         }
-        else
+        else if (!currentWeapon.hasAmmo() && !weapon_reloading)
         {
             gunSource.clip = emptyGunSound;
             gunSource.Play();
@@ -187,13 +190,27 @@ public class BulletFire : MonoBehaviour
             // Create an instance of the shell and store a reference to it's rigidbody.
             Rigidbody shellInstance =
                 GameObject.Instantiate(m_Bullet, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
-			shellInstance.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber));
-            
+
+
+            BulletExplosion bullet = shellInstance.gameObject.GetComponent<BulletExplosion>();
+            bullet.setPlayernumber((m_PlayerNumber));
+
+            bullet.m_MaxDamage = currentWeapon.maxDamage;
+            bullet.m_MaxLifeTime = currentWeapon.bulletLifeTime;
+
+
+
             // Set the shell's velocity to the launch force in the fire position's forward direction.
             shellInstance.velocity = currentWeapon.launchForce * m_FireTransform.forward;
 
             currentWeapon.ammoInClip--;
         }
+        else if (!currentWeapon.hasAmmo() && !weapon_reloading)
+        {
+            gunSource.clip = emptyGunSound;
+            gunSource.Play();
+        }
+
     }
 
 
@@ -220,7 +237,16 @@ public class BulletFire : MonoBehaviour
                GameObject.Instantiate(m_Bullet, m_FireTransformSG2.position, m_FireTransformSG2.rotation) as Rigidbody;
 			shellInstance3.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber));
 
-            
+            BulletExplosion bullet1 = shellInstance1.GetComponent<BulletExplosion>();
+            BulletExplosion bullet2 = shellInstance2.GetComponent<BulletExplosion>();
+            BulletExplosion bullet3 = shellInstance3.GetComponent<BulletExplosion>();
+
+            bullet1.m_MaxDamage = currentWeapon.maxDamage;
+            bullet1.m_MaxLifeTime = currentWeapon.bulletLifeTime;
+            bullet2.m_MaxDamage = currentWeapon.maxDamage;
+            bullet2.m_MaxLifeTime = currentWeapon.bulletLifeTime;
+            bullet3.m_MaxDamage = currentWeapon.maxDamage;
+            bullet3.m_MaxLifeTime = currentWeapon.bulletLifeTime;
 
 
             // Set the shell's velocity to the launch force in the fire position's forward direction.
@@ -231,6 +257,11 @@ public class BulletFire : MonoBehaviour
             
 
             currentWeapon.ammoInClip--;
+        }
+        else if(!currentWeapon.hasAmmo() && !weapon_reloading)
+        {
+            gunSource.clip = emptyGunSound; 
+            gunSource.Play();
         }
     }
 
