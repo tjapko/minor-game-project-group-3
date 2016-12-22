@@ -23,12 +23,11 @@ public class BulletExplosion : MonoBehaviour
             other.gameObject.GetComponent<EnemyHealth>().TakeDamage(m_MaxDamage);
 
 		}
-		if (!other.gameObject.CompareTag("River")) {
-			Debug.Log ("Destroy bullet from collision with tag: " + other.gameObject.tag);
+		if (!other.gameObject.CompareTag("River") && !other.gameObject.CompareTag("Shop")) {
+			// Destroy the shell.
 			Destroy(gameObject);
 		}
               
-        // Destroy the shell.
 
     }
 

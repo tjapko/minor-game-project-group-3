@@ -23,6 +23,7 @@ TagManager:
   - grid
   - ShopUI
   - River
+  - Shop
   layers:
   - Default
   - TransparentFX

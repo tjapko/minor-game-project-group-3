@@ -39,6 +39,7 @@ GameObject:
   - 54: {fileID: 54000012032478890}
   - 114: {fileID: 114000013117289992}
   - 65: {fileID: 65000012455177746}
+  - 65: {fileID: 65000013821213762}
   m_Layer: 12
   m_Name: BaseObject
   m_TagString: Base
@@ -70,7 +71,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011323583086}
   - 23: {fileID: 23000011648567062}
-  - 136: {fileID: 136000011336386420}
   - 54: {fileID: 54000012571390232}
   - 33: {fileID: 33000011245171456}
   m_Layer: 12
@@ -237,6 +237,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 2, z: 2}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!65 &65000013821213762
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011563660048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.9, y: 1.9, z: 1.9}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &114000010265985860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -396,19 +408,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!136 &136000011336386420
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011758717366}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  m_Radius: 0.6
-  m_Height: 3
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!222 &222000012473303040
 CanvasRenderer:
   m_ObjectHideFlags: 1
