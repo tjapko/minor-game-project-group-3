@@ -20,7 +20,7 @@ public class Basehealth : MonoBehaviour {
     public Image m_FillImage;
     //Private variables
     private float m_CurrentHealth;                  //Current health of tower
-    public bool m_Dead = false;                            //Boolean if tower is dead
+    [HideInInspector] public bool m_Dead = false;                            //Boolean if tower is dead
     
     // OnEnable
     public void OnEnable()
