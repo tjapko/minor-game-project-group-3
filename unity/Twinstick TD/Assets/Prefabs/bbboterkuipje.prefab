@@ -41,7 +41,7 @@ GameObject:
   - 65: {fileID: 65000012455177746}
   - 65: {fileID: 65000013821213762}
   m_Layer: 12
-  m_Name: BaseObject
+  m_Name: bbboterkuipje
   m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
