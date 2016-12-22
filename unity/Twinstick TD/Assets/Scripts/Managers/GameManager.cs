@@ -65,11 +65,6 @@ public class GameManager : MonoBehaviour
 
         //Initialize UI script
         m_uiscript = new MapUIScript(gameObject.GetComponent<GameManager>(), m_uiprefab, m_players);
-
-        
-
-           
-         Debug.Log("wave " + m_wave);
         
         // Start the game
         StartCoroutine(GameLoop());
@@ -266,12 +261,9 @@ public class GameManager : MonoBehaviour
             m_wave.DisableEnemyWaveControl();
         } else
         {
-
-            Debug.Log("2)players  " + m_players  + "   3)wave:   " + m_wave  );
             Time.timeScale = 1;
             m_players.enablePlayersControl();
             m_wave.EnableEnemyWaveControl();
-            
         }
         
     }
