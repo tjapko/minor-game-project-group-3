@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_amountofplayers: 1
-  m_waveDelay: 5
+  m_waveDelay: 3
   m_EndDelay: 3
   m_uiprefab: {fileID: 1000011379212736, guid: 55b65d527b3aec941a018aa2b6fbe275, type: 2}
   m_baseprefab: {fileID: 1000013595951870, guid: 1b1b7eb4c86b8474f8f9ca5a0780749b,

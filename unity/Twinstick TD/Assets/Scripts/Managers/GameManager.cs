@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
         // Clear the text from the screen.
         // m_MessageText.text = string.Empty;
 
-        // Wait until base has no health or players are dead
+        // Wait until players are dead
 		while (!playersDead())
         {
             wavephase = true;
