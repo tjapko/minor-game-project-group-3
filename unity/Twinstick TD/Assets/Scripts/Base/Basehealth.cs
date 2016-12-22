@@ -9,7 +9,7 @@ public class Basehealth : MonoBehaviour {
 
     //References
     [Header("References")]
-    public GameObject m_hitFriendlyCanvasPrefab;    //Reference to friendlyHit canvas;
+    public GameObject m_hitBaseCanvasPrefab;    //Reference to friendlyHit canvas;
 
     //Public variables
     public float m_StartingHealth = 100f;           //Starting health
@@ -35,7 +35,7 @@ public class Basehealth : MonoBehaviour {
     //Take damage function
     public void TakeDamage(float amount)
     {
-        createHitMark(m_hitFriendlyCanvasPrefab, -amount);
+		createHitMark(m_hitBaseCanvasPrefab, -amount);
         //Amount must be smaller than zero
         if (amount > 0)
         {

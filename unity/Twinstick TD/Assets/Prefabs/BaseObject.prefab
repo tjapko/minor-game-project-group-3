@@ -885,9 +885,9 @@ MonoBehaviour:
   m_damage: 1
   m_range: 20
   m_launchspeed: 50
-  m_fireRate: 0.5
+  m_fireRate: 0.35
   m_turnrate: 10
-  m_accuracy: 100
+  m_accuracy: 10
 --- !u!114 &114000012729322828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -920,7 +920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8b16943c2a36143a2c727a7b67ec8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hitFriendlyCanvasPrefab: {fileID: 0}
+  m_hitBaseCanvasPrefab: {fileID: 0}
   m_StartingHealth: 50
   m_maxhealth: 50
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
@@ -946,9 +946,9 @@ MonoBehaviour:
   m_damage: 1
   m_range: 20
   m_launchspeed: 50
-  m_fireRate: 0.5
+  m_fireRate: 0.35
   m_turnrate: 10
-  m_accuracy: 100
+  m_accuracy: 10
 --- !u!114 &114000013928195762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -967,9 +967,9 @@ MonoBehaviour:
   m_damage: 1
   m_range: 20
   m_launchspeed: 50
-  m_fireRate: 0.5
+  m_fireRate: 0.35
   m_turnrate: 10
-  m_accuracy: 100
+  m_accuracy: 10
 --- !u!114 &114000013994398642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -988,9 +988,9 @@ MonoBehaviour:
   m_damage: 1
   m_range: 20
   m_launchspeed: 50
-  m_fireRate: 0.5
+  m_fireRate: 0.35
   m_turnrate: 10
-  m_accuracy: 100
+  m_accuracy: 10
 --- !u!136 &136000012430468918
 CapsuleCollider:
   m_ObjectHideFlags: 1
