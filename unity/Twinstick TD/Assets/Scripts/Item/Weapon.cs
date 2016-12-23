@@ -20,7 +20,7 @@ public class Weapon : Item {
 	public int maxAmmo;				// max ammo player can carry
     
     //Constructor
-    // weapon(name , id , description , iconname ,price ,itemtype, fireratef , launchforcef , maxDamagef, reloadTimef,clipsize ,  ammo , ammoInClip)
+    // weapon(name , id , description , iconname ,price ,itemtype, fireratef , launchforcef , maxDamagef, reloadTimef,clipsize ,  ammo , ammoInClip, bulletLifeTime)
 	public Weapon(string name, int id, string description, string iconname,  int price, ItemType type, float _fireRate, float _launchForce, float _maxDamage, float _reloadTime, int _clipSize, int _ammo, int _ammoprice, int _ammoInClip, int _maxAmmo, float _bulletLifeTime) : base(name, id, description, iconname, price, type)
     {
         fireRate = _fireRate;

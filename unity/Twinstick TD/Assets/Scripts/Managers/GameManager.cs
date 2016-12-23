@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
             {
                 //Check if player(s) are using the shop
                 GameObject shopUI = GameObject.FindWithTag("ShopUI");
-                if (!shopUI.activeSelf)
+                if (shopUI == null || !shopUI.activeSelf)
                 {
                     gamepause = !gamepause;
                 }
@@ -122,10 +122,7 @@ public class GameManager : MonoBehaviour
     {
         // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
         yield return StartCoroutine(Startgame());
-        // play sound
-        
-
-
+  
         //Play round
         yield return StartCoroutine(wavePhase());
         

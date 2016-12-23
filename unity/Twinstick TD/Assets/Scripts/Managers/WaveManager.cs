@@ -24,7 +24,6 @@ public class WaveManager
     Grid grid;
     public LayerMask unwalkableMask;
     public float nodeRadius;
-	public int numberEnemiesPerWave = 25; 		//Start amount of enemies per wave
     public double baseDistanceProportion = 0.2; // minimal distance to travel for each enemy
 	public bool baseDead = false;				// if baseDead, all enemies walk towards player
 
@@ -39,12 +38,23 @@ public class WaveManager
     private double m_proportionEnemy2 = 0.4; // proportion of choosing enemy2 each spawning 
     private double m_proportionEnemy3; 		 // proportion of choosing enemy3 each spawning 
     private int m_numberOfWavesPerBoss = 5;  // each m_numberOfWavesPerBoss waves a Boss is spawned
-	private float m_scaleEnemies = 100.0f;
-	// time between spawning variables:
-	private float time;							// total spawnTime of the wave 
-	private float m_startSpawnDelayTime; // starting spawnTime
-	private float m_endSpawnDelayTime;   // end spawnTime
-	private float scaleTime = 5.0f; 			// delayTime over the waves 
+
+//	private float m_scaleEnemies = 50.0f;
+//	// time between spawning variables:
+//	private float time;						 //NOT USED NOW	// total spawnTime of the wave 
+//	private float m_startSpawnDelayTime; 	 //NOU USED NOW	// starting spawnTime 
+//	private float m_endSpawnDelayTime;   	 //NOT USED NOW	// end spawnTime
+//	private float scaleTime = 5.0f; 		 //NOT USED NOW	// delayTime over the waves 
+
+	// spawnDelay of the enemies 
+	private float m_spawnDelayBetweenEnemies = 0.5f; // time delay between the enemies in a wave
+	// increasing amount of enemies 
+	private int m_startEnemies = 5;    // number of starting enemies 
+	private float m_angle1 = 3.0f;     // this angle is applied from the start to wave: m_m_waveTippingPoint1
+	private float m_angle2 = 5.0f;	   // this angle is applied from wave: m_m_waveTippingPoint1 to wave: m_m_waveTippingPoint2
+	private float m_angle3 = 2.0f;	   // this angle is applied from wave: m_m_waveTippingPoint2 till the end of the game
+	private int m_waveTippingPoint1 = 10; // wave at which m_angle2 is used for the increasing amount of enemies 
+	private int m_waveTippingPoint2 = 15; // wave at which m_angle2 is used for the increasing amount of enemies 
 
     public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab)
     {
@@ -59,12 +69,11 @@ public class WaveManager
         this.m_gridprefab = gridprefab;
 
         this.m_wavenumber = 0;
-		this.numberEnemiesPerWave = 10;
         enemy_number = 0;
         m_enemywave = new List<EnemyManager>();
-		this.m_startSpawnDelayTime = this.numberEnemiesPerWave*0.5f;
-		this.m_endSpawnDelayTime = m_scaleEnemies * 0.5f;
-		this.time = this.m_startSpawnDelayTime;
+//		this.m_startSpawnDelayTime = this.numberEnemiesPerWave*0.5f;
+//		this.m_endSpawnDelayTime = m_scaleEnemies * 0.5f;
+//		this.time = this.m_startSpawnDelayTime;
     }
 
 
@@ -80,18 +89,32 @@ public class WaveManager
 			m_gridmanager = new GridManager (m_gridprefab);
 			grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
 		}
-		int enemies = numberEnemiesPerWave + EnemiesAmountPerWave ();
-
-		proportionEnemies (); // update the proportions of the enemies per wave
-
+		int enemies = EnemiesAmountPerWave ();
 		m_wavenumber++;
+		proportionEnemies (); // update the proportions of the enemies per wave
 		yield return SpawnAllEnemies (enemies);
     }
 
 	// Function for amount of enemies next wave
 	public int EnemiesAmountPerWave() {
-		int amount =  Mathf.RoundToInt(m_wavenumber * 1.5f * m_scaleEnemies / (m_wavenumber + 10)); // m_scaleEnemies after 20 waves (*1.5 factor)
-		return amount;
+//		int amount =  Mathf.RoundToInt(m_wavenumber * 1.5f * m_scaleEnemies / (m_wavenumber + 10)); // m_scaleEnemies after 20 waves (*1.5 factor)
+		float amount;
+		float b2, b3; // off sets for graphs (lines) 2 and 3
+		b2 = (m_startEnemies + m_angle1 * m_waveTippingPoint1) - (m_waveTippingPoint1 * m_angle2);
+		b3 = (b2 + m_angle2 * m_waveTippingPoint2) - (m_waveTippingPoint2 * m_angle3);
+
+		if (m_wavenumber == 0) {
+			amount = m_startEnemies;
+		}
+		else if (m_wavenumber < m_waveTippingPoint1) {
+			amount = m_startEnemies + m_angle1 * (m_wavenumber);
+		} else if (m_wavenumber >= m_waveTippingPoint1 && m_wavenumber < m_waveTippingPoint2) {
+			amount = m_angle2 * m_wavenumber + b2;
+		} else {
+			amount = m_angle3 * m_wavenumber + b3;
+		}
+
+		return (int)amount;
 	}
 		
 	// produces a random spawnpoint for the enemy
@@ -188,13 +211,13 @@ public class WaveManager
 	private IEnumerator SpawnAllEnemies(int m_number_enemies) {
         //Spawning algorithm (example)
         int enemies_spawned = 0;
-		time = spawnDelayTime ();
-//		Debug.Log ("wave:" + m_wavenumber + ", spawing time:  " + time + ", amount of enemies: " + m_number_enemies);
+//		time = spawnDelayTime ();
+		Debug.Log ("wave:" + m_wavenumber + ", amount of enemies: " + m_number_enemies);
 	    while (true)
         {
             RouletteWheelSpawnEnemy();
             enemies_spawned++;
-			yield return new WaitForSeconds(time/m_number_enemies);
+			yield return new WaitForSeconds(m_spawnDelayBetweenEnemies);
 	
             if(enemies_spawned >= m_number_enemies - 1)
             {
@@ -202,16 +225,18 @@ public class WaveManager
             }
         }
 
-        //Spawn boss or last enemy
-		if (m_wavenumber % m_numberOfWavesPerBoss == 0 && m_wavenumber >0) { // wavenumber needs to start at zero
-			// spawning the Boss:
-			InstatiateEnemy(m_Enemyprefab4, true); // for spawning the boss 
-		}
-		else {
-				RouletteWheelSpawnEnemy (); 
+		if (m_number_enemies != 1) {
+	        //Spawn boss or last enemy
+			if (m_wavenumber % m_numberOfWavesPerBoss == 0 && m_wavenumber != 0) { // wavenumber needs to start at zero
+				// spawning the Boss:
+				InstatiateEnemy(m_Enemyprefab4, true); // for spawning the boss 
 			}
+			else {
+					RouletteWheelSpawnEnemy (); 
+				}
 
-        yield return null;
+	        yield return null;
+			}
 		}
 		
 	//Check if all enemies are dead;
@@ -299,23 +324,23 @@ public class WaveManager
 		}
 	}
 
-	// returning spawnTime (varies per wave)
-	private float spawnDelayTime() {  
-//		float m_timeExtra; // added amount of time to the total spawnTime of the wave 
-		if (m_wavenumber != 1) { 
-//			m_timeExtra = 1.0f / scaleTime;
-//			time += m_timeExtra;
-			time = EnemiesAmountPerWave()*0.5f;
-		}
-		if (time > m_endSpawnDelayTime) {
-			time = m_endSpawnDelayTime;
-		}
-		return time;
-	}
+//	// returning spawnTime (varies per wave)
+//	private float spawnDelayTime() {  
+////		float m_timeExtra; // added amount of time to the total spawnTime of the wave 
+//		if (m_wavenumber != 1) { 
+////			m_timeExtra = 1.0f / scaleTime;
+////			time += m_timeExtra;
+//			time = EnemiesAmountPerWave()*0.5f;
+//		}
+//		if (time > m_endSpawnDelayTime) {
+//			time = m_endSpawnDelayTime;
+//		}
+//		return time;
+//	}
 
     private int sethealt()
     {
         //Example algorithm
-        return (int) (Mathf.Pow(1.4f , m_wavenumber));
+        return (int) (Mathf.Pow(1.0f , m_wavenumber)); // updating hp enemy per wave
     }
 }
