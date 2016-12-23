@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using UnityEditor.VersionControl;
+//using UnityEditor.VersionControl;
 
 public class Enemie2 : EnemyManager
 {

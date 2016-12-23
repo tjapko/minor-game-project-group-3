@@ -100,6 +100,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4000010095984792, guid: d86d3918dc579bc40b928b6eab563cb5,
     type: 2}
   m_PrefabInternal: {fileID: 2022342578}
+--- !u!1 &32876408 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012813041466, guid: 554d735d61e85354082e2f240e04326d,
+    type: 2}
+  m_PrefabInternal: {fileID: 698934111}
 --- !u!1 &135120917
 GameObject:
   m_ObjectHideFlags: 0
@@ -4213,6 +4218,7 @@ MonoBehaviour:
   m_Playerspawnpoint: {fileID: 500508974}
   m_Enemyspawnpoint: {fileID: 2135807968}
   m_CameraControl: {fileID: 922648188}
+  m_weaponshop: {fileID: 32876408}
 --- !u!4 &1464915406
 Transform:
   m_ObjectHideFlags: 0

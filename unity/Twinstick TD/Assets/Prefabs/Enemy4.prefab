@@ -331,7 +331,7 @@ MonoBehaviour:
   m_damageToTowerSec: 25
   m_towerpersecond: 2
   m_damageToPlayerSec: 5
-  m_StartingHealth: 10
+  m_StartingHealth: 20
   m_Slider: {fileID: 114000011600059752}
   m_FillImage: {fileID: 114000010710730168}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}

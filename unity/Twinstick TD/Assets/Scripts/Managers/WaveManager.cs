@@ -16,7 +16,7 @@ public class WaveManager
     public GameObject m_Enemyprefab1;	//Reference to prefab of enemy1
 	public GameObject m_Enemyprefab2;   //Reference to prefab of enemy2
 	public GameObject m_Enemyprefab3;   //Reference to prefab of enemy3
-	public GameObject m_Enemyprefab4;   //Reference to prefab of enemy14 (Boss)
+	public GameObject m_Enemyprefab4;   //Reference to prefab of enemy4 (Boss)
 	public GameObject m_gridprefab;
 	public double baseDistancePercentage = 0.30; // minimal distance to travel for each enemy
     public double baseDistancePercentageBoss = 0.5; // distance to be travlled by the Boss to the base
@@ -195,7 +195,7 @@ public class WaveManager
             m_enemywave.Add (instance);
 		} else if (boss) {
             Enemie4 instance = new Enemie4(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
-            instance.health.setMaxHealth(sethealt());
+            instance.health.setMaxHealth(20);
             m_enemywave.Add (instance);
 		}
 
