@@ -92,44 +92,30 @@ public class ShopUIScript : MonoBehaviour {
             }
         }
     }
-
-	//function that sets index to right index because of scrolling through weapons
-	private int setIndex(int change, int index){
-		if (change == 1){
-			index++;
-			if (index == 3){
-				index = 0;
-			}
-		} else if (change == 2){
-			index = index+2;
-			if (index == 3){
-				index = 0;
-			} else if (index == 4){
-				index = 1;
+		
+	private int findIndex(int weaponIndex){
+		for (int i = 0; i < 3; i++) {
+			if (m_currentplayer.m_inventory.inventory [i].itemtype == weaponlist [weaponIndex].itemtype) {
+				return i;
 			}
 		}
-		return index;
+		//random number more than weapons in list thatś only returned when the weapon is nog yet in the inventory of player
+		return 100;
 	}
 
     //Function to purchase ammo (button)
-	public void purchase_ammo(int index) {
+	public void purchase_ammo(int weaponIndex) {
 		//check where what weapon is in the inventory
-		int change = 0;
-		for (int i = 0; i < 3; i++) {
-			if (m_currentplayer.m_inventory.inventory [i].itemtype == weaponlist [0].itemtype) {
-				change = i;
+		int inventoryIndex = findIndex(weaponIndex);
+		if (inventoryIndex != 100){
+			// check whether player got enough money & doesn't have max ammo already
+			if (m_currentplayer.m_stats.getCurrency () >= weaponlist [weaponIndex].ammoprice && (m_currentplayer.m_inventory.inventory [inventoryIndex].ammo + weaponlist [weaponIndex].ammoInClip) < weaponlist [weaponIndex].maxAmmo) {
+				//decrease currency
+				m_currentplayer.m_stats.addCurrency (-weaponlist [weaponIndex].ammoprice);
+
+				//add ammo (amount that goes in one clip) to certain weapon
+				m_currentplayer.m_inventory.inventory [inventoryIndex].ammo += weaponlist [weaponIndex].ammoInClip;
 			}
-		}
-
-		index = setIndex (change, index);
-
-		// check whether player got enough money & doesn't have max ammo already
-		if (m_currentplayer.m_stats.getCurrency () >= weaponlist [index].ammoprice && (m_currentplayer.m_inventory.inventory[index].ammo + weaponlist[index].ammoInClip) < weaponlist[index].maxAmmo) {
-			//decrease currency
-			m_currentplayer.m_stats.addCurrency(-weaponlist[index].ammoprice);
-
-			//add ammo (amount that goes in one clip) to certain weapon
-			m_currentplayer.m_inventory.inventory[index].ammo += weaponlist[index].ammoInClip;
 		}
     }
 }
