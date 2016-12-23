@@ -59,9 +59,9 @@ public class ShopScript : MonoBehaviour {
 
         //For testing
         //.................. Weapon(name              , id, description      , iconname , price , itemtype               ,  fireratef , launchforcef , maxDamagef, reloadTimef, clipsize ,  ammo , ammopriceperclip, ammoInClip, maxAmmo, lifetime)
-        Weapon weapon1 = new Weapon("Default Weapon 2", 2, "Default weapon!", "shotgun", 5000, Weapon.ItemType.Shotgun,     1.0f, 50f, 2f, 0.5f, 10, 20, 30, 10, 200, 0.4f);
+        Weapon weapon1 = new Weapon("Default Weapon 2", 2, "Default weapon!", "shotgun", 4000, Weapon.ItemType.Shotgun,     1.0f, 50f, 2f, 0.5f, 10, 20, 30, 10, 200, 0.4f);
         Weapon weapon2 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 8000, Weapon.ItemType.MachineGun, 7f, 50f, 10f, 1.0f, 60, 120, 20, 60, 480, 2f);
-        Weapon weapon3 = new Weapon("Default Weapon 3", 4 , "Default weapon!", "sniper", 3000, Weapon.ItemType.Sniper , 1.0f      , 100f         , 10f      , 1.0f       , 5         , 10    , 20				,5 			,50      , 3f);
+        Weapon weapon3 = new Weapon("Default Weapon 3", 4 , "Default weapon!", "sniper", 2000, Weapon.ItemType.Sniper , 1.0f      , 100f         , 10f      , 1.0f       , 5         , 10    , 20				,5 			,50      , 3f);
         addWeapon(weapon3);
 		addWeapon(weapon1);
         addWeapon(weapon2);
