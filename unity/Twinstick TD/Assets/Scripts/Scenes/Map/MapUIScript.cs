@@ -224,6 +224,7 @@ public class MapUIScript {
     // Show/hide Pause menu
     private void showConstructonPanel(bool status)
     {
+        /*
         if (status)
         {
             m_constructionpanel.SetActive(true);
@@ -233,7 +234,8 @@ public class MapUIScript {
         {
             m_constructionpanel.SetActive(false);
         }
-        
+        */
+        m_constructionpanel.SetActive(false);
     }
 
     // Show/hide the gameover menu

@@ -43,7 +43,7 @@ public class HitMarkScript : MonoBehaviour {
         Vector3 dir = m_MainCamera.transform.position - gameObject.transform.position;
         Quaternion dir_to_face = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(m_MainCamera.transform.rotation, dir_to_face, Time.deltaTime * m_turnrate).eulerAngles;
-        gameObject.transform.rotation = Quaternion.Euler(rotation.x, rotation.y, 0f);
+        gameObject.transform.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
     }
 
     //Function to set damage

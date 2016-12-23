@@ -78,6 +78,7 @@ public class ShopScript : MonoBehaviour {
                 showUI = !showUI;
                 m_instance_UI.SetActive(showUI);
 
+
                 //Set reference to player that has opened the UI
                 GameObject root = GameObject.FindWithTag("Gamemanager");
                 GameManager gm = root.GetComponent<GameManager>();
@@ -241,6 +242,12 @@ public class ShopScript : MonoBehaviour {
                 break;
             }
         }
+    }
+
+    //Getter show UI
+    public bool getActiveUI()
+    {
+        return showUI;
     }
 
 }

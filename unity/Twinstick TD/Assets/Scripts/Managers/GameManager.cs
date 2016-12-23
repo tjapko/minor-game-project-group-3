@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public Transform m_Playerspawnpoint;        // Spawnpoint of player
     [HideInInspector]public Transform m_Enemyspawnpoint;         // Spawnpoint of enemy
 	public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
+    public GameObject m_weaponshop;             // Reference to the weapon shop                 
 
     //Private variables
     private MapUIScript m_uiscript;             // The UI script
@@ -67,11 +68,6 @@ public class GameManager : MonoBehaviour
         //Initialize UI script
         m_uiscript = new MapUIScript(gameObject.GetComponent<GameManager>(), m_uiprefab, m_players);
 
-        
-
-           
-        
-        
         // Start the game
         StartCoroutine(GameLoop());
 
@@ -92,8 +88,7 @@ public class GameManager : MonoBehaviour
             if (!m_players.checkConstruction())
             {
                 //Check if player(s) are using the shop
-                GameObject shopUI = GameObject.FindWithTag("ShopUI");
-                if (shopUI == null || !shopUI.activeSelf)
+                if (!m_weaponshop.GetComponent<ShopScript>().getActiveUI())
                 {
                     gamepause = !gamepause;
                 }

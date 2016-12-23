@@ -77,8 +77,6 @@ public class ShopUIScript : MonoBehaviour {
             icon_2.sprite = weaponlist[1].itemicon;
             icon_3.sprite = weaponlist[2].itemicon;
 
-
-            Debug.Log(weaponlist[0]);
             weapontext_1.text = weaponlist[0].itemprice.ToString();
             weapontext_2.text = weaponlist[1].itemprice.ToString();
             weapontext_3.text = weaponlist[2].itemprice.ToString();
