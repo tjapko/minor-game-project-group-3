@@ -51,12 +51,27 @@ public class MapUIScript : MonoBehaviour {
         //m_playerstats.Add(gameObject.transform.GetChild().gameObject); //Add player 3
         //m_playerstats.Add(gameObject.transform.GetChild().gameObject); //Add player 4
 
+        //Set m_playerstats active
+        for (int i = 0; i < m_playerstats.Count; i++)
+        {
+            if (i < amountofplayers)
+            {
+                m_playerstats[i].SetActive(true);
+            }
+            else
+            {
+                m_playerstats[i].SetActive(false);
+            }
+        }
+
+        //Set player money Text
         m_player_money = new List<Text>();
         for(int i = 0; i < amountofplayers; i++)
         {
             m_player_money.Add(m_playerstats[i].transform.GetChild(1).GetComponent<Text>());
         }
 
+        //Set player kills Text
         m_player_kills = new List<Text>();
         for (int i = 0; i < amountofplayers; i++)
         {
@@ -70,6 +85,19 @@ public class MapUIScript : MonoBehaviour {
         //m_weaponstats.Add(gameObject.transform.GetChild().gameObject);
         //m_weaponstats.Add(gameObject.transform.GetChild().gameObject);
 
+        //Activate weaponstats 
+        for(int i = 0; i < m_weaponstats.Count; i++)
+        {
+            if(i < amountofplayers)
+            {
+                m_weaponstats[i].SetActive(true);
+            } else
+            {
+                m_weaponstats[i].SetActive(false);
+            }
+        }
+
+        //Set lists of weapon icons
         m_weaponIcon = new List<List<Image>>();
         for (int i = 0; i < amountofplayers; i++)
         {
@@ -80,6 +108,7 @@ public class MapUIScript : MonoBehaviour {
             m_weaponIcon.Add(image_list);
         }
 
+        //Set list of weaponammo
         m_weaponammo = new List<Text>();
         for (int i = 0; i < amountofplayers; i++)
         {
