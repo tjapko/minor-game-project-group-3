@@ -1808,6 +1808,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012813041466, guid: 554d735d61e85354082e2f240e04326d, type: 2}
+      propertyPath: m_TagString
+      value: Shop
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 554d735d61e85354082e2f240e04326d, type: 2}
   m_IsPrefabParent: 0
@@ -4198,6 +4202,8 @@ MonoBehaviour:
   gongSource: {fileID: 1464915408}
   gongSound: {fileID: 8300000, guid: 73e875b1afb672e43b0a803abb4a21d8, type: 3}
   m_uiprefab: {fileID: 1000011379212736, guid: 55b65d527b3aec941a018aa2b6fbe275, type: 2}
+  m_shopuiprefab: {fileID: 1000010742267120, guid: 4718148eb10e9d945beab5902c750e9b,
+    type: 2}
   m_baseprefab: {fileID: 1000013595951870, guid: 2d011ede6f946374bad3aa43eb65f5af,
     type: 2}
   m_Playerprefab: {fileID: 1000012244867938, guid: 6526df5f06f78a5438cb83f5730a0724,

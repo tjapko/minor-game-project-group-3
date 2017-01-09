@@ -23,7 +23,7 @@ public class ShopScript : MonoBehaviour {
 
     //Reference
     public GameObject m_ShopUIprefab;
-    private GameObject m_instance_UI;
+    public GameObject m_instance_UI;
 
     //Private variables
     private List<GameObject> players_present;
@@ -50,9 +50,9 @@ public class ShopScript : MonoBehaviour {
         }
 
         //Instantiate UI
-        m_instance_UI = GameObject.Instantiate(m_ShopUIprefab);
-        m_instance_UI.GetComponent<ShopUIScript>().m_shopscript = gameObject.GetComponent<ShopScript>();
-        m_instance_UI.SetActive(false);
+        //m_instance_UI = GameObject.Instantiate(m_ShopUIprefab);
+        //m_instance_UI.GetComponent<ShopUIScript>().m_shopscript = gameObject.GetComponent<ShopScript>();
+        //m_instance_UI.SetActive(false);
 
         //Set UI active
         showUI = false;
@@ -70,6 +70,8 @@ public class ShopScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        showUI = m_instance_UI.activeSelf;
+
         //Change plz (check for every player)
         if (players_present.Count > 0)
         {
@@ -89,12 +91,6 @@ public class ShopScript : MonoBehaviour {
                 m_instance_UI.GetComponent<ShopUIScript>().m_currentplayer = player;
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                //Show or hide the UI
-                showUI = false;
-                m_instance_UI.SetActive(showUI);
-            }
         }
 
         // Disable UI

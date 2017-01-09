@@ -8,113 +8,103 @@ using System.Threading;
 /// Class UI script
 /// Functions for the GameManager to implement UI 
 /// </summary>
-public class MapUIScript {
+public class MapUIScript : MonoBehaviour {
 
-    //Referene to managers
+    //References to managers
     private GameManager m_gamemanager;      //Reference to game manager (used to invoke next wave)
-    private GameObject m_instance;          //Reference to instance of this script's prefab
     private UserManager m_usermanager;      //Reference to the usermanager in the game manager
+    private List<PlayerManager> m_players;  //Reference to the players in the game 
 
     //References to GameObject
-    private GameObject m_pausemenu;         //Reference to the pausemenu window (child of this GameObject)
-    private GameObject m_wavecontrol;       //Reference to the wave control panel
-    private GameObject m_constructionpanel; //Reference to the construction panel
-    private GameObject m_textplayer1;       //Reference to the statistic panel of player 1
-    private GameObject m_textplayer2;       //Reference to the statistic panel of player 2
-    private GameObject m_gameovermenu;      //Reference to the game over menu
-    private GameObject m_weaponplayer1;     //Reference to the weapon UI panel of player 1
-    private GameObject m_weaponplayer2;     //Reference to the Weapon UI panel of player 2
-    private GameObject m_wavestats;         //Reference tot he Wave stats UI panel
+    private GameObject  m_pausemenu;            //Reference to the pausemenu window (child of this GameObject)
+    private GameObject  m_wavecontrol;          //Reference to the wave control panel
+    private GameObject  m_constructionpanel;    //Reference to the construction panel
+    private List<GameObject> m_playerstats;     //Reference to the player stats UI
+    private List<Text> m_player_money;          //Reference to the text displaying the money of the player
+    private List<Text> m_player_kills;          //Reference to the text displaying the kills ma
+    private GameObject  m_gameovermenu;         //Reference to the game over menu
+    private List<GameObject> m_weaponstats;     //Referene to the weapons of the player
+    private List<List<Image>> m_weaponIcon;     //Reference to the weapon icon slots
+    private List<Text> m_weaponammo;            //Reference to the ammo Text component
 
-    //Constructer
-    public MapUIScript(GameManager gamemanager, GameObject ui_prefab, UserManager usermanager)
+    private GameObject  m_wavestats;            //Reference tot he Wave stats UI panel
+
+    private void Start()
     {
-        //Setting references
-        m_gamemanager = gamemanager;
-        m_instance = GameObject.Instantiate(ui_prefab, Vector3.zero, Quaternion.identity) as GameObject; 
-        m_usermanager = usermanager;
+        //Find gamemanager
+        m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
+        m_usermanager = m_gamemanager.getUserManager();
+        m_players = m_usermanager.m_playerlist;
 
-        //Getting references to childrens
-        m_pausemenu = m_instance.transform.GetChild(0).gameObject;
-        m_wavecontrol = m_instance.transform.GetChild(1).gameObject;
-        m_constructionpanel = m_instance.transform.GetChild(2).gameObject;
-        m_textplayer1 = m_instance.transform.GetChild(3).gameObject;
-        m_textplayer2 = m_instance.transform.GetChild(4).gameObject;
-        m_gameovermenu = m_instance.transform.GetChild(5).gameObject;
-        m_weaponplayer1 = m_instance.transform.GetChild(6).gameObject;
-        m_weaponplayer2 = m_instance.transform.GetChild(7).gameObject;
-        m_wavestats = m_instance.transform.GetChild(8).gameObject;
+        //Set references to children
+        m_pausemenu = gameObject.transform.GetChild(0).gameObject;
+        m_wavecontrol = gameObject.transform.GetChild(1).gameObject;
+        m_constructionpanel = gameObject.transform.GetChild(2).gameObject;
+        m_gameovermenu = gameObject.transform.GetChild(5).gameObject;
+        m_wavestats = gameObject.transform.GetChild(8).gameObject;
+
+        //Player stats and children
+        int amountofplayers = m_gamemanager.m_amountofplayers;
+        m_playerstats = new List<GameObject>();
+        m_playerstats.Add(gameObject.transform.GetChild(3).gameObject); //Add player 1
+        m_playerstats.Add(gameObject.transform.GetChild(4).gameObject); //Add player 2
+        //m_playerstats.Add(gameObject.transform.GetChild().gameObject); //Add player 3
+        //m_playerstats.Add(gameObject.transform.GetChild().gameObject); //Add player 4
+
+        m_player_money = new List<Text>();
+        for(int i = 0; i < amountofplayers; i++)
+        {
+            m_player_money.Add(m_playerstats[i].transform.GetChild(1).GetComponent<Text>());
+        }
+
+        m_player_kills = new List<Text>();
+        for (int i = 0; i < amountofplayers; i++)
+        {
+            m_player_kills.Add(m_playerstats[i].transform.GetChild(2).GetComponent<Text>());
+        }
+
+        //Weapon stats and children
+        m_weaponstats = new List<GameObject>();
+        m_weaponstats.Add(gameObject.transform.GetChild(6).gameObject);
+        m_weaponstats.Add(gameObject.transform.GetChild(7).gameObject);
+        //m_weaponstats.Add(gameObject.transform.GetChild().gameObject);
+        //m_weaponstats.Add(gameObject.transform.GetChild().gameObject);
+
+        m_weaponIcon = new List<List<Image>>();
+        for (int i = 0; i < amountofplayers; i++)
+        {
+            List<Image> image_list = new List<Image>();
+            image_list.Add(m_weaponstats[i].transform.GetChild(0).GetComponent<Image>());
+            image_list.Add(m_weaponstats[i].transform.GetChild(1).GetComponent<Image>());
+            image_list.Add(m_weaponstats[i].transform.GetChild(2).GetComponent<Image>());
+            m_weaponIcon.Add(image_list);
+        }
+
+        m_weaponammo = new List<Text>();
+        for (int i = 0; i < amountofplayers; i++)
+        {
+            m_weaponammo.Add(m_weaponstats[i].transform.GetChild(3).GetComponent<Text>());
+        }
 
         //Set active UI
         m_pausemenu.SetActive(false);
         m_wavecontrol.SetActive(true);
         m_constructionpanel.SetActive(false);
         m_gameovermenu.SetActive(false);
-        m_textplayer1.SetActive(true);
 
-        if (gamemanager.m_amountofplayers > 1)
-        {
-            m_textplayer2.SetActive(true);
-            m_weaponplayer2.SetActive(true);
-        } else
-        {
-            m_textplayer2.SetActive(false);
-            m_weaponplayer2.SetActive(false);
-        }
+        //Invoke functions
+        InvokeRepeating("UpdateUI", 0.0f, 0.2f);
 
     }
 
-    // Update is called once per frame
+    //Updates the UI
     public void UpdateUI()
     {
         SetCurrencyText();
         SetKillsText();
         updateWeaponIcon();
+        UpdateAmmoText();
 
-    }
-
-    // Changing UI back and fourth between phases
-    // Wavephase = true : wavephase, Wavephase = false : build phase
-    // First check gameover -> game is paused -> phase of game
-    public void UIchange(bool gameover, bool wavephase, bool pause)
-    {
-        //Check for gameover
-        if (gameover)
-        {
-            showGameoverMenu(true);
-            showConstructonPanel(false);
-            showWaveControl(false);
-            showPauseMenu(false);
-        } else
-        {
-            //Check for pause
-            if (pause)
-            {
-                showConstructonPanel(false);
-                showWaveControl(false);
-                showPauseMenu(true);
-                showGameoverMenu(false);
-            }
-            else
-            {
-                //Check wavephase
-                if (wavephase)
-                {
-                    showWaveControl(true);
-                    showConstructonPanel(false);
-                    showPauseMenu(false);
-                    showGameoverMenu(false);
-                }
-                else
-                {
-                    showWaveControl(true);
-                    showConstructonPanel(true);
-                    showPauseMenu(false);
-                    showGameoverMenu(false);
-                }
-            }
-        }
-        
     }
 
     //Show or hide the UI panel
@@ -138,52 +128,45 @@ public class MapUIScript {
     // sets the currencyText which is visible on the screen to the current Currency
     private void SetCurrencyText()
     {
-        try
+        foreach(Text currencytext in m_player_money)
         {
-            m_textplayer1.transform.GetChild(1).GetComponent<Text>().text = "Currency: " + m_usermanager.m_playerlist[0].m_stats.getCurrency().ToString();
-            //m_textplayer2.transform.GetChild(1).GetComponent<Text>().text = "Currency: " + m_usermanager.m_playerlist[1].getCurrency().ToString();
-        } catch
-        {
-
+            currencytext.text = "Currency: " + m_usermanager.m_playerlist[0].m_stats.getCurrency().ToString();
         }
     }
 
     // sets the KillsText which is visible on the screen to the current amount of kills
     private void SetKillsText()
     {
-        try
+        foreach(Text killstext in m_player_kills)
         {
-            m_textplayer1.transform.GetChild(2).GetComponent<Text>().text = "Kills: " + m_usermanager.m_playerlist[0].m_stats.getkills().ToString();
-            //m_textplayer2.transform.GetChild(2).GetComponent<Text>().text = "Kills: " + m_usermanager.m_playerlist[1].getkills().ToString();
-        } catch
-        {
-
+            killstext.text = "Kills: " + m_usermanager.m_playerlist[0].m_stats.getkills().ToString();
         }
     }
 
     // Sets the icons of the guns
     private void updateWeaponIcon()
     {
-        try
+        int playerindex = 0;
+        foreach(List<Image> player in m_weaponIcon)
         {
-            if (m_usermanager.m_playerlist.Count > 0)
+            int iconindex = 0;
+            foreach(Image icon in player)
             {
-                m_weaponplayer1.transform.GetChild(0).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 0);
-                m_weaponplayer1.transform.GetChild(1).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 1);
-                m_weaponplayer1.transform.GetChild(2).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[0], 2);
-				m_weaponplayer1.transform.GetChild(3).GetComponent<Text>().text = m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammoInClip + "/" + m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammo;
+                icon.sprite = getWeaponIcon(m_usermanager.m_playerlist[playerindex], iconindex);
+                iconindex++;
             }
+            playerindex++;
+        }
+    }
 
-            if (m_usermanager.m_playerlist.Count > 1)
-            {
-                m_weaponplayer2.transform.GetChild(0).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[1], 0);
-                m_weaponplayer2.transform.GetChild(1).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[1], 1);
-                m_weaponplayer2.transform.GetChild(2).GetComponent<Image>().sprite = getWeaponIcon(m_usermanager.m_playerlist[1], 2);
-                m_weaponplayer2.transform.GetChild(3).GetComponent<Text>().text = m_usermanager.m_playerlist[1].m_inventory.inventory[0].ammoInClip + "/" + m_usermanager.m_playerlist[0].m_inventory.inventory[0].ammo;
-            }
-        } catch
+    // Sets the ammo text
+    private void UpdateAmmoText()
+    {
+        int index = 0;
+        foreach(Text ammo_text in m_weaponammo)
         {
-
+            ammo_text.text = m_usermanager.m_playerlist[index].m_inventory.inventory[0].ammoInClip + "/" + m_usermanager.m_playerlist[index].m_inventory.inventory[0].ammo;
+            index++;
         }
     }
 
@@ -194,7 +177,7 @@ public class MapUIScript {
     }
 
     // Show/hide Pause menu
-    private void showPauseMenu(bool status)
+    public void showPauseMenu(bool status)
     {
         if (status)
         {
@@ -208,8 +191,12 @@ public class MapUIScript {
     }
 
     // Show/hide Pause menu
-    private void showWaveControl(bool status)
+    public void showWaveControl(bool status)
     {
+        if(m_wavecontrol == null)
+        {
+            Debug.Log("Wvecontrol is null");
+        }
         if (status)
         {
             m_wavecontrol.SetActive(true);
@@ -222,7 +209,7 @@ public class MapUIScript {
     }
 
     // Show/hide Pause menu
-    private void showConstructonPanel(bool status)
+    public void showConstructonPanel(bool status)
     {
         /*
         if (status)
@@ -239,7 +226,7 @@ public class MapUIScript {
     }
 
     // Show/hide the gameover menu
-    private void showGameoverMenu(bool status)
+    public void showGameoverMenu(bool status)
     {
         if (status)
         {
@@ -268,4 +255,5 @@ public class MapUIScript {
         }
 
     }
+
 }

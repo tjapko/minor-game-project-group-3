@@ -20,17 +20,17 @@ public class ShopUIScript : MonoBehaviour {
     private GameObject ammoPurchaseTab;     //Reference to the Ammo purchase buttons tab
 
     //Icons
-    private Image icon_1;
-    private Image icon_2;
-    private Image icon_3;
+    private Image icon_1;   //Reference to icon 1 of weapon 1
+    private Image icon_2;   //Reference to icon 2 of weapon 2
+    private Image icon_3;   //Reference to icon 3 of weapon 3
 
     //Text
-    private Text weapontext_1;
-    private Text weapontext_2;
-    private Text weapontext_3;
-    private Text ammotext_1;
-    private Text ammotext_2;
-    private Text ammotext_3;
+    private Text weapontext_1;  //Reference to weapontext of weapon 1  
+    private Text weapontext_2;  //Reference to weapontext of weapon 2
+    private Text weapontext_3;  //Reference to weapontext of weapon 3
+    private Text ammotext_1;    //Reference to ammotext of weapon 1
+    private Text ammotext_2;    //Reference to ammotext of weapon 2
+    private Text ammotext_3;    //Reference to ammotext of weapon 3
 
     //Variables
     private List<Weapon> weaponlist;
@@ -38,6 +38,9 @@ public class ShopUIScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        //Find shop
+        m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
+
         //Set lists
         weaponlist = m_shopscript.weaponsforsale;
         ammolist = m_shopscript.ammoforsale;
@@ -61,7 +64,11 @@ public class ShopUIScript : MonoBehaviour {
         ammotext_2 = ammoText.transform.GetChild(1).GetComponent<Text>();
         ammotext_3 = ammoText.transform.GetChild(2).GetComponent<Text>();
 
+        gameObject.SetActive(false);
+
     }
+
+
 	
 	// Update is called once per frame
 	void Update () {

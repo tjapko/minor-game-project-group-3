@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     //References
     public GameObject m_uiprefab;               // Reference to UI prefab
+    public GameObject m_shopuiprefab;           // Reference to the shopUI prefab
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
 	public GameObject m_Enemyprefab1;       //Reference to prefab of enemy1
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
     public GameObject m_weaponshop;             // Reference to the weapon shop                 
 
     //Private variables
-    private MapUIScript m_uiscript;             // The UI script
+    private UIManager m_uiscript;             // The UI script
     private BaseManager m_base;                 // The base manager of the base
     private UserManager m_players;              // A collection of managers for enabling and disabling different aspects of the players.
     private WaveManager m_wave;                 // A collection of managers for enabling and disabling different aspects of the enemies.
@@ -53,7 +54,6 @@ public class GameManager : MonoBehaviour
     //Start
     private void Start()
     {
-       
         //Setting up variables
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 		m_gridManager = new GridManager(m_gridPrefab);
 
         //Initialize UI script
-        m_uiscript = new MapUIScript(gameObject.GetComponent<GameManager>(), m_uiprefab, m_players);
+        m_uiscript = new UIManager(gameObject.GetComponent<GameManager>(), m_uiprefab, m_shopuiprefab);
 
         // Start the game
         StartCoroutine(GameLoop());
@@ -83,15 +83,12 @@ public class GameManager : MonoBehaviour
         //Escape key: pause menu
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            //Check if players are constructing
-            //Escape button is then used to quit building
-            if (!m_players.checkConstruction())
+            if (m_uiscript.go_mapShopUI.activeSelf)
             {
-                //Check if player(s) are using the shop
-                if (!m_weaponshop.GetComponent<ShopScript>().getActiveUI())
-                {
-                    gamepause = !gamepause;
-                }
+                m_uiscript.go_mapShopUI.SetActive(false);
+            } else
+            {
+                gamepause = !gamepause;
             }
         }
         pauseGame(gamepause);
@@ -101,9 +98,6 @@ public class GameManager : MonoBehaviour
 
         //Show or hide UI menu depending on wavephase and pause
         m_uiscript.UIchange(gameover, wavephase, gamepause);
-
-        //Update score
-        m_uiscript.UpdateUI();
 
 		// if base is dead, all existing enemies move to player
 		if (!m_wave.baseDead && m_base.m_Instance.activeSelf == false) {
