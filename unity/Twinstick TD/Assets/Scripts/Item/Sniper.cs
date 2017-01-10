@@ -9,7 +9,7 @@ using System;
 public class Sniper : Weapon {
 
 	//public variables 
-	public static int price = 1000;
+	public static int price = 2000;
 	public static float fireRate = 1.0f;          // the fire rate of the weapon 
 	public static float launchForce = 100f;       // the launchforce of the weapon for the bullet (speed)
 	public static float maxDamage = 10f;         // the damage of the weapon if there is a full hit. 
