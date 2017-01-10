@@ -28,10 +28,6 @@ public class ShopScript : MonoBehaviour {
     //Private variables
     private List<GameObject> players_present;
     private bool showUI;
-	private Weapon weapon1;
-	private Weapon weapon2;
-	private Weapon weapon3;
-	private Weapon weapon4;
 
 	// Use this for initialization
 	void Start () {
@@ -61,36 +57,16 @@ public class ShopScript : MonoBehaviour {
         //Set UI active
         showUI = false;
 
-//        For testing
-//        .................. Weapon(name              , id, description      , iconname , price , itemtype               ,  fireratef , launchforcef , maxDamagef, reloadTimef, clipsize ,  ammo , ammopriceperclip, ammoInClip, maxAmmo, lifetime)
-		Weapon weapon1 = new Weapon("Default Weapon"  , 1 , "Default weapon!", "Weapon1", 100   , Weapon.ItemType.HandGun, 7f      , 75f          , 0.5f       , 0.5f       , 20        , 9999    , 50				,20 		,500     , 2f);
-		Weapon weapon4 = new Weapon("Default Weapon 3", 4 , "Default weapon!", "sniper", 2000, Weapon.ItemType.Sniper ,      1.0f      , 100f         , 10f      , 1.0f       , 5         , 10    , 20				,5 			,50      , 3f);
-		Weapon weapon2 = new Weapon("Default Weapon 2", 2, "Default weapon!", "shotgun", 4000, Weapon.ItemType.Shotgun,      1.0f   , 50f, 2f, 0.5f, 10, 20, 30, 10, 200, 0.4f);
-		Weapon weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 6000, Weapon.ItemType.MachineGun,   10f     ,    50f, 0.25f, 1.0f, 60, 120, 20, 60, 480, 2f);
-//		addWeapon((Weapon)weapon1);
-		addWeapon((Weapon)weapon4);
-		addWeapon((Weapon)weapon2);
-		addWeapon((Weapon)weapon3);
-	
+        //For testing
+        //.................. Weapon(name              , id, description      , iconname , price , itemtype               ,  fireratef , launchforcef , maxDamagef, reloadTimef, clipsize ,  ammo , ammopriceperclip, ammoInClip, maxAmmo, lifetime)
+        Weapon weapon1 = new Weapon("Default Weapon 2", 2, "Default weapon!", "shotgun", 4000, Weapon.ItemType.Shotgun,      1.0f   , 50f, 2f, 0.5f, 10, 20, 30, 10, 200, 0.4f);
+        Weapon weapon2 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 6000, Weapon.ItemType.MachineGun,   10f     ,    50f, 0.25f, 1.0f, 60, 120, 20, 60, 480, 2f);
+        Weapon weapon3 = new Weapon("Default Weapon 3", 4 , "Default weapon!", "sniper", 2000, Weapon.ItemType.Sniper ,      1.0f      , 100f         , 10f      , 1.0f       , 5         , 10    , 20				,5 			,50      , 3f);
+        addWeapon(weapon3);
+		addWeapon(weapon1);
+        addWeapon(weapon2);
+
     }
-
-	//Upgradable: ammo, ammoInClip
-	void Upgrade(int UpgradeLevel) {
-		switch (UpgradeLevel) {
-		case 2: 
-			weapon1.maxDamage = 1; weapon1.ammo = 1; 
-			weapon2.maxDamage = 1; weapon2.ammo = 1; 
-			weapon3.maxDamage = 1; weapon3.ammo = 1; 
-			weapon4.maxDamage = 1; weapon3.ammo = 1;
-			break;
-		case 3: 
-
-			break;
-		default: 
-
-			break;
-		}
-	}
 
     // Update is called once per frame
     void Update () {
@@ -124,7 +100,6 @@ public class ShopScript : MonoBehaviour {
             m_instance_UI.SetActive(showUI);
         }
 
-
     }
 
     //On trigger fuction
@@ -154,6 +129,8 @@ public class ShopScript : MonoBehaviour {
                 m_instance_UI.SetActive(false);
             }
         }
+
+        
     }
 
     //Add player to player present list
