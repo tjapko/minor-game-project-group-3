@@ -327,7 +327,7 @@ public class GameManager : MonoBehaviour
 		// check if the Salesman needs to be spawned and not already spawned
 		if (m_waveNumber % m_travellingSalesmanManager.getWavePerTravellingSalesman()==0 &&
 			!m_travellingSalesmanManager.getWork()) {
-			m_travellingSalesmanManager.spawnTravellingSalesman (m_gridManager.m_grid);
+			//m_travellingSalesmanManager.spawnTravellingSalesman (m_gridManager.m_grid); // commented for not spawning the salesman
 		}
 	}
 

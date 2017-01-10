@@ -89,37 +89,18 @@ public class ShopScript : MonoBehaviour {
 		int weapon4AmmoInClip1 = 5  , weapon4AmmoInClip2 = 10  , weapon4AmmoInClip3 = 15  ;
 
 		switch (UpgradeLevel) {
-		case 2: 
-//			weapon1.ammo = weapon1Ammo2;
-//			weapon1.ammoInClip = weapon1AmmoInClip2;
-//			weapon2.ammo = weapon2Ammo2;
-//			weapon2.ammoInClip = weapon2AmmoInClip2;
-//			weapon3.ammo = weapon3Ammo2;
-//			weapon3.ammoInClip = weapon3AmmoInClip2; 
-//			weapon4.ammo = weapon4Ammo2;
-//			weapon4.ammoInClip = weapon4AmmoInClip2; 
-
-			setAllWeaponAmmo(weapon1Ammo2, weapon2Ammo2, weapon3Ammo2, weapon4Ammo2 );
-			setAllWeaponAmmoInClip(weapon1AmmoInClip2, weapon2AmmoInClip2 ,weapon3AmmoInClip2 ,weapon4AmmoInClip2); 
-			break;
-		case 3:
-//			weapon1.ammo = weapon1Ammo3; weapon1.ammoInClip = weapon1AmmoInClip3;
-//			weapon2.ammo = weapon2Ammo3; weapon2.ammoInClip = weapon2AmmoInClip3;
-//			weapon3.ammo = weapon3Ammo3; weapon3.ammoInClip = weapon3AmmoInClip3; 
-//			weapon4.ammo = weapon4Ammo3; weapon4.ammoInClip = weapon4AmmoInClip3; 
-
-			setAllWeaponAmmo(weapon1Ammo3, weapon2Ammo3, weapon3Ammo3, weapon4Ammo3);
-			setAllWeaponAmmoInClip(weapon1AmmoInClip3, weapon2AmmoInClip3 ,weapon3AmmoInClip3 ,weapon4AmmoInClip3);
-			break;
-		default: 
-//			weapon1.ammo = weapon1Ammo1	; weapon1.ammoInClip = weapon1AmmoInClip1;
-//			weapon2.ammo = weapon2Ammo1	; weapon2.ammoInClip = weapon2AmmoInClip1;
-//			weapon3.ammo = weapon3Ammo1 ; weapon3.ammoInClip = weapon3AmmoInClip1; 
-//			weapon4.ammo = weapon4Ammo1 ; weapon4.ammoInClip = weapon4AmmoInClip1; 
-
-			setAllWeaponAmmo(weapon1Ammo1, weapon2Ammo1, weapon3Ammo1, weapon4Ammo1);
-			setAllWeaponAmmoInClip(weapon1AmmoInClip1, weapon2AmmoInClip1 ,weapon3AmmoInClip1 ,weapon4AmmoInClip1);
-			break;
+			case 2: 
+				setAllWeaponAmmo(weapon1Ammo2, weapon2Ammo2, weapon3Ammo2, weapon4Ammo2 );
+				setAllWeaponAmmoInClip(weapon1AmmoInClip2, weapon2AmmoInClip2 ,weapon3AmmoInClip2 ,weapon4AmmoInClip2); 
+				break;
+			case 3:
+				setAllWeaponAmmo(weapon1Ammo3, weapon2Ammo3, weapon3Ammo3, weapon4Ammo3);
+				setAllWeaponAmmoInClip(weapon1AmmoInClip3, weapon2AmmoInClip3 ,weapon3AmmoInClip3 ,weapon4AmmoInClip3);
+				break;
+			default: 
+				setAllWeaponAmmo(weapon1Ammo1, weapon2Ammo1, weapon3Ammo1, weapon4Ammo1);
+				setAllWeaponAmmoInClip(weapon1AmmoInClip1, weapon2AmmoInClip1 ,weapon3AmmoInClip1 ,weapon4AmmoInClip1);
+				break;
 		}
 	}
 
