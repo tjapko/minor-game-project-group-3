@@ -13,28 +13,32 @@ public class ShopScript : MonoBehaviour {
     string use_button = "f";    //Set to use button of player[i]
 
     //Public variables
-    public int maxweapons = 3;
-    public int maxammotype = 3;
-    public List<Weapon> weaponsforsale;
-    public List<Weapon> ammoforsale;
-    public Rigidbody m_Bullet;  // Prefab of the shell.
-    public Rigidbody m_RayBullet;  // Prefab of the Rayshell.
-    public Transform m_FireTransform;           // A child of the player where the shells are spawned.
-
-    //Reference
-    public GameObject m_ShopUIprefab;
-    public GameObject m_instance_UI;
+    [HideInInspector] public int maxweapons = 4;    //Max weapons the store may contain
+    //[HideInInspector] public int maxammotype = 4;   //Max ammo type the store may contain
+    [HideInInspector] public List<Weapon> weaponsforsale;
+    //[HideInInspector] public List<Weapon> ammoforsale;
+    public int[] upgrade_cost = new int[4]; //Upgrade to next tier [0] should be empty
+    
+    //References
+    public GameObject helpbox_prefab;   //Helpbox prefab
+    [HideInInspector]
+    public GameObject m_instance_UI;  //Reference to instance of shop UI
+    public Rigidbody m_Bullet;          // Prefab of the shell.
+    public Rigidbody m_RayBullet;       // Prefab of the Rayshell.
+    public Transform m_FireTransform;   // A child of the player where the shells are spawned.
 
     //Private variables
-    private List<GameObject> players_present;
-    private bool showUI;
+    private List<GameObject> players_present;   //List of players that are near the shop
+    private bool showUI;    //Boolean if shopUI should be visible
+    private bool box_shown; //Boolean if helpbox has been shown
+    private int current_tier;   //int : current tier of purchasable weapons (starts at 1)
 
 	// Use this for initialization
 	void Start () {
         //Instantiate Lists
         players_present = new List<GameObject>();
         weaponsforsale = new List<Weapon>();
-        ammoforsale = new List<Weapon>();
+        //ammoforsale = new List<Weapon>();
         
 
         //Create empty weaponsforsale
@@ -44,27 +48,25 @@ public class ShopScript : MonoBehaviour {
         }
 
         //Create empty ammoforsale
-        while(ammoforsale.Count < maxammotype)
-        {
-            ammoforsale.Add(new global::Weapon());
-        }
+        //while(ammoforsale.Count < maxammotype)
+        //{
+        //    ammoforsale.Add(new global::Weapon());
+        //}
 
-        //Instantiate UI
-        //m_instance_UI = GameObject.Instantiate(m_ShopUIprefab);
-        //m_instance_UI.GetComponent<ShopUIScript>().m_shopscript = gameObject.GetComponent<ShopScript>();
-        //m_instance_UI.SetActive(false);
-
-        //Set UI active
-        showUI = false;
+        showUI = false; //Set UI active
+        box_shown = false;
+        current_tier = 1;
 
         //For testing
         //.................. Weapon(name              , id, description      , iconname , price , itemtype               ,  fireratef , launchforcef , maxDamagef, reloadTimef, clipsize ,  ammo , ammopriceperclip, ammoInClip, maxAmmo, lifetime)
-        Weapon weapon1 = new Weapon("Default Weapon 2", 2, "Default weapon!", "shotgun", 4000, Weapon.ItemType.Shotgun,      1.0f   , 50f, 2f, 0.5f, 10, 20, 30, 10, 200, 0.4f);
-        Weapon weapon2 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 6000, Weapon.ItemType.MachineGun,   10f     ,    50f, 0.25f, 1.0f, 60, 120, 20, 60, 480, 2f);
-        Weapon weapon3 = new Weapon("Default Weapon 3", 4 , "Default weapon!", "sniper", 2000, Weapon.ItemType.Sniper ,      1.0f      , 100f         , 10f      , 1.0f       , 5         , 10    , 20				,5 			,50      , 3f);
-        addWeapon(weapon3);
-		addWeapon(weapon1);
+        Weapon weapon1 = new Weapon("Default Weapon 2", 1, "Default weapon!", "Weapon1", 200, Weapon.ItemType.HandGun, 1.0f, 50f, 2f, 0.5f, 10, 20, 30, 10, 200, 0.4f);
+        Weapon weapon2 = new Weapon("Default Weapon 3", 4, "Default weapon!", "sniper", 2000, Weapon.ItemType.Sniper, 1.0f, 100f, 10f, 1.0f, 5, 10, 20, 5, 50, 3f);
+        Weapon weapon3 = new Weapon("Default Weapon 2", 2, "Default weapon!", "shotgun", 4000, Weapon.ItemType.Shotgun,      1.0f   , 50f, 2f, 0.5f, 10, 20, 30, 10, 200, 0.4f);
+        Weapon weapon4 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 6000, Weapon.ItemType.MachineGun,   10f     ,    50f, 0.25f, 1.0f, 60, 120, 20, 60, 480, 2f);
+        addWeapon(weapon1);
         addWeapon(weapon2);
+        addWeapon(weapon3);
+        addWeapon(weapon4);
 
     }
 
@@ -108,6 +110,14 @@ public class ShopScript : MonoBehaviour {
         if (other.gameObject.CompareTag("Player"))
         {
             addplayer(other.gameObject);
+
+            if (!box_shown)
+            {
+                GameObject instance = GameObject.Instantiate(helpbox_prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+                SpeechBubbleScript instance_script = instance.GetComponent<SpeechBubbleScript>();
+                instance_script.setText("Press '" + use_button + "' to open the store");
+                box_shown = true;
+            }
         }
     }
 
@@ -207,6 +217,7 @@ public class ShopScript : MonoBehaviour {
     }
 
     //Add item to forsalelist
+    /*
     private void addAmmo(Weapon newAmmo)
     {
         for (int i = 0; i < ammoforsale.Count; i++)
@@ -239,6 +250,7 @@ public class ShopScript : MonoBehaviour {
             }
         }
     }
+    */
 
     //Getter show UI
     public bool getActiveUI()
@@ -246,4 +258,16 @@ public class ShopScript : MonoBehaviour {
         return showUI;
     }
 
+    //Increase tier and load new weapons
+    public void incTier()
+    {
+        current_tier++;
+        //GET NEW WEAPONS
+    }
+
+    //Getter for current_tier
+    public int getCurrentTier()
+    {
+        return current_tier;
+    }
 }

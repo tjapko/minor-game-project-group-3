@@ -27,7 +27,7 @@ GameObject:
   m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1000012117257136
 GameObject:
@@ -45,7 +45,7 @@ GameObject:
   m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1000012813041466
 GameObject:
@@ -60,10 +60,10 @@ GameObject:
   - 54: {fileID: 54000010479474162}
   m_Layer: 0
   m_Name: Shop
-  m_TagString: Player
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4000011443916410
 Transform:
@@ -228,14 +228,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da182362e5b54fd498ea83d92cb1921d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxweapons: 5
-  maxammotype: 5
+  maxweapons: 4
+  upgrade_cost: 0000000064000000c800000090010000
+  helpbox_prefab: {fileID: 1000011848348470, guid: 06d8da69edd821a488eee1b3c9eb5a8c,
+    type: 2}
+  m_instance_UI: {fileID: 0}
   m_Bullet: {fileID: 54000012476593726, guid: 4d22d43c1b361484297b2a7b58b8d4a8, type: 2}
   m_RayBullet: {fileID: 54000012476593726, guid: 0261b5d85b6ae8747bfa627544ea2578,
     type: 2}
   m_FireTransform: {fileID: 4000011702620350, guid: 6526df5f06f78a5438cb83f5730a0724,
-    type: 2}
-  m_ShopUIprefab: {fileID: 1000010742267120, guid: 4718148eb10e9d945beab5902c750e9b,
     type: 2}
 --- !u!136 &136000013965271910
 CapsuleCollider:
