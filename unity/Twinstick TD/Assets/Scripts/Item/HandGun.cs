@@ -6,7 +6,7 @@ using System;
 ///  Weapon constructor 
 ///  inherits from "Item"
 /// </summary>
-public class HandGun : Weapon {
+public class HandGun {
 
 	//public variables 
 	public static int price = 100;
@@ -15,60 +15,14 @@ public class HandGun : Weapon {
 	public static float maxDamage = 0.5f;         // the damage of the weapon if there is a full hit. 
 	public static float reloadTime = 0.5f;        // the time it takes to reload 
 	public static int clipSize = 20;            // the size of the clip 
-	public static int ammo = 9999;                // the ammo there is left (excluding the ammoInClip)
-	public static int ammoprice = 50;			// the price for new ammo !!per clip!!
-	public static int ammoInClip = 20;          // the ammo in the clip 
+	public static int ammoprice = 50;			// the price for new ammo !!per clip!
 	public static int maxAmmo = 500;				// max ammo player can carry
 	public static float bulletLifeTime = 2f;    // the lifetime of the bullet 
-
-	//Constructor
-	public HandGun(string name, int id, string description, string iconname,  int _price, ItemType type, float _fireRate, float _launchForce, float _maxDamage, float _reloadTime, int _clipSize, int _ammo, int _ammoprice, int _ammoInClip, int _maxAmmo, float _bulletLifeTime)
-	{
-		name = "Default Weapon";
-		id = 1;
-		description = "Default weapon!";
-		iconname = "Weapon1";
-		price = _price;
-		type = Weapon.ItemType.HandGun;
-		fireRate = _fireRate;
-		launchForce = _launchForce;
-		maxDamage = _maxDamage;
-		reloadTime = _reloadTime;
-		clipSize = _clipSize;
-		ammo = _ammo;
-		ammoprice = _ammoprice;
-		ammoInClip = _ammoInClip;
-		maxAmmo = _maxAmmo;
-		bulletLifeTime = _bulletLifeTime;
-	}
-
-	/// <summary>
-	/// Checks whether the weapon has ammo left in the clip 
-	/// </summary>
-	/// <returns> boolean </returns>
-	public Boolean hasAmmo()
-	{
-		if (ammoInClip > 0)
-			return true;
-		else
-			return false;
-	}
-
-	/// <summary>
-	/// reloading of the weapon
-	/// </summary>
-	public void reload()
-	{
-		if (ammo > clipSize)
-		{
-			ammoInClip = clipSize;
-			ammo -= clipSize;
-		}
-		else
-		{
-			ammoInClip = ammo;
-			ammo = 0;
-		}
-	}
-		
+	// upgradable stats (ammo & ammoInClip)
+	public static int ammo1 = 9999;                // the ammo there is left (excluding the ammoInClip) level1
+	public static int ammo2 = 9999;                // level2 after the 1st upgrade
+	public static int ammo3 = 9999;                // level3 after the 2nd upgrade
+	public static int ammoInClip1 = 20;             // the ammo in the clip level1
+	public static int ammoInClip2 = 25;             // level2 after the 1st upgrade 
+	public static int ammoInClip3 = 30;             // level3 after the 1st upgrade
 }

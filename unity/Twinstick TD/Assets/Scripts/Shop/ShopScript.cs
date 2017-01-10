@@ -62,44 +62,32 @@ public class ShopScript : MonoBehaviour {
         showUI = false;
 
 //        For testing
-//      ............. Weapon(name              , id, description      , iconname , price , itemtype                  ,   fireratef , launchforcef , maxDamagef , reloadTimef, clipsize  ,  ammo   , ammopriceperclip , ammoInClip , maxAmmo,  lifetime)
-		weapon1 = new Weapon("Default Weapon"  , 1 , "Default weapon!", "Weapon1", 100   , Weapon.ItemType.HandGun   ,   7f        , 75f          , 0.5f       , 0.5f       , 20        , 9999    , 50				 , 20 		  , 500     , 2f);
-		weapon4 = new Weapon("Default Weapon 4", 4 , "Default weapon!", "sniper" , 2000  , Weapon.ItemType.Sniper    ,   1.0f      , 100f         , 10f        , 1.0f       , 5         , 10      , 20				 , 5 	      , 50      , 3f);
-		weapon2 = new Weapon("Default Weapon 2", 2 , "Default weapon!", "shotgun", 4000  , Weapon.ItemType.Shotgun   ,   1.0f      , 50f          , 2f         , 0.5f       , 10        , 20      , 30               , 10         , 200     , 0.4f);
-		weapon3 = new Weapon("Default Weapon 3", 3 , "Default weapon!", "Weapon3", 8000  , Weapon.ItemType.MachineGun,   10f       , 50f          , 0.5f       , 1.0f       , 60        , 120     , 20               , 60         , 480     , 2f);
+//      ............. Weapon(name               , id , description       , iconname  , price            , itemtype                   , fireratef           , launchforcef           , maxDamagef           , reloadTimef           , clipsize            , ammo            , ammopriceperclip     , ammoInClip            , maxAmmo            , lifetime)
+		weapon1 = new Weapon("Default Weapon"   , 1  , "Default weapon!" , "Weapon1" , HandGun.price    , Weapon.ItemType.HandGun    , HandGun.fireRate    , HandGun.launchForce    , HandGun.maxDamage    , HandGun.reloadTime    , HandGun.clipSize    , HandGun.ammo1    , HandGun.ammoprice    , HandGun.ammoInClip1    , HandGun.maxAmmo    , HandGun.bulletLifeTime);
+		weapon4 = new Weapon("Default Weapon 4" , 4  , "Default weapon!" , "sniper"  , Sniper.price     , Weapon.ItemType.Sniper     , Sniper.fireRate     , Sniper.launchForce     , Sniper.maxDamage     , Sniper.reloadTime     , Sniper.clipSize     , Sniper.ammo1     , Sniper.ammoprice     , Sniper.ammoInClip1     , Sniper.maxAmmo     , Sniper.bulletLifeTime);
+		weapon2 = new Weapon("Default Weapon 2" , 2  , "Default weapon!" , "shotgun" , ShotGun.price    , Weapon.ItemType.Shotgun    , ShotGun.fireRate    , ShotGun.launchForce    , ShotGun.maxDamage    , ShotGun.reloadTime    , ShotGun.clipSize    , ShotGun.ammo1    , ShotGun.ammoprice    , ShotGun.ammoInClip1    , ShotGun.maxAmmo    , ShotGun.bulletLifeTime);
+		weapon3 = new Weapon("Default Weapon 3" , 3  , "Default weapon!" , "Weapon3" , MachineGun.price , Weapon.ItemType.MachineGun , MachineGun.fireRate , MachineGun.launchForce , MachineGun.maxDamage , MachineGun.reloadTime , MachineGun.clipSize , MachineGun.ammo1 , MachineGun.ammoprice , MachineGun.ammoInClip1 , MachineGun.maxAmmo , MachineGun.bulletLifeTime);
 		addWeapon((Weapon)weapon1);
 		addWeapon((Weapon)weapon4);
 		addWeapon((Weapon)weapon2);
 		addWeapon((Weapon)weapon3);
-		Upgrade (2);
+//		Upgrade (2); // for testing purposes
     }
 
 	//Upgradable: ammo, ammoInClip
-	// toDO: make private variables? 
 	public void Upgrade(int UpgradeLevel) {
-		// ammo levels for all weapons 
-		int weapon1Ammo1 = 9999, weapon1Ammo2 = 9999, weapon1Ammo3 = 9999;
-		int weapon2Ammo1 = 20  , weapon2Ammo2 = 35  , weapon2Ammo3 = 50  ;
-		int weapon3Ammo1 = 120 , weapon3Ammo2 = 160 , weapon3Ammo3 = 200 ;
-		int weapon4Ammo1 = 10  , weapon4Ammo2 = 15  , weapon4Ammo3 = 20  ;
-		// ammoInClip levels for all weapons
-		int weapon1AmmoInClip1 = 20 , weapon1AmmoInClip2 = 25  , weapon1AmmoInClip3 = 30  ;
-		int weapon2AmmoInClip1 = 10 , weapon2AmmoInClip2 = 15  , weapon2AmmoInClip3 = 20  ;
-		int weapon3AmmoInClip1 = 60 , weapon3AmmoInClip2 = 80  , weapon3AmmoInClip3 = 100 ;
-		int weapon4AmmoInClip1 = 5  , weapon4AmmoInClip2 = 10  , weapon4AmmoInClip3 = 15  ;
-
 		switch (UpgradeLevel) {
 			case 2: 
-				setAllWeaponAmmo(weapon1Ammo2, weapon2Ammo2, weapon3Ammo2, weapon4Ammo2 );
-				setAllWeaponAmmoInClip(weapon1AmmoInClip2, weapon2AmmoInClip2 ,weapon3AmmoInClip2 ,weapon4AmmoInClip2); 
+				setAllWeaponAmmo(HandGun.ammo2, ShotGun.ammo2, MachineGun.ammo2, Sniper.ammo2);
+				setAllWeaponAmmoInClip(HandGun.ammoInClip2, ShotGun.ammoInClip2, MachineGun.ammoInClip2, Sniper.ammoInClip2);
 				break;
 			case 3:
-				setAllWeaponAmmo(weapon1Ammo3, weapon2Ammo3, weapon3Ammo3, weapon4Ammo3);
-				setAllWeaponAmmoInClip(weapon1AmmoInClip3, weapon2AmmoInClip3 ,weapon3AmmoInClip3 ,weapon4AmmoInClip3);
+				setAllWeaponAmmo(HandGun.ammo3, ShotGun.ammo3, MachineGun.ammo3, Sniper.ammo3);
+				setAllWeaponAmmoInClip(HandGun.ammoInClip3, ShotGun.ammoInClip3, MachineGun.ammoInClip3, Sniper.ammoInClip3);
 				break;
 			default: 
-				setAllWeaponAmmo(weapon1Ammo1, weapon2Ammo1, weapon3Ammo1, weapon4Ammo1);
-				setAllWeaponAmmoInClip(weapon1AmmoInClip1, weapon2AmmoInClip1 ,weapon3AmmoInClip1 ,weapon4AmmoInClip1);
+				setAllWeaponAmmo(HandGun.ammo1, ShotGun.ammo1, MachineGun.ammo1, Sniper.ammo1);
+				setAllWeaponAmmoInClip(HandGun.ammoInClip1, ShotGun.ammoInClip1, MachineGun.ammoInClip1, Sniper.ammoInClip1);
 				break;
 		}
 	}
@@ -111,6 +99,7 @@ public class ShopScript : MonoBehaviour {
 		weapon3.ammo = weapon3Ammo; 
 		weapon4.ammo = weapon4Ammo;  
 	}
+
 	// sets the ammoInClip for weapons1-4 
 	private void setAllWeaponAmmoInClip(int weapon1AmmoInClip, int weapon2AmmoInClip, int weapon3AmmoInClip, int weapon4AmmoInClip) {
 		weapon1.ammoInClip = weapon1AmmoInClip; 
