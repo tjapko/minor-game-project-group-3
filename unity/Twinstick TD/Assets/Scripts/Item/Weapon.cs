@@ -7,7 +7,7 @@ using System;
 ///  inherits from "Item"
 /// </summary>
 public class Weapon : Item {
-
+	
     public float bulletLifeTime;    // the lifetime of the bullet 
     public float fireRate;          // the fire rate of the weapon 
     public float launchForce;       // the launchforce of the weapon for the bullet (speed)

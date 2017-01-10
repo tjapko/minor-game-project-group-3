@@ -17,13 +17,13 @@ public class PlayerInventory : MonoBehaviour {
     {
         inventory = new List<Weapon>();
         //.................. Weapon(name              , id, description      , iconname , price , itemtype               ,  fireratef , launchforcef , maxDamagef, reloadTimef, clipsize ,  ammo , ammopriceperclip, ammoInClip, maxAmmo, lifetime)
-        Weapon weapon1 = new Weapon("Default Weapon"  , 1 , "Default weapon!", "Weapon1", 100   , Weapon.ItemType.HandGun, 7f      , 75f          , 0.5f       , 0.5f       , 20        , 9999    , 50				,20 		,500     , 2f);
-		Weapon weapon2 = new Weapon("Default Weapon 2", 2 , "Default weapon!", "shotgun", 200   , Weapon.ItemType.Shotgun, 1f         , 50f          , 2f       , 0.5f       , 10        , 20    , 30				,10			,200     , 0.4f);
-        Weapon weapon3 = new Weapon("Default Weapon 3", 3 , "Default weapon!", "Weapon3", 300   , Weapon.ItemType.MachineGun , 5f    , 50f         , 0.25f      , 1.0f       , 60        , 120   , 20               ,60         , 50     , 2f);
-        //Weapon sniper = new Weapon("Default Weapon 3", 3 , "Default weapon!", "Weapon3", 300   , Weapon.ItemType.Sniper , 0.75f      , 100f         , 10f      , 1.0f       , 5         , 10    , 20				,5 			,50      , 3f);
+		Weapon weapon1 = new Weapon("Default Weapon"  , 1 , "Default weapon!", "Weapon1", 100   , Weapon.ItemType.HandGun, 7f      , 75f          , 0.5f       , 0.5f       , 2        , 9999    , 50				,20 		,500     , 2f);
+		//Weapon weapon2 = new Weapon("Default Weapon 2", 2 , "Default weapon!", "shotgun", 200   , Weapon.ItemType.Shotgun, 1f         , 50f          , 2f       , 0.5f       , 10        , 20    , 30				,10			,200     , 0.4f);
+        //Weapon weapon3 = new Weapon("Default Weapon 3", 3 , "Default weapon!", "Weapon3", 300   , Weapon.ItemType.MachineGun , 5f    , 50f         , 0.25f      , 1.0f       , 60        , 120   , 20               ,60         , 50     , 2f);
+        //Weapon sniper = new Weapon("Default Weapon 3", 4 , "Default weapon!", "Weapon3", 300   , Weapon.ItemType.Sniper , 0.75f      , 100f         , 10f      , 1.0f       , 5         , 10    , 20				,5 			,50      , 3f);
 
         //First add default
-        inventory.Add(weapon1);
+		inventory.Add((Weapon)weapon1);
         //inventory.Add(weapon2);
         //inventory.Add(weapon3);
 
@@ -47,6 +47,7 @@ public class PlayerInventory : MonoBehaviour {
 		{
             swapDown();
         }
+
     }
 
 
