@@ -45,6 +45,7 @@ public class UIManager {
             m_mapui.showConstructonPanel(false);
             m_mapui.showWaveControl(false);
             m_mapui.showPauseMenu(false);
+            m_mapui.showWaveRemaining(false);
         }
         else
         {
@@ -55,6 +56,7 @@ public class UIManager {
                 m_mapui.showWaveControl(false);
                 m_mapui.showPauseMenu(true);
                 m_mapui.showGameoverMenu(false);
+                m_mapui.showWaveRemaining(false);
             }
             else
             {
@@ -65,6 +67,7 @@ public class UIManager {
                     m_mapui.showConstructonPanel(false);
                     m_mapui.showPauseMenu(false);
                     m_mapui.showGameoverMenu(false);
+                    m_mapui.showWaveRemaining(true);
                 }
                 else
                 {
@@ -72,6 +75,7 @@ public class UIManager {
                     m_mapui.showConstructonPanel(true);
                     m_mapui.showPauseMenu(false);
                     m_mapui.showGameoverMenu(false);
+                    m_mapui.showWaveRemaining(false);
                 }
             }
         }

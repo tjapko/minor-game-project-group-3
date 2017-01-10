@@ -343,4 +343,30 @@ public class WaveManager
         //Example algorithm
         return (int) (Mathf.Pow(1.0f , m_wavenumber)); // updating hp enemy per wave
     }
+
+    //Returns amount of enemies remaining 
+    public int enemiesRemaining()
+    {
+        return EnemiesAmountPerWave() - countDeadEnemies();
+    }
+    
+    //Counts the amount of dead enemies
+    private int countDeadEnemies()
+    {
+        if(m_enemywave == null)
+        {
+            return 0;
+        }
+
+        int ans = 0;
+        foreach (EnemyManager enemy in m_enemywave)
+        {
+            if (!enemy.m_Instance.activeSelf)
+            {
+                ans++;
+            }
+        }
+        return ans;
+    } 
+
 }

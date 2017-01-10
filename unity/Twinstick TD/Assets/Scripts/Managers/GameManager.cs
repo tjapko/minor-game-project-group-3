@@ -83,13 +83,20 @@ public class GameManager : MonoBehaviour
         //Escape key: pause menu
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if (m_uiscript.go_mapShopUI.activeSelf)
+            //Check for game over
+            if (!gameover)
             {
-                m_uiscript.go_mapShopUI.SetActive(false);
-            } else
-            {
-                gamepause = !gamepause;
+                //Check if shop UI is active
+                if (m_uiscript.go_mapShopUI.activeSelf)
+                {
+                    m_uiscript.go_mapShopUI.SetActive(false);
+                }
+                else
+                {
+                    gamepause = !gamepause;
+                }
             }
+            
         }
         pauseGame(gamepause);
 
@@ -348,5 +355,9 @@ public class GameManager : MonoBehaviour
         return m_waveNumber;
     }
 
+    public WaveManager getWaveManager()
+    {
+        return m_wave;
+    }
 }
 

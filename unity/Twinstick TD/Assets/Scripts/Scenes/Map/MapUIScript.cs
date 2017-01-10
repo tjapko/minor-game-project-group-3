@@ -13,6 +13,7 @@ public class MapUIScript : MonoBehaviour {
     //References to managers
     private GameManager m_gamemanager;      //Reference to game manager (used to invoke next wave)
     private UserManager m_usermanager;      //Reference to the usermanager in the game manager
+    private WaveManager m_wavemanager;
     private List<PlayerManager> m_players;  //Reference to the players in the game 
 
     //References to GameObject
@@ -25,9 +26,10 @@ public class MapUIScript : MonoBehaviour {
     private GameObject  m_gameovermenu;         //Reference to the game over menu
     private List<GameObject> m_weaponstats;     //Referene to the weapons of the player
     private List<List<Image>> m_weaponIcon;     //Reference to the weapon icon slots
-    private List<Text> m_weaponammo;            //Reference to the ammo Text component
-
-    private GameObject  m_wavestats;            //Reference tot he Wave stats UI panel
+    private List<List<Text>> m_weaponammo;            //Reference to the ammo Text component
+    private GameObject m_wavestats;             //Reference tot he Wave stats UI panel
+    private GameObject m_waveremaining;         //Reference to the wave remaining UI panel
+    private Text m_waveremainingText;           //Reference to the text in the wave remaining UI panel
 
     private void Start()
     {
@@ -35,6 +37,7 @@ public class MapUIScript : MonoBehaviour {
         m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
         m_usermanager = m_gamemanager.getUserManager();
         m_players = m_usermanager.m_playerlist;
+        m_wavemanager = m_gamemanager.getWaveManager();
 
         //Set references to children
         m_pausemenu = gameObject.transform.GetChild(0).gameObject;
@@ -42,6 +45,7 @@ public class MapUIScript : MonoBehaviour {
         m_constructionpanel = gameObject.transform.GetChild(2).gameObject;
         m_gameovermenu = gameObject.transform.GetChild(5).gameObject;
         m_wavestats = gameObject.transform.GetChild(8).gameObject;
+        m_waveremaining = gameObject.transform.GetChild(9).gameObject;
 
         //Player stats and children
         int amountofplayers = m_gamemanager.m_amountofplayers;
@@ -109,17 +113,24 @@ public class MapUIScript : MonoBehaviour {
         }
 
         //Set list of weaponammo
-        m_weaponammo = new List<Text>();
+        m_weaponammo = new List<List<Text>>();
         for (int i = 0; i < amountofplayers; i++)
         {
-            m_weaponammo.Add(m_weaponstats[i].transform.GetChild(3).GetComponent<Text>());
+            List<Text> temp = new List<Text>();
+            temp.Add(m_weaponstats[i].transform.GetChild(3).GetComponent<Text>());
+            temp.Add(m_weaponstats[i].transform.GetChild(4).GetComponent<Text>());
+            temp.Add(m_weaponstats[i].transform.GetChild(5).GetComponent<Text>());
+            m_weaponammo.Add(temp);
         }
+
+        m_waveremainingText = m_waveremaining.transform.GetChild(0).GetComponent<Text>();
 
         //Set active UI
         m_pausemenu.SetActive(false);
         m_wavecontrol.SetActive(true);
         m_constructionpanel.SetActive(false);
         m_gameovermenu.SetActive(false);
+        m_waveremaining.SetActive(false);
 
         //Invoke functions
         InvokeRepeating("UpdateUI", 0.0f, 0.2f);
@@ -133,6 +144,7 @@ public class MapUIScript : MonoBehaviour {
         SetKillsText();
         updateWeaponIcon();
         UpdateAmmoText();
+        setEnemiesRemainingText();
 
     }
 
@@ -172,6 +184,12 @@ public class MapUIScript : MonoBehaviour {
         }
     }
 
+    // Sets the enemies remaining text
+    private void setEnemiesRemainingText()
+    {
+        m_waveremainingText.text = "Enemies left: " + m_wavemanager.enemiesRemaining();
+    }
+
     // Sets the icons of the guns
     private void updateWeaponIcon()
     {
@@ -191,12 +209,18 @@ public class MapUIScript : MonoBehaviour {
     // Sets the ammo text
     private void UpdateAmmoText()
     {
-        int index = 0;
-        foreach(Text ammo_text in m_weaponammo)
+        int player_index = 0;
+        foreach(List<Text> player_ui in m_weaponammo)
         {
-            ammo_text.text = m_usermanager.m_playerlist[index].m_inventory.inventory[0].ammoInClip + "/" + m_usermanager.m_playerlist[index].m_inventory.inventory[0].ammo;
-            index++;
+            int element_index = 0;
+            foreach (Text ammo_text in player_ui)
+            {
+                ammo_text.text = m_usermanager.m_playerlist[player_index].m_inventory.inventory[element_index].ammoInClip + "/" + m_usermanager.m_playerlist[player_index].m_inventory.inventory[element_index].ammo;
+                element_index++;
+            }
+            player_index++;
         }
+        
     }
 
     // Gets the icon of the gun
@@ -208,62 +232,26 @@ public class MapUIScript : MonoBehaviour {
     // Show/hide Pause menu
     public void showPauseMenu(bool status)
     {
-        if (status)
-        {
-            m_pausemenu.SetActive(true);
+        m_pausemenu.SetActive(status);
 
-        } else
-        {
-            m_pausemenu.SetActive(false);
-        }
-        
     }
 
     // Show/hide Pause menu
     public void showWaveControl(bool status)
     {
-        if(m_wavecontrol == null)
-        {
-            Debug.Log("Wvecontrol is null");
-        }
-        if (status)
-        {
-            m_wavecontrol.SetActive(true);
-
-        }
-        else
-        {
-            m_wavecontrol.SetActive(false);
-        }
+        m_wavecontrol.SetActive(status);
     }
 
     // Show/hide Pause menu
     public void showConstructonPanel(bool status)
     {
-        /*
-        if (status)
-        {
-            m_constructionpanel.SetActive(true);
-
-        }
-        else
-        {
-            m_constructionpanel.SetActive(false);
-        }
-        */
         m_constructionpanel.SetActive(false);
     }
 
     // Show/hide the gameover menu
     public void showGameoverMenu(bool status)
     {
-        if (status)
-        {
-            m_gameovermenu.SetActive(true);
-        } else
-        {
-            m_gameovermenu.SetActive(false);
-        }
+        m_gameovermenu.SetActive(status);
     }
 
     // Get the score of the player
@@ -285,4 +273,9 @@ public class MapUIScript : MonoBehaviour {
 
     }
 
+    // Show/hide the wave remaining panel
+    public void showWaveRemaining(bool status)
+    {
+        m_waveremaining.SetActive(status);
+    }
 }
