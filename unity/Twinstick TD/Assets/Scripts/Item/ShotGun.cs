@@ -6,7 +6,7 @@ using System;
 ///  Weapon constructor 
 ///  inherits from "Item"
 /// </summary>
-public class ShotGun : Weapon {
+public class ShotGun {
 
 	//public variables 
 	public static int price = 4000;
