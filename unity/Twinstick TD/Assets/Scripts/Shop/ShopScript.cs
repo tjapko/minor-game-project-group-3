@@ -28,10 +28,7 @@ public class ShopScript : MonoBehaviour {
     //Private variables
     private List<GameObject> players_present;
     private bool showUI;
-	private Weapon weapon1;
-	private Weapon weapon2;
-	private Weapon weapon3;
-	private Weapon weapon4;
+	private Weapon weapon1, weapon2, weapon3, weapon4;
 
 	// Use this for initialization
 	void Start () {

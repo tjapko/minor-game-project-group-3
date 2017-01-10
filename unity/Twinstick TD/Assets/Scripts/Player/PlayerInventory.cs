@@ -24,6 +24,7 @@ public class PlayerInventory : MonoBehaviour {
 
         //First add default
 		inventory.Add((Weapon)weapon1);
+		//inventory.Add(weapon4);
         //inventory.Add(weapon2);
         //inventory.Add(weapon3);
 
