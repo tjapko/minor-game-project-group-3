@@ -14,7 +14,6 @@ public class MachineGun {
 	public static float launchForce = 50f;       // the launchforce of the weapon for the bullet (speed)
 	public static float maxDamage = 0.25f;         // the damage of the weapon if there is a full hit. 
 	public static float reloadTime = 1f;        // the time it takes to reload 
-	public static int clipSize = 60;            // the size of the clip 
 	public static int ammoprice = 20;			// the price for new ammo !!per clip!!
 	public static int maxAmmo = 480;				// max ammo player can carry
 	public static float bulletLifeTime = 2f;    // the lifetime of the bullet 
@@ -24,5 +23,8 @@ public class MachineGun {
 	public static int ammo3 = 200;                // level3 after the 2nd upgrade
 	public static int ammoInClip1 = 60;             // the ammo in the clip level1
 	public static int ammoInClip2 = 80;             // level2 after the 1st upgrade 
-	public static int ammoInClip3 = 100;            // level3 after the 1st upgrade
+	public static int ammoInClip3 = 100;            // level3 after the 2nd upgrade
+    public static int clipSize1 = 60;               //the clipsize level1
+    public static int clipSize2 = 80;               //level2 after the 1st upgrade
+    public static int clipSize3 = 100;              //level3 after the 2nd upgrade
 }

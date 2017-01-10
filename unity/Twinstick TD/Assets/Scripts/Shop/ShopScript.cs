@@ -60,10 +60,10 @@ public class ShopScript : MonoBehaviour {
 
 //        For testing
 //      ............. Weapon(name               , id , description       , iconname  , price            , itemtype                   , fireratef           , launchforcef           , maxDamagef           , reloadTimef           , clipsize            , ammo            , ammopriceperclip     , ammoInClip            , maxAmmo            , lifetime)
-		weapon1 = new Weapon("Default Weapon"   , 1  , "Default weapon!" , "Weapon1" , HandGun.price    , Weapon.ItemType.HandGun    , HandGun.fireRate    , HandGun.launchForce    , HandGun.maxDamage    , HandGun.reloadTime    , HandGun.clipSize    , HandGun.ammo1    , HandGun.ammoprice    , HandGun.ammoInClip1    , HandGun.maxAmmo    , HandGun.bulletLifeTime);
-		weapon4 = new Weapon("Default Weapon 4" , 4  , "Default weapon!" , "sniper"  , Sniper.price     , Weapon.ItemType.Sniper     , Sniper.fireRate     , Sniper.launchForce     , Sniper.maxDamage     , Sniper.reloadTime     , Sniper.clipSize     , Sniper.ammo1     , Sniper.ammoprice     , Sniper.ammoInClip1     , Sniper.maxAmmo     , Sniper.bulletLifeTime);
-		weapon2 = new Weapon("Default Weapon 2" , 2  , "Default weapon!" , "shotgun" , ShotGun.price    , Weapon.ItemType.Shotgun    , ShotGun.fireRate    , ShotGun.launchForce    , ShotGun.maxDamage    , ShotGun.reloadTime    , ShotGun.clipSize    , ShotGun.ammo1    , ShotGun.ammoprice    , ShotGun.ammoInClip1    , ShotGun.maxAmmo    , ShotGun.bulletLifeTime);
-		weapon3 = new Weapon("Default Weapon 3" , 3  , "Default weapon!" , "Weapon3" , MachineGun.price , Weapon.ItemType.MachineGun , MachineGun.fireRate , MachineGun.launchForce , MachineGun.maxDamage , MachineGun.reloadTime , MachineGun.clipSize , MachineGun.ammo1 , MachineGun.ammoprice , MachineGun.ammoInClip1 , MachineGun.maxAmmo , MachineGun.bulletLifeTime);
+		weapon1 = new Weapon("Default Weapon"   , 1  , "Default weapon!" , "Weapon1" , HandGun.price    , Weapon.ItemType.HandGun    , HandGun.fireRate    , HandGun.launchForce    , HandGun.maxDamage    , HandGun.reloadTime    , HandGun.clipSize1    , HandGun.ammo1    , HandGun.ammoprice    , HandGun.ammoInClip1    , HandGun.maxAmmo    , HandGun.bulletLifeTime);
+		weapon4 = new Weapon("Default Weapon 4" , 4  , "Default weapon!" , "sniper"  , Sniper.price     , Weapon.ItemType.Sniper     , Sniper.fireRate     , Sniper.launchForce     , Sniper.maxDamage     , Sniper.reloadTime     , Sniper.clipSize1    , Sniper.ammo1     , Sniper.ammoprice     , Sniper.ammoInClip1     , Sniper.maxAmmo     , Sniper.bulletLifeTime);
+		weapon2 = new Weapon("Default Weapon 2" , 2  , "Default weapon!" , "shotgun" , ShotGun.price    , Weapon.ItemType.Shotgun    , ShotGun.fireRate    , ShotGun.launchForce    , ShotGun.maxDamage    , ShotGun.reloadTime    , ShotGun.clipSize1    , ShotGun.ammo1    , ShotGun.ammoprice    , ShotGun.ammoInClip1    , ShotGun.maxAmmo    , ShotGun.bulletLifeTime);
+		weapon3 = new Weapon("Default Weapon 3" , 3  , "Default weapon!" , "Weapon3" , MachineGun.price , Weapon.ItemType.MachineGun , MachineGun.fireRate , MachineGun.launchForce , MachineGun.maxDamage , MachineGun.reloadTime , MachineGun.clipSize1 , MachineGun.ammo1 , MachineGun.ammoprice , MachineGun.ammoInClip1 , MachineGun.maxAmmo , MachineGun.bulletLifeTime);
 		addWeapon((Weapon)weapon1);
 		addWeapon((Weapon)weapon4);
 		addWeapon((Weapon)weapon2);
@@ -77,11 +77,13 @@ public class ShopScript : MonoBehaviour {
 			case 2: 
 				setAllWeaponAmmo(HandGun.ammo2, ShotGun.ammo2, MachineGun.ammo2, Sniper.ammo2);
 				setAllWeaponAmmoInClip(HandGun.ammoInClip2, ShotGun.ammoInClip2, MachineGun.ammoInClip2, Sniper.ammoInClip2);
+                setAllWeaponClipSize(HandGun.clipSize2, ShotGun.clipSize2, MachineGun.clipSize2, Sniper.clipSize2);
 				break;
 			case 3:
 				setAllWeaponAmmo(HandGun.ammo3, ShotGun.ammo3, MachineGun.ammo3, Sniper.ammo3);
 				setAllWeaponAmmoInClip(HandGun.ammoInClip3, ShotGun.ammoInClip3, MachineGun.ammoInClip3, Sniper.ammoInClip3);
-				break;
+                setAllWeaponClipSize(HandGun.clipSize3, ShotGun.clipSize3, MachineGun.clipSize3, Sniper.clipSize3);
+                break;
 			default: 
 				setAllWeaponAmmo(HandGun.ammo1, ShotGun.ammo1, MachineGun.ammo1, Sniper.ammo1);
 				setAllWeaponAmmoInClip(HandGun.ammoInClip1, ShotGun.ammoInClip1, MachineGun.ammoInClip1, Sniper.ammoInClip1);
@@ -104,6 +106,16 @@ public class ShopScript : MonoBehaviour {
 		weapon3.ammoInClip = weapon3AmmoInClip; 
 		weapon4.ammoInClip = weapon4AmmoInClip;  
 	}
+
+    private void setAllWeaponClipSize(int weapon1ClipSize, int weapon2ClipSize, int weapon3ClipSize, int weapon4ClipSize)
+    {
+        
+        weapon1.clipSize = weapon1ClipSize;
+        weapon2.clipSize = weapon2ClipSize;
+        weapon3.clipSize = weapon3ClipSize;
+        weapon4.clipSize = weapon4ClipSize;
+    
+}
 
     // Update is called once per frame
     void Update () {
