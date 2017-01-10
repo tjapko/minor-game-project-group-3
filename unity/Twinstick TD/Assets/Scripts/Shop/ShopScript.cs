@@ -102,7 +102,7 @@ public class ShopScript : MonoBehaviour {
 		weapon1.ammoInClip = weapon1AmmoInClip; 
 		weapon2.ammoInClip = weapon2AmmoInClip; 
 		weapon3.ammoInClip = weapon3AmmoInClip; 
-		weapon4.ammoInClip= weapon4AmmoInClip;  
+		weapon4.ammoInClip = weapon4AmmoInClip;  
 	}
 
     // Update is called once per frame
