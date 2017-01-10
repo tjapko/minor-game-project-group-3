@@ -10,14 +10,9 @@ public class Enemie2 : EnemyManager
 	//Walks towards player first, untill distance is less than 8, then towards base
 	public Enemie2 (GameObject instance, Transform spawnpoint, Transform basetarget, Transform playerpoint, int number) : base(instance, spawnpoint, basetarget, playerpoint, number)
 	{
-		this.m_SpawnPoint = spawnpoint;
-		this.m_BasePoint = basetarget;
-		this.m_EnemyNumber = number;
-		this.m_Instance = instance;
-		this.m_PlayerPoint = playerpoint;
+		
 
-		this.health = m_Instance.GetComponent<EnemyHealth> ();
-
+        // movement
 		m_Instance.AddComponent<UnitPlayer> ();
 		this.m_MovementPlayer = m_Instance.GetComponent<UnitPlayer> ();
 		health.playerUnit = m_MovementPlayer;

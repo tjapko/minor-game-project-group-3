@@ -182,6 +182,7 @@ public class WaveManager
 		GameObject newinstance = GameObject.Instantiate (Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
 
 		if (Enemyprefab.Equals (m_Enemyprefab1)) {
+           
             Enemie1 instance = new Enemie1(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
             instance.health.setMaxHealth(sethealt());
             m_enemywave.Add (instance);

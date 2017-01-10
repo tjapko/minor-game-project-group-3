@@ -18,13 +18,16 @@ public abstract class EnemyManager
 
 
     //Constructor
-	public EnemyManager(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playertarget, int number)
+	public EnemyManager(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playertarget, int number, float damageToTowerPerAttack, float attackSpeedTower, float damageToPlayerPerAttack, float attackSpeedPlayer, float StartingHealth, float movementspeed)
     {
         m_SpawnPoint = spawnpoint;
         m_BasePoint = basetarget;
         m_EnemyNumber = number;
         m_Instance = instance;
-		this.health = m_Instance.GetComponent<EnemyHealth> ();
+        m_PlayerPoint = playertarget;
+
+        this.health = m_Instance.GetComponent<EnemyHealth> ();
+        
     }
 
 

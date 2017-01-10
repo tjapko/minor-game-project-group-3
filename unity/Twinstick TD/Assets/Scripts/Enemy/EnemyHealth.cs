@@ -41,6 +41,7 @@ public class EnemyHealth : MonoBehaviour
         m_CurrentHealth = m_StartingHealth;
         // Update the health slider's value and color.
         SetHealthUI();
+
 	}
 
 	public void OnTriggerEnter(Collider other){
@@ -127,6 +128,9 @@ public class EnemyHealth : MonoBehaviour
     // OnDeath
     private void OnDeath()
     {
+
+
+
         //Give player money
         GameObject root = GameObject.FindWithTag("Gamemanager");
         GameManager gamemanager = root.GetComponent<GameManager>();
@@ -158,7 +162,7 @@ public class EnemyHealth : MonoBehaviour
     //Set max health of player
     public void setMaxHealth(int value)
     {
-        m_StartingHealth = value;
-        Start();
+        m_CurrentHealth = value;
+        SetHealthUI();
     }
 }
