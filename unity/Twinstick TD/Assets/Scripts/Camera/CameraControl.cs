@@ -9,15 +9,20 @@ public class CameraControl : MonoBehaviour
     public Transform[] m_Targets; // All the targets the camera needs to encompass.
 
 
-    private Camera m_Camera;                        // Used for referencing the camera.
+	[HideInInspector]public static Camera m_Camera;                        // Used for referencing the camera.
     private float m_ZoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
     private Vector3 m_MoveVelocity;                 // Reference velocity for the smooth damping of the position.
     private Vector3 m_DesiredPosition;              // The position the camera is moving towards.
-
+	private static Camera m_constructionCam;
+	private static int i = 0;
 
     private void Awake()
     {
-        m_Camera = GetComponentInChildren<Camera>();
+//      m_Camera = GetComponentInChildren<Camera>();
+//		m_constructionCam = GetComponentInChildren<Camera> ();
+		Camera[] Cameras = GetComponentsInChildren<Camera> ();
+		m_Camera = Cameras [0];
+		m_constructionCam = Cameras [1];
     }
 
 
@@ -28,6 +33,8 @@ public class CameraControl : MonoBehaviour
 
         // Change the size of the camera based.
         Zoom();
+
+
     }
 
 
@@ -127,4 +134,30 @@ public class CameraControl : MonoBehaviour
         // Find and set the required size of the camera.
         m_Camera.orthographicSize = FindRequiredSize();
     }
+
+	public static void switchMainCamToConstructionCam() {
+//		Debug.Log ("ConstructionCam" + i);
+		m_Camera.enabled = false;
+		m_constructionCam.enabled = true;
+	}
+
+	public static void switchConstructionCamToMainCam() {
+//		Debug.Log ("MainCam" + i);
+		i++;
+		m_Camera.enabled = true;
+		m_constructionCam.enabled = false;
+	}
 }
+
+////		m_constructionCam = Camera.allCameras[1];
+//Transform backup = m_CameraControl.m_Camera.transform;
+////before
+//m_CameraControl.m_Camera.transform.position = new Vector3(0, 99, 0);
+//m_CameraControl.m_Camera.transform.localEulerAngles = new Vector3(90, 0, 0);
+////after
+//m_CameraControl.m_Camera.transform.position = backup.position;
+//m_CameraControl.m_Camera.transform.rotation = backup.rotation;
+//
+//
+////Set camera
+//m_CameraControl.SetStartPositionAndSize();

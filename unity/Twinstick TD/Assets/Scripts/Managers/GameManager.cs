@@ -233,6 +233,9 @@ public class GameManager : MonoBehaviour
     // Construction phase
     private IEnumerator constructionPhase()
     {
+		// switch Main camera to construction camera 
+		CameraControl.switchMainCamToConstructionCam ();
+
         //Set wavephase to false and set timer
         wavephase = false;
         StartCoroutine(constructionphaseTimer());
@@ -262,6 +265,8 @@ public class GameManager : MonoBehaviour
             }
         }
         wavephase = true;
+		// switch Main camera to construction camera 
+		CameraControl.switchConstructionCamToMainCam ();
     }
 
     //Pause game function
