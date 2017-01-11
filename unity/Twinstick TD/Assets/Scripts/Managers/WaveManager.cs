@@ -82,13 +82,13 @@ public class WaveManager
 	{
 		if (m_wavenumber == 0) {
 			m_gridmanager = new GridManager (m_gridprefab);
-			grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
+            grid = m_gridmanager.m_grid;
 		}
 		if (m_wavenumber > 0) {
 			GameObject.Destroy (m_gridmanager.m_instance, 0f);
 			m_gridmanager = new GridManager (m_gridprefab);
-			grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
-		}
+            grid = m_gridmanager.m_grid;
+        }
 		int enemies = EnemiesAmountPerWave ();
 		m_wavenumber++;
 		proportionEnemies (); // update the proportions of the enemies per wave

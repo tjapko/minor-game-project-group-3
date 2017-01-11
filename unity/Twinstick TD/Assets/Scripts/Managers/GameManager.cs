@@ -91,6 +91,10 @@ public class GameManager : MonoBehaviour
                 {
                     m_uiscript.go_mapShopUI.SetActive(false);
                 }
+                //Check if players are constructing
+                else if(m_players.checkConstruction()){
+
+                }
                 else
                 {
                     gamepause = !gamepause;
