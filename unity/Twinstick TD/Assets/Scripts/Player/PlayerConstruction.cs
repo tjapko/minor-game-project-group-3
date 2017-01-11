@@ -5,10 +5,13 @@ using System.Collections.Generic;
 public class PlayerConstruction : MonoBehaviour {
 
     //Fix
-    string build_1 = "";
-    string build_2 = "";
-    string build_3 = "";
-    string build4 = "";
+    string build_1 = "1";
+    string build_2 = "2";
+    string build_3 = "3";
+    string build_4 = "4";
+
+    //References
+    private PlayerMovement m_playerMovement;    //Reference to player movement script
 
     //Public variables
     public GameObject m_markerprefab;   //Reference to the suggestive marker prefab
@@ -40,19 +43,25 @@ public class PlayerConstruction : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        //
+        m_playerMovement = GetComponent<PlayerMovement>();
+        //Set variables
         constructing = false;
         constructionphase = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        /*
+
         // Get the location of the mouse in world coordinates
-        mouseposition = GetComponent<PlayerMovement>().mouseposition;
+        if (constructing)
+        {
+            mouseposition = m_playerMovement.mouseposition;
+        }
 
         // Check if player has clicked
         // Player is in construction phase, not already constructing and pressing the construction button
-        if(constructionphase && !constructing && Input.GetKeyDown(build_1))
+        if(Input.GetKeyDown(build_1) && constructionphase && !constructing)
         {
             //Check if player has enough funds
             if(m_player.m_stats.getCurrency() >= m_price_wall)
@@ -65,7 +74,7 @@ public class PlayerConstruction : MonoBehaviour {
 
         // Check if player has clicked
         // Player is in construction phase, not already constructing and pressing the construction button
-        if (constructionphase && !constructing && Input.GetKeyDown(build_2))
+        if (Input.GetKeyDown(build_2) && constructionphase && !constructing)
         {
             //Check if player has enough funds
             if (m_player.m_stats.getCurrency() >= m_price_turret)
@@ -78,7 +87,7 @@ public class PlayerConstruction : MonoBehaviour {
 
         // Check if player has clicked
         // Player is in construction phase, not already constructing and pressing the construction button
-        if (constructionphase && !constructing && Input.GetKeyDown(build_3))
+        if (Input.GetKeyDown(build_3) && constructionphase && !constructing)
         {
             //Check if player has enough funds
             if (m_player.m_stats.getCurrency() >= m_price_carrot)
@@ -91,7 +100,7 @@ public class PlayerConstruction : MonoBehaviour {
 
         // Check if player has clicked
         // Player is in construction phase, not already constructing and pressing the construction button
-        if (constructionphase && !constructing && Input.GetKeyDown(build_4))
+        if (Input.GetKeyDown(build_4) && constructionphase && !constructing)
         {
             //Check if player has enough funds
             if (m_player.m_stats.getCurrency() >= m_price_mud)
@@ -101,7 +110,7 @@ public class PlayerConstruction : MonoBehaviour {
 
             }
         }
-        */
+        
     }
 
 

@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour
     //References
     [Header("References")]
     public GameObject m_hitEnemyCanvasPrefab;       //Reference to enemyHit canbas
+    private GameObject m_maincamera;                    //Reference to the main camera
 
     public AudioSource enemySource;
     public AudioClip deathSound;
@@ -37,6 +38,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void Start()
     {
+        m_maincamera = GameObject.FindWithTag("MainCamera");
         // When the enemy is enabled, reset the enemy's health
         m_CurrentHealth = m_StartingHealth;
         // Update the health slider's value and color.
@@ -87,7 +89,11 @@ public class EnemyHealth : MonoBehaviour
     {
         //Set hitmark
         GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
-        hitbox.GetComponent<HitMarkScript>().setDamage(amount);
+        HitMarkScript hitbox_script = hitbox.GetComponent<HitMarkScript>();
+        hitbox_script.setDamage(amount);        //Set damage
+        hitbox_script.setCamera(m_maincamera);  //Set main camera
+        hitbox_script.lookToCamera();           //Look to main camera
+        hitbox.SetActive(true);                 //Set object active
     }
 
     //stop invoke if colliders are not touching anymore

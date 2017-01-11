@@ -8,9 +8,8 @@ public class PlayerHealth : MonoBehaviour
 
     //References
     public GameObject m_hitFriendlyCanvasPrefab;    //Reference to friendlyHit canvas;
-
-    public AudioSource beatSource;
-    
+    public AudioSource beatSource;                  //Reference to audio 
+    private GameObject m_maincamera;                //Reference to maincamera
 
     public float m_StartingHealth;						//Start health of enemy
 	public Slider m_Slider;                           	// The slider to represent how much health the enemy currently has.
@@ -23,7 +22,8 @@ public class PlayerHealth : MonoBehaviour
 
 	public void Start()
 	{
-		m_Dead = false;
+        m_maincamera = GameObject.FindWithTag("MainCamera");
+        m_Dead = false;
 		// When the enemy is enabled, reset the enemy's health
 		m_CurrentHealth = m_StartingHealth;
 		// Update the health slider's value and color.
@@ -78,6 +78,10 @@ public class PlayerHealth : MonoBehaviour
     {
         //Set hitmark
         GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
-        hitbox.GetComponent<HitMarkScript>().setDamage(amount);
+        HitMarkScript hitbox_script = hitbox.GetComponent<HitMarkScript>();
+        hitbox_script.setDamage(amount);
+        hitbox_script.setCamera(m_maincamera);
+        hitbox_script.lookToCamera();
+        hitbox.SetActive(true);
     }
 }
