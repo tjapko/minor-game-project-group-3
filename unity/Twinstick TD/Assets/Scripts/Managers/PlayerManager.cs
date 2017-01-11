@@ -53,6 +53,13 @@ public class PlayerManager
         m_inventory.enabled = true;
     }
 
+	public void EnableControl2()
+	{
+		m_movement.enabled = true;
+		m_shooting.enabled = true;
+		m_inventory.enabled = true;
+	}
+
     // Disable control of player
     public void DisableControl()
     {
@@ -62,6 +69,12 @@ public class PlayerManager
         m_construction.enabled = false;
         m_inventory.enabled = false;
     }
+
+	public void DisableControl2() {
+		m_movement.enabled = false;
+		m_shooting.enabled = false;
+		m_inventory.enabled = false;
+	}
 
     // Reset state of player
     public void Reset()

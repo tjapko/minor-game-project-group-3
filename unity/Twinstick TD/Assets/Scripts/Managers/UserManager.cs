@@ -80,6 +80,14 @@ public class UserManager {
         }
     }
 
+	public void enablePlayersControl2()
+	{
+		foreach(PlayerManager player in m_playerlist)
+		{
+			player.EnableControl2();
+		}
+	}
+
     //Disable player control
     public void disablePlayersControl()
     {
@@ -88,6 +96,15 @@ public class UserManager {
             player.DisableControl();
         }
     }
+
+	//Disable player control
+	public void disablePlayersControl2()
+	{
+		foreach (PlayerManager player in m_playerlist)
+		{
+			player.DisableControl2();
+		}
+	}
 
     //Reset all players
     public void resetAllPlayers()

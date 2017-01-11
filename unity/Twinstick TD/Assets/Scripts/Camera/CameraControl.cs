@@ -137,8 +137,9 @@ public class CameraControl : MonoBehaviour
 
 	public static void switchMainCamToConstructionCam() {
 //		Debug.Log ("ConstructionCam" + i);
-		m_Camera.enabled = false;
 		m_constructionCam.enabled = true;
+		m_Camera.enabled = false;
+
 	}
 
 	public static void switchConstructionCamToMainCam() {
