@@ -25,6 +25,7 @@ TagManager:
   - River
   - Shop
   - HitCanvas
+  - constructionCam
   layers:
   - Default
   - TransparentFX
