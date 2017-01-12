@@ -32,13 +32,6 @@ public class Grid : MonoBehaviour {
 		CreateGrid();
     }
 
-    // creating every wave a new grid 
-    //void update()
-    //{
-    //    if(There is animation new round)
-    //         CreateGrid();
-    //}
-
     /// <summary>
     ///  The maxSize of the nodes, is needed when creating an Heap
     /// </summary>
@@ -62,7 +55,6 @@ public class Grid : MonoBehaviour {
 				grid [x, y] = new Node (walkable, worldPoint, x, y); //adding the Node to the grid
 			}
 		}
-
 	}
 
     /// <summary>

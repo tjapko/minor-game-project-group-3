@@ -144,9 +144,11 @@ public class EnemyHealth : MonoBehaviour
         }
 
         m_Dead = true;
+		playerUnit.stopPathfinding ();	
 //		Destroy (playerUnit);
 //		Destroy (gameObject);
         gameObject.SetActive(false);
+
     }
 
     //Set player number of last hit

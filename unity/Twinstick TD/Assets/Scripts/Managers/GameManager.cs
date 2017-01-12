@@ -193,7 +193,7 @@ public class GameManager : MonoBehaviour
 
               
                 
-				TravellingSalesman (); // spawning of the TravellingSalesman
+				//TravellingSalesman (); // spawning of the TravellingSalesman
 
             }	
             // Return next frame without delay
