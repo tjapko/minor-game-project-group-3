@@ -15,14 +15,15 @@ public class CameraControl : MonoBehaviour
     private Vector3 m_DesiredPosition;              // The position the camera is moving towards.
 	private static Camera m_constructionCam;
 	private static int i = 0;
+	private static Vector3 m_constructionCamPos = new Vector3 (3, 15, -12);
+	private static GameObject iventoryUI;
 
     private void Awake()
     {
-//      m_Camera = GetComponentInChildren<Camera>();
-//		m_constructionCam = GetComponentInChildren<Camera> ();
 		Camera[] Cameras = GetComponentsInChildren<Camera> ();
 		m_Camera = Cameras [0];
 		m_constructionCam = Cameras [1];
+		m_constructionCam.transform.position = m_constructionCamPos;
     }
 
 
@@ -135,30 +136,25 @@ public class CameraControl : MonoBehaviour
         m_Camera.orthographicSize = FindRequiredSize();
     }
 
+	// switches camera from maincam to constructioncam
 	public static void switchMainCamToConstructionCam() {
-//		Debug.Log ("ConstructionCam" + i);
+		// turn off inventoryUI
+		iventoryUI = GameObject.FindGameObjectWithTag ("inventoryUI");
+		iventoryUI.SetActive (false);
+		// set right camera position
+		m_constructionCam.transform.position = m_constructionCamPos;
+		// switch cameras
 		m_constructionCam.enabled = true;
 		m_Camera.enabled = false;
 
 	}
 
+	// switches camera from constructioncam to maincam 
 	public static void switchConstructionCamToMainCam() {
-//		Debug.Log ("MainCam" + i);
-		i++;
+		// turn on inventoryUI
+		iventoryUI.SetActive (true);
+		//switch cameras
 		m_Camera.enabled = true;
 		m_constructionCam.enabled = false;
 	}
 }
-
-////		m_constructionCam = Camera.allCameras[1];
-//Transform backup = m_CameraControl.m_Camera.transform;
-////before
-//m_CameraControl.m_Camera.transform.position = new Vector3(0, 99, 0);
-//m_CameraControl.m_Camera.transform.localEulerAngles = new Vector3(90, 0, 0);
-////after
-//m_CameraControl.m_Camera.transform.position = backup.position;
-//m_CameraControl.m_Camera.transform.rotation = backup.rotation;
-//
-//
-////Set camera
-//m_CameraControl.SetStartPositionAndSize();

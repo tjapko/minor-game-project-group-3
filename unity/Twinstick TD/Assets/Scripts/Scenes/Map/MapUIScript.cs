@@ -128,7 +128,7 @@ public class MapUIScript : MonoBehaviour {
         //Set active UI
         m_pausemenu.SetActive(false);
         m_wavecontrol.SetActive(true);
-        m_constructionpanel.SetActive(false);
+        m_constructionpanel.SetActive(true);
         m_gameovermenu.SetActive(false);
         m_waveremaining.SetActive(false);
 
@@ -245,7 +245,7 @@ public class MapUIScript : MonoBehaviour {
     // Show/hide Pause menu
     public void showConstructonPanel(bool status)
     {
-        m_constructionpanel.SetActive(false);
+        m_constructionpanel.SetActive(status);
     }
 
     // Show/hide the gameover menu
