@@ -26,6 +26,8 @@ TagManager:
   - Shop
   - HitCanvas
   - constructionCam
+  - inventoryUI
+  - constructionPanelUI
   layers:
   - Default
   - TransparentFX

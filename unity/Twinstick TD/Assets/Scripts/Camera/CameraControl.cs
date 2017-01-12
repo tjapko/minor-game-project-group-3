@@ -16,7 +16,7 @@ public class CameraControl : MonoBehaviour
 	private static Camera m_constructionCam;
 	private static int i = 0;
 	private static Vector3 m_constructionCamPos = new Vector3 (3, 15, -12);
-	private static GameObject iventoryUI;
+	private static GameObject iventoryUI; 
 
     private void Awake()
     {

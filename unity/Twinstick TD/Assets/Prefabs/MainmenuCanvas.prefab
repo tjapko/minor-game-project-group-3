@@ -76,7 +76,7 @@ GameObject:
   - 114: {fileID: 114000012316815856}
   m_Layer: 5
   m_Name: Weapon1
-  m_TagString: Untagged
+  m_TagString: inventoryUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,11 +443,11 @@ GameObject:
   - 224: {fileID: 224000012509452208}
   m_Layer: 5
   m_Name: ConstructionPanel
-  m_TagString: Untagged
+  m_TagString: New Tag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000012212695166
 GameObject:
   m_ObjectHideFlags: 1
