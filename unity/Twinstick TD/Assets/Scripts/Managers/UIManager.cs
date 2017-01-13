@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
 
     //Prefabs
     public GameObject m_CanvasGameOverPrefab;   //GameObject Canvas Game Over
+    public GameObject m_CanvasHelpScreen;       //GameObject Canvas Help Screen
     public GameObject m_CanvasPauseMenuPrefab;  //GameObject Canvas Pause Menu
     public GameObject m_CanvasPlayerUIPrefab;   //GameObject Canas Player UI
     public GameObject m_CanvasShopPrefab;       //GameObject Canvas Shop
@@ -30,23 +31,29 @@ public class UIManager : MonoBehaviour {
     //Constructer
     public void Start()
     {
+        //Find Game manager
         m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
         m_usermanager = m_gamemanager.getUserManager();
 
+        //Instantiate and set references to canvasses (and shop)
+        GameObject.Instantiate(m_CanvasHelpScreen, Vector3.zero, Quaternion.identity);
         go_CanvasGameOver   = GameObject.Instantiate(m_CanvasGameOverPrefab, Vector3.zero, Quaternion.identity) as GameObject;
         go_CanvasPauseMenu  = GameObject.Instantiate(m_CanvasPauseMenuPrefab, Vector3.zero, Quaternion.identity) as GameObject;
         go_CanvasPlayerUI   = GameObject.Instantiate(m_CanvasPlayerUIPrefab, Vector3.zero, Quaternion.identity) as GameObject;
         go_CanvasShop       = GameObject.Instantiate(m_CanvasShopPrefab, Vector3.zero, Quaternion.identity) as GameObject;
         go_Shop = GameObject.FindWithTag("Shop");
 
+        //Get scripts of canvasses
         m_GameOverScript = go_CanvasGameOver.GetComponent<CanvasGameOverScript>();
         m_PauseMenuScript = go_CanvasGameOver.GetComponent<CanvasPauseMenuScript>();
         m_PlayerUIScript = go_CanvasGameOver.GetComponent<CanvasPlayerUIScript>();
         m_ShopUIScript = go_CanvasShop.GetComponent<ShopUIScript>();
 
+        //Find shop and set variable
         ShopScript m_shopscript = go_Shop.GetComponent<ShopScript>();
         m_shopscript.m_instance_UI = go_CanvasShop;
 
+        //Set visibility of canvas
         go_CanvasGameOver.SetActive(false);
         go_CanvasPauseMenu.SetActive(false);
         go_CanvasPlayerUI.SetActive(true);

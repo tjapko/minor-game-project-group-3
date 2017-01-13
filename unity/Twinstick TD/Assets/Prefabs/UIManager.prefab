@@ -53,6 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CanvasGameOverPrefab: {fileID: 1000012743463512, guid: 33fe9089a16346d4a86880e30323add4,
     type: 2}
+  m_CanvasHelpScreen: {fileID: 1000013997601442, guid: c95d69610bd37654b92b915504483a85,
+    type: 2}
   m_CanvasPauseMenuPrefab: {fileID: 1000010634490578, guid: cba800bff826e1d4dbd160b98f27964b,
     type: 2}
   m_CanvasPlayerUIPrefab: {fileID: 1000013395783704, guid: 3fe55d99b3c3e3b4a81e23769000010f,

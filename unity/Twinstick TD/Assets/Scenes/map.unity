@@ -4176,6 +4176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_amountofplayers: 1
+  m_beginDelay: 3
   m_waveDelay: 10
   m_EndDelay: 3
   backgroundSource: {fileID: 1464915407}
