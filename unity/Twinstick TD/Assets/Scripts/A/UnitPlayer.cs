@@ -6,18 +6,16 @@ using System.Collections;
 /// </summary>
 public class UnitPlayer : MonoBehaviour {
 
-	public Transform m_base;  // the baselocation 
-	public Transform m_player;// the playerlocation
-	public float speed = 5f; 	// moving speed
-	public bool playerFirst; 	// walking to player first or not
-	public bool baseHit = false; 				// has hit the base or not
-	public float m_threshold = -20.0f; // maybe variable for GA
-	public float timeNewPath = 2f; // interval between new pathcalculation to enemy
+	public Transform m_base;  			// the baselocation 
+	public Transform m_player;			// the playerlocation
+	public float speed = 5f; 			// moving speed
+	public bool playerFirst; 			// walking to player first or not
+	public bool baseHit = false; 		// has hit the base or not
+	public float m_threshold = -20.0f; 	// maybe variable for GA
+	public float timeNewPath = 2f; 		// interval between new pathcalculation to enemy
 
-	Vector3[] path; // The walkable path
-	int targetIndex;// The index of the waypointArray. The unit moves to path[targetIndex]  
-
-
+	Vector3[] path; 					// The walkable path
+	int targetIndex;					// The index of the waypointArray. The unit moves to path[targetIndex]  
 
 	//For enemy 3, it calculates distance to base and player and chooses closest as target
 	public void calcDistance(){
@@ -39,23 +37,12 @@ public class UnitPlayer : MonoBehaviour {
 	//Calculates path to base and walks towards
 	public void goToBase(){
 		playerFirst = false;
-		PathRequestManager.RequestPath (transform.position, m_base.position, OnPathFound);
+		PathRequestManager.RequestPath (transform, m_base, OnPathFound);
 	}
-
-	int hoi = 0;
 
 	//Calculates path to player and walks towards
 	public void walkToPlayer(){
-		hoi++;
-		Debug.Log (m_player.position + "  " + hoi);
-		/*// if not yet path calculated or last waypoint of path reached, transform's position is startpoint
-		if (path == null || (targetIndex) >= path.Length) {
-			PathRequestManager.RequestPath (transform.position, m_player.position, OnPathFound);
-		} 
-		// else take next waypoint of path already walking as startpoint
-		else{
-			*/PathRequestManager.RequestPath (transform.position, m_player.position, OnPathFound);
-		//}
+		PathRequestManager.RequestPath (transform, m_player, OnPathFound);
 	}
 
 	/// <summary>
@@ -95,7 +82,7 @@ public class UnitPlayer : MonoBehaviour {
 				}
 				currentWaypoint = path[targetIndex];
 			}*/
-			if (Vector3.Distance(transform.position,currentWaypoint) < 0.4f){
+			if (Vector3.Distance(transform.position,currentWaypoint) < 1f){
 				targetIndex ++;
 				if (targetIndex >= path.Length) {
 					yield break;

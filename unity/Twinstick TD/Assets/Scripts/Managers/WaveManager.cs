@@ -49,7 +49,7 @@ public class WaveManager
 	// spawnDelay of the enemies 
 	private float m_spawnDelayBetweenEnemies = 0.5f; // time delay between the enemies in a wave
 	// increasing amount of enemies 
-	private int m_startEnemies = 30;    // number of starting enemies 
+	private int m_startEnemies = 80; // number of starting enemies 
 	private float m_angle1 = 3.0f;     // this angle is applied from the start to wave: m_m_waveTippingPoint1
 	private float m_angle2 = 5.0f;	   // this angle is applied from wave: m_m_waveTippingPoint1 to wave: m_m_waveTippingPoint2
 	private float m_angle3 = 2.0f;	   // this angle is applied from wave: m_m_waveTippingPoint2 till the end of the game
@@ -83,7 +83,6 @@ public class WaveManager
     public IEnumerator NextWave()
 	{
 		if (m_wavenumber > 0) {
-			Debug.Log ("destroy grid");
 			GameObject.Destroy (m_gridmanager.m_instance, 0f);
 			m_gridmanager = new GridManager (m_gridprefab);
 		}
@@ -243,8 +242,7 @@ public class WaveManager
 	{
 		foreach (EnemyManager enemy in m_enemywave)
 		{
-			if (enemy.m_Instance.activeSelf)
-			{
+			if (enemy.m_Instance != null && enemy.m_Instance.activeSelf) {
 				return false;
 			}
 		}

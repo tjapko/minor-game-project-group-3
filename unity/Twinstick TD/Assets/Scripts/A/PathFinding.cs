@@ -25,8 +25,8 @@ public class PathFinding : MonoBehaviour {
     /// </summary>
     /// <param name="startPos"></param>
     /// <param name="targetPos"></param>
-	public void StartFindPath(Vector3 startPos, Vector3 targetPos){
-		StartCoroutine(FindPath(startPos, targetPos));
+	public void StartFindPath(Transform enemy, Transform targetPos){
+		StartCoroutine(FindPath(enemy, targetPos));
 	}
 
     /// <summary>
@@ -35,13 +35,13 @@ public class PathFinding : MonoBehaviour {
     /// <param name="startPos"></param>
     /// <param name="targetPos"></param>
     
-	IEnumerator FindPath(Vector3 startPos, Vector3 targetPos){
+	IEnumerator FindPath(Transform enemy, Transform targetPos){
 
 		Vector3[] waypoints = new 	Vector3[0];	
 		bool pathSuccess = false;
 
-		Node startNode = grid.NodeFromWorldPoint (startPos);
-		Node targetNode = grid.NodeFromWorldPoint (targetPos);
+		Node startNode = grid.NodeFromWorldPoint (enemy.position);
+		Node targetNode = grid.NodeFromWorldPoint (targetPos.position);
 
 		//if targetNode niet walkable, zoek dan naar een neighbour die wel walkable is
 		if (!targetNode.walkable) {
@@ -83,10 +83,10 @@ public class PathFinding : MonoBehaviour {
 			}
 		}
 
-		//als nog steeds niet walkable: destroy object.
+		/*//als nog steeds niet walkable: destroy object.
 		if (!startNode.walkable) {
 			Destroy (gameObject);
-		}
+		}*/
 		
 		//if (startNode.walkable && targetNode.walkable) {
 		if (startNode.walkable) {
