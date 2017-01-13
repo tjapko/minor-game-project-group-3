@@ -6,18 +6,16 @@ using System.Collections;
 /// </summary>
 public class UnitPlayer : MonoBehaviour {
 
-	public Transform m_base;  // the baselocation 
-	public Transform m_player;// the playerlocation
-	public float speed = 5f; 	// moving speed
-	public bool playerFirst; 	// walking to player first or not
-	public bool baseHit = false; 				// has hit the base or not
-	public float m_threshold = -20.0f; // maybe variable for GA
-	public float timeNewPath = 1f; // interval between new pathcalculation to enemy
+	public Transform m_base;  			// the baselocation 
+	public Transform m_player;			// the playerlocation
+	public float speed = 5f; 			// moving speed
+	public bool playerFirst; 			// walking to player first or not
+	public bool baseHit = false; 		// has hit the base or not
+	public float m_threshold = -20.0f; 	// maybe variable for GA
+	public float timeNewPath = 2f; 		// interval between new pathcalculation to enemy
 
-	Vector3[] path; // The walkable path
-	int targetIndex;// The index of the waypointArray. The unit moves to path[targetIndex]  
-
-
+	Vector3[] path; 					// The walkable path
+	int targetIndex;					// The index of the waypointArray. The unit moves to path[targetIndex]  
 
 	//For enemy 3, it calculates distance to base and player and chooses closest as target
 	public void calcDistance(){
@@ -39,12 +37,12 @@ public class UnitPlayer : MonoBehaviour {
 	//Calculates path to base and walks towards
 	public void goToBase(){
 		playerFirst = false;
-		PathRequestManager.RequestPath (transform.position, m_base.position, OnPathFound);
+		PathRequestManager.RequestPath (transform, m_base, OnPathFound);
 	}
 
-	//Calculates path to player and walks towards till distance is small enough when it walks to player first
+	//Calculates path to player and walks towards
 	public void walkToPlayer(){
-		PathRequestManager.RequestPath (transform.position, m_player.position, OnPathFound);
+		PathRequestManager.RequestPath (transform, m_player, OnPathFound);
 	}
 
 	/// <summary>
@@ -63,6 +61,11 @@ public class UnitPlayer : MonoBehaviour {
 		}
 	}
 
+	public void stopPathfinding(){
+		CancelInvoke ();
+		StopCoroutine("FollowPath");
+	}
+
 	/// <summary>
 	/// a coroutine for walking over the path that is given 
 	/// </summary>
@@ -72,12 +75,19 @@ public class UnitPlayer : MonoBehaviour {
 		}
 		Vector3 currentWaypoint = path[0];
 		while (true) {
-			if (transform.position == currentWaypoint) {
+			/*if (transform.position == currentWaypoint) {
 				targetIndex ++;
 				if (targetIndex >= path.Length) {
 					yield break;
 				}
 				currentWaypoint = path[targetIndex];
+			}*/
+			if (Vector3.Distance(transform.position,currentWaypoint) < 1f){
+				targetIndex ++;
+				if (targetIndex >= path.Length) {
+					yield break;
+				}
+				currentWaypoint = path[targetIndex];			
 			}
 			transform.LookAt(currentWaypoint);
 			transform.position = Vector3.MoveTowards(transform.position,currentWaypoint,speed * Time.deltaTime);

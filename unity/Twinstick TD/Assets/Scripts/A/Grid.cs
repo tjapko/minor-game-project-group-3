@@ -32,13 +32,6 @@ public class Grid : MonoBehaviour {
 		CreateGrid();
     }
 
-    // creating every wave a new grid 
-    //void update()
-    //{
-    //    if(There is animation new round)
-    //         CreateGrid();
-    //}
-
     /// <summary>
     ///  The maxSize of the nodes, is needed when creating an Heap
     /// </summary>
@@ -62,7 +55,6 @@ public class Grid : MonoBehaviour {
 				grid [x, y] = new Node (walkable, worldPoint, x, y); //adding the Node to the grid
 			}
 		}
-
 	}
 
     /// <summary>
@@ -112,7 +104,7 @@ public class Grid : MonoBehaviour {
 	public void OnDrawGizmos() {
 	Gizmos.DrawWireCube(transform.position, new Vector3 (gridWorldSize.x, 1, gridWorldSize.y));
 
-	if (grid!= null && displayGridGizmos) {
+	if (displayGridGizmos) {
 			foreach (Node n in grid) {
 				Gizmos.color = (n.walkable) ? Color.white : Color.red;
 				Gizmos.DrawCube (n.worldPosition, Vector3.one * (nodeDiameter - .1f));

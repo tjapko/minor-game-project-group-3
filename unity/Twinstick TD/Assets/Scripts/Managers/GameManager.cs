@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         // Start the game
         StartCoroutine(GameLoop());
 
-        m_wave = new WaveManager(m_Enemyprefab1, m_Enemyprefab2, m_Enemyprefab3, m_Enemyprefab4, m_Enemyspawnpoint, m_Basespawnpoint, m_players.m_playerlist[0].m_Instance.transform, m_gridPrefab);
+		m_wave = new WaveManager(m_Enemyprefab1, m_Enemyprefab2, m_Enemyprefab3, m_Enemyprefab4, m_Enemyspawnpoint, m_Basespawnpoint, m_players.m_playerlist[0].m_Instance.transform, m_gridPrefab, m_gridManager);
 
         backgroundSource.clip = backgroundSounds[Random.Range(0, backgroundSounds.Length)];
         backgroundSource.Play();
@@ -200,7 +200,7 @@ public class GameManager : MonoBehaviour
 
               
                 
-				TravellingSalesman (); // spawning of the TravellingSalesman
+				//TravellingSalesman (); // spawning of the TravellingSalesman
 
             }	
             // Return next frame without delay

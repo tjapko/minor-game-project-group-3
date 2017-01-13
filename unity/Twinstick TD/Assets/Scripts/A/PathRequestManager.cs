@@ -30,8 +30,8 @@ public class PathRequestManager : MonoBehaviour {
     /// <param name="pathStart"></param>
     /// <param name="pathEnd"></param>
     /// <param name="callback"></param>
-	public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback) {
-		PathRequest newRequest = new PathRequest(pathStart,pathEnd,callback);
+	public static void RequestPath(Transform enemy, Transform pathEnd, Action<Vector3[], bool> callback) {
+		PathRequest newRequest = new PathRequest(enemy, pathEnd, callback);
 		instance.pathRequestQueue.Enqueue(newRequest);
 		instance.TryProcessNext();
 	}
@@ -43,7 +43,7 @@ public class PathRequestManager : MonoBehaviour {
 		if (!isProcessingPath && pathRequestQueue.Count > 0) {
 			currentPathRequest = pathRequestQueue.Dequeue();
 			isProcessingPath = true;
-			pathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
+			pathfinding.StartFindPath(currentPathRequest.enemy, currentPathRequest.pathEnd);
 		}
 	}
 
@@ -63,8 +63,9 @@ public class PathRequestManager : MonoBehaviour {
     /// The structure PathRequest
     /// </summary>
 	struct PathRequest {
-		public Vector3 pathStart; // The Startposition of the path
-		public Vector3 pathEnd;// The end position of the path
+		//public Vector3 pathStart; // The Startposition of the path
+		public Transform enemy; // gameobject player for current position
+		public Transform pathEnd;// The end position of the path
 		public Action<Vector3[], bool> callback;// The path in vector3 and a boolean if a good path is created
 
         /// <summary>
@@ -73,11 +74,10 @@ public class PathRequestManager : MonoBehaviour {
         /// <param name="_start"></param>
         /// <param name="_end"></param>
         /// <param name="_callback"></param>
-		public PathRequest(Vector3 _start, Vector3 _end, Action<Vector3[], bool> _callback) {
-			pathStart = _start;
+		public PathRequest(Transform _enemy, Transform _end, Action<Vector3[], bool> _callback) {
+			enemy = _enemy;
 			pathEnd = _end;
 			callback = _callback;
 		}
-
 	}
 }

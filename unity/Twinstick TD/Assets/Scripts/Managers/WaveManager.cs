@@ -49,14 +49,14 @@ public class WaveManager
 	// spawnDelay of the enemies 
 	private float m_spawnDelayBetweenEnemies = 0.5f; // time delay between the enemies in a wave
 	// increasing amount of enemies 
-	private int m_startEnemies = 5;    // number of starting enemies 
+	private int m_startEnemies = 80; // number of starting enemies 
 	private float m_angle1 = 3.0f;     // this angle is applied from the start to wave: m_m_waveTippingPoint1
 	private float m_angle2 = 5.0f;	   // this angle is applied from wave: m_m_waveTippingPoint1 to wave: m_m_waveTippingPoint2
 	private float m_angle3 = 2.0f;	   // this angle is applied from wave: m_m_waveTippingPoint2 till the end of the game
 	private int m_waveTippingPoint1 = 10; // wave at which m_angle2 is used for the increasing amount of enemies 
 	private int m_waveTippingPoint2 = 15; // wave at which m_angle2 is used for the increasing amount of enemies 
 
-    public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab)
+	public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab, GridManager gridmanager)
     {
      
         this.m_Enemyprefab1 = Enemyprefab1;
@@ -67,10 +67,12 @@ public class WaveManager
         this.m_basetarget = basetarget;
         this.m_playerpoint = playerpoint;
         this.m_gridprefab = gridprefab;
+		this.m_gridmanager = gridmanager;
 
         this.m_wavenumber = 0;
         enemy_number = 0;
         m_enemywave = new List<EnemyManager>();
+
 //		this.m_startSpawnDelayTime = this.numberEnemiesPerWave*0.5f;
 //		this.m_endSpawnDelayTime = m_scaleEnemies * 0.5f;
 //		this.time = this.m_startSpawnDelayTime;
@@ -80,15 +82,11 @@ public class WaveManager
     // Send next wave and create new grid
     public IEnumerator NextWave()
 	{
-		if (m_wavenumber == 0) {
-			m_gridmanager = new GridManager (m_gridprefab);
-			grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
-		}
 		if (m_wavenumber > 0) {
 			GameObject.Destroy (m_gridmanager.m_instance, 0f);
 			m_gridmanager = new GridManager (m_gridprefab);
-			grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
 		}
+		grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
 		int enemies = EnemiesAmountPerWave ();
 		m_wavenumber++;
 		proportionEnemies (); // update the proportions of the enemies per wave
@@ -244,8 +242,7 @@ public class WaveManager
 	{
 		foreach (EnemyManager enemy in m_enemywave)
 		{
-			if (enemy.m_Instance.activeSelf)
-			{
+			if (enemy.m_Instance != null && enemy.m_Instance.activeSelf) {
 				return false;
 			}
 		}

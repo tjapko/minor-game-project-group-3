@@ -31,7 +31,9 @@ public abstract class EnemyManager
 	// Used during the phases of the game where the enemy shouldn't move
 	public void EnableControl()
 	{
-		m_Instance.GetComponent<UnitPlayer> ().enabled  = true;
+		{
+			m_Instance.GetComponent<UnitPlayer> ().enabled = true;
+		}
 	}
 
 	// Used during the phases of the game where the enemy should be able to move
