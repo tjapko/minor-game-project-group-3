@@ -976,7 +976,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Basics
+  m_Text: 'Basics
+
+    Kill all bunnies!'
 --- !u!222 &222000010096557536
 CanvasRenderer:
   m_ObjectHideFlags: 1
