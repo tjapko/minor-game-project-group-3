@@ -21,6 +21,6 @@ public class EnemyToPlayer : EnemyManager
 		m_MovementPlayer.m_player = m_PlayerPoint;
 		m_MovementPlayer.m_base = m_BasePoint;
 		m_MovementPlayer.playerFirst = true;
-		m_MovementPlayer.calcDistance ();
+		m_MovementPlayer.calcDistance (false);
 	}
 }
