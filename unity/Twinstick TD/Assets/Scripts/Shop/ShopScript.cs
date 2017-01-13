@@ -86,7 +86,7 @@ public class ShopScript : MonoBehaviour {
         SetGun(level, "maxammo");
 
         List<Weapon> temp = new List<Weapon>();
-       temp.Add((Weapon)weapon1);
+        temp.Add((Weapon)weapon1);
         temp.Add((Weapon)weapon4);
         temp.Add((Weapon)weapon2);
         temp.Add((Weapon)weapon3);
@@ -102,9 +102,6 @@ public class ShopScript : MonoBehaviour {
     // sets the ammo for weapons1-4 
     private void SetGun(int level, string specification)
     {
-        //level -= 1;
-       
-
         switch (specification.ToLower())
         {
             case "ammo":
@@ -351,11 +348,8 @@ public class ShopScript : MonoBehaviour {
     //Increase tier and load new weapons
     public void incTier()
     {
-        Debug.Log("P before" + weaponsforsale[1].price);
         Upgrade(current_tier);
-        Debug.Log("P after" + weaponsforsale[1].price);
         current_tier++;
-        
     }
 
     //Getter for current_tier

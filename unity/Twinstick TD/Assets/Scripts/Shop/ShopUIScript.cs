@@ -123,6 +123,7 @@ public class ShopUIScript : MonoBehaviour {
     {
         //Set the lists
         weaponlist = m_shopscript.weaponsforsale;
+
         //ammolist = weaponlist; //Fix (should be fixed when using different types of ammo)
 
         //Update icons
@@ -151,9 +152,8 @@ public class ShopUIScript : MonoBehaviour {
                 btn_weapon_cost[i].interactable = false;
             } else
             {
-                Debug.Log("weapon i" + weaponlist[i].itemprice.ToString());
-                ui_weapon_cost[i].text = "Buy Weapon:\n " + weaponlist[i].itemprice.ToString();
-                btn_weapon_cost[i].interactable = m_currentplayer.m_stats.getCurrency() > weaponlist[i].itemprice;
+                ui_weapon_cost[i].text = "Buy Weapon:\n " + weaponlist[i].price.ToString();
+                btn_weapon_cost[i].interactable = m_currentplayer.m_stats.getCurrency() > weaponlist[i].price;
             }
         }
 
@@ -223,19 +223,19 @@ public class ShopUIScript : MonoBehaviour {
             if (empty_slot)
             {
                 //Check if player has enough money and inventory does not contain the weapon already
-                if(m_currentplayer.m_stats.getCurrency() >= weaponlist[index].itemprice &&
+                if(m_currentplayer.m_stats.getCurrency() >= weaponlist[index].price &&
                   !m_currentplayer.m_inventory.InventoryContains(weaponlist[index]))
                 {
-                    m_currentplayer.m_stats.addCurrency(-1 * weaponlist[index].itemprice);
+                    m_currentplayer.m_stats.addCurrency(-1 * weaponlist[index].price);
                     m_currentplayer.m_inventory.addItem(weaponlist[index]);
                 }
             } else
             {
                 //Check if player has enough money and inventory does not contain the weapon already
-                if (m_currentplayer.m_stats.getCurrency() >= weaponlist[index].itemprice &&
+                if (m_currentplayer.m_stats.getCurrency() >= weaponlist[index].price &&
                   !m_currentplayer.m_inventory.InventoryContains(weaponlist[index]))
                 {
-                    m_currentplayer.m_stats.addCurrency(-1 * weaponlist[index].itemprice);
+                    m_currentplayer.m_stats.addCurrency(-1 * weaponlist[index].price);
                     m_currentplayer.m_inventory.inventory[0] = weaponlist[index];
                 }
             }
@@ -286,7 +286,7 @@ public class ShopUIScript : MonoBehaviour {
             //Increment tier (weapons are loaded automatically)
             m_shopscript.incTier();
             //Change text of text and buttons
-            if(m_shopscript.getCurrentTier() >= m_shopscript.upgrade_cost.Length)
+            if(m_shopscript.getCurrentTier() >= m_shopscript.upgrade_cost.Length - 1)
             {
                 ui_shopText.text = "Weapons and Ammo \n Tier " + m_shopscript.getCurrentTier();
                 go_ShopUpgradeButton.transform.parent.gameObject.SetActive(false);
