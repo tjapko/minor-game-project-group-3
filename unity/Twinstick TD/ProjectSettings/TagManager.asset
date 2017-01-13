@@ -25,6 +25,7 @@ TagManager:
   - River
   - Shop
   - HitCanvas
+  - UIManager
   layers:
   - Default
   - TransparentFX
