@@ -88,10 +88,13 @@ public class ShopScript : MonoBehaviour {
 				setAllWeaponAmmoInClip(HandGun.ammoInClip3, ShotGun.ammoInClip3, MachineGun.ammoInClip3, Sniper.ammoInClip3);
                 setAllWeaponClipSize(HandGun.clipSize3, ShotGun.clipSize3, MachineGun.clipSize3, Sniper.clipSize3);
                 break;
-			default: 
+			default:
+                Debug.Log("blblblbl");
 				setAllWeaponAmmo(HandGun.ammo1, ShotGun.ammo1, MachineGun.ammo1, Sniper.ammo1);
 				setAllWeaponAmmoInClip(HandGun.ammoInClip1, ShotGun.ammoInClip1, MachineGun.ammoInClip1, Sniper.ammoInClip1);
-				break;
+                setAllWeaponClipSize(HandGun.clipSize1, ShotGun.clipSize1, MachineGun.clipSize1, Sniper.clipSize1);
+
+                break;
 		}
 	}
 
@@ -310,8 +313,9 @@ public class ShopScript : MonoBehaviour {
     //Increase tier and load new weapons
     public void incTier()
     {
+        Upgrade(current_tier);
         current_tier++;
-        //GET NEW WEAPONS
+        
     }
 
     //Getter for current_tier
