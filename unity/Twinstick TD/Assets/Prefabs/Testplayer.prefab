@@ -630,6 +630,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cdc8a7389f9c34b840ab01f09028ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_price_wall: 100
+  m_price_turret: 1000
+  m_price_carrot: 2500
+  m_price_mud: 500
   m_markerprefab: {fileID: 1000011497653828, guid: e43e08069b90c8d409bb0d4bbd06a5e1,
     type: 2}
   m_wallprefab: {fileID: 1000012271596080, guid: fade7fc2720943e4d832fbe8c7cc8949,
@@ -651,10 +655,6 @@ MonoBehaviour:
     m_inventory: {fileID: 0}
     m_playerhealth: {fileID: 0}
     m_PlayerNumber: 0
-  m_price_wall: 10
-  m_price_turret: 150
-  m_price_carrot: 200
-  m_price_mud: 200
 --- !u!114 &114000013388209428
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -19,8 +19,6 @@ public class GameManager : MonoBehaviour
     public AudioClip gongSound;
 
     //References
-    public GameObject m_uiprefab;               // Reference to UI prefab
-    public GameObject m_shopuiprefab;           // Reference to the shopUI prefab
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
 	public GameObject m_Enemyprefab1;       //Reference to prefab of enemy1
@@ -66,7 +64,7 @@ public class GameManager : MonoBehaviour
 		m_gridManager = new GridManager(m_gridPrefab);
 
         //Initialize UI script
-        m_uiscript = new UIManager(gameObject.GetComponent<GameManager>(), m_uiprefab, m_shopuiprefab);
+        m_uiscript = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
 
         // Start the game
         StartCoroutine(GameLoop());
@@ -83,13 +81,24 @@ public class GameManager : MonoBehaviour
         //Escape key: pause menu
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if (m_uiscript.go_mapShopUI.activeSelf)
+            //Check for game over
+            if (!gameover)
             {
-                m_uiscript.go_mapShopUI.SetActive(false);
-            } else
-            {
-                gamepause = !gamepause;
+                //Check if shop UI is active
+                if (m_uiscript.go_CanvasShop.activeSelf)
+                {
+                    m_uiscript.go_CanvasShop.SetActive(false);
+                }
+                //Check if players are constructing
+                else if(m_players.checkConstruction()){
+
+                }
+                else
+                {
+                    gamepause = !gamepause;
+                }
             }
+            
         }
         pauseGame(gamepause);
 
@@ -348,5 +357,9 @@ public class GameManager : MonoBehaviour
         return m_waveNumber;
     }
 
+    public WaveManager getWaveManager()
+    {
+        return m_wave;
+    }
 }
 

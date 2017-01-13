@@ -10,6 +10,7 @@ public class Basehealth : MonoBehaviour {
     //References
     [Header("References")]
     public GameObject m_hitBaseCanvasPrefab;    //Reference to friendlyHit canvas;
+    private GameObject m_maincamera;            //Reference to maincamera
 
     //Public variables
     public float m_StartingHealth = 100f;           //Starting health
@@ -24,8 +25,11 @@ public class Basehealth : MonoBehaviour {
     
     // OnEnable
     public void OnEnable()
-    {   
-		m_Dead = false;
+    {
+        //Set references
+        m_maincamera = GameObject.FindWithTag("MainCamera");
+
+        m_Dead = false;
 		gameObject.SetActive (true);
         //Set starting variables
         m_CurrentHealth = m_StartingHealth;
@@ -86,6 +90,10 @@ public class Basehealth : MonoBehaviour {
     {
         //Set hitmark
         GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
-        hitbox.GetComponent<HitMarkScript>().setDamage(amount);
+        HitMarkScript hitbox_script = hitbox.GetComponent<HitMarkScript>();
+        hitbox_script.setDamage(amount);
+        hitbox_script.setCamera(m_maincamera);
+        hitbox_script.lookToCamera();
+        hitbox.SetActive(true);
     }
 }

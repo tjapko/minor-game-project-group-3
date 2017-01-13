@@ -38,7 +38,8 @@ public class Weapon : Item {
     // empty Weapon constructor, needed for the inventory
     public Weapon() : base()
     {
-
+        ammo = 0;
+        ammoInClip = 0;
     }
     
     /// <summary>

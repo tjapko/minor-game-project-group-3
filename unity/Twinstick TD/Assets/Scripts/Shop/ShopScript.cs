@@ -13,29 +13,35 @@ public class ShopScript : MonoBehaviour {
     string use_button = "f";    //Set to use button of player[i]
 
     //Public variables
-    public int maxweapons = 3;
-    public int maxammotype = 3;
-    public List<Weapon> weaponsforsale;
-    public List<Weapon> ammoforsale;
-    public Rigidbody m_Bullet;  // Prefab of the shell.
-    public Rigidbody m_RayBullet;  // Prefab of the Rayshell.
-    public Transform m_FireTransform;           // A child of the player where the shells are spawned.
-
-    //Reference
-    public GameObject m_ShopUIprefab;
-    public GameObject m_instance_UI;
+    [HideInInspector] public int maxweapons = 4;    //Max weapons the store may contain
+    //[HideInInspector] public int maxammotype = 4;   //Max ammo type the store may contain
+    [HideInInspector] public List<Weapon> weaponsforsale;
+    //[HideInInspector] public List<Weapon> ammoforsale;
+    public int[] upgrade_cost = new int[4]; //Upgrade to next tier [0] should be empty
+    
+    //References
+    public GameObject helpbox_prefab;   //Helpbox prefab
+    [HideInInspector]
+    public GameObject m_instance_UI;  //Reference to instance of shop UI
+    public Rigidbody m_Bullet;          // Prefab of the shell.
+    public Rigidbody m_RayBullet;       // Prefab of the Rayshell.
+    public Transform m_FireTransform;   // A child of the player where the shells are spawned.
 
     //Private variables
-    private List<GameObject> players_present;
-    private bool showUI;
+
 	private Weapon weapon1, weapon2, weapon3, weapon4;
+    private List<GameObject> players_present;   //List of players that are near the shop
+    private bool showUI;    //Boolean if shopUI should be visible
+    private bool box_shown; //Boolean if helpbox has been shown
+    private int current_tier;   //int : current tier of purchasable weapons (starts at 1)
+
 
 	// Use this for initialization
 	void Start () {
         //Instantiate Lists
         players_present = new List<GameObject>();
         weaponsforsale = new List<Weapon>();
-        ammoforsale = new List<Weapon>();
+        //ammoforsale = new List<Weapon>();
         
 
         //Create empty weaponsforsale
@@ -45,18 +51,15 @@ public class ShopScript : MonoBehaviour {
         }
 
         //Create empty ammoforsale
-        while(ammoforsale.Count < maxammotype)
-        {
-            ammoforsale.Add(new global::Weapon());
-        }
+        //while(ammoforsale.Count < maxammotype)
+        //{
+        //    ammoforsale.Add(new global::Weapon());
+        //}
 
-        //Instantiate UI
-        //m_instance_UI = GameObject.Instantiate(m_ShopUIprefab);
-        //m_instance_UI.GetComponent<ShopUIScript>().m_shopscript = gameObject.GetComponent<ShopScript>();
-        //m_instance_UI.SetActive(false);
+        showUI = false; //Set UI active
+        box_shown = false;
+        current_tier = 1;
 
-        //Set UI active
-        showUI = false;
 
 //        For testing
 //      ............. Weapon(name               , id , description       , iconname  , price            , itemtype                   , fireratef           , launchforcef           , maxDamagef           , reloadTimef           , clipsize            , ammo            , ammopriceperclip     , ammoInClip            , maxAmmo            , lifetime)
@@ -69,6 +72,7 @@ public class ShopScript : MonoBehaviour {
 		addWeapon((Weapon)weapon2);
 		addWeapon((Weapon)weapon3);
 //		Upgrade (2); // for testing purposes
+
     }
 
 	//Upgradable: ammo, ammoInClip
@@ -157,6 +161,14 @@ public class ShopScript : MonoBehaviour {
         if (other.gameObject.CompareTag("Player"))
         {
             addplayer(other.gameObject);
+
+            if (!box_shown)
+            {
+                GameObject instance = GameObject.Instantiate(helpbox_prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+                SpeechBubbleScript instance_script = instance.GetComponent<SpeechBubbleScript>();
+                instance_script.setText("Press '" + use_button + "' to open the store");
+                box_shown = true;
+            }
         }
     }
 
@@ -254,6 +266,7 @@ public class ShopScript : MonoBehaviour {
     }
 
     //Add item to forsalelist
+    /*
     private void addAmmo(Weapon newAmmo)
     {
         for (int i = 0; i < ammoforsale.Count; i++)
@@ -286,6 +299,7 @@ public class ShopScript : MonoBehaviour {
             }
         }
     }
+    */
 
     //Getter show UI
     public bool getActiveUI()
@@ -293,4 +307,16 @@ public class ShopScript : MonoBehaviour {
         return showUI;
     }
 
+    //Increase tier and load new weapons
+    public void incTier()
+    {
+        current_tier++;
+        //GET NEW WEAPONS
+    }
+
+    //Getter for current_tier
+    public int getCurrentTier()
+    {
+        return current_tier;
+    }
 }
