@@ -31,6 +31,7 @@ public class WaveManager
     private List<EnemyManager> m_enemywave; //Population of enemies
     private int enemy_number;               //Total amount of enemies spawned
 	private int m_wavenumber;				//Total amount of waves
+	private int m_wave;						// wave number for Enemies left counter 
 
     // Use this for initialization
 	private GridManager m_gridmanager;
@@ -71,6 +72,7 @@ public class WaveManager
 
         this.m_wavenumber = 0;
         enemy_number = 0;
+		m_wave = -1;
         m_enemywave = new List<EnemyManager>();
 
 //		this.m_startSpawnDelayTime = this.numberEnemiesPerWave*0.5f;
@@ -82,6 +84,7 @@ public class WaveManager
     // Send next wave and create new grid
     public IEnumerator NextWave()
 	{
+		m_wave++;
 		if (m_wavenumber > 0) {
 			GameObject.Destroy (m_gridmanager.m_instance, 0f);
 			m_gridmanager = new GridManager (m_gridprefab);
@@ -110,6 +113,28 @@ public class WaveManager
 			amount = m_angle2 * m_wavenumber + b2;
 		} else {
 			amount = m_angle3 * m_wavenumber + b3;
+		}
+
+		return (int)amount;
+	}
+
+	// Function for amount of enemies next wave
+	public int EnemiesAmountPerWave2() {
+		//		int amount =  Mathf.RoundToInt(m_wave * 1.5f * m_scaleEnemies / (m_wave + 10)); // m_scaleEnemies after 20 waves (*1.5 factor)
+		float amount;
+		float b2, b3; // off sets for graphs (lines) 2 and 3
+		b2 = (m_startEnemies + m_angle1 * m_waveTippingPoint1) - (m_waveTippingPoint1 * m_angle2);
+		b3 = (b2 + m_angle2 * m_waveTippingPoint2) - (m_waveTippingPoint2 * m_angle3);
+
+		if (m_wave == 0) {
+			amount = m_startEnemies;
+		}
+		else if (m_wave < m_waveTippingPoint1) {
+			amount = m_startEnemies + m_angle1 * (m_wave);
+		} else if (m_wave >= m_waveTippingPoint1 && m_wave < m_waveTippingPoint2) {
+			amount = m_angle2 * m_wave + b2;
+		} else {
+			amount = m_angle3 * m_wave + b3;
 		}
 
 		return (int)amount;
@@ -344,7 +369,7 @@ public class WaveManager
     //Returns amount of enemies remaining 
     public int enemiesRemaining()
     {
-        return EnemiesAmountPerWave() - countDeadEnemies();
+        return EnemiesAmountPerWave2() - countDeadEnemies();
     }
     
     //Counts the amount of dead enemies
