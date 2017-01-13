@@ -141,14 +141,12 @@ public class UserObjectStatistics : MonoBehaviour {
     {
         if (walkable)
         {
-            Debug.Log("Walkable");
             foreach (MeshRenderer mesh in m_meshes)
             {
                 mesh.material.color = Color.white;
             }
         } else
         {
-            Debug.Log("Unwalkable");
             foreach (MeshRenderer mesh in m_meshes)
             {
                 

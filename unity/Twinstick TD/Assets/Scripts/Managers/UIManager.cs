@@ -4,32 +4,53 @@ using System.Collections;
 /// <summary>
 /// UI Manager
 /// </summary>
-public class UIManager {
+public class UIManager : MonoBehaviour {
+
+    //Prefabs
+    public GameObject m_CanvasGameOverPrefab;   //GameObject Canvas Game Over
+    public GameObject m_CanvasPauseMenuPrefab;  //GameObject Canvas Pause Menu
+    public GameObject m_CanvasPlayerUIPrefab;   //GameObject Canas Player UI
+    public GameObject m_CanvasShopPrefab;       //GameObject Canvas Shop
 
     //References
-    public GameObject go_mapUI;     //Reference to mapUI (gameobject)
-    public GameObject go_mapShopUI; //Reference to shopUI (gameobject)
-    
+    [HideInInspector] public GameObject go_CanvasGameOver;    //GameObject Canvas Game Over
+    [HideInInspector] public GameObject go_CanvasPauseMenu;   //GameObject Canvas Pause Menu
+    [HideInInspector] public GameObject go_CanvasPlayerUI;    //GameObject Canas Player UI
+    [HideInInspector] public GameObject go_CanvasShop;        //GameObject Canvas Shop
+    [HideInInspector] public GameObject go_Shop;              //GameObject Shop
+
     private GameManager m_gamemanager;  //Reference to GameManager
     private UserManager m_usermanager;  //Reference to UserManager
-    private MapUIScript m_mapui;        //Reference to MapUIScript
-    private ShopUIScript m_shopUI;      //Referene to ShopUIScript
+    private CanvasGameOverScript m_GameOverScript;      //Reference to CanvasGameOverScript
+    private CanvasPauseMenuScript m_PauseMenuScript;    //Reference to CanvasPauseMenuScript
+    private CanvasPlayerUIScript m_PlayerUIScript;      //Reference to CanvasPlayerUIScript
+    private ShopUIScript m_ShopUIScript;    //Reference to ShopUIScript
 
 
     //Constructer
-    public UIManager(GameManager gamemanager, GameObject mapuiPrefab, GameObject mapshopuiPrefab)
+    public void Start()
     {
-        m_gamemanager = gamemanager;
+        m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
         m_usermanager = m_gamemanager.getUserManager();
 
-        go_mapUI = GameObject.Instantiate(mapuiPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-        go_mapShopUI = GameObject.Instantiate(mapshopuiPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        go_CanvasGameOver   = GameObject.Instantiate(m_CanvasGameOverPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        go_CanvasPauseMenu  = GameObject.Instantiate(m_CanvasPauseMenuPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        go_CanvasPlayerUI   = GameObject.Instantiate(m_CanvasPlayerUIPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        go_CanvasShop       = GameObject.Instantiate(m_CanvasShopPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        go_Shop = GameObject.FindWithTag("Shop");
 
-        m_mapui = go_mapUI.GetComponent<MapUIScript>();
-        m_shopUI = go_mapShopUI.GetComponent<ShopUIScript>();
+        m_GameOverScript = go_CanvasGameOver.GetComponent<CanvasGameOverScript>();
+        m_PauseMenuScript = go_CanvasGameOver.GetComponent<CanvasPauseMenuScript>();
+        m_PlayerUIScript = go_CanvasGameOver.GetComponent<CanvasPlayerUIScript>();
+        m_ShopUIScript = go_CanvasShop.GetComponent<ShopUIScript>();
 
-        ShopScript m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
-        m_shopscript.m_instance_UI = go_mapShopUI;
+        ShopScript m_shopscript = go_Shop.GetComponent<ShopScript>();
+        m_shopscript.m_instance_UI = go_CanvasShop;
+
+        go_CanvasGameOver.SetActive(false);
+        go_CanvasPauseMenu.SetActive(false);
+        go_CanvasPlayerUI.SetActive(true);
+        go_CanvasShop.SetActive(false);
 
     }
 
@@ -41,41 +62,35 @@ public class UIManager {
         //Check for gameover
         if (gameover)
         {
-            m_mapui.showGameoverMenu(true);
-            m_mapui.showConstructonPanel(false);
-            m_mapui.showWaveControl(false);
-            m_mapui.showPauseMenu(false);
-            m_mapui.showWaveRemaining(false);
+            go_CanvasGameOver.SetActive(true);
+            go_CanvasPauseMenu.SetActive(false);
+            go_CanvasPlayerUI.SetActive(false);
+            go_CanvasShop.SetActive(false);
         }
         else
         {
             //Check for pause
             if (pause)
             {
-                m_mapui.showConstructonPanel(false);
-                m_mapui.showWaveControl(false);
-                m_mapui.showPauseMenu(true);
-                m_mapui.showGameoverMenu(false);
-                m_mapui.showWaveRemaining(false);
+                go_CanvasGameOver.SetActive(false);
+                go_CanvasPauseMenu.SetActive(true);
+                go_CanvasPlayerUI.SetActive(false);
+                go_CanvasShop.SetActive(false);
             }
             else
             {
                 //Check wavephase
                 if (wavephase)
                 {
-                    m_mapui.showWaveControl(true);
-                    m_mapui.showConstructonPanel(false);
-                    m_mapui.showPauseMenu(false);
-                    m_mapui.showGameoverMenu(false);
-                    m_mapui.showWaveRemaining(true);
+                    go_CanvasGameOver.SetActive(false);
+                    go_CanvasPauseMenu.SetActive(false);
+                    go_CanvasPlayerUI.SetActive(true);
                 }
                 else
                 {
-                    m_mapui.showWaveControl(true);
-                    m_mapui.showConstructonPanel(true);
-                    m_mapui.showPauseMenu(false);
-                    m_mapui.showGameoverMenu(false);
-                    m_mapui.showWaveRemaining(false);
+                    go_CanvasGameOver.SetActive(false);
+                    go_CanvasPauseMenu.SetActive(false);
+                    go_CanvasPlayerUI.SetActive(true);
                 }
             }
         }
@@ -84,12 +99,12 @@ public class UIManager {
 
     public IEnumerator showWaveStatsUI()
     {
-        yield return m_mapui.showWaveStatsUI();
+        yield return StartCoroutine(m_PlayerUIScript.showWaveStatsUI());
     }
 
     public void setScore()
     {
-        m_mapui.setScore();
+        m_GameOverScript.setScore();
     }
    
 

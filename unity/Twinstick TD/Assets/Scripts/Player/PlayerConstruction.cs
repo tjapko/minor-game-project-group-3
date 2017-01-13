@@ -4,11 +4,17 @@ using System.Collections.Generic;
 
 public class PlayerConstruction : MonoBehaviour {
 
+    //Start price objects
+    public int m_price_wall = 100;      //Price of wall
+    public int m_price_turret = 1000;   //Price of turret
+    public int m_price_carrot = 2500;   //Price of Carrot field
+    public int m_price_mud = 500;       //Price of the mud field
+
     //Fix
-    const string build_1 = "1";
-    const string build_2 = "2";
-    const string build_3 = "3";
-    const string build_4 = "4";
+    const string build_1 = "1";         //Button to place walls
+    const string build_2 = "2";         //Button to place turrets
+    const string build_3 = "3";         //Button to place farms
+    const string build_4 = "4";         //Button to place mud
 
     //References
     private GameManager m_gamemanager;          //Reference to game manager script
@@ -25,11 +31,6 @@ public class PlayerConstruction : MonoBehaviour {
     public GameObject m_mudprefab;   
     public List<GameObject> m_placedobjects;    //List containing all the objects the user has placed  
     public PlayerManager m_player;     //Reference to the player manager (set by Usermanager)
-
-    public int m_price_wall = 10;       //Price of wall
-    public int m_price_turret = 100;    //Price of turret
-    public int m_price_carrot = 200;    //Price of Carrot field
-    public int m_price_mud = 200;       //Price of the mud field
 
     //Private variables
     private Vector3 mouseposition;      // Position of mouse
@@ -133,7 +134,7 @@ public class PlayerConstruction : MonoBehaviour {
         m_grid = m_gridmanager.m_grid;
 
         //Create the suggestive markers
-        List<GameObject> markers = setConstructionMarker(objecttype);
+        //List<GameObject> markers = setConstructionMarker(objecttype);
 
         //While we're in the construction phase
         while (constructionphase)
@@ -143,42 +144,26 @@ public class PlayerConstruction : MonoBehaviour {
             newinstance.transform.position = selected_node.worldPosition;
             instancestats.setMesh(selected_node.walkable);
 
-
             //Return next frame
             yield return null;
 
-            //Exit 
+            //Exit
+            //Check if button has been pressed
+            //Check if player isn't standing onto the object
+            //Check if node is walkable
             if (Input.GetKeyDown(keyinput) && instancestats.getGroundClear() && m_grid.NodeFromWorldPoint(newinstance.transform.position).walkable)
             {
                 instancestats.setPlacement(true);    //The object is now placed onto the ground
                 newinstance.AddComponent<Rigidbody>();  //Create a rigid body, for OnTriggerEnter to work properly
                 newinstance.GetComponent<Rigidbody>().isKinematic = true;   //Make the rigidbody kinematic, such that it's not affected by physics
+                setTag(objecttype, newinstance);    //Set tag onto game object
                 m_placedobjects.Add(newinstance);   //Add instance to list
                 constructing = false;   //Building has finished
                 newinstance.layer = 9;  //Set layer of the object as unwalkable
 
-                //Reduce funds and set tag
-                switch (keyinput)
-                {
-                    case build_1:
-                        newinstance.tag = "PlayerWall";
-                        m_player.m_stats.substractCurrency(m_price_wall);
-                        break;
-                    case build_2:
-                        newinstance.tag = "PlayerTurret";
-                        m_player.m_stats.substractCurrency(m_price_turret);
-                        break;
-                    case build_3:
-                        newinstance.tag = "PlayerCarrotField";
-                        m_player.m_stats.substractCurrency(m_price_carrot);
-                        break;
-                    case build_4:
-                        newinstance.tag = "PlayerMud";
-                        m_player.m_stats.substractCurrency(m_price_mud);
-                        break;
-                    default:
-                        break;
-                }
+                //Reduce funds
+                reduceFunds(objecttype, countObjects(objecttype));
+                
                 break;
             }
 
@@ -247,56 +232,6 @@ public class PlayerConstruction : MonoBehaviour {
         }
     }
 
-    // Set the markers
-    private List<GameObject> setConstructionMarker(PlayerObjectType new_object_type)
-    {/*
-        //Create list of markers
-        List<GameObject> markers = new List<GameObject>();  //List of markers (gameobject)
-
-        //Load grid and path
-
-        m_gridmanager = new GridManager(gamemanager.m_gridPrefab);
-        m_grid = m_gridmanager.m_grid;
-
-        //Node[,] grid = m_grid.getGrid();
-        //int length = grid.Length;
-        //Debug.Log(length);
-
-        //GameObject.Destroy(m_gridmanager.m_instance);
-        */
-        return new List<GameObject>();
-        /*
-        foreach (GameObject existing_obj in m_placedobjects)
-        {
-            PlayerObjectType existing_obj_type = existing_obj.GetComponent<UserObjectStatistics>().getObjectType();
-            List<Vector3> surrounding_vector = setVector(existing_obj_type, new_object_type);
-            if(surrounding_vector == null)
-            {
-                continue;
-            }
-
-            foreach (Vector3 vector in surrounding_vector)
-            {
-                Vector3 spawnpos = existing_obj.transform.position + vector;
-                //If the lists does not contain the marker add the marker to the list of markers
-                //And instantiate the marker
-                if (!marker_pos.Contains(spawnpos))
-                {
-                    marker_pos.Add(spawnpos);   //Add the position of the marker to the list
-
-                    //Create a marker
-                    GameObject newmarker = GameObject.Instantiate(m_markerprefab, spawnpos, Quaternion.identity) as GameObject;
-                    m_markerprefab.transform.position = spawnpos;
-                    newmarker.GetComponent<SuggestiveMarkerScript>().setMarker(new_object_type);
-                    markers.Add(newmarker);
-                }
-            }
-        }
-
-        return markers;
-        */
-    }
-
     //Destroy the markers
     private void destroyMarkers(List<GameObject> markers)
     {
@@ -306,19 +241,75 @@ public class PlayerConstruction : MonoBehaviour {
         }
     }
 
-    //Check if position is walkable()
-    private Vector3 placeObject(Vector3 position)
-    {
-        GridManager m_gridmanager = new GridManager(m_gamemanager.m_gridPrefab);
-        Grid m_grid = m_gridmanager.m_grid;
-        Node node = m_grid.NodeFromWorldPoint(position);
-
-        return node.walkable?node.worldPosition:Vector3.zero;
-    }
-
     //Getter for boolean constructing: player is constucting
     public bool getPlayerisConstructing()
     {
         return constructing;
+    }
+
+    // Returns the price of a new piece of wall
+    private void reduceFunds(PlayerObjectType objecttype, int exisiting_walls)
+    {
+        float factor = 1.5f + (0.1f * (float)exisiting_walls);
+
+        switch (objecttype)
+        {
+            case PlayerObjectType.PlayerWall:
+                m_player.m_stats.substractCurrency(m_price_wall);
+                m_price_wall = (int)((float) m_price_wall * factor);
+                break;
+            case PlayerObjectType.PlayerTurret:
+                m_player.m_stats.substractCurrency(m_price_turret);
+                m_price_turret = (int)((float)m_price_turret * factor);
+                break;
+            case PlayerObjectType.PlayerCarrotField:
+                m_player.m_stats.substractCurrency(m_price_carrot);
+                m_price_carrot = (int)((float)m_price_carrot * factor);
+                break;
+            case PlayerObjectType.PlayerMud:
+                m_player.m_stats.substractCurrency(m_price_mud);
+                m_price_mud = (int)((float)m_price_mud * factor);
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    //Counts amount of exisiting PlayerObjects
+    private int countObjects(PlayerObjectType objecttype)
+    {
+        int ans = 0;
+        foreach(GameObject obj in m_placedobjects)
+        {
+            UserObjectStatistics stats = obj.GetComponent<UserObjectStatistics>();
+            if(stats.getObjectType() == objecttype)
+            {
+                ans++;
+            }
+        }
+        return ans;
+    }
+
+    private void setTag(PlayerObjectType obj_type, GameObject obj)
+    {
+        switch (obj_type)
+        {
+            case PlayerObjectType.PlayerWall:
+                obj.tag = "PlayerWall";
+                break;
+            case PlayerObjectType.PlayerTurret:
+                obj.tag = "PlayerTurret";
+                break;
+            case PlayerObjectType.PlayerCarrotField:
+                obj.tag = "PlayerCarrotField";
+                break;
+            case PlayerObjectType.PlayerMud:
+                obj.tag = "PlayerMud";
+                break;
+            default:
+                break;
+
+        }
     }
 }

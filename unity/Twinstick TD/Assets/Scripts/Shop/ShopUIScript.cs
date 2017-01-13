@@ -152,7 +152,7 @@ public class ShopUIScript : MonoBehaviour {
             } else
             {
                 ui_weapon_cost[i].text = "Buy Weapon:\n " + weaponlist[i].itemprice.ToString();
-                btn_weapon_cost[i].interactable = true;
+                btn_weapon_cost[i].interactable = m_currentplayer.m_stats.getCurrency() > weaponlist[i].itemprice;
             }
         }
 
@@ -171,13 +171,19 @@ public class ShopUIScript : MonoBehaviour {
             } else
             {
                 //Player has weapon, Check if player is allowed to buy ammo
-                bool allowedtobuy = ((player_weapons[inv_index].ammo + player_weapons[inv_index].ammoInClip) < player_weapons[inv_index].maxAmmo);
+                Weapon selected_weapon = player_weapons[inv_index];
+                bool allowedtobuy = ((selected_weapon.ammo + selected_weapon.ammoInClip) < selected_weapon.maxAmmo);
                 btn_weapon_ammo[i].interactable = allowedtobuy;
                 //Change text of button
                 if (allowedtobuy)
                 {
                     ui_weapon_ammo_cost[i].text = "Buy Ammo:\n" + player_weapons[inv_index].ammoprice.ToString();
-                } else
+                } else if(selected_weapon.itemtype == Item.ItemType.Empty)
+                {
+                    btn_weapon_ammo[i].interactable = false;
+                    ui_weapon_ammo_cost[i].text = "Locked";
+                }
+                else
                 {
                     ui_weapon_ammo_cost[i].text = "Weapon is\n full";
                 }
