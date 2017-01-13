@@ -117,7 +117,7 @@ public class ShopUIScript : MonoBehaviour {
     {
         CancelInvoke("updateForSaleWeapons");
     }
-    List<Weapon> old_list = null;
+
     //Update the UI panel
     private void updateForSaleWeapons()
     {
@@ -151,6 +151,7 @@ public class ShopUIScript : MonoBehaviour {
                 btn_weapon_cost[i].interactable = false;
             } else
             {
+                Debug.Log("weapon i" + weaponlist[i].itemprice.ToString());
                 ui_weapon_cost[i].text = "Buy Weapon:\n " + weaponlist[i].itemprice.ToString();
                 btn_weapon_cost[i].interactable = m_currentplayer.m_stats.getCurrency() > weaponlist[i].itemprice;
             }

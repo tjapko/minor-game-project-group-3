@@ -70,19 +70,28 @@ public class ShopScript : MonoBehaviour {
         addWeapon((Weapon)weapon4);
         addWeapon((Weapon)weapon2);
         addWeapon((Weapon)weapon3);
+       
         //		Upgrade (2); // for testing purposes
 
     }
 
     public void Upgrade(int level)
     {
-        SetGun(level , "ammo");
+        SetGun(level, "ammo");
         SetGun(level, "price");
         SetGun(level, "firerate");
         SetGun(level, "maxdamage");
         SetGun(level, "clipsize");
         SetGun(level, "ammoinclip");
         SetGun(level, "maxammo");
+
+        List<Weapon> temp = new List<Weapon>();
+       temp.Add((Weapon)weapon1);
+        temp.Add((Weapon)weapon4);
+        temp.Add((Weapon)weapon2);
+        temp.Add((Weapon)weapon3);
+
+        weaponsforsale = temp;
     }
 
 
@@ -93,7 +102,9 @@ public class ShopScript : MonoBehaviour {
     // sets the ammo for weapons1-4 
     private void SetGun(int level, string specification)
     {
-        level =- 1;
+        //level -= 1;
+       
+
         switch (specification.ToLower())
         {
             case "ammo":
@@ -143,9 +154,9 @@ public class ShopScript : MonoBehaviour {
                 break;
 
             case "id":
-                weapon2.itemID =+ weaponsforsale.Count;
-                weapon3.itemID = +weaponsforsale.Count;
-                weapon4.itemID = +weaponsforsale.Count;
+                weapon2.itemID += weaponsforsale.Count;
+                weapon3.itemID += weaponsforsale.Count;
+                weapon4.itemID += weaponsforsale.Count;
                 break;
 
         }
@@ -340,7 +351,9 @@ public class ShopScript : MonoBehaviour {
     //Increase tier and load new weapons
     public void incTier()
     {
+        Debug.Log("P before" + weaponsforsale[1].price);
         Upgrade(current_tier);
+        Debug.Log("P after" + weaponsforsale[1].price);
         current_tier++;
         
     }
