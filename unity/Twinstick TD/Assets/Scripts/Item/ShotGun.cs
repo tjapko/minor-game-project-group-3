@@ -6,25 +6,22 @@ using System;
 ///  Weapon constructor 
 ///  inherits from "Item"
 /// </summary>
-public class ShotGun {
+public class ShotGun
+{
 
-	//public variables 
-	public static int price = 4000;
-	public static float fireRate = 1f;          // the fire rate of the weapon 
-	public static float launchForce = 50f;       // the launchforce of the weapon for the bullet (speed)
-	public static float maxDamage = 2f;         // the damage of the weapon if there is a full hit. 
-	public static float reloadTime = 10f;        // the time it takes to reload 
-	public static int ammoprice = 10;			// the price for new ammo !!per clip!!
-	public static int maxAmmo = 200;				// max ammo player can carry
-	public static float bulletLifeTime = 0.4f;    // the lifetime of the bullet 
-	// upgradable stats (ammo & ammoInClip)
-	public static int ammo1 = 20;                // the ammo there is left (excluding the ammoInClip) level1
-	public static int ammo2 = 35;                // level2 after the 1st upgrade
-	public static int ammo3 = 50;                // level3 after the 2nd upgrade
-	public static int ammoInClip1 = 10;             // the ammo in the clip level1
-	public static int ammoInClip2 = 15;             // level2 after the 1st upgrade 
-	public static int ammoInClip3 = 20;             // level3 after the 2nd upgrade
-    public static int clipSize1 = 20;            // the size of the clip 
-    public static int clipSize2 = 20;           // level2 after the 1st upgrade
-    public static int clipSize3 = 20;           // level3 after the 2nd upgrade
+    //public variables 
+    public static float launchForce = 50f;       // the launchforce of the weapon for the bullet (speed)
+    public static float reloadTime = 10f;        // the time it takes to reload 
+    public static int ammoprice = 10;           // the price for new ammo !!per clip!!  
+    public static float bulletLifeTime = 0.4f;    // the lifetime of the bullet 
+   
+    // upgradable stats (ammo & ammoInClip)
+    public static int[] maxAmmo = { 100, 160 , 250 };// max ammo player can carry for every level
+    public static float[] maxDamage = { 2f, 3f, 5f };// the damage for every level  
+    public static int[] price = { 4000, 5000, 7000 };//  the prices for every level
+    public static int[] ammo = { 40, 65, 105 };      // all the different ammo levels 
+    public static int[] ammoInClip = { 10, 15, 20 }; // all ammo from weapon when you buy it 
+    public static int[] clipSize = { 10, 15, 20 };   // all ammo in clip when you buy them 
+    public static float[] fireRate = { 1f,1.5f ,3f };// the fire rate of the weapon
+
 }

@@ -19,13 +19,9 @@ public class HandGun
     public static int maxAmmo = 500;                // max ammo player can carry
     public static float bulletLifeTime = 2f;    // the lifetime of the bullet 
                                                 // upgradable stats (ammo & ammoInClip)
-    public static int ammo1 = 9999;                // the ammo there is left (excluding the ammoInClip) level1
-    public static int ammo2 = 9999;                // level2 after the 1st upgrade
-    public static int ammo3 = 9999;                // level3 after the 2nd upgrade
-    public static int ammoInClip1 = 20;             // the ammo in the clip level1
-    public static int ammoInClip2 = 25;             // level2 after the 1st upgrade 
-    public static int ammoInClip3 = 30;             // level3 after the 1st upgrade
-    public static int clipSize1 = 20;            // the size of the clip 
-    public static int clipSize2 = 25;            //level2 after the 1st upgrade
-    public static int clipSize3 = 30;            // level3 after the 1st upgrade
+
+    public static int ammo = 9999;       // all the different ammo levels 
+    public static int ammoInClip =20;    // all ammo from weapon when you buy it 
+    public static int clipSize =  20;    // all ammo in clip when you buy them 
+   
 }

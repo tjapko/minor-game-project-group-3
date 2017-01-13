@@ -18,7 +18,7 @@ public class ShopScript : MonoBehaviour {
     [HideInInspector] public List<Weapon> weaponsforsale;
     //[HideInInspector] public List<Weapon> ammoforsale;
     public int[] upgrade_cost = new int[4]; //Upgrade to next tier [0] should be empty
-    
+
     //References
     public GameObject helpbox_prefab;   //Helpbox prefab
     [HideInInspector]
@@ -27,22 +27,21 @@ public class ShopScript : MonoBehaviour {
     public Rigidbody m_RayBullet;       // Prefab of the Rayshell.
     public Transform m_FireTransform;   // A child of the player where the shells are spawned.
 
-    //Private variables
-
-	private Weapon weapon1, weapon2, weapon3, weapon4;
+    //Private variables 
+    private Weapon weapon1, weapon2, weapon3, weapon4;
     private List<GameObject> players_present;   //List of players that are near the shop
     private bool showUI;    //Boolean if shopUI should be visible
     private bool box_shown; //Boolean if helpbox has been shown
     private int current_tier;   //int : current tier of purchasable weapons (starts at 1)
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         //Instantiate Lists
         players_present = new List<GameObject>();
         weaponsforsale = new List<Weapon>();
         //ammoforsale = new List<Weapon>();
-        
+
 
         //Create empty weaponsforsale
         while (weaponsforsale.Count < maxweapons)
@@ -61,68 +60,96 @@ public class ShopScript : MonoBehaviour {
         current_tier = 1;
 
 
-//        For testing
-//      ............. Weapon(name               , id , description       , iconname  , price            , itemtype                   , fireratef           , launchforcef           , maxDamagef           , reloadTimef           , clipsize            , ammo            , ammopriceperclip     , ammoInClip            , maxAmmo            , lifetime)
-		weapon1 = new Weapon("Default Weapon"   , 1  , "Default weapon!" , "Weapon1" , HandGun.price    , Weapon.ItemType.HandGun    , HandGun.fireRate    , HandGun.launchForce    , HandGun.maxDamage    , HandGun.reloadTime    , HandGun.clipSize1    , HandGun.ammo1    , HandGun.ammoprice    , HandGun.ammoInClip1    , HandGun.maxAmmo    , HandGun.bulletLifeTime);
-		weapon4 = new Weapon("Default Weapon 4" , 4  , "Default weapon!" , "sniper"  , Sniper.price     , Weapon.ItemType.Sniper     , Sniper.fireRate     , Sniper.launchForce     , Sniper.maxDamage     , Sniper.reloadTime     , Sniper.clipSize1    , Sniper.ammo1     , Sniper.ammoprice     , Sniper.ammoInClip1     , Sniper.maxAmmo     , Sniper.bulletLifeTime);
-		weapon2 = new Weapon("Default Weapon 2" , 2  , "Default weapon!" , "shotgun" , ShotGun.price    , Weapon.ItemType.Shotgun    , ShotGun.fireRate    , ShotGun.launchForce    , ShotGun.maxDamage    , ShotGun.reloadTime    , ShotGun.clipSize1    , ShotGun.ammo1    , ShotGun.ammoprice    , ShotGun.ammoInClip1    , ShotGun.maxAmmo    , ShotGun.bulletLifeTime);
-		weapon3 = new Weapon("Default Weapon 3" , 3  , "Default weapon!" , "Weapon3" , MachineGun.price , Weapon.ItemType.MachineGun , MachineGun.fireRate , MachineGun.launchForce , MachineGun.maxDamage , MachineGun.reloadTime , MachineGun.clipSize1 , MachineGun.ammo1 , MachineGun.ammoprice , MachineGun.ammoInClip1 , MachineGun.maxAmmo , MachineGun.bulletLifeTime);
-		addWeapon((Weapon)weapon1);
-		addWeapon((Weapon)weapon4);
-		addWeapon((Weapon)weapon2);
-		addWeapon((Weapon)weapon3);
-//		Upgrade (2); // for testing purposes
+        //        For testing
+        //      ............. Weapon(name               , id , description       , iconname  , price            , itemtype                   , fireratef           , launchforcef           , maxDamagef           , reloadTimef           , clipsize            , ammo            , ammopriceperclip     , ammoInClip            , maxAmmo            , lifetime)
+        weapon1 = new Weapon("Default Weapon", 1, "Default weapon!", "Weapon1", HandGun.price, Weapon.ItemType.HandGun, HandGun.fireRate, HandGun.launchForce, HandGun.maxDamage, HandGun.reloadTime, HandGun.clipSize, HandGun.ammo, HandGun.ammoprice, HandGun.ammoInClip, HandGun.maxAmmo, HandGun.bulletLifeTime);
+        weapon4 = new Weapon("Default Weapon 4", 4, "Default weapon!", "sniper", Sniper.price[0], Weapon.ItemType.Sniper, Sniper.fireRate[0], Sniper.launchForce, Sniper.maxDamage[0], Sniper.reloadTime, Sniper.clipSize[0], Sniper.ammo[0], Sniper.ammoprice, Sniper.ammoInClip[0], Sniper.maxAmmo[0], Sniper.bulletLifeTime);
+        weapon2 = new Weapon("Default Weapon 2", 2, "Default weapon!", "shotgun", ShotGun.price[0], Weapon.ItemType.Shotgun, ShotGun.fireRate[0], ShotGun.launchForce, ShotGun.maxDamage[0], ShotGun.reloadTime, ShotGun.clipSize[0], ShotGun.ammo[0], ShotGun.ammoprice, ShotGun.ammoInClip[0], ShotGun.maxAmmo[0], ShotGun.bulletLifeTime);
+        weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", MachineGun.price[0], Weapon.ItemType.MachineGun, MachineGun.fireRate[0], MachineGun.launchForce, MachineGun.maxDamage[0], MachineGun.reloadTime, MachineGun.clipSize[0], MachineGun.ammo[0], MachineGun.ammoprice, MachineGun.ammoInClip[0], MachineGun.maxAmmo[0], MachineGun.bulletLifeTime);
+        addWeapon((Weapon)weapon1);
+        addWeapon((Weapon)weapon4);
+        addWeapon((Weapon)weapon2);
+        addWeapon((Weapon)weapon3);
+        //		Upgrade (2); // for testing purposes
 
     }
 
-	//Upgradable: ammo, ammoInClip
-	public void Upgrade(int UpgradeLevel) {
-		switch (UpgradeLevel) {
-			case 2: 
-				setAllWeaponAmmo(HandGun.ammo2, ShotGun.ammo2, MachineGun.ammo2, Sniper.ammo2);
-				setAllWeaponAmmoInClip(HandGun.ammoInClip2, ShotGun.ammoInClip2, MachineGun.ammoInClip2, Sniper.ammoInClip2);
-                setAllWeaponClipSize(HandGun.clipSize2, ShotGun.clipSize2, MachineGun.clipSize2, Sniper.clipSize2);
-				break;
-			case 3:
-				setAllWeaponAmmo(HandGun.ammo3, ShotGun.ammo3, MachineGun.ammo3, Sniper.ammo3);
-				setAllWeaponAmmoInClip(HandGun.ammoInClip3, ShotGun.ammoInClip3, MachineGun.ammoInClip3, Sniper.ammoInClip3);
-                setAllWeaponClipSize(HandGun.clipSize3, ShotGun.clipSize3, MachineGun.clipSize3, Sniper.clipSize3);
-                break;
-			default:
-                Debug.Log("blblblbl");
-				setAllWeaponAmmo(HandGun.ammo1, ShotGun.ammo1, MachineGun.ammo1, Sniper.ammo1);
-				setAllWeaponAmmoInClip(HandGun.ammoInClip1, ShotGun.ammoInClip1, MachineGun.ammoInClip1, Sniper.ammoInClip1);
-                setAllWeaponClipSize(HandGun.clipSize1, ShotGun.clipSize1, MachineGun.clipSize1, Sniper.clipSize1);
-
-                break;
-		}
-	}
-
-	// sets the ammo for weapons1-4 
-	private void setAllWeaponAmmo(int weapon1Ammo, int weapon2Ammo, int weapon3Ammo, int weapon4Ammo) {
-		weapon1.ammo = weapon1Ammo; 
-		weapon2.ammo = weapon2Ammo; 
-		weapon3.ammo = weapon3Ammo; 
-		weapon4.ammo = weapon4Ammo;  
-	}
-
-	// sets the ammoInClip for weapons1-4 
-	private void setAllWeaponAmmoInClip(int weapon1AmmoInClip, int weapon2AmmoInClip, int weapon3AmmoInClip, int weapon4AmmoInClip) {
-		weapon1.ammoInClip = weapon1AmmoInClip; 
-		weapon2.ammoInClip = weapon2AmmoInClip; 
-		weapon3.ammoInClip = weapon3AmmoInClip; 
-		weapon4.ammoInClip = weapon4AmmoInClip;  
-	}
-
-    private void setAllWeaponClipSize(int weapon1ClipSize, int weapon2ClipSize, int weapon3ClipSize, int weapon4ClipSize)
+    public void Upgrade(int level)
     {
-        
-        weapon1.clipSize = weapon1ClipSize;
-        weapon2.clipSize = weapon2ClipSize;
-        weapon3.clipSize = weapon3ClipSize;
-        weapon4.clipSize = weapon4ClipSize;
-    
-}
+        SetGun(level , "ammo");
+        SetGun(level, "price");
+        SetGun(level, "firerate");
+        SetGun(level, "maxdamage");
+        SetGun(level, "clipsize");
+        SetGun(level, "ammoinclip");
+        SetGun(level, "maxammo");
+    }
+
+
+
+
+
+
+    // sets the ammo for weapons1-4 
+    private void SetGun(int level, string specification)
+    {
+        level =- 1;
+        switch (specification.ToLower())
+        {
+            case "ammo":
+                // Set ammo a level higher for all weapons
+                weapon2.ammo = ShotGun.ammo[level];
+                weapon3.ammo = MachineGun.ammo[level];
+                weapon4.ammo = Sniper.ammo[level];
+                break;
+
+        // Set ammoInClip a level higher for all weapons
+            case "ammoinclip":
+                weapon2.ammoInClip = ShotGun.ammoInClip[level];
+                weapon3.ammoInClip = MachineGun.ammoInClip[level];
+                weapon4.ammoInClip = Sniper.ammoInClip[level];
+                break;
+            // Set clipSize a level higher  for all weapons
+            case "slipsize":
+                weapon2.clipSize = ShotGun.clipSize[level];
+                weapon3.clipSize = MachineGun.clipSize[level];
+                weapon4.clipSize = Sniper.clipSize[level];
+                break;
+            // Set Damage a level higher for all weapons 
+            case "maxdamage":
+                weapon2.maxDamage = ShotGun.maxDamage[level];
+                weapon3.maxDamage = MachineGun.maxDamage[level];
+                weapon4.maxDamage = Sniper.maxDamage[level];
+                break;
+            // Set the price a level higher for all weapons 
+            case "price":
+                weapon2.price = ShotGun.price[level];
+                weapon3.price = MachineGun.price[level];
+                weapon4.price = Sniper.price[level];
+                break;
+
+            // Set the fireRate a level higher for all weapons
+            case "firerate":
+                weapon2.fireRate = ShotGun.fireRate[level];
+                weapon3.fireRate = MachineGun.fireRate[level];
+                weapon4.fireRate = Sniper.fireRate[level];
+                break;
+
+            // Set the maxAmmo a level higher for all weapons
+            case "maxammo":
+                weapon2.maxAmmo = ShotGun.maxAmmo[level];
+                weapon3.maxAmmo = MachineGun.maxAmmo[level];
+                weapon4.maxAmmo = Sniper.maxAmmo[level];
+                break;
+
+            case "id":
+                weapon2.itemID =+ weaponsforsale.Count;
+                weapon3.itemID = +weaponsforsale.Count;
+                weapon4.itemID = +weaponsforsale.Count;
+                break;
+
+        }
+    }
 
     // Update is called once per frame
     void Update () {
