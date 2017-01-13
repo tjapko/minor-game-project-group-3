@@ -17,8 +17,9 @@ public class PlayerHealth : MonoBehaviour
 	public Image m_FillImage;                           // The image component of the slider.
 	public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
 	public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
-	private float m_CurrentHealth;  					//Current health of enemy
-	public bool m_Dead = false;  						//Enemy is dead or not
+	private float m_CurrentHealth;  					// Current health of enemy
+    private int m_dollarperlife;                      // Amount of currency per life that it cost to buy. 
+	public bool m_Dead = false;  						// Enemy is dead or not
 
 
 	public void Start()
@@ -28,7 +29,8 @@ public class PlayerHealth : MonoBehaviour
 		m_CurrentHealth = m_StartingHealth;
 		// Update the health slider's value and color.
 		SetHealthUI();
-
+        
+       
     }
 
     public void fixedUpdate()
@@ -54,6 +56,27 @@ public class PlayerHealth : MonoBehaviour
 		m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
 	}
 
+    public void buyHealth()
+    {
+        PlayerStatistics playerstat = new PlayerStatistics();
+        float dif = (m_StartingHealth - m_CurrentHealth);
+        int cost = (int)(dif * m_dollarperlife);
+
+        if (cost >= playerstat.m_currency)
+        {
+            playerstat.m_currency =- cost;
+            m_CurrentHealth = m_StartingHealth;
+        }
+        else
+        {
+
+            int kap = (int)(playerstat.m_currency / m_dollarperlife);
+            m_CurrentHealth =+  kap;
+            playerstat.m_currency =- kap * m_dollarperlife;
+
+        }
+
+    }
 	//Decrease health of base
 	public void takeDamage(float amountSec){
         //Create hitmark
