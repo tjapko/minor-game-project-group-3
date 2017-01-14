@@ -7,11 +7,11 @@ public class Enemie4 : EnemyManager
 {
 	public GameObject enemyPrefab;
 
-	//Boss enemie, walks slowly towards base
-	public Enemie4 (GameObject instance, Transform spawnpoint, Transform basetarget, Transform playerpoint, int number) : base(instance, spawnpoint, basetarget, playerpoint, number)
+    //Boss enemie, walks slowly towards base
+    public Enemie4(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playerpoint, int number, EnemyInheratedValues enemyInheratedValues) : base(instance, spawnpoint, basetarget, playerpoint, number, enemyInheratedValues)
 	{
 
-		//movement
+        //movement
         m_Instance.AddComponent<UnitPlayer> ();
 		this.m_MovementPlayer = m_Instance.GetComponent<UnitPlayer> ();
 		health.playerUnit = m_MovementPlayer;

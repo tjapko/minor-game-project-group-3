@@ -49,12 +49,17 @@ public class WaveManager
 	// spawnDelay of the enemies 
 	private float m_spawnDelayBetweenEnemies = 0.5f; // time delay between the enemies in a wave
 	// increasing amount of enemies 
-	private int m_startEnemies = 5;    // number of starting enemies 
+	private int m_startEnemies = 40;    // number of starting enemies 
 	private float m_angle1 = 3.0f;     // this angle is applied from the start to wave: m_m_waveTippingPoint1
 	private float m_angle2 = 5.0f;	   // this angle is applied from wave: m_m_waveTippingPoint1 to wave: m_m_waveTippingPoint2
 	private float m_angle3 = 2.0f;	   // this angle is applied from wave: m_m_waveTippingPoint2 till the end of the game
 	private int m_waveTippingPoint1 = 10; // wave at which m_angle2 is used for the increasing amount of enemies 
 	private int m_waveTippingPoint2 = 15; // wave at which m_angle2 is used for the increasing amount of enemies 
+
+    // GA
+    private PopulationManagerGA GAManager;
+
+
 
     public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab)
     {
@@ -71,9 +76,11 @@ public class WaveManager
         this.m_wavenumber = 0;
         enemy_number = 0;
         m_enemywave = new List<EnemyManager>();
-//		this.m_startSpawnDelayTime = this.numberEnemiesPerWave*0.5f;
-//		this.m_endSpawnDelayTime = m_scaleEnemies * 0.5f;
-//		this.time = this.m_startSpawnDelayTime;
+        //		this.m_startSpawnDelayTime = this.numberEnemiesPerWave*0.5f;
+        //		this.m_endSpawnDelayTime = m_scaleEnemies * 0.5f;
+        //		this.time = this.m_startSpawnDelayTime;
+
+        this.GAManager = new PopulationManagerGA(m_startEnemies);
     }
 
 
@@ -182,21 +189,18 @@ public class WaveManager
 		GameObject newinstance = GameObject.Instantiate (Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
 
 		if (Enemyprefab.Equals (m_Enemyprefab1)) {
-           
-            Enemie1 instance = new Enemie1(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
-            instance.health.setMaxHealth(sethealt());
+           // enemyvar enemyvar = ga.getenemyvartyp1;
+            Enemie1 instance = new Enemie1(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getStandartValues());
             m_enemywave.Add (instance);
 		} else if (Enemyprefab.Equals (m_Enemyprefab2)) {
-            Enemie2 instance = new Enemie2(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
-            instance.health.setMaxHealth(sethealt());
+            Enemie2 instance = new Enemie2(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getStandartValues());
             m_enemywave.Add (instance);
 		} else if (Enemyprefab.Equals (m_Enemyprefab3)) {
-            Enemie3 instance = new Enemie3(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
-            instance.health.setMaxHealth(sethealt());
+            Enemie3 instance = new Enemie3(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getStandartValues());
             m_enemywave.Add (instance);
 		} else if (boss) {
-            Enemie4 instance = new Enemie4(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
-            instance.health.setMaxHealth(20);
+            Enemie4 instance = new Enemie4(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getStandartValues());
+            instance.health.setCurrentHealth(20);
             m_enemywave.Add (instance);
 		}
 

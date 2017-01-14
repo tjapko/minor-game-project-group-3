@@ -17,10 +17,7 @@ public class EnemyHealth : MonoBehaviour
     public AudioSource enemySource;
     public AudioClip deathSound;
     //Public variables
-	public float m_damageToTowerSec;					//damage to tower per second
-    public float m_towerpersecond ;
-	public float m_damageToPlayerSec;					//damage to player per second
-	public float m_StartingHealth;						//Start health of enemy
+	
     public Slider m_Slider;                           	// The slider to represent how much health the enemy currently has.
     public Image m_FillImage;                           // The image component of the slider.
     public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
@@ -34,11 +31,17 @@ public class EnemyHealth : MonoBehaviour
     private int m_lasthit;          					//Playernumber of last hit
 	private PlayerHealth playerhealth;					//playerhealth script
 	private Basehealth basehealth;						//Basehealth script
+    private float m_damageToTowerSec;					//damage to tower per second
+    private float m_towerpersecond;
+    private float m_damageToPlayerSec;					//damage to player per second
+    private float m_playerPerSecond;
+    private float m_StartingHealth;						//Start health of enemy
+    private float m_damageDoneToObject = 0f;
+    private float m_damageDoneToPlayer = 0f;
 
     public void Start()
     {
-        // When the enemy is enabled, reset the enemy's health
-        m_CurrentHealth = m_StartingHealth;
+          
         // Update the health slider's value and color.
         SetHealthUI();
 
@@ -52,7 +55,7 @@ public class EnemyHealth : MonoBehaviour
 			if (targetRigidbody) 
 			{
 				playerhealth = targetRigidbody.GetComponent<PlayerHealth> ();
-				InvokeRepeating ("playerDamage", 0f, 1f);
+				InvokeRepeating ("playerDamage", 0f, m_playerPerSecond);
 			}
 		}
 		if (other.gameObject.CompareTag("Base"))
@@ -72,6 +75,7 @@ public class EnemyHealth : MonoBehaviour
         if(basehealth != null)
         {
             basehealth.TakeDamage(m_damageToTowerSec);
+            this.m_damageDoneToObject += m_damageToTowerSec;
         }
 	}
 
@@ -80,6 +84,7 @@ public class EnemyHealth : MonoBehaviour
         if(playerhealth != null)
         {
             playerhealth.takeDamage(m_damageToPlayerSec);
+            this.m_damageDoneToPlayer += m_damageToPlayerSec;
         }
 	}
 
@@ -116,20 +121,13 @@ public class EnemyHealth : MonoBehaviour
 
     }
 
-    private void SetHealthUI()
-    {
-        // Set the slider's value appropriately.
-        m_Slider.value = m_CurrentHealth;
-
-        // Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
-        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
-    }
+    
 
     // OnDeath
     private void OnDeath()
     {
 
-
+      
 
         //Give player money
         GameObject root = GameObject.FindWithTag("Gamemanager");
@@ -153,16 +151,48 @@ public class EnemyHealth : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    // Setters
+
+   // public float m_platerPerSecond
+    public void setDamageToTowerSec(float damageTotowerSec)
+    {
+        this.m_damageToTowerSec = damageTotowerSec;
+    }
+
+    public void setTowerperSecond(float towerperSecond)
+    {
+        this.m_towerpersecond = towerperSecond;
+    }
+
+    public void setDamageToPlayerSec(float damageToPlayerSec)
+    {
+        this.m_damageToPlayerSec = damageToPlayerSec;
+    }
+
+    public void setPlayerPerSecond(float PlayerPerSecond)
+    {
+        this.m_playerPerSecond = PlayerPerSecond;
+    }
+
     //Set player number of last hit
     public void setLastHit(int playernumber)
     {
         m_lasthit = playernumber;
     }
 
-    //Set max health of player
-    public void setMaxHealth(int value)
+    //Set current health of the enemy
+    public void setCurrentHealth(float value)
     {
         m_CurrentHealth = value;
         SetHealthUI();
+    }
+
+    private void SetHealthUI()
+    {
+        // Set the slider's value appropriately.
+        m_Slider.value = m_CurrentHealth;
+
+        // Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
+        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
     }
 }

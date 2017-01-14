@@ -15,19 +15,25 @@ public abstract class EnemyManager
     [HideInInspector] public GameObject m_Instance;     // A reference to the instance of the enemy
     [HideInInspector] public UnitPlayer m_MovementPlayer;  	// Reference to enemy's movement script, used to disable and enable control.
 	[HideInInspector] public EnemyHealth health;		//Enemie health script
+    private EnemyInheratedValues inheratedValues;
 
 
     //Constructor
-	public EnemyManager(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playertarget, int number, float damageToTowerPerAttack, float attackSpeedTower, float damageToPlayerPerAttack, float attackSpeedPlayer, float StartingHealth, float movementspeed)
+	public EnemyManager(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playertarget, int number, EnemyInheratedValues enemyInheratedValues)
     {
         m_SpawnPoint = spawnpoint;
         m_BasePoint = basetarget;
         m_EnemyNumber = number;
         m_Instance = instance;
         m_PlayerPoint = playertarget;
-
+        this.inheratedValues = enemyInheratedValues;
         this.health = m_Instance.GetComponent<EnemyHealth> ();
-        
+        this.health.setDamageToTowerSec(inheratedValues.getDamageToObjectPerAttack());
+        this.health.setTowerperSecond(inheratedValues.getAttackSpeedObject());
+        this.health.setDamageToPlayerSec(inheratedValues.getDamgeToPlayerPerAttack());
+        this.health.setPlayerPerSecond(inheratedValues.GetAttackSpeedPlayer());
+        this.health.setCurrentHealth(inheratedValues.getStartingHealth());
+
     }
 
 
@@ -35,7 +41,8 @@ public abstract class EnemyManager
 	public void EnableControl()
 	{
 		m_Instance.GetComponent<UnitPlayer> ().enabled  = true;
-	}
+        m_Instance.GetComponent<UnitPlayer>().setMovementspeed(inheratedValues.getMovementspeed());
+    }
 
 	// Used during the phases of the game where the enemy should be able to move
 	public void DisableControl()

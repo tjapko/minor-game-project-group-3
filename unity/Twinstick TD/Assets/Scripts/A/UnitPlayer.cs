@@ -108,4 +108,9 @@ public class UnitPlayer : MonoBehaviour {
 			}
 		}
 	}
+
+    public void setMovementspeed(float movementspeed)
+    {
+        this.speed = movementspeed;
+    }
 }

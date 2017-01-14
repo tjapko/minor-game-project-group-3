@@ -7,13 +7,12 @@ public class Enemie2 : EnemyManager
 {
 	public GameObject enemyPrefab;
 
-	//Walks towards player first, untill distance is less than 8, then towards base
-	public Enemie2 (GameObject instance, Transform spawnpoint, Transform basetarget, Transform playerpoint, int number) : base(instance, spawnpoint, basetarget, playerpoint, number)
-	{
-		
+    //Walks towards player first, untill distance is less than 8, then towards base
+    public Enemie2(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playerpoint, int number, EnemyInheratedValues enemyInheratedValues) : base(instance, spawnpoint, basetarget, playerpoint, number, enemyInheratedValues)
+    { 
 
         // movement
-		m_Instance.AddComponent<UnitPlayer> ();
+    m_Instance.AddComponent<UnitPlayer> ();
 		this.m_MovementPlayer = m_Instance.GetComponent<UnitPlayer> ();
 		health.playerUnit = m_MovementPlayer;
 		m_MovementPlayer.m_player = m_PlayerPoint;
