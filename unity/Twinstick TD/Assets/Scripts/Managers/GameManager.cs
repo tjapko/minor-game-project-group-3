@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 {
     //Public variables
     public int m_amountofplayers;               // Total amount of players that are participating
-    public float m_beginDelay = 3;
+    //public float m_beginDelay = 3;
     public float m_waveDelay = 15f;              // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
     public AudioSource backgroundSource;
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //Setting up variables
-        m_StartWait = new WaitForSeconds(m_beginDelay);
+        //m_StartWait = new WaitForSeconds(m_beginDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         //Initialize managers
@@ -168,7 +168,7 @@ public class GameManager : MonoBehaviour
         m_CameraControl.SetStartPositionAndSize();
         
         // Wait m_StartWait of seconds before starting rounds
-        yield return m_StartWait;
+        yield return null;
     }
 
     //Play round

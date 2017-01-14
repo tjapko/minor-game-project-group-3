@@ -105,19 +105,35 @@ public class CanvasPlayerUIScript : MonoBehaviour {
         m_constructionpanel.SetActive(false);
         m_waveremaining.SetActive(false);
 
-        //Invoke functions
-        InvokeRepeating("UpdateUI", 0.0f, 0.2f);
+    }
 
+    //OnEnable Function
+    void OnEnable()
+    {
+        InvokeRepeating("UpdateUI", 0.0f, 0.1f);
+    }
+
+    //OnDisble Function
+    void OnDisable()
+    {
+        CancelInvoke("UpdateUI");
     }
 
     //Updates the UI
     public void UpdateUI()
     {
-        SetCurrencyText();
-        SetKillsText();
-        updateWeaponIcon();
-        UpdateAmmoText();
-        setEnemiesRemainingText();
+        try
+        {
+            SetCurrencyText();
+            SetKillsText();
+            updateWeaponIcon();
+            UpdateAmmoText();
+            setEnemiesRemainingText();
+        } catch
+        {
+            //Start() hasn't finished setting references
+        }
+        
 
     }
 
@@ -217,6 +233,9 @@ public class CanvasPlayerUIScript : MonoBehaviour {
     // Show/hide the wave remaining panel
     public void showWaveRemaining(bool status)
     {
-        m_waveremaining.SetActive(status);
+        if(m_waveremaining != null)
+        {
+            m_waveremaining.SetActive(status);
+        }
     }
 }

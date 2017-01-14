@@ -45,8 +45,8 @@ public class UIManager : MonoBehaviour {
 
         //Get scripts of canvasses
         m_GameOverScript = go_CanvasGameOver.GetComponent<CanvasGameOverScript>();
-        m_PauseMenuScript = go_CanvasGameOver.GetComponent<CanvasPauseMenuScript>();
-        m_PlayerUIScript = go_CanvasGameOver.GetComponent<CanvasPlayerUIScript>();
+        m_PauseMenuScript = go_CanvasPauseMenu.GetComponent<CanvasPauseMenuScript>();
+        m_PlayerUIScript = go_CanvasPlayerUI.GetComponent<CanvasPlayerUIScript>();
         m_ShopUIScript = go_CanvasShop.GetComponent<ShopUIScript>();
 
         //Find shop and set variable
@@ -92,12 +92,15 @@ public class UIManager : MonoBehaviour {
                     go_CanvasGameOver.SetActive(false);
                     go_CanvasPauseMenu.SetActive(false);
                     go_CanvasPlayerUI.SetActive(true);
+                    m_PlayerUIScript.showWaveRemaining(true);
+
                 }
                 else
                 {
                     go_CanvasGameOver.SetActive(false);
                     go_CanvasPauseMenu.SetActive(false);
                     go_CanvasPlayerUI.SetActive(true);
+                    m_PlayerUIScript.showWaveRemaining(false);
                 }
             }
         }
