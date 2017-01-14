@@ -16,10 +16,12 @@ public abstract class EnemyManager
     [HideInInspector] public UnitPlayer m_MovementPlayer;  	// Reference to enemy's movement script, used to disable and enable control.
 	[HideInInspector] public EnemyHealth health;		//Enemie health script
     private EnemyInheratedValues inheratedValues;
+    private float m_damageDoneToObject = 0f;
+    private float m_damageDoneToPlayer = 0f;
 
 
     //Constructor
-	public EnemyManager(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playertarget, int number, EnemyInheratedValues enemyInheratedValues)
+    public EnemyManager(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playertarget, int number, EnemyInheratedValues enemyInheratedValues)
     {
         m_SpawnPoint = spawnpoint;
         m_BasePoint = basetarget;
@@ -58,6 +60,12 @@ public abstract class EnemyManager
 
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
+    }
+
+    public void updatePreformance()
+    {
+        this.m_damageDoneToObject = this.health.getDamageDoneToObject();
+        this.m_damageDoneToPlayer = this.health.getDamageDoneToPlayer();
     }
 
 }

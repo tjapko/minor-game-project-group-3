@@ -151,9 +151,23 @@ public class EnemyHealth : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    // Getters
+
+  
+    public float getDamageDoneToObject()
+    {
+        return this.m_damageDoneToObject;
+    }
+
+    public float getDamageDoneToPlayer()
+    {
+        return this.m_damageDoneToPlayer;
+    }
+
+
     // Setters
 
-   // public float m_platerPerSecond
+    // public float m_platerPerSecond
     public void setDamageToTowerSec(float damageTotowerSec)
     {
         this.m_damageToTowerSec = damageTotowerSec;
