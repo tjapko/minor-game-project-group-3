@@ -17,7 +17,8 @@ public class BaseUpgrade {
         //TurretSpeedUpgrade,
         //TurretAccuracyUpgrade,
         RestoreBaseHealth,
-        RestorePlayerHealth
+        RestorePlayerHealth,
+        Empty
     }
 
     //Constructor
@@ -61,5 +62,9 @@ public class BaseUpgrade {
         return upgrade_icon;
     }
 
+    public BaseUpgradeType getBaseUpgradeType()
+    {
+        return upgrade_type;
+    }
 
 }

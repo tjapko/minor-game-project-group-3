@@ -4,12 +4,16 @@ using System.Collections.Generic;
 
 public class BasePlayerPresentScript : MonoBehaviour {
 
+    //References
+    private BaseUpgradeScript m_baseupgradescript;  //Reference to base
+
     //Private variables
     private List<GameObject> players_present;   //List of players that are near the base
 	
     // Use this for initialization
 	public void StartInitialization () {
         players_present = new List<GameObject>();
+        m_baseupgradescript = gameObject.transform.parent.GetComponent<BaseUpgradeScript>();
     }
 
     //On trigger fuction
@@ -45,6 +49,7 @@ public class BasePlayerPresentScript : MonoBehaviour {
         {
             if (other.gameObject.GetInstanceID() == players_present[i].GetInstanceID())
             {
+                m_baseupgradescript.showUICanvas(false);
                 players_present.RemoveAt(i);
                 break;
             }

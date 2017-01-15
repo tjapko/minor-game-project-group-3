@@ -16,7 +16,7 @@ public class Restore_PlayerHealth : BaseUpgrade {
         }
 
         //Set variables
-        upgrade_type = BaseUpgradeType.RestoreBaseHealth;
+        upgrade_type = BaseUpgradeType.RestorePlayerHealth;
         m_restoreamount = restoreAmount;
         setIcon("Restore_PlayerHealthIcon");
     }

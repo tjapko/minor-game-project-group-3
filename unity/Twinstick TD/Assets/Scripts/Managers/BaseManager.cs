@@ -32,6 +32,8 @@ public class BaseManager
         	m_SpawnPoint = m_Instance.transform;
         	//m_basehealth = m_Instance.GetComponent<Basehealth>();
 		}
+
+        m_Instance.GetComponent<BaseUpgradeScript>().StartInitialization();
     }
 
     //Reset function

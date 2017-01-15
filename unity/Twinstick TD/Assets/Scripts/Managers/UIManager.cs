@@ -7,6 +7,7 @@ using System.Collections;
 public class UIManager : MonoBehaviour {
 
     //Prefabs
+    public GameObject m_CanvasBaseUpgradePrefab;//GameObject Canvas BaseUpgrade
     public GameObject m_CanvasGameOverPrefab;   //GameObject Canvas Game Over
     public GameObject m_CanvasHelpScreen;       //GameObject Canvas Help Screen
     public GameObject m_CanvasPauseMenuPrefab;  //GameObject Canvas Pause Menu
@@ -14,14 +15,17 @@ public class UIManager : MonoBehaviour {
     public GameObject m_CanvasShopPrefab;       //GameObject Canvas Shop
 
     //References
+    [HideInInspector] public GameObject go_CanvasBaseUpgrade; //GameObject Canvas Game Over
     [HideInInspector] public GameObject go_CanvasGameOver;    //GameObject Canvas Game Over
     [HideInInspector] public GameObject go_CanvasPauseMenu;   //GameObject Canvas Pause Menu
     [HideInInspector] public GameObject go_CanvasPlayerUI;    //GameObject Canas Player UI
     [HideInInspector] public GameObject go_CanvasShop;        //GameObject Canvas Shop
     [HideInInspector] public GameObject go_Shop;              //GameObject Shop
+    [HideInInspector] public GameObject go_Base;              //GameObject Shop
 
     private GameManager m_gamemanager;  //Reference to GameManager
     private UserManager m_usermanager;  //Reference to UserManager
+    private CanvasBaseUpgrade m_BaseUpgradeScript;      //Reference to CanvasBaseUpgradeScript
     private CanvasGameOverScript m_GameOverScript;      //Reference to CanvasGameOverScript
     private CanvasPauseMenuScript m_PauseMenuScript;    //Reference to CanvasPauseMenuScript
     private CanvasPlayerUIScript m_PlayerUIScript;      //Reference to CanvasPlayerUIScript
@@ -37,19 +41,23 @@ public class UIManager : MonoBehaviour {
 
         //Instantiate and set references to canvasses (and shop)
         GameObject.Instantiate(m_CanvasHelpScreen, Vector3.zero, Quaternion.identity);
-        go_CanvasGameOver   = GameObject.Instantiate(m_CanvasGameOverPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-        go_CanvasPauseMenu  = GameObject.Instantiate(m_CanvasPauseMenuPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-        go_CanvasPlayerUI   = GameObject.Instantiate(m_CanvasPlayerUIPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-        go_CanvasShop       = GameObject.Instantiate(m_CanvasShopPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        go_CanvasBaseUpgrade= GameObject.Instantiate(m_CanvasBaseUpgradePrefab) as GameObject;
+        go_CanvasGameOver   = GameObject.Instantiate(m_CanvasGameOverPrefab) as GameObject;
+        go_CanvasPauseMenu  = GameObject.Instantiate(m_CanvasPauseMenuPrefab) as GameObject;
+        go_CanvasPlayerUI   = GameObject.Instantiate(m_CanvasPlayerUIPrefab) as GameObject;
+        go_CanvasShop       = GameObject.Instantiate(m_CanvasShopPrefab) as GameObject;
         go_Shop = GameObject.FindWithTag("Shop");
+        go_Base = m_gamemanager.getBaseManager().m_Instance;
 
         //Get scripts of canvasses
+        m_BaseUpgradeScript = go_CanvasBaseUpgrade.GetComponent<CanvasBaseUpgrade>();
         m_GameOverScript = go_CanvasGameOver.GetComponent<CanvasGameOverScript>();
         m_PauseMenuScript = go_CanvasPauseMenu.GetComponent<CanvasPauseMenuScript>();
         m_PlayerUIScript = go_CanvasPlayerUI.GetComponent<CanvasPlayerUIScript>();
         m_ShopUIScript = go_CanvasShop.GetComponent<ShopUIScript>();
 
         //Initialize Canvas
+        m_BaseUpgradeScript.StartInitialization();
         m_GameOverScript.StartInitialization();
         m_PauseMenuScript.StartInitialization();
         m_PlayerUIScript.StartInitialization();
@@ -58,8 +66,13 @@ public class UIManager : MonoBehaviour {
         //Find shop and set variable
         ShopScript m_shopscript = go_Shop.GetComponent<ShopScript>();
         m_shopscript.m_instance_UI = go_CanvasShop;
+        BaseUpgradeScript m_baseupgradescript = go_Base.GetComponent<BaseUpgradeScript>();
+        m_baseupgradescript.setReferenceBaseUpgradeUI(go_CanvasBaseUpgrade);
+
+        //Find base and set reference
 
         //Set visibility of canvas
+        go_CanvasBaseUpgrade.SetActive(false);
         go_CanvasGameOver.SetActive(false);
         go_CanvasPauseMenu.SetActive(false);
         go_CanvasPlayerUI.SetActive(true);

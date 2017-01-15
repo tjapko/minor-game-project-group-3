@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
 		m_travellingSalesmanManager = new TravellingSalesmanManager(m_travellingSalesman);
         m_players = new UserManager(m_Playerprefab, m_Playerspawnpoint, m_amountofplayers);
         
-
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
 		m_gridManager = new GridManager(m_gridPrefab);
 
@@ -116,8 +115,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator GameLoop()
     {
         //Initialize other game objects
+        m_base.spawnBase();
         m_uiscript.StartInitialization();   //Initialize UI script
-
 
         // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
         yield return StartCoroutine(Startgame());
@@ -145,8 +144,6 @@ public class GameManager : MonoBehaviour
 		if (m_players.m_playerlist.Count == 0) {
 			m_players.spawnPlayers ();
 		}
-		//spawn base
-        m_base.spawnBase();
 
         //Set camera
         SetCameraTargets();
@@ -379,9 +376,16 @@ public class GameManager : MonoBehaviour
         return m_waveNumber;
     }
 
+    //Getter Wave Manager
     public WaveManager getWaveManager()
     {
         return m_wave;
+    }
+
+    //Getter Base Manager
+    public BaseManager getBaseManager()
+    {
+        return m_base;
     }
 }
 

@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7ac2b7979e36a42a9cbd6e597c74f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_CanvasBaseUpgradePrefab: {fileID: 1000013106999152, guid: a423c921b2220a843a79671d3970544a,
+    type: 2}
   m_CanvasGameOverPrefab: {fileID: 1000012743463512, guid: 33fe9089a16346d4a86880e30323add4,
     type: 2}
   m_CanvasHelpScreen: {fileID: 1000013997601442, guid: c95d69610bd37654b92b915504483a85,
@@ -61,6 +63,7 @@ MonoBehaviour:
     type: 2}
   m_CanvasShopPrefab: {fileID: 1000010287614704, guid: 7df1c01d6f57def4e99e1ea45a92bb3b,
     type: 2}
+  go_CanvasBaseUpgrade: {fileID: 0}
   go_CanvasGameOver: {fileID: 0}
   go_CanvasPauseMenu: {fileID: 0}
   go_CanvasPlayerUI: {fileID: 0}

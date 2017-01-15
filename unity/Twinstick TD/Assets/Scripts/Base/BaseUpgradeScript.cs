@@ -9,7 +9,7 @@ public class BaseUpgradeScript : MonoBehaviour {
     //References
     [Header("References")]
     public GameObject m_baseupgradeground;  //Reference to the gameobject containing the base collider
-    public GameObject m_baseupgradeUI;      //Reference set by UIManager:CanvasBaseUpgrade
+    private GameObject m_baseupgradeUI;      //Reference set by UIManager:CanvasBaseUpgrade
     private GameManager m_gamemanager;      //Reference to the game manager
     private UserManager m_usermanager;      //Reference to the User Manager
     private BasePlayerPresentScript m_playerspresentscript; //Reference to the BasePlayerPresentScript script
@@ -30,8 +30,8 @@ public class BaseUpgradeScript : MonoBehaviour {
     public int[] amount_upgradeBaseHealth;  //Added Amountof hp per upgrade
 
     //Private Variables
-    private List<BaseUpgrade> player_upgradelist;
-    private List<BaseUpgrade> base_upgradelist;
+    private List<List<BaseUpgrade>> player_upgradelist; //List containing upgrade duo's
+    private List<List<BaseUpgrade>> base_upgradelist;   //List containing upgrade duo's
     private bool ui_active;
 
     // Use this for initialization
@@ -45,13 +45,17 @@ public class BaseUpgradeScript : MonoBehaviour {
         m_playerspresentscript.StartInitialization();
 
         //Fill upgrade list
-        player_upgradelist = new List<BaseUpgrade>();
-        base_upgradelist = new List<BaseUpgrade>();
-        player_upgradelist.Add(new Upgrade_PlayerHealth(price_upgradePlayerHealth, amount_upgradePlayerHealth));
-        player_upgradelist.Add(new Restore_PlayerHealth(new int[]{ price_restorePlayerHealth }, amount_restorePlayerHealth));
-        base_upgradelist.Add(new Upgrade_BaseHealth(price_upgradeBaseHealth, amount_upgradeBaseHealth));
-        base_upgradelist.Add(new Restore_BaseHealth(new int[] { price_restoreBaseHealth }, amount_restorePlayerHealth));
+        player_upgradelist = new List<List<BaseUpgrade>>();
+        base_upgradelist = new List<List<BaseUpgrade>>();
+        List<BaseUpgrade> upgrade_duo_1 = new List<BaseUpgrade>();
+        List<BaseUpgrade> upgrade_duo_2 = new List<BaseUpgrade>();
+        upgrade_duo_1.Add((BaseUpgrade)new Upgrade_PlayerHealth(price_upgradePlayerHealth, amount_upgradePlayerHealth));
+        upgrade_duo_1.Add((BaseUpgrade)new Restore_PlayerHealth(new int[] { price_restorePlayerHealth }, amount_restorePlayerHealth));
+        upgrade_duo_2.Add((BaseUpgrade)new Upgrade_BaseHealth(price_upgradeBaseHealth, amount_upgradeBaseHealth));
+        upgrade_duo_2.Add((BaseUpgrade)new Restore_BaseHealth(new int[] { price_restoreBaseHealth }, amount_restoreBaseHealth));
         
+        player_upgradelist.Add(upgrade_duo_1);
+        base_upgradelist.Add(upgrade_duo_2);
 
         //Set variables
         ui_active = false;
@@ -73,7 +77,7 @@ public class BaseUpgradeScript : MonoBehaviour {
 
                 //Set reference in UI to player that has pressed te button
                 int playernumber = players[0].GetComponent<PlayerStatistics>().m_playernumber;
-                ui_baseupgrades.setSelectedPlayer(m_usermanager.m_playerlist[playernumber]);
+                ui_baseupgrades.setSelectedPlayer(m_usermanager.m_playerlist[playernumber]); 
             }
         }
 
@@ -95,14 +99,26 @@ public class BaseUpgradeScript : MonoBehaviour {
     }
 
     //Getter for base_upgradelist
-    public List<BaseUpgrade> getBaseUpgradeList()
+    public List<List<BaseUpgrade>> getBaseUpgradeList()
     {
         return base_upgradelist;
     }
 
     //Getter for player_upgradelist
-    public List<BaseUpgrade> getPlayerUpgradeList()
+    public List<List<BaseUpgrade>> getPlayerUpgradeList()
     {
         return player_upgradelist;
+    }
+
+    public void setReferenceBaseUpgradeUI(GameObject ui)
+    {
+        m_baseupgradeUI = ui;
+        ui_baseupgrades = m_baseupgradeUI.GetComponent<CanvasBaseUpgrade>();
+    }
+    
+    //Set canvas active
+    public void showUICanvas(bool status)
+    {
+        m_baseupgradeUI.SetActive(status);
     }
 }

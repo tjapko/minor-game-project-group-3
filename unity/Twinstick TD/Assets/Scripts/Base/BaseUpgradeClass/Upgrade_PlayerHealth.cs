@@ -25,8 +25,8 @@ public class Upgrade_PlayerHealth : BaseUpgrade {
     public void upgradePlayerHealth(PlayerManager m_player)
     {
         m_player.m_playerhealth.setMaxHealth(m_upgradeAmount[selected_index]);
+        m_player.m_playerhealth.addHealth((float)m_upgradeAmount[selected_index]);
         incIndex();
-
     }
 
 }

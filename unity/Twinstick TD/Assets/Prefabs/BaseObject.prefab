@@ -169,8 +169,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011192970266}
   - 65: {fileID: 65000011148545372}
+  - 114: {fileID: 114000013236846710}
   m_Layer: 5
-  m_Name: UpgradeField
+  m_Name: UpgradeCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,6 +319,7 @@ GameObject:
   - 114: {fileID: 114000012882652028}
   - 65: {fileID: 65000011892786148}
   - 65: {fileID: 65000010631096832}
+  - 114: {fileID: 114000011773733376}
   m_Layer: 12
   m_Name: BaseObject
   m_TagString: Base
@@ -873,6 +875,27 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 0
   m_FillOrigin: 0
+--- !u!114 &114000011773733376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013595951870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4acec6013b56084bb440b49ed3ec494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baseupgradeground: {fileID: 0}
+  m_baseupgradeUI: {fileID: 0}
+  price_restorePlayerHealth: 0
+  amount_restorePlayerHealth: 0
+  price_upgradePlayerHealth: 
+  amount_upgradePlayerHealth: 
+  price_restoreBaseHealth: 0
+  amount_restoreBaseHealth: 0
+  price_upgradeBaseHealth: 
+  amount_upgradeBaseHealth: 
 --- !u!114 &114000012022335900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -999,6 +1022,17 @@ MonoBehaviour:
   m_fireRate: 0.25
   m_turnrate: 10
   m_accuracy: 10
+--- !u!114 &114000013236846710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011696080752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b89362717e297488b403968363454e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013405116222
 MonoBehaviour:
   m_ObjectHideFlags: 1

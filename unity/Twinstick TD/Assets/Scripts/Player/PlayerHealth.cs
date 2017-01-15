@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public AudioSource beatSource;                  //Reference to audio 
     private GameObject m_maincamera;                //Reference to maincamera
 
+    public float m_maxHealth;                           //Max health of player
     public float m_StartingHealth;						//Start health of enemy
 	public Slider m_Slider;                           	// The slider to represent how much health the enemy currently has.
 	public Image m_FillImage;                           // The image component of the slider.
@@ -19,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
     public bool m_Dead = false;  						// Enemy is dead or not
 
     //Private variables
-    private float m_maxHealth;      //Max health of player
+    
 	private float m_CurrentHealth;  					// Current health of enemy
     private int m_dollarperlife;                      // Amount of currency per life that it cost to buy. 
 	
@@ -64,22 +65,23 @@ public class PlayerHealth : MonoBehaviour
     public void buyHealth()
     {
         PlayerStatistics playerstat = new PlayerStatistics();
-        float dif = (m_StartingHealth - m_CurrentHealth);
+        float dif = (m_maxHealth - m_CurrentHealth);
         int cost = (int)(dif * m_dollarperlife);
 
-        if (cost >= playerstat.m_currency)
+        if (playerstat.m_currency >= cost)
         {
-            playerstat.m_currency =- cost;
-            m_CurrentHealth = m_StartingHealth;
+            playerstat.m_currency -= cost;
+            m_CurrentHealth = m_maxHealth;
         }
         else
         {
 
             int kap = (int)(playerstat.m_currency / m_dollarperlife);
-            m_CurrentHealth =+  kap;
-            playerstat.m_currency =- kap * m_dollarperlife;
+            m_CurrentHealth +=  kap;
+            playerstat.m_currency -= kap * m_dollarperlife;
 
         }
+        Debug.Log("Player health after" + m_CurrentHealth);
 
     }
 	//Decrease health of base
@@ -123,5 +125,11 @@ public class PlayerHealth : MonoBehaviour
     public void setMaxHealth(float amount)
     {
         m_maxHealth = amount;
+    }
+
+    //Add health
+    public void addHealth(float amount)
+    {
+        m_CurrentHealth += amount;
     }
 }
