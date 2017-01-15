@@ -886,16 +886,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4acec6013b56084bb440b49ed3ec494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_baseupgradeground: {fileID: 0}
-  m_baseupgradeUI: {fileID: 0}
-  price_restorePlayerHealth: 0
-  amount_restorePlayerHealth: 0
-  price_upgradePlayerHealth: 
-  amount_upgradePlayerHealth: 
-  price_restoreBaseHealth: 0
-  amount_restoreBaseHealth: 0
-  price_upgradeBaseHealth: 
-  amount_upgradeBaseHealth: 
+  m_baseupgradeground: {fileID: 1000011696080752}
+  price_restorePlayerHealth: 10
+  amount_restorePlayerHealth: 10
+  price_upgradePlayerHealth: 64000000c8000000
+  amount_upgradePlayerHealth: c800000090010000
+  price_restoreBaseHealth: 200
+  amount_restoreBaseHealth: 100
+  price_upgradeBaseHealth: c800000090010000
+  amount_upgradeBaseHealth: c800000090010000
 --- !u!114 &114000012022335900
 MonoBehaviour:
   m_ObjectHideFlags: 1

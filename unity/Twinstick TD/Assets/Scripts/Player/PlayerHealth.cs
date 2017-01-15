@@ -31,12 +31,9 @@ public class PlayerHealth : MonoBehaviour
         m_maincamera = GameObject.FindWithTag("MainCamera");
         m_Dead = false;
         // When the enemy is enabled, reset the enemy's health
-        m_maxHealth = m_StartingHealth;
         m_CurrentHealth = m_StartingHealth;
 		// Update the health slider's value and color.
 		SetHealthUI();
-        
-       
     }
 
     public void fixedUpdate()
@@ -64,6 +61,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void buyHealth()
     {
+        Debug.Log("Player health before: " + m_CurrentHealth);
         PlayerStatistics playerstat = new PlayerStatistics();
         float dif = (m_maxHealth - m_CurrentHealth);
         int cost = (int)(dif * m_dollarperlife);
@@ -81,7 +79,7 @@ public class PlayerHealth : MonoBehaviour
             playerstat.m_currency -= kap * m_dollarperlife;
 
         }
-        Debug.Log("Player health after" + m_CurrentHealth);
+        Debug.Log("Player health after: " + m_CurrentHealth);
 
     }
 	//Decrease health of base
@@ -131,5 +129,11 @@ public class PlayerHealth : MonoBehaviour
     public void addHealth(float amount)
     {
         m_CurrentHealth += amount;
+    }
+
+    //Getter current health
+    public float getCurrentHealth()
+    {
+        return m_CurrentHealth;
     }
 }

@@ -176,75 +176,10 @@ public class CanvasBaseUpgrade : MonoBehaviour {
                 img_baseupgradelist[i].sprite = upgrade_1.getIcon();
                 txt_baseupgradelist[i].text = typeToText(upgrade_1.getBaseUpgradeType());
 
-                if (upgrade_1.getPrice() == -1)
-                {
-                    btn_baseupgradelist_1[i].interactable = false;
-                    btn_baseupgradelist_text_1[i].text = "Locked";
-                }
-                else
-                {
-                    if (m_stats.m_currency >= upgrade_1.getPrice())
-                    {
-                        if(upgrade_1.getBaseUpgradeType() == BaseUpgrade.BaseUpgradeType.RestoreBaseHealth)
-                        {
-                            if(m_basehealth.getCurrentHealth() >= m_basehealth.m_maxhealth)
-                            {
-                                btn_baseupgradelist_1[i].interactable = false;
-                                btn_baseupgradelist_text_1[i].text = "Max health";
-                            } else
-                            {
-                                btn_baseupgradelist_1[i].interactable = true;
-                                btn_baseupgradelist_text_1[i].text = buttonText(upgrade_1.getBaseUpgradeType()) + upgrade_1.getPrice();
-                            }
-                        } else
-                        {
-                            btn_baseupgradelist_1[i].interactable = true;
-                            btn_baseupgradelist_text_1[i].text = buttonText(upgrade_1.getBaseUpgradeType()) + upgrade_1.getPrice();
-                        }
-                        
-                    }
-                    else
-                    {
-                        btn_baseupgradelist_1[i].interactable = false;
-                        btn_baseupgradelist_text_1[i].text = "Locked";
-                    }
-                }
-
-                if (upgrade_2.getPrice() == -1)
-                {
-                    btn_baseupgradelist_2[i].interactable = false;
-                    btn_baseupgradelist_text_2[i].text = "Locked";
-                }
-                else
-                {
-                    if (m_stats.m_currency >= upgrade_2.getPrice())
-                    {
-                        if (upgrade_2.getBaseUpgradeType() == BaseUpgrade.BaseUpgradeType.RestoreBaseHealth)
-                        {
-                            if (m_basehealth.getCurrentHealth() >= m_basehealth.m_maxhealth)
-                            {
-                                btn_baseupgradelist_2[i].interactable = false;
-                                btn_baseupgradelist_text_2[i].text = "Max health";
-                            }
-                            else
-                            {
-                                btn_baseupgradelist_2[i].interactable = true;
-                                btn_baseupgradelist_text_2[i].text = buttonText(upgrade_2.getBaseUpgradeType()) + upgrade_2.getPrice();
-                            }
-                        }
-                        else
-                        {
-                            btn_baseupgradelist_2[i].interactable = true;
-                            btn_baseupgradelist_text_2[i].text = buttonText(upgrade_2.getBaseUpgradeType()) + upgrade_2.getPrice();
-                        }
-
-                    }
-                    else
-                    {
-                        btn_baseupgradelist_2[i].interactable = false;
-                        btn_baseupgradelist_text_2[i].text = "Locked";
-                    }
-                }
+                btn_baseupgradelist_1[i].interactable = determineInteractable(upgrade_1);
+                btn_baseupgradelist_2[i].interactable = determineInteractable(upgrade_2);
+                btn_baseupgradelist_text_1[i].text = determineButtonText(upgrade_1);
+                btn_baseupgradelist_text_2[i].text = determineButtonText(upgrade_2);
 
             } else
             {
@@ -268,43 +203,10 @@ public class CanvasBaseUpgrade : MonoBehaviour {
                 img_playerupgradelist[i].sprite = upgrade_1.getIcon();
                 txt_playerupgradelist[i].text = typeToText(upgrade_1.getBaseUpgradeType());
 
-                if (upgrade_1.getPrice() == -1)
-                {
-                    btn_playerupgradelist_1[i].interactable = false;
-                    btn_playerupgradelist_text_1[i].text = "Locked";
-                }
-                else
-                {
-                    if (m_stats.m_currency >= upgrade_1.getPrice())
-                    {
-                        btn_playerupgradelist_1[i].interactable = true;
-                        btn_playerupgradelist_text_1[i].text = buttonText(upgrade_1.getBaseUpgradeType()) + upgrade_1.getPrice();
-                    }
-                    else
-                    {
-                        btn_playerupgradelist_1[i].interactable = false;
-                        btn_playerupgradelist_text_1[i].text = "Locked";
-                    }
-                }
-
-                if (upgrade_2.getPrice() == -1)
-                {
-                    btn_playerupgradelist_2[i].interactable = false;
-                    btn_playerupgradelist_text_2[i].text = "Locked";
-                }
-                else
-                {
-                    if (m_stats.m_currency >= upgrade_1.getPrice())
-                    {
-                        btn_playerupgradelist_2[i].interactable = true;
-                        btn_playerupgradelist_text_2[i].text = buttonText(upgrade_2.getBaseUpgradeType()) + upgrade_2.getPrice();
-                    }
-                    else
-                    {
-                        btn_playerupgradelist_2[i].interactable = false;
-                        btn_playerupgradelist_text_2[i].text = "Locked";
-                    }
-                }
+                btn_playerupgradelist_1[i].interactable = determineInteractable(upgrade_1);
+                btn_playerupgradelist_2[i].interactable = determineInteractable(upgrade_2);
+                btn_playerupgradelist_text_1[i].text = determineButtonText(upgrade_1);
+                btn_playerupgradelist_text_2[i].text = determineButtonText(upgrade_2);
 
             }
         }
@@ -391,6 +293,106 @@ public class CanvasBaseUpgrade : MonoBehaviour {
                 break;
             default:
                 break;
+        }
+    }
+
+    private bool determineInteractable(BaseUpgrade selected_upgrade)
+    {
+        switch (selected_upgrade.getBaseUpgradeType())
+        {
+            case BaseUpgrade.BaseUpgradeType.BaseHealthUpgrade:
+                return (selected_upgrade.getPrice() != -1) && (selected_player.m_stats.m_currency >= selected_upgrade.getPrice());
+            case BaseUpgrade.BaseUpgradeType.RestoreBaseHealth:
+                return (selected_player.m_stats.m_currency >= selected_upgrade.getPrice()) && m_basehealth.getCurrentHealth() < m_basehealth.m_maxhealth;
+            case BaseUpgrade.BaseUpgradeType.PlayerHealthUpgrade:
+                return (selected_upgrade.getPrice() != -1) && (selected_player.m_stats.m_currency >= selected_upgrade.getPrice());
+            case BaseUpgrade.BaseUpgradeType.RestorePlayerHealth:
+                return (selected_player.m_stats.m_currency >= selected_upgrade.getPrice()) && selected_player.m_playerhealth.getCurrentHealth() < selected_player.m_playerhealth.m_maxHealth;
+            case BaseUpgrade.BaseUpgradeType.Empty:
+                return false;
+            default:
+                return false;
+        }
+    }
+
+    private string determineButtonText(BaseUpgrade selected_upgrade)
+    {
+        PlayerStatistics stats = selected_player.m_stats;
+        PlayerHealth health = selected_player.m_playerhealth;
+
+        switch (selected_upgrade.getBaseUpgradeType())
+        {
+            case BaseUpgrade.BaseUpgradeType.BaseHealthUpgrade:
+                if (selected_upgrade.getPrice() == -1)
+                {
+                    return "Max Health Reached";
+                }
+
+                if (stats.getCurrency() >= selected_upgrade.getPrice())
+                {
+                    return "Upgrade Base Health: " + selected_upgrade.getPrice();
+                }
+                else if(stats.getCurrency() < selected_upgrade.getPrice())
+                {
+                    return "Not Enough funds";
+                } else
+                {
+                    return "Locked";
+                }
+            case BaseUpgrade.BaseUpgradeType.RestoreBaseHealth:
+                if (m_basehealth.getCurrentHealth() >= m_basehealth.m_maxhealth)
+                {
+                    return "Max Health";
+                }
+                else
+                {
+                    if (stats.getCurrency() >= selected_upgrade.getPrice())
+                    {
+                        return "Buy Health: " + selected_upgrade.getPrice();
+                    }
+                    else
+                    {
+                        return "Locked";
+                    }
+                }
+            case BaseUpgrade.BaseUpgradeType.PlayerHealthUpgrade:
+                if (selected_upgrade.getPrice() == -1)
+                {
+                    return "Max Health Reached";
+                }
+
+                if (stats.getCurrency() >= selected_upgrade.getPrice())
+                {
+                    return "Upgrade Player Health: " + selected_upgrade.getPrice();
+                }
+                else if (stats.getCurrency() < selected_upgrade.getPrice())
+                {
+                    return "Not Enough funds";
+                }
+                else
+                {
+                    return "Locked";
+                }
+            case BaseUpgrade.BaseUpgradeType.RestorePlayerHealth:
+                if (health.getCurrentHealth() >= health.m_maxHealth)
+                {
+                    return "Max Health";
+                }
+                else
+                {
+                    if (stats.getCurrency() >= selected_upgrade.getPrice())
+                    {
+                        return "Buy Health: " + selected_upgrade.getPrice();
+                    }
+                    else
+                    {
+                        return "Locked";
+                    }
+                }
+            case BaseUpgrade.BaseUpgradeType.Empty:
+                return "";
+            default:
+                return "Error";
         }
     }
 }
