@@ -14,7 +14,7 @@ public class CanvasPauseMenuScript : MonoBehaviour {
     private GameObject m_pausemenu;     //Reference to the pausemenu window (child of this GameObject)
     private GameObject m_controlsmenu;  //Reference to the controlsmenu window (child of this GameObject)        
 
-    private void Start()
+    public void StartInitialization()
     {
         //Find gamemanager
         m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();

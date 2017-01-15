@@ -115,12 +115,16 @@ public class GameManager : MonoBehaviour
     // This is called from start and will run each phase of the game one after another.
     private IEnumerator GameLoop()
     {
+        //Initialize other game objects
+        m_uiscript.StartInitialization();   //Initialize UI script
+
+
         // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
         yield return StartCoroutine(Startgame());
-  
+
         //Play round
         yield return StartCoroutine(wavePhase());
-        
+
         // Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
         yield return StartCoroutine(RoundEnding());
 
@@ -320,6 +324,17 @@ public class GameManager : MonoBehaviour
     // Input from restart button
     public void btn_restartgame()
     {
+        //Reset variables
+        wavephase = false;
+        gameover = false;
+        gamepause = false;
+        pauseGame(gamepause);   //Reset game pause
+
+        //Reset canvas
+        m_uiscript.UIchange(gameover, wavephase, gamepause);
+        m_weaponshop.GetComponent<ShopScript>().resetShop();
+
+        //Start new game
         StartCoroutine(GameLoop());
     }
 

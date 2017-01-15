@@ -23,7 +23,7 @@ public class CanvasPlayerUIScript : MonoBehaviour {
     private GameObject m_waveremaining;         //Reference to the wave remaining UI panel
     private Text m_waveremainingText;           //Reference to the text in the wave remaining UI panel
 
-    private void Start()
+    public void StartInitialization()
     {
         //Find gamemanager
         m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();

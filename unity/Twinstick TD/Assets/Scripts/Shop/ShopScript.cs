@@ -357,4 +357,10 @@ public class ShopScript : MonoBehaviour {
     {
         return current_tier;
     }
+
+    //Reset shop
+    public void resetShop()
+    {
+        Start();
+    }
 }

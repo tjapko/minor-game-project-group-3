@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour {
 
 
     //Constructer
-    public void Start()
+    public void StartInitialization()
     {
         //Find Game manager
         m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
@@ -48,6 +48,12 @@ public class UIManager : MonoBehaviour {
         m_PauseMenuScript = go_CanvasPauseMenu.GetComponent<CanvasPauseMenuScript>();
         m_PlayerUIScript = go_CanvasPlayerUI.GetComponent<CanvasPlayerUIScript>();
         m_ShopUIScript = go_CanvasShop.GetComponent<ShopUIScript>();
+
+        //Initialize Canvas
+        m_GameOverScript.StartInitialization();
+        m_PauseMenuScript.StartInitialization();
+        m_PlayerUIScript.StartInitialization();
+        m_ShopUIScript.StartInitialization();
 
         //Find shop and set variable
         ShopScript m_shopscript = go_Shop.GetComponent<ShopScript>();

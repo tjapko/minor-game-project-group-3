@@ -30,7 +30,7 @@ public class ShopUIScript : MonoBehaviour {
     //private List<Weapon> ammolist;            //Fix (should be fixed when using different types of ammo)
 
     // Use this for initialization
-    void Start () {
+    public void StartInitialization() {
         //Find shop
         m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
 

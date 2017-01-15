@@ -14,7 +14,7 @@ public class CanvasGameOverScript : MonoBehaviour {
     //References to GameObject
     private GameObject m_gameovermenu;         //Reference to the game over menu
 
-    private void Start()
+    public void StartInitialization()
     {
         //Find gamemanager
         m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
@@ -26,7 +26,7 @@ public class CanvasGameOverScript : MonoBehaviour {
         m_gameovermenu = gameObject.transform.GetChild(0).gameObject;
 
         //Activate game over menu
-        m_gameovermenu.SetActive(false);
+        m_gameovermenu.SetActive(true);
 
     }
 
