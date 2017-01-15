@@ -110,4 +110,10 @@ public class BaseTurret : MonoBehaviour {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, m_range);
     }
+
+    //Increase Turret Damage
+    public void incTurretDamage(int amount)
+    {
+        m_damage += amount;
+    }
 }

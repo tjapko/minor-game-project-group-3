@@ -16,17 +16,22 @@ public class PlayerHealth : MonoBehaviour
 	public Image m_FillImage;                           // The image component of the slider.
 	public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
 	public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
+    public bool m_Dead = false;  						// Enemy is dead or not
+
+    //Private variables
+    private float m_maxHealth;      //Max health of player
 	private float m_CurrentHealth;  					// Current health of enemy
     private int m_dollarperlife;                      // Amount of currency per life that it cost to buy. 
-	public bool m_Dead = false;  						// Enemy is dead or not
+	
 
 
 	public void Start()
 	{
         m_maincamera = GameObject.FindWithTag("MainCamera");
         m_Dead = false;
-		// When the enemy is enabled, reset the enemy's health
-		m_CurrentHealth = m_StartingHealth;
+        // When the enemy is enabled, reset the enemy's health
+        m_maxHealth = m_StartingHealth;
+        m_CurrentHealth = m_StartingHealth;
 		// Update the health slider's value and color.
 		SetHealthUI();
         
@@ -106,5 +111,17 @@ public class PlayerHealth : MonoBehaviour
         hitbox_script.setCamera(m_maincamera);
         hitbox_script.lookToCamera();
         hitbox.SetActive(true);
+    }
+
+    //Setter for Dollar Per Life
+    public void setDollarPerLife(int amount)
+    {
+        m_dollarperlife = amount;
+    }
+
+    //Setter of max health
+    public void setMaxHealth(float amount)
+    {
+        m_maxHealth = amount;
     }
 }

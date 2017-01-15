@@ -603,6 +603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playernumber: 0
   m_playerstartcurrency: 1000
+  m_currency: 0
 --- !u!114 &114000013046789916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -718,7 +719,7 @@ MonoBehaviour:
   m_hitFriendlyCanvasPrefab: {fileID: 1000014289387730, guid: 34dffa4b43b2333489644d9d44bab2b1,
     type: 2}
   beatSource: {fileID: 82000012311326998}
-  m_StartingHealth: 100
+  m_StartingHealth: 1
   m_Slider: {fileID: 114000011672887518}
   m_FillImage: {fileID: 114000013388209428}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}

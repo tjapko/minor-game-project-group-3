@@ -21,11 +21,12 @@ public class ShopScript : MonoBehaviour {
 
     //References
     public GameObject helpbox_prefab;   //Helpbox prefab
-    [HideInInspector]
-    public GameObject m_instance_UI;  //Reference to instance of shop UI
+    [HideInInspector] public GameObject m_instance_UI;  //Reference to instance of shop UI (set by UIManager)
     public Rigidbody m_Bullet;          // Prefab of the shell.
     public Rigidbody m_RayBullet;       // Prefab of the Rayshell.
     public Transform m_FireTransform;   // A child of the player where the shells are spawned.
+    private GameManager m_gamemanager;  // Reference to the game manager
+    private UserManager m_usermanager;  // Reference to the user manager
 
     //Private variables 
     private Weapon weapon1, weapon2, weapon3, weapon4;
@@ -41,6 +42,10 @@ public class ShopScript : MonoBehaviour {
         players_present = new List<GameObject>();
         weaponsforsale = new List<Weapon>();
         //ammoforsale = new List<Weapon>();
+
+        //Set references
+        m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
+        m_usermanager = m_gamemanager.getUserManager();
 
 
         //Create empty weaponsforsale
@@ -93,11 +98,6 @@ public class ShopScript : MonoBehaviour {
 
         weaponsforsale = temp;
     }
-
-
-
-
-
 
     // sets the ammo for weapons1-4 
     private void SetGun(int level, string specification)
@@ -163,25 +163,20 @@ public class ShopScript : MonoBehaviour {
     void Update () {
         showUI = m_instance_UI.activeSelf;
 
-        //Change plz (check for every player)
-        if (players_present.Count > 0)
+        //Check for keyinput
+        if (Input.GetKeyDown(use_button))
         {
-            if (Input.GetKeyDown(use_button))
+            //Fix:Should checke every key input of players present in list
+            if (players_present.Count > 0)
             {
                 showUI = !showUI;
                 m_instance_UI.SetActive(showUI);
 
-
                 //Set reference to player that has opened the UI
-                GameObject root = GameObject.FindWithTag("Gamemanager");
-                GameManager gm = root.GetComponent<GameManager>();
-
-                //NEEDS FIX
+                //Fix:
                 int playernumber = players_present[0].GetComponent<PlayerStatistics>().m_playernumber;
-                PlayerManager player = gm.getUserManager().m_playerlist[playernumber];
-                m_instance_UI.GetComponent<ShopUIScript>().m_currentplayer = player;
+                m_instance_UI.GetComponent<ShopUIScript>().m_currentplayer = m_usermanager.m_playerlist[playernumber];
             }
-
         }
 
         // Disable UI

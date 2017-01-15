@@ -96,4 +96,17 @@ public class Basehealth : MonoBehaviour {
         hitbox_script.lookToCamera();
         hitbox.SetActive(true);
     }
+
+    //Increase max health
+    public void incMaxHealth(int amount)
+    {
+        m_maxhealth += amount;
+        m_CurrentHealth += amount;
+    }
+
+    //Getter for current health
+    public float getCurrentHealth()
+    {
+        return m_CurrentHealth;
+    }
 }

@@ -7,43 +7,81 @@ public class BaseUpgradeScript : MonoBehaviour {
     string use_button = "f";        //Set to use button of player[i]
 
     //References
-    public GameObject m_baseupgradeUI;  //Reference set by UIManager:CanvasBaseUpgrade
-    private GameObject player;      //Reference to player Temp solution
+    [Header("References")]
+    public GameObject m_baseupgradeground;  //Reference to the gameobject containing the base collider
+    public GameObject m_baseupgradeUI;      //Reference set by UIManager:CanvasBaseUpgrade
+    private GameManager m_gamemanager;      //Reference to the game manager
+    private UserManager m_usermanager;      //Reference to the User Manager
+    private BasePlayerPresentScript m_playerspresentscript; //Reference to the BasePlayerPresentScript script
+    private CanvasBaseUpgrade ui_baseupgrades;  //Reference to the base upgrades UI
 
     //Public Variables
-    public int m_baserange;             //Range of base 
-    public int cost_restore_1;          //Restore base health
-    public int cost_restore_2;          //Restore Player Health
-    public List<int> cost_upgrade_1;    //Cost of upgrade type_1 : Upgrade basehealth + Turret
-    public List<int> cost_upgrade_2;    //Cost of upgrade type_2 : Upgrade Player Health
-    //public List<int> cost_upgrade_3;    //Cost of upgrade type_3 
-    //public List<int> cost_upgrade_4;    //Cost of upgrade type_4
+    [Header("Public Variables")]
+    [Header("Player Health settings")]
+    public int price_restorePlayerHealth;   //Price of restoring player health
+    public int amount_restorePlayerHealth;  //Amount that is restored per price_restorePlayerHealth
+    public int[] price_upgradePlayerHealth;     //Cost per upgrade
+    public int[] amount_upgradePlayerHealth;    //Added Amountof hp per upgrade
+
+    [Header("Base Healt settings")]
+    public int price_restoreBaseHealth;     //Price of restoring base health
+    public int amount_restoreBaseHealth;    //Amount that is restored per price_restoreBaseHealth
+    public int[] price_upgradeBaseHealth;   //Cost per upgrade
+    public int[] amount_upgradeBaseHealth;  //Added Amountof hp per upgrade
 
     //Private Variables
-    private List<List<int>> upgrade_list;
+    private List<BaseUpgrade> player_upgradelist;
+    private List<BaseUpgrade> base_upgradelist;
+    private bool ui_active;
 
     // Use this for initialization
-    void Start () {
-        //Temp sollution to find one player
-        GameObject player = GameObject.FindWithTag("Player");
+    public void StartInitialization () {
+        //Set references
+        m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
+        m_usermanager = m_gamemanager.getUserManager();
+        m_playerspresentscript = m_baseupgradeground.GetComponent<BasePlayerPresentScript>();
+
+        //Initialize other scripts
+        m_playerspresentscript.StartInitialization();
 
         //Fill upgrade list
-        upgrade_list = new List<List<int>>();
-        upgrade_list.Add(cost_upgrade_1);
-        upgrade_list.Add(cost_upgrade_2);
+        player_upgradelist = new List<BaseUpgrade>();
+        base_upgradelist = new List<BaseUpgrade>();
+        player_upgradelist.Add(new Upgrade_PlayerHealth(price_upgradePlayerHealth, amount_upgradePlayerHealth));
+        player_upgradelist.Add(new Restore_PlayerHealth(new int[]{ price_restorePlayerHealth }, amount_restorePlayerHealth));
+        base_upgradelist.Add(new Upgrade_BaseHealth(price_upgradeBaseHealth, amount_upgradeBaseHealth));
+        base_upgradelist.Add(new Restore_BaseHealth(new int[] { price_restoreBaseHealth }, amount_restorePlayerHealth));
+        
+
+        //Set variables
+        ui_active = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        //Fix:Should check every player use_button
+        ui_active = m_baseupgradeUI.activeSelf;
+
+        //Fix:Should check every player use_button of players that are present
         if (Input.GetKeyUp(use_button))
         {
-            //Temp solution
-            
-            if(Vector3.Distance(player.transform.position, gameObject.transform.position) < m_baserange)
+            List<GameObject> players = m_playerspresentscript.getPlayersPresent();
+            if(players.Count > 0)
             {
-                m_baseupgradeUI.SetActive(true);
+                //Set UI (in)active
+                ui_active = !ui_active;
+                m_baseupgradeUI.SetActive(ui_active);
+
+                //Set reference in UI to player that has pressed te button
+                int playernumber = players[0].GetComponent<PlayerStatistics>().m_playernumber;
+                ui_baseupgrades.setSelectedPlayer(m_usermanager.m_playerlist[playernumber]);
             }
+        }
+
+        // Disable UI when game is paused
+        if (Time.timeScale == 0)
+        {
+            ui_active = false;
+            m_baseupgradeUI.SetActive(ui_active);
         }
     }
 
@@ -56,15 +94,15 @@ public class BaseUpgradeScript : MonoBehaviour {
         }
     }
 
-    // Returns the price of a base upgrade
-    public int upgradeBasePrice()
+    //Getter for base_upgradelist
+    public List<BaseUpgrade> getBaseUpgradeList()
     {
-        return cost_upgrade_1.Count > 0 ? cost_upgrade_1[0] : 0;
+        return base_upgradelist;
     }
 
-    // Returns the price of a Player health upgrade
-    public int upgradePlayerHealthPrice()
+    //Getter for player_upgradelist
+    public List<BaseUpgrade> getPlayerUpgradeList()
     {
-        return cost_upgrade_2.Count > 0 ? cost_upgrade_2[0] : 0;
+        return player_upgradelist;
     }
 }
