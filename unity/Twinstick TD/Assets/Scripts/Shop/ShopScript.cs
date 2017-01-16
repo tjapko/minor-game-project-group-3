@@ -37,7 +37,7 @@ public class ShopScript : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start() {
+    public void Start() {
         //Instantiate Lists
         players_present = new List<GameObject>();
         weaponsforsale = new List<Weapon>();

@@ -66,6 +66,7 @@ public class UIManager : MonoBehaviour {
         //Find shop and set variable
         ShopScript m_shopscript = go_Shop.GetComponent<ShopScript>();
         m_shopscript.m_instance_UI = go_CanvasShop;
+        m_shopscript.Start();
         BaseUpgradeScript m_baseupgradescript = go_Base.GetComponent<BaseUpgradeScript>();
         m_baseupgradescript.setReferenceBaseUpgradeUI(go_CanvasBaseUpgrade);
 
