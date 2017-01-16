@@ -21,9 +21,9 @@ GameObject:
   - 4: {fileID: 4000010353692536}
   - 33: {fileID: 33000014048544770}
   - 23: {fileID: 23000010498867398}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: PlayerWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ GameObject:
   - 65: {fileID: 65000013431518226}
   - 114: {fileID: 114000012654645510}
   - 65: {fileID: 65000013333670152}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: ConstructionWall
   m_TagString: PlayerObject
   m_Icon: {fileID: 0}
@@ -153,4 +153,5 @@ MonoBehaviour:
     m_stats: {fileID: 0}
     m_construction: {fileID: 0}
     m_inventory: {fileID: 0}
+    m_playerhealth: {fileID: 0}
     m_PlayerNumber: 0

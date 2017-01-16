@@ -34,6 +34,8 @@ public class EnemyHealth : MonoBehaviour
     private int m_lasthit;          					//Playernumber of last hit
 	private PlayerHealth playerhealth;					//playerhealth script
 	private Basehealth basehealth;						//Basehealth script
+	private TurretScript turretScript;
+	private CarrotFieldScript carrotField;
 
     public void Start()
     {
@@ -44,8 +46,9 @@ public class EnemyHealth : MonoBehaviour
 	}
 
 	public void OnTriggerEnter(Collider other){
+		
 		//if colide with base, damage base and set enemy to inactive
-		if (other.gameObject.CompareTag ("Player")) 
+		if (other.gameObject.CompareTag ("Player"))
 		{
 			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
 			if (targetRigidbody) 
@@ -62,6 +65,26 @@ public class EnemyHealth : MonoBehaviour
 				basehealth = targetRigidbody.GetComponent<Basehealth>();
 				InvokeRepeating("baseDamage", 0f, m_towerpersecond);
 				playerUnit.baseHit = true;
+			}
+		}
+		if (other.gameObject.CompareTag ("PlayerMud")) 
+		{
+			playerUnit.inOutMud(true);
+		}
+		if (other.gameObject.CompareTag("PlayerCarrotField")){
+			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
+			if (targetRigidbody) 
+			{
+				carrotField = targetRigidbody.GetComponent<CarrotFieldScript> ();
+				InvokeRepeating ("carrotFieldDamage", 0f, 1f);
+			}
+		}
+		if (other.gameObject.CompareTag("PlayerTurret")){
+			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
+			if (targetRigidbody) 
+			{
+				turretScript = targetRigidbody.GetComponent<TurretScript> ();
+				InvokeRepeating ("turretDamage", 0f, 1f);
 			}
 		}
 	}
@@ -82,6 +105,18 @@ public class EnemyHealth : MonoBehaviour
         }
 	}
 
+	private void turretDamage(){
+		if(turretScript != null){
+			turretScript.takeDamage(m_damageToTowerSec);
+		}
+	}
+
+	private void carrotFieldDamage(){
+		if (carrotField != null){
+			carrotField.takeDamage (m_damageToTowerSec);
+		}
+	}
+
     //Spawn hitmark
     private void createHitMark(GameObject prefab, float amount)
     {
@@ -90,9 +125,17 @@ public class EnemyHealth : MonoBehaviour
         hitbox.GetComponent<HitMarkScript>().setDamage(amount);
     }
 
-    //stop invoke if colliders are not touching anymore
+
     public void OnTriggerExit (Collider other){
-		CancelInvoke ();
+		//stop invoke if colliders are not touching anymore
+		if (other.gameObject.CompareTag ("Base") || other.gameObject.CompareTag ("Player")) {
+			CancelInvoke ();
+		}
+		//enemies walk normal speed when out of collision
+		if (other.gameObject.CompareTag ("PlayerMud")) 
+		{
+			playerUnit.inOutMud(false);
+		}
 	}
 
     //Take damage

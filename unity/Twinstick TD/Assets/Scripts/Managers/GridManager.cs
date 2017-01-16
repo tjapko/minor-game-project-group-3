@@ -6,16 +6,16 @@ using UnityEngine.UI;
 
 public class GridManager
 {
-	[HideInInspector] public Grid m_grid;				//Grid to be build
-	[HideInInspector] public PathFinding m_pathFinding; //Pathfinding script
-	[HideInInspector] public PathRequestManager m_request; //Request manager script
-	[HideInInspector] public GameObject m_gridPrefab; //prefab of the grid
-	public GameObject m_instance; //clone of prefab to be build in the hierarchy
+	[HideInInspector] public Grid m_grid;					//Grid to be build
+	[HideInInspector] public PathFinding m_pathFinding; 	//Pathfinding script
+	[HideInInspector] public PathRequestManager m_request; 	//Request manager script
+	[HideInInspector] public GameObject m_gridPrefab; 		//prefab of the grid
+	public GameObject m_instance; 							//clone of prefab to be build in the hierarchy
 
-	private float xGrid; //x length of the map
-	private float yGrid; //y length of the map
-	private float denodeRadius; // radius of the nodes of the grid
-	private bool displayGrid; // display grid in scene or not
+	private float xGrid; 			//x length of the map
+	private float yGrid; 			//y length of the map
+	private float denodeRadius; 	// radius of the nodes of the grid
+	private bool displayGrid; 		// display grid in scene or not
 
 	public GridManager (GameObject gridPrefab)
 	{
@@ -36,9 +36,7 @@ public class GridManager
 		m_grid.gridWorldSize = new Vector2 (xGrid, yGrid);
 		m_grid.nodeRadius = denodeRadius;
 		m_grid.unwalkableMask = LayerMask.GetMask ("Unwalkable");
+		m_grid.unplacableMask = LayerMask.GetMask ("Unplacable");
 		this.m_instance = GameObject.Instantiate (m_gridPrefab) as GameObject;
-
 	}
-
 }
-

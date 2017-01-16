@@ -23,7 +23,7 @@ public class Enemie4 : EnemyManager
 		m_MovementPlayer.m_player = m_PlayerPoint;
 		m_MovementPlayer.m_base = m_BasePoint;
 		m_MovementPlayer.playerFirst = true;
-		m_MovementPlayer.speed = 3.0f;
+		m_MovementPlayer.speed = m_MovementPlayer.bossSpeed;
 		m_MovementPlayer.goToBase();
 	}
 }

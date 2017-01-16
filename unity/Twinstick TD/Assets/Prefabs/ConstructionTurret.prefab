@@ -72,7 +72,7 @@ GameObject:
   - 23: {fileID: 23000012957615666}
   m_Layer: 0
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: PlayerTurret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -370,4 +370,5 @@ MonoBehaviour:
     m_stats: {fileID: 0}
     m_construction: {fileID: 0}
     m_inventory: {fileID: 0}
+    m_playerhealth: {fileID: 0}
     m_PlayerNumber: 0

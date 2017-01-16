@@ -9,11 +9,14 @@ public class UnitPlayer : MonoBehaviour {
 
 	public Transform m_base;  			// the baselocation 
 	public Transform m_player;			// the playerlocation
-	public float speed = 5f; 			// moving speed
+	public float speed; 				// moving speed
 	public bool playerFirst; 			// walking to player first or not
 	public bool baseHit = false; 		// has hit the base or not
 	public float m_threshold = -20.0f; 	// maybe variable for GA
 	public float timeNewPath = 2f; 		// interval between new pathcalculation to enemy
+	public float mudSpeed = 2f;
+	public float normalSpeed = 6f;
+	public float bossSpeed = 3f;
 
 	Vector3[] path; 					// The walkable path
 	int targetIndex;					// The index of the waypointArray. The unit moves to path[targetIndex]  
@@ -73,6 +76,14 @@ public class UnitPlayer : MonoBehaviour {
 	//Calculates path to player and walks towards
 	public void walkToPlayer(){
 		PathRequestManager.RequestPath (transform, m_player, OnPathFound);
+	}
+
+	public void inOutMud(bool slow){
+		if (slow) {
+			this.speed = mudSpeed;
+		} else {
+			this.speed = normalSpeed;
+		}
 	}
 
 	/// <summary>
