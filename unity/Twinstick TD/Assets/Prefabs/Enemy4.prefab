@@ -90,6 +90,7 @@ GameObject:
   - 54: {fileID: 54000013177981260}
   - 114: {fileID: 114000010024179068}
   - 136: {fileID: 136000012005671654}
+  - 95: {fileID: 95000013694445796}
   m_Layer: 13
   m_Name: Enemy4
   m_TagString: Enemy
@@ -313,6 +314,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &95000013694445796
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013264635836}
+  m_Enabled: 0
+  m_Avatar: {fileID: 9000000, guid: 6c052abecf83b9c40be31e4fe9b0afa3, type: 3}
+  m_Controller: {fileID: 9100000, guid: 377071506baa5ad45b914f529b6cc9f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114000010024179068
 MonoBehaviour:
   m_ObjectHideFlags: 1
