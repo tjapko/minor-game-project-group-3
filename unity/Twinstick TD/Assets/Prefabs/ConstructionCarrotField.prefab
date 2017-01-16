@@ -21,7 +21,7 @@ GameObject:
   - 224: {fileID: 224000010059370864}
   - 222: {fileID: 222000011160452050}
   - 114: {fileID: 114000012781027272}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 224000012690988940}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - 223: {fileID: 223000013679313084}
   - 114: {fileID: 114000010711817578}
   - 114: {fileID: 114000011885388870}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: CarrotHealthfab
   m_TagString: Base
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - 224: {fileID: 224000012496183358}
   - 222: {fileID: 222000013096445338}
   - 114: {fileID: 114000011432437794}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - 4: {fileID: 4000013090743566}
   - 33: {fileID: 33000011512404454}
   - 23: {fileID: 23000013074311700}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Cube
   m_TagString: PlayerCarrotField
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 224000012409138420}
   - 114: {fileID: 114000014218646504}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - 65: {fileID: 65000011539914172}
   - 114: {fileID: 114000013533696280}
   - 114: {fileID: 114000011604227322}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: ConstructionCarrotField
   m_TagString: PlayerObject
   m_Icon: {fileID: 0}

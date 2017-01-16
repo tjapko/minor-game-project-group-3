@@ -21,7 +21,7 @@ GameObject:
   - 224: {fileID: 224000013567585582}
   - 222: {fileID: 222000011026115584}
   - 114: {fileID: 114000010710372400}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 224000010299507030}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - 4: {fileID: 4000011008639160}
   - 33: {fileID: 33000010472565670}
   - 23: {fileID: 23000010211128686}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Shaft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 224000012439627896}
   - 114: {fileID: 114000013322764222}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - 4: {fileID: 4000012318584604}
   - 33: {fileID: 33000012827254812}
   - 23: {fileID: 23000011097985460}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Barrelmodel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011407746192}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - 4: {fileID: 4000011072120518}
   - 33: {fileID: 33000010471796862}
   - 23: {fileID: 23000012957615666}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Base
   m_TagString: PlayerTurret
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - 223: {fileID: 223000013871827172}
   - 114: {fileID: 114000011324865440}
   - 114: {fileID: 114000013412799494}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: TurretHealthfab
   m_TagString: Base
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - 65: {fileID: 65000012708567150}
   - 114: {fileID: 114000013306829072}
   - 114: {fileID: 114000012152066830}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: ConstructionTurret
   m_TagString: PlayerObject
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - 224: {fileID: 224000010224607650}
   - 222: {fileID: 222000014293998770}
   - 114: {fileID: 114000010696324746}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011734793894}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
