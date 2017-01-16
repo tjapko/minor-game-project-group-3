@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class CameraControl : MonoBehaviour
 {
@@ -17,12 +18,14 @@ public class CameraControl : MonoBehaviour
 	private static int i = 0;
 	private static Vector3 m_constructionCamPos = new Vector3 (3, 15, -12);
 	private static GameObject iventoryUI; 
+	private static Camera bg;
 
     private void Awake()
     {
 		Camera[] Cameras = GetComponentsInChildren<Camera> ();
 		m_Camera = Cameras [0];
 		m_constructionCam = Cameras [1];
+		bg = Cameras [2];
 		m_constructionCam.transform.position = m_constructionCamPos;
     }
 
@@ -138,6 +141,10 @@ public class CameraControl : MonoBehaviour
 
 	// switches camera from maincam to constructioncam
 	public static void switchMainCamToConstructionCam() {
+//		bg.enabled = true;
+//		bg.gameObject.SetActive (true);
+		m_Camera.enabled = false;
+
 		// turn off inventoryUI
 		iventoryUI = GameObject.FindGameObjectWithTag ("inventoryUI");
 		iventoryUI.SetActive (false);
@@ -145,7 +152,8 @@ public class CameraControl : MonoBehaviour
 		m_constructionCam.transform.position = m_constructionCamPos;
 		// switch cameras
 		m_constructionCam.enabled = true;
-		m_Camera.enabled = false;
+		m_constructionCam.gameObject.SetActive(true);
+
 
 	}
 
@@ -156,5 +164,8 @@ public class CameraControl : MonoBehaviour
 		//switch cameras
 		m_Camera.enabled = true;
 		m_constructionCam.enabled = false;
+		m_constructionCam.gameObject.SetActive(false);
+
 	}
+
 }
