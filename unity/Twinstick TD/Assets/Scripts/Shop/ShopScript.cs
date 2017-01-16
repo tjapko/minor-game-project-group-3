@@ -221,6 +221,7 @@ public class ShopScript : MonoBehaviour {
             {
                 showUI = false;
                 m_instance_UI.SetActive(false);
+                m_usermanager.m_playerlist[playernumber].m_shooting.enabled = true;
             }
         }
     }
