@@ -1106,7 +1106,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'CarrotField (3)
+  m_Text: 'CarrotField (press 3, twice)
 
     Price: '
 --- !u!114 &114000010267985794
@@ -1589,7 +1589,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Wall (1)
+  m_Text: 'Wall (press 1, twice)
 
     Price: '
 --- !u!114 &114000011232828688
@@ -2594,7 +2594,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Mud (4)
+  m_Text: 'Mud (press 4, twice)
 
     Price: '
 --- !u!114 &114000012844173026
@@ -3092,7 +3092,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Turret (2)
+  m_Text: 'Turret (press 2, twice)
 
     Price: '
 --- !u!114 &114000014210494634

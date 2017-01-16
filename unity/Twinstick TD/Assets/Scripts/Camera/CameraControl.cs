@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class CameraControl : MonoBehaviour
 {
@@ -8,9 +8,10 @@ public class CameraControl : MonoBehaviour
     public float m_MinSize = 6.5f;                  // The smallest orthographic size the camera can be.
     [HideInInspector]
     public Transform[] m_Targets; // All the targets the camera needs to encompass.
+//	public static float timer = 2f;
+	public static float intensityScreenShake = 30f;
 
-
-	[HideInInspector]public static Camera m_Camera;                        // Used for referencing the camera.
+	[HideInInspector]public static Camera m_Camera; // Used for referencing the camera.
     private float m_ZoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
     private Vector3 m_MoveVelocity;                 // Reference velocity for the smooth damping of the position.
     private Vector3 m_DesiredPosition;              // The position the camera is moving towards.
@@ -19,6 +20,7 @@ public class CameraControl : MonoBehaviour
 	private static Vector3 m_constructionCamPos = new Vector3 (3, 15, -12);
 	private static GameObject iventoryUI; 
 	private static Camera bg;
+
 
     private void Awake()
     {
@@ -38,6 +40,7 @@ public class CameraControl : MonoBehaviour
         // Change the size of the camera based.
         Zoom();
 
+//		screenShake ();
 
     }
 
@@ -110,10 +113,10 @@ public class CameraControl : MonoBehaviour
             // Find the position of the target from the desired position of the camera's local space.
             Vector3 desiredPosToTarget = targetLocalPos - desiredLocalPos;
 
-            // Choose the largest out of the current size and the distance of the tank 'up' or 'down' from the camera.
+			// Choose the largest out of the current size and the distance of the character 'up' or 'down' from the camera.
             size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.y));
 
-            // Choose the largest out of the current size and the calculated size based on the tank being to the left or right of the camera.
+            // Choose the largest out of the current size and the calculated size based on the character being to the left or right of the camera.
             size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.x) / m_Camera.aspect);
         }
 
@@ -141,8 +144,6 @@ public class CameraControl : MonoBehaviour
 
 	// switches camera from maincam to constructioncam
 	public static void switchMainCamToConstructionCam() {
-//		bg.enabled = true;
-//		bg.gameObject.SetActive (true);
 		m_Camera.enabled = false;
 
 		// turn off inventoryUI
@@ -165,6 +166,26 @@ public class CameraControl : MonoBehaviour
 		m_Camera.enabled = true;
 		m_constructionCam.enabled = false;
 		m_constructionCam.gameObject.SetActive(false);
+
+	}
+
+	// sceenShake of the mainCamera
+	public static void screenShake() {
+		Vector3 MainCamposition = m_Camera.transform.position;
+//		while (timer > 0) {
+//			timer -= 1;
+		//		}
+
+		float shakeX = Random.Range (-intensityScreenShake, intensityScreenShake);
+		float shakeZ = Random.Range (-intensityScreenShake, intensityScreenShake);
+
+		MainCamposition.x += shakeX;
+		MainCamposition.z += shakeZ;
+
+		intensityScreenShake -= 0.1f;
+		if (intensityScreenShake < 0) {
+			intensityScreenShake = 0f;
+		}
 
 	}
 

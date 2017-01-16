@@ -2233,9 +2233,9 @@ Camera:
   m_BackGroundColor: {r: 0.23496972, g: 0.5724883, b: 0.60294116, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.2
     y: 0
-    width: 1
+    width: 0.6
     height: 1
   near clip plane: 0.3
   far clip plane: 50
@@ -2318,6 +2318,93 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d96e9c974f27fb142a1859035b24d605, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &815216765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 815216766}
+  - 20: {fileID: 815216770}
+  - 92: {fileID: 815216769}
+  - 124: {fileID: 815216768}
+  - 81: {fileID: 815216767}
+  m_Layer: 0
+  m_Name: bg
+  m_TagString: constructionCam
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &815216766
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815216765}
+  m_LocalRotation: {x: 0.46984634, y: -0.17101008, z: 0.2961981, w: 0.8137977}
+  m_LocalPosition: {x: 2.9999995, y: -15, z: -12}
+  m_LocalScale: {x: 1, y: 1.0000004, z: 1.0000004}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 40}
+  m_Children: []
+  m_Father: {fileID: 922648189}
+  m_RootOrder: 2
+--- !u!81 &815216767
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815216765}
+  m_Enabled: 1
+--- !u!124 &815216768
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815216765}
+  m_Enabled: 1
+--- !u!92 &815216769
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815216765}
+  m_Enabled: 1
+--- !u!20 &815216770
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 815216765}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0.284, b: 0, a: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 50
+  field of view: 60
+  orthographic: 1
+  orthographic size: 50
+  m_Depth: -12
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
 --- !u!1 &817722354
 GameObject:
   m_ObjectHideFlags: 0
@@ -2516,6 +2603,7 @@ Transform:
   m_Children:
   - {fileID: 1514871770}
   - {fileID: 762963116}
+  - {fileID: 815216766}
   m_Father: {fileID: 0}
   m_RootOrder: 6
 --- !u!4 &935246982 stripped
@@ -4289,7 +4377,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0660e8dbd3ec1e1478958e173ed79815, type: 3}
   gongSource: {fileID: 1464915408}
   gongSound: {fileID: 8300000, guid: 73e875b1afb672e43b0a803abb4a21d8, type: 3}
-  m_uiprefab: {fileID: 1000011379212736, guid: 55b65d527b3aec941a018aa2b6fbe275, type: 2}
+  m_uiprefab: {fileID: 1000014098268180, guid: 583a6667a85a94970a1de3c557094f45, type: 2}
   m_shopuiprefab: {fileID: 1000010742267120, guid: 4718148eb10e9d945beab5902c750e9b,
     type: 2}
   m_baseprefab: {fileID: 1000013595951870, guid: 2d011ede6f946374bad3aa43eb65f5af,
@@ -4659,6 +4747,7 @@ GameObject:
   - 92: {fileID: 1514871768}
   - 124: {fileID: 1514871767}
   - 81: {fileID: 1514871766}
+  - 114: {fileID: 1514871771}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4734,6 +4823,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 922648189}
   m_RootOrder: 0
+--- !u!114 &1514871771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1514871765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6550280da96704c4ba44b4ef3cd61045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeFreq: 100
 --- !u!1001 &1550729440
 Prefab:
   m_ObjectHideFlags: 0
