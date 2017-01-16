@@ -176,6 +176,10 @@ public class CanvasPlayerUIScript : MonoBehaviour {
     // Sets the enemies remaining text
     private void setEnemiesRemainingText()
     {
+        if (m_wavemanager == null)
+        {
+            m_wavemanager = m_gamemanager.getWaveManager();
+        }
         m_waveremainingText.text = "Enemies left: " + m_wavemanager.enemiesRemaining();
     }
 
