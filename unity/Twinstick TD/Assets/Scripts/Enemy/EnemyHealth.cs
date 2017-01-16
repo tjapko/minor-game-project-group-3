@@ -107,13 +107,13 @@ public class EnemyHealth : MonoBehaviour
 
 	private void turretDamage(){
 		if(turretScript != null){
-			turretScript.takeDamage(m_damageToTowerSec);
+	//		turretScript.takeDamage(m_damageToTowerSec);
 		}
 	}
 
 	private void carrotFieldDamage(){
 		if (carrotField != null){
-			carrotField.takeDamage (m_damageToTowerSec);
+	//		carrotField.takeDamage (m_damageToTowerSec);
 		}
 	}
 
