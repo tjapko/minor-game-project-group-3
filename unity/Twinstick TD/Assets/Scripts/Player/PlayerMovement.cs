@@ -26,11 +26,12 @@ public class PlayerMovement : MonoBehaviour {
 	private string m_MovementAxisNameH;
 	private string m_RotationAxisNameV;
 	private string m_RotationAxisNameH;
-
+	static Animator anim;
 
 	// Initializes the Floormask 
 	void Awake()
 	{
+		anim = GetComponent<Animator> ();
 		Floor = LayerMask.GetMask("mouseFloor"); 
 	}
 
@@ -70,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {
 		else {
 			controllerTurn (); // Rotate the player with controller for both controllers (XBOX and PS3) on mac and PS3 on windows
 		} 
-	}
+	}	
 
 	// Adjust the position of the player based on the player's keyboard input.
 	private void Move()
