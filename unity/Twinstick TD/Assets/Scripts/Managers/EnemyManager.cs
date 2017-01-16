@@ -66,6 +66,7 @@ public abstract class EnemyManager
     {
         this.m_damageDoneToObject = this.health.getDamageDoneToObject();
         this.m_damageDoneToPlayer = this.health.getDamageDoneToPlayer();
+        this.inheratedValues.setDamageDone(this.m_damageDoneToObject, this.m_damageDoneToPlayer);
     }
 
 }

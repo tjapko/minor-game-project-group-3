@@ -97,6 +97,7 @@ public class WaveManager
 			grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
 		}
 		int enemies = EnemiesAmountPerWave ();
+        GAManager.nextGenartion(enemies);
 		m_wavenumber++;
 		proportionEnemies (); // update the proportions of the enemies per wave
 		yield return SpawnAllEnemies (enemies);
@@ -190,16 +191,16 @@ public class WaveManager
 
 		if (Enemyprefab.Equals (m_Enemyprefab1)) {
            // enemyvar enemyvar = ga.getenemyvartyp1;
-            Enemie1 instance = new Enemie1(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getStandartValues());
+            Enemie1 instance = new Enemie1(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getInheratedType1());
             m_enemywave.Add (instance);
 		} else if (Enemyprefab.Equals (m_Enemyprefab2)) {
-            Enemie2 instance = new Enemie2(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getStandartValues());
+            Enemie2 instance = new Enemie2(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getInheratedType2());
             m_enemywave.Add (instance);
 		} else if (Enemyprefab.Equals (m_Enemyprefab3)) {
-            Enemie3 instance = new Enemie3(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getStandartValues());
+            Enemie3 instance = new Enemie3(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getInheratedType3());
             m_enemywave.Add (instance);
 		} else if (boss) {
-            Enemie4 instance = new Enemie4(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getStandartValues());
+            Enemie4 instance = new Enemie4(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getInheratedType4());
             instance.health.setCurrentHealth(20);
             m_enemywave.Add (instance);
 		}
