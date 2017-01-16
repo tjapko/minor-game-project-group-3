@@ -40,6 +40,8 @@ public class TurretScript : MonoBehaviour {
 		m_currentHealth = m_startHealth;
 		m_Dead = false;
 		SetHealthUI ();
+        PlayerConstruction pl = new PlayerConstruction();
+        pl.currentTurrets++;
     }
 	
 	// Update is called once per frame
@@ -166,5 +168,7 @@ public class TurretScript : MonoBehaviour {
 	{
 		m_Dead = true;
 		gameObject.SetActive(false);
+       PlayerConstruction pl = new PlayerConstruction();
+        pl.currentTurrets--; 
 	}
 }
