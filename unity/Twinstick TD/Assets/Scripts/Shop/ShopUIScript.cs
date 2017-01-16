@@ -117,10 +117,6 @@ public class ShopUIScript : MonoBehaviour {
     {
         CancelInvoke("updateForSaleWeapons");
 
-        if (m_currentplayer != null)
-        {
-            m_currentplayer.m_shooting.enabled = false;
-        }
     }
 
     //Update the UI panel
