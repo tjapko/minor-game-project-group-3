@@ -19,8 +19,12 @@ public class ScreenShake : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.T)) {
-//			Shake (0.2f, 0.3f);
-//			Shake(0.1f, 0.2f); 
+			Shake (0.2f, 0.3f);
+//			Shake2();
+//			Shake3();
+		}
+		if (Input.GetKeyDown (KeyCode.Y)) {
+			Shake (0.1f, 0.2f);
 		}
 	}
 
@@ -60,4 +64,42 @@ public class ScreenShake : MonoBehaviour {
 		cam.transform.position = camPos;
 	}
 
+	/*
+	IEnumerator Shake2() {
+		float duration = 0.5f;
+		float magnitude = 0.5f;
+
+		float elapsed = 0.0f;
+
+		Vector3 originalCamPos = cam.transform.position;
+
+		while (elapsed < duration) {
+
+			elapsed += Time.deltaTime;          
+
+			float percentComplete = elapsed / duration;         
+			float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
+
+			// map value to [-1, 1]
+			float x = Random.value * 2.0f - 1.0f;
+			float z = Random.value * 2.0f - 1.0f;
+			x *= magnitude * damper;
+			z *= magnitude * damper;
+
+			cam.transform.position = new Vector3(x, originalCamPos.y, z);
+
+			yield return null;
+		}
+
+		cam.transform.position = originalCamPos;
+	}
+	*/
+
+	/*
+	public void Shake3() {
+		Vector3 camPos = cam.transform.position;
+		float amplitude = 0.1f;
+		cam.transform.localPosition = camPos + Random.insideUnitSphere * amplitude;
+	}
+	*/
 }
