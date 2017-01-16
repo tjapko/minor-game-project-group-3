@@ -19,7 +19,8 @@ public class PlayerHealth : MonoBehaviour
 	public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
 	private float m_CurrentHealth;  					//Current health of enemy
 	public bool m_Dead = false;  						//Enemy is dead or not
-
+	public float screenShakeIntensity = 0.1f;
+	public float screenShakeDuration = 0.2f;
 
 	public void Start()
 	{
@@ -64,6 +65,7 @@ public class PlayerHealth : MonoBehaviour
 		if (m_CurrentHealth == 0) {
 			OnDeath ();
 		}
+		ScreenShake.Shake (screenShakeIntensity,screenShakeDuration);
 	}
 
     // OnDeath

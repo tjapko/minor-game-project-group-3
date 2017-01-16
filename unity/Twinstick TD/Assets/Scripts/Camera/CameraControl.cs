@@ -8,8 +8,6 @@ public class CameraControl : MonoBehaviour
     public float m_MinSize = 6.5f;                  // The smallest orthographic size the camera can be.
     [HideInInspector]
     public Transform[] m_Targets; // All the targets the camera needs to encompass.
-//	public static float timer = 2f;
-	public static float intensityScreenShake = 30f;
 
 	[HideInInspector]public static Camera m_Camera; // Used for referencing the camera.
     private float m_ZoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
@@ -166,26 +164,6 @@ public class CameraControl : MonoBehaviour
 		m_Camera.enabled = true;
 		m_constructionCam.enabled = false;
 		m_constructionCam.gameObject.SetActive(false);
-
-	}
-
-	// sceenShake of the mainCamera
-	public static void screenShake() {
-		Vector3 MainCamposition = m_Camera.transform.position;
-//		while (timer > 0) {
-//			timer -= 1;
-		//		}
-
-		float shakeX = Random.Range (-intensityScreenShake, intensityScreenShake);
-		float shakeZ = Random.Range (-intensityScreenShake, intensityScreenShake);
-
-		MainCamposition.x += shakeX;
-		MainCamposition.z += shakeZ;
-
-		intensityScreenShake -= 0.1f;
-		if (intensityScreenShake < 0) {
-			intensityScreenShake = 0f;
-		}
 
 	}
 
