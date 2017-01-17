@@ -61,10 +61,10 @@ public class PlayerHealth : MonoBehaviour
     public void buyHealth()
     {
         Debug.Log("Player health before: " + m_CurrentHealth);
-        PlayerStatistics playerstat = new PlayerStatistics();
+        PlayerStatistics playerstat = GetComponent<PlayerStatistics>();
         float dif = (m_maxHealth - m_CurrentHealth);
-        int cost = (int)(dif * m_dollarperlife);
-
+        int cost =(int)(dif * m_dollarperlife);
+        Debug.Log("currency: "+ playerstat.m_currency + " cost: " + cost );
         if (playerstat.m_currency >= cost)
         {
             playerstat.m_currency -= cost;
