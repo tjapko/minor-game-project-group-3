@@ -22,6 +22,7 @@ public class PlayerConstruction : MonoBehaviour {
     private PlayerStatistics m_playerStats;     //Reference to player stats script
     private GridManager m_gridmanager;          //Reference to grid manager
     private Grid m_grid;                        //Reference to grid in grid manager
+    private Camera m_constructionCamera;        //Reference to the construction camera
 
     //Public variables
     public GameObject m_markerprefab;   //Reference to the suggestive marker prefab
@@ -36,6 +37,8 @@ public class PlayerConstruction : MonoBehaviour {
     private Vector3 mouseposition;      // Position of mouse
     private bool constructing;          // Boolean : boolean if player is constructing
     private bool constructionphase;     // Boolean : (true = construction phase, false = wavephase), set by game manager
+    private int Floor;
+    private float camRayLength = 100f;
 
     //Enum of playerobject
     public enum PlayerObjectType
@@ -52,6 +55,8 @@ public class PlayerConstruction : MonoBehaviour {
         m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
         m_playerMovement = GetComponent<PlayerMovement>();
         m_playerStats = GetComponent<PlayerStatistics>();
+        m_constructionCamera = GameObject.FindWithTag("constructionCam").GetComponent<Camera>();
+        Floor = LayerMask.GetMask("mouseFloor");
 
         //Set variables
         constructing = false;
@@ -62,10 +67,10 @@ public class PlayerConstruction : MonoBehaviour {
 	void Update () {
 
         // Get the location of the mouse in world coordinates
-        if (constructing)
-        {
-            mouseposition = m_playerMovement.mouseposition;
-        }
+        //if (constructing)
+        //{
+        //    mouseposition = m_playerMovement.mouseposition;
+        //}
 
         // Check if player has clicked
         // Player is in construction phase, not already constructing and pressing the construction button
@@ -139,6 +144,9 @@ public class PlayerConstruction : MonoBehaviour {
         //While we're in the construction phase
         while (constructionphase)
         {
+            //Check mouse position
+            mouseposition = mousePos();
+
             //Place the instance onto a node
             Node selected_node = m_grid.NodeFromWorldPoint(mouseposition);
             newinstance.transform.position = selected_node.worldPosition;
@@ -151,7 +159,7 @@ public class PlayerConstruction : MonoBehaviour {
             //Check if button has been pressed
             //Check if player isn't standing onto the object
             //Check if node is walkable
-            if (Input.GetKeyDown(keyinput) && instancestats.getGroundClear() && m_grid.NodeFromWorldPoint(newinstance.transform.position).walkable)
+            if (Input.GetMouseButtonUp(0) || Input.GetKeyDown(keyinput) && (instancestats.getGroundClear() && m_grid.NodeFromWorldPoint(newinstance.transform.position).walkable))
             {
                 instancestats.setPlacement(true);    //The object is now placed onto the ground
                 newinstance.AddComponent<Rigidbody>();  //Create a rigid body, for OnTriggerEnter to work properly
@@ -311,5 +319,26 @@ public class PlayerConstruction : MonoBehaviour {
                 break;
 
         }
+    }
+
+    // Adjust the rotation of the player based on the mousePosition input.
+    private Vector3 mousePos()
+    {
+        // creating a ray from the camera to the mouseposition
+        Ray camRay = m_constructionCamera.ScreenPointToRay(Input.mousePosition);
+
+        // a variable, which is true when the ray hits the floor 
+        RaycastHit floorHit;
+
+        if (Physics.Raycast(camRay, out floorHit, camRayLength, Floor)) // checking if the ray hits the floor 
+        {
+            Vector3 playerToMouse = floorHit.point - transform.position; // creating a vector from the player to the mousePosition
+            playerToMouse.y = 0f; // because it's a projection on the x-z-plane
+            playerToMouse = transform.position + playerToMouse;  //Used for dropping objects
+            return playerToMouse;
+            //Line from Main Camera to the point selected with the mouse (for debugging purposes)
+            //Debug.DrawLine(m_constructionCamera.transform.position, floorHit.point, Color.yellow);
+        }
+        return Vector3.zero;
     }
 }

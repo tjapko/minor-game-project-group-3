@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_amountofplayers: 1
-  m_waveDelay: 1
+  m_waveDelay: 5
   m_EndDelay: 3
   backgroundSource: {fileID: 82000012691815352}
   backgroundSounds:

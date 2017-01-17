@@ -5053,10 +5053,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1000011736931772, guid: 682fa384485ba414b8368ced53b0e3f7, type: 2}
-      propertyPath: m_Name
-      value: Gamemanager
-      objectReference: {fileID: 0}
     - target: {fileID: 114000012087956578, guid: 682fa384485ba414b8368ced53b0e3f7,
         type: 2}
       propertyPath: m_Basespawnpoint
