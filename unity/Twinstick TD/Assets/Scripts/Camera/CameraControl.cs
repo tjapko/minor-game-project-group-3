@@ -166,8 +166,8 @@ public class CameraControl : MonoBehaviour
 	}
 
 	public static void restartCam() {
-		m_Camera.transform.position = m_MainCamPos;
-		m_constructionCam.transform.position = m_constructionCamPos;
+//		m_Camera.transform.position = m_MainCamPos;
+//		m_constructionCam.transform.position = m_constructionCamPos;
 	}
 		
 }
