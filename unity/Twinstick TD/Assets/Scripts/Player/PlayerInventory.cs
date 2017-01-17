@@ -10,7 +10,6 @@ public class PlayerInventory : MonoBehaviour {
     public int maxslots;
     public List<Weapon> inventory;
     public Rigidbody m_Bullet;
-    public Transform m_FireTransform;
     public Rigidbody m_RayBullet;
     //Fill the inventory when the player is initialized
     void Start ()
