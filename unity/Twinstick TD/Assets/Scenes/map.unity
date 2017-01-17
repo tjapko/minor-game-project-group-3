@@ -5102,6 +5102,10 @@ Prefab:
       propertyPath: m_weaponshop
       value: 
       objectReference: {fileID: 32876408}
+    - target: {fileID: 1000011736931772, guid: 682fa384485ba414b8368ced53b0e3f7, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 682fa384485ba414b8368ced53b0e3f7, type: 2}
   m_IsPrefabParent: 0
