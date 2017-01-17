@@ -23,6 +23,7 @@ public class PlayerConstruction : MonoBehaviour {
     private GridManager m_gridmanager;          //Reference to grid manager
     private Grid m_grid;                        //Reference to grid in grid manager
     private Camera m_constructionCamera;        //Reference to the construction camera
+    private int Floor;                          //Reference to floor layer
 
     //Public variables
     public GameObject m_markerprefab;   //Reference to the suggestive marker prefab
@@ -37,7 +38,6 @@ public class PlayerConstruction : MonoBehaviour {
     private Vector3 mouseposition;      // Position of mouse
     private bool constructing;          // Boolean : boolean if player is constructing
     private bool constructionphase;     // Boolean : (true = construction phase, false = wavephase), set by game manager
-    private int Floor;
     private float camRayLength = 100f;
 
     //Enum of playerobject

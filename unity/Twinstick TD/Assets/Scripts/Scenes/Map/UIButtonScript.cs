@@ -37,4 +37,6 @@ public class UIButtonScript : MonoBehaviour {
     //{
     //    StartCoroutine(m_gamemanager.getObjectManager().ObjectPlacement());
     //}
+
+
 }
