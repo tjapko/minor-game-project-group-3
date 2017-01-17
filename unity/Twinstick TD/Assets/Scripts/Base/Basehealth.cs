@@ -18,8 +18,6 @@ public class Basehealth : MonoBehaviour {
     public Color m_ZeroHealthColor = Color.red;     //Zero health colour
     public Slider m_Slider;
     public Image m_FillImage;
-	public float screenShakeIntensity = 0.2f;
-	public float screenShakeDuration = 0.3f;
 
     //Private variables
     private float m_CurrentHealth;                  //Current health of tower
@@ -53,7 +51,7 @@ public class Basehealth : MonoBehaviour {
 				OnDeath ();
 			}
 		}
-		ScreenShake.Shake (screenShakeIntensity,screenShakeDuration);
+		ScreenShake.ShakeBase ();
     }
 
     //Heal base

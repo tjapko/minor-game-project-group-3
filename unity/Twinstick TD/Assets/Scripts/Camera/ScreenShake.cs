@@ -5,6 +5,10 @@ public class ScreenShake : MonoBehaviour {
 
 	public static ScreenShake instance; 	// used in order to make Shake a static function!
 	public static float shakeFreq = 10; 	// # shakes per s
+	[HideInInspector]public static float screenShakeIntensityBase = 0.2f;
+	[HideInInspector]public static float screenShakeDurationBase = 0.3f;
+	[HideInInspector]public static float screenShakeIntensityCharacter = 0.1f;
+	[HideInInspector]public static float screenShakeDurationCharacter = 0.2f;
 
 	private static float shakeIntensity;	// amount of added offset to x-z-positions
 	private static Camera cam;
@@ -64,42 +68,12 @@ public class ScreenShake : MonoBehaviour {
 		cam.transform.position = camPos;
 	}
 
-	/*
-	IEnumerator Shake2() {
-		float duration = 0.5f;
-		float magnitude = 0.5f;
-
-		float elapsed = 0.0f;
-
-		Vector3 originalCamPos = cam.transform.position;
-
-		while (elapsed < duration) {
-
-			elapsed += Time.deltaTime;          
-
-			float percentComplete = elapsed / duration;         
-			float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
-
-			// map value to [-1, 1]
-			float x = Random.value * 2.0f - 1.0f;
-			float z = Random.value * 2.0f - 1.0f;
-			x *= magnitude * damper;
-			z *= magnitude * damper;
-
-			cam.transform.position = new Vector3(x, originalCamPos.y, z);
-
-			yield return null;
-		}
-
-		cam.transform.position = originalCamPos;
+	public static void ShakeBase() {
+		Shake(screenShakeIntensityBase, screenShakeDurationBase);
 	}
-	*/
 
-	/*
-	public void Shake3() {
-		Vector3 camPos = cam.transform.position;
-		float amplitude = 0.1f;
-		cam.transform.localPosition = camPos + Random.insideUnitSphere * amplitude;
+	public static void ShakeCharacter() {
+		Shake(screenShakeIntensityCharacter, screenShakeDurationCharacter);
 	}
-	*/
+
 }
