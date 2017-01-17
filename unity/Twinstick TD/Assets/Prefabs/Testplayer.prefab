@@ -2152,7 +2152,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012244867938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.18, y: -0.0000019179338, z: -17.34}
+  m_LocalPosition: {x: -0.18, y: -0.12, z: -17.34}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2648,7 +2648,6 @@ MonoBehaviour:
     m_playerhealth: {fileID: 0}
     m_PlayerNumber: 0
   mouseposition: {x: 0, y: 0, z: 0}
-  m_MovementInputValueV: 0
 --- !u!114 &114000014108469366
 MonoBehaviour:
   m_ObjectHideFlags: 1
