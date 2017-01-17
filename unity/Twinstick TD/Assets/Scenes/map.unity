@@ -2204,6 +2204,7 @@ GameObject:
   - 20: {fileID: 762963115}
   - 92: {fileID: 762963114}
   - 124: {fileID: 762963113}
+  - 81: {fileID: 762963112}
   m_Layer: 0
   m_Name: constructionCam
   m_TagString: constructionCam
@@ -2211,6 +2212,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!81 &762963112
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 762963111}
+  m_Enabled: 1
 --- !u!124 &762963113
 Behaviour:
   m_ObjectHideFlags: 0
