@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         // Start the game
         StartCoroutine(GameLoop());
 
-		m_wave = new WaveManager(m_Enemyprefab1, m_Enemyprefab2, m_Enemyprefab3, m_Enemyprefab4, m_Enemyspawnpoint, m_Basespawnpoint, m_players.m_playerlist[0].m_Instance.transform, m_gridPrefab, m_gridManager);
+		m_wave = new WaveManager(m_Enemyprefab1, m_Enemyprefab2, m_Enemyprefab3, m_Enemyprefab4, m_Enemyspawnpoint, m_base.m_Instance, m_players.m_playerlist[0].m_Instance.transform, m_gridPrefab, m_gridManager);
 
         backgroundSource.clip = backgroundSounds[Random.Range(0, backgroundSounds.Length)];
         backgroundSource.Play();
@@ -107,10 +107,10 @@ public class GameManager : MonoBehaviour
         m_uiscript.UIchange(gameover, wavephase, gamepause);
 
 		// if base is dead, all existing enemies move to player
-		if (!m_wave.baseDead && m_base.m_Instance == null) {
+		/*if (!m_wave.baseDead && m_base.m_Instance == null) {
 			m_wave.baseDead = true;
 			m_wave.enemiesToPlayer ();
-		}
+		}*/
     }
 
     // This is called from start and will run each phase of the game one after another.

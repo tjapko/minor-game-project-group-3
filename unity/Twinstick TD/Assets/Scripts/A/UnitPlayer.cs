@@ -7,10 +7,10 @@ using System.Collections.Generic;
 /// </summary>
 public class UnitPlayer : MonoBehaviour {
 
-	public Transform m_base;  			// the baselocation 
+	public GameObject m_base;  			// the baselocation 
 	public Transform m_player;			// the playerlocation
 	public float speed; 				// moving speed
-	public bool baseHit = false; 		// has hit the base or not
+	//public bool baseHit = false; 		// has hit the base or not
 	public float m_threshold = -20.0f; 	// maybe variable for GA
 	public float timeNewPath = 2f; 		// interval between new pathcalculation to enemy
 	public float mudSpeed = 2f;
@@ -39,7 +39,7 @@ public class UnitPlayer : MonoBehaviour {
 		} else {
 			//if no playerobjects go to player
 			goToPlayer ();
-		}// check every 2 seconds distance to player
+		}// check every 1 seconds distance to player
 		if (playerCheck) {
 			InvokeRepeating ("playerDist", 0f, 1f);
 		}
@@ -47,12 +47,13 @@ public class UnitPlayer : MonoBehaviour {
 
 	//Gets all objects that enemy needs to go to
 	public List<GameObject> getObjects(){
-		List<GameObject> objectss = new List<GameObject> ();
-		objectss.Add(GameObject.FindGameObjectWithTag("Base"));
-		objectss.AddRange (GameObject.FindGameObjectsWithTag ("PlayerCarrotField"));
-		objectss.AddRange (GameObject.FindGameObjectsWithTag ("PlayerTurret"));
-		Debug.Log(objectss.Count);
-		return objectss;
+		List<GameObject> objects = new List<GameObject> ();
+		if (m_base.activeSelf == true) {
+			objects.Add (m_base);
+		}
+		objects.AddRange (GameObject.FindGameObjectsWithTag ("PlayerCarrotField"));
+		objects.AddRange (GameObject.FindGameObjectsWithTag ("PlayerTurret"));
+		return objects;
 	}
 
 	public void playerDist(){
@@ -71,7 +72,7 @@ public class UnitPlayer : MonoBehaviour {
 
 	//Calculates path to base and walks towards
 	public void goToBase(){
-		PathRequestManager.RequestPath (transform, m_base, OnPathFound);
+		PathRequestManager.RequestPath (transform, m_base.transform, OnPathFound);
 	}
 
 	//Calculates path to player and walks towards
@@ -125,16 +126,10 @@ public class UnitPlayer : MonoBehaviour {
 				targetIndex ++;
 				//als huidig doel er niet meer is.
 				checkCurrentGoal();
-				yield break;
 				if (targetIndex >= path.Length) {
 					yield break;
 				}
 				currentWaypoint = path[targetIndex];			
-			}
-			if (baseHit) {
-				InvokeRepeating ("checkCurrentGoal", 0f, 1f);
-				yield break;
-				yield return null;
 			}
 			transform.LookAt(currentWaypoint);
 			transform.position = Vector3.MoveTowards(transform.position,currentWaypoint,speed * Time.deltaTime);

@@ -30,7 +30,7 @@ public class EnemyHealth : MonoBehaviour
     //Private variables
     private float m_CurrentHealth;  					//Current health of enemy
 	private bool m_Dead;  								//Enemy is dead or not
-	[HideInInspector] public bool basehit;				//Enemy has hit base or not
+	//[HideInInspector] public bool basehit;				//Enemy has hit base or not
     private int m_lasthit;          					//Playernumber of last hit
 	private PlayerHealth playerhealth;					//playerhealth script
 	private Basehealth basehealth;						//Basehealth script
@@ -64,7 +64,7 @@ public class EnemyHealth : MonoBehaviour
 			{
 				basehealth = targetRigidbody.GetComponent<Basehealth>();
 				InvokeRepeating("baseDamage", 0f, m_towerpersecond);
-				playerUnit.baseHit = true;
+				//playerUnit.baseHit = true;
 			}
 		}
 		if (other.gameObject.CompareTag ("PlayerMud")) 
@@ -76,7 +76,7 @@ public class EnemyHealth : MonoBehaviour
 			if (targetRigidbody) 
 			{				
 				carrotField = targetRigidbody.GetComponent<CarrotFieldScript> ();
-				InvokeRepeating ("carrotFieldDamage", 0f, 1f);
+				InvokeRepeating ("carrotFieldDamage", 0f, m_towerpersecond);
 			}
 		}
 		if (other.gameObject.CompareTag("PlayerTurret")){
@@ -84,16 +84,17 @@ public class EnemyHealth : MonoBehaviour
 			if (targetRigidbody) 
 			{
 				turretScript = targetRigidbody.GetComponent<TurretScript> ();
-				InvokeRepeating ("turretDamage", 0f, 1f);
+				InvokeRepeating ("turretDamage", 0f, m_towerpersecond);
 			}
 		}
 	}
 
 	//Give tower damage
 	private void baseDamage(){
-		if (basehealth != null) {
+		if (!basehealth.m_Dead) {
 			basehealth.TakeDamage (m_damageToTowerSec);
 		} else {
+			playerUnit.calcDistance (playerUnit.enemyType);
 			CancelInvoke ("baseDamage");
 		}
 	}

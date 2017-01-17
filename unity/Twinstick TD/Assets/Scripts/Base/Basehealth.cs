@@ -79,7 +79,6 @@ public class Basehealth : MonoBehaviour {
     {
         m_Dead = true;
         gameObject.SetActive(false);
-		Destroy (gameObject);
     }
 
     //Spawn hitmark
