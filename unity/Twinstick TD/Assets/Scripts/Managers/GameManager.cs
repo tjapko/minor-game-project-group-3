@@ -338,6 +338,7 @@ public class GameManager : MonoBehaviour
         m_weaponshop.GetComponent<ShopScript>().resetShop();
 
         //Start new game
+		CameraControl.restartCam();
         StartCoroutine(GameLoop());
     }
 

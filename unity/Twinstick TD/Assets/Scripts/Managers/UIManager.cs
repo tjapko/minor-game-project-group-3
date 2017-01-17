@@ -118,6 +118,7 @@ public class UIManager : MonoBehaviour {
                 //Check wavephase
                 if (wavephase)
                 {
+					Debug.Log ("wavephase");
                     go_CanvasGameOver.SetActive(false);
                     go_CanvasConstruction.SetActive(false);
                     go_CanvasPauseMenu.SetActive(false);
