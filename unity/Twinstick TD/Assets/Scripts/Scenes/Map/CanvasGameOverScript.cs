@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CanvasGameOverScript : MonoBehaviour {
 
@@ -12,7 +13,8 @@ public class CanvasGameOverScript : MonoBehaviour {
     private List<PlayerManager> m_players;  //Reference to the players in the game 
 
     //References to GameObject
-    private GameObject m_gameovermenu;         //Reference to the game over menu
+    private GameObject m_gameovermenu;  //Reference to the game over menu
+    private GameObject m_restartbutton; //Reference to the restart button
 
     public void StartInitialization()
     {
@@ -24,7 +26,7 @@ public class CanvasGameOverScript : MonoBehaviour {
 
         //Set references to children
         m_gameovermenu = gameObject.transform.GetChild(0).gameObject;
-
+        m_restartbutton = m_gameovermenu.transform.GetChild(2).gameObject;
         //Activate game over menu
         m_gameovermenu.SetActive(true);
 
@@ -52,5 +54,19 @@ public class CanvasGameOverScript : MonoBehaviour {
             score[i] = player.m_stats.getkills() * 10 + player.m_stats.getCurrency();
             scoretext.text += "Player" + (i + 1) + " : " + score[i];
         }
+    }
+
+    // Restart Scee
+    public void RestartScene(int sceneindex)
+    {
+        m_restartbutton.GetComponent<Button>().interactable = false;
+        m_restartbutton.transform.GetChild(0).GetComponent<Text>().text = "Restarting Game";
+        NextScene(sceneindex);
+    }
+
+    // Load next scene
+    public void NextScene(int sceneindex)
+    {
+        SceneManager.LoadScene(sceneindex);
     }
 }
