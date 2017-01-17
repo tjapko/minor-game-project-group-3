@@ -18,7 +18,7 @@ public class BulletFire : MonoBehaviour
     public Transform m_FireTransform;       // A child of the player where the shells are spawned.
     public Transform m_FireTransformSG;     // second transform for the Shotgun (only difference is the rotation)
     public Transform m_FireTransformSG2;    // third transform for the Shotgun (only difference is the rotation) 
-    Weapon currentWeapon;                   // the current weapon the player is holding
+    private Weapon currentWeapon;           // the current weapon the player is holding
     private string m_FireButton;            // The input axis that is used for launching shells.
     PlayerInventory playerinventory;        // The playerinventory of this player
     private string reloadButton;            // The reloadButton set on the 'r' button
@@ -285,5 +285,4 @@ public class BulletFire : MonoBehaviour
             gunSource.Play();
         }
     }
-
 }

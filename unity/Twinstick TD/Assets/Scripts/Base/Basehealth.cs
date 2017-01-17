@@ -10,6 +10,7 @@ public class Basehealth : MonoBehaviour {
     //References
     [Header("References")]
     public GameObject m_hitBaseCanvasPrefab;    //Reference to friendlyHit canvas;
+    private GameObject m_maincamera;            //Reference to maincamera
 
     //Public variables
     public float m_StartingHealth = 100f;           //Starting health
@@ -18,14 +19,18 @@ public class Basehealth : MonoBehaviour {
     public Color m_ZeroHealthColor = Color.red;     //Zero health colour
     public Slider m_Slider;
     public Image m_FillImage;
+
     //Private variables
     private float m_CurrentHealth;                  //Current health of tower
     [HideInInspector] public bool m_Dead = false;                            //Boolean if tower is dead
-    
+
     // OnEnable
     public void OnEnable()
-    {   
-		m_Dead = false;
+    {
+        //Set references
+        m_maincamera = GameObject.FindWithTag("MainCamera");
+
+        m_Dead = false;
 		gameObject.SetActive (true);
         //Set starting variables
         m_CurrentHealth = m_StartingHealth;
@@ -50,6 +55,7 @@ public class Basehealth : MonoBehaviour {
 				OnDeath ();
 			}
 		}
+		ScreenShake.ShakeBase ();
     }
 
     //Heal base
@@ -86,6 +92,23 @@ public class Basehealth : MonoBehaviour {
     {
         //Set hitmark
         GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
-        hitbox.GetComponent<HitMarkScript>().setDamage(amount);
+        HitMarkScript hitbox_script = hitbox.GetComponent<HitMarkScript>();
+        hitbox_script.setDamage(amount);
+        hitbox_script.setCamera(m_maincamera);
+        hitbox_script.lookToCamera();
+        hitbox.SetActive(true);
+    }
+
+    //Increase max health
+    public void incMaxHealth(int amount)
+    {
+        m_maxhealth += amount;
+        m_CurrentHealth += amount;
+    }
+
+    //Getter for current health
+    public float getCurrentHealth()
+    {
+        return m_CurrentHealth;
     }
 }

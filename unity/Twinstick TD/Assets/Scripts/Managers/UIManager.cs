@@ -4,32 +4,87 @@ using System.Collections;
 /// <summary>
 /// UI Manager
 /// </summary>
-public class UIManager {
+public class UIManager : MonoBehaviour {
+
+    //Prefabs
+    public GameObject m_CanvasBaseUpgradePrefab;//GameObject Canvas BaseUpgrade
+    public GameObject m_CanvasConstructionPrefab;//GameObject Canvas Construction
+    public GameObject m_CanvasGameOverPrefab;   //GameObject Canvas Game Over
+    public GameObject m_CanvasHelpScreen;       //GameObject Canvas Help Screen
+    public GameObject m_CanvasPauseMenuPrefab;  //GameObject Canvas Pause Menu
+    public GameObject m_CanvasPlayerUIPrefab;   //GameObject Canas Player UI
+    public GameObject m_CanvasShopPrefab;       //GameObject Canvas Shop
 
     //References
-    public GameObject go_mapUI;     //Reference to mapUI (gameobject)
-    public GameObject go_mapShopUI; //Reference to shopUI (gameobject)
-    
+    [HideInInspector] public GameObject go_CanvasBaseUpgrade; //GameObject Canvas Game Over
+    [HideInInspector] public GameObject go_CanvasConstruction;//GameObject Canvas Construction
+    [HideInInspector] public GameObject go_CanvasGameOver;    //GameObject Canvas Game Over
+    [HideInInspector] public GameObject go_CanvasPauseMenu;   //GameObject Canvas Pause Menu
+    [HideInInspector] public GameObject go_CanvasPlayerUI;    //GameObject Canas Player UI
+    [HideInInspector] public GameObject go_CanvasShop;        //GameObject Canvas Shop
+    [HideInInspector] public GameObject go_Shop;              //GameObject Shop
+    [HideInInspector] public GameObject go_Base;              //GameObject Shop
+
     private GameManager m_gamemanager;  //Reference to GameManager
     private UserManager m_usermanager;  //Reference to UserManager
-    private MapUIScript m_mapui;        //Reference to MapUIScript
-    private ShopUIScript m_shopUI;      //Referene to ShopUIScript
+    private CanvasBaseUpgrade m_BaseUpgradeScript;      //Reference to CanvasBaseUpgradeScript
+    private CanvasConstructionScript  m_ConstructionScript;  //Reference to CanvasConstructionScript
+    private CanvasGameOverScript m_GameOverScript;      //Reference to CanvasGameOverScript
+    private CanvasPauseMenuScript m_PauseMenuScript;    //Reference to CanvasPauseMenuScript
+    private CanvasPlayerUIScript m_PlayerUIScript;      //Reference to CanvasPlayerUIScript
+    private ShopUIScript m_ShopUIScript;    //Reference to ShopUIScript
 
 
     //Constructer
-    public UIManager(GameManager gamemanager, GameObject mapuiPrefab, GameObject mapshopuiPrefab)
+    public void StartInitialization()
     {
-        m_gamemanager = gamemanager;
+        //Find Game manager
+        m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
         m_usermanager = m_gamemanager.getUserManager();
 
-        go_mapUI = GameObject.Instantiate(mapuiPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-        go_mapShopUI = GameObject.Instantiate(mapshopuiPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        //Instantiate and set references to canvasses (and shop)
+        GameObject.Instantiate(m_CanvasHelpScreen, Vector3.zero, Quaternion.identity);
+        go_CanvasBaseUpgrade= GameObject.Instantiate(m_CanvasBaseUpgradePrefab) as GameObject;
+        go_CanvasConstruction = GameObject.Instantiate(m_CanvasConstructionPrefab) as GameObject;
+        go_CanvasGameOver   = GameObject.Instantiate(m_CanvasGameOverPrefab) as GameObject;
+        go_CanvasPauseMenu  = GameObject.Instantiate(m_CanvasPauseMenuPrefab) as GameObject;
+        go_CanvasPlayerUI   = GameObject.Instantiate(m_CanvasPlayerUIPrefab) as GameObject;
+        go_CanvasShop       = GameObject.Instantiate(m_CanvasShopPrefab) as GameObject;
+        go_Shop = GameObject.FindWithTag("Shop");
+        go_Base = m_gamemanager.getBaseManager().m_Instance;
 
-        m_mapui = go_mapUI.GetComponent<MapUIScript>();
-        m_shopUI = go_mapShopUI.GetComponent<ShopUIScript>();
+        //Get scripts of canvasses
+        m_BaseUpgradeScript = go_CanvasBaseUpgrade.GetComponent<CanvasBaseUpgrade>();
+        m_ConstructionScript = go_CanvasConstruction.GetComponent<CanvasConstructionScript>();
+        m_GameOverScript = go_CanvasGameOver.GetComponent<CanvasGameOverScript>();
+        m_PauseMenuScript = go_CanvasPauseMenu.GetComponent<CanvasPauseMenuScript>();
+        m_PlayerUIScript = go_CanvasPlayerUI.GetComponent<CanvasPlayerUIScript>();
+        m_ShopUIScript = go_CanvasShop.GetComponent<ShopUIScript>();
 
-        ShopScript m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
-        m_shopscript.m_instance_UI = go_mapShopUI;
+        //Initialize Canvas
+        m_BaseUpgradeScript.StartInitialization();
+        m_ConstructionScript.StartInitialization();
+        m_GameOverScript.StartInitialization();
+        m_PauseMenuScript.StartInitialization();
+        m_PlayerUIScript.StartInitialization();
+        m_ShopUIScript.StartInitialization();
+
+        //Find shop and set variable
+        ShopScript m_shopscript = go_Shop.GetComponent<ShopScript>();
+        m_shopscript.m_instance_UI = go_CanvasShop;
+        m_shopscript.Start();
+        BaseUpgradeScript m_baseupgradescript = go_Base.GetComponent<BaseUpgradeScript>();
+        m_baseupgradescript.setReferenceBaseUpgradeUI(go_CanvasBaseUpgrade);
+
+        //Find base and set reference
+
+        //Set visibility of canvas
+        go_CanvasBaseUpgrade.SetActive(false);
+        go_CanvasConstruction.SetActive(false);
+        go_CanvasGameOver.SetActive(false);
+        go_CanvasPauseMenu.SetActive(false);
+        go_CanvasPlayerUI.SetActive(true);
+        go_CanvasShop.SetActive(false);
 
     }
 
@@ -41,41 +96,43 @@ public class UIManager {
         //Check for gameover
         if (gameover)
         {
-            m_mapui.showGameoverMenu(true);
-            m_mapui.showConstructonPanel(false);
-            m_mapui.showWaveControl(false);
-            m_mapui.showPauseMenu(false);
-            m_mapui.showWaveRemaining(false);
+            go_CanvasGameOver.SetActive(true);
+            go_CanvasConstruction.SetActive(false);
+            go_CanvasPauseMenu.SetActive(false);
+            go_CanvasPlayerUI.SetActive(false);
+            go_CanvasShop.SetActive(false);
         }
         else
         {
             //Check for pause
             if (pause)
             {
-                m_mapui.showConstructonPanel(false);
-                m_mapui.showWaveControl(false);
-                m_mapui.showPauseMenu(true);
-                m_mapui.showGameoverMenu(false);
-                m_mapui.showWaveRemaining(false);
+                go_CanvasGameOver.SetActive(false);
+                go_CanvasConstruction.SetActive(false);
+                go_CanvasPauseMenu.SetActive(true);
+                go_CanvasPlayerUI.SetActive(false);
+                go_CanvasShop.SetActive(false);
             }
             else
             {
                 //Check wavephase
                 if (wavephase)
                 {
-                    m_mapui.showWaveControl(true);
-                    m_mapui.showConstructonPanel(false);
-                    m_mapui.showPauseMenu(false);
-                    m_mapui.showGameoverMenu(false);
-                    m_mapui.showWaveRemaining(true);
+//					Debug.Log ("wavephase");
+                    go_CanvasGameOver.SetActive(false);
+                    go_CanvasConstruction.SetActive(false);
+                    go_CanvasPauseMenu.SetActive(false);
+                    go_CanvasPlayerUI.SetActive(true);
+                    m_PlayerUIScript.showWaveRemaining(true);
+
                 }
                 else
                 {
-                    m_mapui.showWaveControl(true);
-                    m_mapui.showConstructonPanel(true);
-                    m_mapui.showPauseMenu(false);
-                    m_mapui.showGameoverMenu(false);
-                    m_mapui.showWaveRemaining(false);
+                    go_CanvasGameOver.SetActive(false);
+                    go_CanvasConstruction.SetActive(true);
+                    go_CanvasPauseMenu.SetActive(false);
+                    go_CanvasPlayerUI.SetActive(false);
+                    m_PlayerUIScript.showWaveRemaining(false);
                 }
             }
         }
@@ -84,12 +141,12 @@ public class UIManager {
 
     public IEnumerator showWaveStatsUI()
     {
-        yield return m_mapui.showWaveStatsUI();
+        yield return StartCoroutine(m_PlayerUIScript.showWaveStatsUI());
     }
 
     public void setScore()
     {
-        m_mapui.setScore();
+        m_GameOverScript.setScore();
     }
    
 

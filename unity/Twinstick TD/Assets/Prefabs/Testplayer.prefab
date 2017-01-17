@@ -3750,6 +3750,15 @@ SkinnedMeshRenderer:
   m_DirtyAABB: 0
 --- !u!137 &137000013068077880
 SkinnedMeshRenderer:
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe2f9883b2907c48833e817b52bf8c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_playernumber: 0
+  m_playerstartcurrency: 20000
+  m_currency: 0
+--- !u!114 &114000013046789916
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -3922,6 +3931,37 @@ SkinnedMeshRenderer:
   m_DirtyAABB: 0
 --- !u!137 &137000013137183338
 SkinnedMeshRenderer:
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cdc8a7389f9c34b840ab01f09028ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_price_wall: 100
+  m_price_turret: 1000
+  m_price_carrot: 2500
+  m_price_mud: 500
+  m_markerprefab: {fileID: 1000011497653828, guid: e43e08069b90c8d409bb0d4bbd06a5e1,
+    type: 2}
+  m_wallprefab: {fileID: 1000012271596080, guid: fade7fc2720943e4d832fbe8c7cc8949,
+    type: 2}
+  m_turretprefab: {fileID: 1000013817965468, guid: 0037f108a08e3124aa89648971001aea,
+    type: 2}
+  m_carrotfieldprefab: {fileID: 1000013281537698, guid: c21fb4dac3cecb640bcb9c111c467a96,
+    type: 2}
+  m_mudprefab: {fileID: 1000013911877710, guid: b4c3a001e54be8748ad4a0e439f75526,
+    type: 2}
+  m_placedobjects: []
+  m_player:
+    m_Instance: {fileID: 0}
+    m_SpawnPoint: {fileID: 0}
+    m_movement: {fileID: 0}
+    m_shooting: {fileID: 0}
+    m_stats: {fileID: 0}
+    m_construction: {fileID: 0}
+    m_inventory: {fileID: 0}
+    m_playerhealth: {fileID: 0}
+    m_PlayerNumber: 0
+--- !u!114 &114000013388209428
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -4180,6 +4220,22 @@ SkinnedMeshRenderer:
   m_DirtyAABB: 0
 --- !u!137 &137000013419171326
 SkinnedMeshRenderer:
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96c17d720e33504d8aa5764beb3a5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_hitFriendlyCanvasPrefab: {fileID: 1000014289387730, guid: 34dffa4b43b2333489644d9d44bab2b1,
+    type: 2}
+  beatSource: {fileID: 82000012311326998}
+  m_maxHealth: 100
+  m_StartingHealth: 1
+  m_Slider: {fileID: 114000011672887518}
+  m_FillImage: {fileID: 114000013388209428}
+  m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
+  m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  m_Dead: 0
+--- !u!114 &114000014120976380
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}

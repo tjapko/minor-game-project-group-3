@@ -13,7 +13,7 @@ public class PlayerStatistics : MonoBehaviour {
     //Private variables
 
     private int m_kills;      // int which will hold the number of kills per player
-    private int m_currency;  // the currency can be the amount of carrots in the base (Carrots-farm) = baseHealth
+    public int m_currency;  // the currency can be the amount of carrots in the base (Carrots-farm) = baseHealth
 	private int m_metSalesmanAmount;  // the amount that the player meets the Salesman
 
     // Use this for initialization

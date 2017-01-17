@@ -9,32 +9,32 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000010073149380}
+  m_RootGameObject: {fileID: 1000011736931772}
   m_IsPrefabParent: 1
---- !u!1 &1000010073149380
+--- !u!1 &1000011736931772
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000010085738598}
-  - 114: {fileID: 114000012744741884}
-  - 82: {fileID: 82000011847859626}
-  - 82: {fileID: 82000011364484344}
+  - 4: {fileID: 4000013010084880}
+  - 114: {fileID: 114000012087956578}
+  - 82: {fileID: 82000010785898864}
+  - 82: {fileID: 82000012691815352}
   m_Layer: 0
   m_Name: Gamemanager
   m_TagString: Gamemanager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!4 &4000010085738598
+--- !u!4 &4000013010084880
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010073149380}
+  m_GameObject: {fileID: 1000011736931772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -42,15 +42,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!82 &82000011364484344
+--- !u!82 &82000010785898864
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010073149380}
+  m_GameObject: {fileID: 1000011736931772}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243000010068878376, guid: 6cc270b4902593f4fa6a0ec1a20667a1,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -116,12 +117,12 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!82 &82000011847859626
+--- !u!82 &82000012691815352
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010073149380}
+  m_GameObject: {fileID: 1000011736931772}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -129,7 +130,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   Priority: 128
@@ -190,29 +191,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114000012744741884
+--- !u!114 &114000012087956578
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010073149380}
+  m_GameObject: {fileID: 1000011736931772}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac87c7543c3d87d4494cbed3ec8e3b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_amountofplayers: 1
-  m_waveDelay: 3
-  m_EndDelay: 3
-  backgroundSource: {fileID: 82000011847859626}
+  m_waveDelay: 1
+  m_EndDelay: 1
+  backgroundSource: {fileID: 82000012691815352}
   backgroundSounds:
-  - {fileID: 8300000, guid: 5b6b439bc8bee6f4c901e4fb8dd7547d, type: 3}
   - {fileID: 8300000, guid: 40b09d35affa9c7429f5a7d5d5f6bf70, type: 3}
+  - {fileID: 8300000, guid: 5b6b439bc8bee6f4c901e4fb8dd7547d, type: 3}
   - {fileID: 8300000, guid: 0660e8dbd3ec1e1478958e173ed79815, type: 3}
-  gongSource: {fileID: 82000011364484344}
+  gongSource: {fileID: 82000010785898864}
   gongSound: {fileID: 8300000, guid: 73e875b1afb672e43b0a803abb4a21d8, type: 3}
-  m_uiprefab: {fileID: 1000011379212736, guid: 55b65d527b3aec941a018aa2b6fbe275, type: 2}
-  m_baseprefab: {fileID: 1000013595951870, guid: 43fbb3d1a5d35d04c9c9d663b40d8d3b,
+  m_baseprefab: {fileID: 1000013595951870, guid: 2d011ede6f946374bad3aa43eb65f5af,
     type: 2}
   m_Playerprefab: {fileID: 1000012244867938, guid: 6526df5f06f78a5438cb83f5730a0724,
     type: 2}
@@ -232,3 +232,4 @@ MonoBehaviour:
   m_Playerspawnpoint: {fileID: 0}
   m_Enemyspawnpoint: {fileID: 0}
   m_CameraControl: {fileID: 0}
+  m_weaponshop: {fileID: 0}

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 {
     //Public variables
     public int m_amountofplayers;               // Total amount of players that are participating
+    //public float m_beginDelay = 3;
     public float m_waveDelay = 15f;              // The delay between ending and starting of wave
     public float m_EndDelay = 3f;               // The delay between losing and restarting
     public AudioSource backgroundSource;
@@ -19,8 +20,6 @@ public class GameManager : MonoBehaviour
     public AudioClip gongSound;
 
     //References
-    public GameObject m_uiprefab;               // Reference to UI prefab
-    public GameObject m_shopuiprefab;           // Reference to the shopUI prefab
     public GameObject m_baseprefab;             // Reference to the base
     public GameObject m_Playerprefab;           // Reference to the prefab the players will control.
 	public GameObject m_Enemyprefab1;       //Reference to prefab of enemy1
@@ -55,18 +54,18 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //Setting up variables
+        //m_StartWait = new WaitForSeconds(m_beginDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
 
         //Initialize managers
 		m_travellingSalesmanManager = new TravellingSalesmanManager(m_travellingSalesman);
         m_players = new UserManager(m_Playerprefab, m_Playerspawnpoint, m_amountofplayers);
         
-
         m_base = new BaseManager(m_baseprefab, m_Basespawnpoint);
 		m_gridManager = new GridManager(m_gridPrefab);
 
         //Initialize UI script
-        m_uiscript = new UIManager(gameObject.GetComponent<GameManager>(), m_uiprefab, m_shopuiprefab);
+        m_uiscript = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
 
         // Start the game
         StartCoroutine(GameLoop());
@@ -87,24 +86,23 @@ public class GameManager : MonoBehaviour
             if (!gameover)
             {
                 //Check if shop UI is active
-                if (m_uiscript.go_mapShopUI.activeSelf)
+                if (m_uiscript.go_CanvasShop.activeSelf)
                 {
-                    m_uiscript.go_mapShopUI.SetActive(false);
+                    m_uiscript.go_CanvasShop.SetActive(false);
+                }
+                //Check if players are constructing
+                else if(m_players.checkConstruction()){
+
                 }
                 else
                 {
                     gamepause = !gamepause;
+                    pauseGame(gamepause);
+                    m_uiscript.UIchange(gameover, wavephase, gamepause);
                 }
             }
             
         }
-        pauseGame(gamepause);
-
-        //Set the Object placement phase
-        m_players.setConstructionphase(!wavephase);
-
-        //Show or hide UI menu depending on wavephase and pause
-        m_uiscript.UIchange(gameover, wavephase, gamepause);
 
 		// if base is dead, all existing enemies move to player
 		if (!m_wave.baseDead && m_base.m_Instance.activeSelf == false) {
@@ -116,12 +114,16 @@ public class GameManager : MonoBehaviour
     // This is called from start and will run each phase of the game one after another.
     private IEnumerator GameLoop()
     {
+        //Initialize other game objects
+        m_base.spawnBase();
+        m_uiscript.StartInitialization();   //Initialize UI script
+
         // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
         yield return StartCoroutine(Startgame());
-  
+
         //Play round
         yield return StartCoroutine(wavePhase());
-        
+
         // Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
         yield return StartCoroutine(RoundEnding());
 
@@ -142,8 +144,6 @@ public class GameManager : MonoBehaviour
 		if (m_players.m_playerlist.Count == 0) {
 			m_players.spawnPlayers ();
 		}
-		//spawn base
-        m_base.spawnBase();
 
         //Set camera
         SetCameraTargets();
@@ -160,6 +160,10 @@ public class GameManager : MonoBehaviour
         gamepause = false;
         gameover =  false;
 
+        //Set canvas
+        m_players.setConstructionphase(!wavephase);
+        m_uiscript.UIchange(gameover, wavephase, gamepause);
+
         //Set camera
         m_CameraControl.SetStartPositionAndSize();
         
@@ -170,17 +174,13 @@ public class GameManager : MonoBehaviour
     //Play round
     private IEnumerator wavePhase()
     {
-        // Clear the text from the screen.
-        // m_MessageText.text = string.Empty;
-        
-
-
         // Wait until base has no health or players are dead
         while (!playersDead())
-
         {
             wavephase = true;
-            
+            m_players.setConstructionphase(!wavephase);
+            m_uiscript.UIchange(gameover, wavephase, gamepause);
+
 
             //Enemies are dead
             if (m_wave.EnemiesDead())
@@ -197,8 +197,6 @@ public class GameManager : MonoBehaviour
                 gongSource.Play();
 
                 yield return StartCoroutine(m_wave.NextWave());
-
-              
                 
 				//TravellingSalesman (); // spawning of the TravellingSalesman
 
@@ -216,6 +214,10 @@ public class GameManager : MonoBehaviour
         //Player has lost
         gameover = true;
         gamepause = true;
+        m_uiscript.UIchange(gameover, wavephase, gamepause);
+        m_players.setConstructionphase(!wavephase);
+        pauseGame(gamepause);
+
         Debug.Log("GAME OVER");
         
     }
@@ -233,16 +235,22 @@ public class GameManager : MonoBehaviour
     // Construction phase
     private IEnumerator constructionPhase()
     {
+		// switch Main camera to construction camera 
+		CameraControl.switchMainCamToConstructionCam ();
+
         //Set wavephase to false and set timer
         wavephase = false;
+        m_players.setConstructionphase(!wavephase);
+        m_uiscript.UIchange(gameover, wavephase, gamepause);
+
         StartCoroutine(constructionphaseTimer());
-        
         //While the game is in construction phase perform actions
         //Can get out of while loop by getting signal from next wave button
         //Can get out of while loop when timer reaches time 
         // Timer must be shorter than time of ending next wave, incase user presses next wave button !!!! (needs fix)
         while(!wavephase)
         {
+			m_players.disablePlayersControl2();
             yield return null;
         }
 
@@ -261,7 +269,15 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+
         wavephase = true;
+        m_players.setConstructionphase(!wavephase);
+        m_uiscript.UIchange(gameover, wavephase, gamepause);
+
+		// switch Main camera to construction camera 
+		CameraControl.switchConstructionCamToMainCam ();
+		m_players.enablePlayersControl2();
+
     }
 
     //Pause game function
@@ -274,12 +290,9 @@ public class GameManager : MonoBehaviour
             m_wave.DisableEnemyWaveControl();
         } else
         {
-
-           
             Time.timeScale = 1;
             m_players.enablePlayersControl();
             m_wave.EnableEnemyWaveControl();
-            
         }
         
     }
@@ -314,6 +327,18 @@ public class GameManager : MonoBehaviour
     // Input from restart button
     public void btn_restartgame()
     {
+        //Reset variables
+        wavephase = false;
+        gameover = false;
+        gamepause = false;
+        pauseGame(gamepause);   //Reset game pause
+
+        //Reset canvas
+        m_uiscript.UIchange(gameover, wavephase, gamepause);
+        m_weaponshop.GetComponent<ShopScript>().resetShop();
+
+        //Start new game
+		CameraControl.restartCam();
         StartCoroutine(GameLoop());
     }
 
@@ -321,12 +346,15 @@ public class GameManager : MonoBehaviour
     public void btn_nextwave()
     {
         wavephase = true;
+        m_players.setConstructionphase(!wavephase);
+        m_uiscript.UIchange(gameover, wavephase, gamepause);
     }
 
     // Input from pause button
     public void setpause(bool status)
     {
         gamepause = status;
+        m_uiscript.UIchange(gameover, wavephase, gamepause);
     }
 
 	// spawning of the travellingSalesman
@@ -334,7 +362,7 @@ public class GameManager : MonoBehaviour
 		// check if the Salesman needs to be spawned and not already spawned
 		if (m_waveNumber % m_travellingSalesmanManager.getWavePerTravellingSalesman()==0 &&
 			!m_travellingSalesmanManager.getWork()) {
-			m_travellingSalesmanManager.spawnTravellingSalesman (m_gridManager.m_grid);
+			//m_travellingSalesmanManager.spawnTravellingSalesman (m_gridManager.m_grid); // commented to disable the salesman
 		}
 	}
 
@@ -355,9 +383,16 @@ public class GameManager : MonoBehaviour
         return m_waveNumber;
     }
 
+    //Getter Wave Manager
     public WaveManager getWaveManager()
     {
         return m_wave;
+    }
+
+    //Getter Base Manager
+    public BaseManager getBaseManager()
+    {
+        return m_base;
     }
 }
 

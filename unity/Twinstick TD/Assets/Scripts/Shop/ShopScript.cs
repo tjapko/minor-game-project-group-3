@@ -13,29 +13,40 @@ public class ShopScript : MonoBehaviour {
     string use_button = "f";    //Set to use button of player[i]
 
     //Public variables
-    public int maxweapons = 3;
-    public int maxammotype = 3;
-    public List<Weapon> weaponsforsale;
-    public List<Weapon> ammoforsale;
-    public Rigidbody m_Bullet;  // Prefab of the shell.
-    public Rigidbody m_RayBullet;  // Prefab of the Rayshell.
-    public Transform m_FireTransform;           // A child of the player where the shells are spawned.
+    [HideInInspector] public int maxweapons = 4;    //Max weapons the store may contain
+    //[HideInInspector] public int maxammotype = 4;   //Max ammo type the store may contain
+    [HideInInspector] public List<Weapon> weaponsforsale;
+    //[HideInInspector] public List<Weapon> ammoforsale;
+    public int[] upgrade_cost = new int[4]; //Upgrade to next tier [0] should be empty
 
-    //Reference
-    public GameObject m_ShopUIprefab;
-    public GameObject m_instance_UI;
+    //References
+    public GameObject helpbox_prefab;   //Helpbox prefab
+    [HideInInspector] public GameObject m_instance_UI;  //Reference to instance of shop UI (set by UIManager)
+    public Rigidbody m_Bullet;          // Prefab of the shell.
+    public Rigidbody m_RayBullet;       // Prefab of the Rayshell.
+    public Transform m_FireTransform;   // A child of the player where the shells are spawned.
+    private GameManager m_gamemanager;  // Reference to the game manager
+    private UserManager m_usermanager;  // Reference to the user manager
 
-    //Private variables
-    private List<GameObject> players_present;
-    private bool showUI;
+    //Private variables 
+    private Weapon weapon1, weapon2, weapon3, weapon4;
+    private List<GameObject> players_present;   //List of players that are near the shop
+    private bool showUI;    //Boolean if shopUI should be visible
+    private bool box_shown; //Boolean if helpbox has been shown
+    private int current_tier;   //int : current tier of purchasable weapons (starts at 1)
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    public void Start() {
         //Instantiate Lists
         players_present = new List<GameObject>();
         weaponsforsale = new List<Weapon>();
-        ammoforsale = new List<Weapon>();
-        
+        //ammoforsale = new List<Weapon>();
+
+        //Set references
+        m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
+        m_usermanager = m_gamemanager.getUserManager();
+
 
         //Create empty weaponsforsale
         while (weaponsforsale.Count < maxweapons)
@@ -44,53 +55,128 @@ public class ShopScript : MonoBehaviour {
         }
 
         //Create empty ammoforsale
-        while(ammoforsale.Count < maxammotype)
+        //while(ammoforsale.Count < maxammotype)
+        //{
+        //    ammoforsale.Add(new global::Weapon());
+        //}
+
+        showUI = false; //Set UI active
+        box_shown = false;
+        current_tier = 1;
+
+
+        //        For testing
+        //      ............. Weapon(name               , id , description       , iconname  , price            , itemtype                   , fireratef           , launchforcef           , maxDamagef           , reloadTimef           , clipsize            , ammo            , ammopriceperclip     , ammoInClip            , maxAmmo            , lifetime)
+        weapon1 = new Weapon("Default Weapon", 1, "Default weapon!", "Weapon1", HandGun.price, Weapon.ItemType.HandGun, HandGun.fireRate, HandGun.launchForce, HandGun.maxDamage, HandGun.reloadTime, HandGun.clipSize, HandGun.ammo, HandGun.ammoprice, HandGun.ammoInClip, HandGun.maxAmmo, HandGun.bulletLifeTime);
+        weapon4 = new Weapon("Default Weapon 4", 4, "Default weapon!", "sniper", Sniper.price[0], Weapon.ItemType.Sniper, Sniper.fireRate[0], Sniper.launchForce, Sniper.maxDamage[0], Sniper.reloadTime, Sniper.clipSize[0], Sniper.ammo[0], Sniper.ammoprice, Sniper.ammoInClip[0], Sniper.maxAmmo[0], Sniper.bulletLifeTime);
+        weapon2 = new Weapon("Default Weapon 2", 2, "Default weapon!", "shotgun", ShotGun.price[0], Weapon.ItemType.Shotgun, ShotGun.fireRate[0], ShotGun.launchForce, ShotGun.maxDamage[0], ShotGun.reloadTime, ShotGun.clipSize[0], ShotGun.ammo[0], ShotGun.ammoprice, ShotGun.ammoInClip[0], ShotGun.maxAmmo[0], ShotGun.bulletLifeTime);
+        weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", MachineGun.price[0], Weapon.ItemType.MachineGun, MachineGun.fireRate[0], MachineGun.launchForce, MachineGun.maxDamage[0], MachineGun.reloadTime, MachineGun.clipSize[0], MachineGun.ammo[0], MachineGun.ammoprice, MachineGun.ammoInClip[0], MachineGun.maxAmmo[0], MachineGun.bulletLifeTime);
+        addWeapon((Weapon)weapon1);
+        addWeapon((Weapon)weapon4);
+        addWeapon((Weapon)weapon2);
+        addWeapon((Weapon)weapon3);
+       
+        //		Upgrade (2); // for testing purposes
+
+    }
+
+    public void Upgrade(int level)
+    {
+        SetGun(level, "ammo");
+        SetGun(level, "price");
+        SetGun(level, "firerate");
+        SetGun(level, "maxdamage");
+        SetGun(level, "clipsize");
+        SetGun(level, "ammoinclip");
+        SetGun(level, "maxammo");
+
+        List<Weapon> temp = new List<Weapon>();
+        temp.Add((Weapon)weapon1);
+        temp.Add((Weapon)weapon4);
+        temp.Add((Weapon)weapon2);
+        temp.Add((Weapon)weapon3);
+
+        weaponsforsale = temp;
+    }
+
+    // sets the ammo for weapons1-4 
+    private void SetGun(int level, string specification)
+    {
+        switch (specification.ToLower())
         {
-            ammoforsale.Add(new global::Weapon());
+            case "ammo":
+                // Set ammo a level higher for all weapons
+                weapon2.ammo = ShotGun.ammo[level];
+                weapon3.ammo = MachineGun.ammo[level];
+                weapon4.ammo = Sniper.ammo[level];
+                break;
+
+        // Set ammoInClip a level higher for all weapons
+            case "ammoinclip":
+                weapon2.ammoInClip = ShotGun.ammoInClip[level];
+                weapon3.ammoInClip = MachineGun.ammoInClip[level];
+                weapon4.ammoInClip = Sniper.ammoInClip[level];
+                break;
+            // Set clipSize a level higher  for all weapons
+            case "slipsize":
+                weapon2.clipSize = ShotGun.clipSize[level];
+                weapon3.clipSize = MachineGun.clipSize[level];
+                weapon4.clipSize = Sniper.clipSize[level];
+                break;
+            // Set Damage a level higher for all weapons 
+            case "maxdamage":
+                weapon2.maxDamage = ShotGun.maxDamage[level];
+                weapon3.maxDamage = MachineGun.maxDamage[level];
+                weapon4.maxDamage = Sniper.maxDamage[level];
+                break;
+            // Set the price a level higher for all weapons 
+            case "price":
+                weapon2.price = ShotGun.price[level];
+                weapon3.price = MachineGun.price[level];
+                weapon4.price = Sniper.price[level];
+                break;
+
+            // Set the fireRate a level higher for all weapons
+            case "firerate":
+                weapon2.fireRate = ShotGun.fireRate[level];
+                weapon3.fireRate = MachineGun.fireRate[level];
+                weapon4.fireRate = Sniper.fireRate[level];
+                break;
+
+            // Set the maxAmmo a level higher for all weapons
+            case "maxammo":
+                weapon2.maxAmmo = ShotGun.maxAmmo[level];
+                weapon3.maxAmmo = MachineGun.maxAmmo[level];
+                weapon4.maxAmmo = Sniper.maxAmmo[level];
+                break;
+
+            case "id":
+                weapon2.itemID += weaponsforsale.Count;
+                weapon3.itemID += weaponsforsale.Count;
+                weapon4.itemID += weaponsforsale.Count;
+                break;
+
         }
-
-        //Instantiate UI
-        //m_instance_UI = GameObject.Instantiate(m_ShopUIprefab);
-        //m_instance_UI.GetComponent<ShopUIScript>().m_shopscript = gameObject.GetComponent<ShopScript>();
-        //m_instance_UI.SetActive(false);
-
-        //Set UI active
-        showUI = false;
-
-        //For testing
-        //.................. Weapon(name              , id, description      , iconname , price , itemtype               ,  fireratef , launchforcef , maxDamagef, reloadTimef, clipsize ,  ammo , ammopriceperclip, ammoInClip, maxAmmo, lifetime)
-        Weapon weapon1 = new Weapon("Default Weapon 2", 2, "Default weapon!", "shotgun", 4000, Weapon.ItemType.Shotgun,      1.0f   , 50f, 2f, 0.5f, 10, 20, 30, 10, 200, 0.4f);
-        Weapon weapon2 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", 6000, Weapon.ItemType.MachineGun,   10f     ,    50f, 0.25f, 1.0f, 60, 120, 20, 60, 480, 2f);
-        Weapon weapon3 = new Weapon("Default Weapon 3", 4 , "Default weapon!", "sniper", 2000, Weapon.ItemType.Sniper ,      1.0f      , 100f         , 10f      , 1.0f       , 5         , 10    , 20				,5 			,50      , 3f);
-        addWeapon(weapon3);
-		addWeapon(weapon1);
-        addWeapon(weapon2);
-
     }
 
     // Update is called once per frame
     void Update () {
         showUI = m_instance_UI.activeSelf;
 
-        //Change plz (check for every player)
-        if (players_present.Count > 0)
+        //Check for keyinput
+        if (Input.GetKeyDown(use_button))
         {
-            if (Input.GetKeyDown(use_button))
+            //Fix:Should checke every key input of players present in list
+            if (players_present.Count > 0)
             {
                 showUI = !showUI;
                 m_instance_UI.SetActive(showUI);
 
-
                 //Set reference to player that has opened the UI
-                GameObject root = GameObject.FindWithTag("Gamemanager");
-                GameManager gm = root.GetComponent<GameManager>();
-
-                //NEEDS FIX
+                //Fix:
                 int playernumber = players_present[0].GetComponent<PlayerStatistics>().m_playernumber;
-                PlayerManager player = gm.getUserManager().m_playerlist[playernumber];
-                m_instance_UI.GetComponent<ShopUIScript>().m_currentplayer = player;
+                m_instance_UI.GetComponent<ShopUIScript>().m_currentplayer = m_usermanager.m_playerlist[playernumber];
             }
-
         }
 
         // Disable UI
@@ -108,6 +194,14 @@ public class ShopScript : MonoBehaviour {
         if (other.gameObject.CompareTag("Player"))
         {
             addplayer(other.gameObject);
+
+            if (!box_shown)
+            {
+                GameObject instance = GameObject.Instantiate(helpbox_prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+                SpeechBubbleScript instance_script = instance.GetComponent<SpeechBubbleScript>();
+                instance_script.setText("Press '" + use_button + "' to open the store");
+                box_shown = true;
+            }
         }
     }
 
@@ -127,10 +221,9 @@ public class ShopScript : MonoBehaviour {
             {
                 showUI = false;
                 m_instance_UI.SetActive(false);
+                m_usermanager.m_playerlist[playernumber].m_shooting.enabled = true;
             }
         }
-
-        
     }
 
     //Add player to player present list
@@ -207,6 +300,7 @@ public class ShopScript : MonoBehaviour {
     }
 
     //Add item to forsalelist
+    /*
     private void addAmmo(Weapon newAmmo)
     {
         for (int i = 0; i < ammoforsale.Count; i++)
@@ -239,6 +333,7 @@ public class ShopScript : MonoBehaviour {
             }
         }
     }
+    */
 
     //Getter show UI
     public bool getActiveUI()
@@ -246,4 +341,22 @@ public class ShopScript : MonoBehaviour {
         return showUI;
     }
 
+    //Increase tier and load new weapons
+    public void incTier()
+    {
+        Upgrade(current_tier);
+        current_tier++;
+    }
+
+    //Getter for current_tier
+    public int getCurrentTier()
+    {
+        return current_tier;
+    }
+
+    //Reset shop
+    public void resetShop()
+    {
+        Start();
+    }
 }

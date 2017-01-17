@@ -7,7 +7,7 @@ using System;
 ///  inherits from "Item"
 /// </summary>
 public class Weapon : Item {
-
+	
     public float bulletLifeTime;    // the lifetime of the bullet 
     public float fireRate;          // the fire rate of the weapon 
     public float launchForce;       // the launchforce of the weapon for the bullet (speed)
@@ -18,6 +18,7 @@ public class Weapon : Item {
 	public int ammoprice;			// the price for new ammo !!per clip!!
     public int ammoInClip;          // the ammo in the clip 
 	public int maxAmmo;				// max ammo player can carry
+    public int price;               // the price of the weapon
     
     //Constructor
     // weapon(name , id , description , iconname ,price ,itemtype, fireratef , launchforcef , maxDamagef, reloadTimef,clipsize ,  ammo , ammoInClip, bulletLifeTime)
@@ -26,6 +27,7 @@ public class Weapon : Item {
         fireRate = _fireRate;
         launchForce = _launchForce;
         maxDamage = _maxDamage;
+        this.price = price;
         clipSize = _clipSize;
         ammo = _ammo;
 		ammoprice = _ammoprice;

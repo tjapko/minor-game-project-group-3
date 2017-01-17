@@ -1,23 +1,31 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class CameraControl : MonoBehaviour
 {
     public float m_DampTime = 0.2f;                 // Approximate time for the camera to refocus.
     public float m_ScreenEdgeBuffer = 4f;           // Space between the top/bottom most target and the screen edge.
     public float m_MinSize = 6.5f;                  // The smallest orthographic size the camera can be.
-    [HideInInspector]
-    public Transform[] m_Targets; // All the targets the camera needs to encompass.
+    [HideInInspector] public Transform[] m_Targets; // All the targets the camera needs to encompass.
+	[HideInInspector]public static Camera m_Camera; // Used for referencing the camera.
+	[HideInInspector] public static Vector3 m_constructionCamPos = new Vector3 (3, 15, -12);
 
-
-    private Camera m_Camera;                        // Used for referencing the camera.
-    private float m_ZoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
+	private float m_ZoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
     private Vector3 m_MoveVelocity;                 // Reference velocity for the smooth damping of the position.
     private Vector3 m_DesiredPosition;              // The position the camera is moving towards.
+	private static Camera m_constructionCam;
+	private static Vector3 m_MainCamPos;
+	private static Camera bg;
 
 
     private void Awake()
     {
-        m_Camera = GetComponentInChildren<Camera>();
+		Camera[] Cameras = GetComponentsInChildren<Camera> ();
+		m_Camera = Cameras [0];
+		m_constructionCam = Cameras [1];
+		bg = Cameras [2];
+		m_constructionCam.transform.position = m_constructionCamPos;
+		m_MainCamPos = m_Camera.transform.position;
     }
 
 
@@ -28,6 +36,7 @@ public class CameraControl : MonoBehaviour
 
         // Change the size of the camera based.
         Zoom();
+	
     }
 
 
@@ -99,10 +108,10 @@ public class CameraControl : MonoBehaviour
             // Find the position of the target from the desired position of the camera's local space.
             Vector3 desiredPosToTarget = targetLocalPos - desiredLocalPos;
 
-            // Choose the largest out of the current size and the distance of the tank 'up' or 'down' from the camera.
+			// Choose the largest out of the current size and the distance of the character 'up' or 'down' from the camera.
             size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.y));
 
-            // Choose the largest out of the current size and the calculated size based on the tank being to the left or right of the camera.
+            // Choose the largest out of the current size and the calculated size based on the character being to the left or right of the camera.
             size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.x) / m_Camera.aspect);
         }
 
@@ -127,4 +136,38 @@ public class CameraControl : MonoBehaviour
         // Find and set the required size of the camera.
         m_Camera.orthographicSize = FindRequiredSize();
     }
+
+	// switches camera from maincam to constructioncam
+	public static void switchMainCamToConstructionCam() {
+		bg.enabled = true;
+		bg.gameObject.SetActive (true);
+		m_Camera.enabled = false;
+		m_Camera.gameObject.SetActive (false);
+		// set right camera position
+		m_constructionCam.transform.position = m_constructionCamPos;
+		// switch cameras
+		m_constructionCam.enabled = true;
+		m_constructionCam.gameObject.SetActive(true);
+
+	
+	}
+
+	// switches camera from constructioncam to maincam 
+	public static void switchConstructionCamToMainCam() {
+		bg.enabled = false;
+		bg.gameObject.SetActive (false);
+
+
+		//switch cameras
+		m_Camera.enabled = true;
+		m_Camera.gameObject.SetActive(true);
+		m_constructionCam.enabled = false;
+		m_constructionCam.gameObject.SetActive(false);
+	}
+
+	public static void restartCam() {
+		m_Camera.transform.position = m_MainCamPos;
+		m_constructionCam.transform.position = m_constructionCamPos;
+	}
+
 }

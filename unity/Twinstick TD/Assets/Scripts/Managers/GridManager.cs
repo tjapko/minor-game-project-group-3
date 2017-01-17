@@ -29,14 +29,16 @@ public class GridManager
 
 	//Sets up the grid and gets the components of the prefab
 	public void setup(){
-		this.m_grid = m_gridPrefab.GetComponent<Grid>();
-		this.m_pathFinding = m_gridPrefab.GetComponent<PathFinding>();
-		this.m_request = m_gridPrefab.GetComponent<PathRequestManager>();
+        this.m_instance = GameObject.Instantiate(m_gridPrefab) as GameObject;
+        this.m_grid = m_instance.GetComponent<Grid>();
+		this.m_pathFinding = m_instance.GetComponent<PathFinding>();
+		this.m_request = m_instance.GetComponent<PathRequestManager>();
+
 		m_grid.displayGridGizmos = displayGrid;
 		m_grid.gridWorldSize = new Vector2 (xGrid, yGrid);
 		m_grid.nodeRadius = denodeRadius;
 		m_grid.unwalkableMask = LayerMask.GetMask ("Unwalkable");
-		this.m_instance = GameObject.Instantiate (m_gridPrefab) as GameObject;
+		
 
 	}
 
