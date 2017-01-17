@@ -45,7 +45,7 @@ public class CarrotFieldScript : MonoBehaviour {
 		// If the current health is at or below zero and it has not yet been registered, call OnDeath.
 		if (m_currentHealth <= 0f && !m_Dead)
 		{
-			CancelInvoke ();
+			//CancelInvoke ();
 			OnDeath();
 		}
 	}
@@ -71,7 +71,8 @@ public class CarrotFieldScript : MonoBehaviour {
 	private void OnDeath()
 	{
 		m_Dead = true;
-		gameObject.SetActive(false);
+		//gameObject.SetActive(false);
+		Destroy (gameObject);
 	}
 
     //Initialize variables

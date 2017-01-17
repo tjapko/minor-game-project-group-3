@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         m_uiscript.UIchange(gameover, wavephase, gamepause);
 
 		// if base is dead, all existing enemies move to player
-		if (!m_wave.baseDead && m_base.m_Instance.activeSelf == false) {
+		if (!m_wave.baseDead && m_base.m_Instance == null) {
 			m_wave.baseDead = true;
 			m_wave.enemiesToPlayer ();
 		}

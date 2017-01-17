@@ -10,21 +10,22 @@ public class UnitPlayer : MonoBehaviour {
 	public Transform m_base;  			// the baselocation 
 	public Transform m_player;			// the playerlocation
 	public float speed; 				// moving speed
-	public bool playerFirst; 			// walking to player first or not
 	public bool baseHit = false; 		// has hit the base or not
 	public float m_threshold = -20.0f; 	// maybe variable for GA
 	public float timeNewPath = 2f; 		// interval between new pathcalculation to enemy
 	public float mudSpeed = 2f;
 	public float normalSpeed = 6f;
 	public float bossSpeed = 3f;
-
+	public bool enemyType; 				// true is enemy 3, false enemy 2
 	Vector3[] path; 					// The walkable path
 	int targetIndex;					// The index of the waypointArray. The unit moves to path[targetIndex]  
+	public GameObject currentGoal;
 
 	//Calculates distance to each playerObject in the scene and chooses closest as target
-	public void calcDistance(bool secondCheck){
+	public void calcDistance(bool playerCheck){
+		currentGoal = null;
+		enemyType = playerCheck;
 		float smallestDist = 10000f;
-		GameObject currentGoal = null;
 		List<GameObject> objects = getObjects ();
 		foreach (GameObject playerObject in objects){
 			float dist = Vector3.Distance (playerObject.transform.position, transform.position);
@@ -39,18 +40,19 @@ public class UnitPlayer : MonoBehaviour {
 			//if no playerobjects go to player
 			goToPlayer ();
 		}// check every 2 seconds distance to player
-		if (secondCheck) {
-			InvokeRepeating ("playerDist", 0f, 2f);
+		if (playerCheck) {
+			InvokeRepeating ("playerDist", 0f, 1f);
 		}
 	}
 
 	//Gets all objects that enemy needs to go to
 	public List<GameObject> getObjects(){
-		List<GameObject> objects = new List<GameObject> ();
-		objects.Add (m_base.gameObject);
-		objects.AddRange (GameObject.FindGameObjectsWithTag ("PlayerCarrotField"));
-		objects.AddRange (GameObject.FindGameObjectsWithTag ("PlayerTurret"));
-		return objects;
+		List<GameObject> objectss = new List<GameObject> ();
+		objectss.Add(GameObject.FindGameObjectWithTag("Base"));
+		objectss.AddRange (GameObject.FindGameObjectsWithTag ("PlayerCarrotField"));
+		objectss.AddRange (GameObject.FindGameObjectsWithTag ("PlayerTurret"));
+		Debug.Log(objectss.Count);
+		return objectss;
 	}
 
 	public void playerDist(){
@@ -63,13 +65,12 @@ public class UnitPlayer : MonoBehaviour {
 
 	//Starts the function walkToPlayer every 1 second
 	public void goToPlayer(){
-		playerFirst = true;
+		CancelInvoke ();
 		InvokeRepeating ("walkToPlayer", 0f, timeNewPath);
 	}
 
 	//Calculates path to base and walks towards
 	public void goToBase(){
-		playerFirst = false;
 		PathRequestManager.RequestPath (transform, m_base, OnPathFound);
 	}
 
@@ -120,28 +121,30 @@ public class UnitPlayer : MonoBehaviour {
 		}
 		Vector3 currentWaypoint = path[0];
 		while (true) {
-			/*if (transform.position == currentWaypoint) {
-				targetIndex ++;
-				if (targetIndex >= path.Length) {
-					yield break;
-				}
-				currentWaypoint = path[targetIndex];
-			}*/
 			if (Vector3.Distance(transform.position,currentWaypoint) < 1f){
 				targetIndex ++;
+				//als huidig doel er niet meer is.
+				checkCurrentGoal();
+				yield break;
 				if (targetIndex >= path.Length) {
 					yield break;
 				}
 				currentWaypoint = path[targetIndex];			
 			}
+			if (baseHit) {
+				InvokeRepeating ("checkCurrentGoal", 0f, 1f);
+				yield break;
+				yield return null;
+			}
 			transform.LookAt(currentWaypoint);
 			transform.position = Vector3.MoveTowards(transform.position,currentWaypoint,speed * Time.deltaTime);
-			// if enemie has hit the base, stop walking
-			if (!playerFirst && baseHit) {
-				yield break;
-			}
-
 			yield return null;
+		}
+	}
+
+	public void checkCurrentGoal(){
+		if (currentGoal == null || currentGoal.activeSelf == false) {
+			calcDistance (enemyType);
 		}
 	}
 

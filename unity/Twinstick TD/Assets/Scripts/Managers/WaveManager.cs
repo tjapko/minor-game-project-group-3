@@ -198,9 +198,9 @@ public class WaveManager
 		}
 
 		//if base is dead and enemy is not already moving to player -> go to player
-		if (baseDead && !m_enemywave[m_enemywave.Count-1].m_MovementPlayer.playerFirst) {
-			m_enemywave[m_enemywave.Count-1].m_MovementPlayer.goToPlayer ();
-		}
+		//if (baseDead && !m_enemywave[m_enemywave.Count-1].m_MovementPlayer.playerFirst) {
+		//	m_enemywave[m_enemywave.Count-1].m_MovementPlayer.goToPlayer ();
+		//}
 
         enemy_number++;
 	}
@@ -315,7 +315,9 @@ public class WaveManager
 	// for all existing enemies in m_enemywave, let them walk to player
 	public void enemiesToPlayer(){
 		foreach (var enemy in m_enemywave) {
-			if (baseDead && !enemy.m_MovementPlayer.playerFirst) {
+			// if base is dead and enemy is walking to base, go to player
+			if (baseDead && enemy.m_MovementPlayer.currentGoal == m_basetarget.gameObject) {
+				enemy.m_MovementPlayer.stopPathfinding ();
 				enemy.m_MovementPlayer.goToPlayer ();
 			}
 		}

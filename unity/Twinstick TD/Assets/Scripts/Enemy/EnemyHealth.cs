@@ -74,7 +74,7 @@ public class EnemyHealth : MonoBehaviour
 		if (other.gameObject.CompareTag("PlayerCarrotField")){
 			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
 			if (targetRigidbody) 
-			{
+			{				
 				carrotField = targetRigidbody.GetComponent<CarrotFieldScript> ();
 				InvokeRepeating ("carrotFieldDamage", 0f, 1f);
 			}
@@ -91,29 +91,37 @@ public class EnemyHealth : MonoBehaviour
 
 	//Give tower damage
 	private void baseDamage(){
-        if(basehealth != null)
-        {
-            basehealth.TakeDamage(m_damageToTowerSec);
-        }
+		if (basehealth != null) {
+			basehealth.TakeDamage (m_damageToTowerSec);
+		} else {
+			CancelInvoke ("baseDamage");
+		}
 	}
 
 	//give player damage
 	private void playerDamage(){
-        if(playerhealth != null)
-        {
-            playerhealth.takeDamage(m_damageToPlayerSec);
-        }
+		if (playerhealth != null) {
+			playerhealth.takeDamage (m_damageToPlayerSec);
+		} else {
+			CancelInvoke ("playerDamage");
+		}
 	}
 
 	private void turretDamage(){
-		if(turretScript != null){
-	//		turretScript.takeDamage(m_damageToTowerSec);
+		if (turretScript != null) {
+			turretScript.takeDamage (m_damageToTowerSec);
+		} else {
+			playerUnit.calcDistance (playerUnit.enemyType);
+			CancelInvoke ("turretDamage");
 		}
 	}
 
 	private void carrotFieldDamage(){
-		if (carrotField != null){
-	//		carrotField.takeDamage (m_damageToTowerSec);
+		if (carrotField != null) {
+			carrotField.takeDamage (m_damageToTowerSec);
+		} else {
+			playerUnit.calcDistance (playerUnit.enemyType);
+			CancelInvoke ("carrotFieldDamage");
 		}
 	}
 
@@ -128,7 +136,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void OnTriggerExit (Collider other){
 		//stop invoke if colliders are not touching anymore
-		if (other.gameObject.CompareTag ("Base") || other.gameObject.CompareTag ("Player")) {
+		if (other.gameObject.CompareTag ("Base") || other.gameObject.CompareTag ("Player") || other.gameObject.CompareTag("PlayerTurret") || other.gameObject.CompareTag("PlayerCarrotField")) {
 			CancelInvoke ();
 		}
 		//enemies walk normal speed when out of collision

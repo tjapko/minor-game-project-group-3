@@ -20,7 +20,7 @@ public class Basehealth : MonoBehaviour {
     public Image m_FillImage;
     //Private variables
     private float m_CurrentHealth;                  //Current health of tower
-    [HideInInspector] public bool m_Dead = false;                            //Boolean if tower is dead
+    [HideInInspector] public bool m_Dead;                            //Boolean if tower is dead
     
     // OnEnable
     public void OnEnable()
@@ -79,6 +79,7 @@ public class Basehealth : MonoBehaviour {
     {
         m_Dead = true;
         gameObject.SetActive(false);
+		Destroy (gameObject);
     }
 
     //Spawn hitmark
