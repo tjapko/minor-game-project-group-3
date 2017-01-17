@@ -197,8 +197,6 @@ public class GameManager : MonoBehaviour
                 gongSource.Play();
 
                 yield return StartCoroutine(m_wave.NextWave());
-
-              
                 
 				TravellingSalesman (); // spawning of the TravellingSalesman
 
@@ -237,19 +235,22 @@ public class GameManager : MonoBehaviour
     // Construction phase
     private IEnumerator constructionPhase()
     {
+		// switch Main camera to construction camera 
+		CameraControl.switchMainCamToConstructionCam ();
+
         //Set wavephase to false and set timer
         wavephase = false;
         m_players.setConstructionphase(!wavephase);
         m_uiscript.UIchange(gameover, wavephase, gamepause);
 
         StartCoroutine(constructionphaseTimer());
-        
         //While the game is in construction phase perform actions
         //Can get out of while loop by getting signal from next wave button
         //Can get out of while loop when timer reaches time 
         // Timer must be shorter than time of ending next wave, incase user presses next wave button !!!! (needs fix)
         while(!wavephase)
         {
+			m_players.disablePlayersControl2();
             yield return null;
         }
 
@@ -272,6 +273,11 @@ public class GameManager : MonoBehaviour
         wavephase = true;
         m_players.setConstructionphase(!wavephase);
         m_uiscript.UIchange(gameover, wavephase, gamepause);
+
+		// switch Main camera to construction camera 
+		CameraControl.switchConstructionCamToMainCam ();
+		m_players.enablePlayersControl2();
+
     }
 
     //Pause game function

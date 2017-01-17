@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
 
     //Prefabs
     public GameObject m_CanvasBaseUpgradePrefab;//GameObject Canvas BaseUpgrade
+    public GameObject m_CanvasConstructionPrefab;//GameObject Canvas Construction
     public GameObject m_CanvasGameOverPrefab;   //GameObject Canvas Game Over
     public GameObject m_CanvasHelpScreen;       //GameObject Canvas Help Screen
     public GameObject m_CanvasPauseMenuPrefab;  //GameObject Canvas Pause Menu
@@ -16,6 +17,7 @@ public class UIManager : MonoBehaviour {
 
     //References
     [HideInInspector] public GameObject go_CanvasBaseUpgrade; //GameObject Canvas Game Over
+    [HideInInspector] public GameObject go_CanvasConstruction;//GameObject Canvas Construction
     [HideInInspector] public GameObject go_CanvasGameOver;    //GameObject Canvas Game Over
     [HideInInspector] public GameObject go_CanvasPauseMenu;   //GameObject Canvas Pause Menu
     [HideInInspector] public GameObject go_CanvasPlayerUI;    //GameObject Canas Player UI
@@ -26,6 +28,7 @@ public class UIManager : MonoBehaviour {
     private GameManager m_gamemanager;  //Reference to GameManager
     private UserManager m_usermanager;  //Reference to UserManager
     private CanvasBaseUpgrade m_BaseUpgradeScript;      //Reference to CanvasBaseUpgradeScript
+    private CanvasConstructionScript  m_ConstructionScript;  //Reference to CanvasConstructionScript
     private CanvasGameOverScript m_GameOverScript;      //Reference to CanvasGameOverScript
     private CanvasPauseMenuScript m_PauseMenuScript;    //Reference to CanvasPauseMenuScript
     private CanvasPlayerUIScript m_PlayerUIScript;      //Reference to CanvasPlayerUIScript
@@ -42,6 +45,7 @@ public class UIManager : MonoBehaviour {
         //Instantiate and set references to canvasses (and shop)
         GameObject.Instantiate(m_CanvasHelpScreen, Vector3.zero, Quaternion.identity);
         go_CanvasBaseUpgrade= GameObject.Instantiate(m_CanvasBaseUpgradePrefab) as GameObject;
+        go_CanvasConstruction = GameObject.Instantiate(m_CanvasConstructionPrefab) as GameObject;
         go_CanvasGameOver   = GameObject.Instantiate(m_CanvasGameOverPrefab) as GameObject;
         go_CanvasPauseMenu  = GameObject.Instantiate(m_CanvasPauseMenuPrefab) as GameObject;
         go_CanvasPlayerUI   = GameObject.Instantiate(m_CanvasPlayerUIPrefab) as GameObject;
@@ -51,6 +55,7 @@ public class UIManager : MonoBehaviour {
 
         //Get scripts of canvasses
         m_BaseUpgradeScript = go_CanvasBaseUpgrade.GetComponent<CanvasBaseUpgrade>();
+        m_ConstructionScript = go_CanvasConstruction.GetComponent<CanvasConstructionScript>();
         m_GameOverScript = go_CanvasGameOver.GetComponent<CanvasGameOverScript>();
         m_PauseMenuScript = go_CanvasPauseMenu.GetComponent<CanvasPauseMenuScript>();
         m_PlayerUIScript = go_CanvasPlayerUI.GetComponent<CanvasPlayerUIScript>();
@@ -58,6 +63,7 @@ public class UIManager : MonoBehaviour {
 
         //Initialize Canvas
         m_BaseUpgradeScript.StartInitialization();
+        m_ConstructionScript.StartInitialization();
         m_GameOverScript.StartInitialization();
         m_PauseMenuScript.StartInitialization();
         m_PlayerUIScript.StartInitialization();
@@ -74,6 +80,7 @@ public class UIManager : MonoBehaviour {
 
         //Set visibility of canvas
         go_CanvasBaseUpgrade.SetActive(false);
+        go_CanvasConstruction.SetActive(false);
         go_CanvasGameOver.SetActive(false);
         go_CanvasPauseMenu.SetActive(false);
         go_CanvasPlayerUI.SetActive(true);
@@ -90,6 +97,7 @@ public class UIManager : MonoBehaviour {
         if (gameover)
         {
             go_CanvasGameOver.SetActive(true);
+            go_CanvasConstruction.SetActive(false);
             go_CanvasPauseMenu.SetActive(false);
             go_CanvasPlayerUI.SetActive(false);
             go_CanvasShop.SetActive(false);
@@ -100,6 +108,7 @@ public class UIManager : MonoBehaviour {
             if (pause)
             {
                 go_CanvasGameOver.SetActive(false);
+                go_CanvasConstruction.SetActive(false);
                 go_CanvasPauseMenu.SetActive(true);
                 go_CanvasPlayerUI.SetActive(false);
                 go_CanvasShop.SetActive(false);
@@ -110,6 +119,7 @@ public class UIManager : MonoBehaviour {
                 if (wavephase)
                 {
                     go_CanvasGameOver.SetActive(false);
+                    go_CanvasConstruction.SetActive(false);
                     go_CanvasPauseMenu.SetActive(false);
                     go_CanvasPlayerUI.SetActive(true);
                     m_PlayerUIScript.showWaveRemaining(true);
@@ -118,8 +128,9 @@ public class UIManager : MonoBehaviour {
                 else
                 {
                     go_CanvasGameOver.SetActive(false);
+                    go_CanvasConstruction.SetActive(true);
                     go_CanvasPauseMenu.SetActive(false);
-                    go_CanvasPlayerUI.SetActive(true);
+                    go_CanvasPlayerUI.SetActive(false);
                     m_PlayerUIScript.showWaveRemaining(false);
                 }
             }

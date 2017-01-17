@@ -25,7 +25,6 @@ public class PlayerHealth : MonoBehaviour
     private int m_dollarperlife;                      // Amount of currency per life that it cost to buy. 
 	
 
-
 	public void Start()
 	{
         m_maincamera = GameObject.FindWithTag("MainCamera");
@@ -92,6 +91,7 @@ public class PlayerHealth : MonoBehaviour
 		if (m_CurrentHealth == 0) {
 			OnDeath ();
 		}
+		ScreenShake.ShakeCharacter ();
 	}
 
     // OnDeath
