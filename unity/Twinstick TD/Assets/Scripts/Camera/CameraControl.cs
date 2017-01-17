@@ -8,7 +8,7 @@ public class CameraControl : MonoBehaviour
     public float m_MinSize = 6.5f;                  // The smallest orthographic size the camera can be.
     [HideInInspector] public Transform[] m_Targets; // All the targets the camera needs to encompass.
 	[HideInInspector]public static Camera m_Camera; // Used for referencing the camera.
-	[HideInInspector] public static Vector3 m_constructionCamPos = new Vector3 (3, 15, -12);
+	[HideInInspector] public static Vector3 m_constructionCamPos = new Vector3 (0.4f, 13.2f, -5.0f);
 
 	private float m_ZoomSpeed;                      // Reference speed for the smooth damping of the orthographic size.
     private Vector3 m_MoveVelocity;                 // Reference velocity for the smooth damping of the position.
@@ -22,7 +22,8 @@ public class CameraControl : MonoBehaviour
     {
 		Camera[] Cameras = GetComponentsInChildren<Camera> ();
 		m_Camera = Cameras [0];
-		m_constructionCam = Cameras [1];
+//		m_constructionCam = Cameras [1];
+		m_constructionCam = GameObject.FindGameObjectWithTag("constructionCam").GetComponents<Camera>()[0];
 		bg = Cameras [2];
 		m_constructionCam.transform.position = m_constructionCamPos;
 		m_MainCamPos = m_Camera.transform.position;
@@ -142,7 +143,7 @@ public class CameraControl : MonoBehaviour
 		bg.enabled = true;
 		bg.gameObject.SetActive (true);
 		m_Camera.enabled = false;
-		m_Camera.gameObject.SetActive (false);
+//		m_Camera.gameObject.SetActive (false);
 		// set right camera position
 		m_constructionCam.transform.position = m_constructionCamPos;
 		// switch cameras
@@ -157,10 +158,9 @@ public class CameraControl : MonoBehaviour
 		bg.enabled = false;
 		bg.gameObject.SetActive (false);
 
-
 		//switch cameras
 		m_Camera.enabled = true;
-		m_Camera.gameObject.SetActive(true);
+//		m_Camera.gameObject.SetActive(true);
 		m_constructionCam.enabled = false;
 		m_constructionCam.gameObject.SetActive(false);
 	}
@@ -169,5 +169,5 @@ public class CameraControl : MonoBehaviour
 		m_Camera.transform.position = m_MainCamPos;
 		m_constructionCam.transform.position = m_constructionCamPos;
 	}
-
+		
 }

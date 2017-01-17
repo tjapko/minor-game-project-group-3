@@ -13,6 +13,8 @@ public class ScreenShake : MonoBehaviour {
 	private static float shakeIntensity;	// amount of added offset to x-z-positions
 	private static Camera cam;
 	private static Vector3 camPos; 
+	private static int shakingNumber = 0;
+	private Vector3 m_MoveVelocity;                 // Reference velocity for the smooth damping of the position.
 
 	// Use this for initialization
 	void Start () {
@@ -23,24 +25,28 @@ public class ScreenShake : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.T)) {
-			Shake (0.2f, 0.3f);
+//			Shake (0.2f, 0.3f);
 //			Shake2();
 //			Shake3();
 		}
 		if (Input.GetKeyDown (KeyCode.Y)) {
-			Shake (0.1f, 0.2f);
+//			Shake (0.1f, 0.2f);
 		}
 	}
 
 	// handles the starting and stopping of the screenShake
 	public static void Shake(float intensity, float duration) {
 		// stores the position of the camera before shaking 
+		shakingNumber++;
 		camPos = cam.transform.position;
 		shakeIntensity = intensity;
 
-		if (instance) {
-			instance.InvokeRepeating ("StartShake", 0, 1/shakeFreq); 
-			instance.Invoke ("StopShake", duration);
+		if (shakingNumber == 1) {
+			if (instance) {
+				instance.InvokeRepeating ("StartShake", 0, 1 / shakeFreq); 
+				instance.Invoke ("StopShake", duration);
+				shakingNumber = 0;
+			}
 		}
 	}
 
@@ -65,7 +71,10 @@ public class ScreenShake : MonoBehaviour {
 		if (instance) {
 			instance.CancelInvoke ("StartShake");
 		}
-		cam.transform.position = camPos;
+//		cam.transform.position = camPos;
+
+//		m_DesiredPosition = ;
+//		cam.transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, 0.2f);
 	}
 
 	public static void ShakeBase() {
