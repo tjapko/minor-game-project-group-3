@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour {
 	private void mouseTurn()
 	{
 		// creating a ray from the camera to the mouseposition
-		Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition); 
+		Ray camRay = mainCam.ScreenPointToRay(Input.mousePosition); 
 
 		// a variable, which is true when the ray hits the floor 
 		RaycastHit floorHit;
@@ -126,7 +126,7 @@ public class PlayerMovement : MonoBehaviour {
 			m_playerRigidbody.MoveRotation(newRotation);
 
 			//Line from Main Camera to the point selected with the mouse (for debugging purposes)
-			Debug.DrawLine (Camera.main.transform.position, floorHit.point, Color.yellow ); 
+			Debug.DrawLine (mainCam.transform.position, floorHit.point, Color.yellow ); 
 		}
 	}
 
