@@ -29,7 +29,8 @@ TagManager:
   - constructionCam
   - inventoryUI
   - constructionPanelUI
-
+  - timer
+  - New Tag
   layers:
   - Default
   - TransparentFX

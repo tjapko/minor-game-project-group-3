@@ -131,7 +131,7 @@ public class UIManager : MonoBehaviour {
                     go_CanvasGameOver.SetActive(false);
                     go_CanvasConstruction.SetActive(true);
                     go_CanvasPauseMenu.SetActive(false);
-                    go_CanvasPlayerUI.SetActive(false);
+                    go_CanvasPlayerUI.SetActive(true);
                     m_PlayerUIScript.showWaveRemaining(false);
                 }
             }
