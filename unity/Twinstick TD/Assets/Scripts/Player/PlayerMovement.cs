@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour {
 	private string m_RotationAxisNameV;
 	private string m_RotationAxisNameH;
 	static Animator anim;
+	private Camera mainCam;
+	private Camera ConstructionCam;
 
 	// Initializes the Floormask 
 	void Awake()
@@ -52,6 +54,8 @@ public class PlayerMovement : MonoBehaviour {
 			m_RotationAxisNameH = "RightJoystickHorizontalWindowsXBOX_" + (m_PlayerNumber+1);
 			m_RotationAxisNameV = "RightJoystickVerticalWindowsXBOX_" + (m_PlayerNumber+1);
 		}
+		mainCam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponentInParent<Camera>();
+		ConstructionCam = GameObject.FindGameObjectWithTag ("constructionCam").GetComponentInParent<Camera> ();
 
     }
 
@@ -62,7 +66,6 @@ public class PlayerMovement : MonoBehaviour {
         m_MovementInputValueV = Input.GetAxisRaw(m_MovementAxisNameV); // use Input.GetAxisRaw("Vertical") for instant reaction of the Vertical movement 
 		m_MovementInputValueH = Input.GetAxisRaw(m_MovementAxisNameH); // use Input.GetAxisRaw("Horizontal") for instant reaction of the Horizontal movement 
 		//m_RotationInputM = Input.mousePosition;
-
 		Move(); // Move the player (both keyboard and controller)
 
 		if (GameManager.getWavephase ()) {
@@ -146,19 +149,23 @@ public class PlayerMovement : MonoBehaviour {
 	// Rotates a Vector3 with respect to the camera view, in order to obtain a relative vector (independent from the camera view)
 	private Vector3 RotateWithView(Vector3 originalVector) 
 	{
-		// camera is moved (not fixed)
-		if (cameraTransform != null) 
-		{
-			// calculate the new rotated, right-oriented vector 
-			Vector3 dir = cameraTransform.TransformDirection (originalVector);
-			dir.y = 0f; // y-value is keeped zero
-			return dir.normalized * originalVector.magnitude; // same length as before ()
-		}
+		if (GameManager.getWavephase ()) {
+			// camera is moved (not fixed)
+			if (mainCam.transform != null) {
+				// calculate the new rotated, right-oriented vector 
+				Vector3 dir = mainCam.transform.TransformDirection (originalVector);
+				dir.y = 0f; // y-value is keeped zero
+				return dir.normalized * originalVector.magnitude; // same length as before ()
+			}
 		// camera is not moved (fixed)
-		else 
-		{
-			cameraTransform = Camera.main.transform; 
-			return originalVector; // just return the orignal vector (already right orientation)
+			else {
+				cameraTransform = mainCam.transform; 
+				return originalVector; // just return the orignal vector (already right orientation)
+			}
+		}
+		else {
+			cameraTransform = ConstructionCam.transform;
+			return originalVector;
 		}
 
 	}

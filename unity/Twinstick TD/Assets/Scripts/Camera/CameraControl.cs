@@ -32,12 +32,13 @@ public class CameraControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Move the camera towards a desired position.
-        Move();
+		if (GameManager.getWavephase ()) {
+			// Move the camera towards a desired position.
+			Move ();
 
-        // Change the size of the camera based.
-        Zoom();
-	
+			// Change the size of the camera based.
+			Zoom ();
+		}
     }
 
 

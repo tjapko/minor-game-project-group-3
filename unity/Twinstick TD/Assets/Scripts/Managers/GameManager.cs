@@ -250,7 +250,7 @@ public class GameManager : MonoBehaviour
         // Timer must be shorter than time of ending next wave, incase user presses next wave button !!!! (needs fix)
         while(!wavephase)
         {
-			m_players.disablePlayersControl2();
+//			m_players.disablePlayersControl2();
             yield return null;
         }
 
@@ -276,7 +276,7 @@ public class GameManager : MonoBehaviour
 
 		// switch Main camera to construction camera 
 		CameraControl.switchConstructionCamToMainCam ();
-		m_players.enablePlayersControl2();
+//		m_players.enablePlayersControl2();
 
     }
 
