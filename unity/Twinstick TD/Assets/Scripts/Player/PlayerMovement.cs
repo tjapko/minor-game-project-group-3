@@ -65,12 +65,13 @@ public class PlayerMovement : MonoBehaviour {
 
 		Move(); // Move the player (both keyboard and controller)
 
-		if (!useController) {
-			mouseTurn (); // Rotate the player with mouse
-		} 
-		else {
-			controllerTurn (); // Rotate the player with controller for both controllers (XBOX and PS3) on mac and PS3 on windows
-		} 
+		if (GameManager.getWavephase ()) {
+			if (!useController) {
+				mouseTurn (); // Rotate the player with mouse
+			} else {
+				controllerTurn (); // Rotate the player with controller for both controllers (XBOX and PS3) on mac and PS3 on windows
+			} 
+		}
 	}	
 
 	// Adjust the position of the player based on the player's keyboard input.
