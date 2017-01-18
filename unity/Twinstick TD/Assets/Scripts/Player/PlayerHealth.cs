@@ -49,13 +49,13 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-	private void SetHealthUI()
+	public void SetHealthUI()
 	{
 		// Set the slider's value appropriately.
 		m_Slider.value = m_CurrentHealth;
 
 		// Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
-		m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
+		m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_maxHealth);
 	}
 
     public void buyHealth()
@@ -78,6 +78,7 @@ public class PlayerHealth : MonoBehaviour
             playerstat.m_currency -= kap * m_dollarperlife;
 
         }
+        SetHealthUI();
         Debug.Log("Player health after: " + m_CurrentHealth);
 
     }
@@ -120,9 +121,9 @@ public class PlayerHealth : MonoBehaviour
     }
 
     //Setter of max health
-    public void setMaxHealth(float amount)
+    public void addMaxHealth(float amount)
     {
-        m_maxHealth = amount;
+        m_maxHealth += amount;
     }
 
     //Add health

@@ -18,7 +18,9 @@ public class CanvasPlayerUIScript : MonoBehaviour {
     private List<Text> m_player_kills;          //Reference to the text displaying the kills ma
     private List<GameObject> m_weaponstats;     //Referene to the weapons of the player
     private List<List<Image>> m_weaponIcon;     //Reference to the weapon icon slots
-    private List<List<Text>> m_weaponammo;            //Reference to the ammo Text component
+    private List<List<Text>> m_weaponammo;      //Reference to the ammo Text component
+    private List<Slider> m_healthslider;        //Slider for player health
+    private List<Image> m_fillImage;            //Image for player health
     private GameObject m_wavestats;             //Reference tot he Wave stats UI panel
     private GameObject m_waveremaining;         //Reference to the wave remaining UI panel
     private Text m_waveremainingText;           //Reference to the text in the wave remaining UI panel
@@ -33,8 +35,15 @@ public class CanvasPlayerUIScript : MonoBehaviour {
 
         //Get variables
         int amountofplayers = m_gamemanager.m_amountofplayers;
+        m_player_money = new List<Text>();
+        m_player_kills = new List<Text>();
         m_playerstats = new List<GameObject>();
         m_weaponstats = new List<GameObject>();
+        m_weaponIcon = new List<List<Image>>();
+        m_weaponammo = new List<List<Text>>();
+        m_healthslider = new List<Slider>();
+        m_fillImage = new List<Image>();
+
 
         //Set references to children
         m_wavecontrol = gameObject.transform.GetChild(0).gameObject;
@@ -57,45 +66,36 @@ public class CanvasPlayerUIScript : MonoBehaviour {
         }
 
         //Set player money Text
-        m_player_money = new List<Text>();
+        
+
         for (int i = 0; i < amountofplayers; i++)
         {
             m_player_money.Add(m_playerstats[i].transform.GetChild(1).GetComponent<Text>());
-        }
-
-        //Set player kills Text
-        m_player_kills = new List<Text>();
-        for (int i = 0; i < amountofplayers; i++)
-        {
             m_player_kills.Add(m_playerstats[i].transform.GetChild(2).GetComponent<Text>());
+
+            m_healthslider.Add(m_weaponstats[i].transform.GetChild(0).GetComponent<Slider>());
+            m_fillImage.Add(m_weaponstats[i].transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>());
+
+            List<Image> image_list = new List<Image>();
+            image_list.Add(m_weaponstats[i].transform.GetChild(1).GetComponent<Image>());
+            image_list.Add(m_weaponstats[i].transform.GetChild(2).GetComponent<Image>());
+            image_list.Add(m_weaponstats[i].transform.GetChild(3).GetComponent<Image>());
+            m_weaponIcon.Add(image_list);
+
+            List<Text> ammo_list = new List<Text>();
+            ammo_list.Add(m_weaponstats[i].transform.GetChild(4).GetComponent<Text>());
+            ammo_list.Add(m_weaponstats[i].transform.GetChild(5).GetComponent<Text>());
+            ammo_list.Add(m_weaponstats[i].transform.GetChild(6).GetComponent<Text>());
+            m_weaponammo.Add(ammo_list);
+
+           
+
         }
 
         //Activate weaponstats 
         for (int i = 0; i < m_weaponstats.Count; i++)
         {
             m_weaponstats[i].SetActive(i < amountofplayers);
-        }
-
-        //Set lists of weapon icons
-        m_weaponIcon = new List<List<Image>>();
-        for (int i = 0; i < amountofplayers; i++)
-        {
-            List<Image> image_list = new List<Image>();
-            image_list.Add(m_weaponstats[i].transform.GetChild(0).GetComponent<Image>());
-            image_list.Add(m_weaponstats[i].transform.GetChild(1).GetComponent<Image>());
-            image_list.Add(m_weaponstats[i].transform.GetChild(2).GetComponent<Image>());
-            m_weaponIcon.Add(image_list);
-        }
-
-        //Set list of weaponammo
-        m_weaponammo = new List<List<Text>>();
-        for (int i = 0; i < amountofplayers; i++)
-        {
-            List<Text> temp = new List<Text>();
-            temp.Add(m_weaponstats[i].transform.GetChild(3).GetComponent<Text>());
-            temp.Add(m_weaponstats[i].transform.GetChild(4).GetComponent<Text>());
-            temp.Add(m_weaponstats[i].transform.GetChild(5).GetComponent<Text>());
-            m_weaponammo.Add(temp);
         }
 
         m_waveremainingText = m_waveremaining.transform.GetChild(0).GetComponent<Text>();
@@ -128,6 +128,7 @@ public class CanvasPlayerUIScript : MonoBehaviour {
             SetKillsText();
             updateWeaponIcon();
             UpdateAmmoText();
+            updateHealthUI();
             setEnemiesRemainingText();
         } catch
         {
@@ -240,6 +241,19 @@ public class CanvasPlayerUIScript : MonoBehaviour {
         if(m_waveremaining != null)
         {
             m_waveremaining.SetActive(status);
+        }
+    }
+
+    //Updates health UI
+    public void updateHealthUI()
+    {
+        for(int i = 0; i < m_players.Count; i++)
+        {
+            PlayerHealth health_script = m_players[i].m_playerhealth;
+
+            m_healthslider[i].maxValue = health_script.m_maxHealth;
+            m_healthslider[i].value = health_script.getCurrentHealth();
+            m_fillImage[i].color = Color.Lerp(health_script.m_ZeroHealthColor, health_script.m_FullHealthColor, health_script.getCurrentHealth() / health_script.m_maxHealth);
         }
     }
 }

@@ -12,6 +12,7 @@ public class CanvasPauseMenuScript : MonoBehaviour {
 
     //References to GameObject
     private GameObject m_pausemenu;     //Reference to the pausemenu window (child of this GameObject)
+    private GameObject m_settingsmenu;  //Reference to the settingsmenu window (child of this GameObject)
     private GameObject m_controlsmenu;  //Reference to the controlsmenu window (child of this GameObject)        
 
     public void StartInitialization()
@@ -24,7 +25,8 @@ public class CanvasPauseMenuScript : MonoBehaviour {
 
         //Set references to children
         m_pausemenu = gameObject.transform.GetChild(0).gameObject;
-        m_controlsmenu = gameObject.transform.GetChild(1).gameObject;
+        m_settingsmenu = gameObject.transform.GetChild(1).gameObject;
+        m_controlsmenu = gameObject.transform.GetChild(2).gameObject;
 
         //Enable menus
         m_pausemenu.SetActive(true);
@@ -36,6 +38,7 @@ public class CanvasPauseMenuScript : MonoBehaviour {
     void OnEnable()
     {
         showPauseMenu(true);
+        showSettingsMenu(false);
         showControlsMenu(false);
     }
 
@@ -43,6 +46,7 @@ public class CanvasPauseMenuScript : MonoBehaviour {
     void OnDisable()
     {
         showPauseMenu(true);
+        showSettingsMenu(false);
         showControlsMenu(false);
     }
 
@@ -52,6 +56,15 @@ public class CanvasPauseMenuScript : MonoBehaviour {
         if(m_pausemenu != null)
         {
             m_pausemenu.SetActive(status);
+        }
+    }
+
+    // Show/hide Controls menu
+    public void showSettingsMenu(bool status)
+    {
+        if (m_settingsmenu != null)
+        {
+            m_settingsmenu.SetActive(status);
         }
     }
 

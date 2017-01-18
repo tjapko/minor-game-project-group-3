@@ -44,6 +44,8 @@ public class Restore_BaseHealth : BaseUpgrade {
                 player_stats.substractCurrency(player_stats.m_currency);
 
             }
+
+            basehealth_script.SetHealthUI();
         }
         
     }

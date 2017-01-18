@@ -17,6 +17,7 @@ public class ShopScript : MonoBehaviour {
     //[HideInInspector] public int maxammotype = 4;   //Max ammo type the store may contain
     [HideInInspector] public List<Weapon> weaponsforsale;
     //[HideInInspector] public List<Weapon> ammoforsale;
+    public int m_rebuildbasecost;           //Rebuild base cost 
     public int[] upgrade_cost = new int[4]; //Upgrade to next tier [0] should be empty
 
     //References
@@ -185,7 +186,6 @@ public class ShopScript : MonoBehaviour {
             showUI = false;
             m_instance_UI.SetActive(showUI);
         }
-
     }
 
     //On trigger fuction
