@@ -5,10 +5,10 @@ public class ScreenShake : MonoBehaviour {
 
 	public static ScreenShake instance; 	// used in order to make Shake a static function!
 	public static float shakeFreq = 10; 	// # shakes per s
-	[HideInInspector]public static float screenShakeIntensityBase = 0.2f;
+	[HideInInspector]public static float screenShakeIntensityBase = 0.3f;
 	[HideInInspector]public static float screenShakeDurationBase = 0.3f;
-	[HideInInspector]public static float screenShakeIntensityCharacter = 0.1f;
-	[HideInInspector]public static float screenShakeDurationCharacter = 0.2f;
+	[HideInInspector]public static float screenShakeIntensityCharacter = 0.2f;
+	[HideInInspector]public static float screenShakeDurationCharacter = 0.3f;
 
 	private static float shakeIntensity;	// amount of added offset to x-z-positions
 	private static Camera cam;
@@ -25,12 +25,12 @@ public class ScreenShake : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.T)) {
-//			Shake (0.2f, 0.3f);
+			Shake (screenShakeIntensityBase, screenShakeDurationBase);
 //			Shake2();
 //			Shake3();
 		}
 		if (Input.GetKeyDown (KeyCode.Y)) {
-//			Shake (0.1f, 0.2f);
+			Shake (screenShakeIntensityCharacter, screenShakeDurationCharacter);
 		}
 	}
 
