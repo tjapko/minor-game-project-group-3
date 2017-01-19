@@ -2137,7 +2137,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114000011647761522}
-        m_MethodName: purchase_weapon
+        m_MethodName: purchase_ammo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

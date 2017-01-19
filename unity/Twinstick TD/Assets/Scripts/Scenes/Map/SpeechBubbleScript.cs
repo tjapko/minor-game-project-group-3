@@ -20,7 +20,9 @@ public class SpeechBubbleScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        m_MainCamera = GameObject.FindWithTag("MainCamera");
+        GameObject maincamera = GameObject.FindWithTag("MainCamera");
+        GameObject const_camera = GameObject.FindWithTag("constructionCam");
+        m_MainCamera = maincamera.GetComponent<Camera>().enabled ? maincamera : const_camera;
 
         gameObject.transform.position = gameObject.transform.position + m_offset;
         lookToCamera();
