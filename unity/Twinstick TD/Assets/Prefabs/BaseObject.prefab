@@ -319,6 +319,7 @@ GameObject:
   - 65: {fileID: 65000011892786148}
   - 65: {fileID: 65000010631096832}
   - 114: {fileID: 114000012585224080}
+  - 114: {fileID: 114000011773733376}
   m_Layer: 0
   m_Name: BaseObject
   m_TagString: Base
@@ -396,7 +397,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000014275804332}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!4 &4000010269930666
 Transform:
   m_ObjectHideFlags: 1
@@ -545,7 +546,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000014275804332}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!4 &4000014022692424
 Transform:
   m_ObjectHideFlags: 1
@@ -578,8 +579,8 @@ Transform:
   - {fileID: 4000011483646512}
   - {fileID: 4000014022692424}
   - {fileID: 224000013598233058}
-  - {fileID: 4000011192970266}
   - {fileID: 4000013287017254}
+  - {fileID: 4000010162659352}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!23 &23000011975065760
@@ -982,7 +983,7 @@ MonoBehaviour:
   m_FillOrigin: 0
 --- !u!114 &114000011773733376
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013595951870}
@@ -991,7 +992,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4acec6013b56084bb440b49ed3ec494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_baseupgradeground: {fileID: 1000011696080752}
+  m_baseupgradeground: {fileID: 1000013106999152, guid: a423c921b2220a843a79671d3970544a,
+    type: 2}
   price_restorePlayerHealth: 100
   amount_restorePlayerHealth: 1
   price_upgradePlayerHealth: 64000000c8000000
@@ -1000,6 +1002,12 @@ MonoBehaviour:
   amount_restoreBaseHealth: 1
   price_upgradeBaseHealth: c800000090010000
   amount_upgradeBaseHealth: c800000090010000
+  upgradeBaseTurretDamage: 
+  upgradeBaseTurretRange: []
+  upgradeBaseTurretAccuracy: []
+  upgradeBaseTurretFirerate: []
+  upgradeBaseTurretLaunchForce: []
+  upgradeBaseTurretTurnRate: []
 --- !u!114 &114000012022335900
 MonoBehaviour:
   m_ObjectHideFlags: 1

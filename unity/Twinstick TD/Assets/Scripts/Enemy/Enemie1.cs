@@ -8,7 +8,7 @@ public class Enemie1 : EnemyManager
 	public GameObject enemyPrefab;
 
     //Walks towards base first, after hit to player
-    public Enemie1(GameObject instance, Transform spawnpoint, GameObject _base, Transform playerpoint, int number, EnemyInheratedValues enemyInheratedValues) : base(instance, spawnpoint, basetarget, playerpoint, number, enemyInheratedValues)
+    public Enemie1(GameObject instance, Transform spawnpoint, GameObject _base, Transform playerpoint, int number, EnemyInheratedValues enemyInheratedValues) : base(instance, spawnpoint, _base, playerpoint, number, enemyInheratedValues)
 	{
 
 

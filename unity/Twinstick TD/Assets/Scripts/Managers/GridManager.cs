@@ -22,7 +22,7 @@ public class GridManager
 		this.m_gridPrefab = gridPrefab;
 		this.xGrid = 150;
 		this.yGrid = 150;
-		this.denodeRadius = 0.5f;
+		this.denodeRadius = 1f;
 		this.displayGrid = true;
 		setup ();
 	}

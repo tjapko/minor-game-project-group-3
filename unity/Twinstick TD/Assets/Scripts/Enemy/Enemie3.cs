@@ -9,7 +9,7 @@ public class Enemie3 : EnemyManager
 
 
     //Chooses whether player or base is closest, walks there first, then to the other
-    public Enemie3(GameObject instance, Transform spawnpoint, GameObject _base, Transform playerpoint, int number, EnemyInheratedValues enemyInheratedValues) : base(instance, spawnpoint, basetarget, playerpoint, number, enemyInheratedValues)
+    public Enemie3(GameObject instance, Transform spawnpoint, GameObject _base, Transform playerpoint, int number, EnemyInheratedValues enemyInheratedValues) : base(instance, spawnpoint, _base, playerpoint, number, enemyInheratedValues)
 	{
 
 

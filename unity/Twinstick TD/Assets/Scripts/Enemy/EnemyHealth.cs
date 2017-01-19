@@ -64,7 +64,7 @@ public class EnemyHealth : MonoBehaviour
 			{
 				playerUnit.stopCoroutines();
 				playerhealth = targetRigidbody.GetComponent<PlayerHealth> ();
-				InvokeRepeating ("playerDamage", 0f, m_playerpersecond);
+				InvokeRepeating ("playerDamage", 0f, m_playerPerSecond);
 
 			}
 		}
