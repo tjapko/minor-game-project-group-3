@@ -195,16 +195,16 @@ public class PlayerConstruction : MonoBehaviour {
     //Function to remove objects
     public void removeObject(GameObject remove_object)
     {
-        int remove_id = remove_object.GetInstanceID();
-        for(int i = 0; i < m_placedobjects.Count; i++)
-        {
-            if(m_placedobjects[i].GetInstanceID()  == remove_id)
-            {
-                Destroy(m_placedobjects[i]);
-                m_placedobjects.RemoveAt(i);
-                break;
-            }
-        }
+		if (remove_object != null) {
+			int remove_id = remove_object.GetInstanceID ();
+			for (int i = 0; i < m_placedobjects.Count; i++) {
+				if (m_placedobjects [i].GetInstanceID () == remove_id) {
+					Destroy (m_placedobjects [i]);
+					m_placedobjects.RemoveAt (i);
+					break;
+				}
+			}
+		}
     }
 
     //Sets the construction phase

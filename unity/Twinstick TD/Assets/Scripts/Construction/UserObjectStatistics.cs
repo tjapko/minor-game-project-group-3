@@ -105,7 +105,9 @@ public class UserObjectStatistics : MonoBehaviour {
     //Function on death
     public void onDeath()
     {
-		m_owner.m_construction.removeObject(gameObject);
+		if (m_owner != null && m_owner.m_construction != null) {
+			m_owner.m_construction.removeObject (gameObject);
+		}
     }
 
 
