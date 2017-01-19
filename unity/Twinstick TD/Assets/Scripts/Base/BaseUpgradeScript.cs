@@ -34,6 +34,8 @@ public class BaseUpgradeScript : MonoBehaviour {
 	public float[] upgradeBaseTurretRange;  	 //Range of the turret per upgrade
 	public float[] upgradeBaseTurretAccuracy;  //Accuracy of the turret per upgrade
 	public float[] upgradeBaseTurretFirerate;  //FireRate of the turret per upgrade
+	public float[] upgradeBaseTurretLaunchForce;  //LaunchForce of the turret per upgrade
+	public float[] upgradeBaseTurretTurnRate;  //TurnRate of the turret per upgrade
 
     //Private Variables
     private List<List<BaseUpgrade>> player_upgradelist; //List containing upgrade duo's
@@ -57,7 +59,7 @@ public class BaseUpgradeScript : MonoBehaviour {
         List<BaseUpgrade> upgrade_duo_2 = new List<BaseUpgrade>();
         upgrade_duo_1.Add((BaseUpgrade)new Upgrade_PlayerHealth(price_upgradePlayerHealth, amount_upgradePlayerHealth));
         upgrade_duo_1.Add((BaseUpgrade)new Restore_PlayerHealth(new int[] { price_restorePlayerHealth }, amount_restorePlayerHealth));
-		upgrade_duo_2.Add((BaseUpgrade)new Upgrade_Base(price_upgradeBaseHealth, amount_upgradeBaseHealth, upgradeBaseTurretDamage, upgradeBaseTurretRange, upgradeBaseTurretAccuracy,upgradeBaseTurretFirerate));
+		upgrade_duo_2.Add((BaseUpgrade)new Upgrade_Base(price_upgradeBaseHealth, amount_upgradeBaseHealth, upgradeBaseTurretDamage, upgradeBaseTurretRange, upgradeBaseTurretAccuracy,upgradeBaseTurretFirerate, upgradeBaseTurretLaunchForce, upgradeBaseTurretTurnRate));
         upgrade_duo_2.Add((BaseUpgrade)new Restore_BaseHealth(new int[] { price_restoreBaseHealth }, amount_restoreBaseHealth));
         
 

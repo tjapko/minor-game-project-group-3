@@ -265,7 +265,6 @@ public class CanvasBaseUpgrade : MonoBehaviour {
                 break;
             case BaseUpgrade.BaseUpgradeType.RestoreBaseHealth:
                 Restore_BaseHealth upgrade_2 = (Restore_BaseHealth)selected_upgrade;
-                Debug.Log("price: " + upgrade_2.getPrice());
                 if (upgrade_2.getPrice() != -1 && player_stats.getCurrency() >= upgrade_2.getPrice())
                 {
                     upgrade_2.restoreBaseHealth(m_base, selected_player);

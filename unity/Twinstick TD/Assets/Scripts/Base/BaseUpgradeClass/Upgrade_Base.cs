@@ -9,11 +9,13 @@ public class Upgrade_Base : BaseUpgrade {
 	private float[] m_BaseTurretRangeInc;
 	private float[] m_BaseTurretAccuracyInc;
 	private float[] m_BaseTurretFireRateInc;
+	private float[] m_BaseTurretLaunchSpeedInc;
+	private float[] m_BaseTurretTurnRateInc;
 
 
     //Constructor
     //m_base: the base (gameobject)
-	public Upgrade_Base(int[] price, int[] incHealthAmount, int[] incTurretDamage, float[]  incTurretRange, float[] incTurretAccuracy, float[]  incTurretFireRate) : base(price)
+	public Upgrade_Base(int[] price, int[] incHealthAmount, int[] incTurretDamage, float[]  incTurretRange, float[] incTurretAccuracy, float[]  incTurretFireRate, float[] incTurretLaunchSpeed, float[] incTurretTurnRate) : base(price)
     {
         //Error message
         if (price.Length != incHealthAmount.Length)
@@ -28,6 +30,9 @@ public class Upgrade_Base : BaseUpgrade {
 		m_BaseTurretRangeInc = incTurretRange;
 		m_BaseTurretAccuracyInc = incTurretAccuracy;
 		m_BaseTurretFireRateInc = incTurretFireRate;
+		m_BaseTurretLaunchSpeedInc = incTurretLaunchSpeed;
+		m_BaseTurretTurnRateInc = incTurretTurnRate;
+
         setIcon("Upgrade_BaseHealthIcon");
     }
 
@@ -52,10 +57,8 @@ public class Upgrade_Base : BaseUpgrade {
 			baseTurretScript.setRange(m_BaseTurretRangeInc[selected_index]);
 			baseTurretScript.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
 			baseTurretScript.setFirerate(m_BaseTurretFireRateInc[selected_index]);
-			Debug.Log (baseTurretScript.m_damage);
-			Debug.Log (baseTurretScript.m_range);
-			Debug.Log (baseTurretScript.m_accuracy);
-			Debug.Log (baseTurretScript.m_fireRate);
+			baseTurretScript.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
+			baseTurretScript.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
 
 			//Increase index
 			incIndex();
