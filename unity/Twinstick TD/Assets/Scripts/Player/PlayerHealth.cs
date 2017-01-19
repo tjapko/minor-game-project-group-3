@@ -8,8 +8,14 @@ public class PlayerHealth : MonoBehaviour
 
     //References
     public GameObject m_hitFriendlyCanvasPrefab;    //Reference to friendlyHit canvas;
-    public AudioSource beatSource;                  //Reference to audio 
+    
     private GameObject m_maincamera;                //Reference to maincamera
+
+    //audio
+    public AudioSource beatSource;                  //Reference to audio heartbeat 
+    public AudioSource painSource;                  // Reference to audiosource for sfx
+    public AudioClip pain;
+    public AudioClip dead;
 
     public float m_maxHealth;                           //Max health of player
     public float m_StartingHealth;						//Start health of enemy
@@ -33,6 +39,7 @@ public class PlayerHealth : MonoBehaviour
         m_CurrentHealth = m_StartingHealth;
 		// Update the health slider's value and color.
 		SetHealthUI();
+        painSource.clip = pain;
     }
 
     public void fixedUpdate()
@@ -84,6 +91,9 @@ public class PlayerHealth : MonoBehaviour
     }
 	//Decrease health of base
 	public void takeDamage(float amountSec){
+       
+        painSource.Play();
+
         //Create hitmark
         createHitMark(m_hitFriendlyCanvasPrefab, amountSec);
 
@@ -98,6 +108,11 @@ public class PlayerHealth : MonoBehaviour
     // OnDeath
     private void OnDeath()
     {
+        painSource.transform.parent = null;
+        painSource.clip = dead;
+        painSource.Play();
+      //  Destroy(painSource.gameObject, 4f );
+        
         m_Dead = true;
         gameObject.SetActive(false);
     }

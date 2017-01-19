@@ -17,6 +17,7 @@ public class EnemyHealth : MonoBehaviour
 
     public AudioSource enemySource;
     public AudioClip deathSound;
+    public AudioClip beastPainsound;
     //Public variables
 	public float m_damageToTowerSec;					//damage to tower per second
     public float m_towerpersecond ;
@@ -179,6 +180,8 @@ public class EnemyHealth : MonoBehaviour
     //Take damage
     public void TakeDamage(float amount)
     {
+        enemySource.clip = beastPainsound;
+        enemySource.Play();
         //Set hitmark
         createHitMark(m_hitEnemyCanvasPrefab, amount);
 

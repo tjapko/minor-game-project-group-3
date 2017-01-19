@@ -10,6 +10,7 @@ public class ScreenShake : MonoBehaviour {
 	[HideInInspector]public static float screenShakeIntensityCharacter = 0.2f;
 	[HideInInspector]public static float screenShakeDurationCharacter = 0.3f;
 
+
 	private static float shakeIntensity;	// amount of added offset to x-z-positions
 	private static Camera cam;
 	private static Vector3 camPos; 
