@@ -1,19 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/* to dos
-    1 create a gen ( do this in the enemyinheratedvalues class(maybe change that class to gen))
-        1.1 figure out how to encode the values to a gen and program it
-        1.2 create a translation from the gen to enemyinherted values
-    2 on creation
-        2.1 create a enemy population the size of the wave for each enemy
-        2.2 fill it with random generated genes
-    3 create getters for each enemy type
-    4 create an endwave function
-        4.1 this first removes all non spawned enemys from its popluation
-        4.2 then let it call the GA
-    5 create the GA
-
+/*the population manger hold three lists of each enemy inherated values and a boolean which tells if they are spawned or not
 
     */
 public class PopulationManagerGA {
@@ -24,21 +12,31 @@ public class PopulationManagerGA {
     EnemyInheratedValues boss;
     private GaneticAlgorithm GA = new GaneticAlgorithm();
 
+    // initialize all the lists and create a GA
     public PopulationManagerGA(float StartingAmountEnemies) { 
         poptype1 = new EnemyPopulation();
         poptype2 = new EnemyPopulation();
         poptype3 = new EnemyPopulation();
         createBoss();
-        firstpop(StartingAmountEnemies, poptype1);
-        firstpop(StartingAmountEnemies, poptype2);
-        firstpop(StartingAmountEnemies, poptype3);
+    //    firstpop(StartingAmountEnemies, poptype1);
+   //     firstpop(StartingAmountEnemies, poptype2);
+      //  firstpop(StartingAmountEnemies, poptype3);
     }
 
+
+    /* goes to the next genaration of the GA, 
+     * It does this by first clearing the unspawned enemys of each list,
+     * then a check is preformed to make sure there are more then two spawned enemies to make sure there are parent avaible
+     * then it provides the population to the GA and that returns a new populaiton
+     */
     public void nextGenartion(int AmountEnemies)
     {
+        
+
         poptype1.clearUnspawnedEnemys();
         poptype2.clearUnspawnedEnemys();
         poptype3.clearUnspawnedEnemys();
+      
         // check for popsize
         if (poptype1.getList().Count > 2)
         {
@@ -64,6 +62,13 @@ public class PopulationManagerGA {
         {
             restockPop(poptype3, AmountEnemies);
         }
+
+        Debug.Log("type 1 = ");
+        poptype1.debugAverageStats();
+        Debug.Log("type 2 = ");
+        poptype2.debugAverageStats();
+        Debug.Log("type 3 = ");
+        poptype3.debugAverageStats();
 
     }
 
@@ -97,6 +102,7 @@ public class PopulationManagerGA {
         {
             EnemyInheratedValues enemy = new EnemyInheratedValues();
             pop.AddEnemy(enemy);
+            Debug.Log(pop.getList().Count);
         }
     }
     

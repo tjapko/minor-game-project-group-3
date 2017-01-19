@@ -25,7 +25,7 @@ public class Gene {
 
     public void randomGene()
     {
-        this.option = Random.Range(1, 4);
+        this.option = Random.Range(1, 5);
         optiontogene();
     }
 

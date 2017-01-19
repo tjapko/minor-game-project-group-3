@@ -44,22 +44,23 @@ public class EnemyInheratedValues  {
         chromosome.setVarriables();
 
         // damage per attack
-        float damageperAttack = (chromosome.getAmountOption1()/geneamount)*this.rangeDamagePerAttack;
+        float damageperAttack = (chromosome.getAmountOption1()/(float)geneamount)*this.rangeDamagePerAttack;
         this.damageToObjectPerAttack = this.baseDamageToObjectPerAttack + damageperAttack;
         this.damageToPlayerPerAttack = this.baseDamageToPlayerPerAttack + damageperAttack;
 
         // attack speed
-        float attackspeed = (chromosome.getAmountOption2() / geneamount) * this.rangeAttackSpeed;
+        float attackspeed = (chromosome.getAmountOption2() / (float)geneamount) * this.rangeAttackSpeed;
         this.attackSpeedObject = this.baseAttackSpeedObject + attackspeed;
         this.attackSpeedPlayer = this.baseAttackSpeedPlayer + attackspeed;
 
         // health
-        float health = (chromosome.getAmountOption3() / geneamount) * this.rangeStartingHealth;
+        float health = (chromosome.getAmountOption3() / (float)geneamount) * this.rangeStartingHealth;
         this.StartingHealth = this.baseStartingHealth + health;
 
         //movementspeed
-        float movement = (chromosome.getAmountOption4() / geneamount) * this.rangeMovementSpeed;
+        float movement = (chromosome.getAmountOption4() / (float)geneamount) * this.rangeMovementSpeed;
         this.movementspeed = this.baseMovementspeed + movement;
+
     }
 
 

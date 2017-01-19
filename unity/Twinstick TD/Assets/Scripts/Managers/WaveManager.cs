@@ -49,7 +49,7 @@ public class WaveManager
 	// spawnDelay of the enemies 
 	private float m_spawnDelayBetweenEnemies = 0.5f; // time delay between the enemies in a wave
 	// increasing amount of enemies 
-	private int m_startEnemies = 10;    // number of starting enemies 
+	private int m_startEnemies = 5;    // number of starting enemies 
 	private float m_angle1 = 3.0f;     // this angle is applied from the start to wave: m_m_waveTippingPoint1
 	private float m_angle2 = 5.0f;	   // this angle is applied from wave: m_m_waveTippingPoint1 to wave: m_m_waveTippingPoint2
 	private float m_angle3 = 2.0f;	   // this angle is applied from wave: m_m_waveTippingPoint2 till the end of the game
@@ -97,7 +97,7 @@ public class WaveManager
 			grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
 		}
 		int enemies = EnemiesAmountPerWave ();
-        GAManager.nextGenartion(enemies);
+        GAManager.nextGenartion(enemies);   // give the current list of enemies to GA and that updates to incubation list
 		m_wavenumber++;
 		proportionEnemies (); // update the proportions of the enemies per wave
 		yield return SpawnAllEnemies (enemies);
@@ -190,7 +190,7 @@ public class WaveManager
 		GameObject newinstance = GameObject.Instantiate (Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
 
 		if (Enemyprefab.Equals (m_Enemyprefab1)) {
-           // enemyvar enemyvar = ga.getenemyvartyp1;
+           // get enemy varriables from the GA manager in GAManager.getInheratedType1()
             Enemie1 instance = new Enemie1(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number,GAManager.getInheratedType1());
             m_enemywave.Add (instance);
 		} else if (Enemyprefab.Equals (m_Enemyprefab2)) {

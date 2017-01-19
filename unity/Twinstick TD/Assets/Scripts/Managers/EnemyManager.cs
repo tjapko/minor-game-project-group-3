@@ -20,6 +20,8 @@ public abstract class EnemyManager
     private float m_damageDoneToPlayer = 0f;
 
 
+    
+
     //Constructor
     public EnemyManager(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playertarget, int number, EnemyInheratedValues enemyInheratedValues)
     {
