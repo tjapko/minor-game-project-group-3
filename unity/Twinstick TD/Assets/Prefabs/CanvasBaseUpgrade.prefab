@@ -600,7 +600,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Upgrade Health: \n200"
+  m_Text: "Upgrade (Turrets&hp): \n200"
 --- !u!114 &114000011914095712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -633,7 +633,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Base Health
+  m_Text: Base
 --- !u!114 &114000011962334256
 MonoBehaviour:
   m_ObjectHideFlags: 1

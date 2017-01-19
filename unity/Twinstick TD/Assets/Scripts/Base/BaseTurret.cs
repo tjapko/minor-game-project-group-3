@@ -11,12 +11,14 @@ public class BaseTurret : MonoBehaviour {
 
     //Public variables
     [Header("Public variables")]
-    public float m_damage = 100f;    //damage of the turret
-    public float m_range = 200f;     //Range of the turret
-    public float m_launchspeed = 10f;   //Launch speed of the bullet
-    public float m_fireRate = 1f;   //Fire rate of the turret
-    public float m_turnrate = 1f;   //Turn rate of the turret
-    public float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
+    public float m_damage = 1f;    //damage of the turret
+	public float m_range = 200f;     //Range of the turret
+	public float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
+	public float m_fireRate = 1f;   //Fire rate of the turret
+
+	public float m_launchspeed = 10f;   //Launch speed of the bullet
+	public float m_turnrate = 1f;   //Turn rate of the turret
+
 
     //Private variables
     private GameObject m_target;        //Target (gameobject)
@@ -110,10 +112,21 @@ public class BaseTurret : MonoBehaviour {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, m_range);
     }
+		
+	public void setDamage(float amount) {
+		m_damage = amount;
+	}
 
-    //Increase Turret Damage
-    public void incTurretDamage(int amount)
-    {
-        m_damage += amount;
-    }
+	public void setRange(float amount) {
+		m_range = amount;
+	}
+
+	public void setAccuracy(float amount) {
+		m_accuracy = amount;
+	}
+
+	public void setFirerate(float amount) {
+		m_fireRate = amount;
+	}
+		
 }
