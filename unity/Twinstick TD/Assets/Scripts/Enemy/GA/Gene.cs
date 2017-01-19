@@ -67,6 +67,8 @@ public class Gene {
         }
     }
 
+
+
     public int getOption()
     {
         return this.option;

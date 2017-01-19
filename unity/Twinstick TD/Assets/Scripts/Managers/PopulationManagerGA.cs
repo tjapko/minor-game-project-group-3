@@ -70,6 +70,7 @@ public class PopulationManagerGA {
         Debug.Log("type 3 = ");
         poptype3.debugAverageStats();
 
+
     }
 
     public EnemyInheratedValues getInheratedType1()

@@ -63,6 +63,12 @@ public class EnemyInheratedValues  {
 
     }
 
+    public void mutate()
+    {
+        chromosome.mutate();
+        ChromosomeToValues();
+    }
+
 
     public void setDamageDone(float damageToObject, float damageToPlayer)
     {

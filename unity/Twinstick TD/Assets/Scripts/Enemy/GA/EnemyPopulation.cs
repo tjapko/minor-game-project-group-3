@@ -34,16 +34,7 @@ public class EnemyPopulation
                 return tempEnemy;
             }
         }
-   /*     foreach(KeyValuePair<EnemyInheratedValues, bool> tempEnemy in PopulationList)
-        {
-            if (!tempEnemy.Value)
-            {
-                
-                return tempEnemy.Key;
-
-            }
-        }
-        */
+  
         return PopulationList[0].Key;
         
     }

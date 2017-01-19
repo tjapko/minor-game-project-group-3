@@ -8,7 +8,9 @@ public class GaneticAlgorithm {
    private Chromosome parentA;
    private Chromosome parentB;
     private int popsize;
+    private float mutationRate = 0.1f;
 
+    
     public EnemyPopulation RunGA (EnemyPopulation population, int SizePop) {
         this.popsize = SizePop;
         this.population = population;
@@ -46,10 +48,18 @@ public class GaneticAlgorithm {
         EnemyPopulation offspring = new EnemyPopulation();
         for(int i = 0; i< popsize; i++)
         {
-            offspring.AddEnemy(newChild());
+            EnemyInheratedValues newchild = newChild();
+            if (Random.Range(0f,1f) < mutationRate)
+            {
+                newchild.mutate();
+            }
+
+            offspring.AddEnemy(newchild);
         }
         return offspring;
     }
+
+   
 
     private EnemyInheratedValues newChild()
     {

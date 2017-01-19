@@ -78,6 +78,12 @@ public class Chromosome {
             }
         }
       }
+    
+    public void mutate()
+    {
+        int geneNumber = Random.Range(0, geneamount - 1);
+        chromosome[geneNumber].randomGene();
+    }
 
     public int getAmountOption1()
     {
