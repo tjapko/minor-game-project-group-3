@@ -13,7 +13,7 @@ public class ShopScript : MonoBehaviour {
     string use_button = "f";    //Set to use button of player[i]
 
     //Public variables
-    [HideInInspector] public int maxweapons = 4;    //Max weapons the store may contain
+    [HideInInspector] public int maxweapons;    //Max weapons the store may contain
     //[HideInInspector] public int maxammotype = 4;   //Max ammo type the store may contain
     [HideInInspector] public List<Weapon> weaponsforsale;
     //[HideInInspector] public List<Weapon> ammoforsale;
@@ -48,12 +48,13 @@ public class ShopScript : MonoBehaviour {
         m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
         m_usermanager = m_gamemanager.getUserManager();
 
-
         //Create empty weaponsforsale
-        while (weaponsforsale.Count < maxweapons)
-        {
-            weaponsforsale.Add(new Weapon());
-        }
+       	//while (weaponsforsale.Count < maxweapons)
+        //{
+        //    weaponsforsale.Add(new Weapon());
+        //}
+		//Debug.Log("start   " + weaponsforsale.Count);
+
 
         //Create empty ammoforsale
         //while(ammoforsale.Count < maxammotype)
@@ -72,11 +73,10 @@ public class ShopScript : MonoBehaviour {
         weapon4 = new Weapon("Default Weapon 4", 4, "Default weapon!", "sniper", Sniper.price[0], Weapon.ItemType.Sniper, Sniper.fireRate[0], Sniper.launchForce, Sniper.maxDamage[0], Sniper.reloadTime, Sniper.clipSize[0], Sniper.ammo[0], Sniper.ammoprice, Sniper.ammoInClip[0], Sniper.maxAmmo[0], Sniper.bulletLifeTime);
         weapon2 = new Weapon("Default Weapon 2", 2, "Default weapon!", "shotgun", ShotGun.price[0], Weapon.ItemType.Shotgun, ShotGun.fireRate[0], ShotGun.launchForce, ShotGun.maxDamage[0], ShotGun.reloadTime, ShotGun.clipSize[0], ShotGun.ammo[0], ShotGun.ammoprice, ShotGun.ammoInClip[0], ShotGun.maxAmmo[0], ShotGun.bulletLifeTime);
         weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", MachineGun.price[0], Weapon.ItemType.MachineGun, MachineGun.fireRate[0], MachineGun.launchForce, MachineGun.maxDamage[0], MachineGun.reloadTime, MachineGun.clipSize[0], MachineGun.ammo[0], MachineGun.ammoprice, MachineGun.ammoInClip[0], MachineGun.maxAmmo[0], MachineGun.bulletLifeTime);
-        addWeapon((Weapon)weapon1);
-        addWeapon((Weapon)weapon4);
-        addWeapon((Weapon)weapon2);
-        addWeapon((Weapon)weapon3);
-       
+		weaponsforsale.Add((Weapon)weapon1);
+		weaponsforsale.Add((Weapon)weapon4);
+		weaponsforsale.Add((Weapon)weapon2);
+		weaponsforsale.Add((Weapon)weapon3);
         //		Upgrade (2); // for testing purposes
 
     }

@@ -83,11 +83,6 @@ public class PathFinding : MonoBehaviour {
 			}
 		}
 
-		/*//als nog steeds niet walkable: destroy object.
-		if (!startNode.walkable) {
-			Destroy (gameObject);
-		}*/
-		
 		//if (startNode.walkable && targetNode.walkable) {
 		if (startNode.walkable) {
 
@@ -112,7 +107,6 @@ public class PathFinding : MonoBehaviour {
 						neighbour.gCost = newMovementCostToNeighbour;
 						neighbour.hCost = GetDistance (neighbour, targetNode);
 						neighbour.parent = currentNode;
-	
 						if (!openSet.Contains (neighbour)) {
 							openSet.Add (neighbour);
 						}

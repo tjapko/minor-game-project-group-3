@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TurretScript : MonoBehaviour {
 
@@ -8,7 +9,10 @@ public class TurretScript : MonoBehaviour {
     public GameObject m_bulletPrefab; //Reference to bullet prefab
     public Transform m_turretFireTransform; //Reference to the fire transform
     public GameObject m_turretbarrel;   //Reference to barrel of turret
-
+	public GameObject m_hitBaseCanvasPrefab;    //Reference to friendlyHit canvas;
+	public Slider m_Slider;
+	public Image m_FillImage;
+	
     //Public variables
     [Header("Public variables")]
     public float m_damage = 100f;    //damage of the turret
@@ -17,6 +21,9 @@ public class TurretScript : MonoBehaviour {
     public float m_fireRate = 1f;   //Fire rate of the turret
     public float m_turnrate = 1f;   //Turn rate of the turret
     public float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
+	public float m_startHealth;
+	public Color m_FullHealthColor = Color.green;   //Full health colour
+	public Color m_ZeroHealthColor = Color.red;     //Zero health colour
 
     //Private variables
     private GameObject m_target;        //Target (gameobject)
@@ -24,10 +31,20 @@ public class TurretScript : MonoBehaviour {
     private float m_firecountdown;      //Countdown until next shot
     private Transform m_rotation;       //Rotation of turret
     private int m_PlayerNumber;
+	private float m_currentHealth;
+	private bool m_Dead;
+	private UserObjectStatistics stats;
+	private PlayerConstruction pl;
 
     // Use this for initialization
     void Start () {
+		stats = gameObject.GetComponent<UserObjectStatistics> ();
         InvokeRepeating("getTarget", 0f, 0.5f);
+		m_currentHealth = m_startHealth;
+		m_Dead = false;
+		SetHealthUI ();
+		pl = gameObject.GetComponent<PlayerConstruction> ();
+        pl.currentTurrets++;
     }
 	
 	// Update is called once per frame
@@ -114,4 +131,47 @@ public class TurretScript : MonoBehaviour {
     {
         m_PlayerNumber = number;
     }
+
+	public void takeDamage(float damage){
+		//Set hitmark
+		createHitMark(m_hitBaseCanvasPrefab, damage);
+
+		// Reduce current health by the amount of damage done.
+		m_currentHealth -= damage;
+		// Change the UI elements appropriately.
+		SetHealthUI();
+
+		// If the current health is at or below zero and it has not yet been registered, call OnDeath.
+		if (m_currentHealth <= 0f && !m_Dead)
+		{
+			//CancelInvoke ();
+			OnDeath();
+		}
+	}
+
+	private void SetHealthUI()
+	{
+		// Set the slider's value appropriately.
+		m_Slider.value = m_currentHealth;
+
+		// Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
+		m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_currentHealth / m_startHealth);
+	}
+
+	//Spawn hitmark
+	private void createHitMark(GameObject prefab, float amount)
+	{
+		//Set hitmark
+		GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+		hitbox.GetComponent<HitMarkScript>().setDamage(amount);
+	}
+
+	// OnDeath
+	private void OnDeath()
+	{
+		stats.onDeath ();
+		m_Dead = true;
+		//gameObject.SetActive(false);
+        pl.currentTurrets--; 
+	}
 }

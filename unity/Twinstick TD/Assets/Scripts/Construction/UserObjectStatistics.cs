@@ -29,17 +29,17 @@ public class UserObjectStatistics : MonoBehaviour {
         player_present = false;
         colliding_markers = new List<GameObject>();
 
-        InvokeRepeating("checkforPlayer", 0f, 0.1f);
+        //InvokeRepeating("checkforPlayer", 0f, 0.1f);
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 
     //Object is intersecting with the to be placed object
-    public void OnTriggerEnter(Collider other)
+    /*public void OnTriggerEnter(Collider other)
     {
 
     }
@@ -48,10 +48,10 @@ public class UserObjectStatistics : MonoBehaviour {
     public void OnTriggerExit(Collider other)
     {
 
-    }
+    }*/
 
     // Check if player is standing near turret
-    private void checkforPlayer()
+	private void checkforPlayer()
     {
         bool playerisPresent = false;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -88,7 +88,9 @@ public class UserObjectStatistics : MonoBehaviour {
     //Function on death
     public void onDeath()
     {
-        m_owner.m_Instance.GetComponent<PlayerConstruction>().removeObject(gameObject);
+		if (m_owner != null && m_owner.m_construction != null) {
+			m_owner.m_construction.removeObject (gameObject);
+		}
     }
 
 
@@ -110,7 +112,6 @@ public class UserObjectStatistics : MonoBehaviour {
         {
             ts.setPlayerNumber(playernumber);
         }
-
     }
 
     //Setter of object_placed

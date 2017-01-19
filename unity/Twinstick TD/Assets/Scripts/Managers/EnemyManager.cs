@@ -9,7 +9,7 @@ public abstract class EnemyManager
 {
     //Public variables
     public Transform m_SpawnPoint;                      // Spawn position of enemy (should be appointed by Gamemanger instead of manual)
-    [HideInInspector] public Transform m_BasePoint;     // Location of base
+	[HideInInspector] public GameObject m_Base;     // Location of base
 	[HideInInspector] public Transform m_PlayerPoint; 	// Location of player
     [HideInInspector] public int m_EnemyNumber;         // Number of enemy
     [HideInInspector] public GameObject m_Instance;     // A reference to the instance of the enemy
@@ -18,10 +18,10 @@ public abstract class EnemyManager
 
 
     //Constructor
-	public EnemyManager(GameObject instance, Transform spawnpoint, Transform basetarget, Transform playertarget, int number)
+	public EnemyManager(GameObject instance, Transform spawnpoint, GameObject _base, Transform playertarget, int number)
     {
         m_SpawnPoint = spawnpoint;
-        m_BasePoint = basetarget;
+        m_Base = _base;
         m_EnemyNumber = number;
         m_Instance = instance;
 		this.health = m_Instance.GetComponent<EnemyHealth> ();

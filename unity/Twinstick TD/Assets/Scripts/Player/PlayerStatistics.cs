@@ -8,7 +8,7 @@ public class PlayerStatistics : MonoBehaviour {
 
     //Public variables
     public int m_playernumber;  // Current player number
-    public int m_playerstartcurrency = 1000;   //Start currency of player
+    public int m_playerstartcurrency;   //Start currency of player
 
     //Private variables
 

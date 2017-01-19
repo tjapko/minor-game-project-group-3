@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 	public GameObject m_travellingSalesman;     // Reference to the travelling Salesman
     public Transform m_Basespawnpoint;          // Spawnpoint of base
     public Transform m_Playerspawnpoint;        // Spawnpoint of player
-    [HideInInspector]public Transform m_Enemyspawnpoint;         // Spawnpoint of enemy
+    public Transform m_Enemyspawnpoint;         // Spawnpoint of enemy
 	public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
     public GameObject m_weaponshop;             // Reference to the weapon shop                 
 
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         // Start the game
         StartCoroutine(GameLoop());
 
-		m_wave = new WaveManager(m_Enemyprefab1, m_Enemyprefab2, m_Enemyprefab3, m_Enemyprefab4, m_Enemyspawnpoint, m_Basespawnpoint, m_players.m_playerlist[0].m_Instance.transform, m_gridPrefab, m_gridManager);
+		m_wave = new WaveManager(m_Enemyprefab1, m_Enemyprefab2, m_Enemyprefab3, m_Enemyprefab4, m_Enemyspawnpoint, m_base.m_Instance, m_players.m_playerlist[0].m_Instance.transform, m_gridPrefab, m_gridManager);
 
         backgroundSource.clip = backgroundSounds[Random.Range(0, backgroundSounds.Length)];
         backgroundSource.Play();
@@ -105,11 +105,13 @@ public class GameManager : MonoBehaviour
             
         }
 
-		// if base is dead, all existing enemies move to player
-		if (!m_wave.baseDead && m_base.m_Instance.activeSelf == false) {
-			m_wave.baseDead = true;
-			m_wave.enemiesToPlayer ();
-		}
+        pauseGame(gamepause);
+
+        //Set the Object placement phase
+        m_players.setConstructionphase(!wavephase);
+
+        //Show or hide UI menu depending on wavephase and pause
+        m_uiscript.UIchange(gameover, wavephase, gamepause);
     }
 
     // This is called from start and will run each phase of the game one after another.

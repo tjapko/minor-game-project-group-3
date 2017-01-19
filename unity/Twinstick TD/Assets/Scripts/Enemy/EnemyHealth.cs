@@ -20,6 +20,7 @@ public class EnemyHealth : MonoBehaviour
     //Public variables
 	public float m_damageToTowerSec;					//damage to tower per second
     public float m_towerpersecond ;
+	public float m_playerpersecond;
 	public float m_damageToPlayerSec;					//damage to player per second
 	public float m_StartingHealth;						//Start health of enemy
     public Slider m_Slider;                           	// The slider to represent how much health the enemy currently has.
@@ -31,10 +32,13 @@ public class EnemyHealth : MonoBehaviour
     //Private variables
     private float m_CurrentHealth;  					//Current health of enemy
 	private bool m_Dead;  								//Enemy is dead or not
-	[HideInInspector] public bool basehit;				//Enemy has hit base or not
+	//[HideInInspector] public bool basehit;				//Enemy has hit base or not
     private int m_lasthit;          					//Playernumber of last hit
 	private PlayerHealth playerhealth;					//playerhealth script
 	private Basehealth basehealth;						//Basehealth script
+	private TurretScript turretScript;
+	private CarrotFieldScript carrotField;
+	private WallScript wallScript;
 
     public void Start()
     {
@@ -46,14 +50,16 @@ public class EnemyHealth : MonoBehaviour
 	}
 
 	public void OnTriggerEnter(Collider other){
+		
 		//if colide with base, damage base and set enemy to inactive
-		if (other.gameObject.CompareTag ("Player")) 
+		if (other.gameObject.CompareTag ("Player"))
 		{
 			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
 			if (targetRigidbody) 
 			{
+				playerUnit.stopCoroutines();
 				playerhealth = targetRigidbody.GetComponent<PlayerHealth> ();
-				InvokeRepeating ("playerDamage", 0f, 1f);
+				InvokeRepeating ("playerDamage", 0f, m_playerpersecond);
 			}
 		}
 		if (other.gameObject.CompareTag("Base"))
@@ -63,25 +69,86 @@ public class EnemyHealth : MonoBehaviour
 			{
 				basehealth = targetRigidbody.GetComponent<Basehealth>();
 				InvokeRepeating("baseDamage", 0f, m_towerpersecond);
-				playerUnit.baseHit = true;
+				//stop walking if hit the base
+				playerUnit.stopCoroutines();
+			}
+		}
+		if (other.gameObject.CompareTag ("PlayerMud")) 
+		{
+			playerUnit.inOutMud(true);
+		}
+		if (other.gameObject.CompareTag("PlayerCarrotField")){
+			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
+			if (targetRigidbody) 
+			{				
+				playerUnit.stopCoroutines ();
+				carrotField = targetRigidbody.GetComponent<CarrotFieldScript> ();
+				InvokeRepeating ("carrotFieldDamage", 0f, m_towerpersecond);
+			}
+		}
+		if (other.gameObject.CompareTag("PlayerTurret")){
+			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
+			if (targetRigidbody) 
+			{
+				playerUnit.stopCoroutines ();
+				turretScript = targetRigidbody.GetComponent<TurretScript> ();
+				InvokeRepeating ("turretDamage", 0f, m_towerpersecond);
+			}
+		}
+		if (other.gameObject.CompareTag("PlayerWall")){
+			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
+			if (targetRigidbody) 
+			{
+				//playerUnit.stopCoroutines ();
+				wallScript = targetRigidbody.GetComponent<WallScript> ();
+				InvokeRepeating ("wallDamage", 0f, m_towerpersecond);
 			}
 		}
 	}
 
 	//Give tower damage
 	private void baseDamage(){
-        if(basehealth != null)
-        {
-            basehealth.TakeDamage(m_damageToTowerSec);
-        }
+		if (!basehealth.m_Dead) {
+			basehealth.TakeDamage (m_damageToTowerSec);
+		} else {
+			playerUnit.calcDistance (playerUnit.enemyType);
+			CancelInvoke ("baseDamage");
+		}
 	}
 
 	//give player damage
 	private void playerDamage(){
-        if(playerhealth != null)
-        {
-            playerhealth.takeDamage(m_damageToPlayerSec);
-        }
+		if (playerhealth != null) {
+			playerhealth.takeDamage (m_damageToPlayerSec);
+		} else {
+			CancelInvoke ("playerDamage");
+		}
+	}
+
+	private void turretDamage(){
+		if (turretScript != null) {
+			turretScript.takeDamage (m_damageToTowerSec);
+		} else {
+			playerUnit.calcDistance (playerUnit.enemyType);
+			CancelInvoke ("turretDamage");
+		}
+	}
+
+	private void carrotFieldDamage(){
+		if (carrotField != null) {
+			carrotField.takeDamage (m_damageToTowerSec);
+		} else {
+			playerUnit.calcDistance (playerUnit.enemyType);
+			CancelInvoke ("carrotFieldDamage");
+		}
+	}
+
+	private void wallDamage(){
+		if (wallScript != null) {
+			wallScript.takeDamage (m_damageToTowerSec);
+		} else {
+			CancelInvoke ("wallDamage");
+		}
 	}
 
     //Spawn hitmark
@@ -96,9 +163,17 @@ public class EnemyHealth : MonoBehaviour
         hitbox.SetActive(true);                 //Set object active
     }
 
-    //stop invoke if colliders are not touching anymore
+
     public void OnTriggerExit (Collider other){
-		CancelInvoke ();
+		//stop invoke if colliders are not touching anymore
+		if (other.gameObject.CompareTag ("Base") || other.gameObject.CompareTag ("Player") || other.gameObject.CompareTag("PlayerTurret") || other.gameObject.CompareTag("PlayerCarrotField") || other.gameObject.CompareTag("PlayerWall"))  {
+			CancelInvoke ();
+		}
+		//enemies walk normal speed when out of collision
+		if (other.gameObject.CompareTag ("PlayerMud")) 
+		{
+			playerUnit.inOutMud(false);
+		}
 	}
 
     //Take damage

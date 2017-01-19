@@ -10,7 +10,7 @@ public class WaveManager
 	[HideInInspector]public Transform m_enemyspawnpoints;   //Spawnpoints of enemies
     public GameManager gameManager;
 
-    public Transform m_basetarget;         //Target(s) of enemies
+	public GameObject m_base;         //Target(s) of enemies
 	public Transform m_playerpoint;
     public Transform m_target;             //Target(s) of enemies
     public GameObject m_Enemyprefab1;	//Reference to prefab of enemy1
@@ -25,7 +25,7 @@ public class WaveManager
     public LayerMask unwalkableMask;
     public float nodeRadius;
     public double baseDistanceProportion = 0.2; // minimal distance to travel for each enemy
-	public bool baseDead = false;				// if baseDead, all enemies walk towards player
+	//public bool baseDead = false;				// if baseDead, all enemies walk towards player
 
     //Private variables
     private List<EnemyManager> m_enemywave; //Population of enemies
@@ -57,7 +57,7 @@ public class WaveManager
 	private int m_waveTippingPoint1 = 10; // wave at which m_angle2 is used for the increasing amount of enemies 
 	private int m_waveTippingPoint2 = 15; // wave at which m_angle2 is used for the increasing amount of enemies 
 
-	public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, Transform enemyspawnpoints, Transform basetarget, Transform playerpoint, GameObject gridprefab, GridManager gridmanager)
+	public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, Transform enemyspawnpoints, GameObject _base, Transform playerpoint, GameObject gridprefab, GridManager gridmanager)
     {
      
         this.m_Enemyprefab1 = Enemyprefab1;
@@ -65,7 +65,7 @@ public class WaveManager
         this.m_Enemyprefab4 = Enemyprefab4;
 		this.m_Enemyprefab3 = Enemyprefab3;
         this.m_enemyspawnpoints = enemyspawnpoints;
-        this.m_basetarget = basetarget;
+        this.m_base = _base;
         this.m_playerpoint = playerpoint;
         this.m_gridprefab = gridprefab;
 		this.m_gridmanager = gridmanager;
@@ -206,27 +206,27 @@ public class WaveManager
 		GameObject newinstance = GameObject.Instantiate (Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
 
 		if (Enemyprefab.Equals (m_Enemyprefab1)) {
-            Enemie1 instance = new Enemie1(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
+            Enemie1 instance = new Enemie1(newinstance, m_enemyspawnpoints, m_base, m_playerpoint, enemy_number);
             instance.health.setMaxHealth(sethealt());
             m_enemywave.Add (instance);
 		} else if (Enemyprefab.Equals (m_Enemyprefab2)) {
-            Enemie2 instance = new Enemie2(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
+            Enemie2 instance = new Enemie2(newinstance, m_enemyspawnpoints, m_base, m_playerpoint, enemy_number);
             instance.health.setMaxHealth(sethealt());
             m_enemywave.Add (instance);
 		} else if (Enemyprefab.Equals (m_Enemyprefab3)) {
-            Enemie3 instance = new Enemie3(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
+            Enemie3 instance = new Enemie3(newinstance, m_enemyspawnpoints, m_base, m_playerpoint, enemy_number);
             instance.health.setMaxHealth(sethealt());
             m_enemywave.Add (instance);
 		} else if (boss) {
-            Enemie4 instance = new Enemie4(newinstance, m_enemyspawnpoints, m_basetarget, m_playerpoint, enemy_number);
+            Enemie4 instance = new Enemie4(newinstance, m_enemyspawnpoints, m_base, m_playerpoint, enemy_number);
             instance.health.setMaxHealth(20);
             m_enemywave.Add (instance);
 		}
 
 		//if base is dead and enemy is not already moving to player -> go to player
-		if (baseDead && !m_enemywave[m_enemywave.Count-1].m_MovementPlayer.playerFirst) {
-			m_enemywave[m_enemywave.Count-1].m_MovementPlayer.goToPlayer ();
-		}
+		//if (baseDead && !m_enemywave[m_enemywave.Count-1].m_MovementPlayer.playerFirst) {
+		//	m_enemywave[m_enemywave.Count-1].m_MovementPlayer.goToPlayer ();
+		//}
 
         enemy_number++;
 	}
@@ -286,7 +286,7 @@ public class WaveManager
             m_enemywave.RemoveAt(0);
         }
 
-		baseDead = false;
+		//baseDead = false;
     }
 
     //Enable control of enemies
@@ -337,15 +337,6 @@ public class WaveManager
 
         return answer;
     }
-
-	// for all existing enemies in m_enemywave, let them walk to player
-	public void enemiesToPlayer(){
-		foreach (var enemy in m_enemywave) {
-			if (baseDead && !enemy.m_MovementPlayer.playerFirst) {
-				enemy.m_MovementPlayer.goToPlayer ();
-			}
-		}
-	}
 
 //	// returning spawnTime (varies per wave)
 //	private float spawnDelayTime() {  

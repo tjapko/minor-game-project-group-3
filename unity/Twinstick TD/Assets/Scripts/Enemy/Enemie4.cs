@@ -8,10 +8,10 @@ public class Enemie4 : EnemyManager
 	public GameObject enemyPrefab;
 
 	//Boss enemie, walks slowly towards base
-	public Enemie4 (GameObject instance, Transform spawnpoint, Transform basetarget, Transform playerpoint, int number) : base(instance, spawnpoint, basetarget, playerpoint, number)
+	public Enemie4 (GameObject instance, Transform spawnpoint, GameObject _base, Transform playerpoint, int number) : base(instance, spawnpoint, _base, playerpoint, number)
 	{
 		this.m_SpawnPoint = spawnpoint;
-		this.m_BasePoint = basetarget;
+		this.m_Base = _base;
 		this.m_EnemyNumber = number;
 		this.m_Instance = instance;
 		this.m_PlayerPoint = playerpoint;
@@ -21,9 +21,8 @@ public class Enemie4 : EnemyManager
 		this.m_MovementPlayer = m_Instance.GetComponent<UnitPlayer> ();
 		health.playerUnit = m_MovementPlayer;
 		m_MovementPlayer.m_player = m_PlayerPoint;
-		m_MovementPlayer.m_base = m_BasePoint;
-		m_MovementPlayer.playerFirst = true;
-		m_MovementPlayer.speed = 3.0f;
+		m_MovementPlayer.m_base = m_Base;
+		m_MovementPlayer.speed = m_MovementPlayer.bossSpeed;
 		m_MovementPlayer.goToBase();
 	}
 }

@@ -24,7 +24,7 @@ public class Basehealth : MonoBehaviour {
     //Private variables
     private float m_CurrentHealth;                  //Current health of tower
     [HideInInspector] public bool m_Dead = false;                            //Boolean if tower is dead
-
+    
     // OnEnable
     public void OnEnable()
     {
@@ -57,7 +57,12 @@ public class Basehealth : MonoBehaviour {
 				OnDeath ();
 			}
 		}
-		ScreenShake.ShakeBase ();
+		if (m_CurrentHealth != 0) {
+			ScreenShake.ShakeBase ();
+		}
+		if (m_CurrentHealth == 0) {
+			ScreenShake.ShakeBaseOndeath ();
+		}
     }
 
     //Heal base
@@ -92,7 +97,7 @@ public class Basehealth : MonoBehaviour {
         ShopScript m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
         ShopUIScript m_shopuiscript = m_shopscript.m_instance_UI.GetComponent<ShopUIScript>();
         m_shopuiscript.setBaseDestroyed(true);
-		ScreenShake.ShakeBaseOndeath ();
+//		ScreenShake.ShakeBaseOndeath ();
     }
 
     // On Rebuild
