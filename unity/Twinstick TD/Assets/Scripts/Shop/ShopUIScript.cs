@@ -273,13 +273,25 @@ public class ShopUIScript : MonoBehaviour {
 		int inventoryIndex = findSameWeaponType(weaponlist[weaponIndex].itemtype);
 
 		if (inventoryIndex != 100){
-			// check whether player got enough money & doesn't have max ammo already
-			if (m_currentplayer.m_stats.getCurrency () >= weaponlist [weaponIndex].ammoprice && (m_currentplayer.m_inventory.inventory [inventoryIndex].ammo + weaponlist [weaponIndex].ammoInClip) < weaponlist [weaponIndex].maxAmmo) {
-				//decrease currency
-				m_currentplayer.m_stats.addCurrency (-weaponlist [weaponIndex].ammoprice);
+            // check whether player got enough money & doesn't have max ammo already
+            if (m_currentplayer.m_stats.getCurrency () >= weaponlist [weaponIndex].ammoprice) {
+                Weapon selected_weapon = m_currentplayer.m_inventory.inventory[inventoryIndex];
 
-				//add ammo (amount that goes in one clip) to certain weapon
-				m_currentplayer.m_inventory.inventory [inventoryIndex].ammo += weaponlist [weaponIndex].ammoInClip;
+                if ((selected_weapon.ammo + selected_weapon.ammoInClip) < selected_weapon.maxAmmo)
+                {
+                    //decrease currency
+                    m_currentplayer.m_stats.addCurrency(-weaponlist[weaponIndex].ammoprice);
+
+                    //add ammo (amount that goes in one clip) to certain weapon
+                    if (selected_weapon.ammo + selected_weapon.ammoInClip + selected_weapon.clipSize > selected_weapon.maxAmmo)
+                    {
+                        m_currentplayer.m_inventory.inventory[inventoryIndex].ammo = selected_weapon.maxAmmo - selected_weapon.ammoInClip;
+                    }
+                    else
+                    {
+                        m_currentplayer.m_inventory.inventory[inventoryIndex].ammo += weaponlist[weaponIndex].clipSize;
+                    }
+                }
 			}
 		}
     }

@@ -355,7 +355,7 @@ public class WaveManager
     private int sethealt()
     {
         //Example algorithm
-        return (int) (Mathf.Pow(1.0f , m_wavenumber)); // updating hp enemy per wave
+        return (int)  (Mathf.Pow(1.5f    , m_wavenumber)); // updating hp enemy per wave
     }
 
     //Returns amount of enemies remaining 

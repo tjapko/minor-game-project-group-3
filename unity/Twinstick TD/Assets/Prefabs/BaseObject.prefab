@@ -208,6 +208,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000012378873658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013287017254}
+  - 82: {fileID: 82000013685154502}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000012722731438
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,6 +533,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000012440070302}
   m_RootOrder: 0
+--- !u!4 &4000013287017254
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012378873658}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -4.92419, y: -20.109385, z: -21.342154}
+  m_LocalScale: {x: 0.3333333, y: 0.5, z: 0.3333333}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000014275804332}
+  m_RootOrder: 7
 --- !u!4 &4000014022692424
 Transform:
   m_ObjectHideFlags: 1
@@ -549,7 +578,8 @@ Transform:
   - {fileID: 4000011483646512}
   - {fileID: 4000014022692424}
   - {fileID: 224000013598233058}
-  - {fileID: 4000010162659352}
+  - {fileID: 4000011192970266}
+  - {fileID: 4000013287017254}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!23 &23000011975065760
@@ -806,6 +836,81 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 1, z: 3}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!82 &82000013685154502
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012378873658}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243000010068878376, guid: 6cc270b4902593f4fa6a0ec1a20667a1,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: dd44eec7d5602954880338e661d2c599, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114000011113260260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -875,6 +980,26 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 0
   m_FillOrigin: 0
+--- !u!114 &114000011773733376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013595951870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4acec6013b56084bb440b49ed3ec494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baseupgradeground: {fileID: 1000011696080752}
+  price_restorePlayerHealth: 100
+  amount_restorePlayerHealth: 1
+  price_upgradePlayerHealth: 64000000c8000000
+  amount_upgradePlayerHealth: c800000090010000
+  price_restoreBaseHealth: 100
+  amount_restoreBaseHealth: 1
+  price_upgradeBaseHealth: c800000090010000
+  amount_upgradeBaseHealth: c800000090010000
 --- !u!114 &114000012022335900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1011,6 +1136,8 @@ MonoBehaviour:
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   m_Slider: {fileID: 114000012022335900}
   m_FillImage: {fileID: 114000011372990030}
+  deathsound: {fileID: 82000013685154502}
+  death: {fileID: 8300000, guid: dd44eec7d5602954880338e661d2c599, type: 3}
   m_Dead: 0
 --- !u!114 &114000013001154140
 MonoBehaviour:
