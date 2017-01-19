@@ -85,11 +85,11 @@ public class Basehealth : MonoBehaviour {
     // OnDeath
     private void OnDeath()
     {
-        Debug.Log("joeee");
+        
         deathsound.transform.parent = null;
         deathsound.clip = death;
         deathsound.Play();
-        Destroy(deathsound.gameObject, 9f);
+       // Destroy(deathsound.gameObject, 8f);
 
         m_Dead = true;
         gameObject.SetActive(false);
