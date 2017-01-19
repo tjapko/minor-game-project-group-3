@@ -127,7 +127,7 @@ public class UnitPlayer : MonoBehaviour {
 		}
 		Vector3 currentWaypoint = path[0];
 		while (true) {
-			if (Vector3.Distance(currentWaypoint,transform.position) < 0.5f){
+			if (Vector3.Distance(currentWaypoint,transform.position) < 0.4f){
 				targetIndex ++;
 				//check of huidig doel er niet meer is.
 				checkCurrentGoal();
