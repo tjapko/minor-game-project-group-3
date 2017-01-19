@@ -12,7 +12,7 @@ public class BaseUpgrade {
     public enum BaseUpgradeType
     {
         PlayerHealthUpgrade,
-        BaseHealthUpgrade,
+        BaseUpgrade,
         TurretDamageUpgrade,
         //TurretSpeedUpgrade,
         //TurretAccuracyUpgrade,

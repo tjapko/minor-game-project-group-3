@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Upgrade_BaseTurretDamage : BaseUpgrade {
+public class Upgrade_BaseTurret : BaseUpgrade {
 
-    //Private variable
-    private int[] m_BaseTurretDamageInc;
+	//Private variable
+	private int[] m_BaseTurretDamage;
 
     //Constructor
     //m_base: the base (gameobject)
-    public Upgrade_BaseTurretDamage(int[] price, int[] incTurretDMG) : base(price)
+    public Upgrade_BaseTurret(int[] price, int[] incTurretDMG) : base(price)
     {
         //Error message
         if (price.Length != incTurretDMG.Length)
@@ -18,7 +18,7 @@ public class Upgrade_BaseTurretDamage : BaseUpgrade {
 
         //Set variables
         upgrade_type = BaseUpgradeType.TurretDamageUpgrade;
-        m_BaseTurretDamageInc = incTurretDMG;
+        m_BaseTurretDamage = incTurretDMG;
         setIcon("Upgrade_BaseTurretDamageIcon");
     }
 
@@ -31,7 +31,7 @@ public class Upgrade_BaseTurretDamage : BaseUpgrade {
         {
 
             //Inrease basehealth
-            baseturret_script.incTurretDamage(m_BaseTurretDamageInc[selected_index]);
+			baseturret_script.setAccuracy(m_BaseTurretDamage[selected_index]);
             //Increase index
             incIndex();
         }

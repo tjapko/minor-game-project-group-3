@@ -216,10 +216,10 @@ public class CanvasBaseUpgrade : MonoBehaviour {
     {
         switch (type)
         {
-            case BaseUpgrade.BaseUpgradeType.BaseHealthUpgrade:
-                return "Base Health";
+            case BaseUpgrade.BaseUpgradeType.BaseUpgrade:
+                return "Base";
             case BaseUpgrade.BaseUpgradeType.RestoreBaseHealth:
-                return "Base Health";
+                return "Base";
             case BaseUpgrade.BaseUpgradeType.PlayerHealthUpgrade:
                 return "Player Health";
             case BaseUpgrade.BaseUpgradeType.RestorePlayerHealth:
@@ -233,8 +233,8 @@ public class CanvasBaseUpgrade : MonoBehaviour {
     {
         switch (type)
         {
-            case BaseUpgrade.BaseUpgradeType.BaseHealthUpgrade:
-                return "Upgrade Base Health: ";
+            case BaseUpgrade.BaseUpgradeType.BaseUpgrade:
+			return "Upgrade Base (Turrets&hp): ";
             case BaseUpgrade.BaseUpgradeType.RestoreBaseHealth:
                 return "Buy Health: ";
             case BaseUpgrade.BaseUpgradeType.PlayerHealthUpgrade:
@@ -254,8 +254,8 @@ public class CanvasBaseUpgrade : MonoBehaviour {
 
         switch (selected_upgrade.getBaseUpgradeType())
         {
-            case BaseUpgrade.BaseUpgradeType.BaseHealthUpgrade:
-                Upgrade_BaseHealth upgrade_1 = (Upgrade_BaseHealth)selected_upgrade;
+            case BaseUpgrade.BaseUpgradeType.BaseUpgrade:
+                Upgrade_Base upgrade_1 = (Upgrade_Base)selected_upgrade;
 
                 if(upgrade_1.getPrice() != -1 && player_stats.getCurrency() >= upgrade_1.getPrice())
                 {
@@ -265,7 +265,6 @@ public class CanvasBaseUpgrade : MonoBehaviour {
                 break;
             case BaseUpgrade.BaseUpgradeType.RestoreBaseHealth:
                 Restore_BaseHealth upgrade_2 = (Restore_BaseHealth)selected_upgrade;
-                Debug.Log("price: " + upgrade_2.getPrice());
                 if (upgrade_2.getPrice() != -1 && player_stats.getCurrency() >= upgrade_2.getPrice())
                 {
                     upgrade_2.restoreBaseHealth(m_base, selected_player);
@@ -300,7 +299,7 @@ public class CanvasBaseUpgrade : MonoBehaviour {
     {
         switch (selected_upgrade.getBaseUpgradeType())
         {
-            case BaseUpgrade.BaseUpgradeType.BaseHealthUpgrade:
+            case BaseUpgrade.BaseUpgradeType.BaseUpgrade:
                 return (selected_upgrade.getPrice() != -1) && (selected_player.m_stats.m_currency >= selected_upgrade.getPrice());
             case BaseUpgrade.BaseUpgradeType.RestoreBaseHealth:
                 return (selected_player.m_stats.m_currency >= selected_upgrade.getPrice()) && m_basehealth.getCurrentHealth() < m_basehealth.m_maxhealth;
@@ -322,7 +321,7 @@ public class CanvasBaseUpgrade : MonoBehaviour {
 
         switch (selected_upgrade.getBaseUpgradeType())
         {
-            case BaseUpgrade.BaseUpgradeType.BaseHealthUpgrade:
+            case BaseUpgrade.BaseUpgradeType.BaseUpgrade:
                 if (selected_upgrade.getPrice() == -1)
                 {
                     return "Max Health Reached";
@@ -330,7 +329,7 @@ public class CanvasBaseUpgrade : MonoBehaviour {
 
                 if (stats.getCurrency() >= selected_upgrade.getPrice())
                 {
-                    return "Upgrade Base Health: " + selected_upgrade.getPrice();
+				return "Upgrade Base(Turrets&hp): " + selected_upgrade.getPrice();
                 }
                 else if(stats.getCurrency() < selected_upgrade.getPrice())
                 {
