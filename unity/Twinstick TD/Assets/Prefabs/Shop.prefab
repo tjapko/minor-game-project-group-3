@@ -22,7 +22,7 @@ GameObject:
   - 33: {fileID: 33000012350740842}
   - 65: {fileID: 65000010841404450}
   - 23: {fileID: 23000010368873936}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Base
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - 33: {fileID: 33000012345423166}
   - 136: {fileID: 136000013965271910}
   - 23: {fileID: 23000011897836732}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cylinder
   m_TagString: Base
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - 65: {fileID: 65000013109671300}
   - 114: {fileID: 114000012635998886}
   - 54: {fileID: 54000010479474162}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shop
   m_TagString: Shop
   m_Icon: {fileID: 0}
@@ -228,16 +228,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da182362e5b54fd498ea83d92cb1921d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxweapons: 4
-  upgrade_cost: 0000000064000000c800000090010000
-  helpbox_prefab: {fileID: 1000011848348470, guid: 06d8da69edd821a488eee1b3c9eb5a8c,
-    type: 2}
-  m_instance_UI: {fileID: 0}
+  maxweapons: 5
+  maxammotype: 5
   m_Bullet: {fileID: 54000012476593726, guid: 4d22d43c1b361484297b2a7b58b8d4a8, type: 2}
   m_RayBullet: {fileID: 54000012476593726, guid: 0261b5d85b6ae8747bfa627544ea2578,
     type: 2}
   m_FireTransform: {fileID: 4000011702620350, guid: 6526df5f06f78a5438cb83f5730a0724,
     type: 2}
+  m_ShopUIprefab: {fileID: 1000010742267120, guid: 4718148eb10e9d945beab5902c750e9b,
+    type: 2}
+  m_instance_UI: {fileID: 0}
 --- !u!136 &136000013965271910
 CapsuleCollider:
   m_ObjectHideFlags: 1

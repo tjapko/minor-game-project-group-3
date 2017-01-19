@@ -26,6 +26,7 @@ public class PlayerConstruction : MonoBehaviour {
     private Camera m_constructionCamera;        //Reference to the construction camera
     private int Floor;                          //Reference to floor layer
 
+
     //Public variables
     public GameObject m_markerprefab;   //Reference to the suggestive marker prefab
     public GameObject m_wallprefab;   //Reference to (to be placed) turret
@@ -34,6 +35,10 @@ public class PlayerConstruction : MonoBehaviour {
     public GameObject m_mudprefab;   
     public List<GameObject> m_placedobjects;    //List containing all the objects the user has placed  
     public PlayerManager m_player;     //Reference to the player manager (set by Usermanager)
+
+    // turret variables
+    public static int maxTurrets = 3; // maximum amount of turrets
+    public int  currentTurrets=0; // current amount of active turrets 
 
     //Private variables
     private Vector3 mouseposition;      // Position of mouse
@@ -118,10 +123,6 @@ public class PlayerConstruction : MonoBehaviour {
                 }
             }
         }
-
-
-        
-        
     }
 
 
@@ -163,16 +164,16 @@ public class PlayerConstruction : MonoBehaviour {
             if (Input.GetMouseButtonUp(0) || Input.GetKeyDown(keyinput) && (instancestats.getGroundClear() && m_grid.NodeFromWorldPoint(newinstance.transform.position).walkable))
             {
                 instancestats.setPlacement(true);    //The object is now placed onto the ground
-                newinstance.AddComponent<Rigidbody>();  //Create a rigid body, for OnTriggerEnter to work properly
+                //newinstance.AddComponent<Rigidbody>();  //Create a rigid body, for OnTriggerEnter to work properly
                 newinstance.GetComponent<Rigidbody>().isKinematic = true;   //Make the rigidbody kinematic, such that it's not affected by physics
                 setTag(objecttype, newinstance);    //Set tag onto game object
-                m_placedobjects.Add(newinstance);   //Add instance to list
+				newinstance.GetComponent<UserObjectStatistics>().m_owner = m_player;
+				m_placedobjects.Add(newinstance);   //Add instance to list
                 constructing = false;   //Building has finished
-                newinstance.layer = 9;  //Set layer of the object as unwalkable
+               	newinstance.layer = 15;  //Set layer of the object as unwalkable
 
                 //Reduce funds
                 reduceFunds(objecttype, countObjects(objecttype));
-                
                 break;
             }
 
@@ -197,16 +198,16 @@ public class PlayerConstruction : MonoBehaviour {
     //Function to remove objects
     public void removeObject(GameObject remove_object)
     {
-        int remove_id = remove_object.GetInstanceID();
-        for(int i = 0; i < m_placedobjects.Count; i++)
-        {
-            if(m_placedobjects[i].GetInstanceID()  == remove_id)
-            {
-                Destroy(m_placedobjects[i]);
-                m_placedobjects.RemoveAt(i);
-                break;
-            }
-        }
+		if (remove_object != null) {
+			int remove_id = remove_object.GetInstanceID ();
+			for (int i = 0; i < m_placedobjects.Count; i++) {
+				if (m_placedobjects [i].GetInstanceID () == remove_id) {
+					Destroy (m_placedobjects [i]);
+					m_placedobjects.RemoveAt (i);
+					break;
+				}
+			}
+		}
     }
 
     //Sets the construction phase

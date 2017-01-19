@@ -2,38 +2,31 @@
 using System.Collections;
 using UnityEngine.UI;
 
-/// <summary>
-/// Script CarrotFieldScript
-/// Contains the basic functions for the carrot field
-/// </summary>
-public class CarrotFieldScript : MonoBehaviour {
+public class WallScript : MonoBehaviour
+{
 	[Header("References")]
 	public GameObject m_hitBaseCanvasPrefab;    //Reference to friendlyHit canvas;
 	public Slider m_Slider;
 	public Image m_FillImage;
 
 	[Header("Public variables")]
-    //Public Variables
-    public float m_startyield;                //Yield of carrot field at start
-    public float m_inc;                       //Yield(n+1) = inc * Yield(n)
+	//Public Variables
 	public float m_startHealth;
 	public Color m_FullHealthColor = Color.green;   //Full health colour
 	public Color m_ZeroHealthColor = Color.red;     //Zero health colour
 
 	//Private variables
-    private float m_currentYield;           //Current yield Y(n)
 	private float m_currentHealth;
 	private bool m_Dead;
 	private UserObjectStatistics stats;
 
-    void Start()
-    {
+	void Start()
+	{		
 		stats = gameObject.GetComponent<UserObjectStatistics> ();
 		m_Dead = false;
-        m_currentYield = m_startyield;
 		m_currentHealth = m_startHealth;
 		SetHealthUI ();
-    }
+	}
 
 	public void takeDamage(float damage){
 		//Set hitmark
@@ -76,13 +69,5 @@ public class CarrotFieldScript : MonoBehaviour {
 		m_Dead = true;
 		//gameObject.SetActive(false);
 	}
-
-    //Initialize variables
-    public int waveYield()
-    {
-        
-        //m_currentYield = m_currentYield * m_inc;
-		return (int)m_startyield;
-    }
-
 }
+

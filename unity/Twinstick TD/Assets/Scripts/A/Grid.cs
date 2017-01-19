@@ -11,16 +11,18 @@ public class Grid : MonoBehaviour {
 	[HideInInspector]public Vector2 gridWorldSize; // the size of the whole map in coordinates
 	[HideInInspector]public float nodeRadius;// radius of the nodes
 	[HideInInspector]public LayerMask unwalkableMask;// a layer where all the static objects in the map are on
-	Node[,] grid;  // The Grid: including walkable nodes and NOT walkable nodes.
+	[HideInInspector]public LayerMask unplacableMask; // a layer where all the unplacable colliders in the map are on
+	Node[,] grid;  // The Grid: including walkable nodes, NOT walkable AND NOT placable nodes.
 
 	float nodeDiameter; // the NodeDiameter 
 	int gridSizeX, gridSizeY; // The size of the whole map in NodeCoordinates 
 
-    public Grid(bool dispGridGizmos, Vector2 worldSize, float radius, LayerMask unwalkable)
+	public Grid(bool dispGridGizmos, Vector2 worldSize, float radius, LayerMask unwalkable, LayerMask unplacable)
     {
         this.displayGridGizmos = dispGridGizmos;
         this.gridWorldSize = worldSize;
         this.unwalkableMask = unwalkable;
+		this.unplacableMask = unplacable;
 		this.nodeRadius = radius;
     }
 
@@ -52,7 +54,8 @@ public class Grid : MonoBehaviour {
 			for (int y = 0; y < gridSizeY; y++){// for every Node in Y direction 
 				Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
 				bool walkable = !(Physics.CheckSphere(worldPoint, (nodeRadius * 1.4f) , unwalkableMask)); //checking whether the node is walkable
-				grid [x, y] = new Node (walkable, worldPoint, x, y); //adding the Node to the grid
+				bool placable = !(Physics.CheckSphere(worldPoint, (nodeRadius * 1.4f) , unplacableMask)); //checking whether the node is placable
+				grid [x, y] = new Node (walkable, placable, worldPoint, x, y); //adding the Node to the grid
 			}
 		}
 	}
@@ -106,7 +109,7 @@ public class Grid : MonoBehaviour {
 
 	if (displayGridGizmos) {
 			foreach (Node n in grid) {
-				Gizmos.color = (n.walkable) ? Color.white : Color.red;
+				Gizmos.color = (n.walkable) ? Color.white : Color.green;
 				Gizmos.DrawCube (n.worldPosition, Vector3.one * (nodeDiameter - .1f));
 			}
 		}

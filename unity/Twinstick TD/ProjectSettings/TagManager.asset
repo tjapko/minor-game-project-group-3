@@ -50,8 +50,8 @@ TagManager:
   - Player
   - Base
   - enemy
-  - 
-  - 
+  - Unplacable
+  - playerObjects
   - 
   - 
   - 
