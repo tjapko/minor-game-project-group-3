@@ -366,6 +366,7 @@ public class GameManager : MonoBehaviour
     public void setpause(bool status)
     {
         gamepause = status;
+        pauseGame(gamepause);
         m_uiscript.UIchange(gameover, wavephase, gamepause);
     }
 
