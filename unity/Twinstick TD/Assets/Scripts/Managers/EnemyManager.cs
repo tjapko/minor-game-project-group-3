@@ -15,16 +15,31 @@ public abstract class EnemyManager
     [HideInInspector] public GameObject m_Instance;     // A reference to the instance of the enemy
     [HideInInspector] public UnitPlayer m_MovementPlayer;  	// Reference to enemy's movement script, used to disable and enable control.
 	[HideInInspector] public EnemyHealth health;		//Enemie health script
+    private EnemyInheratedValues inheratedValues;
+    private float m_damageDoneToObject = 0f;
+    private float m_damageDoneToPlayer = 0f;
 
+
+    
 
     //Constructor
-	public EnemyManager(GameObject instance, Transform spawnpoint, GameObject _base, Transform playertarget, int number)
+
+    public EnemyManager(GameObject instance, Transform spawnpoint, GameObject _base, Transform playertarget, int number, EnemyInheratedValues enemyInheratedValues)
+
     {
         m_SpawnPoint = spawnpoint;
         m_Base = _base;
         m_EnemyNumber = number;
         m_Instance = instance;
-		this.health = m_Instance.GetComponent<EnemyHealth> ();
+        m_PlayerPoint = playertarget;
+        this.inheratedValues = enemyInheratedValues;
+        this.health = m_Instance.GetComponent<EnemyHealth> ();
+        this.health.setDamageToTowerSec(inheratedValues.getDamageToObjectPerAttack());
+        this.health.setTowerperSecond(inheratedValues.getAttackSpeedObject());
+        this.health.setDamageToPlayerSec(inheratedValues.getDamgeToPlayerPerAttack());
+        this.health.setPlayerPerSecond(inheratedValues.GetAttackSpeedPlayer());
+        this.health.setCurrentHealth(inheratedValues.getStartingHealth());
+
     }
 
 
@@ -33,8 +48,9 @@ public abstract class EnemyManager
 	{
 		{
 			m_Instance.GetComponent<UnitPlayer> ().enabled = true;
-		}
-	}
+            m_Instance.GetComponent<UnitPlayer>().setMovementspeed(inheratedValues.getMovementspeed());
+        }
+    }
 
 	// Used during the phases of the game where the enemy should be able to move
 	public void DisableControl()
@@ -50,6 +66,13 @@ public abstract class EnemyManager
 
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
+    }
+
+    public void updatePreformance()
+    {
+        this.m_damageDoneToObject = this.health.getDamageDoneToObject();
+        this.m_damageDoneToPlayer = this.health.getDamageDoneToPlayer();
+        this.inheratedValues.setDamageDone(this.m_damageDoneToObject, this.m_damageDoneToPlayer);
     }
 
 }

@@ -57,7 +57,12 @@ public class WaveManager
 	private int m_waveTippingPoint1 = 10; // wave at which m_angle2 is used for the increasing amount of enemies 
 	private int m_waveTippingPoint2 = 15; // wave at which m_angle2 is used for the increasing amount of enemies 
 
+    //GA
+    private PopulationManagerGA GAManager;
+
+
 	public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, Transform enemyspawnpoints, GameObject _base, Transform playerpoint, GameObject gridprefab, GridManager gridmanager)
+
     {
      
         this.m_Enemyprefab1 = Enemyprefab1;
@@ -75,9 +80,11 @@ public class WaveManager
 		m_wave = -1;
         m_enemywave = new List<EnemyManager>();
 
-//		this.m_startSpawnDelayTime = this.numberEnemiesPerWave*0.5f;
-//		this.m_endSpawnDelayTime = m_scaleEnemies * 0.5f;
-//		this.time = this.m_startSpawnDelayTime;
+        //		this.m_startSpawnDelayTime = this.numberEnemiesPerWave*0.5f;
+        //		this.m_endSpawnDelayTime = m_scaleEnemies * 0.5f;
+        //		this.time = this.m_startSpawnDelayTime;
+
+        this.GAManager = new PopulationManagerGA(m_startEnemies);
     }
 
 
@@ -92,6 +99,7 @@ public class WaveManager
 		}
 		grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
 		int enemies = EnemiesAmountPerWave ();
+        GAManager.nextGenartion(enemies);   // give the current list of enemies to GA and that updates to incubation list
 		m_wavenumber++;
 		proportionEnemies (); // update the proportions of the enemies per wave
 		yield return SpawnAllEnemies (enemies);
@@ -206,20 +214,20 @@ public class WaveManager
 		GameObject newinstance = GameObject.Instantiate (Enemyprefab, m_enemyspawnpoints.position, m_enemyspawnpoints.rotation) as GameObject;
 
 		if (Enemyprefab.Equals (m_Enemyprefab1)) {
-            Enemie1 instance = new Enemie1(newinstance, m_enemyspawnpoints, m_base, m_playerpoint, enemy_number);
-            instance.health.setMaxHealth(sethealt());
+
+           // get enemy varriables from the GA manager in GAManager.getInheratedType1()
+            Enemie1 instance = new Enemie1(newinstance, m_enemyspawnpoints, m_base, m_playerpoint, enemy_number,GAManager.getInheratedType1());
             m_enemywave.Add (instance);
 		} else if (Enemyprefab.Equals (m_Enemyprefab2)) {
-            Enemie2 instance = new Enemie2(newinstance, m_enemyspawnpoints, m_base, m_playerpoint, enemy_number);
-            instance.health.setMaxHealth(sethealt());
+            Enemie2 instance = new Enemie2(newinstance, m_enemyspawnpoints, m_base, m_playerpoint, enemy_number,GAManager.getInheratedType2());
             m_enemywave.Add (instance);
 		} else if (Enemyprefab.Equals (m_Enemyprefab3)) {
-            Enemie3 instance = new Enemie3(newinstance, m_enemyspawnpoints, m_base, m_playerpoint, enemy_number);
-            instance.health.setMaxHealth(sethealt());
+            Enemie3 instance = new Enemie3(newinstance, m_enemyspawnpoints, m_base, m_playerpoint, enemy_number,GAManager.getInheratedType3());
             m_enemywave.Add (instance);
 		} else if (boss) {
-            Enemie4 instance = new Enemie4(newinstance, m_enemyspawnpoints, m_base, m_playerpoint, enemy_number);
-            instance.health.setMaxHealth(20);
+            Enemie4 instance = new Enemie4(newinstance, m_enemyspawnpoints, m_base, m_playerpoint, enemy_number,GAManager.getInheratedType4());
+            instance.health.setCurrentHealth(20);
+
             m_enemywave.Add (instance);
 		}
 
@@ -272,7 +280,11 @@ public class WaveManager
 				return false;
 			}
 		}
-		return true;
+
+        UpdateEnemyPreformance();
+
+
+        return true;
 	}
 		
     //Remove dead enemies
@@ -287,6 +299,14 @@ public class WaveManager
         }
 
 		//baseDead = false;
+    }
+
+    public void UpdateEnemyPreformance()
+    {
+        foreach (EnemyManager enemy in m_enemywave)
+        {
+            enemy.updatePreformance();
+        }
     }
 
     //Enable control of enemies
