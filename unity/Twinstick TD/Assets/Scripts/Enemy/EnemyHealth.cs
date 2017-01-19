@@ -36,6 +36,7 @@ public class EnemyHealth : MonoBehaviour
 	private Basehealth basehealth;						//Basehealth script
 	private TurretScript turretScript;
 	private CarrotFieldScript carrotField;
+	private WallScript wallScript;
 
     public void Start()
     {
@@ -64,7 +65,8 @@ public class EnemyHealth : MonoBehaviour
 			{
 				basehealth = targetRigidbody.GetComponent<Basehealth>();
 				InvokeRepeating("baseDamage", 0f, m_towerpersecond);
-				//playerUnit.baseHit = true;
+				//stop walking if hit the base
+				//playerUnit.stopPathfinding();
 			}
 		}
 		if (other.gameObject.CompareTag ("PlayerMud")) 
@@ -75,6 +77,7 @@ public class EnemyHealth : MonoBehaviour
 			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
 			if (targetRigidbody) 
 			{				
+				playerUnit.stopCoroutines ();
 				carrotField = targetRigidbody.GetComponent<CarrotFieldScript> ();
 				InvokeRepeating ("carrotFieldDamage", 0f, m_towerpersecond);
 			}
@@ -83,8 +86,18 @@ public class EnemyHealth : MonoBehaviour
 			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
 			if (targetRigidbody) 
 			{
+				playerUnit.stopCoroutines ();
 				turretScript = targetRigidbody.GetComponent<TurretScript> ();
 				InvokeRepeating ("turretDamage", 0f, m_towerpersecond);
+			}
+		}
+		if (other.gameObject.CompareTag("PlayerWall")){
+			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
+			if (targetRigidbody) 
+			{
+				//playerUnit.stopCoroutines ();
+				wallScript = targetRigidbody.GetComponent<WallScript> ();
+				InvokeRepeating ("wallDamage", 0f, m_towerpersecond);
 			}
 		}
 	}
@@ -126,6 +139,14 @@ public class EnemyHealth : MonoBehaviour
 		}
 	}
 
+	private void wallDamage(){
+		if (wallScript != null) {
+			wallScript.takeDamage (m_damageToTowerSec);
+		} else {
+			CancelInvoke ("wallDamage");
+		}
+	}
+
     //Spawn hitmark
     private void createHitMark(GameObject prefab, float amount)
     {
@@ -137,7 +158,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void OnTriggerExit (Collider other){
 		//stop invoke if colliders are not touching anymore
-		if (other.gameObject.CompareTag ("Base") || other.gameObject.CompareTag ("Player") || other.gameObject.CompareTag("PlayerTurret") || other.gameObject.CompareTag("PlayerCarrotField")) {
+		if (other.gameObject.CompareTag ("Base") || other.gameObject.CompareTag ("Player") || other.gameObject.CompareTag("PlayerTurret") || other.gameObject.CompareTag("PlayerCarrotField") || other.gameObject.CompareTag("PlayerWall"))  {
 			CancelInvoke ();
 		}
 		//enemies walk normal speed when out of collision

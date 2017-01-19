@@ -105,12 +105,6 @@ public class GameManager : MonoBehaviour
 
         //Show or hide UI menu depending on wavephase and pause
         m_uiscript.UIchange(gameover, wavephase, gamepause);
-
-		// if base is dead, all existing enemies move to player
-		/*if (!m_wave.baseDead && m_base.m_Instance == null) {
-			m_wave.baseDead = true;
-			m_wave.enemiesToPlayer ();
-		}*/
     }
 
     // This is called from start and will run each phase of the game one after another.

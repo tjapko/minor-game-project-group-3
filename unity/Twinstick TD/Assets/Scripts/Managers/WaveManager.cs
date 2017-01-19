@@ -312,17 +312,6 @@ public class WaveManager
         return answer;
     }
 
-	// for all existing enemies in m_enemywave, let them walk to player
-	public void enemiesToPlayer(){
-		foreach (var enemy in m_enemywave) {
-			// if base is dead and enemy is walking to base, go to player
-			/*if (baseDead && enemy.m_MovementPlayer.currentGoal == m_basetarget.gameObject) {
-				enemy.m_MovementPlayer.stopPathfinding ();
-				enemy.m_MovementPlayer.goToPlayer ();
-			}*/
-		}
-	}
-
 //	// returning spawnTime (varies per wave)
 //	private float spawnDelayTime() {  
 ////		float m_timeExtra; // added amount of time to the total spawnTime of the wave 

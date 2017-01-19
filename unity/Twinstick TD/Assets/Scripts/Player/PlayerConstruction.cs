@@ -146,7 +146,7 @@ public class PlayerConstruction : MonoBehaviour {
                 newinstance.GetComponent<Rigidbody>().isKinematic = true;   //Make the rigidbody kinematic, such that it's not affected by physics
                 m_placedobjects.Add(newinstance);   //Add instance to list
                 constructing = false;   //Building has finished
-                newinstance.layer = 9;  //Set layer of the object as unwalkable
+               	newinstance.layer = 15;  //Set layer of the object as unwalkable
 
                 //Reduce funds and set tag
                 switch (keyinput)
@@ -163,8 +163,8 @@ public class PlayerConstruction : MonoBehaviour {
                         newinstance.tag = "PlayerCarrotField";
                         m_player.m_stats.substractCurrency(m_price_carrot);
                         break;
-                    case "4":
-                        newinstance.tag = "PlayerMud";
+				case "4":
+						newinstance.tag = "PlayerMud";
                         m_player.m_stats.substractCurrency(m_price_mud);
                         break;
                     default:

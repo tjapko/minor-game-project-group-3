@@ -113,6 +113,10 @@ public class UnitPlayer : MonoBehaviour {
 		StopCoroutine("FollowPath");
 	}
 
+	public void stopCoroutines(){
+		StopCoroutine("FollowPath");
+	}
+
 	/// <summary>
 	/// a coroutine for walking over the path that is given 
 	/// </summary>

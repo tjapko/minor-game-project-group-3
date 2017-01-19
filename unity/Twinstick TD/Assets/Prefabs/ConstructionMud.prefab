@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000010073213234}
   - 33: {fileID: 33000010181300264}
   - 23: {fileID: 23000013737023758}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: Plane
   m_TagString: PlayerMud
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - 114: {fileID: 114000013960979630}
   - 65: {fileID: 65000011044375096}
   - 114: {fileID: 114000010054518494}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: ConstructionMud
   m_TagString: PlayerObject
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013911877710}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
