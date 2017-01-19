@@ -14,7 +14,15 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 7e7d92bd0ef900548aef3b385d31411d
+    name: volBGM
+  - guid: d3310ebd3caa65046a792f6651cea73e
+    name: volMaster
+  - guid: 468beea134642cc439e7dfc2d639fd81
+    name: volSFX
+  - guid: 2c96c344857217f499e67aec52550a75
+    name: volWalking
   m_AudioMixerGroupViews:
   - guids:
     - 4f489d722326d614c8fdd6274b11256c
@@ -76,7 +84,8 @@ AudioMixerSnapshotController:
     2d8f467c878da544e879ba9d75ace376: 0
     aedd945d469651a4eab18805fd37ed5a: 2.5
     6e0df4ada6371954c9bef2a0615a79a8: 3
-    7e7d92bd0ef900548aef3b385d31411d: -9.833286
+    7e7d92bd0ef900548aef3b385d31411d: -10.345198
+    d3310ebd3caa65046a792f6651cea73e: -80
     aab0ae0e4cbe5ab47a06e502d769f45b: 0
     f76cdbaeea3f21c4282415e3bbb33073: 0
     44b2b6ee3215d2240945bb0e05f42677: -55.499916

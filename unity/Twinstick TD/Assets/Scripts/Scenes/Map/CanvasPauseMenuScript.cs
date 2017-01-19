@@ -28,8 +28,12 @@ public class CanvasPauseMenuScript : MonoBehaviour {
         m_settingsmenu = gameObject.transform.GetChild(1).gameObject;
         m_controlsmenu = gameObject.transform.GetChild(2).gameObject;
 
+        //Initialize
+        m_settingsmenu.GetComponent<SettingsScript>().StartInitialzation();
+
         //Enable menus
         m_pausemenu.SetActive(true);
+        m_settingsmenu.SetActive(false);
         m_controlsmenu.SetActive(false);
 
     }
