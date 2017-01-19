@@ -10,6 +10,8 @@ public class DestroyRayBullet : MonoBehaviour
     public float timeToTarget;      // The time it takes to travel from the beginposition to the endposition (distance / launchforce)
     public Vector3 StartPos;        // the position where the bullet is initiated (m_FireTransform)
     public bool hit = false;        // is true when the ray hits a target
+    public AudioSource laserSound;
+    public AudioClip laser;
 
     private float t;                // a float to store the time data each updateframe
     internal object m_MaxDamage;
@@ -22,7 +24,9 @@ public class DestroyRayBullet : MonoBehaviour
 
         StartPos = transform.position;
         Destroy(gameObject, m_MaxLifeTime);
-
+        laserSound.transform.parent = null;
+        laserSound.Play();
+        Destroy(laserSound.gameObject, 1f);
     }
 
     /// <summary>

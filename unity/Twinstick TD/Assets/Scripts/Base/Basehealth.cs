@@ -19,6 +19,8 @@ public class Basehealth : MonoBehaviour {
     public Color m_ZeroHealthColor = Color.red;     //Zero health colour
     public Slider m_Slider;
     public Image m_FillImage;
+    public AudioSource deathsound;
+    public AudioClip death;
 
     //Private variables
     private float m_CurrentHealth;                  //Current health of tower
@@ -83,6 +85,12 @@ public class Basehealth : MonoBehaviour {
     // OnDeath
     private void OnDeath()
     {
+        Debug.Log("joeee");
+        deathsound.transform.parent = null;
+        deathsound.clip = death;
+        deathsound.Play();
+        Destroy(deathsound.gameObject, 9f);
+
         m_Dead = true;
         gameObject.SetActive(false);
     }

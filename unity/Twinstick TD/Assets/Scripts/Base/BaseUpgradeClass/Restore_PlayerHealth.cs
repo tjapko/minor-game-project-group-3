@@ -4,9 +4,10 @@ using System.Collections;
 public class Restore_PlayerHealth : BaseUpgrade {
     //Private variable
     private int m_restoreamount;
-
+    GameObject m_player;
     //Constructor
     //m_base: the base (gameobject)
+
     public Restore_PlayerHealth(int[] price, int restoreAmount) : base(price)
     {
         //Error message
@@ -19,6 +20,14 @@ public class Restore_PlayerHealth : BaseUpgrade {
         upgrade_type = BaseUpgradeType.RestorePlayerHealth;
         m_restoreamount = restoreAmount;
         setIcon("Restore_PlayerHealthIcon");
+    }
+
+    private int Cost()
+    {
+        Basehealth player_script = m_player.GetComponent<Basehealth>();
+        float dif = (player_script.m_maxhealth - player_script.getCurrentHealth());
+        Debug.Log("price: " + price_array);
+        return ((int)(dif * price_array[0]));
     }
 
     //Restore health of base

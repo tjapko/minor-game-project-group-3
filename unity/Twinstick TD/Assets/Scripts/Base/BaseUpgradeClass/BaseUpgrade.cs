@@ -38,6 +38,7 @@ public class BaseUpgrade {
         }
     }
 
+  
     //Get price of next upgrade, '-1' means no more upgrades
     public int getPrice()
     {

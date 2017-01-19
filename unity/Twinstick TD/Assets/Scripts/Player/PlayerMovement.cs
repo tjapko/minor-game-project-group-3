@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour {
 	[HideInInspector]public static bool useController;
 	[HideInInspector]public static bool windowsAndXBOX; 
 	public static bool macAndXBOX;
-
+    public AudioSource walking;
 
 	private Rigidbody m_playerRigidbody;
 	private float m_MovementInputValueV;
@@ -96,6 +96,15 @@ public class PlayerMovement : MonoBehaviour {
 		// adding movement to player's position
 		movement += m_playerRigidbody.position;
 
+        if (movementX == 0 && movementZ == 0)
+        {
+            walking.Stop();
+        }
+        else if (!walking.isPlaying)
+        {
+            walking.Play();
+        }
+        
 		// move player to the new (moved) position
 		m_playerRigidbody.MovePosition(movement);
 
