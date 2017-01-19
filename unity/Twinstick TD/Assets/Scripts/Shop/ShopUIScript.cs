@@ -10,9 +10,13 @@ using UnityEngine.UI;
 /// </summary>
 public class ShopUIScript : MonoBehaviour {
 
-    //References
+    //Global references
+    private GameManager m_gamemanager;                  //Reference to game manager
+
+    //References:Weapon Shop
     [HideInInspector] public ShopScript m_shopscript;         //Reference to ShopScript, which contains the weapons (Set by the shop)
     [HideInInspector] public PlayerManager m_currentplayer;    //Reference to the player that has opened the UI
+    private GameObject go_rebuildbutton;        //Reference to the rebuild button
     private GameObject go_ShopText;             //Reference to text of the shop (gameobject)
     private Text ui_shopText;                   //Reference to the text of the shop
     private GameObject go_ShopUpgradeButton;    //Reference to shop upgrade button
@@ -25,22 +29,40 @@ public class ShopUIScript : MonoBehaviour {
     private List<Button> btn_weapon_ammo;       //List of references to the ammo purchase buttons
     private List<Text> ui_weapon_ammo_cost;     //List of references to the text of the ammo purchase buttons
 
+    //References:Rebuild base
+    private GameObject menushop;                //Reference to the shop menu
+    private GameObject menurebuild;             //Reference to the rebuild menu
+    private Button btn_rebuild;                 //Reference to the button on the rebuild button
+    private Text txt_rebuild;                   //Reference to the text of the rebuild button
+
     //Variables
+    private bool base_destroyed;                //Boolean if base is destroyed
     private List<Weapon> weaponlist;
     //private List<Weapon> ammolist;            //Fix (should be fixed when using different types of ammo)
 
     // Use this for initialization
     public void StartInitialization() {
-        //Find shop
+        //Initialize variables
+        ui_weapon_icons = new List<Image>();
+        ui_weapon_name = new List<Text>();
+        btn_weapon_cost = new List<Button>();
+        ui_weapon_cost = new List<Text>();
+        btn_weapon_ammo = new List<Button>();
+        ui_weapon_ammo_cost = new List<Text>();
+        base_destroyed = false;
+
+        //Find shopand game manager
+        m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
         m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
 
         //Set lists
         weaponlist = m_shopscript.weaponsforsale;
         //ammolist = weaponlist; //Fix (should be fixed when using different types of ammo)
 
-        GameObject menu = gameObject.transform.GetChild(0).gameObject;
-        GameObject menushopinfo = menu.transform.GetChild(0).gameObject;
-
+        menushop = gameObject.transform.GetChild(0).gameObject;
+        menurebuild = gameObject.transform.GetChild(1).gameObject;
+        GameObject menushopinfo = menushop.transform.GetChild(0).gameObject;
+        
         //Set references
         go_ShopText = menushopinfo.transform.GetChild(0).gameObject;
         ui_shopText = go_ShopText.GetComponent<Text>();
@@ -49,59 +71,39 @@ public class ShopUIScript : MonoBehaviour {
 
         //Get weapons in menu
         go_weapons = new List<GameObject>();
-        go_weapons.Add(menu.transform.GetChild(1).gameObject);
-        go_weapons.Add(menu.transform.GetChild(2).gameObject);
-        go_weapons.Add(menu.transform.GetChild(3).gameObject);
-        go_weapons.Add(menu.transform.GetChild(4).gameObject);
+        go_weapons.Add(menushop.transform.GetChild(1).gameObject);
+        go_weapons.Add(menushop.transform.GetChild(2).gameObject);
+        go_weapons.Add(menushop.transform.GetChild(3).gameObject);
+        go_weapons.Add(menushop.transform.GetChild(4).gameObject);
 
-        //Get icons
-        ui_weapon_icons = new List<Image>();
+        //Set references weapon shop
         foreach (GameObject go_weapon in go_weapons)
         {
             ui_weapon_icons.Add(go_weapon.transform.GetChild(0).GetComponent<Image>());
-        }
-
-        //Get  weapon type
-        ui_weapon_name = new List<Text>();
-        foreach(GameObject go_weapon in go_weapons)
-        {
             ui_weapon_name.Add(go_weapon.transform.GetChild(1).GetComponent<Text>());
-        }
-
-        //Get weapon purchase buttons
-        btn_weapon_cost = new List<Button>();
-        foreach(GameObject go_weapon in go_weapons)
-        {
             btn_weapon_cost.Add(go_weapon.transform.GetChild(2).gameObject.GetComponent<Button>());
-        }
-
-        //Get weapon cost
-        ui_weapon_cost = new List<Text>();
-        foreach(GameObject go_weapon in go_weapons)
-        {
             ui_weapon_cost.Add(go_weapon.transform.GetChild(2).GetChild(0).GetComponent<Text>());
-        }
-
-        //Get ammo purchase buttons
-        btn_weapon_ammo = new List<Button>();
-        foreach (GameObject go_weapon in go_weapons)
-        {
             btn_weapon_ammo.Add(go_weapon.transform.GetChild(3).gameObject.GetComponent<Button>());
-        }
-
-        //Get ammo cost
-        ui_weapon_ammo_cost = new List<Text>();
-        foreach(GameObject go_weapon in go_weapons)
-        {
             ui_weapon_ammo_cost.Add(go_weapon.transform.GetChild(3).GetChild(0).GetComponent<Text>());
         }
+
+        //Set references rebuild
+        go_rebuildbutton = menurebuild.transform.GetChild(1).gameObject;
+        btn_rebuild = go_rebuildbutton.GetComponent<Button>();
+        txt_rebuild = go_rebuildbutton.transform.GetChild(0).GetComponent<Text>();
 
         //Set text of shop
         ui_shopText.text = "Weapons and Ammo \n Tier 1";
         ui_ShopUpgradeButton.text = "Uprade Shop: \n" + m_shopscript.upgrade_cost[1];
 
+        //Set text of rebuild
+        txt_rebuild.text = "Rebuild base: " + m_shopscript.m_rebuildbasecost;
+
         //Disable itself
+        menushop.SetActive(true);
+        menurebuild.SetActive(false);
         gameObject.SetActive(false);
+        
 
     }
 
@@ -109,14 +111,26 @@ public class ShopUIScript : MonoBehaviour {
     void OnEnable()
     {
         //Invoke functions
-        InvokeRepeating("updateForSaleWeapons", 0f, 0.1f);
+        if (base_destroyed)
+        {
+            shopMenuActive(false);
+            rebuildMenuActive(true);
+            InvokeRepeating("updateRebuildBaseMenu", 0f, 0.1f);
+
+        } else
+        {
+            shopMenuActive(true);
+            rebuildMenuActive(false);
+            InvokeRepeating("updateForSaleWeapons", 0f, 0.1f);
+        }
+        
     }
 
     //On Disable function
     void OnDisable()
     {
         CancelInvoke("updateForSaleWeapons");
-
+        CancelInvoke("updateRebuildBaseMenu");
     }
 
     //Update the UI panel
@@ -281,17 +295,73 @@ public class ShopUIScript : MonoBehaviour {
             //Increment tier (weapons are loaded automatically)
             m_shopscript.incTier();
             //Change text of text and buttons
-            if(m_shopscript.getCurrentTier() >= m_shopscript.upgrade_cost.Length - 1)
+            ui_shopText.text = "Weapons and Ammo \n Tier " + m_shopscript.getCurrentTier();
+            if (m_shopscript.getCurrentTier() >= m_shopscript.upgrade_cost.Length - 1)
             {
-                ui_shopText.text = "Weapons and Ammo \n Tier " + m_shopscript.getCurrentTier();
                 go_ShopUpgradeButton.transform.parent.gameObject.SetActive(false);
             } else
             {
-                ui_shopText.text = "Weapons and Ammo \n Tier " + m_shopscript.getCurrentTier();
                 ui_ShopUpgradeButton.text = "Uprade Shop: \n" + m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()];
             }
             
 
+        }
+    }
+
+    //Sets shop menu actives
+    private void shopMenuActive(bool status)
+    {
+        if(menushop != null)
+        {
+            menushop.SetActive(status);
+        } 
+    }
+
+    //Sets rebuild menu active
+    private void rebuildMenuActive(bool status)
+    {
+        if(menurebuild != null)
+        {
+            menurebuild.SetActive(status);
+            //txt_rebuild.text = "Rebuild base: " + m_shopscript.m_rebuildbasecost;
+        }
+    }
+
+    //Sets base_destroyed
+    public void setBaseDestroyed(bool status)
+    {
+        base_destroyed = status;
+    }
+
+    //Rebuilds the base
+    public void rebuildBase()
+    {
+        if(m_currentplayer.m_stats.m_currency >= m_shopscript.m_rebuildbasecost)
+        {
+            m_currentplayer.m_stats.substractCurrency(m_shopscript.m_rebuildbasecost);
+            m_gamemanager.getBaseManager().m_Instance.GetComponent<Basehealth>().OnRebuild();
+        }
+    }
+
+    public void updateRebuildBaseMenu()
+    {
+        if (m_gamemanager.getBaseManager().m_Instance.activeSelf)
+        {
+            txt_rebuild.text = "Base has been built";
+            btn_rebuild.interactable = false;
+            //shopMenuActive(true);
+            //rebuildMenuActive(false);
+        } else
+        {
+            if (m_currentplayer.m_stats.m_currency >= m_shopscript.m_rebuildbasecost)
+            {
+                txt_rebuild.text = "Rebuild base: " + m_shopscript.m_rebuildbasecost;
+                btn_rebuild.interactable = true;
+            } else
+            {
+                txt_rebuild.text = "Not Enough funds: " + m_shopscript.m_rebuildbasecost;
+                btn_rebuild.interactable = false;
+            }
         }
     }
 }

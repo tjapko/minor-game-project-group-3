@@ -148,6 +148,5 @@ public class UIManager : MonoBehaviour {
     {
         m_GameOverScript.setScore();
     }
-   
 
 }

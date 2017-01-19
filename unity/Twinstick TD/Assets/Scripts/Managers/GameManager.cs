@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         //Setting up variables
         //m_StartWait = new WaitForSeconds(m_beginDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
+        Time.timeScale = 1.0f;
 
         //Initialize managers
 		m_travellingSalesmanManager = new TravellingSalesmanManager(m_travellingSalesman);
@@ -185,7 +186,9 @@ public class GameManager : MonoBehaviour
             //Enemies are dead
             if (m_wave.EnemiesDead())
             {
-				m_players.rewardPlayer();
+                //Reward player
+                waveReward();
+
                 // Go into construction phase
                 yield return StartCoroutine(constructionPhase());
 				m_waveNumber++;
@@ -324,6 +327,15 @@ public class GameManager : MonoBehaviour
         m_CameraControl.m_Targets = targets;
     }
 
+    //Reward player
+    private void waveReward()
+    {
+        if (m_base.m_Instance.activeSelf)
+        {
+            m_players.rewardPlayer();
+        }
+    }
+
     // Input from restart button
     public void btn_restartgame()
     {
@@ -354,6 +366,7 @@ public class GameManager : MonoBehaviour
     public void setpause(bool status)
     {
         gamepause = status;
+        pauseGame(gamepause);
         m_uiscript.UIchange(gameover, wavephase, gamepause);
     }
 
@@ -394,5 +407,6 @@ public class GameManager : MonoBehaviour
     {
         return m_base;
     }
+
 }
 

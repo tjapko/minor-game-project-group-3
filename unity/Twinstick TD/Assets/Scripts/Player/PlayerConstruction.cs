@@ -18,6 +18,7 @@ public class PlayerConstruction : MonoBehaviour {
 
     //References
     private GameManager m_gamemanager;          //Reference to game manager script
+    private BaseManager m_basemanager;          //Reference to base manager
     private PlayerMovement m_playerMovement;    //Reference to player movement script
     private PlayerStatistics m_playerStats;     //Reference to player stats script
     private GridManager m_gridmanager;          //Reference to grid manager
@@ -53,6 +54,7 @@ public class PlayerConstruction : MonoBehaviour {
     void Start () {
         //Set referenes
         m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
+        m_basemanager = m_gamemanager.getBaseManager();
         m_playerMovement = GetComponent<PlayerMovement>();
         m_playerStats = GetComponent<PlayerStatistics>();
         m_constructionCamera = GameObject.FindWithTag("constructionCam").GetComponent<Camera>();
@@ -65,61 +67,60 @@ public class PlayerConstruction : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        // Get the location of the mouse in world coordinates
-        //if (constructing)
-        //{
-        //    mouseposition = m_playerMovement.mouseposition;
-        //}
-
-        // Check if player has clicked
-        // Player is in construction phase, not already constructing and pressing the construction button
-        if(Input.GetKeyDown(build_1) && constructionphase && !constructing)
+        if (constructionphase && !constructing && m_basemanager.m_Instance.activeSelf)
         {
-            //Check if player has enough funds
-            if(m_playerStats.getCurrency() >= m_price_wall)
+            // Check if player has clicked
+            // Player is in construction phase, not already constructing and pressing the construction button
+            if (Input.GetKeyDown(build_1))
             {
-                constructing = true;
-                StartCoroutine(ObjectPlacement(build_1, m_wallprefab, PlayerObjectType.PlayerWall));
+                //Check if player has enough funds
+                if (m_playerStats.getCurrency() >= m_price_wall)
+                {
+                    constructing = true;
+                    StartCoroutine(ObjectPlacement(build_1, m_wallprefab, PlayerObjectType.PlayerWall));
+                }
+
             }
-            
-        }
 
-        // Check if player has clicked
-        // Player is in construction phase, not already constructing and pressing the construction button
-        if (Input.GetKeyDown(build_2) && constructionphase && !constructing)
-        {
-            //Check if player has enough funds
-            if (m_playerStats.getCurrency() >= m_price_turret)
+            // Check if player has clicked
+            // Player is in construction phase, not already constructing and pressing the construction button
+            if (Input.GetKeyDown(build_2))
             {
-                constructing = true;
-                StartCoroutine(ObjectPlacement(build_2, m_turretprefab, PlayerObjectType.PlayerTurret));
+                //Check if player has enough funds
+                if (m_playerStats.getCurrency() >= m_price_turret)
+                {
+                    constructing = true;
+                    StartCoroutine(ObjectPlacement(build_2, m_turretprefab, PlayerObjectType.PlayerTurret));
+                }
             }
-        }
 
-        // Check if player has clicked
-        // Player is in construction phase, not already constructing and pressing the construction button
-        if (Input.GetKeyDown(build_3) && constructionphase && !constructing)
-        {
-            //Check if player has enough funds
-            if (m_playerStats.getCurrency() >= m_price_carrot)
+            // Check if player has clicked
+            // Player is in construction phase, not already constructing and pressing the construction button
+            if (Input.GetKeyDown(build_3))
             {
-                constructing = true;
-                StartCoroutine(ObjectPlacement(build_3, m_carrotfieldprefab, PlayerObjectType.PlayerCarrotField));
+                //Check if player has enough funds
+                if (m_playerStats.getCurrency() >= m_price_carrot)
+                {
+                    constructing = true;
+                    StartCoroutine(ObjectPlacement(build_3, m_carrotfieldprefab, PlayerObjectType.PlayerCarrotField));
+                }
             }
-        }
 
-        // Check if player has clicked
-        // Player is in construction phase, not already constructing and pressing the construction button
-        if (Input.GetKeyDown(build_4) && constructionphase && !constructing)
-        {
-            //Check if player has enough funds
-            if (m_playerStats.getCurrency() >= m_price_mud)
+            // Check if player has clicked
+            // Player is in construction phase, not already constructing and pressing the construction button
+            if (Input.GetKeyDown(build_4))
             {
-                constructing = true;
-                StartCoroutine(ObjectPlacement(build_4, m_mudprefab, PlayerObjectType.PlayerMud));
+                //Check if player has enough funds
+                if (m_playerStats.getCurrency() >= m_price_mud)
+                {
+                    constructing = true;
+                    StartCoroutine(ObjectPlacement(build_4, m_mudprefab, PlayerObjectType.PlayerMud));
+                }
             }
         }
+
+
+        
         
     }
 

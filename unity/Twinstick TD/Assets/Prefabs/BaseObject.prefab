@@ -977,7 +977,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_hitBaseCanvasPrefab: {fileID: 1000014289387730, guid: a30a69af317c4804ca69af6bac192067,
     type: 2}
-  m_StartingHealth: 150
+  m_StartingHealth: 10
+  m_StartingMaxHealth: 100
   m_maxhealth: 150
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}

@@ -27,6 +27,7 @@ public class Restore_PlayerHealth : BaseUpgrade {
         //Might need fix?
         m_player.m_playerhealth.setDollarPerLife((int)((float)price_array[0] / (float)m_restoreamount));
         m_player.m_playerhealth.buyHealth();
+        m_player.m_playerhealth.SetHealthUI();
     }
 
 

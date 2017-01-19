@@ -34,5 +34,8 @@ public class Upgrade_BaseHealth : BaseUpgrade {
             //Increase index
             incIndex();
         }
+
+        //Update Slider
+        basehealthScript.SetHealthUI();
     }
 }

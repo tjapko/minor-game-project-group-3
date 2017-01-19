@@ -13,8 +13,9 @@ public class Basehealth : MonoBehaviour {
     private GameObject m_maincamera;            //Reference to maincamera
 
     //Public variables
-    public float m_StartingHealth = 100f;           //Starting health
-    public float m_maxhealth = 100f;                //Maximum health
+    public float m_StartingHealth = 100f;           //Starting health:Untouched
+    public float m_StartingMaxHealth = 100f;        //Starting max health:Untouched
+    public float m_maxhealth;                       //Maximum health: Current max health
     public Color m_FullHealthColor = Color.green;   //Full health colour
     public Color m_ZeroHealthColor = Color.red;     //Zero health colour
     public Slider m_Slider;
@@ -33,8 +34,9 @@ public class Basehealth : MonoBehaviour {
         m_Dead = false;
 		gameObject.SetActive (true);
         //Set starting variables
+        m_maxhealth = m_StartingMaxHealth;
         m_CurrentHealth = m_StartingHealth;
-		SetHealthUI();
+        SetHealthUI();
     }
 
     
@@ -71,13 +73,13 @@ public class Basehealth : MonoBehaviour {
         }
     }
 
-    private void SetHealthUI()
+    public void SetHealthUI()
     {
         // Set the slider's value appropriately.
         m_Slider.value = m_CurrentHealth;
 
         // Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
-        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
+        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_maxhealth);
     }
 
     // OnDeath
@@ -85,6 +87,20 @@ public class Basehealth : MonoBehaviour {
     {
         m_Dead = true;
         gameObject.SetActive(false);
+
+        //Set shop canvas to rebuild canvas
+        ShopScript m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
+        ShopUIScript m_shopuiscript = m_shopscript.m_instance_UI.GetComponent<ShopUIScript>();
+        m_shopuiscript.setBaseDestroyed(true);
+    }
+
+    // On Rebuild
+    public void OnRebuild()
+    {
+        OnEnable();
+        ShopScript m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
+        ShopUIScript m_shopuiscript = m_shopscript.m_instance_UI.GetComponent<ShopUIScript>();
+        m_shopuiscript.setBaseDestroyed(false);
     }
 
     //Spawn hitmark
