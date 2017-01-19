@@ -13,7 +13,7 @@ public class CanvasConstructionScript : MonoBehaviour {
 //	private List<Text> txt_kills;           //Reference to kills text
 	private GameObject m_wavecontrolpanel;  //Reference to the wave control panel
 	private Text m_Timer;  
-	private int timer;
+	public static float timer;
 	private Text obj1;  
 	private Text obj2;  
 	private Text obj3;  

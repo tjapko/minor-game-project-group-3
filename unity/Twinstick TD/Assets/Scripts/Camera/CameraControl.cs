@@ -151,7 +151,6 @@ public class CameraControl : MonoBehaviour
 		m_constructionCam.enabled = true;
 		m_constructionCam.gameObject.SetActive(true);
 
-	
 	}
 
 	// switches camera from constructioncam to maincam 

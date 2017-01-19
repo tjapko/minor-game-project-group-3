@@ -5,6 +5,8 @@ public class ScreenShake : MonoBehaviour {
 
 	public static ScreenShake instance; 	// used in order to make Shake a static function!
 	public static float shakeFreq = 10; 	// # shakes per s
+	[HideInInspector]public static float screenShakeIntensityBaseOnDeath = 1.5f;
+	[HideInInspector]public static float screenShakeDurationBaseOnDeath = 0.5f;
 	[HideInInspector]public static float screenShakeIntensityBase = 0.3f;
 	[HideInInspector]public static float screenShakeDurationBase = 0.3f;
 	[HideInInspector]public static float screenShakeIntensityCharacter = 0.2f;
@@ -25,12 +27,13 @@ public class ScreenShake : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.T)) {
-			Shake (screenShakeIntensityBase, screenShakeDurationBase);
+//			ShakeBaseOndeath ();
+//			Shake (screenShakeIntensityBase, screenShakeDurationBase);
 //			Shake2();
 //			Shake3();
 		}
 		if (Input.GetKeyDown (KeyCode.Y)) {
-			Shake (screenShakeIntensityCharacter, screenShakeDurationCharacter);
+//			Shake (screenShakeIntensityCharacter, screenShakeDurationCharacter);
 		}
 	}
 
@@ -79,6 +82,10 @@ public class ScreenShake : MonoBehaviour {
 
 	public static void ShakeBase() {
 		Shake(screenShakeIntensityBase, screenShakeDurationBase);
+	}
+
+	public static void ShakeBaseOndeath() {
+		Shake(screenShakeIntensityBaseOnDeath, screenShakeDurationBaseOnDeath);
 	}
 
 	public static void ShakeCharacter() {

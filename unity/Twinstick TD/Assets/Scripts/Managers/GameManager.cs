@@ -239,6 +239,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator constructionPhase()
     {
 		// switch Main camera to construction camera 
+		CanvasConstructionScript.timer = m_waveDelay;
 		CameraControl.switchMainCamToConstructionCam ();
 
         //Set wavephase to false and set timer

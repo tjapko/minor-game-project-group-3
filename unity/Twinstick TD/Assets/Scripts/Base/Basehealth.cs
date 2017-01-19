@@ -92,6 +92,7 @@ public class Basehealth : MonoBehaviour {
         ShopScript m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
         ShopUIScript m_shopuiscript = m_shopscript.m_instance_UI.GetComponent<ShopUIScript>();
         m_shopuiscript.setBaseDestroyed(true);
+		ScreenShake.ShakeBaseOndeath ();
     }
 
     // On Rebuild
