@@ -289,7 +289,7 @@ public class ShopUIScript : MonoBehaviour {
                     }
                     else
                     {
-                        m_currentplayer.m_inventory.inventory[inventoryIndex].ammo += weaponlist[weaponIndex].ammoInClip;
+                        m_currentplayer.m_inventory.inventory[inventoryIndex].ammo += weaponlist[weaponIndex].clipSize;
                     }
                 }
 			}
