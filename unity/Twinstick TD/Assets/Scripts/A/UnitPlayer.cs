@@ -16,6 +16,7 @@ public class UnitPlayer : MonoBehaviour {
 	public float mudSpeed = 2f;
 	public float normalSpeed = 6f;
 	public float bossSpeed = 3f;
+	public float distanceToPlayer = 18f;
 	public bool enemyType; 				// true is enemy 3, false enemy 2
 	Vector3[] path; 					// The walkable path
 	int targetIndex;					// The index of the waypointArray. The unit moves to path[targetIndex]  
@@ -58,7 +59,7 @@ public class UnitPlayer : MonoBehaviour {
 
 	public void playerDist(){
 		float dist = Vector3.Distance (transform.position, m_player.position);
-		if (dist < 20f) {
+		if (dist < distanceToPlayer) {
 			CancelInvoke ();
 			goToPlayer ();
 		}
@@ -126,9 +127,9 @@ public class UnitPlayer : MonoBehaviour {
 		}
 		Vector3 currentWaypoint = path[0];
 		while (true) {
-			if (Vector3.Distance(transform.position,currentWaypoint) < 1f){
+			if (Vector3.Distance(currentWaypoint,transform.position) < 0.5f){
 				targetIndex ++;
-				//als huidig doel er niet meer is.
+				//check of huidig doel er niet meer is.
 				checkCurrentGoal();
 				if (targetIndex >= path.Length) {
 					yield break;

@@ -438,6 +438,7 @@ MonoBehaviour:
   deathSound: {fileID: 8300000, guid: e4668f91481389a4abab4cf860503ef3, type: 3}
   m_damageToTowerSec: 5
   m_towerpersecond: 2
+  m_playerpersecond: 1
   m_damageToPlayerSec: 1
   m_StartingHealth: 1
   m_Slider: {fileID: 114000010470969668}

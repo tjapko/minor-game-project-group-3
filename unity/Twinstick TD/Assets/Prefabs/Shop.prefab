@@ -22,12 +22,12 @@ GameObject:
   - 33: {fileID: 33000012350740842}
   - 65: {fileID: 65000010841404450}
   - 23: {fileID: 23000010368873936}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1000012117257136
 GameObject:
@@ -40,12 +40,12 @@ GameObject:
   - 33: {fileID: 33000012345423166}
   - 136: {fileID: 136000013965271910}
   - 23: {fileID: 23000011897836732}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cylinder
   m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1000012813041466
 GameObject:
@@ -60,10 +60,10 @@ GameObject:
   - 54: {fileID: 54000010479474162}
   m_Layer: 9
   m_Name: Shop
-  m_TagString: Player
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4000011443916410
 Transform:

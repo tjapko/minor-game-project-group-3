@@ -18,9 +18,11 @@ public class WallScript : MonoBehaviour
 	//Private variables
 	private float m_currentHealth;
 	private bool m_Dead;
+	private UserObjectStatistics stats;
 
 	void Start()
-	{
+	{		
+		stats = gameObject.GetComponent<UserObjectStatistics> ();
 		m_Dead = false;
 		m_currentHealth = m_startHealth;
 		SetHealthUI ();
@@ -63,9 +65,9 @@ public class WallScript : MonoBehaviour
 	// OnDeath
 	private void OnDeath()
 	{
+		stats.onDeath ();
 		m_Dead = true;
 		//gameObject.SetActive(false);
-		Destroy (gameObject);
 	}
 }
 

@@ -105,7 +105,7 @@ public class UserObjectStatistics : MonoBehaviour {
     //Function on death
     public void onDeath()
     {
-        m_owner.m_Instance.GetComponent<PlayerConstruction>().removeObject(gameObject);
+		m_owner.m_construction.removeObject(gameObject);
     }
 
 

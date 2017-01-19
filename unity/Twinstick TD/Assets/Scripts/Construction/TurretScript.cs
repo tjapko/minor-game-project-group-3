@@ -33,9 +33,11 @@ public class TurretScript : MonoBehaviour {
     private int m_PlayerNumber;
 	private float m_currentHealth;
 	private bool m_Dead;
+	private UserObjectStatistics stats;
 
     // Use this for initialization
     void Start () {
+		stats = gameObject.GetComponent<UserObjectStatistics> ();
         InvokeRepeating("getTarget", 0f, 0.5f);
 		m_currentHealth = m_startHealth;
 		m_Dead = false;
@@ -166,9 +168,9 @@ public class TurretScript : MonoBehaviour {
 	// OnDeath
 	private void OnDeath()
 	{
+		stats.onDeath ();
 		m_Dead = true;
 		//gameObject.SetActive(false);
-		Destroy (gameObject);
         PlayerConstruction pl = new PlayerConstruction();
         pl.currentTurrets--; 
 	}

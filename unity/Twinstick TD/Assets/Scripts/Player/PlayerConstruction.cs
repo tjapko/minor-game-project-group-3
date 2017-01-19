@@ -142,9 +142,10 @@ public class PlayerConstruction : MonoBehaviour {
             if (Input.GetKeyDown(keyinput) && instancestats.getGroundClear())
             {
                 instancestats.setPlacement(true);    //The object is now placed onto the ground
-                newinstance.AddComponent<Rigidbody>();  //Create a rigid body, for OnTriggerEnter to work properly
+                //newinstance.AddComponent<Rigidbody>();  //Create a rigid body, for OnTriggerEnter to work properly
                 newinstance.GetComponent<Rigidbody>().isKinematic = true;   //Make the rigidbody kinematic, such that it's not affected by physics
-                m_placedobjects.Add(newinstance);   //Add instance to list
+				newinstance.GetComponent<UserObjectStatistics>().m_owner = m_player;
+				m_placedobjects.Add(newinstance);   //Add instance to list
                 constructing = false;   //Building has finished
                	newinstance.layer = 15;  //Set layer of the object as unwalkable
 

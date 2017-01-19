@@ -24,9 +24,11 @@ public class CarrotFieldScript : MonoBehaviour {
     private float m_currentYield;           //Current yield Y(n)
 	private float m_currentHealth;
 	private bool m_Dead;
+	private UserObjectStatistics stats;
 
     void Start()
     {
+		stats = gameObject.GetComponent<UserObjectStatistics> ();
 		m_Dead = false;
         m_currentYield = m_startyield;
 		m_currentHealth = m_startHealth;
@@ -70,9 +72,9 @@ public class CarrotFieldScript : MonoBehaviour {
 	// OnDeath
 	private void OnDeath()
 	{
+		stats.onDeath ();
 		m_Dead = true;
 		//gameObject.SetActive(false);
-		Destroy (gameObject);
 	}
 
     //Initialize variables

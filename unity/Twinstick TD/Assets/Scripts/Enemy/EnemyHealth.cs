@@ -19,6 +19,7 @@ public class EnemyHealth : MonoBehaviour
     //Public variables
 	public float m_damageToTowerSec;					//damage to tower per second
     public float m_towerpersecond ;
+	public float m_playerpersecond;
 	public float m_damageToPlayerSec;					//damage to player per second
 	public float m_StartingHealth;						//Start health of enemy
     public Slider m_Slider;                           	// The slider to represent how much health the enemy currently has.
@@ -54,8 +55,9 @@ public class EnemyHealth : MonoBehaviour
 			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
 			if (targetRigidbody) 
 			{
+				playerUnit.stopCoroutines();
 				playerhealth = targetRigidbody.GetComponent<PlayerHealth> ();
-				InvokeRepeating ("playerDamage", 0f, 1f);
+				InvokeRepeating ("playerDamage", 0f, m_playerpersecond);
 			}
 		}
 		if (other.gameObject.CompareTag("Base"))
@@ -66,7 +68,7 @@ public class EnemyHealth : MonoBehaviour
 				basehealth = targetRigidbody.GetComponent<Basehealth>();
 				InvokeRepeating("baseDamage", 0f, m_towerpersecond);
 				//stop walking if hit the base
-				//playerUnit.stopPathfinding();
+				playerUnit.stopCoroutines();
 			}
 		}
 		if (other.gameObject.CompareTag ("PlayerMud")) 
