@@ -35,6 +35,7 @@ TagManager:
   - obj3
   - obj4
   - New Tag
+  - baseTurret
   layers:
   - Default
   - TransparentFX
@@ -52,7 +53,7 @@ TagManager:
   - enemy
   - Unplacable
   - playerObjects
-  - 
+  - UpgradeBase
   - 
   - 
   - 

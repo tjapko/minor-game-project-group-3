@@ -159,9 +159,9 @@ public class ShopUIScript : MonoBehaviour {
 
         //Update weapon price and interactable (also ammo interactable)
         PlayerInventory inv = m_currentplayer.m_inventory;
-        for(int i = 0; i < weaponlist.Count; i++)
-        {
-            if (inv.InventoryContains(weaponlist[i]))
+		for(int i = 0; i < weaponlist.Count; i++)
+		{
+			if (inv.InventoryContains(weaponlist[i]))
             {
                 ui_weapon_cost[i].text = "Sold out";
                 btn_weapon_cost[i].interactable = false;

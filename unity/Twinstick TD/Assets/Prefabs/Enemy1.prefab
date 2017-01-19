@@ -150,7 +150,6 @@ GameObject:
   - 54: {fileID: 54000013937263104}
   - 65: {fileID: 65000013443504456}
   - 114: {fileID: 114000010553490936}
-  - 95: {fileID: 95000010676401970}
   m_Layer: 13
   m_Name: Enemy1
   m_TagString: Enemy
@@ -378,23 +377,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!95 &95000010676401970
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013238595700}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: 6c052abecf83b9c40be31e4fe9b0afa3, type: 3}
-  m_Controller: {fileID: 9100000, guid: 377071506baa5ad45b914f529b6cc9f7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95000011936054982
 Animator:
   serializedVersion: 3

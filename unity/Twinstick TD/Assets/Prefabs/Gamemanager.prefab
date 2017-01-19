@@ -203,8 +203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_amountofplayers: 1
-  m_waveDelay: 1
-  m_EndDelay: 1
   backgroundSource: {fileID: 82000012691815352}
   backgroundSounds:
   - {fileID: 8300000, guid: 40b09d35affa9c7429f5a7d5d5f6bf70, type: 3}
@@ -232,4 +230,5 @@ MonoBehaviour:
   m_Playerspawnpoint: {fileID: 0}
   m_Enemyspawnpoint: {fileID: 0}
   m_CameraControl: {fileID: 0}
-  m_weaponshop: {fileID: 0}
+  m_weaponshop: {fileID: 1000012813041466, guid: 554d735d61e85354082e2f240e04326d,
+    type: 2}

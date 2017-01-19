@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 	public GameObject m_travellingSalesman;     // Reference to the travelling Salesman
     public Transform m_Basespawnpoint;          // Spawnpoint of base
     public Transform m_Playerspawnpoint;        // Spawnpoint of player
-    [HideInInspector]public Transform m_Enemyspawnpoint;         // Spawnpoint of enemy
+    public Transform m_Enemyspawnpoint;         // Spawnpoint of enemy
 	public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
     public GameObject m_weaponshop;             // Reference to the weapon shop                 
 

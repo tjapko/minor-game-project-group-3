@@ -12,7 +12,7 @@ public class TurretScript : MonoBehaviour {
 	public GameObject m_hitBaseCanvasPrefab;    //Reference to friendlyHit canvas;
 	public Slider m_Slider;
 	public Image m_FillImage;
-
+	
     //Public variables
     [Header("Public variables")]
     public float m_damage = 100f;    //damage of the turret
@@ -34,6 +34,7 @@ public class TurretScript : MonoBehaviour {
 	private float m_currentHealth;
 	private bool m_Dead;
 	private UserObjectStatistics stats;
+	private PlayerConstruction pl;
 
     // Use this for initialization
     void Start () {
@@ -42,7 +43,7 @@ public class TurretScript : MonoBehaviour {
 		m_currentHealth = m_startHealth;
 		m_Dead = false;
 		SetHealthUI ();
-        PlayerConstruction pl = new PlayerConstruction();
+		pl = gameObject.GetComponent<PlayerConstruction> ();
         pl.currentTurrets++;
     }
 	
@@ -171,7 +172,6 @@ public class TurretScript : MonoBehaviour {
 		stats.onDeath ();
 		m_Dead = true;
 		//gameObject.SetActive(false);
-        PlayerConstruction pl = new PlayerConstruction();
         pl.currentTurrets--; 
 	}
 }
