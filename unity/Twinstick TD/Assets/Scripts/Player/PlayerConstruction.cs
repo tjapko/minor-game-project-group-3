@@ -5,10 +5,10 @@ using System.Collections.Generic;
 public class PlayerConstruction : MonoBehaviour {
 
     //Start price objects
-    public int m_price_wall = 100;      //Price of wall
-    public int m_price_turret = 1000;   //Price of turret
-    public int m_price_carrot = 2500;   //Price of Carrot field
-    public int m_price_mud = 500;       //Price of the mud field
+    public static int m_price_wall = 100;      //Price of wall
+	public static int m_price_turret = 1000;   //Price of turret
+	public static int m_price_carrot = 2500;   //Price of Carrot field
+	public static int m_price_mud = 500;       //Price of the mud field
 
     //Fix
     const string build_1 = "1";         //Button to place walls

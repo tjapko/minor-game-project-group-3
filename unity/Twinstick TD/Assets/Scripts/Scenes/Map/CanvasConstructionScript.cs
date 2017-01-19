@@ -12,8 +12,12 @@ public class CanvasConstructionScript : MonoBehaviour {
 //	private List<Text> txt_currency;        //Reference to currency text
 //	private List<Text> txt_kills;           //Reference to kills text
 	private GameObject m_wavecontrolpanel;  //Reference to the wave control panel
-	private Text m_Timer;  //Reference to the wave control panel
+	private Text m_Timer;  
 	private int timer;
+	private Text obj1;  
+	private Text obj2;  
+	private Text obj3;  
+	private Text obj4;  
 
 	//Private variables
 	private GameManager m_gamemanager;  //Reference to Game manager
@@ -37,6 +41,10 @@ public class CanvasConstructionScript : MonoBehaviour {
 //		m_stats.Add(gameObject.transform.GetChild(2).gameObject);
 		m_wavecontrolpanel = gameObject.transform.GetChild(3).gameObject;
 		m_Timer = GameObject.FindGameObjectWithTag ("timer").GetComponentInParent<Text>();
+		obj1 = GameObject.FindGameObjectWithTag ("obj1").GetComponentInParent<Text>();
+		obj2 = GameObject.FindGameObjectWithTag ("obj2").GetComponentInParent<Text>();
+		obj3 = GameObject.FindGameObjectWithTag ("obj3").GetComponentInParent<Text>();
+		obj4 = GameObject.FindGameObjectWithTag ("obj4").GetComponentInParent<Text>();
 
 //		//Set UI active
 //		for(int i = 0; i < m_stats.Count; i++)
@@ -74,6 +82,7 @@ public class CanvasConstructionScript : MonoBehaviour {
 //			SetCurrencyText();
 //			SetKillsText();
 			SetTimerText();
+			SetPrices();
 		}
 		catch
 		{
@@ -108,5 +117,12 @@ public class CanvasConstructionScript : MonoBehaviour {
 		if (timer > 0) {
 			timer--;
 		}
+	}
+
+	private void SetPrices() {
+		obj1.text = "Wall: Press 1 \n Price: " + PlayerConstruction.m_price_wall;
+		obj2.text = "Turret: Press 2 \n Price: " + PlayerConstruction.m_price_turret;
+		obj3.text = "Carrot-Field: Press 3 \n Price: " + PlayerConstruction.m_price_carrot;
+		obj4.text = "Mud: Press 4 \n Price:  " + PlayerConstruction.m_price_mud;
 	}
 }

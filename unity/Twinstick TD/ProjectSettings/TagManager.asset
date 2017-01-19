@@ -30,6 +30,10 @@ TagManager:
   - inventoryUI
   - constructionPanelUI
   - timer
+  - obj1
+  - obj2
+  - obj3
+  - obj4
   - New Tag
   layers:
   - Default
