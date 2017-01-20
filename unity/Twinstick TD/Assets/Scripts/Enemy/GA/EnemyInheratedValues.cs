@@ -46,8 +46,8 @@ public class EnemyInheratedValues  {
     {
 		updateRange (waveNumber);
         
-        chromosome = new Chromosome(geneamount);
-        chromosome.createRandomChromosome();
+        this.chromosome = new Chromosome(this.geneamount);
+        this.chromosome.createRandomChromosome();
         ChromosomeToValues();
 
 		rangeDamagePerAttackDuplicate = rangeDamagePerAttack; 

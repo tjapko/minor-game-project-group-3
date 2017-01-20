@@ -8,6 +8,7 @@ public class Gene {
     public Gene()
     {
         gene = new int[2];
+        randomGene();
     }
 
     public void defineGeneOption(int Option)

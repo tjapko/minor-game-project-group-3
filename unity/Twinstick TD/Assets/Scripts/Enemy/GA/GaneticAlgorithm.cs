@@ -35,12 +35,13 @@ public class GaneticAlgorithm {
         float prop = 0;
           foreach(KeyValuePair<EnemyInheratedValues, bool> enemy in population.getList())
         {
-            if (rand < enemy.Key.getFitness() + prop)
+            if (rand < (enemy.Key.getFitness() + prop))
             {
                 return enemy.Key.getChromosome();
             }
             prop += enemy.Key.getFitness();
         }
+
         Chromosome test = new Chromosome(20);
         return test;
     }
@@ -66,11 +67,12 @@ public class GaneticAlgorithm {
     private EnemyInheratedValues newChild()
     {
 		EnemyInheratedValues child = new EnemyInheratedValues(waveNumber);
-        int crossoverindex = Random.Range(0, parentA.getLength());
+        int length = parentA.getLength();
+        int crossoverindex = Random.Range(0, length);
         int[] childarray = new int[parentA.getLength()];
         parentA.getArrayTillIndex(crossoverindex).CopyTo(childarray, 0);
         parentB.getArrayFromIndex(crossoverindex).CopyTo(childarray, crossoverindex);
-        child.getChromosome().fromArrayToGene(childarray);
+               child.getChromosome().fromArrayToGene(childarray);
         child.ChromosomeToValues();
         return child;
     }

@@ -91,7 +91,7 @@ public class WaveManager
     // Send next wave and create new grid
     public IEnumerator NextWave()
 	{
-
+       
 		m_wave++;
 		if (m_wavenumber > 0) {
 			GameObject.Destroy (m_gridmanager.m_instance, 0f);

@@ -16,6 +16,7 @@ public class Chromosome {
     {
         this.geneamount = geneamount;
         chromosome = new Gene[geneamount];
+
     }
 
 
@@ -24,9 +25,12 @@ public class Chromosome {
         for(int i = 0; i<chromosome.Length; i++)
         {
             Gene gene = new Gene();
-            gene.randomGene();
             chromosome[i] = gene;
         }
+            for (int i = 0; i < chromosome.Length; i++)
+        {
+        }
+
     }
 
     public void fromArrayToGene(int[] geneArray)
@@ -39,10 +43,12 @@ public class Chromosome {
 
     public int[] getArrayFromIndex(int index)
     {
-        int[] arrayFromIndex = new int[geneamount-(index)];
-        for(int i = index; i< arrayFromIndex.Length; i++)
+        
+        int[] arrayFromIndex = new int[geneamount-index];
+        for(int i = 0; i< arrayFromIndex.Length; i++)
         {
-            arrayFromIndex[i - index] = chromosome[index].getOption();
+        
+            arrayFromIndex[i] = chromosome[i + index].getOption();
         }
         return arrayFromIndex;
     }
