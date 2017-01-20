@@ -10,14 +10,26 @@ public class HSController : MonoBehaviour
     public string highscoreURL = "https://insyprojects.ewi.tudelft.nl/ewi3620tu3/HSData.php";
 	public string[] items;
 	private GameObject m_HighScoreMenu; 
+	private GameObject m_backbutton;
 
     void Start()
     {
+		//Set references to children
+		m_HighScoreMenu = gameObject.transform.GetChild(0).gameObject;
+		m_backbutton = m_HighScoreMenu.transform.GetChild(6).gameObject;
+		//Activate game over menu
+		m_HighScoreMenu.SetActive(true);
         StartCoroutine(GetScores());
 
 
     }
  
+
+	public void showHighScoreMenu(bool status)
+	{
+		m_HighScoreMenu.SetActive(status);
+	}
+
     // remember to use StartCoroutine when calling this function!
     IEnumerator PostScores(string Name, int Score)
     {
@@ -60,8 +72,8 @@ public class HSController : MonoBehaviour
 		for (int i = 0; i < 4; i++) {
 			m_HighScoreMenu = gameObject.transform.GetChild(0).gameObject;
 			Text scoretext = m_HighScoreMenu.transform.GetChild(i+1).GetComponent<Text>();
-
-			scoretext.text = i + 1 + items [i]; //this is a GUIText that will display the scores in game.
+			int j = i + 1;
+			scoretext.text = items [i]; //this is a GUIText that will display the scores in game.
 		}
 	}
 
