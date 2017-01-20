@@ -147,13 +147,13 @@ public class EnemyInheratedValues  {
 	public void updateRange(int waveNumber)
 	{
 		if (waveNumber > 2) {
-			this.rangeDamagePerAttack = this.rangeDamagePerAttackDuplicate * this.scaleDamagePerAttack / this.AimingEndWavenumber;
+			this.rangeDamagePerAttack = this.rangeDamagePerAttackDuplicate * this.scaleDamagePerAttack / this.AimingEndWavenumber*waveNumber;
 
-			this.rangeAttackSpeed = this.rangeAttackSpeedDuplicate * this.scaleAttackSpeed / this.AimingEndWavenumber;
+			this.rangeAttackSpeed = this.rangeAttackSpeedDuplicate * this.scaleAttackSpeed / this.AimingEndWavenumber*waveNumber;
 
-			this.rangeStartingHealth = this.rangeStartingHealthDuplicate * this.scaleStartingHealth / this.AimingEndWavenumber;
+			this.rangeStartingHealth = this.rangeStartingHealthDuplicate * this.scaleStartingHealth / this.AimingEndWavenumber*waveNumber;
 
-			this.rangeMovementSpeed = this.rangeMovementSpeedDuplicate * this.scaleMovementSpeed / this.AimingEndWavenumber;
+			this.rangeMovementSpeed = this.rangeMovementSpeedDuplicate * this.scaleMovementSpeed / this.AimingEndWavenumber*waveNumber;
 		
 		}
 	}
