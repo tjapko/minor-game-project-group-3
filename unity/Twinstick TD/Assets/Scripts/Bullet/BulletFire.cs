@@ -10,7 +10,7 @@ public class BulletFire : MonoBehaviour
     public AudioClip reloadingSound;
     public AudioClip emptyGunSound;
     public float maxBulletDistance;         // maximum bulletdistance (applied in Raycast shooting, the length of the ray)
-    public RaycastHit RayHit;               // contains the information of the Raycast Hit
+    //public RaycastHit RayHit;               // contains the information of the Raycast Hit
 	[HideInInspector] public int m_PlayerNumber;              // Used to identify the different players.
 //	private int m_PlayerNumber = 0;              // Used to identify the different players.
     public Rigidbody m_Bullet;              // Prefab of the shell.
@@ -24,13 +24,14 @@ public class BulletFire : MonoBehaviour
     private string reloadButton;            // The reloadButton set on the 'r' button
     private bool weapon_reloading;          //Boolean if weapons is reloading
 	private float m_timer = 0.0f;
-
+    LineRenderer line;
     /// <summary>
     ///  initiating the fire and reload button and retrieving the related inventory 
     /// </summary>
     private void Start()
-    {       
-
+    {
+        line = gameObject.transform.GetChild(0).GetComponent<LineRenderer>();
+        line.enabled = true;
 		m_FireButton = "Fire1_" + ((m_PlayerNumber+1));
         playerinventory = GetComponent<PlayerInventory>();
 
@@ -151,17 +152,17 @@ public class BulletFire : MonoBehaviour
                      GameObject.Instantiate(m_RayBullet, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
 
             
-           
+
            // shellInstance.velocity = currentWeapon.launchForce * m_FireTransform.forward;
             DestroyRayBullet bullet = shellInstance.GetComponent<DestroyRayBullet>();
             bullet.m_MaxLifeTime = currentWeapon.bulletLifeTime;
 
             currentWeapon.ammoInClip--;
-
-           
+            RaycastHit RayHit;
+          
             if (Physics.Raycast(m_FireTransform.position, transform.forward, out RayHit, maxBulletDistance))
             {
-
+                StartCoroutine(laserVisual(RayHit));
                 
                 bullet.hit = true;
 
@@ -189,6 +190,7 @@ public class BulletFire : MonoBehaviour
             { 
                 // Set the shell's velocity to the launch force in the fire position's forward direction.
                 shellInstance.velocity = currentWeapon.launchForce * m_FireTransform.forward;
+                StartCoroutine(laserVisual(RayHit));
             }
 
         }
@@ -199,6 +201,25 @@ public class BulletFire : MonoBehaviour
         }
     }
 
+    IEnumerator laserVisual(RaycastHit p)
+    {
+        line.enabled = true;
+
+        //line.SetColors(Color.red, Color.red);
+        Ray ray = new Ray(gameObject.transform.GetChild(0).position, gameObject.transform.GetChild(0).forward);
+        
+
+        line.SetPosition(0, ray.origin);
+        Debug.Log(p.point);
+        if (p.point != new Vector3(0, 0, 0))
+            line.SetPosition(1,p.point);
+       else
+            line.SetPosition(1, ray.GetPoint(100));
+        yield return new WaitForSeconds(0.1f);
+
+        line.enabled = false;
+
+    }
 
     /// <summary>
     /// Firing the weapon from the Handgun principle (default).
