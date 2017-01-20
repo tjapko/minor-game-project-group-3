@@ -45,7 +45,7 @@ public class EnemyPopulation
    }
     public void CalculateFitness()
     {
-        totalFitness = 1;
+        totalFitness = 0;
         foreach (KeyValuePair<EnemyInheratedValues, bool> tempEnemy in PopulationList)
         {
             float Damage = tempEnemy.Key.getDamageDone();
