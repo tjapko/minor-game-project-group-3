@@ -58,7 +58,7 @@ GameObject:
   - 114: {fileID: 114000013235058056}
   - 114: {fileID: 114000010184337328}
   m_Layer: 5
-  m_Name: HighScoreCanvas (Alex)
+  m_Name: HighScoreCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
