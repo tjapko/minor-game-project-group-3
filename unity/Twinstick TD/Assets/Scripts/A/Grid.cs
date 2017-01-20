@@ -53,11 +53,9 @@ public class Grid : MonoBehaviour {
 		for (int x = 0; x < gridSizeX; x++){// for every Node in X direction
 			for (int y = 0; y < gridSizeY; y++){// for every Node in Y direction 
 				Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
-				Debug.Log (unplacableMask.value);
 				bool walkable = !(Physics.CheckSphere(worldPoint, (nodeRadius * 1.4f) , unwalkableMask)); //checking whether the node is walkable
 				bool placable = !(Physics.CheckSphere(worldPoint, (nodeRadius * 1.4f) , unplacableMask)); //checking whether the node is placable
 				if (!placable) {
-					Debug.Log ("h");
 				}
 				grid [x, y] = new Node (walkable, placable, worldPoint, x, y); //adding the Node to the grid
 			}
