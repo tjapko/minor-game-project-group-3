@@ -392,6 +392,7 @@ MonoBehaviour:
     m_inventory: {fileID: 0}
     m_playerhealth: {fileID: 0}
     m_PlayerNumber: 0
+  m_meshes: []
 --- !u!114 &114000013801190724
 MonoBehaviour:
   m_ObjectHideFlags: 1

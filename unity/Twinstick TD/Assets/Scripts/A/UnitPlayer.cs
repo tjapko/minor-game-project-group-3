@@ -13,9 +13,10 @@ public class UnitPlayer : MonoBehaviour {
 	//public bool baseHit = false; 		// has hit the base or not
 	public float m_threshold = -20.0f; 	// maybe variable for GA
 	public float timeNewPath = 2f; 		// interval between new pathcalculation to enemy
-	public float mudSpeed = 2f;
+	public float mudSpeed = 1f;
 	public float normalSpeed = 6f;
 	public float bossSpeed = 3f;
+	public float GAspeed;
 	public float distanceToPlayer = 18f;
 	public bool enemyType; 				// true is enemy 3, false enemy 2
 	Vector3[] path; 					// The walkable path
@@ -85,7 +86,11 @@ public class UnitPlayer : MonoBehaviour {
 		if (slow) {
 			this.speed = mudSpeed;
 		} else {
-			this.speed = normalSpeed;
+			if (GAspeed != null){
+				this.speed = GAspeed;
+			}else{
+				this.speed = normalSpeed;
+			}
 		}
 	}
 
@@ -169,6 +174,7 @@ public class UnitPlayer : MonoBehaviour {
 
     public void setMovementspeed(float movementspeed)
     {
-        this.speed = movementspeed;
+        this.GAspeed = movementspeed;
+		this.speed = GAspeed;
     }
 }

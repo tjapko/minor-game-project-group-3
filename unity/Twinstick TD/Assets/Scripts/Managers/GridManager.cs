@@ -16,13 +16,14 @@ public class GridManager
 	private float yGrid; 			//y length of the map
 	private float denodeRadius; 	// radius of the nodes of the grid
 	private bool displayGrid; 		// display grid in scene or not
+	private LayerMask heehoileuk;
 
 	public GridManager (GameObject gridPrefab)
 	{
 		this.m_gridPrefab = gridPrefab;
 		this.xGrid = 150;
 		this.yGrid = 150;
-		this.denodeRadius = 1f;
+		this.denodeRadius = 0.5f;
 		this.displayGrid = true;
 		setup ();
 	}
@@ -33,12 +34,8 @@ public class GridManager
         this.m_grid = m_instance.GetComponent<Grid>();
 		this.m_pathFinding = m_instance.GetComponent<PathFinding>();
 		this.m_request = m_instance.GetComponent<PathRequestManager>();
-
 		m_grid.displayGridGizmos = displayGrid;
 		m_grid.gridWorldSize = new Vector2 (xGrid, yGrid);
 		m_grid.nodeRadius = denodeRadius;
-		m_grid.unwalkableMask = LayerMask.GetMask ("Unwalkable");
-		m_grid.unplacableMask = LayerMask.GetMask ("Unplacable");
-
 	}
 }

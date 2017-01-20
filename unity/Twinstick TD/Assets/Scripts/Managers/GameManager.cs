@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
             
         }
 
-        pauseGame(gamepause);
+        //pauseGame(gamepause);
 
         //Set the Object placement phase
         m_players.setConstructionphase(!wavephase);

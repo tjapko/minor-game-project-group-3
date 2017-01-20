@@ -2934,6 +2934,9 @@ MonoBehaviour:
     m_inventory: {fileID: 0}
     m_playerhealth: {fileID: 0}
     m_PlayerNumber: 0
+  m_gridPrefabNoPathFinding: {fileID: 1000011495106052, guid: 81c1ed0d66e20e44db8179503707f8f7,
+    type: 2}
+  currentTurrets: 0
 --- !u!114 &114000013388209428
 MonoBehaviour:
   m_ObjectHideFlags: 1
