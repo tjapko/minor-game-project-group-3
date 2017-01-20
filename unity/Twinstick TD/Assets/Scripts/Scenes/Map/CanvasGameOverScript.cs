@@ -20,8 +20,8 @@ public class CanvasGameOverScript : MonoBehaviour {
 	private GameObject m_HighScoreCanvas;
 	private string addScoreURL = "https://insyprojects.ewi.tudelft.nl/ewi3620tu3/addscore.php?"; //be sure to add a ? to your url
 	private string secretKey = "mySecretKey"; // Edit this value and make sure it's the same as the one stored on the server
-	public string[] items;
-
+	private int scorevalue; //Score to be used for twitter and database
+	private InputField inputfield;
 	private HSController m_HSController;      //Reference to CanvasGameOverScript
 
     public void StartInitialization()
@@ -83,7 +83,8 @@ public class CanvasGameOverScript : MonoBehaviour {
         {
             PlayerManager player = playerlist[i];
             score[i] = player.m_stats.getkills() * 10 + player.m_stats.getCurrency();
-            scoretext.text += "   Score : " + score[i];
+			scoretext.text += "   Score : " + score[i];
+			scorevalue = score [0];
         }
     }
 
@@ -101,6 +102,16 @@ public class CanvasGameOverScript : MonoBehaviour {
     {
         SceneManager.LoadScene(sceneindex);
     }
+	//recives input from the field
+	public void input(){
+		m_gameovermenu = gameObject.transform.GetChild(0).gameObject;
+		inputfield = m_gameovermenu.transform.GetChild (2).GetComponent<InputField> ();
+		string name = inputfield.text;
+		inputfield.interactable = false;
+		StartCoroutine(PostScores(name, scorevalue));
+
+	}
+
 
 	// remember to use StartCoroutine when calling this function!
 	IEnumerator PostScores(string Name, int Score)
@@ -115,9 +126,6 @@ public class CanvasGameOverScript : MonoBehaviour {
 		// Post the URL to the site and create a download object to get the result.
 		WWW hs_post = new WWW(post_url);
 		yield return hs_post; // Wait until the download is done
-		string itemsDataString = hs_post.text;
-		print (itemsDataString);
-		items = itemsDataString.Split(';');
 		if (hs_post.error != null)
 		{
 			print("There was an error posting the high score: " + hs_post.error);
