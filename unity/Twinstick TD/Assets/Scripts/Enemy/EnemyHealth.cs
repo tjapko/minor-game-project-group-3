@@ -218,10 +218,7 @@ public class EnemyHealth : MonoBehaviour
     // OnDeath
     private void OnDeath()
     {
-
-      
-
-        //Give player money
+		//Give player money
         GameObject root = GameObject.FindWithTag("Gamemanager");
         GameManager gamemanager = root.GetComponent<GameManager>();
         PlayerManager playermanager = gamemanager.getUserManager().m_playerlist[m_lasthit];
