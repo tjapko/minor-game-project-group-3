@@ -12,12 +12,9 @@ public class Enemie2 : EnemyManager
 
 
         //movement
-        m_Instance.AddComponent<UnitPlayer>();
-        this.m_MovementPlayer = m_Instance.GetComponent<UnitPlayer>();
         health.playerUnit = m_MovementPlayer;
         m_MovementPlayer.m_player = m_PlayerPoint;
         m_MovementPlayer.m_base = m_Base;
-        m_MovementPlayer.speed = m_MovementPlayer.normalSpeed;
 		m_MovementPlayer.goToPlayer();
     }
 }

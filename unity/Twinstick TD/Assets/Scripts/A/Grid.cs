@@ -12,17 +12,19 @@ public class Grid : MonoBehaviour {
 	[HideInInspector]public float nodeRadius;// radius of the nodes
 	[HideInInspector]public LayerMask unwalkableMask;// a layer where all the static objects in the map are on
 	[HideInInspector]public LayerMask unplacableMask; // a layer where all the unplacable colliders in the map are on
+	[HideInInspector]public LayerMask playerObjectMask; // a layer where all the unplacable colliders in the map are on
 	Node[,] grid;  // The Grid: including walkable nodes, NOT walkable AND NOT placable nodes.
 
 	float nodeDiameter; // the NodeDiameter 
 	int gridSizeX, gridSizeY; // The size of the whole map in NodeCoordinates 
 
-	public Grid(bool dispGridGizmos, Vector2 worldSize, float radius, LayerMask unwalkable, LayerMask unplacable)
+	public Grid(bool dispGridGizmos, Vector2 worldSize, float radius, LayerMask unwalkable, LayerMask unplacable, LayerMask playerObjects)
     {
         this.displayGridGizmos = dispGridGizmos;
         this.gridWorldSize = worldSize;
         this.unwalkableMask = unwalkable;
 		this.unplacableMask = unplacable;
+		this.playerObjectMask = playerObjects;
 		this.nodeRadius = radius;
     }
 
@@ -31,7 +33,11 @@ public class Grid : MonoBehaviour {
 		nodeDiameter = nodeRadius * 2;
 		gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);// the size of the grid in nodeCoordinates relative X
 		gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);//the size og the grid in nodeCoordinates relative Z
+		unwalkableMask = LayerMask.GetMask ("Unwalkable");
+		unplacableMask = LayerMask.GetMask ("Unplacable");
+		playerObjectMask = LayerMask.GetMask("playerObjects");
 		CreateGrid();
+
     }
 
     /// <summary>
@@ -54,10 +60,7 @@ public class Grid : MonoBehaviour {
 			for (int y = 0; y < gridSizeY; y++){// for every Node in Y direction 
 				Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
 				bool walkable = !(Physics.CheckSphere(worldPoint, (nodeRadius * 1.4f) , unwalkableMask)); //checking whether the node is walkable
-				bool placable = !(Physics.CheckSphere(worldPoint, (nodeRadius * 1.4f) , unplacableMask)); //checking whether the node is placable
-				if (!placable) {
-					Debug.Log ("h");
-				}
+				bool placable = !(Physics.CheckSphere(worldPoint, (nodeRadius * 1.4f) , unplacableMask) || Physics.CheckSphere(worldPoint, (nodeRadius * 1.4f) , playerObjectMask)); //checking whether the node is placable
 				grid [x, y] = new Node (walkable, placable, worldPoint, x, y); //adding the Node to the grid
 			}
 		}
@@ -112,7 +115,7 @@ public class Grid : MonoBehaviour {
 
 	if (displayGridGizmos) {
 			foreach (Node n in grid) {
-				Gizmos.color = (n.walkable) ? Color.white : Color.red;
+				Gizmos.color = (n.placable) ? Color.white : Color.green;
 				Gizmos.DrawCube (n.worldPosition, Vector3.one * (nodeDiameter - .1f));
 			}
 		}

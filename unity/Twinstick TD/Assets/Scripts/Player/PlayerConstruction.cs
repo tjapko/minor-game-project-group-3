@@ -21,11 +21,11 @@ public class PlayerConstruction : MonoBehaviour {
     private BaseManager m_basemanager;          //Reference to base manager
     private PlayerMovement m_playerMovement;    //Reference to player movement script
     private PlayerStatistics m_playerStats;     //Reference to player stats script
-    private GridManager m_gridmanager;          //Reference to grid manager
+    //private GridManager m_gridmanager;          //Reference to grid manager
     private Grid m_grid;                        //Reference to grid in grid manager
     private Camera m_constructionCamera;        //Reference to the construction camera
     private int Floor;                          //Reference to floor layer
-
+	private GameObject m_gridInstance;
 
     //Public variables
     public GameObject m_markerprefab;   //Reference to the suggestive marker prefab
@@ -35,6 +35,7 @@ public class PlayerConstruction : MonoBehaviour {
     public GameObject m_mudprefab;   
     public List<GameObject> m_placedobjects;    //List containing all the objects the user has placed  
     public PlayerManager m_player;     //Reference to the player manager (set by Usermanager)
+	public GameObject m_gridPrefabNoPathFinding;
 
     // turret variables
     public static int maxTurrets = 3; // maximum amount of turrets
@@ -137,8 +138,9 @@ public class PlayerConstruction : MonoBehaviour {
         newinstance.layer = 10; //Set layer of new instance such that the object doesnt collide with he player
 
         //Create a new grid
-        m_gridmanager = new GridManager(m_gamemanager.m_gridPrefab);
-        m_grid = m_gridmanager.m_grid;
+		this.m_gridInstance = GameObject.Instantiate(m_gridPrefabNoPathFinding) as GameObject;
+		this.m_grid = m_gridInstance.GetComponent<Grid>();
+
 
         //Create the suggestive markers
         //List<GameObject> markers = setConstructionMarker(objecttype);
@@ -191,8 +193,8 @@ public class PlayerConstruction : MonoBehaviour {
             constructing = false;
             GameObject.Destroy(newinstance);
         }
-        //destroyMarkers(markers);
-
+		//Delete grid again
+		Destroy (m_gridInstance);
     }
 
     //Function to remove objects
