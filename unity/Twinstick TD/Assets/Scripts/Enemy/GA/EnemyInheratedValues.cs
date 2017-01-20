@@ -12,31 +12,48 @@ public class EnemyInheratedValues  {
 
 
     private float baseDamageToObjectPerAttack = 1f;
-    private float baseAttackSpeedObject = 1f;
+    private float baseAttackSpeedObject = 3f;
     private float baseDamageToPlayerPerAttack = 1f;
-    private float baseAttackSpeedPlayer = 1f;
-    private float baseStartingHealth = 2f;
-    private float baseMovementspeed = 6f;
+    private float baseAttackSpeedPlayer = 3f;
+    private float baseStartingHealth = 1f;
+    private float baseMovementspeed = 3f;
 
 
     private int geneamount = 20;
     private Chromosome chromosome;
 
-    private float rangeDamagePerAttack = 5f;
-    private float rangeAttackSpeed = 5f;
-    private float rangeStartingHealth =10f;
-    private float rangeMovementSpeed = 5f;
+	private int AimingEndWavenumber = 15;
+
+	private float scaleDamagePerAttack = 2f;
+	private float scaleAttackSpeed = 1f;
+	private float scaleStartingHealth = 2f;
+	private float scaleMovementSpeed = 2f;
+
+	private float rangeDamagePerAttack = 2f; 
+	private float rangeAttackSpeed = 1f;    
+    private float rangeStartingHealth = 2f;  
+	private float rangeMovementSpeed = 2f;  
+
+	private float rangeDamagePerAttackDuplicate; 
+	private float rangeAttackSpeedDuplicate;     
+	private float rangeStartingHealthDuplicate;  
+	private float rangeMovementSpeedDuplicate;   
 
     private float DamageDone = 0;
     private float Fitness = 0;
 
-	public EnemyInheratedValues()
+	public EnemyInheratedValues(int waveNumber)
     {
-     
+		updateRange (waveNumber);
         
         chromosome = new Chromosome(geneamount);
         chromosome.createRandomChromosome();
         ChromosomeToValues();
+
+		rangeDamagePerAttackDuplicate = rangeDamagePerAttack; 
+		rangeAttackSpeedDuplicate = rangeAttackSpeed;     
+		rangeStartingHealthDuplicate = rangeStartingHealth;  
+		rangeMovementSpeedDuplicate = rangeMovementSpeed;
     }
 
     public void ChromosomeToValues()
@@ -50,8 +67,8 @@ public class EnemyInheratedValues  {
 
         // attack speed
         float attackspeed = (chromosome.getAmountOption2() / (float)geneamount) * this.rangeAttackSpeed;
-        this.attackSpeedObject = this.baseAttackSpeedObject + attackspeed;
-        this.attackSpeedPlayer = this.baseAttackSpeedPlayer + attackspeed;
+        this.attackSpeedObject = this.baseAttackSpeedObject - attackspeed;
+        this.attackSpeedPlayer = this.baseAttackSpeedPlayer - attackspeed;
 
         // health
         float health = (chromosome.getAmountOption3() / (float)geneamount) * this.rangeStartingHealth;
@@ -127,7 +144,20 @@ public class EnemyInheratedValues  {
         return this.movementspeed;
     }
 
-  
+	public void updateRange(int waveNumber)
+	{
+		if (waveNumber > 2) {
+			this.rangeDamagePerAttack = this.rangeDamagePerAttackDuplicate * this.scaleDamagePerAttack / this.AimingEndWavenumber;
+
+			this.rangeAttackSpeed = this.rangeAttackSpeedDuplicate * this.scaleAttackSpeed / this.AimingEndWavenumber;
+
+			this.rangeStartingHealth = this.rangeStartingHealthDuplicate * this.scaleStartingHealth / this.AimingEndWavenumber;
+
+			this.rangeMovementSpeed = this.rangeMovementSpeedDuplicate * this.scaleMovementSpeed / this.AimingEndWavenumber;
+		
+		}
+	}
+
 
     public void isBoss(float damageObject, float speedObject, float damagePlayer, float speedPlayer, float Health, float move)
     {

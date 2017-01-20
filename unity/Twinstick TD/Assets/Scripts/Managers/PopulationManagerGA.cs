@@ -10,6 +10,7 @@ public class PopulationManagerGA {
     EnemyPopulation poptype2;
     EnemyPopulation poptype3;
     EnemyInheratedValues boss;
+	private int waveNumber=0;
     private GaneticAlgorithm GA = new GaneticAlgorithm();
 
     // initialize all the lists and create a GA
@@ -29,9 +30,9 @@ public class PopulationManagerGA {
      * then a check is preformed to make sure there are more then two spawned enemies to make sure there are parent avaible
      * then it provides the population to the GA and that returns a new populaiton
      */
-    public void nextGenartion(int AmountEnemies)
+	public void nextGenartion(int AmountEnemies, int waveNumber)
     {
-        
+		this.waveNumber = waveNumber;
 
         poptype1.clearUnspawnedEnemys();
         poptype2.clearUnspawnedEnemys();
@@ -40,7 +41,7 @@ public class PopulationManagerGA {
         // check for popsize
         if (poptype1.getList().Count > 2)
         {
-            poptype1 = GA.RunGA(poptype1, AmountEnemies);
+			poptype1 = GA.RunGA(poptype1, AmountEnemies, this.waveNumber);
         }
         else
         {
@@ -48,7 +49,7 @@ public class PopulationManagerGA {
         }
         if (poptype2.getList().Count > 2)
         {
-            poptype2 = GA.RunGA(poptype2, AmountEnemies);
+			poptype2 = GA.RunGA(poptype2, AmountEnemies, this.waveNumber);
         }
         else
         {
@@ -56,7 +57,7 @@ public class PopulationManagerGA {
         }
         if (poptype3.getList().Count > 2)
         {
-            poptype3 = GA.RunGA(poptype3, AmountEnemies);
+			poptype3 = GA.RunGA(poptype3, AmountEnemies, this.waveNumber);
         }
         else
         {
@@ -103,7 +104,7 @@ public class PopulationManagerGA {
     {
         for (int i = 0; i< StartingAmountEnemies; i++)
         {
-            EnemyInheratedValues enemy = new EnemyInheratedValues();
+			EnemyInheratedValues enemy = new EnemyInheratedValues(waveNumber);
             pop.AddEnemy(enemy);
             Debug.Log(pop.getList().Count);
         }
@@ -113,14 +114,14 @@ public class PopulationManagerGA {
     {
         for (int i = 0; i < amount; i++)
         {
-            EnemyInheratedValues enemy = new EnemyInheratedValues();
+			EnemyInheratedValues enemy = new EnemyInheratedValues(waveNumber);
             pop.AddEnemy(enemy);
         }
     }
 
     private void createBoss()
     {
-        boss = new EnemyInheratedValues();
+		boss = new EnemyInheratedValues(waveNumber);
         boss.isBoss(10f,10f,10f,10f,10f,30f);
     }
 }
