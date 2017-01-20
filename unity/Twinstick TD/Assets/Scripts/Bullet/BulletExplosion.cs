@@ -26,7 +26,7 @@ public class BulletExplosion : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<EnemyHealth>().setLastHit(m_playernumber);
-            other.gameObject.GetComponent<EnemyHealth>().TakeDamage(m_MaxDamage);
+			other.gameObject.GetComponent<EnemyHealth>().TakeDamage(m_MaxDamage, transform.position);
 
 		}
 		if (!other.gameObject.CompareTag("River") && !other.gameObject.CompareTag("Shop")) {
