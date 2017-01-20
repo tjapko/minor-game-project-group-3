@@ -23,7 +23,7 @@ public class DestroyRayBullet : MonoBehaviour
     {
 
         StartPos = transform.position;
-        Debug.Log("joeeee");
+       
         laserSound.transform.parent = null;
         laserSound.clip = laser;
         laserSound.Play();
