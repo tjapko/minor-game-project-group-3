@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour {
     public GameObject m_CanvasBaseUpgradePrefab;//GameObject Canvas BaseUpgrade
     public GameObject m_CanvasConstructionPrefab;//GameObject Canvas Construction
     public GameObject m_CanvasGameOverPrefab;   //GameObject Canvas Game Over
-    public GameObject m_CanvasHelpScreen;       //GameObject Canvas Help Screen
+	public GameObject m_CanvasHelpScreen;       //GameObject Canvas Help Screen
     public GameObject m_CanvasPauseMenuPrefab;  //GameObject Canvas Pause Menu
     public GameObject m_CanvasPlayerUIPrefab;   //GameObject Canas Player UI
     public GameObject m_CanvasShopPrefab;       //GameObject Canvas Shop
@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour {
     [HideInInspector] public GameObject go_CanvasBaseUpgrade; //GameObject Canvas Game Over
     [HideInInspector] public GameObject go_CanvasConstruction;//GameObject Canvas Construction
     [HideInInspector] public GameObject go_CanvasGameOver;    //GameObject Canvas Game Over
-    [HideInInspector] public GameObject go_CanvasPauseMenu;   //GameObject Canvas Pause Menu
+	[HideInInspector] public GameObject go_CanvasPauseMenu;   //GameObject Canvas Pause Menu
     [HideInInspector] public GameObject go_CanvasPlayerUI;    //GameObject Canas Player UI
     [HideInInspector] public GameObject go_CanvasShop;        //GameObject Canvas Shop
     [HideInInspector] public GameObject go_Shop;              //GameObject Shop
@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour {
     private CanvasBaseUpgrade m_BaseUpgradeScript;      //Reference to CanvasBaseUpgradeScript
     private CanvasConstructionScript  m_ConstructionScript;  //Reference to CanvasConstructionScript
     private CanvasGameOverScript m_GameOverScript;      //Reference to CanvasGameOverScript
-    private CanvasPauseMenuScript m_PauseMenuScript;    //Reference to CanvasPauseMenuScript
+	private CanvasPauseMenuScript m_PauseMenuScript;    //Reference to CanvasPauseMenuScript
     private CanvasPlayerUIScript m_PlayerUIScript;      //Reference to CanvasPlayerUIScript
     private ShopUIScript m_ShopUIScript;    //Reference to ShopUIScript
 
@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour {
         go_CanvasBaseUpgrade= GameObject.Instantiate(m_CanvasBaseUpgradePrefab) as GameObject;
         go_CanvasConstruction = GameObject.Instantiate(m_CanvasConstructionPrefab) as GameObject;
         go_CanvasGameOver   = GameObject.Instantiate(m_CanvasGameOverPrefab) as GameObject;
-        go_CanvasPauseMenu  = GameObject.Instantiate(m_CanvasPauseMenuPrefab) as GameObject;
+		go_CanvasPauseMenu  = GameObject.Instantiate(m_CanvasPauseMenuPrefab) as GameObject;
         go_CanvasPlayerUI   = GameObject.Instantiate(m_CanvasPlayerUIPrefab) as GameObject;
         go_CanvasShop       = GameObject.Instantiate(m_CanvasShopPrefab) as GameObject;
         go_Shop = GameObject.FindWithTag("Shop");
@@ -57,7 +57,7 @@ public class UIManager : MonoBehaviour {
         m_BaseUpgradeScript = go_CanvasBaseUpgrade.GetComponent<CanvasBaseUpgrade>();
         m_ConstructionScript = go_CanvasConstruction.GetComponent<CanvasConstructionScript>();
         m_GameOverScript = go_CanvasGameOver.GetComponent<CanvasGameOverScript>();
-        m_PauseMenuScript = go_CanvasPauseMenu.GetComponent<CanvasPauseMenuScript>();
+		m_PauseMenuScript = go_CanvasPauseMenu.GetComponent<CanvasPauseMenuScript>();
         m_PlayerUIScript = go_CanvasPlayerUI.GetComponent<CanvasPlayerUIScript>();
         m_ShopUIScript = go_CanvasShop.GetComponent<ShopUIScript>();
 
@@ -65,7 +65,7 @@ public class UIManager : MonoBehaviour {
         m_BaseUpgradeScript.StartInitialization();
         m_ConstructionScript.StartInitialization();
         m_GameOverScript.StartInitialization();
-        m_PauseMenuScript.StartInitialization();
+		m_PauseMenuScript.StartInitialization();
         m_PlayerUIScript.StartInitialization();
         m_ShopUIScript.StartInitialization();
 
@@ -82,7 +82,7 @@ public class UIManager : MonoBehaviour {
         go_CanvasBaseUpgrade.SetActive(false);
         go_CanvasConstruction.SetActive(false);
         go_CanvasGameOver.SetActive(false);
-        go_CanvasPauseMenu.SetActive(false);
+		go_CanvasPauseMenu.SetActive(false);
         go_CanvasPlayerUI.SetActive(true);
         go_CanvasShop.SetActive(false);
 
