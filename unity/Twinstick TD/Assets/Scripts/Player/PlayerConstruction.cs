@@ -361,16 +361,16 @@ public class PlayerConstruction : MonoBehaviour {
         switch (obj_type)
         {
             case PlayerObjectType.PlayerWall:
-                currentWalls++;
+//                currentWalls++;
                 break;
             case PlayerObjectType.PlayerTurret:
                 currentTurrets++;
                 break;
             case PlayerObjectType.PlayerCarrotField:
-                currentCarrotFarms++;
+//                currentCarrotFarms++;
                 break;
             case PlayerObjectType.PlayerMud:
-                currentMudPools++;
+//                currentMudPools++;
                 break;
             default:
                 break;
