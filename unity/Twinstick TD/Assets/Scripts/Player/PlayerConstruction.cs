@@ -1,14 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class PlayerConstruction : MonoBehaviour {
 
     //Start price objects
-    public static int m_price_wall = 100;      //Price of wall
-	public static int m_price_turret = 1000;   //Price of turret
-	public static int m_price_carrot = 2500;   //Price of Carrot field
-	public static int m_price_mud = 500;       //Price of the mud field
+    [Header("Cost:")]
+    public static int m_start_price_wall = 100;     //Price of wall
+	public static int m_start_price_turret = 1000;  //Price of turret
+	public static int m_start_price_carrot = 2500;  //Price of Carrot field
+	public static int m_start_price_mud = 500;      //Price of the mud field
+    public static float m_price_wall_factor = 1.1f;   // Factor Wall
+    public static float m_price_turret_factor = 1.1f;   // Factor Turret
+    public static float m_price_carrot_factor = 1.1f;   // Factor Carrot Farm
+    public static float m_price_mud_factor = 1.1f;   // Factor Mud Pool
+
+    //Max objects
+    [Header("Max Objects")]
+    public static int maxWalls = 4;     // maximum amount of walls
+    public static int maxTurrets = 3;   // maximum amount of turrets
+    public static int maxCarrotFarms = 4;   //maximum amount of carrot farms
+    public static int maxMudPools = 4;  //maximum amount of mud pools
 
     //Fix
     const string build_1 = "1";         //Button to place walls
@@ -28,23 +41,26 @@ public class PlayerConstruction : MonoBehaviour {
 
 
     //Public variables
+    [Header("Prefabs")]
     public GameObject m_markerprefab;   //Reference to the suggestive marker prefab
     public GameObject m_wallprefab;   //Reference to (to be placed) turret
     public GameObject m_turretprefab;   //Reference to (to be placed) turret
     public GameObject m_carrotfieldprefab;  //Reference to (to be placed) carrot field prefab
     public GameObject m_mudprefab;   
-    public List<GameObject> m_placedobjects;    //List containing all the objects the user has placed  
-    public PlayerManager m_player;     //Reference to the player manager (set by Usermanager)
 
-    // turret variables
-    public static int maxTurrets = 3; // maximum amount of turrets
-    public int  currentTurrets=0; // current amount of active turrets 
+    [HideInInspector] public List<GameObject> m_placedobjects;    //List containing all the objects the user has placed  
+    [HideInInspector] public PlayerManager m_player;     //Reference to the player manager (set by Usermanager)
 
     //Private variables
     private Vector3 mouseposition;      // Position of mouse
     private bool constructing;          // Boolean : boolean if player is constructing
     private bool constructionphase;     // Boolean : (true = construction phase, false = wavephase), set by game manager
     private float camRayLength = 100f;
+
+    private static int currentWalls;           // Current amount of walls
+    private static int currentTurrets;         // current amount of active turrets 
+    private static int currentCarrotFarms;     // Current amount of Carrot farms
+    private static int currentMudPools;        // Current amount of mud pools
 
     //Enum of playerobject
     public enum PlayerObjectType
@@ -68,7 +84,13 @@ public class PlayerConstruction : MonoBehaviour {
         //Set variables
         constructing = false;
         constructionphase = false;
-    }
+
+        currentWalls = 0;
+        currentTurrets = 0;
+        currentCarrotFarms = 0;
+        currentMudPools = 0;
+
+}
 	
 	// Update is called once per frame
 	void Update () {
@@ -79,7 +101,7 @@ public class PlayerConstruction : MonoBehaviour {
             if (Input.GetKeyDown(build_1))
             {
                 //Check if player has enough funds
-                if (m_playerStats.getCurrency() >= m_price_wall)
+                if (m_playerStats.getCurrency() >= determinePrice(PlayerObjectType.PlayerWall) && currentWalls < maxWalls)
                 {
                     constructing = true;
                     StartCoroutine(ObjectPlacement(build_1, m_wallprefab, PlayerObjectType.PlayerWall));
@@ -92,7 +114,7 @@ public class PlayerConstruction : MonoBehaviour {
             if (Input.GetKeyDown(build_2))
             {
                 //Check if player has enough funds
-                if (m_playerStats.getCurrency() >= m_price_turret)
+                if (m_playerStats.getCurrency() >= determinePrice(PlayerObjectType.PlayerTurret) && currentTurrets < maxTurrets)
                 {
                     constructing = true;
                     StartCoroutine(ObjectPlacement(build_2, m_turretprefab, PlayerObjectType.PlayerTurret));
@@ -104,7 +126,7 @@ public class PlayerConstruction : MonoBehaviour {
             if (Input.GetKeyDown(build_3))
             {
                 //Check if player has enough funds
-                if (m_playerStats.getCurrency() >= m_price_carrot)
+                if (m_playerStats.getCurrency() >= determinePrice(PlayerObjectType.PlayerCarrotField) && currentCarrotFarms < maxCarrotFarms)
                 {
                     constructing = true;
                     StartCoroutine(ObjectPlacement(build_3, m_carrotfieldprefab, PlayerObjectType.PlayerCarrotField));
@@ -116,7 +138,7 @@ public class PlayerConstruction : MonoBehaviour {
             if (Input.GetKeyDown(build_4))
             {
                 //Check if player has enough funds
-                if (m_playerStats.getCurrency() >= m_price_mud)
+                if (m_playerStats.getCurrency() >= determinePrice(PlayerObjectType.PlayerMud) && currentMudPools < maxMudPools)
                 {
                     constructing = true;
                     StartCoroutine(ObjectPlacement(build_4, m_mudprefab, PlayerObjectType.PlayerMud));
@@ -167,13 +189,15 @@ public class PlayerConstruction : MonoBehaviour {
                 //newinstance.AddComponent<Rigidbody>();  //Create a rigid body, for OnTriggerEnter to work properly
                 newinstance.GetComponent<Rigidbody>().isKinematic = true;   //Make the rigidbody kinematic, such that it's not affected by physics
                 setTag(objecttype, newinstance);    //Set tag onto game object
-				newinstance.GetComponent<UserObjectStatistics>().m_owner = m_player;
+                incCounter(objecttype);             //Increase counter
+                setReferences(objecttype, newinstance);
+                newinstance.GetComponent<UserObjectStatistics>().m_owner = m_player;
 				m_placedobjects.Add(newinstance);   //Add instance to list
                 constructing = false;   //Building has finished
                	newinstance.layer = 15;  //Set layer of the object as unwalkable
 
                 //Reduce funds
-                reduceFunds(objecttype, countObjects(objecttype));
+                reduceFunds(objecttype);
                 break;
             }
 
@@ -258,32 +282,15 @@ public class PlayerConstruction : MonoBehaviour {
     }
 
     // Returns the price of a new piece of wall
-    private void reduceFunds(PlayerObjectType objecttype, int exisiting_walls)
+    private void reduceFunds(PlayerObjectType objecttype)
     {
-        float factor = 1.5f + (0.1f * (float)exisiting_walls);
+        m_player.m_stats.substractCurrency(determinePrice(objecttype));
+    }
 
-        switch (objecttype)
-        {
-            case PlayerObjectType.PlayerWall:
-                m_player.m_stats.substractCurrency(m_price_wall);
-                m_price_wall = (int)((float) m_price_wall * factor);
-                break;
-            case PlayerObjectType.PlayerTurret:
-                m_player.m_stats.substractCurrency(m_price_turret);
-                m_price_turret = (int)((float)m_price_turret * factor);
-                break;
-            case PlayerObjectType.PlayerCarrotField:
-                m_player.m_stats.substractCurrency(m_price_carrot);
-                m_price_carrot = (int)((float)m_price_carrot * factor);
-                break;
-            case PlayerObjectType.PlayerMud:
-                m_player.m_stats.substractCurrency(m_price_mud);
-                m_price_mud = (int)((float)m_price_mud * factor);
-                break;
-            default:
-                break;
+    //
+    private void newPrice()
+    {
 
-        }
     }
 
     //Counts amount of exisiting PlayerObjects
@@ -301,6 +308,7 @@ public class PlayerConstruction : MonoBehaviour {
         return ans;
     }
 
+    //Set tag function
     private void setTag(PlayerObjectType obj_type, GameObject obj)
     {
         switch (obj_type)
@@ -343,4 +351,90 @@ public class PlayerConstruction : MonoBehaviour {
         }
         return Vector3.zero;
     }
+
+    //Increase counters
+    private void incCounter(PlayerObjectType obj_type)
+    {
+        switch (obj_type)
+        {
+            case PlayerObjectType.PlayerWall:
+                currentWalls++;
+                break;
+            case PlayerObjectType.PlayerTurret:
+                currentTurrets++;
+                break;
+            case PlayerObjectType.PlayerCarrotField:
+                currentCarrotFarms++;
+                break;
+            case PlayerObjectType.PlayerMud:
+                currentMudPools++;
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    //Decrease counters
+    public void decCounter(PlayerObjectType obj_type)
+    {
+        switch (obj_type)
+        {
+            case PlayerObjectType.PlayerWall:
+                currentWalls--;
+                break;
+            case PlayerObjectType.PlayerTurret:
+                currentTurrets--;
+                break;
+            case PlayerObjectType.PlayerCarrotField:
+                currentCarrotFarms--;
+                break;
+            case PlayerObjectType.PlayerMud:
+                currentMudPools--;
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    //Set references
+    private void setReferences(PlayerObjectType obj_type, GameObject m_object)
+    {
+        switch (obj_type)
+        {
+            case PlayerObjectType.PlayerWall:
+                break;
+            case PlayerObjectType.PlayerTurret:
+                m_object.GetComponent<TurretScript>().setPlayerConstruction(gameObject.GetComponent<PlayerConstruction>());
+                break;
+            case PlayerObjectType.PlayerCarrotField:
+                break;
+            case PlayerObjectType.PlayerMud:
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    //Determine price of object
+    public static int determinePrice(PlayerObjectType obj_type)
+    {
+        switch (obj_type)
+        {
+            case PlayerObjectType.PlayerWall:
+                return (int)((float)m_start_price_wall * Math.Pow(m_price_wall_factor, currentWalls));  
+            case PlayerObjectType.PlayerTurret:
+                return (int)((float)m_start_price_turret * Math.Pow(m_price_turret_factor, currentTurrets));
+            case PlayerObjectType.PlayerCarrotField:
+                return (int)((float)m_start_price_carrot * Math.Pow(m_price_carrot_factor, currentCarrotFarms));
+            case PlayerObjectType.PlayerMud:
+                return (int)((float)m_start_price_mud * Math.Pow(m_price_mud_factor, currentMudPools));
+            default:
+                return 0;
+        }
+    }
 }
+
+

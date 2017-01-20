@@ -63,11 +63,11 @@ public class PopulationManagerGA {
             restockPop(poptype3, AmountEnemies);
         }
 
-        Debug.Log("type 1 = ");
+        //Debug.Log("type 1 = ");
         poptype1.debugAverageStats();
-        Debug.Log("type 2 = ");
+        //Debug.Log("type 2 = ");
         poptype2.debugAverageStats();
-        Debug.Log("type 3 = ");
+        //Debug.Log("type 3 = ");
         poptype3.debugAverageStats();
 
 

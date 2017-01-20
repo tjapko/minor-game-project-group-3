@@ -204,12 +204,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_amountofplayers: 1
-  backgroundSource: {fileID: 0}
+  backgroundSource: {fileID: 82000012691815352}
   backgroundSounds:
   - {fileID: 8300000, guid: 40b09d35affa9c7429f5a7d5d5f6bf70, type: 3}
   - {fileID: 8300000, guid: 5b6b439bc8bee6f4c901e4fb8dd7547d, type: 3}
   - {fileID: 8300000, guid: 0660e8dbd3ec1e1478958e173ed79815, type: 3}
-  gongSource: {fileID: 0}
+  gongSource: {fileID: 82000010785898864}
   gongSound: {fileID: 8300000, guid: 73e875b1afb672e43b0a803abb4a21d8, type: 3}
   m_baseprefab: {fileID: 1000013595951870, guid: 2d011ede6f946374bad3aa43eb65f5af,
     type: 2}
