@@ -22,7 +22,7 @@ AudioMixerController:
   - guid: 468beea134642cc439e7dfc2d639fd81
     name: volSFX
   - guid: 2c96c344857217f499e67aec52550a75
-    name: MyExposedParam 3
+    name: volWalking
   m_AudioMixerGroupViews:
   - guids:
     - 4f489d722326d614c8fdd6274b11256c
