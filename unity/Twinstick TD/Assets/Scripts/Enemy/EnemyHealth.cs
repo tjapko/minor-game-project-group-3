@@ -192,8 +192,10 @@ public class EnemyHealth : MonoBehaviour
 	}
 
     //Take damage
-    public void TakeDamage(float amount)
+	public void TakeDamage(float amount, Vector3 bulletOrigin)
     {
+		
+		playerUnit.enemyHit (bulletOrigin);
         enemySource.clip = beastPainsound;
         enemySource.Play();
         //Set hitmark

@@ -22,6 +22,7 @@ public class UnitPlayer : MonoBehaviour {
 	Vector3[] path; 					// The walkable path
 	int targetIndex;					// The index of the waypointArray. The unit moves to path[targetIndex]  
 	public GameObject currentGoal;
+	private Vector3 currentWaypoint;
 
 	//Calculates distance to each playerObject in the scene and chooses closest as target
 	public void calcDistance(bool playerCheck){
@@ -94,6 +95,12 @@ public class UnitPlayer : MonoBehaviour {
 		}
 	}
 
+	public void enemyHit(Vector3 origin){
+		Vector3 normalized = transform.position - 2*Vector3.Normalize (origin - transform.position);
+		normalized.y = 0;
+		transform.position = normalized;
+	}
+
 	/// <summary>
 	/// If there is a path the unit will move over it
 	/// </summary>
@@ -130,7 +137,7 @@ public class UnitPlayer : MonoBehaviour {
 		if (path.Length == 0) {
 			yield break;
 		}
-		Vector3 currentWaypoint = path[0];
+		currentWaypoint = path[0];
 		while (true) {
 			if (Vector3.Distance(currentWaypoint,transform.position) < 0.4f){
 				targetIndex ++;
