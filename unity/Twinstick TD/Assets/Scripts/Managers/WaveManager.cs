@@ -99,7 +99,7 @@ public class WaveManager
 		}
 		grid = GameObject.FindWithTag ("grid").GetComponent<Grid> ();
 		int enemies = EnemiesAmountPerWave ();
-        GAManager.nextGenartion(enemies);   // give the current list of enemies to GA and that updates to incubation list
+		GAManager.nextGenartion(enemies, m_wavenumber);   // give the current list of enemies to GA and that updates to incubation list
 		m_wavenumber++;
 		proportionEnemies (); // update the proportions of the enemies per wave
 		yield return SpawnAllEnemies (enemies);

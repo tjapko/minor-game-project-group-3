@@ -9,9 +9,11 @@ public class GaneticAlgorithm {
    private Chromosome parentB;
     private int popsize;
     private float mutationRate = 0.1f;
+	private int waveNumber;
 
     
-    public EnemyPopulation RunGA (EnemyPopulation population, int SizePop) {
+	public EnemyPopulation RunGA (EnemyPopulation population, int SizePop, int waveNumber) {
+		this.waveNumber = waveNumber;
         this.popsize = SizePop;
         this.population = population;
         EnemyPopulation newGenartion;
@@ -63,7 +65,7 @@ public class GaneticAlgorithm {
 
     private EnemyInheratedValues newChild()
     {
-        EnemyInheratedValues child = new EnemyInheratedValues();
+		EnemyInheratedValues child = new EnemyInheratedValues(waveNumber);
         int crossoverindex = Random.Range(0, parentA.getLength());
         int[] childarray = new int[parentA.getLength()];
         parentA.getArrayTillIndex(crossoverindex).CopyTo(childarray, 0);
