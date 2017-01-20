@@ -22,11 +22,10 @@ public class Restore_BaseHealth : BaseUpgrade {
 
 
     }
-    private int Cost()
+	private int Cost(GameObject m_base)
     {
         Basehealth basehealth_script = m_base.GetComponent<Basehealth>();
         float dif = (basehealth_script.m_maxhealth- basehealth_script.getCurrentHealth());
-        Debug.Log("price: " + price_array);
         return ((int)(dif * price_array[0]));
     }
 
@@ -40,7 +39,7 @@ public class Restore_BaseHealth : BaseUpgrade {
         {
             
            
-            int cost = Cost();
+			int cost = Cost(m_base);
 
             if (cost <= player_stats.m_currency)
             {

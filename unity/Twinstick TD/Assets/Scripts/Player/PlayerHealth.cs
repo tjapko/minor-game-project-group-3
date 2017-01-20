@@ -67,11 +67,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void buyHealth()
     {
-        Debug.Log("Player health before: " + m_CurrentHealth);
         PlayerStatistics playerstat = GetComponent<PlayerStatistics>();
         float dif = (m_maxHealth - m_CurrentHealth);
         int cost =(int)(dif * m_dollarperlife);
-        Debug.Log("currency: "+ playerstat.m_currency + " cost: " + cost );
         if (playerstat.m_currency >= cost)
         {
             playerstat.m_currency -= cost;
@@ -86,7 +84,6 @@ public class PlayerHealth : MonoBehaviour
 
         }
         SetHealthUI();
-        Debug.Log("Player health after: " + m_CurrentHealth);
 
     }
 	//Decrease health of base
@@ -99,7 +96,7 @@ public class PlayerHealth : MonoBehaviour
 
         m_CurrentHealth = m_CurrentHealth - amountSec;
 		SetHealthUI ();
-		if (m_CurrentHealth == 0) {
+		if (m_CurrentHealth <= 0) {
 			OnDeath ();
 		}
 		ScreenShake.ShakeCharacter ();
