@@ -120,9 +120,9 @@ public class CanvasConstructionScript : MonoBehaviour {
 	}
 
 	private void SetPrices() {
-		obj1.text = "Wall: Press 1 \n Price: " + PlayerConstruction.m_price_wall;
-		obj2.text = "Turret: Press 2 \n Price: " + PlayerConstruction.m_price_turret;
-		obj3.text = "Carrot-Field: Press 3 \n Price: " + PlayerConstruction.m_price_carrot;
-		obj4.text = "Mud: Press 4 \n Price:  " + PlayerConstruction.m_price_mud;
+		obj1.text = "Wall: Press 1 \n Price: " + PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerWall);
+		obj2.text = "Turret: Press 2 \n Price: " + PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerTurret);
+		obj3.text = "Carrot-Field: Press 3 \n Price: " + PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerCarrotField);
+		obj4.text = "Mud: Press 4 \n Price:  " + PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerMud);
 	}
 }
