@@ -2590,7 +2590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DampTime: 0.2
   m_ScreenEdgeBuffer: 4
-  m_MinSize: 15
+  m_MinSize: 20
   m_Targets: []
 --- !u!4 &922648189
 Transform:
