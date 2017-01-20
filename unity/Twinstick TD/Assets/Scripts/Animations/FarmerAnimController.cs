@@ -15,7 +15,7 @@ public class FarmerAnimController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if ((Input.GetAxisRaw("Vertical_1") != 0)) {
+		if ((Input.GetAxisRaw("Vertical_1") != 0) || Input.GetAxisRaw("Horizontal_1") != 0) {
 			anim.SetBool ("IsWalking", true);
 		} else {
 			anim.SetBool ("IsWalking", false);
