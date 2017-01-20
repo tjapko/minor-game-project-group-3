@@ -23,9 +23,9 @@ public class ShopScript : MonoBehaviour {
     //References
     public GameObject helpbox_prefab;   //Helpbox prefab
     [HideInInspector] public GameObject m_instance_UI;  //Reference to instance of shop UI (set by UIManager)
-    public Rigidbody m_Bullet;          // Prefab of the shell.
-    public Rigidbody m_RayBullet;       // Prefab of the Rayshell.
-    public Transform m_FireTransform;   // A child of the player where the shells are spawned.
+//    public Rigidbody m_Bullet;          // Prefab of the shell.
+//    public Rigidbody m_RayBullet;       // Prefab of the Rayshell.
+//    public Transform m_FireTransform;   // A child of the player where the shells are spawned.
     private GameManager m_gamemanager;  // Reference to the game manager
     private UserManager m_usermanager;  // Reference to the user manager
 
