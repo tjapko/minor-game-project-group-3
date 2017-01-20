@@ -29,7 +29,7 @@ public class BaseTurret : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        InvokeRepeating("getTarget", 0f, 0.5f);
+        InvokeRepeating("getTarget", 0f, 0.5f); // 0.5f variable?
     }
 
     // Update is called once per frame

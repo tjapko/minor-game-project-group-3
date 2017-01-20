@@ -948,11 +948,11 @@ MonoBehaviour:
   m_turretFireTransform: {fileID: 4000012950769734}
   m_turretbarrel: {fileID: 1000010641751276}
   m_damage: 0.5
-  m_range: 1
-  m_accuracy: 10
+  m_range: 200
+  m_accuracy: 1000
   m_fireRate: 0.25
-  m_launchspeed: 50
-  m_turnrate: 10
+  m_launchspeed: 200
+  m_turnrate: 1
 --- !u!114 &114000011372990030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1059,8 +1059,8 @@ MonoBehaviour:
   - 1.2
   - 1.5
   upgradeBaseTurretLaunchForce:
-  - 12
-  - 15
+  - 250
+  - 300
   upgradeBaseTurretTurnRate:
   - 1.2
   - 1.5
@@ -1091,11 +1091,11 @@ MonoBehaviour:
   m_turretFireTransform: {fileID: 4000010269930666}
   m_turretbarrel: {fileID: 1000011996272956}
   m_damage: 0.5
-  m_range: 1
-  m_accuracy: 10
+  m_range: 200
+  m_accuracy: 1000
   m_fireRate: 0.25
-  m_launchspeed: 50
-  m_turnrate: 10
+  m_launchspeed: 200
+  m_turnrate: 1
 --- !u!114 &114000012882652028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1151,11 +1151,11 @@ MonoBehaviour:
   m_turretFireTransform: {fileID: 4000010834220312}
   m_turretbarrel: {fileID: 1000013486474002}
   m_damage: 0.5
-  m_range: 1
-  m_accuracy: 10
+  m_range: 200
+  m_accuracy: 1000
   m_fireRate: 0.25
-  m_launchspeed: 50
-  m_turnrate: 10
+  m_launchspeed: 200
+  m_turnrate: 1
 --- !u!114 &114000013405116222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1198,12 +1198,12 @@ MonoBehaviour:
     type: 2}
   m_turretFireTransform: {fileID: 4000012741593254}
   m_turretbarrel: {fileID: 1000013318400458}
-  m_damage: 0.5
-  m_range: 1
-  m_accuracy: 10
+  m_damage: 1
+  m_range: 200
+  m_accuracy: 1000
   m_fireRate: 0.25
-  m_launchspeed: 50
-  m_turnrate: 10
+  m_launchspeed: 200
+  m_turnrate: 1
 --- !u!136 &136000012430468918
 CapsuleCollider:
   m_ObjectHideFlags: 1
