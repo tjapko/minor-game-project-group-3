@@ -23,10 +23,12 @@ public class DestroyRayBullet : MonoBehaviour
     {
 
         StartPos = transform.position;
-        Destroy(gameObject, m_MaxLifeTime);
+        Debug.Log("joeeee");
         laserSound.transform.parent = null;
+        laserSound.clip = laser;
         laserSound.Play();
-        Destroy(laserSound.gameObject, 1f);
+        Destroy(laserSound.gameObject, 5f);
+        Destroy(gameObject, m_MaxLifeTime);
     }
 
     /// <summary>

@@ -235,7 +235,7 @@ MonoBehaviour:
   StartPos: {x: 0, y: 0, z: 0}
   hit: 0
   laserSound: {fileID: 82000010739371928}
-  laser: {fileID: 8300000, guid: 3e05aa20cd27f404690bcd1b66e3a633, type: 3}
+  laser: {fileID: 8300000, guid: f804c78d0cfebce43b713646ab250ba1, type: 3}
 --- !u!136 &136000013389974852
 CapsuleCollider:
   m_ObjectHideFlags: 1
