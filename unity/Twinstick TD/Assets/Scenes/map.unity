@@ -2268,6 +2268,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 922648189}
   m_RootOrder: 1
+--- !u!82 &788203460 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82000012691815352, guid: 682fa384485ba414b8368ced53b0e3f7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1645544756}
+--- !u!82 &788203461 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82000010785898864, guid: 682fa384485ba414b8368ced53b0e3f7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1645544756}
 --- !u!1001 &806776950
 Prefab:
   m_ObjectHideFlags: 0
@@ -5174,6 +5184,16 @@ Prefab:
       propertyPath: m_weaponshop
       value: 
       objectReference: {fileID: 32876408}
+    - target: {fileID: 114000012087956578, guid: 682fa384485ba414b8368ced53b0e3f7,
+        type: 2}
+      propertyPath: gongSource
+      value: 
+      objectReference: {fileID: 788203461}
+    - target: {fileID: 114000012087956578, guid: 682fa384485ba414b8368ced53b0e3f7,
+        type: 2}
+      propertyPath: backgroundSource
+      value: 
+      objectReference: {fileID: 788203460}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 682fa384485ba414b8368ced53b0e3f7, type: 2}
   m_IsPrefabParent: 0
