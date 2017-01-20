@@ -186,7 +186,7 @@ public class PlayerConstruction : MonoBehaviour {
             //Check if button has been pressed
             //Check if player isn't standing onto the object
             //Check if node is walkable
-			if (Input.GetMouseButtonUp(0) || Input.GetKeyDown(keyinput) && (instancestats.getGroundClear() && m_grid.NodeFromWorldPoint(newinstance.transform.position).walkable && m_grid.NodeFromWorldPoint(newinstance.transform.position).placable))
+			if ((Input.GetMouseButtonUp(0) || Input.GetKeyDown(keyinput)) && (instancestats.getGroundClear() && m_grid.NodeFromWorldPoint(newinstance.transform.position).walkable && m_grid.NodeFromWorldPoint(newinstance.transform.position).placable))
             {
                 instancestats.setPlacement(true);    //The object is now placed onto the ground
                 //newinstance.AddComponent<Rigidbody>();  //Create a rigid body, for OnTriggerEnter to work properly
