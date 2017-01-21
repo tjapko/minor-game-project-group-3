@@ -149,4 +149,9 @@ public class UIManager : MonoBehaviour {
         m_GameOverScript.setScore();
     }
 
+    public void showWaveReward()
+    {
+        StartCoroutine(m_PlayerUIScript.showWaveReward());
+    }
+
 }

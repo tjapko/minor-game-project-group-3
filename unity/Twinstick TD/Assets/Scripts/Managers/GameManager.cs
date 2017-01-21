@@ -190,6 +190,7 @@ public class GameManager : MonoBehaviour
             {
                 //Reward player
                 waveReward();
+                m_uiscript.showWaveReward();
 
                 // Go into construction phase
                 yield return StartCoroutine(constructionPhase());

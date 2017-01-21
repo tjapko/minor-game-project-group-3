@@ -116,7 +116,7 @@ public class UserManager {
     }
 
     //Function to determine currency per wave
-    private int waveCurrency()
+    public int waveCurrency()
     {
         //GameObject m_root = GameObject.FindWithTag("Gamemanager");
         //GameManager m_gamemanager = m_root.GetComponent<GameManager>();
