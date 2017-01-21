@@ -68,6 +68,7 @@ public class UserManager {
         foreach(PlayerManager player in m_playerlist)
         {
             player.m_construction.setconstructionphase(status);
+            player.m_shooting.setConstructionPhase(status);
         }
     }
 

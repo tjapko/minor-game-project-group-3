@@ -96,7 +96,6 @@ public class PlayerConstruction : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log("Current': " + currentTurrets);
         if (constructionphase && !constructing && m_basemanager.m_Instance.activeSelf)
         {
             // Check if player has clicked
