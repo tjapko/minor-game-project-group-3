@@ -9,7 +9,8 @@ public class UnitPlayer : MonoBehaviour {
 
 	public GameObject m_base;  			// the baselocation 
 	public Transform m_player;			// the playerlocation
-	public float speed; 				// moving speed
+	public float movementSpeed; 				// moving speed
+	public float rotationSpeed = 100f;
 	//public bool baseHit = false; 		// has hit the base or not
 	public float m_threshold = -20.0f; 	// maybe variable for GA
 	public float timeNewPath = 2f; 		// interval between new pathcalculation to enemy
@@ -85,18 +86,18 @@ public class UnitPlayer : MonoBehaviour {
 
 	public void inOutMud(bool slow){
 		if (slow) {
-			this.speed = mudSpeed;
+			this.movementSpeed = mudSpeed;
 		} else {
 			if (GAspeed != null){
-				this.speed = GAspeed;
+				this.movementSpeed = GAspeed;
 			}else{
-				this.speed = normalSpeed;
+				this.movementSpeed = normalSpeed;
 			}
 		}
 	}
 
 	public void enemyHit(Vector3 origin){
-		Vector3 normalized = transform.position - 2*Vector3.Normalize (origin - transform.position);
+		Vector3 normalized = transform.position - 2* Vector3.Normalize (origin - transform.position);
 		normalized.y = 0;
 		transform.position = normalized;
 	}
@@ -131,13 +132,16 @@ public class UnitPlayer : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// a coroutine for walking over the path that is given 
+	/// a coroutine for walking over the path that is given
 	/// </summary>
 	IEnumerator FollowPath() {
 		if (path.Length == 0) {
 			yield break;
 		}
 		currentWaypoint = path[0];
+		var p = Quaternion.LookRotation (path[path.Length - 1] - transform.position);
+		transform.rotation = Quaternion.RotateTowards (transform.rotation, p, 5*rotationSpeed * Time.deltaTime);
+
 		while (true) {
 			if (Vector3.Distance(currentWaypoint,transform.position) < 0.4f){
 				targetIndex ++;
@@ -148,8 +152,9 @@ public class UnitPlayer : MonoBehaviour {
 				}
 				currentWaypoint = path[targetIndex];			
 			}
-			transform.LookAt(currentWaypoint);
-			transform.position = Vector3.MoveTowards(transform.position,currentWaypoint,speed * Time.deltaTime);
+			var q = Quaternion.LookRotation (currentWaypoint - transform.position);
+			transform.rotation = Quaternion.RotateTowards (transform.rotation, q, rotationSpeed * Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position,currentWaypoint,movementSpeed * Time.deltaTime);
 			yield return null;
 		}
 	}
@@ -182,6 +187,7 @@ public class UnitPlayer : MonoBehaviour {
     public void setMovementspeed(float movementspeed)
     {
         this.GAspeed = movementspeed;
-		this.speed = GAspeed;
+		this.movementSpeed = GAspeed;
+		this.rotationSpeed = 25 * GAspeed;
     }
 }
