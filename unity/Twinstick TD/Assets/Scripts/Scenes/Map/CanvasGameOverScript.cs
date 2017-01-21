@@ -135,7 +135,7 @@ public class CanvasGameOverScript : MonoBehaviour {
     public void ShareToTwitter()
     {
         string url = "http://twitter.com/intent/tweet?text=I+just+scored+";
-        url += 10; // enter score here!!
+        url += scorevalue;
         url += "+in+this+amazing+game";
         Application.OpenURL(url);
     }

@@ -1913,10 +1913,10 @@ RectTransform:
   - {fileID: 224000012896967456}
   m_Father: {fileID: 224000012208123440}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0.25, y: 0.2}
-  m_AnchorMax: {x: 0.75, y: 0.8}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.000030517578, y: 0.000015258789}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 960, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000010947546954
 RectTransform:

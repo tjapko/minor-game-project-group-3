@@ -20,7 +20,8 @@ public class PlayerStatistics : MonoBehaviour {
     void Start () {
         m_kills = 0;      // start m_kills 
 		m_metSalesmanAmount = 0;  // start m_metSalesmanAmount
-        m_currency = m_playerstartcurrency;      // start m_currency
+
+        m_currency = 500;      // start m_currency
     }
 	
 	// Update is called once per frame
