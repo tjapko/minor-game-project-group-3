@@ -27,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
 
     //Private variables
     
-	private float m_CurrentHealth;  					// Current health of enemy
+	public static float m_CurrentHealth;  					// Current health of enemy
     private int m_dollarperlife;                      // Amount of currency per life that it cost to buy. 
 	
 

@@ -40,19 +40,12 @@ public class WaveManager
     private double m_proportionEnemy3; 		 // proportion of choosing enemy3 each spawning 
     private int m_numberOfWavesPerBoss = 5;  // each m_numberOfWavesPerBoss waves a Boss is spawned
 
-//	private float m_scaleEnemies = 50.0f;
-//	// time between spawning variables:
-//	private float time;						 //NOT USED NOW	// total spawnTime of the wave 
-//	private float m_startSpawnDelayTime; 	 //NOU USED NOW	// starting spawnTime 
-//	private float m_endSpawnDelayTime;   	 //NOT USED NOW	// end spawnTime
-//	private float scaleTime = 5.0f; 		 //NOT USED NOW	// delayTime over the waves 
-
 	// spawnDelay of the enemies 
-	private float m_spawnDelayBetweenEnemies = 0.5f; // time delay between the enemies in a wave
+	private float m_spawnDelayBetweenEnemies = 0.25f; // time delay between the enemies in a wave
 	// increasing amount of enemies 
 	private int m_startEnemies = 5; // number of starting enemies 
-	private float m_angle1 = 3.0f;     // this angle is applied from the start to wave: m_m_waveTippingPoint1
-	private float m_angle2 = 5.0f;	   // this angle is applied from wave: m_m_waveTippingPoint1 to wave: m_m_waveTippingPoint2
+	private float m_angle1 = 2.0f;     // this angle is applied from the start to wave: m_m_waveTippingPoint1
+	private float m_angle2 = 3.0f;	   // this angle is applied from wave: m_m_waveTippingPoint1 to wave: m_m_waveTippingPoint2
 	private float m_angle3 = 2.0f;	   // this angle is applied from wave: m_m_waveTippingPoint2 till the end of the game
 	private int m_waveTippingPoint1 = 10; // wave at which m_angle2 is used for the increasing amount of enemies 
 	private int m_waveTippingPoint2 = 15; // wave at which m_angle2 is used for the increasing amount of enemies 
@@ -105,7 +98,7 @@ public class WaveManager
 		yield return SpawnAllEnemies (enemies);
     }
 
-	// Function for amount of enemies next wave
+	// Function for amount of enemies per wave
 	public int EnemiesAmountPerWave() {
 //		int amount =  Mathf.RoundToInt(m_wavenumber * 1.5f * m_scaleEnemies / (m_wavenumber + 10)); // m_scaleEnemies after 20 waves (*1.5 factor)
 		float amount;

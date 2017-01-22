@@ -529,7 +529,7 @@ MonoBehaviour:
   m_fireRate: 1
   m_turnrate: 10
   m_accuracy: 1000
-  m_startHealth: 10
+  m_startHealth: 2
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114000013306829072

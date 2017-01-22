@@ -16,10 +16,10 @@ public class BaseUpgradeScript : MonoBehaviour {
     private CanvasBaseUpgrade ui_baseupgrades;  //Reference to the base upgrades UI
 
     //Public Variables
-    [Header("Public Variables")]
+//    [Header("Public Variables:")]
     [Header("Player Health settings")]
     public int price_restorePlayerHealth;   //Price of restoring player health
-    public int amount_restorePlayerHealth;  //Amount that is restored per price_restorePlayerHealth
+	public int amount_restorePlayerHealth;  //Amount that is restored per price_restorePlayerHealth
     public int[] price_upgradePlayerHealth;     //Cost per upgrade
     public int[] amount_upgradePlayerHealth;    //Added Amountof hp per upgrade
 
@@ -30,7 +30,7 @@ public class BaseUpgradeScript : MonoBehaviour {
     public int[] amount_upgradeBaseHealth;  //Added Amountof hp per upgrade
 
 	[Header("Turret stats settings")]
-	public int[] upgradeBaseTurretDamage;    //Damage of the turret per upgrade
+	public float[] upgradeBaseTurretDamage;    //Damage of the turret per upgrade
 	public float[] upgradeBaseTurretRange;  	 //Range of the turret per upgrade
 	public float[] upgradeBaseTurretAccuracy;  //Accuracy of the turret per upgrade
 	public float[] upgradeBaseTurretFirerate;  //FireRate of the turret per upgrade

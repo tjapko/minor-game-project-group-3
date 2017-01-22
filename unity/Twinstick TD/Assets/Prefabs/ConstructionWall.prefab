@@ -324,7 +324,7 @@ MonoBehaviour:
     type: 2}
   m_Slider: {fileID: 114000010354233816}
   m_FillImage: {fileID: 114000010566975516}
-  m_startHealth: 50
+  m_startHealth: 1
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114000011998791728

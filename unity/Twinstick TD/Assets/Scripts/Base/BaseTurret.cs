@@ -11,13 +11,13 @@ public class BaseTurret : MonoBehaviour {
 
     //Public variables
     [Header("Public variables")]
-    public float m_damage = 1f;    //damage of the turret
-	public float m_range = 200f;     //Range of the turret
-	public float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
-	public float m_fireRate = 1f;   //Fire rate of the turret
-	public float m_launchspeed = 10f;   //Launch speed of the bullet
-	public float m_turnrate = 1f;   //Turn rate of the turret
-
+    public static float m_damage = 1f;    //damage of the turret
+	public static float m_range = 200f;     //Range of the turret
+	public static float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
+	public static float m_fireRate = 1f;   //Fire rate of the turret
+	public static float m_launchspeed = 10f;   //Launch speed of the bullet
+	public static float m_turnrate = 1f;   //Turn rate of the turret
+	// damage, 
 
     //Private variables
     private GameObject m_target;        //Target (gameobject)
@@ -112,27 +112,31 @@ public class BaseTurret : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, m_range);
     }
 		
-	public void setDamage(float amount) {
+	public static void setDamage(float amount) {
 		m_damage = amount;
 	}
 
-	public void setRange(float amount) {
+	public static float getDamage() {
+		return m_damage;
+	}
+
+	public static void setRange(float amount) {
 		m_range = amount;
 	}
 
-	public void setAccuracy(float amount) {
+	public static void setAccuracy(float amount) {
 		m_accuracy = amount;
 	}
 
-	public void setFirerate(float amount) {
+	public static void setFirerate(float amount) {
 		m_fireRate = amount;
 	}
 
-	public void setLaunchForce(float amount) {
+	public static void setLaunchForce(float amount) {
 		m_launchspeed = amount;
 	}
 
-	public void setTurnRate(float amount) {
+	public static void setTurnRate(float amount) {
 		m_turnrate = amount;
 	}
 		

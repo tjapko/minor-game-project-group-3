@@ -82,7 +82,8 @@ public class CanvasGameOverScript : MonoBehaviour {
         for (int i = 0; i < amountofplayers; i++)
         {
             PlayerManager player = playerlist[i];
-            score[i] = player.m_stats.getkills() * 10 + player.m_stats.getCurrency();
+//            score[i] = player.m_stats.getkills() * 10 + player.m_stats.getCurrency();
+			score[i] =  (GameManager.m_waveNumberusedForHighscore-1)*10 + player.m_stats.getkills() + PlayerConstruction.m_totalCarrotfieldsEachWave*10;
 			scoretext.text += "   Score : " + score[i];
 			scorevalue = score [0];
         }

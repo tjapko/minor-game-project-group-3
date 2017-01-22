@@ -121,7 +121,7 @@ public class UserManager {
         //GameObject m_root = GameObject.FindWithTag("Gamemanager");
         //GameManager m_gamemanager = m_root.GetComponent<GameManager>();
         //return m_gamemanager.getWaveNumber() * 1000;
-        return 500;
+		return PlayerStatistics.m_currencyBasePerWave;
     }
 
     //Function to check if any player is constructing

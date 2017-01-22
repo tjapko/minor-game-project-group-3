@@ -260,7 +260,9 @@ public class CanvasBaseUpgrade : MonoBehaviour {
                 if(upgrade_1.getPrice() != -1 && player_stats.getCurrency() >= upgrade_1.getPrice())
                 {
                     player_stats.substractCurrency(upgrade_1.getPrice());
-                    upgrade_1.UpgradeBase(m_base);
+//				BaseTurret baseTurretScript = m_base.GetComponentsInChildren<BaseTurret> ()[0];
+				upgrade_1.UpgradeBase(m_base);
+
                 }
                 break;
             case BaseUpgrade.BaseUpgradeType.RestoreBaseHealth:

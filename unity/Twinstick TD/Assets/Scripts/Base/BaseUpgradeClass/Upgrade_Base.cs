@@ -5,7 +5,7 @@ public class Upgrade_Base : BaseUpgrade {
 
     //Private variable
     private int[] m_basehealthinc;
-	private int[] m_BaseTurretDamageInc;
+	private float[] m_BaseTurretDamageInc;
 	private float[] m_BaseTurretRangeInc;
 	private float[] m_BaseTurretAccuracyInc;
 	private float[] m_BaseTurretFireRateInc;
@@ -15,7 +15,7 @@ public class Upgrade_Base : BaseUpgrade {
 
     //Constructor
     //m_base: the base (gameobject)
-	public Upgrade_Base(int[] price, int[] incHealthAmount, int[] incTurretDamage, float[]  incTurretRange, float[] incTurretAccuracy, float[]  incTurretFireRate, float[] incTurretLaunchSpeed, float[] incTurretTurnRate) : base(price)
+	public Upgrade_Base(int[] price, int[] incHealthAmount, float[] incTurretDamage, float[]  incTurretRange, float[] incTurretAccuracy, float[]  incTurretFireRate, float[] incTurretLaunchSpeed, float[] incTurretTurnRate) : base(price)
     {
         //Error message
         if (price.Length != incHealthAmount.Length)
@@ -37,14 +37,12 @@ public class Upgrade_Base : BaseUpgrade {
     }
 
     //Upgrade the base
-    public void UpgradeBase(GameObject m_base)
+	public void UpgradeBase(GameObject m_base)
     {
         //Check if base contains BaseHealth script
         Basehealth basehealthScript = m_base.GetComponent<Basehealth>();
-		//Check if base contains BaseTurret script
-		BaseTurret baseTurretScript = GameObject.FindGameObjectWithTag("baseTurret").GetComponent<BaseTurret>();
 
-		if (basehealthScript != null && baseTurretScript != null)
+		if (basehealthScript != null)
         {
             //Inrease basehealth
             basehealthScript.incMaxHealth(m_basehealthinc[selected_index]);
@@ -53,13 +51,13 @@ public class Upgrade_Base : BaseUpgrade {
 	        basehealthScript.SetHealthUI();
 
 			//Inrease turret stats 
-			baseTurretScript.setDamage(m_BaseTurretDamageInc[selected_index]);
-			baseTurretScript.setRange(m_BaseTurretRangeInc[selected_index]);
-			baseTurretScript.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
-			baseTurretScript.setFirerate(m_BaseTurretFireRateInc[selected_index]);
-			baseTurretScript.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
-			baseTurretScript.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
-
+			BaseTurret.setDamage(m_BaseTurretDamageInc[selected_index]);
+			BaseTurret.setRange(m_BaseTurretRangeInc[selected_index]);
+			BaseTurret.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
+			BaseTurret.setFirerate(m_BaseTurretFireRateInc[selected_index]);
+			BaseTurret.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
+			BaseTurret.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
+			Debug.Log ("getDamage: " + BaseTurret.getDamage());
 			//Increase index
 			incIndex();
 		}

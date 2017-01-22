@@ -7,13 +7,15 @@ using System.Collections;
 public class PlayerStatistics : MonoBehaviour {
 
     //Public variables
-    public int m_playernumber;  // Current player number
+	[HideInInspector]public int m_playernumber;  // Current player number
     public int m_playerstartcurrency;   //Start currency of player
+	public static int m_currencyPerKill = 50;
+	public static int m_currencyBasePerWave = 500;
 
     //Private variables
 
     private int m_kills;      // int which will hold the number of kills per player
-    public int m_currency;  // the currency can be the amount of carrots in the base (Carrots-farm) = baseHealth
+	[HideInInspector]public int m_currency;  // the currency can be the amount of carrots in the base (Carrots-farm) = baseHealth
 	private int m_metSalesmanAmount;  // the amount that the player meets the Salesman
 
     // Use this for initialization
@@ -21,7 +23,7 @@ public class PlayerStatistics : MonoBehaviour {
         m_kills = 0;      // start m_kills 
 		m_metSalesmanAmount = 0;  // start m_metSalesmanAmount
 
-        m_currency = 500;      // start m_currency
+		m_currency = m_playerstartcurrency;      // start m_currency
     }
 	
 	// Update is called once per frame

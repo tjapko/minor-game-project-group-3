@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
 {
     //Public variables
     public int m_amountofplayers;               // Total amount of players that are participating
-    //public float m_beginDelay = 3;
-    public static float m_waveDelay = 30f;              // The delay between ending and starting of wave
+//    public float m_beginDelay = 3;
+    public static float m_waveDelay = 120f;              // The delay between ending and starting of wave
     public static float m_EndDelay = 3f;               // The delay between losing and restarting
     public AudioSource backgroundSource;
     public AudioClip[] backgroundSounds;
@@ -48,13 +48,13 @@ public class GameManager : MonoBehaviour
     private bool gameover;                      // Boolean if game is over
     private bool gamepause;                     // Boolean if game is paused
     private static bool wavephase;                     // Boolean if game is in wavephase or construction phase 
-
+	public static int m_waveNumberusedForHighscore;                   
 
     //Start
     private void Start()
     {
         //Setting up variables
-        //m_StartWait = new WaitForSeconds(m_beginDelay);
+//        m_StartWait = new WaitForSeconds(m_beginDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
         Time.timeScale = 1.0f;
 
@@ -159,6 +159,7 @@ public class GameManager : MonoBehaviour
 
         //Set variables
         m_waveNumber = 0;
+		m_waveNumberusedForHighscore = 0;
         wavephase = false;
         gamepause = false;
         gameover =  false;
@@ -194,6 +195,7 @@ public class GameManager : MonoBehaviour
                 // Go into construction phase
                 yield return StartCoroutine(constructionPhase());
 				m_waveNumber++;
+				m_waveNumberusedForHighscore++;
 				StartCoroutine(m_uiscript.showWaveStatsUI());
                 //Spawn next wave and remove dead enemies
                 //While loop is needed, because EnemiesDead() is not fast enough to detect that a new wave has spawned

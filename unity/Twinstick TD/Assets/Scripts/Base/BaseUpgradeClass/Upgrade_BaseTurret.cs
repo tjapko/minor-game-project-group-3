@@ -22,18 +22,4 @@ public class Upgrade_BaseTurret : BaseUpgrade {
         setIcon("Upgrade_BaseTurretDamageIcon");
     }
 
-    //Upgrade the base
-    public void upgradeTurretDamage(GameObject turret)
-    {
-        BaseTurret baseturret_script = turret.GetComponent<BaseTurret>();
-
-        if (baseturret_script != null)
-        {
-
-            //Inrease basehealth
-			baseturret_script.setAccuracy(m_BaseTurretDamage[selected_index]);
-            //Increase index
-            incIndex();
-        }
-    }
 }

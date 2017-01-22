@@ -8,20 +8,21 @@ public class PlayerConstruction : MonoBehaviour {
     //Start price objects
     [Header("Cost:")]
     public static int m_start_price_wall = 100;     //Price of wall
-	public static int m_start_price_turret = 1000;  //Price of turret
-	public static int m_start_price_carrot = 2500;  //Price of Carrot field
-	public static int m_start_price_mud = 500;      //Price of the mud field
+	public static int m_start_price_turret = 3000;  //Price of turret
+	public static int m_start_price_carrot = 500;  //Price of Carrot field
+	public static int m_start_price_mud = 750;      //Price of the mud field
     public static float m_price_wall_factor = 1.1f;   // Factor Wall
-    public static float m_price_turret_factor = 1.1f;   // Factor Turret
+    public static float m_price_turret_factor = 1.5f;   // Factor Turret
     public static float m_price_carrot_factor = 1.1f;   // Factor Carrot Farm
-    public static float m_price_mud_factor = 1.1f;   // Factor Mud Pool
+    public static float m_price_mud_factor = 1.2f;   // Factor Mud Pool
 
     //Max objects
     [Header("Max Objects")]
-    public static int maxWalls = 4;     // maximum amount of walls
-    public static int maxTurrets = 3;   // maximum amount of turrets
-    public static int maxCarrotFarms = 4;   //maximum amount of carrot farms
-    public static int maxMudPools = 4;  //maximum amount of mud pools
+    public static int maxWalls = 10;     // maximum amount of walls
+    public static int maxTurrets = 4;   // maximum amount of turrets
+    public static int maxCarrotFarms = 10;   //maximum amount of carrot farms
+    public static int maxMudPools = 10;  //maximum amount of mud pools
+	public static int m_totalCarrotfieldsEachWave = 0;
 
     //Fix
     const string build_1 = "1";         //Button to place walls
@@ -255,6 +256,7 @@ public class PlayerConstruction : MonoBehaviour {
                 amount += carrot_script.waveYield();
             }
         }
+		m_totalCarrotfieldsEachWave += currentCarrotFarms;
         return amount;
     }
 
@@ -361,16 +363,16 @@ public class PlayerConstruction : MonoBehaviour {
         switch (obj_type)
         {
             case PlayerObjectType.PlayerWall:
-//                currentWalls++;
+                currentWalls++;
                 break;
             case PlayerObjectType.PlayerTurret:
                 currentTurrets++;
                 break;
             case PlayerObjectType.PlayerCarrotField:
-//                currentCarrotFarms++;
+                currentCarrotFarms++;
                 break;
             case PlayerObjectType.PlayerMud:
-//                currentMudPools++;
+                currentMudPools++;
                 break;
             default:
                 break;
