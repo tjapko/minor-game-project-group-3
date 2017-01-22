@@ -39,30 +39,70 @@ public class Upgrade_Base : BaseUpgrade {
     //Upgrade the base
     public void UpgradeBase(GameObject m_base)
     {
-        //Check if base contains BaseHealth script
+        //Boolean if upgrade was a (partial) success
+        bool succes = false;
+        
+        //Load objects and scripts
         Basehealth basehealthScript = m_base.GetComponent<Basehealth>();
-		//Check if base contains BaseTurret script
-		BaseTurret baseTurretScript = GameObject.FindGameObjectWithTag("baseTurret").GetComponent<BaseTurret>();
+		GameObject[] baseTurrets = GameObject.FindGameObjectsWithTag("baseTurret");
+        GameObject[] playerTurrets = GameObject.FindGameObjectsWithTag("PlayerTurret");
 
-		if (basehealthScript != null && baseTurretScript != null)
+        //Check if base contains BaseHealth script
+        if (basehealthScript != null)
         {
             //Inrease basehealth
             basehealthScript.incMaxHealth(m_basehealthinc[selected_index]);
-            
-	        //Update Slider
-	        basehealthScript.SetHealthUI();
+	        basehealthScript.SetHealthUI(); //Update Slider 
+            succes = true;
 
-			//Inrease turret stats 
-			baseTurretScript.setDamage(m_BaseTurretDamageInc[selected_index]);
-			baseTurretScript.setRange(m_BaseTurretRangeInc[selected_index]);
-			baseTurretScript.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
-			baseTurretScript.setFirerate(m_BaseTurretFireRateInc[selected_index]);
-			baseTurretScript.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
-			baseTurretScript.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
+        }
 
-			//Increase index
-			incIndex();
-		}
+        //Check if base contains BaseTurret script
+        if (baseTurrets != null && baseTurrets.Length > 0)
+        {
+            foreach(GameObject turret in baseTurrets)
+            {
+                BaseTurret turret_script = turret.GetComponent<BaseTurret>();
+                if(turret_script != null)
+                {
+                    //Inrease turret stats 
+                    turret_script.setDamage(m_BaseTurretDamageInc[selected_index]);
+                    turret_script.setRange(m_BaseTurretRangeInc[selected_index]);
+                    turret_script.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
+                    turret_script.setFirerate(m_BaseTurretFireRateInc[selected_index]);
+                    turret_script.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
+                    turret_script.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
+                    succes = true;
+                }
+            }
+        }
+
+        //Check all player turrets
+        if (playerTurrets != null && playerTurrets.Length > 0)
+        {
+            foreach(GameObject turret in playerTurrets)
+            {
+                TurretScript turret_script = turret.GetComponent<TurretScript>();
+                if (turret_script != null)
+                {
+                    Debug.Log("Success");
+                    //Inrease turret stats 
+                    turret_script.setDamage(m_BaseTurretDamageInc[selected_index]);
+                    turret_script.setRange(m_BaseTurretRangeInc[selected_index]);
+                    turret_script.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
+                    turret_script.setFirerate(m_BaseTurretFireRateInc[selected_index]);
+                    turret_script.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
+                    turret_script.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
+                    succes = true;
+                    
+                }
+            }
+        }
+
+        if (succes)
+        {
+            incIndex();
+        }
 			
     }
 }
