@@ -94,6 +94,9 @@ public class GameManager : MonoBehaviour
                 //Check if players are constructing
                 else if(m_players.checkConstruction()){
 
+                } else if (m_uiscript.go_CanvasBaseUpgrade.activeSelf)
+                {
+                    m_uiscript.go_CanvasBaseUpgrade.SetActive(false);
                 }
                 else
                 {
