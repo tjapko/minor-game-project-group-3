@@ -15,13 +15,13 @@ public class TurretScript : MonoBehaviour {
 	
     //Public variables
     [Header("Public variables")]
-    public float m_damage = 100f;    //damage of the turret
-    public float m_range = 100f;     //Range of the turret
-    public float m_launchspeed = 10f;   //Launch speed of the bullet
-    public float m_fireRate = 1f;   //Fire rate of the turret
-    public float m_turnrate = 1f;   //Turn rate of the turret
-    public float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
-	public float m_startHealth;
+    public static float m_damage = 100f;    //damage of the turret
+    public static float m_range = 100f;     //Range of the turret
+    public static float m_launchspeed = 10f;   //Launch speed of the bullet
+    public static float m_fireRate = 1f;   //Fire rate of the turret
+    public static float m_turnrate = 1f;   //Turn rate of the turret
+    public static float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
+	public static float m_startHealth;
 	public Color m_FullHealthColor = Color.green;   //Full health colour
 	public Color m_ZeroHealthColor = Color.red;     //Zero health colour
 
