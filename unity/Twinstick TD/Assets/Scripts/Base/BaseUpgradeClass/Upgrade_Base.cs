@@ -42,25 +42,49 @@ public class Upgrade_Base : BaseUpgrade {
         //Check if base contains BaseHealth script
         Basehealth basehealthScript = m_base.GetComponent<Basehealth>();
 
-		if (basehealthScript != null)
-        {
-            //Inrease basehealth
-            basehealthScript.incMaxHealth(m_basehealthinc[selected_index]);
+		if (basehealthScript != null) {
+			//Inrease basehealth
+			basehealthScript.incMaxHealth (m_basehealthinc [selected_index]);
             
-	        //Update Slider
-	        basehealthScript.SetHealthUI();
+			//Update Slider
+			basehealthScript.SetHealthUI ();
 
 			//Inrease turret stats 
-			BaseTurret.setDamage(m_BaseTurretDamageInc[selected_index]);
-			BaseTurret.setRange(m_BaseTurretRangeInc[selected_index]);
-			BaseTurret.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
-			BaseTurret.setFirerate(m_BaseTurretFireRateInc[selected_index]);
-			BaseTurret.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
-			BaseTurret.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
-			Debug.Log ("getDamage: " + BaseTurret.getDamage());
+			BaseTurret.setDamage (m_BaseTurretDamageInc [selected_index]);
+			BaseTurret.setRange (m_BaseTurretRangeInc [selected_index]);
+			BaseTurret.setAccuracy (m_BaseTurretAccuracyInc [selected_index]);
+			BaseTurret.setFirerate (m_BaseTurretFireRateInc [selected_index]);
+			BaseTurret.setLaunchForce (m_BaseTurretLaunchSpeedInc [selected_index]);
+			BaseTurret.setTurnRate (m_BaseTurretTurnRateInc [selected_index]);
+			Debug.Log ("getDamage: " + BaseTurret.getDamage ());
 			//Increase index
-			incIndex();
+			incIndex ();
 		}
-			
     }
+
+	public void revertUpgrade()
+	{
+		//Reset index
+		resetIndex();
+
+		//Load objects and scripts
+		GameObject baseTurrets = GameObject.FindWithTag("baseTurret");
+		//Check if base contains BaseTurret script
+		if (baseTurrets != null)
+		{
+			BaseTurret turret_script = baseTurrets.GetComponent<BaseTurret>();
+			if (turret_script != null)
+			{
+				//Inrease turret stats 
+				BaseTurret.setDamage(m_BaseTurretDamageInc[selected_index]);
+				BaseTurret.setRange(m_BaseTurretRangeInc[selected_index]);
+				BaseTurret.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
+				BaseTurret.setFirerate(m_BaseTurretFireRateInc[selected_index]);
+				BaseTurret.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
+				BaseTurret.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
+			}
+		}
+
+	}
+
 }
