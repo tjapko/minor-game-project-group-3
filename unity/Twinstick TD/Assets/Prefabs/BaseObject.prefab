@@ -62,7 +62,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000010839257682
 GameObject:
   m_ObjectHideFlags: 1
@@ -175,7 +175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000012271294188
 GameObject:
   m_ObjectHideFlags: 1
@@ -305,7 +305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000013595951870
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,12 +947,6 @@ MonoBehaviour:
     type: 2}
   m_turretFireTransform: {fileID: 4000012950769734}
   m_turretbarrel: {fileID: 1000010641751276}
-  m_damage: 0.5
-  m_range: 200
-  m_accuracy: 1000
-  m_fireRate: 0.25
-  m_launchspeed: 200
-  m_turnrate: 1
 --- !u!114 &114000011372990030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1047,8 +1041,8 @@ MonoBehaviour:
   price_restoreBaseHealth: 200
   amount_restoreBaseHealth: 100
   price_upgradeBaseHealth: c800000090010000
-  amount_upgradeBaseHealth: c800000090010000
-  upgradeBaseTurretDamage: 0200000005000000
+  amount_upgradeBaseHealth: 0100000002000000
+  upgradeBaseTurretDamage: 0100000002000000
   upgradeBaseTurretRange:
   - 250
   - 300
@@ -1090,12 +1084,6 @@ MonoBehaviour:
     type: 2}
   m_turretFireTransform: {fileID: 4000010269930666}
   m_turretbarrel: {fileID: 1000011996272956}
-  m_damage: 0.5
-  m_range: 200
-  m_accuracy: 1000
-  m_fireRate: 0.25
-  m_launchspeed: 200
-  m_turnrate: 1
 --- !u!114 &114000012882652028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1109,9 +1097,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_hitBaseCanvasPrefab: {fileID: 1000014289387730, guid: a30a69af317c4804ca69af6bac192067,
     type: 2}
-  m_StartingHealth: 50
-  m_StartingMaxHealth: 100
-  m_maxhealth: 50
+  m_StartingHealth: 1
+  m_StartingMaxHealth: 1
+  m_maxhealth: 1
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   m_Slider: {fileID: 114000012022335900}
@@ -1150,12 +1138,6 @@ MonoBehaviour:
     type: 2}
   m_turretFireTransform: {fileID: 4000010834220312}
   m_turretbarrel: {fileID: 1000013486474002}
-  m_damage: 0.5
-  m_range: 200
-  m_accuracy: 1000
-  m_fireRate: 0.25
-  m_launchspeed: 200
-  m_turnrate: 1
 --- !u!114 &114000013405116222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1198,12 +1180,6 @@ MonoBehaviour:
     type: 2}
   m_turretFireTransform: {fileID: 4000012741593254}
   m_turretbarrel: {fileID: 1000013318400458}
-  m_damage: 1
-  m_range: 200
-  m_accuracy: 1000
-  m_fireRate: 0.25
-  m_launchspeed: 200
-  m_turnrate: 1
 --- !u!136 &136000012430468918
 CapsuleCollider:
   m_ObjectHideFlags: 1
