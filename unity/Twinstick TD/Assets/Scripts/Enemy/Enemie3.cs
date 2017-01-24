@@ -17,7 +17,6 @@ public class Enemie3 : EnemyManager
 		health.playerUnit = m_MovementPlayer;
 		m_MovementPlayer.m_player = m_PlayerPoint;
 		m_MovementPlayer.m_base = m_Base;
-		m_MovementPlayer.speed = m_MovementPlayer.normalSpeed;
 		m_MovementPlayer.calcDistance (true);
 	}
 }

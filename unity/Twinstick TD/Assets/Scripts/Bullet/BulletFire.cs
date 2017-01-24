@@ -244,7 +244,7 @@ public class BulletFire : MonoBehaviour
 
             bullet.m_MaxDamage = currentWeapon.maxDamage;
             bullet.m_MaxLifeTime = currentWeapon.bulletLifeTime;
-
+			bullet.source = transform;
 
 
             // Set the shell's velocity to the launch force in the fire position's forward direction.
@@ -276,6 +276,7 @@ public class BulletFire : MonoBehaviour
                GameObject.Instantiate(m_Bullet, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
 			shellInstance1.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber));
 
+
             Rigidbody shellInstance2 =
                 GameObject.Instantiate(m_Bullet, m_FireTransformSG.position, m_FireTransformSG.rotation) as Rigidbody;
 			shellInstance2.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber));
@@ -294,6 +295,9 @@ public class BulletFire : MonoBehaviour
             bullet2.m_MaxLifeTime = currentWeapon.bulletLifeTime;
             bullet3.m_MaxDamage = currentWeapon.maxDamage;
             bullet3.m_MaxLifeTime = currentWeapon.bulletLifeTime;
+			bullet1.source = transform;
+			bullet2.source = transform;
+			bullet3.source = transform;
 
 
             // Set the shell's velocity to the launch force in the fire position's forward direction.

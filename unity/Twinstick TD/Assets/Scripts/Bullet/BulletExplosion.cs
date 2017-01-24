@@ -4,7 +4,7 @@ public class BulletExplosion : MonoBehaviour
 {
     public AudioSource shotSource;
     public AudioClip shot;
-    public LayerMask m_EnemyMask;   // Used to filter what the explosion affects, this should be set to "Enemies".
+	public Transform source;
     [HideInInspector]public float m_MaxDamage;       // The amount of damage done if the explosion is centred on an enemy.
     [HideInInspector]public float m_MaxLifeTime;     // The time in seconds before the shell is removed.
 
@@ -26,8 +26,7 @@ public class BulletExplosion : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<EnemyHealth>().setLastHit(m_playernumber);
-			other.gameObject.GetComponent<EnemyHealth>().TakeDamage(m_MaxDamage, transform.position);
-
+			other.gameObject.GetComponent<EnemyHealth>().TakeDamage(m_MaxDamage, source.position);
 		}
 		if (!other.gameObject.CompareTag("River") && !other.gameObject.CompareTag("Shop")) {
 			// Destroy the shell.
