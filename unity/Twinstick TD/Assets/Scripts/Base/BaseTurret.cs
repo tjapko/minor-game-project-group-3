@@ -79,17 +79,19 @@ public class BaseTurret : MonoBehaviour {
     //Function to fire bullet
     private void Fire()
     {
-        GameObject newbullet = GameObject.Instantiate(m_bulletPrefab, m_turretFireTransform.position, m_turretFireTransform.rotation) as GameObject;
-        float acc_factor = 1 / m_accuracy;
-        Vector3 bullet_direction = m_turretFireTransform.forward;
-        bullet_direction.x += Random.Range(-acc_factor, acc_factor);
-        bullet_direction.y += Random.Range(-acc_factor, acc_factor);
-        bullet_direction.z += Random.Range(-acc_factor, acc_factor);
-        bullet_direction.Normalize();
-        bullet_direction = bullet_direction * m_launchspeed;
-        newbullet.GetComponent<Rigidbody>().velocity = bullet_direction;
+		GameObject newbullet = GameObject.Instantiate(m_bulletPrefab, m_turretFireTransform.position, m_turretFireTransform.rotation) as GameObject;
+		BulletExplosion bullet_script = newbullet.GetComponent<BulletExplosion>();
+		bullet_script.m_MaxDamage = m_damage;
+		bullet_script.setPlayernumber((m_PlayerNumber));
 
-        newbullet.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber));
+		float acc_factor = 1 / m_accuracy;
+		Vector3 bullet_direction = m_turretFireTransform.forward;
+		bullet_direction.x += Random.Range(-acc_factor, acc_factor);
+		bullet_direction.y += Random.Range(-acc_factor, acc_factor);
+		bullet_direction.z += Random.Range(-acc_factor, acc_factor);
+		bullet_direction.Normalize();
+		bullet_direction = bullet_direction * m_launchspeed;
+		newbullet.GetComponent<Rigidbody>().velocity = bullet_direction;
     }
 
     //Function to turn turret

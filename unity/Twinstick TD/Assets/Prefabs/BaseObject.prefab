@@ -1042,7 +1042,9 @@ MonoBehaviour:
   amount_restoreBaseHealth: 100
   price_upgradeBaseHealth: c800000090010000
   amount_upgradeBaseHealth: 0100000002000000
-  upgradeBaseTurretDamage: 0100000002000000
+  upgradeBaseTurretDamage:
+  - 2
+  - 5
   upgradeBaseTurretRange:
   - 250
   - 300
