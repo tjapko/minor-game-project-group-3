@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class CanvasPlayerUIScript : MonoBehaviour {
+    //Public variables
+    public float m_showRewardTime = 2.0f;   //Show reward time
+
     //References to managers
     private GameManager m_gamemanager;      //Reference to game manager (used to invoke next wave)
     private UserManager m_usermanager;      //Reference to the usermanager in the game manager
@@ -255,5 +258,24 @@ public class CanvasPlayerUIScript : MonoBehaviour {
             m_healthslider[i].value = health_script.getCurrentHealth();
             m_fillImage[i].color = Color.Lerp(health_script.m_ZeroHealthColor, health_script.m_FullHealthColor, health_script.getCurrentHealth() / health_script.m_maxHealth);
         }
+    }
+
+    //Show wave reward
+    public IEnumerator showWaveReward()
+    {
+        CancelInvoke("UpdateUI");
+
+        int index = 0;
+        float waveReward = m_usermanager.waveCurrency();
+        foreach (Text currencytext in m_player_money)
+        {
+            int carrotReward = m_usermanager.m_playerlist[index].m_construction.getCarrots();
+            currencytext.text = "Wave: +" + waveReward + ", Carrot Fields: +" + carrotReward;
+            index++;
+        }
+        yield return new WaitForSeconds(m_showRewardTime);
+
+        InvokeRepeating("UpdateUI", 0.0f, 0.1f);
+
     }
 }

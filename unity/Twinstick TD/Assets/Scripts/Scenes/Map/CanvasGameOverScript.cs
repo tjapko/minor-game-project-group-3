@@ -35,7 +35,7 @@ public class CanvasGameOverScript : MonoBehaviour {
         //Set references to children
         m_gameovermenu = gameObject.transform.GetChild(0).gameObject;
 		m_HighScoreCanvas = gameObject.transform.GetChild(1).gameObject;
-        m_restartbutton = m_gameovermenu.transform.GetChild(2).gameObject;
+        m_restartbutton = m_gameovermenu.transform.GetChild(5).gameObject;
         //Activate game over menu
         m_gameovermenu.SetActive(true);
 

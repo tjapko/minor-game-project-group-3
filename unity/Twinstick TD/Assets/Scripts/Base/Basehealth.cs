@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 /// <summary>
 /// Class Basehealh
@@ -92,11 +93,22 @@ public class Basehealth : MonoBehaviour {
     // OnDeath
     private void OnDeath()
     {
-        
         deathsound.transform.parent = null;
         deathsound.clip = death;
         deathsound.Play();
-       // Destroy(deathsound.gameObject, 8f);
+        // Destroy(deathsound.gameObject, 8f);
+
+        //reset turrets of base
+        BaseUpgradeScript upgrade_script = GetComponent<BaseUpgradeScript>();
+        upgrade_script.getBaseUpgradeList().ForEach(delegate (List<BaseUpgrade> list) {
+            foreach (BaseUpgrade upgrade in list)
+            {
+                if (upgrade.getBaseUpgradeType() == BaseUpgrade.BaseUpgradeType.BaseUpgrade)
+                {
+                    ((Upgrade_Base)upgrade).revertUpgrade();
+                }
+            }
+        });
 
         m_Dead = true;
         gameObject.SetActive(false);
@@ -105,7 +117,9 @@ public class Basehealth : MonoBehaviour {
         ShopScript m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
         ShopUIScript m_shopuiscript = m_shopscript.m_instance_UI.GetComponent<ShopUIScript>();
         m_shopuiscript.setBaseDestroyed(true);
-//		ScreenShake.ShakeBaseOndeath ();
+        //		ScreenShake.ShakeBaseOndeath ();
+
+        
     }
 
     // On Rebuild

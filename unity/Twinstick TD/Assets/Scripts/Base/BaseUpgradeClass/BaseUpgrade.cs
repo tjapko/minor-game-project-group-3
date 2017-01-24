@@ -58,14 +58,22 @@ public class BaseUpgrade {
         }
     }
 
+    //Getter for icon
     public Sprite getIcon()
     {
         return upgrade_icon;
     }
 
+    //Getter for base upgrade type
     public BaseUpgradeType getBaseUpgradeType()
     {
         return upgrade_type;
+    }
+
+    //Reset index
+    protected void resetIndex()
+    {
+        selected_index = 0;
     }
 
 }

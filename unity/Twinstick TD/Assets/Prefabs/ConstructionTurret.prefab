@@ -120,7 +120,7 @@ GameObject:
   - 23: {fileID: 23000012957615666}
   m_Layer: 0
   m_Name: Base
-  m_TagString: PlayerTurret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,7 +138,7 @@ GameObject:
   - 114: {fileID: 114000013412799494}
   m_Layer: 0
   m_Name: TurretHealthfab
-  m_TagString: Base
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

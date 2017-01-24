@@ -11,8 +11,7 @@ public class UIButtonScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GameObject m_root = GameObject.FindWithTag("Gamemanager");
-        m_gamemanager = m_root.GetComponent<GameManager>();
+
     }
 	
     //Function for nextwave button

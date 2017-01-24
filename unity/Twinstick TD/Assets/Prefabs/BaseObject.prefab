@@ -62,7 +62,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000010839257682
 GameObject:
   m_ObjectHideFlags: 1
@@ -175,7 +175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000012271294188
 GameObject:
   m_ObjectHideFlags: 1
@@ -305,7 +305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000013595951870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,20 +1034,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseupgradeground: {fileID: 1000013878964730}
-  price_restorePlayerHealth: 2000
-  amount_restorePlayerHealth: 5
-  price_upgradePlayerHealth: e8030000d0070000
-  amount_upgradePlayerHealth: 070000000a000000
-  price_restoreBaseHealth: 2000
-  amount_restoreBaseHealth: 5
-  price_upgradeBaseHealth: e8030000d0070000
-  amount_upgradeBaseHealth: 070000000a000000
-  upgradeBaseTurretDamage:
-  - 2
-  - 3
+  price_restorePlayerHealth: 10
+  amount_restorePlayerHealth: 10
+  price_upgradePlayerHealth: 64000000c8000000
+  amount_upgradePlayerHealth: c800000090010000
+  price_restoreBaseHealth: 200
+  amount_restoreBaseHealth: 100
+  price_upgradeBaseHealth: c800000090010000
+  amount_upgradeBaseHealth: 0100000002000000
+  upgradeBaseTurretDamage: 0100000002000000
   upgradeBaseTurretRange:
-  - 225
   - 250
+  - 300
   upgradeBaseTurretAccuracy:
   - 1200
   - 1500
@@ -1055,8 +1053,8 @@ MonoBehaviour:
   - 1.2
   - 1.5
   upgradeBaseTurretLaunchForce:
-  - 12
-  - 15
+  - 250
+  - 300
   upgradeBaseTurretTurnRate:
   - 1.2
   - 1.5
@@ -1099,9 +1097,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_hitBaseCanvasPrefab: {fileID: 1000014289387730, guid: a30a69af317c4804ca69af6bac192067,
     type: 2}
-  m_StartingHealth: 50
-  m_StartingMaxHealth: 100
-  m_maxhealth: 50
+  m_StartingHealth: 1
+  m_StartingMaxHealth: 1
+  m_maxhealth: 1
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   m_Slider: {fileID: 114000012022335900}

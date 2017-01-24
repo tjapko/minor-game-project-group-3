@@ -193,15 +193,15 @@ public class PlayerConstruction : MonoBehaviour {
                 //newinstance.AddComponent<Rigidbody>();  //Create a rigid body, for OnTriggerEnter to work properly
                 newinstance.GetComponent<Rigidbody>().isKinematic = true;   //Make the rigidbody kinematic, such that it's not affected by physics
                 setTag(objecttype, newinstance);    //Set tag onto game object
-                incCounter(objecttype);             //Increase counter
+                
                 setReferences(objecttype, newinstance);
                 newinstance.GetComponent<UserObjectStatistics>().m_owner = m_player;
 				m_placedobjects.Add(newinstance);   //Add instance to list
                 constructing = false;   //Building has finished
                	newinstance.layer = 15;  //Set layer of the object as unwalkable
 
-                //Reduce funds
-                reduceFunds(objecttype);
+                reduceFunds(objecttype);    //Reduce funds
+                incCounter(objecttype);     //Increase counter
                 break;
             }
 
@@ -210,6 +210,12 @@ public class PlayerConstruction : MonoBehaviour {
             {
                 constructing = true;
                 break;
+            }
+
+            //Turn button
+            if (Input.GetMouseButtonUp(1))
+            {
+                newinstance.transform.rotation = Quaternion.LookRotation(newinstance.transform.right);
             }
         }
 

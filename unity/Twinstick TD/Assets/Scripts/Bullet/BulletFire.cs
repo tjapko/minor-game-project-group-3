@@ -24,6 +24,7 @@ public class BulletFire : MonoBehaviour
     private string reloadButton;            // The reloadButton set on the 'r' button
     private bool weapon_reloading;          //Boolean if weapons is reloading
 	private float m_timer = 0.0f;
+    private bool constructionphase;         //Boolean if game is in construction phase
     LineRenderer line;
     /// <summary>
     ///  initiating the fire and reload button and retrieving the related inventory 
@@ -38,6 +39,7 @@ public class BulletFire : MonoBehaviour
         reloadButton = "r"; // Reload Button   ////// NEED FIX NOT YET IMPLEMENTED 
 
         weapon_reloading = false; //Set weapon reloading to false
+        constructionphase = false;//Set construction phase to false
 
     }
 
@@ -47,34 +49,37 @@ public class BulletFire : MonoBehaviour
     /// </summary>
     private void Update()
     {
-
         currentWeapon = playerinventory.inventory[0];
-        if (currentWeapon.itemtype == Weapon.ItemType.MachineGun)
+        if (!constructionphase)
         {
-            if (Input.GetButton(m_FireButton))
+            if (currentWeapon.itemtype == Weapon.ItemType.MachineGun)
             {
-                Fire();
+                if (Input.GetButton(m_FireButton))
+                {
+                    Fire();
+                }
+
+                if (Input.GetKeyUp(reloadButton))
+
+                {
+                    StartCoroutine(Reload());
+                }
             }
-
-            if (Input.GetKeyUp(reloadButton))
-
+            else
             {
-                StartCoroutine(Reload());
+                if (Input.GetButtonDown(m_FireButton))
+                {
+                    Fire();
+                }
+
+                if (Input.GetKeyUp(reloadButton))
+
+                {
+                    StartCoroutine(Reload());
+                }
             }
         }
-        else
-        {
-            if (Input.GetButtonDown(m_FireButton))
-            {
-                Fire();
-            }
-
-            if (Input.GetKeyUp(reloadButton))
-
-            {
-                StartCoroutine(Reload());
-            }
-        }
+        
 		m_timer += Time.deltaTime;  // the m_timer is updated 
     }
 
@@ -305,5 +310,11 @@ public class BulletFire : MonoBehaviour
             gunSource.clip = emptyGunSound; 
             gunSource.Play();
         }
+    }
+
+    //Setter for construction phase
+    public void setConstructionPhase(bool status)
+    {
+        constructionphase = status;
     }
 }

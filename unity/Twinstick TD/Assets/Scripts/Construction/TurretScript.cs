@@ -15,13 +15,13 @@ public class TurretScript : MonoBehaviour {
 	
     //Public variables
     [Header("Public variables")]
-    public float m_damage = 100f;    //damage of the turret
-    public float m_range = 100f;     //Range of the turret
-    public float m_launchspeed = 10f;   //Launch speed of the bullet
-    public float m_fireRate = 1f;   //Fire rate of the turret
-    public float m_turnrate = 1f;   //Turn rate of the turret
-    public float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
-	public float m_startHealth;
+    public static float m_damage = 100f;    //damage of the turret
+    public static float m_range = 100f;     //Range of the turret
+    public static float m_launchspeed = 10f;   //Launch speed of the bullet
+    public static float m_fireRate = 1f;   //Fire rate of the turret
+    public static float m_turnrate = 1f;   //Turn rate of the turret
+    public static float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
+	public static float m_startHealth;
 	public Color m_FullHealthColor = Color.green;   //Full health colour
 	public Color m_ZeroHealthColor = Color.red;     //Zero health colour
 
@@ -92,16 +92,18 @@ public class TurretScript : MonoBehaviour {
     private void Fire()
     {
         GameObject newbullet = GameObject.Instantiate(m_bulletPrefab, m_turretFireTransform.position, m_turretFireTransform.rotation) as GameObject;
+        BulletExplosion bullet_script = newbullet.GetComponent<BulletExplosion>();
+        bullet_script.m_MaxDamage = m_damage;
+        bullet_script.setPlayernumber((m_PlayerNumber));
+
         float acc_factor = 1 / m_accuracy;
         Vector3 bullet_direction = m_turretFireTransform.forward;
         bullet_direction.x += Random.Range(-acc_factor, acc_factor);
         bullet_direction.y += Random.Range(-acc_factor, acc_factor);
         bullet_direction.z += Random.Range(-acc_factor, acc_factor);
         bullet_direction.Normalize();
-        bullet_direction = bullet_direction* m_launchspeed;
+        bullet_direction = bullet_direction * m_launchspeed;
         newbullet.GetComponent<Rigidbody>().velocity = bullet_direction;
-
-        newbullet.gameObject.GetComponent<BulletExplosion>().setPlayernumber((m_PlayerNumber));
     }
 
     //Function to turn turret
@@ -178,4 +180,34 @@ public class TurretScript : MonoBehaviour {
         pl.removeObject(gameObject);
         pl.decCounter(PlayerConstruction.PlayerObjectType.PlayerTurret); 
 	}
+
+    public void setDamage(float amount)
+    {
+        m_damage = amount;
+    }
+
+    public void setRange(float amount)
+    {
+        m_range = amount;
+    }
+
+    public void setAccuracy(float amount)
+    {
+        m_accuracy = amount;
+    }
+
+    public void setFirerate(float amount)
+    {
+        m_fireRate = amount;
+    }
+
+    public void setLaunchForce(float amount)
+    {
+        m_launchspeed = amount;
+    }
+
+    public void setTurnRate(float amount)
+    {
+        m_turnrate = amount;
+    }
 }
