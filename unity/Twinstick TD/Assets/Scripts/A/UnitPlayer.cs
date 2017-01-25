@@ -12,7 +12,6 @@ public class UnitPlayer : MonoBehaviour {
 	public float movementSpeed; 				// moving speed
 	public float rotationSpeed = 100f;
 	//public bool baseHit = false; 		// has hit the base or not
-	public float m_threshold = -20.0f; 	// maybe variable for GA
 	public float timeNewPath = 2f; 		// interval between new pathcalculation to enemy
 	public float mudSpeed = 1f;
 	public float normalSpeed = 6f;
@@ -24,7 +23,7 @@ public class UnitPlayer : MonoBehaviour {
 	int targetIndex;					// The index of the waypointArray. The unit moves to path[targetIndex]  
 	public GameObject currentGoal;
 	private Vector3 currentWaypoint;
-	private float m_scalePush = 1.5f;
+	public float m_scalePush = 1.5f;
 
 	//Calculates distance to each playerObject in the scene and chooses closest as target
 	public void calcDistance(bool playerCheck){
