@@ -3644,7 +3644,6 @@ GameObject:
   - 54: {fileID: 54000013544660852}
   - 114: {fileID: 114000012882652028}
   - 65: {fileID: 65000011892786148}
-  - 65: {fileID: 65000010631096832}
   - 114: {fileID: 114000012585224080}
   m_Layer: 15
   m_Name: BaseObject
@@ -16265,18 +16264,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 3, z: 2.3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65000010631096832
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013595951870}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.81, y: 1.83, z: 4.7}
-  m_Center: {x: -0.09, y: 0.5, z: 0.68}
 --- !u!65 &65000011444775704
 BoxCollider:
   m_ObjectHideFlags: 1
