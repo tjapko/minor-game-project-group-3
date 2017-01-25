@@ -6,7 +6,7 @@ using System;
 ///  Weapon constructor 
 ///  inherits from "Item"
 /// </summary>
-public class Sniper {
+public class Laser {
 
     //public variables 
          
@@ -20,6 +20,6 @@ public class Sniper {
     public static int[] ammoInClip = { 10, 15, 20 };     // all ammo from weapon when you buy it 
     public static int[] clipSize = { 10, 15, 20 };       // all ammo in clip when you buy them 
     public static int[] maxAmmo = { 50, 75, 100 };      // max ammo player can carry for every level
-    public static float[] maxDamage = { 1, 2f, 3f }; // the damage for every level
+    public static float[] maxDamage = { 3, 4.5f, 6f }; // the damage for every level
     public static int[]  price = { 2000, 3000 , 4000};  // the price of the weapon for every level  
 }
