@@ -233,7 +233,7 @@ MonoBehaviour:
   shot: {fileID: 8300000, guid: 4d6efbae00f60464987a6c2cc3e64601, type: 3}
   source: {fileID: 4000014275804332, guid: 2d011ede6f946374bad3aa43eb65f5af, type: 2}
   m_MaxDamage: 1
-  m_MaxLifeTime: 2
+  m_MaxLifeTime: 9999
 --- !u!136 &136000013389974852
 CapsuleCollider:
   m_ObjectHideFlags: 1
