@@ -76,7 +76,11 @@ public class UnitPlayer : MonoBehaviour {
 
 	//Calculates path to base and walks towards
 	public void goToBase(){
-		PathRequestManager.RequestPath (transform, m_base.transform, OnPathFound);
+		if (m_base.activeInHierarchy) {
+			PathRequestManager.RequestPath (transform, m_base.transform, OnPathFound);
+		} else {
+			goToPlayer ();
+		}
 	}
 
 	//Calculates path to player and walks towards

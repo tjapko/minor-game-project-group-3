@@ -173,7 +173,8 @@ public class EnemyHealth : MonoBehaviour
         //Set hitmark
         GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
         HitMarkScript hitbox_script = hitbox.GetComponent<HitMarkScript>();
-        hitbox_script.setDamage(amount);        //Set damage
+		int otherAmount = Mathf.RoundToInt (amount);
+		hitbox_script.setDamage(otherAmount);   //Set damage
         hitbox_script.setCamera(m_maincamera);  //Set main camera
         hitbox_script.lookToCamera();           //Look to main camera
         hitbox.SetActive(true);                 //Set object active
