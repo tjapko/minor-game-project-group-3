@@ -11,10 +11,10 @@ public class PlayerConstruction : MonoBehaviour {
 	public static int m_start_price_turret = 3000;  //Price of turret
 	public static int m_start_price_carrot = 500;  //Price of Carrot field
 	public static int m_start_price_mud = 750;      //Price of the mud field
-    public static float m_price_wall_factor = 1.1f;   // Factor Wall
-    public static float m_price_turret_factor = 1.5f;   // Factor Turret
-    public static float m_price_carrot_factor = 1.1f;   // Factor Carrot Farm
-    public static float m_price_mud_factor = 1.2f;   // Factor Mud Pool
+    public static float m_price_wall_factor = 1.05f;   // Factor Wall
+    public static float m_price_turret_factor = 2.0f;   // Factor Turret
+    public static float m_price_carrot_factor = 1.05f;   // Factor Carrot Farm
+    public static float m_price_mud_factor = 1.05f;   // Factor Mud Pool
 
     //Max objects
     [Header("Max Objects")]

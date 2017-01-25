@@ -16544,10 +16544,10 @@ MonoBehaviour:
   - 4
   - 5
   upgradeBaseTurretRange:
+  - 15
+  - 15
+  - 20
   - 25
-  - 25
-  - 35
-  - 45
   upgradeBaseTurretAccuracy:
   - 3000
   - 3000
