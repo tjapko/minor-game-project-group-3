@@ -16353,37 +16353,37 @@ MonoBehaviour:
   price_restoreBaseHealth: 200
   amount_restoreBaseHealth: 100
   price_upgradeBaseHealth: c8000000900100005802000020030000
-  amount_upgradeBaseHealth: 6400000064000000c800000090010000
+  amount_upgradeBaseHealth: 1400000014000000190000001e000000
   upgradeBaseTurretDamage:
-  - 2
-  - 2
   - 3
+  - 3
+  - 4
   - 5
   upgradeBaseTurretRange:
-  - 200
-  - 200
-  - 250
-  - 300
+  - 25
+  - 25
+  - 35
+  - 45
   upgradeBaseTurretAccuracy:
-  - 1000
-  - 1000
-  - 1200
-  - 1500
+  - 3000
+  - 3000
+  - 4000
+  - 5000
   upgradeBaseTurretFirerate:
-  - 1
-  - 1
-  - 1.2
-  - 1.5
+  - 0.33
+  - 0.33
+  - 0.5
+  - 0.67
   upgradeBaseTurretLaunchForce:
   - 200
   - 200
   - 250
-  - 400
+  - 300
   upgradeBaseTurretTurnRate:
-  - 1
-  - 1
-  - 1.2
-  - 1.5
+  - 3
+  - 3
+  - 4
+  - 5
 --- !u!114 &114000012654888320
 MonoBehaviour:
   m_ObjectHideFlags: 1
