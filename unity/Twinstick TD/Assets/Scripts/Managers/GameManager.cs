@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     //Public variables
     public int m_amountofplayers;               // Total amount of players that are participating
 //    public float m_beginDelay = 3;
-    public static float m_waveDelay = 1f;              // The delay between ending and starting of wave
+    public static float m_waveDelay = 10f;              // The delay between ending and starting of wave
     public static float m_EndDelay = 3f;               // The delay between losing and restarting
     public AudioSource backgroundSource;
     public AudioClip[] backgroundSounds;
