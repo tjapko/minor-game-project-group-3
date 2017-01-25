@@ -17,5 +17,6 @@ public class Enemie4 : EnemyManager
         m_MovementPlayer.m_base = m_Base;
 		m_MovementPlayer.movementSpeed = m_MovementPlayer.bossSpeed;
         m_MovementPlayer.calcDistance(true);
+		m_MovementPlayer.m_scalePush = 0.0f;
     }
 }
