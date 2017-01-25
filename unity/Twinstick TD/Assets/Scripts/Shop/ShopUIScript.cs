@@ -302,12 +302,13 @@ public class ShopUIScript : MonoBehaviour {
     public void upgradeStore()
     {
         int upgradeCost = UpgradeCost();
-        if (m_currentplayer.m_stats.getCurrency() >= m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()])
+        if (m_currentplayer.m_stats.getCurrency() >= upgradeCost)
         {
             //Substract currency
             m_currentplayer.m_stats.addCurrency(- upgradeCost);
             //Increment tier (weapons are loaded automatically)
             m_shopscript.incTier();
+            upgradeCost = UpgradeCost();
             //Change text of text and buttons
             ui_shopText.text = "Weapons and Ammo \n Tier " + m_shopscript.getCurrentTier();
             if (m_shopscript.getCurrentTier() >= m_shopscript.upgrade_cost.Length - 1)
@@ -326,17 +327,20 @@ public class ShopUIScript : MonoBehaviour {
     {
         List<Weapon> inv = m_currentplayer.m_inventory.inventory;
         int weaponsCost = 0;
-        foreach(Weapon i in inv)
+        foreach (Weapon i in inv)
         {
-            weaponsCost +=upgradeprice(i);
+            weaponsCost += upgradeprice(i);
         }
-
+        Debug.Log("tier: " + m_shopscript.getCurrentTier() + "  upgradeCost: " + m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()]) ;
         int upgradecost = m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()] + weaponsCost;
+
         return upgradecost;
     }
 
     private int upgradeprice(Weapon weapon)
     {
+
+
         if (weapon.itemtype == Item.ItemType.Laser ) {
             return Laser.price[m_shopscript.getCurrentTier()];
         }
