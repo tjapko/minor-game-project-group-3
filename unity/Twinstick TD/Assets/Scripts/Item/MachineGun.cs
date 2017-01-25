@@ -19,6 +19,6 @@ public class MachineGun {
     public static int[] clipSize = { 60, 90, 120 };              // all ammo in clip when you buy them 
     public static int[] maxAmmo = { 180, 270, 480 };            // max ammo player can carry for every level
     public static float[] maxDamage = {0.5f, 1f, 2f };     // the damage for every level  
-    public static int[] price = { 6000, 7000, 8000 };          // the price of the weapon for every level
+    public static int[] price = { 6000, 7000, 8000,0 };          // the price of the weapon for every level
     public static float[] fireRate = { 10f , 12f , 15f };       // the fire rate of the weapon 
 }
