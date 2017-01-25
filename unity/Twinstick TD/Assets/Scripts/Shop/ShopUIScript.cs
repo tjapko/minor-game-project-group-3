@@ -237,6 +237,7 @@ public class ShopUIScript : MonoBehaviour {
                 {
                     m_currentplayer.m_stats.addCurrency(-1 * weaponlist[index].price);
                     m_currentplayer.m_inventory.addItem(weaponlist[index]);
+                    ui_ShopUpgradeButton.text = "Uprade Shop: \n" + UpgradeCost();
                 }
             } else
             {
@@ -246,6 +247,7 @@ public class ShopUIScript : MonoBehaviour {
                 {
                     m_currentplayer.m_stats.addCurrency(-1 * weaponlist[index].price);
                     m_currentplayer.m_inventory.inventory[0] = weaponlist[index];
+                    ui_ShopUpgradeButton.text = "Uprade Shop: \n" + UpgradeCost();
                 }
             }
         }
@@ -299,13 +301,14 @@ public class ShopUIScript : MonoBehaviour {
     //Upgrade store function
     public void upgradeStore()
     {
-
-        if (m_currentplayer.m_stats.getCurrency() >= m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()])
+        int upgradeCost = UpgradeCost();
+        if (m_currentplayer.m_stats.getCurrency() >= upgradeCost)
         {
             //Substract currency
-            m_currentplayer.m_stats.addCurrency(-m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()]);
+            m_currentplayer.m_stats.addCurrency(- upgradeCost);
             //Increment tier (weapons are loaded automatically)
             m_shopscript.incTier();
+            upgradeCost = UpgradeCost();
             //Change text of text and buttons
             ui_shopText.text = "Weapons and Ammo \n Tier " + m_shopscript.getCurrentTier();
             if (m_shopscript.getCurrentTier() >= m_shopscript.upgrade_cost.Length - 1)
@@ -313,13 +316,44 @@ public class ShopUIScript : MonoBehaviour {
                 go_ShopUpgradeButton.transform.parent.gameObject.SetActive(false);
             } else
             {
-                ui_ShopUpgradeButton.text = "Uprade Shop: \n" + m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()];
+                ui_ShopUpgradeButton.text = "Uprade Shop: \n" + upgradeCost;
             }
             
 
         }
     }
 
+    private int UpgradeCost()
+    {
+        List<Weapon> inv = m_currentplayer.m_inventory.inventory;
+        int weaponsCost = 0;
+        foreach (Weapon i in inv)
+        {
+            weaponsCost += upgradeprice(i);
+        }
+        Debug.Log("tier: " + m_shopscript.getCurrentTier() + "  upgradeCost: " + m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()]) ;
+        int upgradecost = m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()] + weaponsCost;
+
+        return upgradecost;
+    }
+
+    private int upgradeprice(Weapon weapon)
+    {
+
+
+        if (weapon.itemtype == Item.ItemType.Laser ) {
+            return Laser.price[m_shopscript.getCurrentTier()];
+        }
+        if (weapon.itemtype == Item.ItemType.MachineGun)
+        {
+            return MachineGun.price[m_shopscript.getCurrentTier()];
+        }
+        if (weapon.itemtype == Item.ItemType.Shotgun)
+        {
+            return ShotGun.price[m_shopscript.getCurrentTier()];
+        }
+        else return 0;
+    }
     //Sets shop menu actives
     private void shopMenuActive(bool status)
     {

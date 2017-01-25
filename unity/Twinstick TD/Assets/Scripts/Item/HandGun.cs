@@ -10,7 +10,7 @@ public class HandGun
 {
 
     //public variables 
-    public static int price = 100;
+    public static int price = 0;
     public static float fireRate = 7f;          // the fire rate of the weapon 
     public static float launchForce = 75f;       // the launchforce of the weapon for the bullet (speed)
     public static float maxDamage = 1f;         // the damage of the weapon if there is a full hit. 
