@@ -51,7 +51,7 @@ public class WaveManager
 	private int m_waveTippingPoint2 = 15; // wave at which m_angle2 is used for the increasing amount of enemies 
 
     //GA
-    private PopulationManagerGA GAManager;
+    public PopulationManagerGA GAManager;
 
 
 	public WaveManager(GameObject Enemyprefab1, GameObject Enemyprefab2, GameObject Enemyprefab3, GameObject Enemyprefab4, Transform enemyspawnpoints, GameObject _base, Transform playerpoint, GameObject gridprefab, GridManager gridmanager)
