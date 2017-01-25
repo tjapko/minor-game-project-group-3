@@ -11,7 +11,7 @@ public class EnemyInheratedValues  {
     private float movementspeed;
 
     private float baseDamageToObjectPerAttack = 1f;
-    private float baseAttackSpeedObject = 2f;
+    private float baseAttackSpeedObject = 5f;
     private float baseDamageToPlayerPerAttack = 1f;
     private float baseAttackSpeedPlayer = 2f;
     private float baseStartingHealth = 0.75f;
@@ -24,8 +24,8 @@ public class EnemyInheratedValues  {
 	private int startWaveIncRanges = 3;
 	private int AimingEndWavenumber = 20;
 
-	private float scaleDamagePerAttack = 5f;
-	private float scaleAttackSpeed = 4f;
+	private float scaleDamagePerAttack = 4f;
+	private float scaleAttackSpeed = 1f;
 	private float scaleStartingHealth = 5f;
 	private float scaleMovementSpeed = 5f;
 
