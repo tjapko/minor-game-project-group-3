@@ -86,7 +86,7 @@ public class EnemyPopulation
     }
 
 
-    public void debugAverageStats()
+    public float[] debugAverageStats()
     {
 
         float[] averageStats = new float[4];
@@ -103,7 +103,7 @@ public class EnemyPopulation
         averageStats[1] = averageStats[1] / (float)counter;
         averageStats[2] = averageStats[2] / (float)counter;
         averageStats[3] = averageStats[3] / (float)counter;
-//        Debug.Log("average Damage per attack = " + averageStats[0] + " average Attackspeed = " + averageStats[1] + " average Health = " + averageStats[2] + " average MovementSpeed = " + averageStats[3]);
-        
+        //        Debug.Log("average Damage per attack = " + averageStats[0] + " average Attackspeed = " + averageStats[1] + " average Health = " + averageStats[2] + " average MovementSpeed = " + averageStats[3]);
+        return averageStats;
     }
 }
