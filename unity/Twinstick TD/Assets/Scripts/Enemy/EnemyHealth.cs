@@ -63,7 +63,7 @@ public class EnemyHealth : MonoBehaviour
 			Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
 			if (targetRigidbody) 
 			{
-				playerUnit.stopCoroutines();
+				//playerUnit.stopCoroutines();
 				playerhealth = targetRigidbody.GetComponent<PlayerHealth> ();
 				InvokeRepeating ("playerDamage", 0f, m_playerPerSecond);
 
