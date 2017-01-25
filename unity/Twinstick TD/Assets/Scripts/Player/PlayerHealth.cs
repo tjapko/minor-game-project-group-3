@@ -58,7 +58,8 @@ public class PlayerHealth : MonoBehaviour
 
 	public void SetHealthUI()
 	{
-		// Set the slider's value appropriately.
+        // Set the slider's value appropriately.
+        m_Slider.maxValue = m_maxHealth;
 		m_Slider.value = m_CurrentHealth;
 
 		// Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.

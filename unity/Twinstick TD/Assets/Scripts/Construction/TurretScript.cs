@@ -21,7 +21,7 @@ public class TurretScript : MonoBehaviour {
     public static float m_fireRate = 1f;   //Fire rate of the turret
     public static float m_turnrate = 1f;   //Turn rate of the turret
     public static float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
-	public static float m_startHealth;
+	public static float m_startHealth = 25;
 	public Color m_FullHealthColor = Color.green;   //Full health colour
 	public Color m_ZeroHealthColor = Color.red;     //Zero health colour
 
@@ -41,8 +41,9 @@ public class TurretScript : MonoBehaviour {
 		stats = gameObject.GetComponent<UserObjectStatistics> ();
         InvokeRepeating("getTarget", 0f, 0.5f);
 		m_currentHealth = m_startHealth;
+
 		m_Dead = false;
-		SetHealthUI ();
+        SetHealthUI ();
     }
 	
 	// Update is called once per frame
@@ -156,11 +157,13 @@ public class TurretScript : MonoBehaviour {
 
 	private void SetHealthUI()
 	{
-		// Set the slider's value appropriately.
-		m_Slider.value = m_currentHealth;
+        // Set the slider's value appropriately.
+        m_Slider.maxValue = m_startHealth;
+        m_Slider.value = m_currentHealth;
+        
 
-		// Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
-		m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_currentHealth / m_startHealth);
+        // Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
+        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_currentHealth / m_startHealth);
 	}
 
 	//Spawn hitmark

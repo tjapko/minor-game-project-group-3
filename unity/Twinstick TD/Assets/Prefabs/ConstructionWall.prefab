@@ -261,7 +261,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 50
+  m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
@@ -311,7 +311,7 @@ MonoBehaviour:
     type: 2}
   m_Slider: {fileID: 114000010354233816}
   m_FillImage: {fileID: 114000010566975516}
-  m_startHealth: 1
+  m_startHealth: 10
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114000011998791728
@@ -379,7 +379,8 @@ MonoBehaviour:
     m_inventory: {fileID: 0}
     m_playerhealth: {fileID: 0}
     m_PlayerNumber: 0
-  m_meshes: []
+  m_meshes:
+  - {fileID: 23000011172925484}
 --- !u!114 &114000013801190724
 MonoBehaviour:
   m_ObjectHideFlags: 1

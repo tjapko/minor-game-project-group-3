@@ -32,7 +32,9 @@ public class CarrotFieldScript : MonoBehaviour {
 		m_Dead = false;
         m_currentYield = m_startyield;
 		m_currentHealth = m_startHealth;
-		SetHealthUI ();
+
+        m_Slider.maxValue = m_startHealth;
+        SetHealthUI ();
     }
 
 	public void takeDamage(float damage){
@@ -57,8 +59,8 @@ public class CarrotFieldScript : MonoBehaviour {
 		// Set the slider's value appropriately.
 		m_Slider.value = m_currentHealth;
 
-		// Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
-		m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_currentHealth / m_startHealth);
+        // Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
+        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_currentHealth / m_startHealth);
 	}
 
 	//Spawn hitmark

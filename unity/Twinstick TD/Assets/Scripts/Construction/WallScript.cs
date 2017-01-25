@@ -25,7 +25,9 @@ public class WallScript : MonoBehaviour
 		stats = gameObject.GetComponent<UserObjectStatistics> ();
 		m_Dead = false;
 		m_currentHealth = m_startHealth;
-		SetHealthUI ();
+
+        m_Slider.maxValue = m_startHealth;
+        SetHealthUI ();
 	}
 
 	public void takeDamage(float damage){

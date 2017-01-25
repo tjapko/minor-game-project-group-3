@@ -178,7 +178,7 @@ public class PlayerConstruction : MonoBehaviour {
             //Place the instance onto a node
             Node selected_node = m_grid.NodeFromWorldPoint(mouseposition);
             newinstance.transform.position = selected_node.worldPosition;
-            instancestats.setMesh(selected_node.walkable);
+            instancestats.setMesh(selected_node.walkable && selected_node.placable);
 
             //Return next frame
             yield return null;

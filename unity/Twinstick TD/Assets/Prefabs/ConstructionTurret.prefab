@@ -1831,7 +1831,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013817965468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.2746882, y: -0.0000019590493, z: -16.433699}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -5201,7 +5201,23 @@ MonoBehaviour:
     m_inventory: {fileID: 0}
     m_playerhealth: {fileID: 0}
     m_PlayerNumber: 0
-  m_meshes: []
+  m_meshes:
+  - {fileID: 23000011721113240}
+  - {fileID: 23000010291241798}
+  - {fileID: 23000010633628240}
+  - {fileID: 23000012142977046}
+  - {fileID: 23000010522237964}
+  - {fileID: 23000011834440284}
+  - {fileID: 23000012070212602}
+  - {fileID: 23000013958750104}
+  - {fileID: 23000010868127584}
+  - {fileID: 23000010120191990}
+  - {fileID: 23000012718652386}
+  - {fileID: 23000010818069398}
+  - {fileID: 23000013230045204}
+  - {fileID: 23000013499451336}
+  - {fileID: 23000011237418056}
+  - {fileID: 23000012148937012}
 --- !u!114 &114000013322764222
 MonoBehaviour:
   m_ObjectHideFlags: 1

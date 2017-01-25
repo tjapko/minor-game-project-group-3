@@ -47,11 +47,12 @@ public class EnemyHealth : MonoBehaviour
 
     public void Start()
     {
-          
+        //Set references
+        m_maincamera = GameObject.FindWithTag("MainCamera");
 
         // Update the health slider's value and color.
         SetHealthUI();
-        m_maincamera = GameObject.FindWithTag("MainCamera");
+        
     }
 
 	public void OnTriggerEnter(Collider other){
@@ -311,6 +312,7 @@ public class EnemyHealth : MonoBehaviour
     //Set current health of the enemy
     public void setCurrentHealth(float value)
     {
+        m_StartingHealth = value;
         m_CurrentHealth = value;
         SetHealthUI();
     }
@@ -318,8 +320,9 @@ public class EnemyHealth : MonoBehaviour
     private void SetHealthUI()
     {
         // Set the slider's value appropriately.
+        m_Slider.maxValue = m_StartingHealth;
         m_Slider.value = m_CurrentHealth;
-
+        
         // Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
         m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
     }
