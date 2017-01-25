@@ -7,7 +7,7 @@ public class PlayerConstruction : MonoBehaviour {
 
     //Start price objects
     [Header("Cost:")]
-    public static int m_start_price_wall = 100;     //Price of wall
+    public static int m_start_price_wall = 250;     //Price of wall
 	public static int m_start_price_turret = 3000;  //Price of turret
 	public static int m_start_price_carrot = 500;  //Price of Carrot field
 	public static int m_start_price_mud = 750;      //Price of the mud field
