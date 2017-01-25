@@ -115,7 +115,7 @@ public class Grid : MonoBehaviour {
 
 	if (displayGridGizmos) {
 			foreach (Node n in grid) {
-				Gizmos.color = (n.placable) ? Color.white : Color.green;
+				Gizmos.color = (n.walkable) ? Color.white : Color.red;
 				Gizmos.DrawCube (n.worldPosition, Vector3.one * (nodeDiameter - .1f));
 			}
 		}
