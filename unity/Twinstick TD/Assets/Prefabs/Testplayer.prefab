@@ -3048,7 +3048,7 @@ MonoBehaviour:
     m_playerhealth: {fileID: 0}
     m_PlayerNumber: 0
   mouseposition: {x: 0, y: 0, z: 0}
-  m_MovementSpeed: 11
+  m_MovementSpeed: 20
   walking: {fileID: 82000014111889120}
 --- !u!114 &114000013674785422
 MonoBehaviour:
