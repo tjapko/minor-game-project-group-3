@@ -15,7 +15,7 @@ public class EnemyInheratedValues  {
     private float baseAttackSpeedObject = 2f;
     private float baseDamageToPlayerPerAttack = 1f;
     private float baseAttackSpeedPlayer = 2f;
-    private float baseStartingHealth = 1f;
+    private float baseStartingHealth = 0.75f;
     private float baseMovementspeed = 3f;
 
 
@@ -34,11 +34,7 @@ public class EnemyInheratedValues  {
 	private float rangeAttackSpeed = 0.5f;    
     private float rangeStartingHealth = 2f;  
 	private float rangeMovementSpeed = 2f;  
-
-	private float rangeDamagePerAttackDuplicate; 
-	private float rangeAttackSpeedDuplicate;     
-	private float rangeStartingHealthDuplicate;  
-	private float rangeMovementSpeedDuplicate;   
+  
 
     private float DamageDone = 0;
     private float Fitness = 0;
@@ -51,10 +47,7 @@ public class EnemyInheratedValues  {
         this.chromosome.createRandomChromosome();
         ChromosomeToValues();
 
-		rangeDamagePerAttackDuplicate = rangeDamagePerAttack; 
-		rangeAttackSpeedDuplicate = rangeAttackSpeed;     
-		rangeStartingHealthDuplicate = rangeStartingHealth;  
-		rangeMovementSpeedDuplicate = rangeMovementSpeed;
+
     }
 
     public void ChromosomeToValues()
@@ -148,13 +141,13 @@ public class EnemyInheratedValues  {
 	public void updateRange(int waveNumber)
 	{
 		if (waveNumber >= this.startWaveIncRanges) {
-			this.rangeDamagePerAttack = this.rangeDamagePerAttackDuplicate * this.scaleDamagePerAttack / (this.AimingEndWavenumber-this.startWaveIncRanges)*(waveNumber-this.startWaveIncRanges);
+			this.rangeDamagePerAttack = this.rangeDamagePerAttack * this.scaleDamagePerAttack / (this.AimingEndWavenumber-this.startWaveIncRanges)*(waveNumber-this.startWaveIncRanges);
 
-			this.rangeAttackSpeed = this.rangeAttackSpeedDuplicate * this.scaleAttackSpeed / (this.AimingEndWavenumber-this.startWaveIncRanges)*(waveNumber-this.startWaveIncRanges);
+			this.rangeAttackSpeed = this.rangeAttackSpeed * this.scaleAttackSpeed / (this.AimingEndWavenumber-this.startWaveIncRanges)*(waveNumber-this.startWaveIncRanges);
 
-			this.rangeStartingHealth = this.rangeStartingHealthDuplicate * this.scaleStartingHealth / (this.AimingEndWavenumber-this.startWaveIncRanges)*(waveNumber-this.startWaveIncRanges);
+			this.rangeStartingHealth = this.rangeStartingHealth * this.scaleStartingHealth / (this.AimingEndWavenumber-this.startWaveIncRanges)*(waveNumber-this.startWaveIncRanges);
 
-			this.rangeMovementSpeed = this.rangeMovementSpeedDuplicate * this.scaleMovementSpeed / (this.AimingEndWavenumber-this.startWaveIncRanges)*(waveNumber-this.startWaveIncRanges);
+			this.rangeMovementSpeed = this.rangeMovementSpeed * this.scaleMovementSpeed / (this.AimingEndWavenumber-this.startWaveIncRanges)*(waveNumber-this.startWaveIncRanges);
 		
 		}
 	}
