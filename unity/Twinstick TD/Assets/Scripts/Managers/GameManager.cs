@@ -80,6 +80,8 @@ public class GameManager : MonoBehaviour
     //Check per frame
     private void Update()
     {
+
+      
         //Escape key: pause menu
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -109,10 +111,10 @@ public class GameManager : MonoBehaviour
         }
 
         //pauseGame(gamepause);
-
+      
         //Set the Object placement phase
         m_players.setConstructionphase(!wavephase);
-
+      
         //Show or hide UI menu depending on wavephase and pause
         m_uiscript.UIchange(gameover, wavephase, gamepause);
     }
@@ -163,7 +165,8 @@ public class GameManager : MonoBehaviour
         //Set variables
         m_waveNumber = 0;
 		m_waveNumberusedForHighscore = 0;
-        wavephase = false;
+        wavephase = true;
+        Debug.Log("Start wavephase: " + wavephase);
         gamepause = false;
         gameover =  false;
 
@@ -184,8 +187,11 @@ public class GameManager : MonoBehaviour
         // Wait until base has no health or players are dead
         while (!playersDead())
         {
+
             wavephase = true;
+            Debug.Log("wavePhase() before wavephase: " + wavephase);
             m_players.setConstructionphase(!wavephase);
+            Debug.Log("wavePhase() after wavephase: " + wavephase);
             m_uiscript.UIchange(gameover, wavephase, gamepause);
 
 
@@ -197,7 +203,14 @@ public class GameManager : MonoBehaviour
                 m_uiscript.showWaveReward();
 
                 // Go into construction phase
-                yield return StartCoroutine(constructionPhase());
+                if (m_waveNumber == 0)
+                {
+                    yield return null;
+                }
+                else
+                {
+                    yield return StartCoroutine(constructionPhase());
+                }
 				m_waveNumber++;
 				m_waveNumberusedForHighscore++;
 				StartCoroutine(m_uiscript.showWaveStatsUI());
