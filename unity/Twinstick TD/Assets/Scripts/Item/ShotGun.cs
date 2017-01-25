@@ -12,7 +12,7 @@ public class ShotGun
     //public variables 
     public static float launchForce = 50f;       // the launchforce of the weapon for the bullet (speed)
     public static float reloadTime = 1.5f;        // the time it takes to reload 
-    public static int ammoprice = 30;           // the price for new ammo !!per clip!!  
+    public static int ammoprice = 50;           // the price for new ammo !!per clip!!  
     public static float bulletLifeTime = 0.4f;    // the lifetime of the bullet 
     // upgradable stats (ammo & ammoInClip)
     public static int[] maxAmmo = { 100, 150 , 250 };// max ammo player can carry for every level
