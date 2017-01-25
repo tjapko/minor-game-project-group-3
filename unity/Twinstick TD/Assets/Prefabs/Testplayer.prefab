@@ -3082,8 +3082,8 @@ MonoBehaviour:
   painSource: {fileID: 82000012169849638}
   pain: {fileID: 8300000, guid: db2b0085442d3fa4dba6335d87ff4186, type: 3}
   dead: {fileID: 8300000, guid: 3f6ae516c2bbc394ba29bb4ef95b3325, type: 3}
-  m_maxHealth: 5
-  m_StartingHealth: 5
+  m_maxHealth: 10
+  m_StartingHealth: 10
   m_Slider: {fileID: 114000011672887518}
   m_FillImage: {fileID: 114000011386025574}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
