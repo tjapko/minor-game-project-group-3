@@ -106,7 +106,7 @@ public class Basehealth : MonoBehaviour {
             {
                 if (upgrade.getBaseUpgradeType() == BaseUpgrade.BaseUpgradeType.BaseUpgrade)
                 {
-                    ((Upgrade_Base)upgrade).revertUpgrade();
+                    ((Upgrade_Base)upgrade).revertUpgrade(gameObject);
                 }
             }
         });

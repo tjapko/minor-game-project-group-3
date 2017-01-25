@@ -9,6 +9,7 @@ public class BaseUpgradeScript : MonoBehaviour {
     //References
     [Header("References")]
     public GameObject m_baseupgradeground;  //Reference to the gameobject containing the base collider
+    public List<GameObject> m_baseturrets;  //Reference to list of turrets
     private GameObject m_baseupgradeUI;      //Reference set by UIManager:CanvasBaseUpgrade
     private GameManager m_gamemanager;      //Reference to the game manager
     private UserManager m_usermanager;      //Reference to the User Manager
@@ -62,9 +63,14 @@ public class BaseUpgradeScript : MonoBehaviour {
 		upgrade_duo_2.Add((BaseUpgrade)new Upgrade_Base(price_upgradeBaseHealth, amount_upgradeBaseHealth, upgradeBaseTurretDamage, upgradeBaseTurretRange, upgradeBaseTurretAccuracy,upgradeBaseTurretFirerate, upgradeBaseTurretLaunchForce, upgradeBaseTurretTurnRate));
         upgrade_duo_2.Add((BaseUpgrade)new Restore_BaseHealth(new int[] { price_restoreBaseHealth }, amount_restoreBaseHealth));
         
-
         player_upgradelist.Add(upgrade_duo_1);
         base_upgradelist.Add(upgrade_duo_2);
+
+        //Disable turrets
+        foreach(GameObject turret in m_baseturrets)
+        {
+            turret.SetActive(false);
+        }
 
         //Set variables
         ui_active = false;
@@ -129,5 +135,13 @@ public class BaseUpgradeScript : MonoBehaviour {
     public void showUICanvas(bool status)
     {
         m_baseupgradeUI.SetActive(status);
+    }
+
+    public void resetTurrets()
+    {
+        foreach(GameObject turret in m_baseturrets)
+        {
+            turret.SetActive(false);
+        }
     }
 }

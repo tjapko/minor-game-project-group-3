@@ -113,31 +113,38 @@ public class BaseTurret : MonoBehaviour {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, m_range);
     }
-		
+	
+    //Setter Set damage	
 	public static void setDamage(float amount) {
 		m_damage = amount;
 	}
 
+    //Setter Get Damage
 	public static float getDamage() {
 		return m_damage;
 	}
 
+    //Setter Range
 	public static void setRange(float amount) {
 		m_range = amount;
 	}
 
+    //Setter Accuracy
 	public static void setAccuracy(float amount) {
 		m_accuracy = amount;
 	}
 
+    //Setter Fire rate
 	public static void setFirerate(float amount) {
 		m_fireRate = amount;
 	}
 
+    //Setter launch force
 	public static void setLaunchForce(float amount) {
 		m_launchspeed = amount;
 	}
 
+    //Setter turn rate
 	public static void setTurnRate(float amount) {
 		m_turnrate = amount;
 	}

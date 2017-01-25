@@ -7976,7 +7976,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013595951870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.4075408, y: 0.11374855, z: 17.723366}
   m_LocalScale: {x: 3, y: 2, z: 3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -16343,30 +16343,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseupgradeground: {fileID: 1000013878964730}
+  m_baseturrets:
+  - {fileID: 1000014014694016}
+  - {fileID: 1000013895628786}
   price_restorePlayerHealth: 10
   amount_restorePlayerHealth: 10
   price_upgradePlayerHealth: 64000000c8000000
   amount_upgradePlayerHealth: c800000090010000
   price_restoreBaseHealth: 200
   amount_restoreBaseHealth: 100
-  price_upgradeBaseHealth: c800000090010000
-  amount_upgradeBaseHealth: 0100000002000000
+  price_upgradeBaseHealth: c8000000900100005802000020030000
+  amount_upgradeBaseHealth: 6400000064000000c800000090010000
   upgradeBaseTurretDamage:
   - 2
+  - 2
+  - 3
   - 5
   upgradeBaseTurretRange:
+  - 200
+  - 200
   - 250
   - 300
   upgradeBaseTurretAccuracy:
+  - 1000
+  - 1000
   - 1200
   - 1500
   upgradeBaseTurretFirerate:
+  - 1
+  - 1
   - 1.2
   - 1.5
   upgradeBaseTurretLaunchForce:
+  - 200
+  - 200
   - 250
-  - 300
+  - 400
   upgradeBaseTurretTurnRate:
+  - 1
+  - 1
   - 1.2
   - 1.5
 --- !u!114 &114000012654888320

@@ -41,49 +41,87 @@ public class Upgrade_Base : BaseUpgrade {
     {
         //Check if base contains BaseHealth script
         Basehealth basehealthScript = m_base.GetComponent<Basehealth>();
+        BaseUpgradeScript baseupgradeScript = m_base.GetComponent<BaseUpgradeScript>();
 
-		if (basehealthScript != null) {
-			//Inrease basehealth
-			basehealthScript.incMaxHealth (m_basehealthinc [selected_index]);
-            
-			//Update Slider
-			basehealthScript.SetHealthUI ();
+        if (basehealthScript != null)
+        {
+            //Inrease basehealth
+            basehealthScript.incMaxHealth(m_basehealthinc[selected_index]);
 
-			//Inrease turret stats 
-			BaseTurret.setDamage (m_BaseTurretDamageInc [selected_index]);
-			BaseTurret.setRange (m_BaseTurretRangeInc [selected_index]);
-			BaseTurret.setAccuracy (m_BaseTurretAccuracyInc [selected_index]);
-			BaseTurret.setFirerate (m_BaseTurretFireRateInc [selected_index]);
-			BaseTurret.setLaunchForce (m_BaseTurretLaunchSpeedInc [selected_index]);
-			BaseTurret.setTurnRate (m_BaseTurretTurnRateInc [selected_index]);
-			//Increase index
-			incIndex ();
-		}
-    }
+            //Update Slider
+            basehealthScript.SetHealthUI();
+        }
 
-	public void revertUpgrade()
+        //Inrease base turret stats 
+        BaseTurret.setDamage(m_BaseTurretDamageInc[selected_index]);
+        BaseTurret.setRange(m_BaseTurretRangeInc[selected_index]);
+        BaseTurret.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
+        BaseTurret.setFirerate(m_BaseTurretFireRateInc[selected_index]);
+        BaseTurret.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
+        BaseTurret.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
+
+        //Increase player turret stats
+        TurretScript.setDamage(m_BaseTurretDamageInc[selected_index]);
+        TurretScript.setRange(m_BaseTurretRangeInc[selected_index]);
+        TurretScript.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
+        TurretScript.setFirerate(m_BaseTurretFireRateInc[selected_index]);
+        TurretScript.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
+        TurretScript.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
+
+        //Spawn turrets
+        checkBaseTurret(selected_index, baseupgradeScript);
+
+        //Increase index
+        incIndex();
+}
+
+	public void revertUpgrade(GameObject m_base)
 	{
 		//Reset index
 		resetIndex();
 
-		//Load objects and scripts
-		GameObject baseTurrets = GameObject.FindWithTag("baseTurret");
-		//Check if base contains BaseTurret script
-		if (baseTurrets != null)
-		{
-			BaseTurret turret_script = baseTurrets.GetComponent<BaseTurret>();
-			if (turret_script != null)
-			{
-				//Inrease turret stats 
-				BaseTurret.setDamage(m_BaseTurretDamageInc[selected_index]);
-				BaseTurret.setRange(m_BaseTurretRangeInc[selected_index]);
-				BaseTurret.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
-				BaseTurret.setFirerate(m_BaseTurretFireRateInc[selected_index]);
-				BaseTurret.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
-				BaseTurret.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
-			}
-		}
+        //Inrease turret stats 
+        BaseTurret.setDamage(m_BaseTurretDamageInc[selected_index]);
+        BaseTurret.setRange(m_BaseTurretRangeInc[selected_index]);
+        BaseTurret.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
+        BaseTurret.setFirerate(m_BaseTurretFireRateInc[selected_index]);
+        BaseTurret.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
+        BaseTurret.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
 
-	}
+        m_base.GetComponent<BaseUpgradeScript>().resetTurrets();
 
+
+    }
+
+    //Switch statement for placing turrets
+    private void checkBaseTurret(int upgrade, BaseUpgradeScript script)
+    {
+        switch (upgrade)
+        {
+            case 0:
+                spawnBaseTurret(script, 1);
+                break;
+            case 1:
+                spawnBaseTurret(script, 2);
+                break;
+            default:
+                break;
+        }
+
+    }
+    //Placing turrets
+    private void spawnBaseTurret(BaseUpgradeScript script, int active_turrets)
+    {
+        if (script.m_baseturrets != null && script.m_baseturrets.Count > 0)
+        {
+            int turret_amount = script.m_baseturrets.Count;
+            for (int i =0; i < turret_amount; i++)
+            {
+                if(i < active_turrets)
+                {
+                    script.m_baseturrets[i].SetActive(true);
+                }
+            }
+        }
+    }
 }
