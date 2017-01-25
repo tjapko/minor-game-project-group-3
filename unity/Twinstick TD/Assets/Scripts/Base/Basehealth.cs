@@ -136,9 +136,11 @@ public class Basehealth : MonoBehaviour {
     private void createHitMark(GameObject prefab, float amount)
     {
         //Set hitmark
-        GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+
+		GameObject hitbox = GameObject.Instantiate(prefab, (gameObject.transform.position + new Vector3(0f,5f,0f)), gameObject.transform.rotation) as GameObject;
         HitMarkScript hitbox_script = hitbox.GetComponent<HitMarkScript>();
-        hitbox_script.setDamage(amount);
+		int otherAmount = - Mathf.RoundToInt (amount);
+		hitbox_script.setDamage(otherAmount);
         hitbox_script.setCamera(m_maincamera);
         hitbox_script.lookToCamera();
         hitbox.SetActive(true);

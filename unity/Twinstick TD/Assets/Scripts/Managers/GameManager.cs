@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
+using System.Collections.Generic;
 
 //UNDER CONSTRUCTION
 /// <summary>
@@ -231,6 +233,22 @@ public class GameManager : MonoBehaviour
 		foreach (GameObject element in canvasList) {
 			Destroy (element);
 		}
+
+        Analytics.CustomEvent("GameOVer", new Dictionary<string, object> {
+            {"wave number", m_waveNumber },
+            {"average damage per attack poptype 1", m_wave.GAManager.poptype1.debugAverageStats()[0] },
+            {"average attack speed poptype 1", m_wave.GAManager.poptype1.debugAverageStats()[1] },
+            {"average health poptype 1", m_wave.GAManager.poptype1.debugAverageStats()[2] },
+            {"average movementspeed poptype 1", m_wave.GAManager.poptype1.debugAverageStats()[3] },
+            {"average damage per attack poptype 2", m_wave.GAManager.poptype2.debugAverageStats()[0] },
+            {"average attack speed poptype 2", m_wave.GAManager.poptype2.debugAverageStats()[1] },
+            {"average health poptype 2", m_wave.GAManager.poptype2.debugAverageStats()[2] },
+            {"average movementspeed poptype 2", m_wave.GAManager.poptype2.debugAverageStats()[3] },
+            {"average damage per attack poptype 3", m_wave.GAManager.poptype3.debugAverageStats()[0] },
+            {"average attack speed poptype 3", m_wave.GAManager.poptype3.debugAverageStats()[1] },
+            {"average health poptype 3", m_wave.GAManager.poptype3.debugAverageStats()[2] },
+            {"average movementspeed poptype 3", m_wave.GAManager.poptype3.debugAverageStats()[3] }
+                   });
 
         //Player has lost
         gameover = true;

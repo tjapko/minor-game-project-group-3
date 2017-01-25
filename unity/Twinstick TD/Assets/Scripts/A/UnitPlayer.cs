@@ -76,7 +76,11 @@ public class UnitPlayer : MonoBehaviour {
 
 	//Calculates path to base and walks towards
 	public void goToBase(){
-		PathRequestManager.RequestPath (transform, m_base.transform, OnPathFound);
+		if (m_base.activeInHierarchy) {
+			PathRequestManager.RequestPath (transform, m_base.transform, OnPathFound);
+		} else {
+			goToPlayer ();
+		}
 	}
 
 	//Calculates path to player and walks towards
@@ -139,8 +143,8 @@ public class UnitPlayer : MonoBehaviour {
 			yield break;
 		}
 		currentWaypoint = path[0];
-		var p = Quaternion.LookRotation (path[path.Length - 1] - transform.position);
-		transform.rotation = Quaternion.RotateTowards (transform.rotation, p, 5*rotationSpeed * Time.deltaTime);
+		//var p = Quaternion.LookRotation (path[path.Length - 1] - transform.position);
+		//transform.rotation = Quaternion.RotateTowards (transform.rotation, p, 5*rotationSpeed * Time.deltaTime);
 
 		while (true) {
 			if (Vector3.Distance(currentWaypoint,transform.position) < 0.4f){
@@ -152,8 +156,10 @@ public class UnitPlayer : MonoBehaviour {
 				}
 				currentWaypoint = path[targetIndex];			
 			}
+			float angle = Mathf.RoundToInt(Vector3.Angle (currentWaypoint - transform.position, transform.forward));
+			float speed = 2 * Mathf.Pow(1.15f,(angle/2));
 			var q = Quaternion.LookRotation (currentWaypoint - transform.position);
-			transform.rotation = Quaternion.RotateTowards (transform.rotation, q, rotationSpeed * Time.deltaTime);
+			transform.rotation = Quaternion.RotateTowards (transform.rotation, q, speed * Time.deltaTime);
 			transform.position = Vector3.MoveTowards(transform.position,currentWaypoint,movementSpeed * Time.deltaTime);
 			yield return null;
 		}

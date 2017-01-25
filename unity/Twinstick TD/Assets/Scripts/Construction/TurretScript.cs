@@ -21,7 +21,7 @@ public class TurretScript : MonoBehaviour {
     public static float m_fireRate = 1f;   //Fire rate of the turret
     public static float m_turnrate = 1f;   //Turn rate of the turret
     public static float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
-	public static float m_startHealth = 25;
+	public float m_startHealth = 25;
 	public Color m_FullHealthColor = Color.green;   //Full health colour
 	public Color m_ZeroHealthColor = Color.red;     //Zero health colour
 
@@ -139,6 +139,7 @@ public class TurretScript : MonoBehaviour {
     }
 
 	public void takeDamage(float damage){
+		Debug.Log ("turret gets damage: " + damage);
 		//Set hitmark
 		createHitMark(m_hitBaseCanvasPrefab, damage);
 
