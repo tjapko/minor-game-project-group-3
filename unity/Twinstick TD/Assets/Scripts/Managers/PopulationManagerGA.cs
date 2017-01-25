@@ -6,9 +6,9 @@ using System.Collections;
     */
 public class PopulationManagerGA {
 
-    EnemyPopulation poptype1;
-    EnemyPopulation poptype2;
-    EnemyPopulation poptype3;
+   public EnemyPopulation poptype1;
+    public EnemyPopulation poptype2;
+    public EnemyPopulation poptype3;
     EnemyInheratedValues boss;
 	private int waveNumber=0;
     private GaneticAlgorithm GA;
