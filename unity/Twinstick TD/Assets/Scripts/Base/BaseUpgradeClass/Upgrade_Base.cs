@@ -56,7 +56,6 @@ public class Upgrade_Base : BaseUpgrade {
 			BaseTurret.setFirerate (m_BaseTurretFireRateInc [selected_index]);
 			BaseTurret.setLaunchForce (m_BaseTurretLaunchSpeedInc [selected_index]);
 			BaseTurret.setTurnRate (m_BaseTurretTurnRateInc [selected_index]);
-			Debug.Log ("getDamage: " + BaseTurret.getDamage ());
 			//Increase index
 			incIndex ();
 		}

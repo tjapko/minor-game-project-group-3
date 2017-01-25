@@ -150,7 +150,6 @@ public class UserObjectStatistics : MonoBehaviour {
         {
             foreach (MeshRenderer mesh in m_meshes)
             {
-                
                 mesh.material.color = Color.red;
             }
         }
