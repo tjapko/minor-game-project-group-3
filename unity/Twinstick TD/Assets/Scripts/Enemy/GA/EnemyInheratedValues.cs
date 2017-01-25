@@ -27,7 +27,7 @@ public class EnemyInheratedValues  {
 	private float scaleDamagePerAttack = 5f;
 	private float scaleAttackSpeed = 4f;
 	private float scaleStartingHealth = 5f;
-	private float scaleMovementSpeed = 10f;
+	private float scaleMovementSpeed = 5f;
 
 	private float rangeDamagePerAttack = 2f; 
 	private float rangeAttackSpeed = 0.5f;    

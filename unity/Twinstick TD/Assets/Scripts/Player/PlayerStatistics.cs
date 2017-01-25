@@ -10,8 +10,8 @@ public class PlayerStatistics : MonoBehaviour {
     public int m_playernumber;  // Current player number
     public int m_playerstartcurrency;   //Start currency of player
 
-	public static int m_currencyBasePerWave = 500;
-	public static int m_currencyPerKill = 50;
+	public static int m_currencyBasePerWave = 1000;
+	public static int m_currencyPerKill = 100;
 
     //Private variables
 
