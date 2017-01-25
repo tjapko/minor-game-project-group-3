@@ -18,10 +18,10 @@ public class PlayerConstruction : MonoBehaviour {
 
     //Max objects
     [Header("Max Objects")]
-    public static int maxWalls = 10;     // maximum amount of walls
+    public static int maxWalls = 9999;     // maximum amount of walls
     public static int maxTurrets = 4;   // maximum amount of turrets
-    public static int maxCarrotFarms = 10;   //maximum amount of carrot farms
-    public static int maxMudPools = 10;  //maximum amount of mud pools
+    public static int maxCarrotFarms = 9999;   //maximum amount of carrot farms
+    public static int maxMudPools = 9999;  //maximum amount of mud pools
 	public static int m_totalCarrotfieldsEachWave = 0;
 
     //Fix

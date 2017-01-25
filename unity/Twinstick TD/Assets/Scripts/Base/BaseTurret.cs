@@ -14,9 +14,9 @@ public class BaseTurret : MonoBehaviour {
     public static float m_damage = 3f;    //damage of the turret
 	public static float m_range = 25f;     //Range of the turret
 	public static float m_accuracy = 3000f; //Accurracy of tower +/- (1/m_accuracy)
-	public static float m_fireRate = 3f;   //Fire rate of the turret
+	public static float m_fireRate = 0.5f;   //Fire rate of the turret
 	public static float m_launchspeed = 200f;   //Launch speed of the bullet
-	public static float m_turnrate = 5f;   //Turn rate of the turret
+	public static float m_turnrate = 3f;   //Turn rate of the turret
 	// damage, 
 
     //Private variables
