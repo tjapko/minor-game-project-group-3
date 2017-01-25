@@ -243,7 +243,7 @@ public class GameManager : MonoBehaviour
             {"average damage per attack poptype 2", m_wave.GAManager.poptype2.debugAverageStats()[0] },
             {"average attack speed poptype 2", m_wave.GAManager.poptype2.debugAverageStats()[1] },
             {"average health poptype 2", m_wave.GAManager.poptype2.debugAverageStats()[2] },
-            {"average movementspeed poptype 2", m_wave.GAManager.poptype2.debugAverageStats()[3] }
+            {"average movementspeed poptype 2", m_wave.GAManager.poptype2.debugAverageStats()[3] },
             {"average damage per attack poptype 3", m_wave.GAManager.poptype3.debugAverageStats()[0] },
             {"average attack speed poptype 3", m_wave.GAManager.poptype3.debugAverageStats()[1] },
             {"average health poptype 3", m_wave.GAManager.poptype3.debugAverageStats()[2] },
