@@ -24,6 +24,7 @@ public class UnitPlayer : MonoBehaviour {
 	int targetIndex;					// The index of the waypointArray. The unit moves to path[targetIndex]  
 	public GameObject currentGoal;
 	private Vector3 currentWaypoint;
+	private float m_scalePush = 1.5f;
 
 	//Calculates distance to each playerObject in the scene and chooses closest as target
 	public void calcDistance(bool playerCheck){
@@ -97,7 +98,7 @@ public class UnitPlayer : MonoBehaviour {
 	}
 
 	public void enemyHit(Vector3 origin){
-		Vector3 normalized = transform.position - 2* Vector3.Normalize (origin - transform.position);
+		Vector3 normalized = transform.position - m_scalePush* Vector3.Normalize (origin - transform.position);
 		normalized.y = 0;
 		transform.position = normalized;
 	}
