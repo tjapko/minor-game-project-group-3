@@ -1,0 +1,157 @@
+Initialize engine version: 5.4.2f2 (b7e030c65c9b)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA Quadro K1100M (ID=0xff6)
+    Vendor:   NVIDIA
+    VRAM:     2017 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\Documents\School\Minor\Project\git\unity\Twinstick TD\Build_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\Documents\School\Minor\Project\git\unity\Twinstick TD\Build_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\Documents\School\Minor\Project\git\unity\Twinstick TD\Build_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\Documents\School\Minor\Project\git\unity\Twinstick TD\Build_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\Documents\School\Minor\Project\git\unity\Twinstick TD\Build_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\Documents\School\Minor\Project\git\unity\Twinstick TD\Build_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\Documents\School\Minor\Project\git\unity\Twinstick TD\Build_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\Documents\School\Minor\Project\git\unity\Twinstick TD\Build_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.255 seconds
+Platform assembly: D:\Documents\School\Minor\Project\git\unity\Twinstick TD\Build_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\Documents\School\Minor\Project\git\unity\Twinstick TD\Build_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.738555 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1f50 -> priority: 1 
+  Thread -> id: 2690 -> priority: 1 
+NullReferenceException: Object reference not set to an instance of an object
+  at UIButtonScript.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at UIButtonScript.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+The referenced script on this Behaviour (Game Object 'Group28') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group26') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group5') is missing!
+ 
+(Filename:  Line: 1656)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.321297 ms
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 4160.
+Total: 2.346101 ms (FindLiveObjects: 0.168922 ms CreateObjectMapping: 0.130006 ms MarkObjects: 1.406549 ms  DeleteObjects: 0.635064 ms)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group28') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group28') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group26') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group26') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group5') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group5') is missing!
+ 
+(Filename:  Line: 1656)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 19.244789 ms
+
+Unloading 3285 unused Assets to reduce memory usage. Loaded Objects now: 540.
+Total: 12.752170 ms (FindLiveObjects: 0.094511 ms CreateObjectMapping: 0.132144 ms MarkObjects: 3.187721 ms  DeleteObjects: 9.337365 ms)
+
+The referenced script on this Behaviour (Game Object 'Group28') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group26') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group5') is missing!
+ 
+(Filename:  Line: 1656)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.690658 ms
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 4162.
+Total: 5.129692 ms (FindLiveObjects: 0.183462 ms CreateObjectMapping: 0.130006 ms MarkObjects: 4.241030 ms  DeleteObjects: 0.575192 ms)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group28') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group28') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group26') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group26') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group5') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Group5') is missing!
+ 
+(Filename:  Line: 1656)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 18.358269 ms
+
+Unloading 3285 unused Assets to reduce memory usage. Loaded Objects now: 540.
+Total: 13.011328 ms (FindLiveObjects: 0.118887 ms CreateObjectMapping: 0.133427 ms MarkObjects: 3.257856 ms  DeleteObjects: 9.500299 ms)
+
