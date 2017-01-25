@@ -11,12 +11,12 @@ public class BaseTurret : MonoBehaviour {
 
     //Public variables
     [Header("Public variables")]
-    public static float m_damage = 1f;    //damage of the turret
-	public static float m_range = 200f;     //Range of the turret
-	public static float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
-	public static float m_fireRate = 1f;   //Fire rate of the turret
-	public static float m_launchspeed = 10f;   //Launch speed of the bullet
-	public static float m_turnrate = 1f;   //Turn rate of the turret
+    public static float m_damage = 3f;    //damage of the turret
+	public static float m_range = 25f;     //Range of the turret
+	public static float m_accuracy = 3000f; //Accurracy of tower +/- (1/m_accuracy)
+	public static float m_fireRate = 3f;   //Fire rate of the turret
+	public static float m_launchspeed = 200f;   //Launch speed of the bullet
+	public static float m_turnrate = 5f;   //Turn rate of the turret
 	// damage, 
 
     //Private variables
@@ -25,11 +25,12 @@ public class BaseTurret : MonoBehaviour {
     private float m_firecountdown;      //Countdown until next shot
     private Transform m_rotation;       //Rotation of turret
     private int m_PlayerNumber = 0;     //FIX PLZ
+	private float m_FreqInvoke = 0.1f;
 
     // Use this for initialization
     void Start()
     {
-        InvokeRepeating("getTarget", 0f, 0.5f); // 0.5f variable?
+        InvokeRepeating("getTarget", 0f, m_FreqInvoke); 
     }
 
     // Update is called once per frame

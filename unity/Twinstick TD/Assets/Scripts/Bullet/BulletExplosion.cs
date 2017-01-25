@@ -6,7 +6,7 @@ public class BulletExplosion : MonoBehaviour
     public AudioClip shot;
 	public Transform source;
     [HideInInspector]public float m_MaxDamage;       // The amount of damage done if the explosion is centred on an enemy.
-    [HideInInspector]public float m_MaxLifeTime;     // The time in seconds before the shell is removed.
+    [HideInInspector]public float m_MaxLifeTime = 9999;     // The time in seconds before the shell is removed.
 
     private int m_playernumber;
     
