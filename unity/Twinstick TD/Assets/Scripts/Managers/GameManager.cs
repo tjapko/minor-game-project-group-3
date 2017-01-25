@@ -166,7 +166,6 @@ public class GameManager : MonoBehaviour
         m_waveNumber = 0;
 		m_waveNumberusedForHighscore = 0;
         wavephase = true;
-        Debug.Log("Start wavephase: " + wavephase);
         gamepause = false;
         gameover =  false;
 
@@ -189,9 +188,7 @@ public class GameManager : MonoBehaviour
         {
 
             wavephase = true;
-            Debug.Log("wavePhase() before wavephase: " + wavephase);
             m_players.setConstructionphase(!wavephase);
-            Debug.Log("wavePhase() after wavephase: " + wavephase);
             m_uiscript.UIchange(gameover, wavephase, gamepause);
 
 
