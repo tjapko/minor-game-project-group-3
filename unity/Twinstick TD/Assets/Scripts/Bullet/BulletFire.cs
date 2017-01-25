@@ -185,7 +185,7 @@ public class BulletFire : MonoBehaviour
                         if (healthscript != null)
                         {
 							healthscript.setLastHit((m_PlayerNumber));
-							RayHit.transform.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
+							RayHit.transform.SendMessage("TakeDamage2", damage, SendMessageOptions.DontRequireReceiver);
                         }
                     }
 
