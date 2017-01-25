@@ -31,6 +31,8 @@ public class WallScript : MonoBehaviour
 	}
 
 	public void takeDamage(float damage){
+		Debug.Log (m_currentHealth + " currenthealth, wall gets damage: " + damage);
+
 		//Set hitmark
 		createHitMark(m_hitBaseCanvasPrefab, damage);
 
@@ -38,7 +40,7 @@ public class WallScript : MonoBehaviour
 		m_currentHealth -= damage;
 		// Change the UI elements appropriately.
 		SetHealthUI();
-
+		Debug.Log ("after hit:  " + m_currentHealth);
 		// If the current health is at or below zero and it has not yet been registered, call OnDeath.
 		if (m_currentHealth <= 0f && !m_Dead)
 		{

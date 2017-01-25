@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// </summary>
 public class UserObjectStatistics : MonoBehaviour {
     //Public variables
-    public int m_maxhealth;     //Max health of the carrot field
+    private int m_maxhealth;     //Max health of the carrot field
    
     //References
     [HideInInspector]public PlayerManager m_owner;   //Instantiated by the player in PlayerConstruction
@@ -24,7 +24,7 @@ public class UserObjectStatistics : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        m_health = m_maxhealth;
+        //m_health = m_maxhealth;
         object_placed = false;
         player_present = false;
         colliding_markers = new List<GameObject>();
