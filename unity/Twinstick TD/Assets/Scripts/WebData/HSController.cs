@@ -42,11 +42,11 @@ public class HSController : MonoBehaviour
 			print ("There was an error getting the high score: " + itemsData.error);
 		}
         
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			m_HighScoreMenu = gameObject.transform.GetChild(0).gameObject;
 			Text scoretext = m_HighScoreMenu.transform.GetChild(i+1).GetComponent<Text>();
 			int j = i + 1;
-			scoretext.text = items [i]; //this is a GUIText that will display the scores in game.
+			scoretext.text = j + ". " + items [i]; //this is a GUIText that will display the scores in game.
 		}
 	}
 
