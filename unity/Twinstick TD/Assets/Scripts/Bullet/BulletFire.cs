@@ -215,7 +215,6 @@ public class BulletFire : MonoBehaviour
         
 
         line.SetPosition(0, ray.origin);
-        Debug.Log(p.point);
         if (p.point != new Vector3(0, 0, 0))
             line.SetPosition(1,p.point);
        else

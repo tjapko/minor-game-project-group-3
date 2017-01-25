@@ -70,7 +70,7 @@ public class ShopScript : MonoBehaviour {
         //        For testing
         //      ............. Weapon(name               , id , description       , iconname  , price            , itemtype                   , fireratef           , launchforcef           , maxDamagef           , reloadTimef           , clipsize            , ammo            , ammopriceperclip     , ammoInClip            , maxAmmo            , lifetime)
         weapon1 = new Weapon("Default Weapon", 1, "Default weapon!", "Weapon1", HandGun.price, Weapon.ItemType.HandGun, HandGun.fireRate, HandGun.launchForce, HandGun.maxDamage, HandGun.reloadTime, HandGun.clipSize, HandGun.ammo, HandGun.ammoprice, HandGun.ammoInClip, HandGun.maxAmmo, HandGun.bulletLifeTime);
-        weapon4 = new Weapon("Default Weapon 4", 4, "Default weapon!", "sniper", Sniper.price[0], Weapon.ItemType.Sniper, Sniper.fireRate[0], Sniper.launchForce, Sniper.maxDamage[0], Sniper.reloadTime, Sniper.clipSize[0], Sniper.ammo[0], Sniper.ammoprice, Sniper.ammoInClip[0], Sniper.maxAmmo[0], Sniper.bulletLifeTime);
+        weapon4 = new Weapon("Default Weapon 4", 4, "Default weapon!", "laser", Laser.price[0], Weapon.ItemType.Laser, Laser.fireRate[0], Laser.launchForce, Laser.maxDamage[0], Laser.reloadTime, Laser.clipSize[0], Laser.ammo[0], Laser.ammoprice, Laser.ammoInClip[0], Laser.maxAmmo[0], Laser.bulletLifeTime);
         weapon2 = new Weapon("Default Weapon 2", 2, "Default weapon!", "shotgun", ShotGun.price[0], Weapon.ItemType.Shotgun, ShotGun.fireRate[0], ShotGun.launchForce, ShotGun.maxDamage[0], ShotGun.reloadTime, ShotGun.clipSize[0], ShotGun.ammo[0], ShotGun.ammoprice, ShotGun.ammoInClip[0], ShotGun.maxAmmo[0], ShotGun.bulletLifeTime);
         weapon3 = new Weapon("Default Weapon 3", 3, "Default weapon!", "Weapon3", MachineGun.price[0], Weapon.ItemType.MachineGun, MachineGun.fireRate[0], MachineGun.launchForce, MachineGun.maxDamage[0], MachineGun.reloadTime, MachineGun.clipSize[0], MachineGun.ammo[0], MachineGun.ammoprice, MachineGun.ammoInClip[0], MachineGun.maxAmmo[0], MachineGun.bulletLifeTime);
 		weaponsforsale.Add((Weapon)weapon1);
@@ -109,46 +109,46 @@ public class ShopScript : MonoBehaviour {
                 // Set ammo a level higher for all weapons
                 weapon2.ammo = ShotGun.ammo[level];
                 weapon3.ammo = MachineGun.ammo[level];
-                weapon4.ammo = Sniper.ammo[level];
+                weapon4.ammo = Laser.ammo[level];
                 break;
 
         // Set ammoInClip a level higher for all weapons
             case "ammoinclip":
                 weapon2.ammoInClip = ShotGun.ammoInClip[level];
                 weapon3.ammoInClip = MachineGun.ammoInClip[level];
-                weapon4.ammoInClip = Sniper.ammoInClip[level];
+                weapon4.ammoInClip = Laser.ammoInClip[level];
                 break;
             // Set clipSize a level higher  for all weapons
             case "slipsize":
                 weapon2.clipSize = ShotGun.clipSize[level];
                 weapon3.clipSize = MachineGun.clipSize[level];
-                weapon4.clipSize = Sniper.clipSize[level];
+                weapon4.clipSize = Laser.clipSize[level];
                 break;
             // Set Damage a level higher for all weapons 
             case "maxdamage":
                 weapon2.maxDamage = ShotGun.maxDamage[level];
                 weapon3.maxDamage = MachineGun.maxDamage[level];
-                weapon4.maxDamage = Sniper.maxDamage[level];
+                weapon4.maxDamage = Laser.maxDamage[level];
                 break;
             // Set the price a level higher for all weapons 
             case "price":
                 weapon2.price = ShotGun.price[level];
                 weapon3.price = MachineGun.price[level];
-                weapon4.price = Sniper.price[level];
+                weapon4.price = Laser.price[level];
                 break;
 
             // Set the fireRate a level higher for all weapons
             case "firerate":
                 weapon2.fireRate = ShotGun.fireRate[level];
                 weapon3.fireRate = MachineGun.fireRate[level];
-                weapon4.fireRate = Sniper.fireRate[level];
+                weapon4.fireRate = Laser.fireRate[level];
                 break;
 
             // Set the maxAmmo a level higher for all weapons
             case "maxammo":
                 weapon2.maxAmmo = ShotGun.maxAmmo[level];
                 weapon3.maxAmmo = MachineGun.maxAmmo[level];
-                weapon4.maxAmmo = Sniper.maxAmmo[level];
+                weapon4.maxAmmo = Laser.maxAmmo[level];
                 break;
 
             case "id":

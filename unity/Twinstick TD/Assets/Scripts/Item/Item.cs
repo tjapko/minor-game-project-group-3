@@ -16,7 +16,7 @@ public class Item {
     {
         MachineGun,
         HandGun,
-        Sniper,
+        Laser,
         Shotgun,
         GrenadeLauncher,
         Consumable,
