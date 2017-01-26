@@ -10,7 +10,7 @@ public class MachineGun {
 
 	//public variables 
 	public static float launchForce = 50f;       // the launchforce of the weapon for the bullet (speed)
-	public static float reloadTime = 1f;        // the time it takes to reload 
+	public static float reloadTime = 0f;        // the time it takes to reload 
 	public static int ammoprice = 40;			// the price for new ammo !!per clip!!
 	public static float bulletLifeTime = 2f;    // the lifetime of the bullet 
     // upgradable stats (ammo & ammoInClip)
