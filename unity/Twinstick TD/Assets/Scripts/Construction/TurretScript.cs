@@ -15,32 +15,34 @@ public class TurretScript : MonoBehaviour {
 	
     //Public variables
     [Header("Public variables")]
-    public static float m_damage = 100f;    //damage of the turret
-    public static float m_range = 100f;     //Range of the turret
-    public static float m_launchspeed = 10f;   //Launch speed of the bullet
-    public static float m_fireRate = 1f;   //Fire rate of the turret
-    public static float m_turnrate = 1f;   //Turn rate of the turret
-    public static float m_accuracy = 1000f; //Accurracy of tower +/- (1/m_accuracy)
-	public float m_startHealth = 25;
+    public static float m_maxhealth = 10;       //Current max health
+    public static float m_damage = 1f;          //damage of the turret
+    public static float m_range = 25f;          //Range of the turret
+    public static float m_accuracy = 3000f;     //Accurracy of tower +/- (1/m_accuracy)
+    public static float m_fireRate = 0.5f;      //Fire rate of the turret
+    public static float m_launchspeed = 200f;   //Launch speed of the bullet
+    public static float m_turnrate = 3f;        //Turn rate of the turret
 	public Color m_FullHealthColor = Color.green;   //Full health colour
 	public Color m_ZeroHealthColor = Color.red;     //Zero health colour
 
     //Private variables
+    private GameObject m_maincamera;
+    private float m_currentHealth;      //CUrrent health
     private GameObject m_target;        //Target (gameobject)
     private Transform m_targetlocation; //Location of target
     private float m_firecountdown;      //Countdown until next shot
     private Transform m_rotation;       //Rotation of turret
     private int m_PlayerNumber;
-	private float m_currentHealth;
-	private bool m_Dead;
+	private bool m_Dead;                //Bool dead
 	private UserObjectStatistics stats;
 	private PlayerConstruction pl;
 
     // Use this for initialization
     void Start () {
-		stats = gameObject.GetComponent<UserObjectStatistics> ();
+        m_maincamera = GameObject.FindWithTag("CameraRig").transform.GetChild(0).gameObject;
+        stats = gameObject.GetComponent<UserObjectStatistics> ();
         InvokeRepeating("getTarget", 0f, 0.5f);
-		m_currentHealth = m_startHealth;
+        m_currentHealth = m_maxhealth;
 
 		m_Dead = false;
         SetHealthUI ();
@@ -156,27 +158,32 @@ public class TurretScript : MonoBehaviour {
 		}
 	}
 
-	private void SetHealthUI()
+	public void SetHealthUI()
 	{
         // Set the slider's value appropriately.
-        m_Slider.maxValue = m_startHealth;
+        m_Slider.maxValue = m_maxhealth;
         m_Slider.value = m_currentHealth;
-        
 
         // Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
-        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_currentHealth / m_startHealth);
+        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_currentHealth / m_maxhealth);
 	}
 
-	//Spawn hitmark
-	private void createHitMark(GameObject prefab, float amount)
+    //Spawn hitmark
+    private void createHitMark(GameObject prefab, float amount)
 	{
 		//Set hitmark
 		GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
-		hitbox.GetComponent<HitMarkScript>().setDamage(amount);
+        HitMarkScript hitbox_script = hitbox.GetComponent<HitMarkScript>();
+        int otherAmount = -Mathf.RoundToInt(amount);
+        hitbox_script.m_offset = new Vector3(0, 2, 0);
+        hitbox_script.setDamage(otherAmount);
+        hitbox_script.setCamera(m_maincamera);
+        hitbox_script.lookToCamera();
+        hitbox.SetActive(true);
 	}
 
-	// OnDeath
-	private void OnDeath()
+    // OnDeath
+    private void OnDeath()
 	{
 		stats.onDeath ();
 		m_Dead = true;
@@ -184,6 +191,13 @@ public class TurretScript : MonoBehaviour {
         pl.removeObject(gameObject);
         pl.decCounter(PlayerConstruction.PlayerObjectType.PlayerTurret); 
 	}
+
+
+    //Setter Set damage	
+    public static void addMaxHealth(float amount)
+    {
+        m_maxhealth += amount;
+    }
 
     //Setter Set damage	
     public static void setDamage(float amount)
@@ -227,5 +241,9 @@ public class TurretScript : MonoBehaviour {
         m_turnrate = amount;
     }
 
-
+    //Add health to turret
+    public void addHealth(float amount)
+    {
+        m_currentHealth += amount;
+    }
 }
