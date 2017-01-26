@@ -82,8 +82,6 @@ public class GameManager : MonoBehaviour
     //Check per frame
     private void Update()
     {
-
-      
         //Escape key: pause menu
         if(Input.GetKeyDown(KeyCode.Escape))
         {

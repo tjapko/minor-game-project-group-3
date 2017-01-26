@@ -29,9 +29,9 @@ public class CanvasPlayerUIScript : MonoBehaviour {
     private GameObject m_wavestats;             //Reference tot he Wave stats UI panel
     private GameObject m_waveremaining;         //Reference to the wave remaining UI panel
     private Text m_waveremainingText;           //Reference to the text in the wave remaining UI panel
-    public GameObject go_basehealth;            //Reference to slider of base health (set externally)
-    private Slider m_basehealthSlider;          //Slider for player health
-    private Image m_basehealthfillImage;        //Image for player health
+    //public GameObject go_basehealth;            //Reference to slider of base health (set externally)
+    //private Slider m_basehealthSlider;          //Slider for player health
+    //private Image m_basehealthfillImage;        //Image for player health
 
     public void StartInitialization()
     {
@@ -108,8 +108,8 @@ public class CanvasPlayerUIScript : MonoBehaviour {
         m_waveremainingText = m_waveremaining.transform.GetChild(0).GetComponent<Text>();
 
         //Set references base health
-        m_basehealthSlider = go_basehealth.transform.GetComponent<Slider>();
-        m_basehealthfillImage = go_basehealth.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+        //m_basehealthSlider = go_basehealth.transform.GetComponent<Slider>();
+        //m_basehealthfillImage = go_basehealth.transform.GetChild(1).GetChild(0).GetComponent<Image>();
 
         //Set active UI
         m_wavecontrol.SetActive(true);
@@ -271,9 +271,9 @@ public class CanvasPlayerUIScript : MonoBehaviour {
         }
 
         //Update base health
-        m_basehealthSlider.maxValue = m_basehealthscript.m_maxhealth;
-        m_basehealthSlider.value = m_basehealthscript.getCurrentHealth();
-        m_basehealthfillImage.color = Color.Lerp(m_basehealthscript.m_ZeroHealthColor, m_basehealthscript.m_FullHealthColor, m_basehealthscript.getCurrentHealth() / m_basehealthscript.m_maxhealth);
+        //m_basehealthSlider.maxValue = m_basehealthscript.m_maxhealth;
+        //m_basehealthSlider.value = m_basehealthscript.getCurrentHealth();
+        //m_basehealthfillImage.color = Color.Lerp(m_basehealthscript.m_ZeroHealthColor, m_basehealthscript.m_FullHealthColor, m_basehealthscript.getCurrentHealth() / m_basehealthscript.m_maxhealth);
 
 
     }
