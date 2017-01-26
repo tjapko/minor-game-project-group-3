@@ -77,6 +77,7 @@ public class Upgrade_Base : BaseUpgrade {
 
 	public void revertUpgrade(GameObject m_base)
 	{
+        /*
 		//Reset index
 		resetIndex();
 
@@ -89,8 +90,7 @@ public class Upgrade_Base : BaseUpgrade {
         BaseTurret.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
 
         m_base.GetComponent<BaseUpgradeScript>().resetTurrets();
-
-
+        */
     }
 
     //Switch statement for placing turrets
