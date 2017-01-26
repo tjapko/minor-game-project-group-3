@@ -36,79 +36,81 @@ public class PathFinding : MonoBehaviour {
     /// <param name="targetPos"></param>
     
 	IEnumerator FindPath(Transform enemy, Transform targetPos){
-
+		Node targetNode = null;
+		Node startNode = null;
 		Vector3[] waypoints = new 	Vector3[0];	
 		bool pathSuccess = false;
+		if (enemy != null && targetPos != null) {
+			startNode = grid.NodeFromWorldPoint (enemy.position);
+			targetNode = grid.NodeFromWorldPoint (targetPos.position);
 
-		Node startNode = grid.NodeFromWorldPoint (enemy.position);
-		Node targetNode = grid.NodeFromWorldPoint (targetPos.position);
-
-		//if targetNode niet walkable, zoek dan naar een neighbour die wel walkable is
-		if (!targetNode.walkable) {
-			foreach (Node neighbour in grid.GetNeighbours(targetNode)) {
-				if (neighbour.walkable) {
-					targetNode = neighbour;
-				}
-			}
-		}
-
-		//als buren ook niet walkable, kijk naar buren van buren.
-		if (!targetNode.walkable) {
-			foreach (Node neighbour in grid.GetNeighbours(targetNode)) {
-				foreach (Node neighbourNeighbour in grid.GetNeighbours(neighbour)) {
-					if (neighbourNeighbour.walkable) {
-						targetNode = neighbourNeighbour;
+			//if targetNode niet walkable, zoek dan naar een neighbour die wel walkable is
+			if (!targetNode.walkable) {
+				foreach (Node neighbour in grid.GetNeighbours(targetNode)) {
+					if (neighbour.walkable) {
+						targetNode = neighbour;
 					}
 				}
 			}
-		}
 
-		//if startnode niet walkable
-		if (!startNode.walkable) {
-			foreach (Node neighbour in grid.GetNeighbours(startNode)) {
-				if (neighbour.walkable) {
-					startNode = neighbour;
+			//als buren ook niet walkable, kijk naar buren van buren.
+			if (!targetNode.walkable) {
+				foreach (Node neighbour in grid.GetNeighbours(targetNode)) {
+					foreach (Node neighbourNeighbour in grid.GetNeighbours(neighbour)) {
+						if (neighbourNeighbour.walkable) {
+							targetNode = neighbourNeighbour;
+						}
+					}
 				}
 			}
-		}
 
-		//if startnode niet walkable
-		if (!startNode.walkable) {
-			foreach (Node neighbour in grid.GetNeighbours(startNode)) {
-				foreach (Node neighbourNeighbour in grid.GetNeighbours(neighbour)) {
-					if (neighbourNeighbour.walkable) {
+			//if startnode niet walkable
+			if (!startNode.walkable) {
+				foreach (Node neighbour in grid.GetNeighbours(startNode)) {
+					if (neighbour.walkable) {
 						startNode = neighbour;
 					}
 				}
 			}
-		}
 
-		//if (startNode.walkable && targetNode.walkable) {
-		if (startNode.walkable) {
-
-			Heap<Node> openSet = new Heap<Node> (grid.MaxSize);
-			HashSet<Node> closedSet = new HashSet<Node> ();
-			openSet.Add (startNode);
-			
-			while (openSet.Count > 0) {
-			Node currentNode = openSet.RemoveFirst ();
-				closedSet.Add (currentNode);
-	
-				if (currentNode == targetNode) {
-					pathSuccess = true;
-					break;
-				}
-				foreach (Node neighbour in grid.GetNeighbours(currentNode)) {
-					if (!neighbour.walkable || closedSet.Contains (neighbour)) {
-						continue;
+			//if startnode niet walkable
+			if (!startNode.walkable) {
+				foreach (Node neighbour in grid.GetNeighbours(startNode)) {
+					foreach (Node neighbourNeighbour in grid.GetNeighbours(neighbour)) {
+						if (neighbourNeighbour.walkable) {
+							startNode = neighbour;
+						}
 					}
-					int newMovementCostToNeighbour = currentNode.gCost + GetDistance (currentNode, neighbour);
-					if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains (neighbour)) {
-						neighbour.gCost = newMovementCostToNeighbour;
-						neighbour.hCost = GetDistance (neighbour, targetNode);
-						neighbour.parent = currentNode;
-						if (!openSet.Contains (neighbour)) {
-							openSet.Add (neighbour);
+				}
+			}
+
+			//if (startNode.walkable && targetNode.walkable) {
+			if (startNode.walkable) {
+
+				Heap<Node> openSet = new Heap<Node> (grid.MaxSize);
+				HashSet<Node> closedSet = new HashSet<Node> ();
+				openSet.Add (startNode);
+			
+				while (openSet.Count > 0) {
+					Node currentNode = openSet.RemoveFirst ();
+					closedSet.Add (currentNode);
+	
+					if (currentNode == targetNode) {
+						pathSuccess = true;
+						break;
+					}
+					foreach (Node neighbour in grid.GetNeighbours(currentNode)) {
+						if (!neighbour.walkable || closedSet.Contains (neighbour)) {
+							continue;
+						}
+						int newMovementCostToNeighbour = currentNode.gCost + GetDistance (currentNode, neighbour);
+						if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains (neighbour)) {
+							neighbour.gCost = newMovementCostToNeighbour;
+							neighbour.hCost = GetDistance (neighbour, targetNode);
+							neighbour.parent = currentNode;
+							if (!openSet.Contains (neighbour)) {
+								openSet.Add (neighbour);
+							}
 						}
 					}
 				}
