@@ -12,7 +12,7 @@ public class Upgrade_PlayerHealth : BaseUpgrade {
         //Error message
         if (price.Length != upgradeAmount.Length)
         {
-            Debug.Log("price.Length should be upgradeAmount.Length");
+//            Debug.Log("price.Length should be upgradeAmount.Length");
         }
 
         //Set variables

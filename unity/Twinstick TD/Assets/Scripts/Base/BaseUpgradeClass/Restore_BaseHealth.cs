@@ -12,7 +12,7 @@ public class Restore_BaseHealth : BaseUpgrade {
         //Error message
         if (price.Length != 1)
         {
-            Debug.Log("Price length should be 1");
+//            Debug.Log("Price length should be 1");
         }
 
         //Set variables

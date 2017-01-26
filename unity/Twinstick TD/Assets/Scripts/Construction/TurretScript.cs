@@ -139,7 +139,7 @@ public class TurretScript : MonoBehaviour {
     }
 
 	public void takeDamage(float damage){
-		Debug.Log ("turret gets damage: " + damage);
+//		Debug.Log ("turret gets damage: " + damage);
 		//Set hitmark
 		createHitMark(m_hitBaseCanvasPrefab, damage);
 

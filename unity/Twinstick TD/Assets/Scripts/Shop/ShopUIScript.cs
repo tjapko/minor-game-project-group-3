@@ -39,6 +39,8 @@ public class ShopUIScript : MonoBehaviour {
     private bool base_destroyed;                //Boolean if base is destroyed
     private List<Weapon> weaponlist;
     //private List<Weapon> ammolist;            //Fix (should be fixed when using different types of ammo)
+	private float m_scaleUpgradeWeaponPrice = 0.25f;
+
 
     // Use this for initialization
     public void StartInitialization() {
@@ -331,8 +333,8 @@ public class ShopUIScript : MonoBehaviour {
         {
             weaponsCost += upgradeprice(i);
         }
-        Debug.Log("tier: " + m_shopscript.getCurrentTier() + "  upgradeCost: " + m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()]) ;
-        int upgradecost = m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()] + weaponsCost;
+//        Debug.Log("tier: " + m_shopscript.getCurrentTier() + "  upgradeCost: " + m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()]) ;
+		int upgradecost = (int)(m_shopscript.upgrade_cost[m_shopscript.getCurrentTier()] + weaponsCost * m_scaleUpgradeWeaponPrice);
 
         return upgradecost;
     }

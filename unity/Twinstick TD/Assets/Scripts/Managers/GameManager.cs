@@ -257,7 +257,7 @@ public class GameManager : MonoBehaviour
         m_players.setConstructionphase(!wavephase);
         pauseGame(gamepause);
 
-        Debug.Log("GAME OVER");
+//        Debug.Log("GAME OVER");
         
     }
 

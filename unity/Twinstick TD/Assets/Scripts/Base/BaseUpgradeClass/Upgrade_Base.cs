@@ -20,7 +20,7 @@ public class Upgrade_Base : BaseUpgrade {
         //Error message
         if (price.Length != incHealthAmount.Length)
         {
-            Debug.Log("price.Length != incHealthAmount.Length");
+//            Debug.Log("price.Length != incHealthAmount.Length");
         }
 
         //Set variables

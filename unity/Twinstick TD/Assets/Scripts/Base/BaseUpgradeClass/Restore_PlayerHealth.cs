@@ -13,7 +13,7 @@ public class Restore_PlayerHealth : BaseUpgrade {
         //Error message
         if (price.Length != 1)
         {
-            Debug.Log("Price length should be 1");
+//            Debug.Log("Price length should be 1");
         }
 
         //Set variables
@@ -26,7 +26,7 @@ public class Restore_PlayerHealth : BaseUpgrade {
     {
         Basehealth player_script = m_player.GetComponent<Basehealth>();
         float dif = (player_script.m_maxhealth - player_script.getCurrentHealth());
-        Debug.Log("price: " + price_array);
+//        Debug.Log("price: " + price_array);
         return ((int)(dif * price_array[0]));
     }
 
