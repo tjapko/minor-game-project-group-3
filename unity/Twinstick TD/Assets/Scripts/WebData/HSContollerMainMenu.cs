@@ -34,7 +34,6 @@ public class HSContollerMainMenu : MonoBehaviour {
         yield return itemsData;
 
         string itemsDataString = itemsData.text;
-        print(itemsDataString);
         items = itemsDataString.Split(';');
 
         for (int i = 0; i < 5; i++)
