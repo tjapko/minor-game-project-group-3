@@ -13,7 +13,7 @@ public class BaseManager
     public GameObject m_Instance;                       // Reference to instance of base
 
     //private variables
-    //private Basehealth m_basehealth;                    //Reference to base health script
+    public Basehealth m_basehealth;                    //Reference to base health script
 
     //Constructor
     public BaseManager (GameObject baseprefab, Transform spawnpoint)
@@ -30,7 +30,7 @@ public class BaseManager
 		} else {
         	m_Instance = GameObject.Instantiate(m_baseprefab, m_SpawnPoint.position, m_SpawnPoint.rotation) as GameObject;
         	m_SpawnPoint = m_Instance.transform;
-        	//m_basehealth = m_Instance.GetComponent<Basehealth>();
+        	m_basehealth = m_Instance.GetComponent<Basehealth>();
 		}
 
         m_Instance.GetComponent<BaseUpgradeScript>().StartInitialization();

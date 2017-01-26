@@ -9,8 +9,10 @@ public class CanvasPlayerUIScript : MonoBehaviour {
 
     //References to managers
     private GameManager m_gamemanager;      //Reference to game manager (used to invoke next wave)
-    private UserManager m_usermanager;      //Reference to the usermanager in the game manager
-    private WaveManager m_wavemanager;
+    private UserManager m_usermanager;      //Reference to the user manager in the game manager
+    private WaveManager m_wavemanager;      //Reference to the wave manager in the game manager
+    private BaseManager m_basemanager;      //Reference to the base manager in the game manager
+    private Basehealth m_basehealthscript;  //Reference to the base health script
     private List<PlayerManager> m_players;  //Reference to the players in the game
 
     //References to GameObject
@@ -27,6 +29,9 @@ public class CanvasPlayerUIScript : MonoBehaviour {
     private GameObject m_wavestats;             //Reference tot he Wave stats UI panel
     private GameObject m_waveremaining;         //Reference to the wave remaining UI panel
     private Text m_waveremainingText;           //Reference to the text in the wave remaining UI panel
+    public GameObject go_basehealth;            //Reference to slider of base health (set externally)
+    private Slider m_basehealthSlider;          //Slider for player health
+    private Image m_basehealthfillImage;        //Image for player health
 
     public void StartInitialization()
     {
@@ -35,6 +40,8 @@ public class CanvasPlayerUIScript : MonoBehaviour {
         m_usermanager = m_gamemanager.getUserManager();
         m_players = m_usermanager.m_playerlist;
         m_wavemanager = m_gamemanager.getWaveManager();
+        m_basemanager = m_gamemanager.getBaseManager();
+        m_basehealthscript = m_basemanager.m_basehealth;
 
         //Get variables
         int amountofplayers = m_gamemanager.m_amountofplayers;
@@ -90,9 +97,6 @@ public class CanvasPlayerUIScript : MonoBehaviour {
             ammo_list.Add(m_weaponstats[i].transform.GetChild(5).GetComponent<Text>());
             ammo_list.Add(m_weaponstats[i].transform.GetChild(6).GetComponent<Text>());
             m_weaponammo.Add(ammo_list);
-
-           
-
         }
 
         //Activate weaponstats 
@@ -102,6 +106,10 @@ public class CanvasPlayerUIScript : MonoBehaviour {
         }
 
         m_waveremainingText = m_waveremaining.transform.GetChild(0).GetComponent<Text>();
+
+        //Set references base health
+        m_basehealthSlider = go_basehealth.transform.GetComponent<Slider>();
+        m_basehealthfillImage = go_basehealth.transform.GetChild(1).GetChild(0).GetComponent<Image>();
 
         //Set active UI
         m_wavecontrol.SetActive(true);
@@ -252,6 +260,7 @@ public class CanvasPlayerUIScript : MonoBehaviour {
     //Updates health UI
     public void updateHealthUI()
     {
+        //Update player health
         for(int i = 0; i < m_players.Count; i++)
         {
             PlayerHealth health_script = m_players[i].m_playerhealth;
@@ -260,6 +269,13 @@ public class CanvasPlayerUIScript : MonoBehaviour {
             m_healthslider[i].value = health_script.getCurrentHealth();
             m_fillImage[i].color = Color.Lerp(health_script.m_ZeroHealthColor, health_script.m_FullHealthColor, health_script.getCurrentHealth() / health_script.m_maxHealth);
         }
+
+        //Update base health
+        m_basehealthSlider.maxValue = m_basehealthscript.m_maxhealth;
+        m_basehealthSlider.value = m_basehealthscript.getCurrentHealth();
+        m_basehealthfillImage.color = Color.Lerp(m_basehealthscript.m_ZeroHealthColor, m_basehealthscript.m_FullHealthColor, m_basehealthscript.getCurrentHealth() / m_basehealthscript.m_maxhealth);
+
+
     }
 
     //Show wave reward

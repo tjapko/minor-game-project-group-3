@@ -210,7 +210,11 @@ public class GameManager : MonoBehaviour
                 {
                     yield return StartCoroutine(constructionPhase());
                 }
-				m_waveNumber++;
+
+                // switch Main camera to construction camera 
+                CameraControl.switchConstructionCamToMainCam();
+
+                m_waveNumber++;
 				m_waveNumberusedForHighscore++;
 				StartCoroutine(m_uiscript.showWaveStatsUI());
                 //Spawn next wave and remove dead enemies
@@ -314,8 +318,6 @@ public class GameManager : MonoBehaviour
         m_players.setConstructionphase(!wavephase);
         m_uiscript.UIchange(gameover, wavephase, gamepause);
 
-		// switch Main camera to construction camera 
-		CameraControl.switchConstructionCamToMainCam ();
 //		m_players.enablePlayersControl2();
 
     }
