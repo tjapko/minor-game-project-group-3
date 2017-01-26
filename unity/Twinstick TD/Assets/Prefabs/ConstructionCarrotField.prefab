@@ -1662,7 +1662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14808f004a0775b4ab61866601d20afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxhealth: 10
   m_owner:
     m_Instance: {fileID: 0}
     m_SpawnPoint: {fileID: 0}
@@ -1735,7 +1734,7 @@ MonoBehaviour:
   m_FillImage: {fileID: 114000011432437794}
   m_startyield: 250
   m_inc: 1.5
-  m_startHealth: 1
+  m_startHealth: 20
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114000014218646504
