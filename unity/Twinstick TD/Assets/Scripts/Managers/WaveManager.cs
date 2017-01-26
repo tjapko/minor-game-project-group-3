@@ -141,6 +141,9 @@ public class WaveManager
 		} else {
 			amount = m_angle3 * m_wave + b3;
 		}
+		if (amount > m_maxEnemies) {
+			return m_maxEnemies;
+		}
 
 		return (int)amount;
 	}
