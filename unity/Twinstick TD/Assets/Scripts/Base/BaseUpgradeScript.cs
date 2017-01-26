@@ -30,13 +30,14 @@ public class BaseUpgradeScript : MonoBehaviour {
     public int[] price_upgradeBaseHealth;   //Cost per upgrade
     public int[] amount_upgradeBaseHealth;  //Added Amountof hp per upgrade
 
-	[Header("Turret stats settings")]
-	public float[] upgradeBaseTurretDamage;    //Damage of the turret per upgrade
-	public float[] upgradeBaseTurretRange;  	 //Range of the turret per upgrade
-	public float[] upgradeBaseTurretAccuracy;  //Accuracy of the turret per upgrade
-	public float[] upgradeBaseTurretFirerate;  //FireRate of the turret per upgrade
-	public float[] upgradeBaseTurretLaunchForce;  //LaunchForce of the turret per upgrade
-	public float[] upgradeBaseTurretTurnRate;  //TurnRate of the turret per upgrade
+    [Header("Turret stats settings")]
+    public float[] upgradePlayerTurretHealth;   //Upgrade the health of a player turret
+	public float[] upgradeBaseTurretDamage;     //Damage of the turret per upgrade
+	public float[] upgradeBaseTurretRange;  	//Range of the turret per upgrade
+	public float[] upgradeBaseTurretAccuracy;   //Accuracy of the turret per upgrade
+	public float[] upgradeBaseTurretFirerate;   //FireRate of the turret per upgrade
+	public float[] upgradeBaseTurretLaunchForce;//LaunchForce of the turret per upgrade
+	public float[] upgradeBaseTurretTurnRate;   //TurnRate of the turret per upgrade
 
     //Private Variables
     private List<List<BaseUpgrade>> player_upgradelist; //List containing upgrade duo's
@@ -60,7 +61,7 @@ public class BaseUpgradeScript : MonoBehaviour {
         List<BaseUpgrade> upgrade_duo_2 = new List<BaseUpgrade>();
         upgrade_duo_1.Add((BaseUpgrade)new Upgrade_PlayerHealth(price_upgradePlayerHealth, amount_upgradePlayerHealth));
         upgrade_duo_1.Add((BaseUpgrade)new Restore_PlayerHealth(new int[] { price_restorePlayerHealth }, amount_restorePlayerHealth));
-		upgrade_duo_2.Add((BaseUpgrade)new Upgrade_Base(price_upgradeBaseHealth, amount_upgradeBaseHealth, upgradeBaseTurretDamage, upgradeBaseTurretRange, upgradeBaseTurretAccuracy,upgradeBaseTurretFirerate, upgradeBaseTurretLaunchForce, upgradeBaseTurretTurnRate));
+		upgrade_duo_2.Add((BaseUpgrade)new Upgrade_Base(price_upgradeBaseHealth, amount_upgradeBaseHealth, upgradePlayerTurretHealth, upgradeBaseTurretDamage, upgradeBaseTurretRange, upgradeBaseTurretAccuracy,upgradeBaseTurretFirerate, upgradeBaseTurretLaunchForce, upgradeBaseTurretTurnRate));
         upgrade_duo_2.Add((BaseUpgrade)new Restore_BaseHealth(new int[] { price_restoreBaseHealth }, amount_restoreBaseHealth));
         
         player_upgradelist.Add(upgrade_duo_1);

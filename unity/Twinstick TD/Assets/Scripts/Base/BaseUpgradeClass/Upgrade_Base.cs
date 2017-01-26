@@ -5,6 +5,7 @@ public class Upgrade_Base : BaseUpgrade {
 
     //Private variable
     private int[] m_basehealthinc;
+    private float[] m_PTurretHealthInc;
 	private float[] m_BaseTurretDamageInc;
 	private float[] m_BaseTurretRangeInc;
 	private float[] m_BaseTurretAccuracyInc;
@@ -15,7 +16,7 @@ public class Upgrade_Base : BaseUpgrade {
 
     //Constructor
     //m_base: the base (gameobject)
-	public Upgrade_Base(int[] price, int[] incHealthAmount, float[] incTurretDamage, float[]  incTurretRange, float[] incTurretAccuracy, float[]  incTurretFireRate, float[] incTurretLaunchSpeed, float[] incTurretTurnRate) : base(price)
+	public Upgrade_Base(int[] price, int[] incHealthAmount, float[] incPTurretHealth, float[] incTurretDamage, float[]  incTurretRange, float[] incTurretAccuracy, float[]  incTurretFireRate, float[] incTurretLaunchSpeed, float[] incTurretTurnRate) : base(price)
     {
         //Error message
         if (price.Length != incHealthAmount.Length)
@@ -25,6 +26,7 @@ public class Upgrade_Base : BaseUpgrade {
 
         //Set variables
         upgrade_type = BaseUpgradeType.BaseUpgrade;
+        m_PTurretHealthInc = incPTurretHealth;
         m_basehealthinc = incHealthAmount;
 		m_BaseTurretDamageInc = incTurretDamage;
 		m_BaseTurretRangeInc = incTurretRange;
@@ -61,12 +63,25 @@ public class Upgrade_Base : BaseUpgrade {
         BaseTurret.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
 
         //Increase player turret stats
+        TurretScript.addMaxHealth(m_PTurretHealthInc[selected_index]);
         TurretScript.setDamage(m_BaseTurretDamageInc[selected_index]);
         TurretScript.setRange(m_BaseTurretRangeInc[selected_index]);
         TurretScript.setAccuracy(m_BaseTurretAccuracyInc[selected_index]);
         TurretScript.setFirerate(m_BaseTurretFireRateInc[selected_index]);
         TurretScript.setLaunchForce(m_BaseTurretLaunchSpeedInc[selected_index]);
         TurretScript.setTurnRate(m_BaseTurretTurnRateInc[selected_index]);
+
+        //Add health to existing turrets
+        GameObject[] existingTurrets = GameObject.FindGameObjectsWithTag("PlayerTurret");
+        foreach(GameObject turret in existingTurrets)
+        {
+            TurretScript script = turret.GetComponent<TurretScript>();
+            if(script != null)
+            {
+                script.addHealth(m_PTurretHealthInc[selected_index]);
+                script.SetHealthUI();
+            }
+        }
 
         //Spawn turrets
         checkBaseTurret(selected_index, baseupgradeScript);
