@@ -212,9 +212,11 @@ public class GameManager : MonoBehaviour
                 // switch Main camera to construction camera 
                 CameraControl.switchConstructionCamToMainCam();
 
+                //Do wave number things
                 m_waveNumber++;
 				m_waveNumberusedForHighscore++;
-				StartCoroutine(m_uiscript.showWaveStatsUI());
+                m_uiscript.setWaveNumber();
+
                 //Spawn next wave and remove dead enemies
                 //While loop is needed, because EnemiesDead() is not fast enough to detect that a new wave has spawned
                 m_wave.DestroyEnemies();

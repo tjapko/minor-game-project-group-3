@@ -150,22 +150,22 @@ public class CanvasPlayerUIScript : MonoBehaviour {
     }
 
     //Show or hide the UI panel
-    public IEnumerator showWaveStatsUI()
-    {
-        //Set the text of the UI
-        int wavenumber = m_gamemanager.getWaveNumber();
-        m_wavestats.transform.GetChild(0).GetComponent<Text>().text = "Wave " + wavenumber;
+    //public IEnumerator showWaveStatsUI()
+    //{
+    //    //Set the text of the UI
+    //    int wavenumber = m_gamemanager.getWaveNumber();
+    //    m_wavestats.transform.GetChild(0).GetComponent<Text>().text = "Wave " + wavenumber;
 
-        m_wavestats.SetActive(true);
-        m_wavestats.GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, false);
-        m_wavestats.transform.GetChild(0).GetComponent<Text>().CrossFadeAlpha(1.0f, 2.0f, false);
+    //    m_wavestats.SetActive(true);
+    //    m_wavestats.GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, false);
+    //    m_wavestats.transform.GetChild(0).GetComponent<Text>().CrossFadeAlpha(1.0f, 2.0f, false);
 
-        yield return new WaitForSeconds(1.0f);
+    //    yield return new WaitForSeconds(1.0f);
 
-        m_wavestats.GetComponent<Image>().CrossFadeAlpha(0.0f, 2.0f, false);
-        m_wavestats.transform.GetChild(0).GetComponent<Text>().CrossFadeAlpha(0.0f, 2.0f, false);
-        m_wavestats.SetActive(false);
-    }
+    //    m_wavestats.GetComponent<Image>().CrossFadeAlpha(0.0f, 2.0f, false);
+    //    m_wavestats.transform.GetChild(0).GetComponent<Text>().CrossFadeAlpha(0.0f, 2.0f, false);
+    //    m_wavestats.SetActive(false);
+    //}
 
     // sets the currencyText which is visible on the screen to the current Currency
     private void SetCurrencyText()
@@ -193,6 +193,13 @@ public class CanvasPlayerUIScript : MonoBehaviour {
             m_wavemanager = m_gamemanager.getWaveManager();
         }
         m_waveremainingText.text = "Enemies left: " + m_wavemanager.enemiesRemaining();
+    }
+
+    // Sets the current wave number
+    public void setWaveNumber()
+    {
+        int wavenumber = m_gamemanager.getWaveNumber();
+        m_wavestats.transform.GetChild(0).GetComponent<Text>().text = "Wave " + wavenumber;
     }
 
     // Sets the icons of the guns
@@ -255,6 +262,12 @@ public class CanvasPlayerUIScript : MonoBehaviour {
         {
             m_waveremaining.SetActive(status);
         }
+    }
+
+    // Show/hide the wave number panel
+    public void showWaveNumber(bool status)
+    {
+        m_wavestats.SetActive(status);
     }
 
     //Updates health UI
