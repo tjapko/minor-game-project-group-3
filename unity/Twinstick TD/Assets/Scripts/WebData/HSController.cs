@@ -33,7 +33,7 @@ public class HSController : MonoBehaviour
 		yield return itemsData;
 
 		string itemsDataString = itemsData.text;
-		print (itemsDataString);
+
 		items = itemsDataString.Split (';');
 
 		if (itemsData.error != null) {

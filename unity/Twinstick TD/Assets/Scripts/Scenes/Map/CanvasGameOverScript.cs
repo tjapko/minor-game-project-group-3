@@ -117,13 +117,11 @@ public class CanvasGameOverScript : MonoBehaviour {
 	// remember to use StartCoroutine when calling this function!
 	IEnumerator PostScores(string Name, int Score)
 	{
-		print ("recieved");
 		//This connects to a server side php script that will add the name and score to a MySQL DB.
 		// Supply it with a string representing the players name and the players score.
 		var hash=Md5.Md5Sum(Name + Score + secretKey);
 
 		string post_url = addScoreURL + "Name=" + WWW.EscapeURL(Name) + "&Score=" + Score + "&hash=" + hash;
-		print (post_url);
 		// Post the URL to the site and create a download object to get the result.
 		WWW hs_post = new WWW(post_url);
 		yield return hs_post; // Wait until the download is done

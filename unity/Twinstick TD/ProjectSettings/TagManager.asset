@@ -36,6 +36,7 @@ TagManager:
   - obj4
   - New Tag
   - baseTurret
+  - CameraRig
   layers:
   - Default
   - TransparentFX
