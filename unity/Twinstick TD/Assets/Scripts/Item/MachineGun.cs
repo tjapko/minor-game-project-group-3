@@ -15,7 +15,7 @@ public class MachineGun {
 	public static float bulletLifeTime = 2f;    // the lifetime of the bullet 
     // upgradable stats (ammo & ammoInClip)
     public static int[] ammo = { 180, 360, 720};                // all the different ammo levels 
-    public static int[] ammoInClip = { 60, 90, 120 };            // all ammo from weapon when you buy it 
+	public static int[] ammoInClip = { 60, 120, 240 };             // all ammo from weapon when you buy it 
     public static int[] clipSize = { 60, 120, 240 };              // all ammo in clip when you buy them 
     public static int[] maxAmmo = { 180, 360, 720 };            // max ammo player can carry for every level
     public static float[] maxDamage = {1f, 2f, 3f };     // the damage for every level  

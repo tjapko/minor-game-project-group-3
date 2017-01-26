@@ -16567,7 +16567,7 @@ MonoBehaviour:
   - 6000
   - 7000
   upgradeBaseTurretFirerate:
-  - 0.33
+  - 0.25
   - 0.33
   - 0.67
   - 1
