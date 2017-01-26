@@ -84,8 +84,8 @@ public class Basehealth : MonoBehaviour {
     public void SetHealthUI()
     {
         // Set the slider's value appropriately.
-        m_Slider.value = m_CurrentHealth;
         m_Slider.maxValue = m_maxhealth;
+        m_Slider.value = m_CurrentHealth;
 
         // Interpolate the color of the bar between the choosen colours based on the current percentage of the starting health.
         m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_maxhealth);
@@ -126,7 +126,15 @@ public class Basehealth : MonoBehaviour {
     // On Rebuild
     public void OnRebuild()
     {
-        OnEnable();
+        //Set variables
+        m_Dead = false;
+        gameObject.SetActive(true);
+
+        //Set starting variables
+        m_CurrentHealth = m_maxhealth;
+        SetHealthUI();
+
+        //Set variable shop script
         ShopScript m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
         ShopUIScript m_shopuiscript = m_shopscript.m_instance_UI.GetComponent<ShopUIScript>();
         m_shopuiscript.setBaseDestroyed(false);

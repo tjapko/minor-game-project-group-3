@@ -20,8 +20,6 @@ public class HSController : MonoBehaviour
 		//Activate game over menu
 		m_HighScoreMenu.SetActive(true);
         StartCoroutine(GetScores());
-
-
     }
  
 	 
