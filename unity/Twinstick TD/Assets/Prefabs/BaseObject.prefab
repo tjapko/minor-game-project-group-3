@@ -16579,6 +16579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b89362717e297488b403968363454e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  helpbox_prefab: {fileID: 1000011848348470, guid: 06d8da69edd821a488eee1b3c9eb5a8c,
+    type: 2}
 --- !u!114 &114000012882652028
 MonoBehaviour:
   m_ObjectHideFlags: 1
