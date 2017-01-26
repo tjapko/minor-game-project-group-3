@@ -352,14 +352,14 @@ public class GameManager : MonoBehaviour
     private void SetCameraTargets()
     {
         // Get targets of players
-        Transform[] targets = new Transform[m_amountofplayers];
+        Transform[] targets = new Transform[m_amountofplayers+1];
 
 
-        for (int i = 0; i < targets.Length; i++)
+        for (int i = 0; i < targets.Length-1; i++)
         {
             targets[i] = m_players.m_playerlist[i].m_Instance.transform;
         }
-
+        targets[targets.Length - 1] = m_base.m_Instance.transform;
         // These are the targets the camera should follow.
         m_CameraControl.m_Targets = targets;
     }

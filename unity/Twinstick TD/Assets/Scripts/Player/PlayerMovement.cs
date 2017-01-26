@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 	private float m_MovementInputValueH;
 //	private Vector3 m_RotationInputM; not used 
 	private int Floor;
-	private float camRayLength = 100f;
+	private float camRayLength = 200f;
 	private Vector3 movement;
 	private Vector3 playerDir;
 	private Transform cameraTransform;
