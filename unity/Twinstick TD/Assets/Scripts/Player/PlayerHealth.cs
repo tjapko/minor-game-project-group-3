@@ -8,7 +8,6 @@ public class PlayerHealth : MonoBehaviour
 
     //References
     public GameObject m_hitFriendlyCanvasPrefab;    //Reference to friendlyHit canvas;
-    
     private GameObject m_maincamera;                //Reference to maincamera
 
     //audio
@@ -33,7 +32,7 @@ public class PlayerHealth : MonoBehaviour
 
 	public void Start()
 	{
-        m_maincamera = GameObject.FindWithTag("MainCamera");
+        m_maincamera = GameObject.FindWithTag("CameraRig").transform.GetChild(0).gameObject;
         m_Dead = false;
         // When the enemy is enabled, reset the enemy's health
         m_CurrentHealth = m_StartingHealth;

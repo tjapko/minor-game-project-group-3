@@ -157,7 +157,7 @@ public class UnitPlayer : MonoBehaviour {
 				currentWaypoint = path[targetIndex];			
 			}
 			float angle = Mathf.RoundToInt(Vector3.Angle (currentWaypoint - transform.position, transform.forward));
-			float speed = 2 * Mathf.Pow(1.15f,(angle/2));
+			float speed = 15 * Mathf.Pow(1.5f,(angle/15));
 			var q = Quaternion.LookRotation (currentWaypoint - transform.position);
 			transform.rotation = Quaternion.RotateTowards (transform.rotation, q, speed * Time.deltaTime);
 			transform.position = Vector3.MoveTowards(transform.position,currentWaypoint,movementSpeed * Time.deltaTime);

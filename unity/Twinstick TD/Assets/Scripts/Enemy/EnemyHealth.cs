@@ -48,7 +48,7 @@ public class EnemyHealth : MonoBehaviour
     public void Start()
     {
         //Set references
-        m_maincamera = GameObject.FindWithTag("MainCamera");
+        m_maincamera = GameObject.FindWithTag("CameraRig").transform.GetChild(0).gameObject;
 
         // Update the health slider's value and color.
         SetHealthUI();

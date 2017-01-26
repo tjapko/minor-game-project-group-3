@@ -32,7 +32,7 @@ public class Basehealth : MonoBehaviour {
     public void OnEnable()
     {
         //Set references
-        m_maincamera = GameObject.FindWithTag("MainCamera");
+        m_maincamera = GameObject.FindWithTag("CameraRig").transform.GetChild(0).gameObject;
 
         m_Dead = false;
 		gameObject.SetActive (true);
