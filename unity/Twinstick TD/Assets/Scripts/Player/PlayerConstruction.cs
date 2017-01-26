@@ -206,7 +206,7 @@ public class PlayerConstruction : MonoBehaviour {
             }
 
             //Escape button
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("f"))
             {
                 constructing = true;
                 break;
