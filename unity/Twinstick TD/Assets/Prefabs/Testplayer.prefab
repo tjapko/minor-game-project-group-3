@@ -2810,7 +2810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playernumber: 0
-  m_playerstartcurrency: 2000000
+  m_playerstartcurrency: 500
   m_currency: 0
 --- !u!114 &114000013046789916
 MonoBehaviour:

@@ -25,18 +25,11 @@ public class zoomControl : MonoBehaviour {
 				m_constructionCam.orthographicSize -= 20;
 				m_constructionCam.transform.position = mousePos ();
 			}
-//			m_constructionCam.transform.position = mousePos ();
 		}
-		
 		if (scroll < 0)
 		{
-			if (m_constructionCam.orthographicSize <= 60) {
 				m_constructionCam.orthographicSize = 70;
-				m_constructionCam.transform.position = mousePos ();
-			} else {
 				m_constructionCam.transform.position = m_CamPos;
-				m_constructionCam.orthographicSize = 70;
-			}
 		}
 	}
 
@@ -54,6 +47,9 @@ public class zoomControl : MonoBehaviour {
 			Vector3 playerToMouse = floorHit.point - transform.position; // creating a vector from the player to the mousePosition
 			playerToMouse.y = 0f; // because it's a projection on the x-z-plane
 			playerToMouse = transform.position + playerToMouse;  //Used for dropping objects
+			if (75.0 - playerToMouse.z < 55) {
+				playerToMouse.z = 20;
+			}
 			return playerToMouse;
 		}
 		return Vector3.zero;
