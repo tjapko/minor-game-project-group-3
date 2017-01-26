@@ -16,7 +16,7 @@ public class CameraControl : MonoBehaviour
 	private static Camera m_constructionCam;
 	private static Vector3 m_MainCamPos;
 	private static Camera bg;
-	private static float m_sizeContructionCam = 71f;
+	private static float m_sizeContructionCam = 70f;
 
 
     private void Awake()
