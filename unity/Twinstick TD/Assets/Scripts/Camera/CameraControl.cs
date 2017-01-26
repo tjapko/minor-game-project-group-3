@@ -16,6 +16,7 @@ public class CameraControl : MonoBehaviour
 	private static Camera m_constructionCam;
 	private static Vector3 m_MainCamPos;
 	private static Camera bg;
+	private static float m_sizeContructionCam = 71f;
 
 
     private void Awake()
@@ -144,9 +145,10 @@ public class CameraControl : MonoBehaviour
 		bg.enabled = true;
 		bg.gameObject.SetActive (true);
 		m_Camera.enabled = false;
-//		m_Camera.gameObject.SetActive (false);
+		m_Camera.gameObject.SetActive (false);
 		// set right camera position
 		m_constructionCam.transform.position = m_constructionCamPos;
+		m_constructionCam.orthographicSize = m_sizeContructionCam;
 		// switch cameras
 		m_constructionCam.enabled = true;
 		m_constructionCam.gameObject.SetActive(true);
@@ -160,7 +162,7 @@ public class CameraControl : MonoBehaviour
 
 		//switch cameras
 		m_Camera.enabled = true;
-//		m_Camera.gameObject.SetActive(true);
+		m_Camera.gameObject.SetActive(true);
 		m_constructionCam.enabled = false;
 		m_constructionCam.gameObject.SetActive(false);
 	}
@@ -168,6 +170,5 @@ public class CameraControl : MonoBehaviour
 	public static void restartCam() {
 //		m_Camera.transform.position = m_MainCamPos;
 //		m_constructionCam.transform.position = m_constructionCamPos;
-	}
-		
+	}		
 }

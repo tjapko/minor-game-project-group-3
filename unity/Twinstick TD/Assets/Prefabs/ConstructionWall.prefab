@@ -381,7 +381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14808f004a0775b4ab61866601d20afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxhealth: 10
   m_owner:
     m_Instance: {fileID: 0}
     m_SpawnPoint: {fileID: 0}

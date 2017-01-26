@@ -2242,6 +2242,7 @@ GameObject:
   - 20: {fileID: 762963115}
   - 92: {fileID: 762963114}
   - 124: {fileID: 762963113}
+  - 114: {fileID: 762963112}
   m_Layer: 0
   m_Name: constructionCam
   m_TagString: constructionCam
@@ -2249,6 +2250,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &762963112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 762963111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9784a4eb9187452798fdbd739d78dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &762963113
 Behaviour:
   m_ObjectHideFlags: 0
@@ -2269,7 +2281,7 @@ Camera:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 762963111}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.23496972, g: 0.5724883, b: 0.60294116, a: 0}
@@ -2923,6 +2935,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 922648189}
   - 114: {fileID: 922648188}
+  - 81: {fileID: 922648190}
   m_Layer: 0
   m_Name: Camera rig
   m_TagString: Untagged
@@ -2961,6 +2974,13 @@ Transform:
   - {fileID: 815216766}
   m_Father: {fileID: 0}
   m_RootOrder: 10
+--- !u!81 &922648190
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 922648187}
+  m_Enabled: 1
 --- !u!4 &935246982 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000012195149662, guid: 492cd182034e8024b8c78c3e21ea68ea,
@@ -5071,7 +5091,6 @@ GameObject:
   - 92: {fileID: 1514871768}
   - 124: {fileID: 1514871767}
   - 114: {fileID: 1514871771}
-  - 81: {fileID: 1514871766}
   - 82: {fileID: 1514871772}
   m_Layer: 0
   m_Name: Main Camera
@@ -5080,13 +5099,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1514871766
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1514871765}
-  m_Enabled: 1
 --- !u!124 &1514871767
 Behaviour:
   m_ObjectHideFlags: 0
