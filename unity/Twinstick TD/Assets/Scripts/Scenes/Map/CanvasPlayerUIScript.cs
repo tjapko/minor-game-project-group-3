@@ -212,7 +212,9 @@ public class CanvasPlayerUIScript : MonoBehaviour {
             int element_index = 0;
             foreach (Text ammo_text in player_ui)
             {
-                ammo_text.text = m_usermanager.m_playerlist[player_index].m_inventory.inventory[element_index].ammoInClip + "/" + m_usermanager.m_playerlist[player_index].m_inventory.inventory[element_index].ammo;
+                Weapon selected_wep = m_usermanager.m_playerlist[player_index].m_inventory.inventory[element_index];
+                string max_ammo = (selected_wep.ammo > 10000) ? "∞" : selected_wep.ammo.ToString();
+                ammo_text.text = selected_wep.ammoInClip + "/" + max_ammo;
                 element_index++;
             }
             player_index++;
