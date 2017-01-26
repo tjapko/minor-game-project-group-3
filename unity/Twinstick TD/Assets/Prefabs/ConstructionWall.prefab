@@ -86,10 +86,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013070086712}
   - 65: {fileID: 65000013431518226}
+  - 65: {fileID: 65000010917294282}
   - 114: {fileID: 114000012654645510}
   - 54: {fileID: 54000012826101316}
   - 114: {fileID: 114000010808074100}
-  - 65: {fileID: 65000010917294282}
   m_Layer: 16
   m_Name: ConstructionWall
   m_TagString: PlayerWall
@@ -220,8 +220,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.4, z: 3.5}
-  m_Center: {x: -0.3, y: 0.1, z: 0}
+  m_Size: {x: 0.5, y: 0.4, z: 3.5}
+  m_Center: {x: -0.25, y: 0.1, z: 0}
 --- !u!65 &65000013431518226
 BoxCollider:
   m_ObjectHideFlags: 1
