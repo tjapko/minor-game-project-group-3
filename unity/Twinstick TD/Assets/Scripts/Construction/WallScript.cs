@@ -8,8 +8,9 @@ public class WallScript : MonoBehaviour
 	public GameObject m_hitBaseCanvasPrefab;    //Reference to friendlyHit canvas;
 	public Slider m_Slider;
 	public Image m_FillImage;
+    private PlayerConstruction m_constructionScript;    //Reference to construction script
 
-	[Header("Public variables")]
+    [Header("Public variables")]
 	//Public Variables
 	public float m_startHealth;
 	public Color m_FullHealthColor = Color.green;   //Full health colour
@@ -71,7 +72,14 @@ public class WallScript : MonoBehaviour
 	{
 		stats.onDeath ();
 		m_Dead = true;
-		//gameObject.SetActive(false);
-	}
+        m_constructionScript.removeObject(gameObject);
+        //gameObject.SetActive(false);
+    }
+
+    //Set player construction script
+    public void setPlayerConstruction(PlayerConstruction script)
+    {
+        m_constructionScript = script;
+    }
 }
 

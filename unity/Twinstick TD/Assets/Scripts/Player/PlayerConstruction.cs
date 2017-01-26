@@ -39,7 +39,7 @@ public class PlayerConstruction : MonoBehaviour {
     private Grid m_grid;                        //Reference to grid in grid manager
     private Camera m_constructionCamera;        //Reference to the construction camera
     private int Floor;                          //Reference to floor layer
-	private GameObject m_gridInstance;
+	private GameObject m_gridInstance;          //Reference to grid
 
     //Public variables
     [Header("Prefabs")]
@@ -225,6 +225,8 @@ public class PlayerConstruction : MonoBehaviour {
             constructing = false;
             GameObject.Destroy(newinstance);
         }
+
+
 		//Delete grid again
 		Destroy (m_gridInstance);
     }
@@ -236,6 +238,7 @@ public class PlayerConstruction : MonoBehaviour {
 			int remove_id = remove_object.GetInstanceID ();
 			for (int i = 0; i < m_placedobjects.Count; i++) {
 				if (m_placedobjects [i].GetInstanceID () == remove_id) {
+                    decCounter(m_placedobjects[i].GetComponent<UserObjectStatistics>().getObjectType());
 					Destroy (m_placedobjects [i]);
 					m_placedobjects.RemoveAt (i);
 					break;
@@ -415,13 +418,16 @@ public class PlayerConstruction : MonoBehaviour {
         switch (obj_type)
         {
             case PlayerObjectType.PlayerWall:
+                m_object.GetComponent<WallScript>().setPlayerConstruction(gameObject.GetComponent<PlayerConstruction>());
                 break;
             case PlayerObjectType.PlayerTurret:
                 m_object.GetComponent<TurretScript>().setPlayerConstruction(gameObject.GetComponent<PlayerConstruction>());
                 break;
             case PlayerObjectType.PlayerCarrotField:
+                m_object.GetComponent<CarrotFieldScript>().setPlayerConstruction(gameObject.GetComponent<PlayerConstruction>());
                 break;
             case PlayerObjectType.PlayerMud:
+                m_object.GetComponent<MudScript>().setPlayerConstruction(gameObject.GetComponent<PlayerConstruction>());
                 break;
             default:
                 break;
@@ -445,6 +451,42 @@ public class PlayerConstruction : MonoBehaviour {
             default:
                 return 0;
         }
+    }
+
+    //Recount objects
+    private void recountObject()
+    {
+        int temp_currentWalls = 0;          
+        int temp_currentTurrets = 0;         
+        int temp_currentCarrotFarms = 0;     
+        int temp_currentMudPools = 0;
+        
+        foreach(GameObject player_object in m_placedobjects)
+        {
+            PlayerObjectType type = player_object.GetComponent<UserObjectStatistics>().getObjectType();
+            switch (type)
+            {
+                case PlayerObjectType.PlayerWall:
+                    temp_currentWalls++;
+                    break;
+                case PlayerObjectType.PlayerTurret:
+                    temp_currentTurrets++;
+                    break;
+                case PlayerObjectType.PlayerCarrotField:
+                    temp_currentCarrotFarms++;
+                    break;
+                case PlayerObjectType.PlayerMud:
+                    temp_currentMudPools++;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        currentWalls = temp_currentWalls;
+        currentTurrets = temp_currentTurrets;
+        currentCarrotFarms = temp_currentCarrotFarms;
+        currentMudPools = temp_currentMudPools;
     }
 }
 

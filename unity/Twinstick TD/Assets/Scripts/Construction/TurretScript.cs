@@ -10,9 +10,10 @@ public class TurretScript : MonoBehaviour {
     public Transform m_turretFireTransform; //Reference to the fire transform
     public GameObject m_turretbarrel;   //Reference to barrel of turret
 	public GameObject m_hitBaseCanvasPrefab;    //Reference to friendlyHit canvas;
-	public Slider m_Slider;
-	public Image m_FillImage;
-	
+	public Slider m_Slider;     //Reference to health slider
+	public Image m_FillImage;   //Reference to health image
+    private PlayerConstruction m_constructionScript;    //Reference to construction script
+
     //Public variables
     [Header("Public variables")]
     public static float m_maxhealth = 15;       //Current max health
@@ -35,7 +36,7 @@ public class TurretScript : MonoBehaviour {
     private int m_PlayerNumber;
 	private bool m_Dead;                //Bool dead
 	private UserObjectStatistics stats;
-	private PlayerConstruction pl;
+	
 
     // Use this for initialization
     void Start () {
@@ -135,9 +136,10 @@ public class TurretScript : MonoBehaviour {
         m_PlayerNumber = number;
     }
 
+    //Set player construction script
     public void setPlayerConstruction(PlayerConstruction script)
     {
-        pl = script;
+        m_constructionScript = script;
     }
 
 	public void takeDamage(float damage){
@@ -188,8 +190,7 @@ public class TurretScript : MonoBehaviour {
 		stats.onDeath ();
 		m_Dead = true;
         //gameObject.SetActive(false);
-        pl.removeObject(gameObject);
-        pl.decCounter(PlayerConstruction.PlayerObjectType.PlayerTurret); 
+        m_constructionScript.removeObject(gameObject);
 	}
 
 

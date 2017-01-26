@@ -11,8 +11,9 @@ public class CarrotFieldScript : MonoBehaviour {
 	public GameObject m_hitBaseCanvasPrefab;    //Reference to friendlyHit canvas;
 	public Slider m_Slider;
 	public Image m_FillImage;
+    private PlayerConstruction m_constructionScript;    //Reference to construction script
 
-	[Header("Public variables")]
+    [Header("Public variables")]
     //Public Variables
     public float m_startyield;                //Yield of carrot field at start
     public float m_inc;                       //Yield(n+1) = inc * Yield(n)
@@ -76,8 +77,9 @@ public class CarrotFieldScript : MonoBehaviour {
 	{
 		stats.onDeath ();
 		m_Dead = true;
-		//gameObject.SetActive(false);
-	}
+        m_constructionScript.removeObject(gameObject);
+        //gameObject.SetActive(false);
+    }
 
     //Initialize variables
     public int waveYield()
@@ -85,6 +87,12 @@ public class CarrotFieldScript : MonoBehaviour {
         
         //m_currentYield = m_currentYield * m_inc;
 		return (int)m_startyield;
+    }
+
+    //Set player construction script
+    public void setPlayerConstruction(PlayerConstruction script)
+    {
+        m_constructionScript = script;
     }
 
 }
