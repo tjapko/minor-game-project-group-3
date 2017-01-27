@@ -150,6 +150,16 @@ public class EnemyInheratedValues  {
 			this.rangeMovementSpeed = this.rangeMovementSpeed * this.scaleMovementSpeed / (this.AimingEndWavenumber-this.startWaveIncRanges)*(waveNumber-this.startWaveIncRanges);
 		
 		}
+		if (waveNumber >= stopWaveIncRanges) {
+			this.rangeDamagePerAttack = this.rangeDamagePerAttack * this.scaleDamagePerAttack / (this.AimingEndWavenumber-this.startWaveIncRanges)*(stopWaveIncRanges-this.startWaveIncRanges);
+
+			this.rangeAttackSpeed = this.rangeAttackSpeed * this.scaleAttackSpeed / (this.AimingEndWavenumber-this.startWaveIncRanges)*(stopWaveIncRanges-this.startWaveIncRanges);
+
+			this.rangeStartingHealth = this.rangeStartingHealth * this.scaleStartingHealth / (this.AimingEndWavenumber-this.startWaveIncRanges)*(stopWaveIncRanges-this.startWaveIncRanges);
+
+			this.rangeMovementSpeed = this.rangeMovementSpeed * this.scaleMovementSpeed / (this.AimingEndWavenumber-this.startWaveIncRanges)*(stopWaveIncRanges-this.startWaveIncRanges);
+
+		}
 	}
 
 
