@@ -20,6 +20,6 @@ public class Laser {
     public static int[] ammoInClip = { 20, 30, 40 };     // all ammo from weapon when you buy it 
     public static int[] clipSize = { 20, 30, 40 };       // all ammo in clip when you buy them 
     public static int[] maxAmmo = { 100, 200, 400 };      // max ammo player can carry for every level
-    public static float[] maxDamage = { 3, 4f, 6f }; // the damage for every level
+    public static float[] maxDamage = { 3f, 4f, 6f }; // the damage for every level
     public static int[]  price = { 2000, 3000 , 5000,0};  // the price of the weapon for every level  
 }
