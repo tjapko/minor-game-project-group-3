@@ -17,18 +17,22 @@ public class SwitchControl : MonoBehaviour {
 			PlayerMovement.windowsAndXBOX = false;
 		}
 
-		// detect controller input 
-		// rightJoystick for orientation 
-		if(Input.GetAxisRaw ("RightJoystickHorizontalMac_" + (m_PlayerNumber+1)) != 0.0f ||
-				Input.GetAxisRaw ("RightJoystickVerticalMac_" + (m_PlayerNumber+1)) != 0.0f) {
+        // detect controller input 
+        // rightJoystick for orientation 
+
+ 
+
+         if ((Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXDashboardPlayer) &&(Input.GetAxisRaw ("RightJoystickHorizontalMac_" + (m_PlayerNumber+1)) != 0.0f ||
+				Input.GetAxisRaw ("RightJoystickVerticalMac_" + (m_PlayerNumber+1)) != 0.0f)) {
 			PlayerMovement.useController = true;
 			PlayerMovement.windowsAndXBOX = false;
 		} 
-		else if(Input.GetAxisRaw ("RightJoystickHorizontalWindowsXBOX_"+ ((m_PlayerNumber+1))) != 0.0f || 
-			Input.GetAxisRaw ("RightJoystickVerticalWindowsXBOX_"+ ((m_PlayerNumber+1))) != 0.0f ) {
+	else if((Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor) &&(Input.GetAxisRaw ("RightJoystickHorizontalWindowsXBOX_"+ ((m_PlayerNumber+1))) != 0.0f || 
+			Input.GetAxisRaw ("RightJoystickVerticalWindowsXBOX_"+ ((m_PlayerNumber+1))) != 0.0f )) {
 			PlayerMovement.useController = true;
 			PlayerMovement.windowsAndXBOX = true;
 		}
+        
 	}
 }
 	
