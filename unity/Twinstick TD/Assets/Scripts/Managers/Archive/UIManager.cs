@@ -75,7 +75,6 @@ public class UIManager : MonoBehaviour {
         m_shopscript.m_instance_UI = go_CanvasShop;
         m_shopscript.Start();
         BaseUpgradeScript m_baseupgradescript = go_Base.GetComponent<BaseUpgradeScript>();
-        m_baseupgradescript.setReferenceBaseUpgradeUI(go_CanvasBaseUpgrade);
 
         //Find base and set reference
 

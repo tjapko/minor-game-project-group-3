@@ -63,7 +63,6 @@ public class BasePlayerPresentScript : MonoBehaviour {
         {
             if (other.gameObject.GetInstanceID() == players_present[i].GetInstanceID())
             {
-                m_baseupgradescript.showUICanvas(false);
                 players_present.RemoveAt(i);
                 break;
             }

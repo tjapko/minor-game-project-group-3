@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BaseUpgradeScript : MonoBehaviour {
+public class BaseUpgradeScriptV2 : MonoBehaviour {
     //Temp variables
     string use_button = "f";        //Set to use button of player[i]
 
@@ -10,8 +10,11 @@ public class BaseUpgradeScript : MonoBehaviour {
     [Header("References")]
     public GameObject m_baseupgradeground;  //Reference to the gameobject containing the base collider
     public List<GameObject> m_baseturrets;  //Reference to list of turrets
+    private GameObject m_baseupgradeUI;      //Reference set by UIManager:CanvasBaseUpgrade
     private GameManager m_gamemanager;      //Reference to the game manager
     private UserManager m_usermanager;      //Reference to the User Manager
+    private BasePlayerPresentScript m_playerspresentscript; //Reference to the BasePlayerPresentScript script
+    private CanvasBaseUpgrade ui_baseupgrades;  //Reference to the base upgrades UI
 
     //Public Variables
 //    [Header("Public Variables:")]
@@ -39,12 +42,17 @@ public class BaseUpgradeScript : MonoBehaviour {
     //Private Variables
     private List<List<BaseUpgrade>> player_upgradelist; //List containing upgrade duo's
     private List<List<BaseUpgrade>> base_upgradelist;   //List containing upgrade duo's
+    private bool ui_active;
 
     // Use this for initialization
     public void StartInitialization () {
         //Set references
         m_gamemanager = GameObject.FindWithTag("Gamemanager").GetComponent<GameManager>();
         m_usermanager = m_gamemanager.getUserManager();
+        m_playerspresentscript = m_baseupgradeground.GetComponent<BasePlayerPresentScript>();
+
+        //Initialize other scripts
+        m_playerspresentscript.StartInitialization();
 
         //Fill upgrade list
         player_upgradelist = new List<List<BaseUpgrade>>();
@@ -63,6 +71,37 @@ public class BaseUpgradeScript : MonoBehaviour {
         foreach(GameObject turret in m_baseturrets)
         {
             turret.SetActive(false);
+        }
+
+        //Set variables
+        ui_active = false;
+    }
+	
+	// Update is called once per frame
+	void Update () {
+        ui_active = m_baseupgradeUI.activeSelf;
+
+        //Fix:Should check every player use_button of players that are present
+        if (Input.GetKeyUp(use_button))
+        {
+            List<GameObject> players = m_playerspresentscript.getPlayersPresent();
+            if(players.Count > 0)
+            {
+                //Set UI (in)active
+                ui_active = !ui_active;
+                m_baseupgradeUI.SetActive(ui_active);
+
+                //Set reference in UI to player that has pressed te button
+                int playernumber = players[0].GetComponent<PlayerStatistics>().m_playernumber;
+                ui_baseupgrades.setSelectedPlayer(m_usermanager.m_playerlist[playernumber]); 
+            }
+        }
+
+        // Disable UI when game is paused
+        if (Time.timeScale == 0)
+        {
+            ui_active = false;
+            m_baseupgradeUI.SetActive(ui_active);
         }
     }
 
@@ -87,7 +126,18 @@ public class BaseUpgradeScript : MonoBehaviour {
         return player_upgradelist;
     }
 
-    //Reset turrets
+    public void setReferenceBaseUpgradeUI(GameObject ui)
+    {
+        m_baseupgradeUI = ui;
+        ui_baseupgrades = m_baseupgradeUI.GetComponent<CanvasBaseUpgrade>();
+    }
+    
+    //Set canvas active
+    public void showUICanvas(bool status)
+    {
+        m_baseupgradeUI.SetActive(status);
+    }
+
     public void resetTurrets()
     {
         foreach(GameObject turret in m_baseturrets)

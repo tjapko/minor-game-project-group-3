@@ -753,7 +753,7 @@ GameObject:
   - 114: {fileID: 114000013921243202}
   - 114: {fileID: 114000012152745864}
   m_Layer: 5
-  m_Name: CanvasPlayerUI
+  m_Name: CanvasPlayerUIV1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1541,7 +1541,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_showRewardTime: 2
-  go_basehealth: {fileID: 1000012363604314}
 --- !u!114 &114000012198733324
 MonoBehaviour:
   m_ObjectHideFlags: 1

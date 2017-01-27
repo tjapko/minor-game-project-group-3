@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     public GameObject m_weaponshop;             // Reference to the weapon shop                 
 
     //Private variables
-    private UIManager m_uiscript;             // The UI script
+    private UIManagerV2 m_uiscript;             // The UI script
     private BaseManager m_base;                 // The base manager of the base
     private UserManager m_players;              // A collection of managers for enabling and disabling different aspects of the players.
     private WaveManager m_wave;                 // A collection of managers for enabling and disabling different aspects of the enemies.
@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
 		m_gridManager = new GridManager(m_gridPrefab);
 
         //Initialize UI script
-        m_uiscript = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
+        m_uiscript = GameObject.FindWithTag("UIManager").GetComponent<UIManagerV2>();
 
         // Start the game
         StartCoroutine(GameLoop());
@@ -88,17 +88,10 @@ public class GameManager : MonoBehaviour
             //Check for game over
             if (!gameover)
             {
-                //Check if shop UI is active
-                if (m_uiscript.go_CanvasShop.activeSelf)
-                {
-                    m_uiscript.go_CanvasShop.SetActive(false);
-                }
-                //Check if players are constructing
-                else if(m_players.checkConstruction()){
 
-                } else if (m_uiscript.go_CanvasBaseUpgrade.activeSelf)
-                {
-                    m_uiscript.go_CanvasBaseUpgrade.SetActive(false);
+                //Check if players are constructing
+                if(m_players.checkConstruction()){
+
                 }
                 else
                 {
@@ -279,7 +272,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator constructionPhase()
     {
 		// switch Main camera to construction camera 
-		CanvasConstructionScript.timer = m_waveDelay;
 		CameraControl.switchMainCamToConstructionCam ();
 
         //Set wavephase to false and set timer

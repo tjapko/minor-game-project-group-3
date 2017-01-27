@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000013567209682}
+  m_IsPrefabParent: 1
+--- !u!1 &1000013567209682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011406839176}
+  - 114: {fileID: 114000010092022422}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: UIManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000011406839176
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013567209682}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.78468, y: 60.517426, z: -95.620316}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &114000010092022422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013567209682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7ac2b7979e36a42a9cbd6e597c74f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CanvasBaseUpgradePrefab: {fileID: 1000013106999152, guid: a423c921b2220a843a79671d3970544a,
+    type: 2}
+  m_CanvasConstructionPrefab: {fileID: 1000012965847770, guid: 5a70d5ed95fe046198c26a09c8cec01e,
+    type: 2}
+  m_CanvasGameOverPrefab: {fileID: 1000012743463512, guid: 33fe9089a16346d4a86880e30323add4,
+    type: 2}
+  m_CanvasPauseMenuPrefab: {fileID: 1000010634490578, guid: cba800bff826e1d4dbd160b98f27964b,
+    type: 2}
+  m_CanvasPlayerUIPrefab: {fileID: 1000013395783704, guid: 3fe55d99b3c3e3b4a81e23769000010f,
+    type: 2}
+  m_CanvasShopPrefab: {fileID: 1000010287614704, guid: 7df1c01d6f57def4e99e1ea45a92bb3b,
+    type: 2}
+  go_CanvasBaseUpgrade: {fileID: 0}
+  go_CanvasConstruction: {fileID: 0}
+  go_CanvasGameOver: {fileID: 0}
+  go_CanvasPauseMenu: {fileID: 0}
+  go_CanvasPlayerUI: {fileID: 0}
+  go_CanvasShop: {fileID: 0}
+  go_Shop: {fileID: 0}
+  go_Base: {fileID: 0}
