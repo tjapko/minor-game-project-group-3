@@ -169,7 +169,6 @@ public class CanvasBaseUpgrade : MonoBehaviour {
             //Only apply changes when there are enough display panels available
             if (i < m_listBaseUpgrades.Count)
             {
-                PlayerStatistics m_stats = selected_player.m_stats;
                 BaseUpgrade upgrade_1 = m_listBaseUpgrades[i][0];
                 BaseUpgrade upgrade_2 = m_listBaseUpgrades[i][1];
 

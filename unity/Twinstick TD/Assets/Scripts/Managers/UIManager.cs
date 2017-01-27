@@ -7,10 +7,11 @@ using System.Collections;
 public class UIManager : MonoBehaviour {
 
     //Prefabs
+    [Header("Prefabs:")]
     public GameObject m_CanvasBaseUpgradePrefab;//GameObject Canvas BaseUpgrade
     public GameObject m_CanvasConstructionPrefab;//GameObject Canvas Construction
     public GameObject m_CanvasGameOverPrefab;   //GameObject Canvas Game Over
-	public GameObject m_CanvasHelpScreen;       //GameObject Canvas Help Screen
+	//public GameObject m_CanvasHelpScreen;       //GameObject Canvas Help Screen
     public GameObject m_CanvasPauseMenuPrefab;  //GameObject Canvas Pause Menu
     public GameObject m_CanvasPlayerUIPrefab;   //GameObject Canas Player UI
     public GameObject m_CanvasShopPrefab;       //GameObject Canvas Shop
@@ -43,7 +44,7 @@ public class UIManager : MonoBehaviour {
         m_usermanager = m_gamemanager.getUserManager();
 
         //Instantiate and set references to canvasses (and shop)
-        GameObject.Instantiate(m_CanvasHelpScreen, Vector3.zero, Quaternion.identity);
+        //GameObject.Instantiate(m_CanvasHelpScreen, Vector3.zero, Quaternion.identity);
         go_CanvasBaseUpgrade= GameObject.Instantiate(m_CanvasBaseUpgradePrefab) as GameObject;
         go_CanvasConstruction = GameObject.Instantiate(m_CanvasConstructionPrefab) as GameObject;
         go_CanvasGameOver   = GameObject.Instantiate(m_CanvasGameOverPrefab) as GameObject;
@@ -123,7 +124,9 @@ public class UIManager : MonoBehaviour {
                     go_CanvasConstruction.SetActive(false);
                     go_CanvasPauseMenu.SetActive(false);
                     go_CanvasPlayerUI.SetActive(true);
+                    m_PlayerUIScript.showWaveControl(false);
                     m_PlayerUIScript.showWaveRemaining(true);
+                    m_PlayerUIScript.showWaveNumber(true);
 
                 }
                 else
@@ -132,26 +135,36 @@ public class UIManager : MonoBehaviour {
                     go_CanvasConstruction.SetActive(true);
                     go_CanvasPauseMenu.SetActive(false);
                     go_CanvasPlayerUI.SetActive(true);
+                    m_PlayerUIScript.showWaveControl(true);
                     m_PlayerUIScript.showWaveRemaining(false);
+                    m_PlayerUIScript.showWaveNumber(false);
                 }
             }
         }
 
     }
 
-    public IEnumerator showWaveStatsUI()
-    {
-        yield return StartCoroutine(m_PlayerUIScript.showWaveStatsUI());
-    }
+    //public IEnumerator showWaveStatsUI()
+    //{
+    //    yield return StartCoroutine(m_PlayerUIScript.showWaveStatsUI());
+    //}
 
+    //Set score in game over canvas
     public void setScore()
     {
         m_GameOverScript.setScore();
     }
 
+    //Show reward in playerUi
     public void showWaveReward()
     {
         StartCoroutine(m_PlayerUIScript.showWaveReward());
+    }
+
+    //Set wavenumber in player ui
+    public void setWaveNumber()
+    {
+        m_PlayerUIScript.setWaveNumber();
     }
 
 }
