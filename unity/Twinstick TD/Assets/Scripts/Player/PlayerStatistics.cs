@@ -138,4 +138,10 @@ public class PlayerStatistics : MonoBehaviour {
         m_currency = m_playerstartcurrency;
 
     }
+
+    //Determines score
+    public int getScore()
+    {
+        return (GameManager.m_waveNumberusedForHighscore - 1) * 25 + getkills() + PlayerConstruction.m_totalCarrotfieldsEachWave;
+    }
 }
