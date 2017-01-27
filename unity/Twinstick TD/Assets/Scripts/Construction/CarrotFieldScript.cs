@@ -67,9 +67,11 @@ public class CarrotFieldScript : MonoBehaviour {
 	//Spawn hitmark
 	private void createHitMark(GameObject prefab, float amount)
 	{
+		int otherAmount = Mathf.RoundToInt(amount);
+
 		//Set hitmark
 		GameObject hitbox = GameObject.Instantiate(prefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
-		hitbox.GetComponent<HitMarkScript>().setDamage(amount);
+		hitbox.GetComponent<HitMarkScript>().setDamage(otherAmount);
 	}
 
 	// OnDeath
