@@ -210,7 +210,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013238595700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: -7.6339254, y: 0.33363542, z: 19.909443}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -425,11 +425,7 @@ MonoBehaviour:
     type: 2}
   enemySource: {fileID: 82000010100013496}
   deathSound: {fileID: 8300000, guid: e4668f91481389a4abab4cf860503ef3, type: 3}
-  m_damageToTowerSec: 5
-  m_towerpersecond: 2
-  m_playerpersecond: 1
-  m_damageToPlayerSec: 1
-  m_StartingHealth: 1
+  beastPainsound: {fileID: 0}
   m_Slider: {fileID: 114000012260996922}
   m_FillImage: {fileID: 114000013379947842}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
