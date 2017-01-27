@@ -16532,26 +16532,26 @@ MonoBehaviour:
   - {fileID: 1000013895628786}
   price_restorePlayerHealth: 500
   amount_restorePlayerHealth: 5
-  price_upgradePlayerHealth: e8030000dc050000d0070000c4090000
-  amount_upgradePlayerHealth: 0a0000000f0000001400000019000000
+  price_upgradePlayerHealth: e8030000dc050000c4090000a00f0000
+  amount_upgradePlayerHealth: 0a0000000f000000140000001e000000
   price_restoreBaseHealth: 1000
   amount_restoreBaseHealth: 10
-  price_upgradeBaseHealth: 881300004c1d0000d4300000204e000030750000c8af0000
+  price_upgradeBaseHealth: 881300004c1d0000d430000050460000a8610000409c0000
   amount_upgradeBaseHealth: 190000001e000000230000002d0000003700000046000000
   upgradePlayerTurretHealth:
   - 20
   - 30
-  - 40
-  - 50
+  - 45
   - 60
-  - 70
+  - 75
+  - 100
   upgradeBaseTurretDamage:
-  - 3
   - 3
   - 4
   - 5
-  - 6
-  - 7
+  - 6.5
+  - 8
+  - 10
   upgradeBaseTurretRange:
   - 15
   - 20
@@ -16562,17 +16562,17 @@ MonoBehaviour:
   upgradeBaseTurretAccuracy:
   - 2000
   - 3000
-  - 4000
-  - 5000
+  - 4500
   - 6000
   - 7000
+  - 8000
   upgradeBaseTurretFirerate:
   - 0.25
   - 0.33
   - 0.67
   - 1
-  - 1.2
   - 1.5
+  - 2
   upgradeBaseTurretLaunchForce:
   - 200
   - 200
@@ -16582,11 +16582,11 @@ MonoBehaviour:
   - 400
   upgradeBaseTurretTurnRate:
   - 3
-  - 3
   - 4
   - 5
   - 6
   - 7
+  - 8
 --- !u!114 &114000012654888320
 MonoBehaviour:
   m_ObjectHideFlags: 1
