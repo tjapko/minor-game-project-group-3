@@ -44,7 +44,7 @@ public class WaveManager
 	private float m_spawnDelayBetweenEnemies = 0.25f; // time delay between the enemies in a wave
 	// increasing amount of enemies 
 	private int m_startEnemies = 5; // number of starting enemies 
-	private int m_maxEnemies = 50;
+	private int m_maxEnemies = 75;
 	private float m_angle1 = 2.0f;     // this angle is applied from the start to wave: m_m_waveTippingPoint1
 	private float m_angle2 = 3.0f;	   // this angle is applied from wave: m_m_waveTippingPoint1 to wave: m_m_waveTippingPoint2
 	private float m_angle3 = 2.0f;	   // this angle is applied from wave: m_m_waveTippingPoint2 till the end of the game

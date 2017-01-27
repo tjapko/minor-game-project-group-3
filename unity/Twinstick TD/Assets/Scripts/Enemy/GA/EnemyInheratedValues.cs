@@ -22,6 +22,7 @@ public class EnemyInheratedValues  {
     private Chromosome chromosome;
 
 	private int startWaveIncRanges = 3;
+	private int stopWaveIncRanges = 20;
 	private int AimingEndWavenumber = 20;
 
 	private float scaleDamagePerAttack = 4f;
@@ -139,7 +140,7 @@ public class EnemyInheratedValues  {
 
 	public void updateRange(int waveNumber)
 	{
-		if (waveNumber >= this.startWaveIncRanges) {
+		if (waveNumber >= this.startWaveIncRanges && waveNumber < stopWaveIncRanges) {
 			this.rangeDamagePerAttack = this.rangeDamagePerAttack * this.scaleDamagePerAttack / (this.AimingEndWavenumber-this.startWaveIncRanges)*(waveNumber-this.startWaveIncRanges);
 
 			this.rangeAttackSpeed = this.rangeAttackSpeed * this.scaleAttackSpeed / (this.AimingEndWavenumber-this.startWaveIncRanges)*(waveNumber-this.startWaveIncRanges);
