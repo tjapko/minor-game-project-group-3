@@ -45,15 +45,7 @@ public class PlayerMovement : MonoBehaviour {
 		m_MovementAxisNameV = "Vertical_" + (m_PlayerNumber+1); 
 		m_MovementAxisNameH = "Horizontal_" + (m_PlayerNumber+1);
 		// input field for rotation, mac 
-		if (!windowsAndXBOX) {
-			m_RotationAxisNameH = "RightJoystickHorizontalMac_" + (m_PlayerNumber+1);
-			m_RotationAxisNameV = "RightJoystickVerticalMac_" + (m_PlayerNumber+1);
-		}
-		// input field for rotation, for using XBOX controller on windows 
-		else {
-			m_RotationAxisNameH = "RightJoystickHorizontalWindowsXBOX_" + (m_PlayerNumber+1);
-			m_RotationAxisNameV = "RightJoystickVerticalWindowsXBOX_" + (m_PlayerNumber+1);
-		}
+
 		mainCam = GameObject.FindGameObjectWithTag ("MainCamera").GetComponentInParent<Camera>();
 		ConstructionCam = GameObject.FindGameObjectWithTag ("constructionCam").GetComponentInParent<Camera> ();
 
@@ -62,6 +54,18 @@ public class PlayerMovement : MonoBehaviour {
 	//Every physics step: Abstracting Vertical,Horizontal and mousePosition input and Updating player's position and rotation
 	private void FixedUpdate()
 	{
+        if (!windowsAndXBOX)
+        {
+            m_RotationAxisNameH = "RightJoystickHorizontalMac_" + (m_PlayerNumber + 1);
+            m_RotationAxisNameV = "RightJoystickVerticalMac_" + (m_PlayerNumber + 1);
+        }
+        // input field for rotation, for using XBOX controller on windows 
+        else
+        {
+            m_RotationAxisNameH = "RightJoystickHorizontalWindowsXBOX_" + (m_PlayerNumber + 1);
+            m_RotationAxisNameV = "RightJoystickVerticalWindowsXBOX_" + (m_PlayerNumber + 1);
+        }
+
         // Store the player's input.
         m_MovementInputValueV = Input.GetAxisRaw(m_MovementAxisNameV); // use Input.GetAxisRaw("Vertical") for instant reaction of the Vertical movement 
 		m_MovementInputValueH = Input.GetAxisRaw(m_MovementAxisNameH); // use Input.GetAxisRaw("Horizontal") for instant reaction of the Horizontal movement 
