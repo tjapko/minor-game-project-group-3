@@ -304,7 +304,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 }
                 else
                 {
-                    return stats.getCurrency() >= selected_upgrade.getPrice() ? "Upgrade Base(Turrets&hp): " + selected_upgrade.getPrice() : "Not Enough funds" + selected_upgrade.getPrice();
+                    return stats.getCurrency() >= selected_upgrade.getPrice() ? "" + selected_upgrade.getPrice() : "Not Enough funds" + selected_upgrade.getPrice();
                 }
             case BaseUpgrade.BaseUpgradeType.RestoreBaseHealth:
                 if (m_basehealth.getCurrentHealth() >= m_basehealth.m_maxhealth)
@@ -313,7 +313,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 }
                 else
                 {
-                    return stats.getCurrency() >= selected_upgrade.getPrice() ? "Buy Health: " + selected_upgrade.getPrice() : "Not Enough funds" + selected_upgrade.getPrice();
+                    return stats.getCurrency() >= selected_upgrade.getPrice() ? "" + selected_upgrade.getPrice() : "Not Enough funds" + selected_upgrade.getPrice();
                 }
             case BaseUpgrade.BaseUpgradeType.PlayerHealthUpgrade:
                 if (selected_upgrade.getPrice() == -1)
@@ -322,7 +322,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 }
                 else
                 {
-                    return stats.getCurrency() >= selected_upgrade.getPrice() ? "Upgrade Player Health: " + selected_upgrade.getPrice() : "Not Enough funds" + selected_upgrade.getPrice();
+                    return stats.getCurrency() >= selected_upgrade.getPrice() ? "" + selected_upgrade.getPrice() : "Not Enough funds" + selected_upgrade.getPrice();
                 }
             case BaseUpgrade.BaseUpgradeType.RestorePlayerHealth:
                 if (health.getCurrentHealth() >= health.m_maxHealth)
@@ -331,7 +331,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 }
                 else
                 {
-                    return stats.getCurrency() >= selected_upgrade.getPrice() ? "Buy Health: " + selected_upgrade.getPrice() : "Not Enough funds" + selected_upgrade.getPrice();
+                    return stats.getCurrency() >= selected_upgrade.getPrice() ? "" + selected_upgrade.getPrice() : "Not Enough funds" + selected_upgrade.getPrice();
                 }
             case BaseUpgrade.BaseUpgradeType.Empty:
                 return "";
@@ -376,7 +376,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 {
                     m_playermanager.m_stats.addCurrency(-1 * m_weaponlist[index].price);
                     m_playermanager.m_inventory.addItem(m_weaponlist[index]);
-                    txt_upgradeweapons.text = "Uprade Shop: \n" + UpgradeShopCost();
+                    txt_upgradeweapons.text = "" + UpgradeShopCost();
                 }
             }
             else
@@ -387,7 +387,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 {
                     m_playermanager.m_stats.addCurrency(-1 * m_weaponlist[index].price);
                     m_playermanager.m_inventory.inventory[0] = m_weaponlist[index];
-                    txt_upgradeweapons.text = "Uprade Shop: \n" + UpgradeShopCost();
+                    txt_upgradeweapons.text = "" + UpgradeShopCost();
                 }
             }
         }
