@@ -140,6 +140,9 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 showEmptyShopMenu(true);
                 showRebuildPanel(true);
                 showConstructionPanel(false);
+
+                //Update panels
+                updateRebuildBaseMenu();
             }
             
         }
@@ -262,19 +265,19 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
     {
         if (m_gamemanager.getBaseManager().m_Instance.activeSelf)
         {
-            txt_rebuildBase.text = "Base has been built";
+            txt_rebuildBase.text = "Base has\n been built";
             btn_rebuildBase.interactable = false;
         }
         else
         {
             if (m_playermanager.m_stats.m_currency >= m_shopscript.m_rebuildbasecost)
             {
-                txt_rebuildBase.text = "Rebuild base: " + m_shopscript.m_rebuildbasecost;
+                txt_rebuildBase.text = "Rebuild base:\n " + m_shopscript.m_rebuildbasecost;
                 btn_rebuildBase.interactable = true;
             }
             else
             {
-                txt_rebuildBase.text = "Not Enough funds: " + m_shopscript.m_rebuildbasecost;
+                txt_rebuildBase.text = "Not Enough\n funds: " + m_shopscript.m_rebuildbasecost;
                 btn_rebuildBase.interactable = false;
             }
         }
@@ -325,7 +328,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 }
                 else
                 {
-                    return stats.getCurrency() >= selected_upgrade.getPrice() ? "" + selected_upgrade.getPrice() : "Not Enough funds" + selected_upgrade.getPrice();
+                    return stats.getCurrency() >= selected_upgrade.getPrice() ? selected_upgrade.getPrice().ToString() : "Not Enough\n funds " + selected_upgrade.getPrice();
                 }
             case BaseUpgrade.BaseUpgradeType.RestoreBaseHealth:
                 if (m_basehealth.getCurrentHealth() >= m_basehealth.m_maxhealth)
@@ -334,7 +337,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 }
                 else
                 {
-                    return stats.getCurrency() >= selected_upgrade.getPrice() ? "" + selected_upgrade.getPrice() : "Not Enough funds" + selected_upgrade.getPrice();
+                    return stats.getCurrency() >= selected_upgrade.getPrice() ? selected_upgrade.getPrice().ToString() : "Not Enough\n funds " + selected_upgrade.getPrice();
                 }
             case BaseUpgrade.BaseUpgradeType.PlayerHealthUpgrade:
                 if (selected_upgrade.getPrice() == -1)
@@ -343,7 +346,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 }
                 else
                 {
-                    return stats.getCurrency() >= selected_upgrade.getPrice() ? "" + selected_upgrade.getPrice() : "Not Enough funds" + selected_upgrade.getPrice();
+                    return stats.getCurrency() >= selected_upgrade.getPrice() ? selected_upgrade.getPrice().ToString() : "Not Enough\n funds " + selected_upgrade.getPrice();
                 }
             case BaseUpgrade.BaseUpgradeType.RestorePlayerHealth:
                 if (health.getCurrentHealth() >= health.m_maxHealth)
@@ -352,7 +355,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 }
                 else
                 {
-                    return stats.getCurrency() >= selected_upgrade.getPrice() ? "" + selected_upgrade.getPrice() : "Not Enough funds" + selected_upgrade.getPrice();
+                    return stats.getCurrency() >= selected_upgrade.getPrice() ? selected_upgrade.getPrice().ToString() : "Not Enough\n funds " + selected_upgrade.getPrice();
                 }
             case BaseUpgrade.BaseUpgradeType.Empty:
                 return "";
