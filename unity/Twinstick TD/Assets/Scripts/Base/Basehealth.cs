@@ -115,9 +115,9 @@ public class Basehealth : MonoBehaviour {
         gameObject.SetActive(false);
 
         //Set shop canvas to rebuild canvas
-        ShopScript m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
-        ShopUIScript m_shopuiscript = m_shopscript.m_instance_UI.GetComponent<ShopUIScript>();
-        m_shopuiscript.setBaseDestroyed(true);
+        //ShopScript m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
+        //ShopUIScript m_shopuiscript = m_shopscript.m_instance_UI.GetComponent<ShopUIScript>();
+        //m_shopuiscript.setBaseDestroyed(true);
         //		ScreenShake.ShakeBaseOndeath ();
 
         
@@ -135,9 +135,9 @@ public class Basehealth : MonoBehaviour {
         SetHealthUI();
 
         //Set variable shop script
-        ShopScript m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
-        ShopUIScript m_shopuiscript = m_shopscript.m_instance_UI.GetComponent<ShopUIScript>();
-        m_shopuiscript.setBaseDestroyed(false);
+        //ShopScript m_shopscript = GameObject.FindWithTag("Shop").GetComponent<ShopScript>();
+        //ShopUIScript m_shopuiscript = m_shopscript.m_instance_UI.GetComponent<ShopUIScript>();
+        //m_shopuiscript.setBaseDestroyed(false);
     }
 
     //Spawn hitmark
