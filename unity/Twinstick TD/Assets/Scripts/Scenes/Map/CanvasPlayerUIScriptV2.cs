@@ -83,7 +83,7 @@ public class CanvasPlayerUIScriptV2 : MonoBehaviour
     //Set high score text
     private void updateHighScoreText()
     {
-        txt_highscore.text = "Score:\n" + m_player.m_stats.getScore();
+        txt_highscore.text = "" + m_player.m_stats.getScore();
     }
 
     //Updat Health UI
@@ -112,12 +112,12 @@ public class CanvasPlayerUIScriptV2 : MonoBehaviour
     //Update Wave statistics
     private void updateWaveStatistics()
     {
-        txt_waveremaining.text = "Enemies Remaining: " + m_wavemanager.enemiesRemaining().ToString();
+        txt_waveremaining.text = "" + m_wavemanager.enemiesRemaining().ToString();
     }
 
     // Sets the current wave number
     public void setWaveNumber()
     {
-        txt_wavenumber.text = "Wave " + m_gamemanager.getWaveNumber();
+        txt_wavenumber.text = "" + m_gamemanager.getWaveNumber();
     }
 }

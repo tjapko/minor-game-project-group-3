@@ -26,9 +26,9 @@ public class PlayerConstruction : MonoBehaviour {
 
     //Fix
     const string build_1 = "1";         //Button to place walls
-    const string build_2 = "2";         //Button to place turrets
-    const string build_3 = "3";         //Button to place farms
-    const string build_4 = "4";         //Button to place mud
+    const string build_2 = "4";         //Button to place turrets
+    const string build_3 = "2";         //Button to place farms
+    const string build_4 = "3";         //Button to place mud
 
     //References
     private GameManager m_gamemanager;          //Reference to game manager script
