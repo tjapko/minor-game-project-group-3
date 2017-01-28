@@ -22,7 +22,7 @@ public class EnemyInheratedValues  {
     private Chromosome chromosome;
 
 	private int startWaveIncRanges = 3;
-	private int stopWaveIncRanges = 20;
+	private int stopWaveIncRanges = 30;
 	private int AimingEndWavenumber = 20;
 
 	private float scaleDamagePerAttack = 4f;

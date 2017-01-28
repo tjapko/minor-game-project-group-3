@@ -14,17 +14,16 @@ public class PlayerStatistics : MonoBehaviour {
 	public static int m_currencyPerKill = 200;
 
     //Private variables
-
     private int m_kills;      // int which will hold the number of kills per player
     public int m_currency;  // the currency can be the amount of carrots in the base (Carrots-farm) = baseHealth
 	private int m_metSalesmanAmount;  // the amount that the player meets the Salesman
+	private int highestCurrency;
 
     // Use this for initialization
     void Start () {
         m_kills = 0;      // start m_kills 
 		m_metSalesmanAmount = 0;  // start m_metSalesmanAmount
-
-        //m_currency = 500;      // start m_currency
+		highestCurrency = m_currency;
     }
 	
 	// Update is called once per frame
@@ -39,6 +38,9 @@ public class PlayerStatistics : MonoBehaviour {
 */
     public void updateCurrency()
     {
+		if (m_currency > highestCurrency) {
+			highestCurrency = m_currency;
+		}
         int amount; // initialize int amount (for adding to or substracrting from the m_currency)
         bool kill = false, purchase = false;    //boolean kill and purchase to check if condition is met 
         string reward = "", price = ""; // for different rewards of killing enemies and different prices of purchases
@@ -142,6 +144,6 @@ public class PlayerStatistics : MonoBehaviour {
     //Determines score
     public int getScore()
     {
-        return (GameManager.m_waveNumberusedForHighscore - 1) * 25 + getkills() + PlayerConstruction.m_totalCarrotfieldsEachWave;
+		return (GameManager.m_waveNumberusedForHighscore - 1) * 25 + getkills() + PlayerConstruction.m_totalCarrotfieldsEachWave + (int)(highestCurrency/1000);
     }
 }
