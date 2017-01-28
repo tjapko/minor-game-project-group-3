@@ -86,6 +86,9 @@ public class CanvasPlayerUIScriptV2 : MonoBehaviour
     private void updateHighScoreText()
     {
         txt_highscore.text = "" + m_player.m_stats.getScore();
+		if (m_player.m_stats.getScore () < 0) {
+			txt_highscore.text = "0";
+		}
     }
 
     //Updat Health UI
