@@ -41,6 +41,10 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
     public List<Text> txt_ammoweapons;          //References to the text in the refill ammo buttons
     public Button btn_upgradeweapons;           //Reference to the upgrade weapon button
     public Text txt_upgradeweapons;             //Reference to the text in the uprade weapon button
+    public Text txt_construction_1;             //Reference to the construction upgrade 1 text
+    public Text txt_construction_2;             //Reference to the construction upgrade 2 text
+    public Text txt_construction_3;             //Reference to the construction upgrade 3 text
+    public Text txt_construction_4;             //Reference to the construction upgrade 4 text
 
     //Private references
     private GameManager m_gamemanager;          //Reference to the game manager
@@ -106,28 +110,36 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
     {
         try
         {
+            //Set playermanager
             if(m_playermanager == null)
             {
                 m_playermanager = m_usermanager.m_playerlist[0];
             }
+            //Update currency
             updateTxtCurrency();
 
             if (m_basemanager.m_Instance.activeSelf)
             {
+                //Show/hide panels
                 showShopMenu(true);
                 showUpgradePanel(true);
                 showEmptyShopMenu(false);
                 showRebuildPanel(false);
-                
+                showConstructionPanel(true);
+
+                //Update panels
                 updateUpgradeBaseBTN();
                 updatePurchaseWeaponsBTN();
                 updatePurchaseAmmoBTN();
+                updateConstructionCost();
             } else
             {
+                //Show/hide panels
                 showShopMenu(false);
                 showUpgradePanel(false);
                 showEmptyShopMenu(true);
                 showRebuildPanel(true);
+                showConstructionPanel(false);
             }
             
         }
@@ -268,6 +280,15 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
         }
     }
 
+    //update construction cost
+    private void updateConstructionCost()
+    {
+        txt_construction_1.text = PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerWall).ToString();
+        txt_construction_2.text = PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerCarrotField).ToString();
+        txt_construction_3.text = PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerMud).ToString();
+        txt_construction_4.text = PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerTurret).ToString();
+    }
+
     //Determine if upgrade button should be interactable
     private bool determineUpgradeBTNInteractable(PlayerManager selected_player, BaseManager selected_base, BaseUpgrade selected_upgrade)
     {
@@ -300,7 +321,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
             case BaseUpgrade.BaseUpgradeType.BaseUpgrade:
                 if (selected_upgrade.getPrice() == -1)
                 {
-                    return "Max Health Reached";
+                    return "Max Health\n Reached";
                 }
                 else
                 {
@@ -318,7 +339,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
             case BaseUpgrade.BaseUpgradeType.PlayerHealthUpgrade:
                 if (selected_upgrade.getPrice() == -1)
                 {
-                    return "Max Health Reached";
+                    return "Max Health\n Reached";
                 }
                 else
                 {
@@ -496,7 +517,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
         if (m_playermanager.m_stats.m_currency >= m_shopscript.m_rebuildbasecost)
         {
             m_playermanager.m_stats.substractCurrency(m_shopscript.m_rebuildbasecost);
-            m_gamemanager.getBaseManager().m_Instance.GetComponent<Basehealth>().OnRebuild();
+            m_basemanager.m_basehealth.OnRebuild();
         }
     }
 
@@ -597,6 +618,12 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
     private void showUpgradePanel(bool status)
     {
         m_BaseUpgrade.SetActive(status);
+    }
+
+    //Show construction panel
+    private void showConstructionPanel(bool status)
+    {
+        m_ConstructionPanel.SetActive(status);
     }
 
     //Show wave reward
