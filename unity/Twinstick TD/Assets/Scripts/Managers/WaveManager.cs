@@ -131,7 +131,7 @@ public class WaveManager
 		b2 = (m_startEnemies + m_angle1 * m_waveTippingPoint1) - (m_waveTippingPoint1 * m_angle2);
 		b3 = (b2 + m_angle2 * m_waveTippingPoint2) - (m_waveTippingPoint2 * m_angle3);
 
-		if (m_wave == 0) {
+		if (m_wave <= 0) {
 			amount = m_startEnemies;
 		}
 		else if (m_wave < m_waveTippingPoint1) {
