@@ -21,8 +21,8 @@ public class zoomControl : MonoBehaviour {
 		float scroll = Input.GetAxis("Mouse ScrollWheel");
 		if (scroll > 0)
 		{
-			if (m_constructionCam.orthographicSize > 40) {
-				m_constructionCam.orthographicSize -= 20;
+			if (m_constructionCam.orthographicSize >= 45) {
+				m_constructionCam.orthographicSize -= 25;
 				m_constructionCam.transform.position = mousePos ();
 			}
 		}
