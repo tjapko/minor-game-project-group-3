@@ -144,6 +144,6 @@ public class PlayerStatistics : MonoBehaviour {
     //Determines score
     public int getScore()
     {
-		return (GameManager.m_waveNumberusedForHighscore - 1) * 25 + getkills() + PlayerConstruction.m_totalCarrotfieldsEachWave + (int)(highestCurrency/1000);
+		return (GameManager.m_waveNumberusedForHighscore - 1) * 25 + getkills() + PlayerConstruction.m_totalCarrotfieldsEachWave + ((int)(highestCurrency/1000)-1);
     }
 }

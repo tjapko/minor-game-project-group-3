@@ -25,6 +25,7 @@ public class CanvasPlayerUIScriptV2 : MonoBehaviour
     public GameObject m_WaveStatisticsPanel;    //Reference to the wave statistics panel
     public Text txt_waveremaining;              //Reference to the wave remaining text in the wave statistics panel
     public Text txt_wavenumber;                 //Reference to the wave number text in the wave statistics panel
+	public Text txt_kills;
 
     //References to managers
     private GameManager m_gamemanager;      //Reference to game manager (used to invoke next wave)
@@ -71,6 +72,7 @@ public class CanvasPlayerUIScriptV2 : MonoBehaviour
             updateWeapon();
             updateWaveStatistics();
             setWaveNumber();
+			setKills();
         }
         catch
         {
@@ -120,4 +122,10 @@ public class CanvasPlayerUIScriptV2 : MonoBehaviour
     {
         txt_wavenumber.text = "" + m_gamemanager.getWaveNumber();
     }
+
+	// Sets the number of kills
+	public void setKills()
+	{
+		txt_kills.text = "" + m_player.m_stats.getkills ();
+	}
 }
