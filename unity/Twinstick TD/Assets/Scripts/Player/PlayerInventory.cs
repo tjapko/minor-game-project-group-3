@@ -6,14 +6,30 @@ using System.Collections.Generic;
 /// Class PlayerInventory
 /// </summary>
 public class PlayerInventory : MonoBehaviour {
-    //Public variables
+    //Private variableds
+	private Weapon currentWeapon;
+	private GameObject revolver; 
+	private GameObject ak; 
+	private GameObject blaster; 
+	private GameObject shotgun; 
+
+	//Public variables
     public int maxslots;
     public List<Weapon> inventory;
     public Rigidbody m_Bullet;
     public Rigidbody m_RayBullet;
+
     //Fill the inventory when the player is initialized
     void Start ()
     {
+		// weapon mesh
+		revolver = gameObject.transform.GetChild(7).gameObject;
+		ak = gameObject.transform.GetChild(8).gameObject;
+		blaster = gameObject.transform.GetChild(9).gameObject;
+		shotgun = gameObject.transform.GetChild(10).gameObject;
+
+
+
         inventory = new List<Weapon>();
 		//      ............. Weapon(name               , id , description       , iconname  , price            , itemtype                   , fireratef           , launchforcef           , maxDamagef           , reloadTimef           , clipsize            , ammo            , ammopriceperclip     , ammoInClip            , maxAmmo            , lifetime)
 		Weapon weapon1 = new Weapon("Default Weapon"   , 1  , "Default weapon!" , "Weapon1" , HandGun.price    , Weapon.ItemType.HandGun    , HandGun.fireRate   , HandGun.launchForce    , HandGun.maxDamage    , HandGun.reloadTime    , HandGun.clipSize    , HandGun.ammo    , HandGun.ammoprice    , HandGun.ammoInClip    , HandGun.maxAmmo    , HandGun.bulletLifeTime);
@@ -93,6 +109,7 @@ public class PlayerInventory : MonoBehaviour {
             Weapon firstelement = inventory[0];
             inventory.RemoveAt(0);
             inventory.Add(firstelement);
+			WepMesh ();
         }
 
     }
@@ -109,6 +126,7 @@ public class PlayerInventory : MonoBehaviour {
                 Weapon temp = inventory[0];
                 inventory.RemoveAt(0);
                 inventory.Add(temp);
+				WepMesh ();
             }
         }
     }
@@ -147,6 +165,29 @@ public class PlayerInventory : MonoBehaviour {
             inventory.Add(new Weapon());
         }
     }
+
+	public void WepMesh(){
+		currentWeapon = inventory[0];
+		revolver.SetActive (false);
+		ak.SetActive (false);
+		blaster.SetActive (false);
+		shotgun.SetActive (false);
+
+		if (currentWeapon.itemtype == Weapon.ItemType.MachineGun) {
+			ak.SetActive (true);
+		}
+		else if (currentWeapon.itemtype == Weapon.ItemType.Shotgun) {
+			shotgun.SetActive (true);
+		}
+		else if (currentWeapon.itemtype == Weapon.ItemType.Laser) {
+			blaster.SetActive (true);
+		}
+		else {
+			revolver.SetActive (true);
+		}
+
+
+	}
 
     public void reset()
     {
