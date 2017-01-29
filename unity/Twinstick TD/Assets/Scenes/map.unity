@@ -1386,6 +1386,11 @@ Prefab:
       propertyPath: m_Name
       value: ShopV2
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010833715836, guid: 554d735d61e85354082e2f240e04326d,
+        type: 2}
+      propertyPath: m_rebuildbasecost
+      value: 10000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 554d735d61e85354082e2f240e04326d, type: 2}
   m_IsPrefabParent: 0
