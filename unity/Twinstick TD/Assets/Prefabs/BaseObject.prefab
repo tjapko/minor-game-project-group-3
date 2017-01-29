@@ -16493,7 +16493,7 @@ MonoBehaviour:
   amount_upgradePlayerHealth: 0a0000000f000000140000001e000000
   price_restoreBaseHealth: 1000
   amount_restoreBaseHealth: 10
-  price_upgradeBaseHealth: 881300004c1d0000d430000050460000a8610000409c0000
+  price_upgradeBaseHealth: a00f0000401f000010270000983a0000204e0000a8610000
   amount_upgradeBaseHealth: 190000001e000000230000002d0000003700000046000000
   upgradePlayerTurretHealth:
   - 20
