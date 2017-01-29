@@ -2709,8 +2709,8 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010795247276}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3261,7 +3261,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012600799908}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -5190,7 +5190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14808f004a0775b4ab61866601d20afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxhealth: 25
   m_owner:
     m_Instance: {fileID: 0}
     m_SpawnPoint: {fileID: 0}
