@@ -26,6 +26,7 @@ public class BulletFire : MonoBehaviour
 	private float m_timer = 0.0f;
     private bool constructionphase;         //Boolean if game is in construction phase
     LineRenderer line;
+
     /// <summary>
     ///  initiating the fire and reload button and retrieving the related inventory 
     /// </summary>
@@ -54,6 +55,7 @@ public class BulletFire : MonoBehaviour
         {
             if (currentWeapon.itemtype == Weapon.ItemType.MachineGun)
             {
+				
                 if (Input.GetButton(m_FireButton))
                 {
                     Fire();
@@ -95,9 +97,9 @@ public class BulletFire : MonoBehaviour
 			
 			if (currentWeapon.itemtype == Weapon.ItemType.HandGun || currentWeapon.itemtype == Weapon.ItemType.MachineGun) {
 				FireHandGun ();
-				
 			} else if (currentWeapon.itemtype == Weapon.ItemType.Shotgun) {
 				FireSG ();
+		
 			} else {
 				FireRay ();
 			}
