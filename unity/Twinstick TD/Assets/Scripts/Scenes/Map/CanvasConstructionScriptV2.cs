@@ -132,6 +132,7 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 updatePurchaseWeaponsBTN();
                 updatePurchaseAmmoBTN();
                 updateConstructionCost();
+                updateUpgradeShopMenu();
             } else
             {
                 //Show/hide panels
@@ -280,6 +281,22 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 txt_rebuildBase.text = "Not Enough\n funds: " + m_shopscript.m_rebuildbasecost;
                 btn_rebuildBase.interactable = false;
             }
+        }
+    }
+
+    //Update upgrade shop menu
+    public void updateUpgradeShopMenu()
+    {
+        if (m_shopscript.getCurrentTier() >= m_shopscript.upgrade_cost.Length - 1)
+        {
+            btn_upgradeweapons.transform.parent.gameObject.SetActive(false);
+            txt_upgradeweapons.text = "Max upgrade\n reached";
+        }
+        else
+        {
+            btn_upgradeweapons.transform.parent.gameObject.SetActive(true);
+            btn_upgradeweapons.interactable = m_playermanager.m_stats.getCurrency() >= UpgradeShopCost();
+            txt_upgradeweapons.text = "Uprade Shop: \n" + UpgradeShopCost();
         }
     }
 
@@ -460,7 +477,6 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 {
                     m_playermanager.m_stats.addCurrency(-1 * m_weaponlist[index].price);
                     m_playermanager.m_inventory.addItem(m_weaponlist[index]);
-                    txt_upgradeweapons.text = "" + UpgradeShopCost();
                 }
             }
             else
@@ -471,7 +487,6 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 {
                     m_playermanager.m_stats.addCurrency(-1 * m_weaponlist[index].price);
                     m_playermanager.m_inventory.inventory[0] = m_weaponlist[index];
-                    txt_upgradeweapons.text = "" + UpgradeShopCost();
                 }
             }
         }
@@ -519,19 +534,6 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
             m_playermanager.m_stats.addCurrency(-upgradeCost);
             //Increment tier (weapons are loaded automatically)
             m_shopscript.incTier();
-            upgradeCost = UpgradeShopCost();
-            //Change text of text and buttons
-            //ui_shopText.text = "Weapons\n Tier " + m_shopscript.getCurrentTier();
-            if (m_shopscript.getCurrentTier() >= m_shopscript.upgrade_cost.Length - 1)
-            {
-                btn_upgradeweapons.transform.parent.gameObject.SetActive(false);
-            }
-            else
-            {
-                txt_upgradeweapons.text = "Uprade Shop: \n" + upgradeCost;
-            }
-
-
         }
     }
 
