@@ -1732,7 +1732,7 @@ MonoBehaviour:
     type: 2}
   m_Slider: {fileID: 114000014218646504}
   m_FillImage: {fileID: 114000011432437794}
-  m_startyield: 250
+  m_startyield: 350
   m_inc: 1.5
   m_startHealth: 10
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}

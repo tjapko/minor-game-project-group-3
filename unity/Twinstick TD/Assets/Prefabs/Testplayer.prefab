@@ -2076,7 +2076,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010351771752}
   m_LocalRotation: {x: 0, y: -0.08715578, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 3.3, z: 3.3}
+  m_LocalPosition: {x: -0.11, y: 2.6, z: 5.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: -10, z: 0}
   m_Children: []
@@ -2504,7 +2504,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011607735642}
   m_LocalRotation: {x: 0, y: 0.08715578, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 3.3, z: 2.9}
+  m_LocalPosition: {x: 0, y: 2.06, z: 4.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 10, z: 0}
   m_Children: []
@@ -2583,7 +2583,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011598913768}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.3, z: 3}
+  m_LocalPosition: {x: 0, y: 2.06, z: 4.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -2784,8 +2784,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a39c3ce0a65be6a4da5bb4bbe0834b1d, type: 2}
-  - {fileID: 2100000, guid: 62820715073cfcf4f830b8ac74513ea9, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -2845,17 +2845,17 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: ae2f667352dc0504781438eb3b2dc9d5, type: 2}
-  - {fileID: 2100000, guid: 0f84ddcfee892b947ac20354c3ff58bd, type: 2}
-  - {fileID: 2100000, guid: cbc1b0f9fcf29ff46bc9f85f69fcbbec, type: 2}
-  - {fileID: 2100000, guid: 98600f5d308b12d46a17b69a6fbe3abc, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 2100000, guid: fe4b751947910ea4c8052c18596a0543, type: 2}
-  - {fileID: 2100000, guid: 81651bac2efd3d141aacc89c5c884ec2, type: 2}
-  - {fileID: 2100000, guid: b502c7396d1385149998b934aeefdd9f, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 2100000, guid: d2e7d4caa18aa20478efbd4ab497a384, type: 2}
-  - {fileID: 2100000, guid: 2052cdc83197f5241852635fe30b7a19, type: 2}
-  - {fileID: 2100000, guid: 312becf6799cb304da76fffb9efcf782, type: 2}
-  - {fileID: 2100000, guid: a39c3ce0a65be6a4da5bb4bbe0834b1d, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
