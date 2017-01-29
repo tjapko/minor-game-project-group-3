@@ -488,6 +488,30 @@ public class PlayerConstruction : MonoBehaviour {
         currentCarrotFarms = temp_currentCarrotFarms;
         currentMudPools = temp_currentMudPools;
     }
+
+    //Getter current walls
+    public static int getCurrentWalls()
+    {
+        return currentWalls;
+    }
+
+    //Getter current turrets
+    public static int getCurrentTurrets()
+    {
+        return currentTurrets;
+    }
+
+    //Getter current carrot farms
+    public static int getCurrentCarrotsFarms()
+    {
+        return currentCarrotFarms;
+    }
+
+    //Getter current mud pools
+    public static int getCurrentMud()
+    {
+        return currentMudPools;
+    }
 }
 
 
