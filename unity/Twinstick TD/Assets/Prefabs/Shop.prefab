@@ -148,4 +148,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rebuildbasecost: 10000
-  upgrade_cost: e8030000d0070000b80b0000a00f0000
+  upgrade_cost: e8030000e2040000dc050000d0070000

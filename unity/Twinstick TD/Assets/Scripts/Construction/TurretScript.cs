@@ -16,7 +16,7 @@ public class TurretScript : MonoBehaviour {
 
     //Public variables
     [Header("Public variables")]
-    public static float m_maxhealth = 15;       //Current max health
+    public static float m_maxhealth = 25;       //Current max health
     public static float m_damage = 1f;          //damage of the turret
     public static float m_range = 25f;          //Range of the turret
     public static float m_accuracy = 3000f;     //Accurracy of tower +/- (1/m_accuracy)
