@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012739239080}
   - 137: {fileID: 137000014160777584}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Group1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010103354324}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010135899024}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012182923834}
   - 95: {fileID: 95000012303121170}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: rabbit v2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
