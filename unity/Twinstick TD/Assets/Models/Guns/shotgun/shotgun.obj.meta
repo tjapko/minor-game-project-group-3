@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: bf4c9c50e3dc0a548a16cb21d1929263
-timeCreated: 1485644226
+guid: d7b16f6690493e4468fa82e9a1f2af9f
+timeCreated: 1485696120
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Arms
+    100000: shotgun
     100002: //RootNode
-    400000: Arms
+    400000: shotgun
     400002: //RootNode
-    2300000: Arms
-    3300000: Arms
-    4300000: Arms
+    2300000: shotgun
+    3300000: shotgun
+    4300000: shotgun
   materials:
     importMaterials: 1
     materialName: 0

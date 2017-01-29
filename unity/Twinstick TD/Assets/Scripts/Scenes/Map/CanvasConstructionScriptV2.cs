@@ -286,10 +286,16 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
     //update construction cost
     private void updateConstructionCost()
     {
-        txt_construction_1.text = PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerWall).ToString();
-        txt_construction_2.text = PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerCarrotField).ToString();
-        txt_construction_3.text = PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerMud).ToString();
-        txt_construction_4.text = PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerTurret).ToString();
+        txt_construction_1.text = determineConstructionText(PlayerConstruction.PlayerObjectType.PlayerWall);
+        txt_construction_2.text = determineConstructionText(PlayerConstruction.PlayerObjectType.PlayerCarrotField);
+        txt_construction_3.text = determineConstructionText(PlayerConstruction.PlayerObjectType.PlayerMud);
+        txt_construction_4.text = determineConstructionText(PlayerConstruction.PlayerObjectType.PlayerTurret);
+
+        txt_construction_1.color = determineConstructionTextColour(PlayerConstruction.PlayerObjectType.PlayerWall);
+        txt_construction_2.color = determineConstructionTextColour(PlayerConstruction.PlayerObjectType.PlayerCarrotField);
+        txt_construction_3.color = determineConstructionTextColour(PlayerConstruction.PlayerObjectType.PlayerMud);
+        txt_construction_4.color = determineConstructionTextColour(PlayerConstruction.PlayerObjectType.PlayerTurret);
+
     }
 
     //Determine if upgrade button should be interactable
@@ -361,6 +367,60 @@ public class CanvasConstructionScriptV2 : MonoBehaviour
                 return "";
             default:
                 return "Error";
+        }
+    }
+
+    //Determine text of construction
+    private string determineConstructionText(PlayerConstruction.PlayerObjectType type)
+    {
+        switch (type)
+        {
+            case PlayerConstruction.PlayerObjectType.PlayerWall:
+                return PlayerConstruction.getCurrentWalls() >= PlayerConstruction.maxWalls ?
+                    "Sold Out" : m_basemanager.m_Instance.activeSelf ?
+                    PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerWall).ToString() : "Base destroyed";
+            case PlayerConstruction.PlayerObjectType.PlayerTurret:
+                return PlayerConstruction.getCurrentTurrets() >= PlayerConstruction.maxTurrets ?
+                    "Sold Out" : m_basemanager.m_Instance.activeSelf ? 
+                    PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerTurret).ToString() : "Base destroyed"; ;
+            case PlayerConstruction.PlayerObjectType.PlayerCarrotField:
+                return PlayerConstruction.getCurrentCarrotsFarms() >= PlayerConstruction.maxCarrotFarms ?
+                    "Sold Out" : m_basemanager.m_Instance.activeSelf ? 
+                    PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerCarrotField).ToString() : "Base destroyed"; ;
+            case PlayerConstruction.PlayerObjectType.PlayerMud:
+                return PlayerConstruction.getCurrentMud() >= PlayerConstruction.maxMudPools ?
+                    "Sold Out" : m_basemanager.m_Instance.activeSelf ? 
+                    PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerMud).ToString() : "Base destroyed";
+            default:
+                return "";
+
+        }
+    }
+
+    //Determine colour of construction
+    private Color determineConstructionTextColour(PlayerConstruction.PlayerObjectType type)
+    {
+        int playermoney = m_playermanager.m_stats.getCurrency();
+        switch (type)
+        {
+            case PlayerConstruction.PlayerObjectType.PlayerWall:
+                return PlayerConstruction.getCurrentWalls() >= PlayerConstruction.maxWalls ?
+                    Color.black : playermoney >= PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerWall) ?
+                    Color.black : Color.red;
+            case PlayerConstruction.PlayerObjectType.PlayerTurret:
+                return PlayerConstruction.getCurrentTurrets() >= PlayerConstruction.maxTurrets ?
+                    Color.black : playermoney >= PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerTurret) ?
+                    Color.black : Color.red;
+            case PlayerConstruction.PlayerObjectType.PlayerCarrotField:
+                return PlayerConstruction.getCurrentCarrotsFarms() >= PlayerConstruction.maxCarrotFarms ?
+                    Color.black : playermoney >= PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerCarrotField) ?
+                    Color.black : Color.red;
+            case PlayerConstruction.PlayerObjectType.PlayerMud:
+                return PlayerConstruction.getCurrentMud() >= PlayerConstruction.maxMudPools ?
+                    Color.black : playermoney >= PlayerConstruction.determinePrice(PlayerConstruction.PlayerObjectType.PlayerMud) ?
+                    Color.black : Color.red;
+            default:
+                return Color.black;
         }
     }
 
